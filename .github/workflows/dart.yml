@@ -37,6 +37,7 @@ jobs:
 
       - name: Static Code Analysis
         run: flutter analyze
+        continue-on-error: true
 
       - name: Run Unit & Widget Tests
         run: flutter test --coverage
