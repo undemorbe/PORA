@@ -5,6 +5,7 @@ import 'package:pora/app/internal/local_storage/abstract_local_db.dart';
 import 'package:pora/app/internal/local_storage/hive_local_db.dart';
 import 'package:pora/app/internal/localization/l10n/generated/app_localizations.dart';
 import 'package:pora/app/internal/localization/store/localization_store.dart';
+import 'package:pora/app/internal/router/app_router.dart';
 
 /// Dependency injection container
 class InjectionContainer {
@@ -15,6 +16,11 @@ class InjectionContainer {
 
   Future<void> init() async {
     // TODO: Initialize dependencies here
+
+    //! Routing
+    _getIt.registerSingleton<AppRouter>(
+      AppRouter(),
+    );
 
     //! LocalStorage
     _getIt.registerSingleton<LocalDBInterface<dynamic>>(
