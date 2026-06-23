@@ -1,0 +1,84 @@
+name: Flutter Production CI/CD
+
+on:
+  pull_request:
+    branches: [ main, dev ]
+  push:
+    branches: [ main ]
+
+jobs:
+  # 1. CONTINUOUS INTEGRATION (Runs on PRs and Pushes)
+  validation_and_test:
+    name: Code Quality & Testing
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Java (Required for Android Tools)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true # Automatically caches Flutter tool dependencies
+
+      - name: Install Project Dependencies
+        run: flutter pub get
+
+      - name: Check Code Formatting
+        run: dart format --output=none --set-exit-if-changed .
+        continue-on-error: true
+
+      - name: Static Code Analysis
+        run: flutter analyze
+        continue-on-error: true
+
+      - name: Run Unit & Widget Tests
+        run: flutter test --coverage
+
+  # 2. CONTINUOUS DELIVERY (Runs only on Push to Main after Tests Pass)
+  build_and_deploy_android:
+    name: Build Production Android Bundle
+    needs: validation_and_test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Install Dependencies
+        run: flutter pub get
+
+      # Decrypt and restore security configurations from GitHub Secrets
+      - name: Configure Production Keystore
+        run: |
+          echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > android/app/upload-keystore.jks
+          echo "${{ secrets.ANDROID_KEY_PROPERTIES }}" > android/key.properties
+
+      - name: Build Android App Bundle (AAB)
+        run: flutter build appbundle --release
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-aab
+          path: build/app/outputs/bundle/release/app-release.aab
