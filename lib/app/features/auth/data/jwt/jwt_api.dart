@@ -8,7 +8,7 @@ class RefreshTokensRequest {
     required this.refreshToken,
   });
   
-  final INetworkFetcher networkFetcher;
+  final INetworkService networkFetcher;
   final String refreshToken;
 
   Future<Map<String, dynamic>> fetchAccess() async {
