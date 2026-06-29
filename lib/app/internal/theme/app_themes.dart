@@ -49,7 +49,7 @@ abstract class PoraTheme {
           shape: const RoundedRectangleBorder(borderRadius: PoraRadii.button),
         ),
       ),
-      inputDecorationTheme: InputDecorationTheme(
+      inputDecorationTheme: const InputDecorationTheme(
         filled: true,
         fillColor: PoraColors.surface,
         contentPadding:

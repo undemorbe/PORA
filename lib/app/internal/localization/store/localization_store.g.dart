@@ -45,7 +45,7 @@ mixin _$LocalizationStore on _LocalizationStoreBase, Store {
   }
 
   @override
-  void initialise({LocalDBInterface<dynamic>? localDB}) {
+  void initialise({ILocalDB<dynamic>? localDB}) {
     final _$actionInfo = _$_LocalizationStoreBaseActionController.startAction(
       name: '_LocalizationStoreBase.initialise',
     );

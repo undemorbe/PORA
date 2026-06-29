@@ -1,9 +1,9 @@
 {
-    "appName": "Pora",
+    "appName": "ПОРА",
     "@appName": {
         "description": "The name of the application"
     },
-    "language": "English",
+    "language": "Русский",
     "@language": {
         "description": "The language of the application"
     },
@@ -50,4 +50,5 @@
     "@authPrivatePolicy": {
         "description": "The private policy link text"
     }
+
 }

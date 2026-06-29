@@ -1,23 +1,15 @@
 import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pora/app/internal/local_storage/abstract_local_db.dart';
 
-class HiveLocalDB<T> implements LocalDBInterface<T> {
+class HiveLocalDB<T> implements ILocalDB<T> {
   
   @override
-  List<String>? _boxes = ['settings','user','cache'];
+  final String _box = 'userDataBox';
 
   @override
-  Future<void> clear({String? concreteBoxName}) async {
-    if (concreteBoxName != null) {
-      await Hive.deleteBoxFromDisk(concreteBoxName);
-      return;
-    }
-
-    if (_boxes != null) {
-      for (var key in _boxes!) {
-        await Hive.deleteBoxFromDisk(key);
-      }
-    }
+  Future<void> clear() async {
+      await Hive.deleteBoxFromDisk(_box);
   }
 
   @override
@@ -36,7 +28,7 @@ class HiveLocalDB<T> implements LocalDBInterface<T> {
   @override
   Future<void> init() async {
     // Инициализация Hive
-    // await Hive.initFlutter();
+    await Hive.initFlutter();
   }
 
   @override
@@ -46,16 +38,9 @@ class HiveLocalDB<T> implements LocalDBInterface<T> {
   }
   
   @override
-  Future<void> closeDB({String? concreteBoxName}) async {
-    if (concreteBoxName != null) {
-      await Hive.box<T>(concreteBoxName).close();
-      return;
-    }
+  Future<void> closeDB() async {
+      await Hive.box<T>(_box).close();
     
-    if (_boxes != null) {
-      for (var key in _boxes!) {
-        await Hive.box<T>(key).close();
-      }
-    }
+    
   }
 }

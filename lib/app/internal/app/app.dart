@@ -8,6 +8,7 @@ import 'package:pora/app/internal/localization/store/localization_store.dart';
 import 'package:pora/app/internal/logging/logger.dart';
 import 'package:pora/app/internal/router/app_router.dart';
 import 'package:pora/app/internal/theme/app_themes.dart';
+import 'package:pora/app/internal/theme/store/theme_store.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
 class MainApp extends StatelessWidget {
@@ -23,6 +24,7 @@ class MainApp extends StatelessWidget {
       //!Routing
       routerDelegate: AutoRouterDelegate(
       injectionContainer.getIt<AppRouter>(),
+      
       navigatorObservers: () => [
         TalkerRouteObserver(Logger.talker),
        ],
@@ -33,7 +35,7 @@ class MainApp extends StatelessWidget {
       darkTheme: PoraTheme.dark,
       theme: PoraTheme.light,
       // To change theme, must go to settings in iOS
-      themeMode: ThemeMode.system,
+      themeMode: injectionContainer.getIt<ThemeStore>().themeMode,
       
 
       // !Localization

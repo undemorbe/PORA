@@ -16,7 +16,7 @@ abstract class _LocalizationStoreBase with Store {
   }
 
   @action
-  void initialise({LocalDBInterface? localDB}){
+  void initialise({ILocalDB? localDB}){
     var locale = localDB?.get(key: 'key', baseName: LocalDBNames.settings.name) ?? Platform.localeName;
     setCurrentLocale(newLocale: locale);
   }
