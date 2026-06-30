@@ -12,8 +12,8 @@ Future<void> main() async {
 
   final injectionContainer = InjectionContainer()..init();
 
-  await injectionContainer.getIt<ILocalDB<dynamic>>().init();
-  await injectionContainer.getIt<JWTAccessStore>().fetchAccessToken();
+  Future(() => injectionContainer.getIt<ILocalDB<dynamic>>().init(),).whenComplete(() => 
+   injectionContainer.getIt<JWTAccessStore>().fetchAccessToken(),);
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,

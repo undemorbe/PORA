@@ -65,7 +65,7 @@ class AuthPage extends StatelessWidget {
                 crossAxisAlignment: .center,
                 mainAxisSize: .min,
                 children: [
-                   AuthButton(text: AppLocalizations.of(context)!.authPhone, onPressed: () {}, backgroundColor: AuthTypes.phone.themeColor),
+                   AuthButton(text: AppLocalizations.of(context)!.authSignInWithPhone, onPressed: () {}, backgroundColor: AuthTypes.phone.themeColor),
                    const AuthExpansible(),
                    Padding(
                     padding: const .symmetric(vertical: 24, horizontal: 45),

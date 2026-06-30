@@ -9,8 +9,8 @@ class ConfirmOtp {
 
   const ConfirmOtp({required this.networkOtp});
 
-  Future<Either<Failure, Success>> callConfirmOtp({required String code}) async {
-    final data = await networkOtp.verifyOtp(code: code);
+  Future<Either<Failure, Success>> callConfirmOtp({required String code, required String login}) async {
+    final data = await networkOtp.verifyOtp(code: code, login: login);
     //! Code handle
 
     return Right(ServerSuccess('200', data));

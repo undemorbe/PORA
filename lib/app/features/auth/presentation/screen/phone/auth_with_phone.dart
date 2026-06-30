@@ -13,7 +13,7 @@ class AuthWithPhone extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         //! Localize
-        title: Text(AppLocalizations.of(context)!.signInWithPhone, style: Theme.of(context).textTheme.bodySmall,),
+        title: Text(AppLocalizations.of(context)!.authSignInWithPhone, style: Theme.of(context).textTheme.bodySmall,),
       ),
       body: const Center(
             // Input field

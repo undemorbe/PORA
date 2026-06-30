@@ -1,5 +1,5 @@
 import 'package:mobx/mobx.dart';
-import 'package:pora/app/internal/JWT_access/data/jwt_api.dart';
+import 'package:pora/app/internal/JWT_access/datasource/JWT_api.dart';
 import 'package:pora/app/internal/local_storage/abstract_local_db.dart';
 part 'JWT_store.g.dart';
 
@@ -12,34 +12,37 @@ abstract class _JWTAccessStoreBase with Store {
 
   _JWTAccessStoreBase({required this.refreshTokensRequest, required this.localDB});
 
+  @computed
+  bool get isUser => _accessToken != null  && _refreshToken != null;
+
   @readonly
-  String? accessToken;
+  String? _accessToken;
   
   @readonly
-  String? refreshToken;
+  String? _refreshToken;
 
   @action
   void setAccessToken(String? token) {
-    accessToken = token;
+    _accessToken = token;
   }
 
   @action
   void setRefreshToken(String? token) {
-    refreshToken = token;
+    _refreshToken = token;
   }
 
   @action
   Future<void> fetchAccessToken() async {
     final result = await localDB.get(key: 'refreshToken', baseName: LocalDBNames.auth.name);
-    refreshToken = result as String?;
+    _refreshToken = result as String?;
 
-    if (refreshToken != null) {
-        final tokens = await refreshTokensRequest.fetchAccess(refreshToken: refreshToken);
+    if (_refreshToken != null) {
+        final tokens = await refreshTokensRequest.fetchAccess(refreshToken: _refreshToken);
         
         setAccessToken(tokens['accessToken'] as String?);
         setRefreshToken(tokens['refreshToken'] as String?);
 
-        await localDB.set(key: 'refreshToken', value: refreshToken, baseName: LocalDBNames.auth.name);
+        await localDB.set(key: 'refreshToken', value: _refreshToken, baseName: LocalDBNames.auth.name);
     }
     setAccessToken(null);
     setRefreshToken(null);
@@ -47,7 +50,7 @@ abstract class _JWTAccessStoreBase with Store {
 
   @action
   void clearAccessToken() {
-    accessToken = null;
+    _accessToken = null;
   }
 
 }

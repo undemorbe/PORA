@@ -9,39 +9,51 @@ part of 'JWT_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$JWTAccessStore on _JWTAccessStoreBase, Store {
-  late final _$accessTokenAtom = Atom(
-    name: '_JWTAccessStoreBase.accessToken',
+  Computed<bool>? _$isUserComputed;
+
+  @override
+  bool get isUser => (_$isUserComputed ??= Computed<bool>(
+    () => super.isUser,
+    name: '_JWTAccessStoreBase.isUser',
+  )).value;
+
+  late final _$_accessTokenAtom = Atom(
+    name: '_JWTAccessStoreBase._accessToken',
     context: context,
   );
 
-  @override
   String? get accessToken {
-    _$accessTokenAtom.reportRead();
-    return super.accessToken;
+    _$_accessTokenAtom.reportRead();
+    return super._accessToken;
   }
 
   @override
-  set accessToken(String? value) {
-    _$accessTokenAtom.reportWrite(value, super.accessToken, () {
-      super.accessToken = value;
+  String? get _accessToken => accessToken;
+
+  @override
+  set _accessToken(String? value) {
+    _$_accessTokenAtom.reportWrite(value, super._accessToken, () {
+      super._accessToken = value;
     });
   }
 
-  late final _$refreshTokenAtom = Atom(
-    name: '_JWTAccessStoreBase.refreshToken',
+  late final _$_refreshTokenAtom = Atom(
+    name: '_JWTAccessStoreBase._refreshToken',
     context: context,
   );
 
-  @override
   String? get refreshToken {
-    _$refreshTokenAtom.reportRead();
-    return super.refreshToken;
+    _$_refreshTokenAtom.reportRead();
+    return super._refreshToken;
   }
 
   @override
-  set refreshToken(String? value) {
-    _$refreshTokenAtom.reportWrite(value, super.refreshToken, () {
-      super.refreshToken = value;
+  String? get _refreshToken => refreshToken;
+
+  @override
+  set _refreshToken(String? value) {
+    _$_refreshTokenAtom.reportWrite(value, super._refreshToken, () {
+      super._refreshToken = value;
     });
   }
 
@@ -99,8 +111,7 @@ mixin _$JWTAccessStore on _JWTAccessStoreBase, Store {
   @override
   String toString() {
     return '''
-accessToken: ${accessToken},
-refreshToken: ${refreshToken}
+isUser: ${isUser}
     ''';
   }
 }

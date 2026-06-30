@@ -5,5 +5,6 @@ class PhoneAuthStore = _PhoneAuthStoreBase with _$PhoneAuthStore;
 
 abstract class _PhoneAuthStoreBase with Store {
   
+  
 
 }
