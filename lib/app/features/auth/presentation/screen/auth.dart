@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:pora/app/features/auth/domain/enum/auth.dart';
+import 'package:pora/app/features/auth/domain/entity/auth_types.dart';
 import 'package:pora/app/features/auth/presentation/widgets/auth_button.dart';
 import 'package:pora/app/features/auth/presentation/widgets/auth_expansible.dart';
 import 'package:pora/app/internal/localization/l10n/generated/app_localizations.dart';

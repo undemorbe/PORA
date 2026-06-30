@@ -19,6 +19,8 @@ dependencies:
   flutter_dotenv: ^6.0.1
   talker_flutter: ^5.1.17
   phosphor_flutter: any
+  pinput: ^6.0.2
+  equatable: ^2.0.8
 
 dev_dependencies:
   flutter_test:
