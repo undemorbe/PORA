@@ -1,5 +1,1 @@
-enum LocalDBNames {
-  settings,
-  user,
-  cache,
-}
+enum LocalDBNames { settings, user, cache }

@@ -1,0 +1,53 @@
+{
+    "appName": "Pora",
+    "@appName": {
+        "description": "The name of the application"
+    },
+    "language": "English",
+    "@language": {
+        "description": "The language of the application"
+    },
+    "authUnderAppName1": "Общий список для пар и семей",
+    "@authUnderAppName1": {
+        "description": "The first line under the app name"
+    },
+
+    "authUnderAppName2": "Рецепты, дом и доставка — в одном месте",
+    "@authUnderAppName2": {
+        "description": "The second line under the app name"
+    },
+
+    "authSignInExpansibleExpand": "Войти иным способом",
+    "@authSignInExpansibleExpand": {
+        "description": "The sign in with other methods title"
+    },
+    "authSignInExpansibleCollapse": "Свернуть",
+    "@authSignInExpansibleCollapse": {
+        "description": "The sign in with other methods title"
+    },
+
+    "authSignInWithEmail": "Войти через email",
+    "@authSignInWithEmail": {
+        "description": "The sign in with email button text"
+    },
+
+    "authSignInWithGoogle": "Войти через Google",
+    "@authSignInWithGoogle": {
+        "description": "The sign in with Google button text"
+    },
+
+    "authSignInWithApple": "Войти через Apple",
+    "@authSignInWithApple": {
+        "description": "The sign in with Apple button text"
+    },
+
+    "authSignInWithPhone": "Войти через телефон",
+    "@authSignInWithPhone": {
+        "description": "The sign in with Phone button text"
+    },
+
+    "authPrivatePolicy": "Продолжая, вы соглашаетесь с\nУсловиями и Политикой конфиденциальности",
+    "@authPrivatePolicy": {
+        "description": "The private policy link text"
+    }
+}

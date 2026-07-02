@@ -1,15 +1,14 @@
-enum LocalDBNames {
-  settings,
-  user,
-  cache,
-}
+enum LocalDBNames { settings, user, cache, auth }
 
-abstract class LocalDBInterface<T> {
-  T? get({required String key, String? baseName});
-  Future<void> set({required String key, required T value, String? baseName});
-  Future<void> delete({required String key, String? baseName});
+abstract class ILocalDB<T> {
+  Future<T?> get({required String key, required LocalDBNames boxName});
+  Future<void> set({
+    required String key,
+    required T value,
+    required LocalDBNames boxName,
+  });
+  Future<void> delete({required String key, required LocalDBNames boxName});
   Future<void> init();
-  Future<void> clear({String? concreteBoxName});
-  Future<void> closeDB({String? concreteBoxName});
-  List<String>? _boxes;
+  Future<void> clear({required LocalDBNames boxName});
+  Future<void> closeDB({required LocalDBNames boxName});
 }

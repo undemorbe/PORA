@@ -9,15 +9,17 @@ class LocalizationStore = _LocalizationStoreBase with _$LocalizationStore;
 abstract class _LocalizationStoreBase with Store {
   @observable
   String currentLocale = 'en';
-  
+
   @action
-  void setCurrentLocale({required String newLocale}){
+  void setCurrentLocale({required String newLocale}) {
     currentLocale = newLocale;
   }
 
   @action
-  void initialise({LocalDBInterface? localDB}){
-    var locale = localDB?.get(key: 'key', baseName: LocalDBNames.settings.name) ?? Platform.localeName;
+  Future<void> initialise({ILocalDB? localDB}) async {
+    var locale =
+        await localDB?.get(key: 'key', boxName: LocalDBNames.settings) ??
+        Platform.localeName;
     setCurrentLocale(newLocale: locale);
   }
 }

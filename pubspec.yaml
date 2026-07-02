@@ -17,6 +17,15 @@ dependencies:
   flutter_mobx: ^2.3.0
   get_it: ^9.2.1
   flutter_dotenv: ^6.0.1
+  talker_flutter: ^5.1.17
+  pinput: ^6.0.2
+  equatable: ^2.0.8
+  phosphoricons_flutter: ^1.0.0
+  retrofit: ^4.9.2
+  dio: ^5.10.0
+  json_annotation: ^4.12.0
+  flutter_secure_storage: ^10.3.1
+  flutter_gen: ^5.14.1
 
 dev_dependencies:
   flutter_test:
@@ -26,19 +35,25 @@ dev_dependencies:
   auto_route_generator: ^10.5.0
   mobx_codegen: ^2.7.7
   change_app_package_name: ^1.5.0
+  json_serializable: ^6.14.0
+  retrofit_generator: ^10.2.7
 
 flutter:
   uses-material-design: true
   generate: true
+
+  assets:
+    - .env
+
   fonts:
       - family: Inter
         fonts:
-              - asset: assets/fonts/Inter-Regular.ttf
-              - asset: assets/fonts/Inter-Medium.ttf
+              - asset: assets/fonts/Inter_18pt-Regular.ttf
+              - asset: assets/fonts/Inter_18pt-Medium.ttf
                 weight: 500
-              - asset: assets/fonts/Inter-SemiBold.ttf
+              - asset: assets/fonts/Inter_18pt-SemiBold.ttf
                 weight: 600
-              - asset: assets/fonts/Inter-Bold.ttf
+              - asset: assets/fonts/Inter_18pt-Bold.ttf
                 weight: 700
-              - asset: assets/fonts/Inter-ExtraBold.ttf
+              - asset: assets/fonts/Inter_18pt-ExtraBold.ttf
                 weight: 800

@@ -34,14 +34,18 @@ abstract class PoraRadii {
 
   static const BorderRadius sm = BorderRadius.all(_sm); // чекбокс
   static const BorderRadius md = BorderRadius.all(_md); // мелкие пилюли-кнопки
-  static const BorderRadius input = BorderRadius.all(_input); // поля, мелкие чипы
+  static const BorderRadius input = BorderRadius.all(
+    _input,
+  ); // поля, мелкие чипы
   static const BorderRadius button = BorderRadius.all(_button); // кнопки
   static const BorderRadius card = BorderRadius.all(_card); // карточки
-  static const BorderRadius tile = BorderRadius.all(_tile); // плитки-иллюстрации
-  static const BorderRadius pill =
-      BorderRadius.all(Radius.circular(999)); // чипы/пилюли/FAB
+  static const BorderRadius tile = BorderRadius.all(
+    _tile,
+  ); // плитки-иллюстрации
+  static const BorderRadius pill = BorderRadius.all(
+    Radius.circular(999),
+  ); // чипы/пилюли/FAB
 }
-
 
 // -----------------------------------------------------------------------------
 //  SIZES  (ключевые размеры компонентов)

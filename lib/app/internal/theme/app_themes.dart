@@ -1,4 +1,3 @@
-
 // -----------------------------------------------------------------------------
 //  THEME
 // -----------------------------------------------------------------------------
@@ -49,11 +48,13 @@ abstract class PoraTheme {
           shape: const RoundedRectangleBorder(borderRadius: PoraRadii.button),
         ),
       ),
-      inputDecorationTheme: InputDecorationTheme(
+      inputDecorationTheme: const InputDecorationTheme(
         filled: true,
         fillColor: PoraColors.surface,
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 16,
+        ),
         border: OutlineInputBorder(
           borderRadius: PoraRadii.input,
           borderSide: const BorderSide(color: PoraColors.border),
@@ -77,6 +78,7 @@ abstract class PoraTheme {
       ),
     );
   }
+
   static ThemeData get dark {
     const scheme = ColorScheme(
       brightness: Brightness.dark,
@@ -123,11 +125,13 @@ abstract class PoraTheme {
           shape: const RoundedRectangleBorder(borderRadius: PoraRadii.button),
         ),
       ),
-      inputDecorationTheme: InputDecorationTheme(
+      inputDecorationTheme: const InputDecorationTheme(
         filled: true,
         fillColor: PoraColorsDark.surfaceAlt,
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 16,
+        ),
         border: OutlineInputBorder(
           borderRadius: PoraRadii.input,
           borderSide: const BorderSide(color: PoraColorsDark.border),
@@ -138,8 +142,10 @@ abstract class PoraTheme {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: PoraRadii.input,
-          borderSide:
-              const BorderSide(color: PoraColorsDark.primary, width: 1.5),
+          borderSide: const BorderSide(
+            color: PoraColorsDark.primary,
+            width: 1.5,
+          ),
         ),
       ),
       switchTheme: SwitchThemeData(
@@ -152,5 +158,4 @@ abstract class PoraTheme {
       ),
     );
   }
-
 }

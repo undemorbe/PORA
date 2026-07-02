@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-
 /// Locales for the INTL
 class Locales {
   static final supportedLocales = [

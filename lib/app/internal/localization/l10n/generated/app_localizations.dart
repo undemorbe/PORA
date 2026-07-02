@@ -6,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
 import 'app_localizations_en.dart';
+import 'app_localizations_ru.dart';
 
 // ignore_for_file: type=lint
 
@@ -92,7 +93,76 @@ abstract class AppLocalizations {
       ];
 
   /// A list of this localizations delegate's supported locales.
-  static const List<Locale> supportedLocales = <Locale>[Locale('en')];
+  static const List<Locale> supportedLocales = <Locale>[
+    Locale('en'),
+    Locale('ru'),
+  ];
+
+  /// The name of the application
+  ///
+  /// In en, this message translates to:
+  /// **'Pora'**
+  String get appName;
+
+  /// The language of the application
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get language;
+
+  /// The first line under the app name
+  ///
+  /// In en, this message translates to:
+  /// **'Общий список для пар и семей'**
+  String get authUnderAppName1;
+
+  /// The second line under the app name
+  ///
+  /// In en, this message translates to:
+  /// **'Рецепты, дом и доставка — в одном месте'**
+  String get authUnderAppName2;
+
+  /// The sign in with other methods title
+  ///
+  /// In en, this message translates to:
+  /// **'Войти иным способом'**
+  String get authSignInExpansibleExpand;
+
+  /// The sign in with other methods title
+  ///
+  /// In en, this message translates to:
+  /// **'Свернуть'**
+  String get authSignInExpansibleCollapse;
+
+  /// The sign in with email button text
+  ///
+  /// In en, this message translates to:
+  /// **'Войти через email'**
+  String get authSignInWithEmail;
+
+  /// The sign in with Google button text
+  ///
+  /// In en, this message translates to:
+  /// **'Войти через Google'**
+  String get authSignInWithGoogle;
+
+  /// The sign in with Apple button text
+  ///
+  /// In en, this message translates to:
+  /// **'Войти через Apple'**
+  String get authSignInWithApple;
+
+  /// The sign in with Phone button text
+  ///
+  /// In en, this message translates to:
+  /// **'Войти через телефон'**
+  String get authSignInWithPhone;
+
+  /// The private policy link text
+  ///
+  /// In en, this message translates to:
+  /// **'Продолжая, вы соглашаетесь с\nУсловиями и Политикой конфиденциальности'**
+  String get authPrivatePolicy;
 }
 
 class _AppLocalizationsDelegate
@@ -106,7 +176,7 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) =>
-      <String>['en'].contains(locale.languageCode);
+      <String>['en', 'ru'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -117,6 +187,8 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
   switch (locale.languageCode) {
     case 'en':
       return AppLocalizationsEn();
+    case 'ru':
+      return AppLocalizationsRu();
   }
 
   throw FlutterError(
