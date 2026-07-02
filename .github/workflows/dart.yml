@@ -1,17 +1,24 @@
-name: Flutter Production CI/CD
+name: Flutter CI/CD
 
 on:
   pull_request:
     branches: [ main, dev ]
   push:
     branches: [ main ]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
 
 jobs:
-  # 1. CONTINUOUS INTEGRATION (Runs on PRs and Pushes)
   validation_and_test:
     name: Code Quality & Testing
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -26,29 +33,32 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-          cache: true # Automatically caches Flutter tool dependencies
+          cache: true
+
+      - name: Create CI Environment File
+        env:
+          API_URL: ${{ vars.API_URL || secrets.API_URL }}
+        run: |
+          printf 'API_URL=%s\n' "${API_URL:-https://example.invalid}" > .env
 
       - name: Install Project Dependencies
         run: flutter pub get
 
       - name: Check Code Formatting
         run: dart format --output=none --set-exit-if-changed .
-        continue-on-error: true
 
       - name: Static Code Analysis
         run: flutter analyze
-        continue-on-error: true
 
       - name: Run Unit & Widget Tests
         run: flutter test --coverage
 
-  # 2. CONTINUOUS DELIVERY (Runs only on Push to Main after Tests Pass)
   build_and_deploy_android:
     name: Build Production Android Bundle
     needs: validation_and_test
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -65,14 +75,32 @@ jobs:
           channel: 'stable'
           cache: true
 
+      - name: Create CI Environment File
+        env:
+          API_URL: ${{ vars.API_URL || secrets.API_URL }}
+        run: |
+          printf 'API_URL=%s\n' "${API_URL:-https://example.invalid}" > .env
+
       - name: Install Dependencies
         run: flutter pub get
 
-      # Decrypt and restore security configurations from GitHub Secrets
-      - name: Configure Production Keystore
+      - name: Verify Android Signing Secrets
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEY_PROPERTIES: ${{ secrets.ANDROID_KEY_PROPERTIES }}
         run: |
-          echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > android/app/upload-keystore.jks
-          echo "${{ secrets.ANDROID_KEY_PROPERTIES }}" > android/key.properties
+          test -n "$ANDROID_KEYSTORE_BASE64" || (echo "ANDROID_KEYSTORE_BASE64 secret is required" >&2 && exit 1)
+          test -n "$ANDROID_KEY_PROPERTIES" || (echo "ANDROID_KEY_PROPERTIES secret is required" >&2 && exit 1)
+
+      - name: Configure Production Keystore
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEY_PROPERTIES: ${{ secrets.ANDROID_KEY_PROPERTIES }}
+        run: |
+          printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 --decode > android/app/upload-keystore.jks
+          printf '%s\n' "$ANDROID_KEY_PROPERTIES" > android/key.properties
+          test -s android/app/upload-keystore.jks
+          test -s android/key.properties
 
       - name: Build Android App Bundle (AAB)
         run: flutter build appbundle --release
