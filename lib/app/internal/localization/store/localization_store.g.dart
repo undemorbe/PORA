@@ -27,6 +27,18 @@ mixin _$LocalizationStore on _LocalizationStoreBase, Store {
     });
   }
 
+  late final _$initialiseAsyncAction = AsyncAction(
+    '_LocalizationStoreBase.initialise',
+    context: context,
+  );
+
+  @override
+  Future<void> initialise({ILocalDB<dynamic>? localDB}) {
+    return _$initialiseAsyncAction.run(
+      () => super.initialise(localDB: localDB),
+    );
+  }
+
   late final _$_LocalizationStoreBaseActionController = ActionController(
     name: '_LocalizationStoreBase',
     context: context,
@@ -39,18 +51,6 @@ mixin _$LocalizationStore on _LocalizationStoreBase, Store {
     );
     try {
       return super.setCurrentLocale(newLocale: newLocale);
-    } finally {
-      _$_LocalizationStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void initialise({ILocalDB<dynamic>? localDB}) {
-    final _$actionInfo = _$_LocalizationStoreBaseActionController.startAction(
-      name: '_LocalizationStoreBase.initialise',
-    );
-    try {
-      return super.initialise(localDB: localDB);
     } finally {
       _$_LocalizationStoreBaseActionController.endAction(_$actionInfo);
     }
