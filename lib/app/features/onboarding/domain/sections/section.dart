@@ -1,8 +1,8 @@
-abstract class ISection{
+abstract class ISection {
   String get title;
 }
 
-class Section implements ISection{
+class Section implements ISection {
   @override
   final String title;
 
