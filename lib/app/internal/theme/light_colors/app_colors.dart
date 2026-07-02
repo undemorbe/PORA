@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 // -----------------------------------------------------------------------------
 //  COLORS
 // -----------------------------------------------------------------------------
@@ -16,10 +17,14 @@ abstract class PoraColors {
   static const Color inkInverse = Color(0xFFFFFFFF); // текст на акценте
   static const Color textMuted = Color(0xFF9B9082); // вторичный текст
   static const Color textSubtle = Color(0xFFA89E8F); // подписи, мета
-  static const Color textSecondary = Color(0xFF6E655A); // текст на белых кнопках
+  static const Color textSecondary = Color(
+    0xFF6E655A,
+  ); // текст на белых кнопках
   static const Color divider = Color(0xFFF1E8DB); // разделители в карточках
   static const Color border = Color(0xFFECE3D8); // обводка инпутов/чипов
-  static const Color borderStrong = Color(0xFFE6DCCD); // обводка вторичных кнопок
+  static const Color borderStrong = Color(
+    0xFFE6DCCD,
+  ); // обводка вторичных кнопок
 
   // Accents
   static const Color sage = Color(0xFF8AA38B); // второй участник, успех мягкий
@@ -32,14 +37,15 @@ abstract class PoraColors {
   static const Color danger = Color(0xFFC9544A); // удалить, выйти
 
   // Controls
-  static const Color toggleOff = Color(0xFFD9CDBC); // выключенный тумблер/чекбокс
+  static const Color toggleOff = Color(
+    0xFFD9CDBC,
+  ); // выключенный тумблер/чекбокс
   static const Color progressTrack = Color(0xFFEFE3D4); // трек прогресса/дотов
   static const Color dark = Color(0xFF1D1B19); // кнопка Apple
 
   // Утилита: полупрозрачный «ink» (home indicator и т.п.)
   static Color inkAlpha(double a) => ink.withOpacity(a);
 }
-
 
 // -----------------------------------------------------------------------------
 //  SHADOWS

@@ -1,6 +1,4 @@
-
 import 'package:flutter/material.dart';
-
 
 // -----------------------------------------------------------------------------
 //  DARK COLORS  (зеркало PoraColors, тёмные значения)
@@ -9,7 +7,9 @@ abstract class PoraColorsDark {
   // Поверхности (elevation светлеет, без жёстких теней)
   static const Color bg = Color(0xFF16120D); // тёплый почти-чёрный фон
   static const Color surface = Color(0xFF221C16); // карточки
-  static const Color surfaceAlt = Color(0xFF2B241C); // поля ввода, raised-пилюли
+  static const Color surfaceAlt = Color(
+    0xFF2B241C,
+  ); // поля ввода, raised-пилюли
   static const Color divider = Color(0xFF322A21); // разделители
   static const Color border = Color(0xFF3A3128); // обводки
 
@@ -34,7 +34,9 @@ abstract class PoraColorsDark {
   // Controls
   static const Color toggleOff = Color(0xFF463D32);
   static const Color progressTrack = Color(0xFF322A21);
-  static const Color inkInverse = Color(0xFF1A140F); // тёмный текст на светлом акценте
+  static const Color inkInverse = Color(
+    0xFF1A140F,
+  ); // тёмный текст на светлом акценте
 
   static Color inkAlpha(double a) => ink.withOpacity(a);
 }
