@@ -3,7 +3,6 @@ import 'package:pora/app/features/auth/domain/entity/auth_types.dart';
 import 'package:pora/app/features/auth/presentation/widgets/auth_button.dart';
 import 'package:pora/app/internal/localization/l10n/generated/app_localizations.dart';
 
-
 class AuthExpansible extends StatefulWidget {
   const AuthExpansible({super.key});
 
@@ -25,19 +24,46 @@ class _AuthExpansibleState extends State<AuthExpansible> {
     return Expansible(
       headerBuilder: (context, animation) {
         final isExpanded = _controller.isExpanded;
-        return AuthButton(text: isExpanded ? AppLocalizations.of(context)?.authSignInExpansibleCollapse??'Collapse' : AppLocalizations.of(context)?.authSignInExpansibleExpand??'Expand', 
-        onPressed: (){//!add
-        }, backgroundColor: AuthTypes.expansible.themeColor);
+        return AuthButton(
+          text: isExpanded
+              ? AppLocalizations.of(context)?.authSignInExpansibleCollapse ??
+                    'Collapse'
+              : AppLocalizations.of(context)?.authSignInExpansibleExpand ??
+                    'Expand',
+          onPressed: () {
+            //!add
+          },
+          backgroundColor: AuthTypes.expansible.themeColor,
+        );
       },
       bodyBuilder: (context, animation) {
         return Column(
           children: [
-            AuthButton(text: AppLocalizations.of(context)?.authSignInWithEmail??'email', onPressed: (){//!add
-            }, backgroundColor: AuthTypes.email.themeColor),
-            AuthButton(text: AppLocalizations.of(context)?.authSignInWithGoogle??'google', onPressed: (){//!add
-            }, backgroundColor: AuthTypes.google.themeColor ),
-            AuthButton(text: AppLocalizations.of(context)?.authSignInWithApple??'apple', onPressed: (){//!add
-            }, backgroundColor: AuthTypes.apple.themeColor),
+            AuthButton(
+              text:
+                  AppLocalizations.of(context)?.authSignInWithEmail ?? 'email',
+              onPressed: () {
+                //!add
+              },
+              backgroundColor: AuthTypes.email.themeColor,
+            ),
+            AuthButton(
+              text:
+                  AppLocalizations.of(context)?.authSignInWithGoogle ??
+                  'google',
+              onPressed: () {
+                //!add
+              },
+              backgroundColor: AuthTypes.google.themeColor,
+            ),
+            AuthButton(
+              text:
+                  AppLocalizations.of(context)?.authSignInWithApple ?? 'apple',
+              onPressed: () {
+                //!add
+              },
+              backgroundColor: AuthTypes.apple.themeColor,
+            ),
           ],
         );
       },

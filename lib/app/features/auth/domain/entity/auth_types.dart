@@ -7,11 +7,10 @@ enum AuthTypes {
   apple(PoraColors.inkInverse),
   google(PoraColors.primary),
   expansible(PoraColors.danger);
-  
+
   // Final fields
   final Color themeColor;
 
   // Constant constructor
-  const AuthTypes( this.themeColor);
-
+  const AuthTypes(this.themeColor);
 }

@@ -1,4 +1,3 @@
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:pora/app/features/auth/presentation/widgets/text_fields/phone_field.dart';
@@ -13,13 +12,17 @@ class AuthWithPhone extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         //! Localize
-        title: Text(AppLocalizations.of(context)!.authSignInWithPhone, style: Theme.of(context).textTheme.bodySmall,),
+        title: Text(
+          AppLocalizations.of(context)!.authSignInWithPhone,
+          style: Theme.of(context).textTheme.bodySmall,
+        ),
       ),
       body: const Center(
-            // Input field
-            child: Padding(
-              padding: .symmetric(horizontal: 24),
-              child: PhoneInputField()),        
+        // Input field
+        child: Padding(
+          padding: .symmetric(horizontal: 24),
+          child: PhoneInputField(),
+        ),
       ),
     );
   }

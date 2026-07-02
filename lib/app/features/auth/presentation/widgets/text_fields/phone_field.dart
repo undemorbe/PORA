@@ -5,10 +5,6 @@ class PhoneInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      decoration: InputDecoration(
-        hintText: 'Phone',
-      ),
-    );
+    return TextField(decoration: InputDecoration(hintText: 'Phone'));
   }
 }

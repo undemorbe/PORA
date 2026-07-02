@@ -6,7 +6,8 @@ class AuthGate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //! Implement gate (via observer or auto route might be)
-    return Container(); 
+    return Container();
   }
 }
+
 // /authorize/check-user
