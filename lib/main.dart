@@ -1,36 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pora/app/internal/JWT_access/store/JWT_store.dart';
+import 'package:pora/app/internal/JWT_access/domain/usecases/refresh_token.dart';
 import 'package:pora/app/internal/app/app.dart';
 import 'package:pora/app/internal/di/injection_container.dart';
 import 'package:pora/app/internal/local_storage/abstract_local_db.dart';
 import 'package:pora/app/internal/localization/store/localization_store.dart';
 
-Future<void> main() async {
-
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  final injectionContainer = InjectionContainer()..init();
+  final injectionContainer = InjectionContainer();
+  await injectionContainer.init();
 
-  Future(() => injectionContainer.getIt<ILocalDB<dynamic>>().init(),).whenComplete(() => 
-   injectionContainer.getIt<JWTAccessStore>().fetchAccessToken(),);
+  await _initializeApp(injectionContainer);
 
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent,
-    statusBarIconBrightness: Brightness.dark,
-  ));
+  runApp(MainApp(injectionContainer: injectionContainer));
+}
 
-  SystemChrome.setPreferredOrientations(
-    [
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]
+Future<void> _initializeApp(InjectionContainer container) async {
+  final localDB = container.getIt<ILocalDB<dynamic>>();
+
+  await localDB.init();
+  await container.getIt<RefreshTokenUseCase>().call();
+
+  final localizationStore = container.getIt<LocalizationStore>();
+  await localizationStore.initialise();
+
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+    ),
   );
 
-  
-  injectionContainer.getIt<LocalizationStore>().initialise();
-  
-  runApp(MainApp(
-    injectionContainer: injectionContainer,
-  ));
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
 }
