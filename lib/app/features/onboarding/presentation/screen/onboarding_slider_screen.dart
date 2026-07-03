@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:pora/app/features/onboarding/presentation/widgets/onboarding_slide_view.dart';
+import 'package:pora/app/internal/router/app_router.gr.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
@@ -72,7 +73,9 @@ class _OnboardingSliderPageState extends State<OnboardingSliderPage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.router.navigate(OnboardingBriefRoute());
+                    },
                     child: Text(
                       'Пропустить',
                       style: PoraText.bodyLarge.copyWith(

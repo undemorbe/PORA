@@ -1,6 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
+import 'package:pora/app/features/onboarding/data/datasources/onboarding_local.dart';
+import 'package:pora/app/features/onboarding/data/services/onboarding_service.dart';
+import 'package:pora/app/features/onboarding/domain/repositories/onboarding_repository.dart';
+import 'package:pora/app/features/onboarding/domain/usecase/sawed_onboarding.dart';
 import 'package:pora/app/features/user/data/datasource/remote.dart';
 import 'package:pora/app/features/user/data/services/user/user_service.dart';
 import 'package:pora/app/features/user/domain/repository/user/user_repository.dart';
@@ -18,6 +22,7 @@ import 'package:pora/app/internal/logging/logger.dart';
 import 'package:pora/app/internal/network/api_client/api_client.dart';
 import 'package:pora/app/internal/network/api_client/dio.dart';
 import 'package:pora/app/internal/router/app_router.dart';
+import 'package:pora/app/internal/router/guard/auth_state.dart';
 import 'package:pora/app/internal/theme/store/theme_store.dart';
 
 class InjectionContainer {
@@ -40,7 +45,8 @@ class InjectionContainer {
 
   void _registerCoreDependencies() {
     _getIt.registerSingleton<LocalizationStore>(LocalizationStore());
-    _getIt.registerSingleton<AppRouter>(AppRouter());
+    _getIt.registerSingleton<AuthState>(AuthState());
+    _getIt.registerSingleton<AppRouter>(AppRouter(_getIt<AuthState>()));
     _getIt.registerSingleton<ThemeStore>(ThemeStore());
     _getIt.registerLazySingleton<TokensSecureStore>(() => TokensSecureStore());
 
@@ -61,11 +67,18 @@ class InjectionContainer {
     );
 
     //! USER feature
-    _getIt.registerLazySingleton<GetUser>(
-      () => GetUser(_getIt<UserRepository>()),
+    _getIt.registerFactory<GetUserUseCase>(
+      () => GetUserUseCase(_getIt<UserRepository>()),
     );
-    _getIt.registerLazySingleton<UpdateUser>(
-      () => UpdateUser(_getIt<UserRepository>()),
+    _getIt.registerFactory<UpdateUserUseCase>(
+      () => UpdateUserUseCase(_getIt<UserRepository>()),
+    );
+
+    //! Onboarding feature
+    _getIt.registerFactory<SawedOnboardingUseCase>(
+      () => SawedOnboardingUseCase(
+        onboardingRepository: _getIt<OnboardingRepository>(),
+      ),
     );
   }
 
@@ -82,11 +95,21 @@ class InjectionContainer {
     _getIt.registerLazySingleton<TokensRemoteDataSource>(
       () => TokensRemoteDataSourceImpl(apiClient: _getIt<ApiClient>()),
     );
-    //? Fix secure store to clean architecture, impl, abstract etc
+    //? Might be good to Fix secure store to clean architecture, impl, abstract etc
     _getIt.registerLazySingleton<TokensRepository>(
       () => TokensService(
         tokensRemoteDataSource: _getIt<TokensRemoteDataSource>(),
         tokensSecureStore: _getIt<TokensSecureStore>(),
+      ),
+    );
+
+    //! ONBOARDING feature
+    _getIt.registerLazySingleton<OnboardingLocaleDataSource>(
+      () => OnboardingLocaleDataSource(iLocalDB: _getIt<ILocalDB>()),
+    );
+    _getIt.registerLazySingleton<OnboardingRepository>(
+      () => OnboardingService(
+        onboardingLocaleDataSource: _getIt<OnboardingLocaleDataSource>(),
       ),
     );
   }
