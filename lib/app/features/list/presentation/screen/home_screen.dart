@@ -8,15 +8,22 @@ import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 import 'package:pora/app/internal/widgets/pora_bottom_nav.dart';
 
-/// Главный экран — общий список покупок семьи («Наш список»).
+/// Главный экран — общий список покупок выбранной семьи.
 ///
-/// Пока с демо-данными; при интеграции заменяется на MobX-стор
-/// (presentation/store) + данные из бэкенда/WebSocket.
+/// [familyId] / [familyName] приходят из экрана выбора семьи (FamiliesPage).
+/// Пока с демо-данными; при интеграции список берётся по familyId
+/// (GET /families/{id}/lists) через MobX-стор + WebSocket.
 @RoutePage()
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  const HomePage({super.key, this.familyId, this.familyName});
 
-  // Демо-данные (позже — из стора).
+  /// Идентификатор выбранной семьи (null — семья по умолчанию).
+  final String? familyId;
+
+  /// Название семьи для заголовка (null — «Наш список»).
+  final String? familyName;
+
+  // Демо-данные (позже — из стора по familyId).
   static const _sections = <ListSection>[
     ListSection(
       title: 'Молочное',
@@ -61,10 +68,13 @@ class HomePage extends StatelessWidget {
             100, // место под плавающую кнопку
           ),
           children: [
-            const ListHeader(
-              title: 'Наш список',
+            ListHeader(
+              title: familyName ?? 'Наш список',
               subtitle: '2 человека · 8 продуктов',
-              members: [('А', PoraColors.sage), ('Б', PoraColors.primary)],
+              members: const [
+                ('А', PoraColors.sage),
+                ('Б', PoraColors.primary),
+              ],
             ),
             const SizedBox(height: PoraSpacing.xl),
             for (final section in _sections)

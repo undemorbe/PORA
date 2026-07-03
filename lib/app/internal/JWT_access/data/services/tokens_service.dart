@@ -24,7 +24,7 @@ class TokensService extends TokensRepository {
         await tokensRemoteDataSource.refreshTokens(refreshToken: refreshToken),
       );
     } catch (e) {
-      throw Left(UnexpectedFailure(e.toString()));
+      return Left(UnexpectedFailure(e.toString()));
     }
   }
 
