@@ -18,7 +18,7 @@ import 'package:pora/app/features/auth/presentation/screen/confirm_code.dart'
     as _i4;
 import 'package:pora/app/features/auth/presentation/screen/phone/auth_with_phone.dart'
     as _i3;
-import 'package:pora/app/features/home/presentation/screen/home_screen.dart'
+import 'package:pora/app/features/list/presentation/screen/home_screen.dart'
     as _i5;
 import 'package:pora/app/features/household/presentation/screen/household_screen.dart'
     as _i6;

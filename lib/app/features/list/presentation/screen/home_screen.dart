@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:pora/app/features/home/domain/entity/list_item.dart';
-import 'package:pora/app/features/home/presentation/widgets/add_list_button.dart';
-import 'package:pora/app/features/home/presentation/widgets/list_header.dart';
-import 'package:pora/app/features/home/presentation/widgets/section_group.dart';
+import 'package:pora/app/features/list/domain/entity/list_item.dart';
+import 'package:pora/app/features/list/presentation/widgets/add_list_button.dart';
+import 'package:pora/app/features/list/presentation/widgets/list_header.dart';
+import 'package:pora/app/features/list/presentation/widgets/section_group.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 import 'package:pora/app/internal/widgets/pora_bottom_nav.dart';

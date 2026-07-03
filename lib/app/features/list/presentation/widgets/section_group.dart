@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pora/app/features/home/domain/entity/list_item.dart';
-import 'package:pora/app/features/home/presentation/widgets/list_item_tile.dart';
+import 'package:pora/app/features/list/domain/entity/list_item.dart';
+import 'package:pora/app/features/list/presentation/widgets/list_item_tile.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/widgets/pora_card.dart';
 import 'package:pora/app/internal/widgets/section_label.dart';
