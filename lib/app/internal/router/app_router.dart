@@ -17,8 +17,7 @@ class AppRouter extends RootStackRouter {
       path: "/${SplashRoute.name}",
       initial: true,
     ),
-    AutoRoute(page: AuthRoute.page,
-     path: "/${AuthRoute.name}"),
+    AutoRoute(page: AuthRoute.page, path: "/${AuthRoute.name}"),
     AutoRoute(
       page: OTPConfirmationRoute.page,
       path: "/${OTPConfirmationRoute.name}",

@@ -9,7 +9,6 @@ import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/widgets/pora_buttons.dart';
 import 'package:pora/app/features/onboarding/presentation/widgets/onboarding_progress_header.dart';
 
-
 @RoutePage()
 class AuthPage extends StatefulWidget {
   const AuthPage({super.key});
@@ -22,7 +21,7 @@ class _AuthPageState extends State<AuthPage> {
   final AuthStore authStore = AuthStore();
   final TextEditingController destinationController = TextEditingController();
   final TextEditingController otpController = TextEditingController();
-  
+
   @override
   Widget build(BuildContext context) {
     final PrivacyStore privacyStore = PrivacyStore();
@@ -76,7 +75,10 @@ class _AuthPageState extends State<AuthPage> {
                     },
                     child: Text(
                       'Продолжая, вы принимаете Условия и Политику конфиденциальности',
-                      style: PoraText.small.copyWith(height: 1.4, decoration: TextDecoration.underline),
+                      style: PoraText.small.copyWith(
+                        height: 1.4,
+                        decoration: TextDecoration.underline,
+                      ),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -84,8 +86,16 @@ class _AuthPageState extends State<AuthPage> {
                   PoraPrimaryButton(
                     label: 'Присоединиться',
                     onPressed: () {
-                      authStore.sendOtp(destination: destinationController.text);
-                      context.router.push(OTPConfirmationRoute(authStore: authStore, OTPController: otpController, destinationController: destinationController, ));
+                      authStore.sendOtp(
+                        destination: destinationController.text,
+                      );
+                      context.router.push(
+                        OTPConfirmationRoute(
+                          authStore: authStore,
+                          OTPController: otpController,
+                          destinationController: destinationController,
+                        ),
+                      );
                     },
                   ),
                 ],

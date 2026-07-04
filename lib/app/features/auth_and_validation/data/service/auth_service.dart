@@ -7,27 +7,31 @@ import 'package:pora/app/internal/errors/success.dart';
 import 'package:pora/app/internal/extensions/either.dart';
 
 class AuthService extends AuthRepository {
-
   final AuthRemote authRemote;
 
   AuthService({required this.authRemote});
 
   @override
-  Future<Either<Failure, Success>> sendOtp({required String destination}) async{
+  Future<Either<Failure, Success>> sendOtp({
+    required String destination,
+  }) async {
     final value = await authRemote.sendOtp(destination: destination);
-    if(value.isRight){
+    if (value.isRight) {
       return Right(value.right);
     }
     return Left(value.left);
   }
 
   @override
-  Future<Either<Failure, TokensEntity>> verifyOtp( {
+  Future<Either<Failure, TokensEntity>> verifyOtp({
     required String destination,
     required String otp,
   }) async {
-    final value = await authRemote.verifyOtp(destination: destination, otp: otp);
-    if(value.isRight){
+    final value = await authRemote.verifyOtp(
+      destination: destination,
+      otp: otp,
+    );
+    if (value.isRight) {
       return Right(value.right);
     }
     return Left(value.left);
