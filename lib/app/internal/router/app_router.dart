@@ -1,8 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:pora/app/internal/router/app_router.gr.dart';
+import 'package:pora/app/internal/router/guard/auth_guard.dart';
+import 'package:pora/app/internal/router/guard/auth_state.dart';
 
 @AutoRouterConfig(replaceInRouteName: 'Screen|Page,Route')
 class AppRouter extends RootStackRouter {
+  AppRouter(this._auth);
+
+  final AuthState _auth;
+  late final AuthGuard _authGuard = AuthGuard(_auth);
+
   @override
   List<AutoRoute> get routes => [
     AutoRoute(
@@ -10,29 +17,76 @@ class AppRouter extends RootStackRouter {
       path: "/${SplashRoute.name}",
       initial: true,
     ),
-    AutoRoute(page: AuthWithPhone.page, path: "/${AuthWithPhone.name}"),
     AutoRoute(page: AuthRoute.page, path: "/${AuthRoute.name}"),
-    AutoRoute(page: HomeRoute.page, path: "/${HomeRoute.name}"),
-    AutoRoute(page: PredictionsRoute.page, path: "/${PredictionsRoute.name}"),
     AutoRoute(
-      page: OnboardingBriefRoute.page,
-      path: "/${OnboardingBriefRoute.name}",
+      page: OTPConfirmationRoute.page,
+      path: "/${OTPConfirmationRoute.name}",
     ),
-    AutoRoute(page: SettingsRoute.page, path: "/${SettingsRoute.name}"),
-    AutoRoute(page: ItemDetailRoute.page, path: "/${ItemDetailRoute.name}"),
-    AutoRoute(page: AddItemRoute.page, path: "/${AddItemRoute.name}"),
-    AutoRoute(page: HouseholdRoute.page, path: "/${HouseholdRoute.name}"),
-    AutoRoute(page: RecipeImportRoute.page, path: "/${RecipeImportRoute.name}"),
-    AutoRoute(page: InsightsRoute.page, path: "/${InsightsRoute.name}"),
+    AutoRoute(
+      page: HomeRoute.page,
+      path: "/${HomeRoute.name}",
+      guards: [_authGuard],
+    ),
+    AutoRoute(
+      page: PredictionsRoute.page,
+      path: "/${PredictionsRoute.name}",
+      guards: [_authGuard],
+    ),
+    AutoRoute(
+      page: SettingsRoute.page,
+      path: "/${SettingsRoute.name}",
+      guards: [_authGuard],
+    ),
+    AutoRoute(
+      page: ItemDetailRoute.page,
+      path: "/${ItemDetailRoute.name}",
+      guards: [_authGuard],
+    ),
+    AutoRoute(
+      page: AddItemRoute.page,
+      path: "/${AddItemRoute.name}",
+      guards: [_authGuard],
+    ),
+    AutoRoute(
+      page: HouseholdRoute.page,
+      path: "/${HouseholdRoute.name}",
+      guards: [_authGuard],
+    ),
+    AutoRoute(
+      page: RecipeImportRoute.page,
+      path: "/${RecipeImportRoute.name}",
+      guards: [_authGuard],
+    ),
+    AutoRoute(
+      page: InsightsRoute.page,
+      path: "/${InsightsRoute.name}",
+      guards: [_authGuard],
+    ),
     AutoRoute(
       page: NotificationsRoute.page,
       path: "/${NotificationsRoute.name}",
+      guards: [_authGuard],
     ),
-    AutoRoute(page: OrderRoute.page, path: "/${OrderRoute.name}"),
-    AutoRoute(page: SearchRoute.page, path: "/${SearchRoute.name}"),
+    AutoRoute(
+      page: OrderRoute.page,
+      path: "/${OrderRoute.name}",
+      guards: [_authGuard],
+    ),
+    AutoRoute(
+      page: SearchRoute.page,
+      path: "/${SearchRoute.name}",
+      guards: [_authGuard],
+    ),
     AutoRoute(
       page: OnboardingSliderRoute.page,
       path: "/${OnboardingSliderRoute.name}",
     ),
+    AutoRoute(
+      page: FamiliesRoute.page,
+      path: "/${FamiliesRoute.name}",
+      guards: [_authGuard],
+    ),
+    AutoRoute(page: BriefRoute.page, path: "/${BriefRoute.name}"),
+    AutoRoute(page: BriefProfileRoute.page, path: "/${BriefProfileRoute.name}"),
   ];
 }

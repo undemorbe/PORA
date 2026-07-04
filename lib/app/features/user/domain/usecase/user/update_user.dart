@@ -3,8 +3,8 @@ import 'package:pora/app/features/user/domain/repository/user/user_repository.da
 import 'package:pora/app/internal/errors/failure.dart';
 import 'package:pora/app/internal/extensions/either.dart';
 
-class UpdateUser {
-  const UpdateUser(this.repository);
+class UpdateUserUseCase {
+  const UpdateUserUseCase(this.repository);
   final UserRepository repository;
   Future<Either<Failure, UserEntity>> call(UserEntity user) =>
       repository.updateUser(user);

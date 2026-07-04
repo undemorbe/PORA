@@ -14,3 +14,8 @@ class ServerSuccess extends Success {
   const ServerSuccess([String message = 'Успешный вызов', data])
     : super(message: message, data: data);
 }
+
+class LocalDBSuccess extends Success {
+  const LocalDBSuccess([String message = 'Успешный вызов', data])
+    : super(message: message, data: data);
+}
