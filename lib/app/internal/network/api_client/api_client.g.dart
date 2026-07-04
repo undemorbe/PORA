@@ -47,9 +47,9 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<void> checkUser({required String phone}) async {
+  Future<void> checkUser({required String destination}) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'phone': phone};
+    final queryParameters = <String, dynamic>{r'phone': destination};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<void>(
@@ -66,12 +66,12 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<void> sendOtp({required Map<String, String> body}) async {
+  Future<void> sendOtp({required Map<String, dynamic> destination}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body);
+    _data.addAll(destination);
     final _options = _setStreamType<void>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
@@ -86,13 +86,13 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<void> verifyOtp({required Map<String, String> body}) async {
+  Future<TokensModel> verifyOtp({required Map<String, dynamic> body}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body);
-    final _options = _setStreamType<void>(
+    final _options = _setStreamType<TokensModel>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -102,7 +102,15 @@ class _ApiClient implements ApiClient {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    await _dio.fetch<void>(_options);
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late TokensModel _value;
+    try {
+      _value = TokensModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options, response: _result);
+      rethrow;
+    }
+    return _value;
   }
 
   @override

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:pora/app/features/auth_and_validation/JWT_access/data/models/tokens_model.dart';
 import 'package:pora/app/features/user/data/models/user/user_model.dart';
-import 'package:pora/app/internal/JWT_access/data/models/tokens_model.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 
@@ -19,13 +19,13 @@ abstract class ApiClient {
   });
 
   @GET('/authorize/check-user')
-  Future<void> checkUser({@Query('phone') required String phone});
+  Future<void> checkUser({@Query('phone') required String destination});
 
   @POST('/authorize/send-otp')
-  Future<void> sendOtp({@Body() required Map<String, String> body});
+  Future<void> sendOtp({@Body() required Map<String, dynamic> destination});
 
   @POST('/authorize/verify-otp')
-  Future<void> verifyOtp({@Body() required Map<String, String> body});
+  Future<TokensModel> verifyOtp({@Body() required Map<String, dynamic> body});
 
   @POST('/authorize/logout')
   Future<void> logout();

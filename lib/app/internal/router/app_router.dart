@@ -17,8 +17,12 @@ class AppRouter extends RootStackRouter {
       path: "/${SplashRoute.name}",
       initial: true,
     ),
-    AutoRoute(page: AuthWithPhone.page, path: "/${AuthWithPhone.name}"),
-    AutoRoute(page: AuthRoute.page, path: "/${AuthRoute.name}"),
+    AutoRoute(page: AuthRoute.page,
+     path: "/${AuthRoute.name}"),
+    AutoRoute(
+      page: OTPConfirmationRoute.page,
+      path: "/${OTPConfirmationRoute.name}",
+    ),
     AutoRoute(
       page: HomeRoute.page,
       path: "/${HomeRoute.name}",
@@ -28,10 +32,6 @@ class AppRouter extends RootStackRouter {
       page: PredictionsRoute.page,
       path: "/${PredictionsRoute.name}",
       guards: [_authGuard],
-    ),
-    AutoRoute(
-      page: OnboardingBriefRoute.page,
-      path: "/${OnboardingBriefRoute.name}",
     ),
     AutoRoute(
       page: SettingsRoute.page,
@@ -87,13 +87,7 @@ class AppRouter extends RootStackRouter {
       path: "/${FamiliesRoute.name}",
       guards: [_authGuard],
     ),
-    AutoRoute(
-      page: OnboardingProfileRoute.page,
-      path: "/${OnboardingProfileRoute.name}",
-    ),
-    AutoRoute(
-      page: OnboardingRegisterRoute.page,
-      path: "/${OnboardingRegisterRoute.name}",
-    ),
+    AutoRoute(page: BriefRoute.page, path: "/${BriefRoute.name}"),
+    AutoRoute(page: BriefProfileRoute.page, path: "/${BriefProfileRoute.name}"),
   ];
 }

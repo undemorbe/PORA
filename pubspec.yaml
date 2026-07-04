@@ -26,6 +26,7 @@ dependencies:
   json_annotation: ^4.12.0
   flutter_secure_storage: ^10.3.1
   flutter_gen: ^5.14.1
+  url_launcher: ^6.3.2
 
 dev_dependencies:
   flutter_test:

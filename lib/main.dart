@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pora/app/internal/JWT_access/domain/usecases/refresh_token.dart';
+import 'package:pora/app/features/auth_and_validation/JWT_access/domain/usecases/refresh_token.dart';
 import 'package:pora/app/internal/app/app.dart';
 import 'package:pora/app/internal/di/injection_container.dart';
 import 'package:pora/app/internal/router/guard/auth_state.dart';
