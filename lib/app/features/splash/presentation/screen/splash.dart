@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pora/app/features/onboarding/domain/usecase/sawed_onboarding.dart';
+import 'package:pora/app/features/splash/presentation/store/splash_store.dart';
 import 'package:pora/app/internal/router/app_router.gr.dart';
 import 'package:pora/app/internal/router/guard/auth_state.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
@@ -31,6 +32,9 @@ class _SplashPageState extends State<SplashPage>
   @override
   void initState() {
     super.initState();
+
+    SplashStore controller = SplashStore();
+
     _c = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 2600),
@@ -52,23 +56,11 @@ class _SplashPageState extends State<SplashPage>
     _c.forward().whenComplete(() {
       if (!mounted) return;
       Future.delayed(const Duration(milliseconds: 450), () async {
+        final routeDestination = await controller.whereToRoute();
+
         if (!mounted) return;
-        final authed = GetIt.instance<AuthState>().isAuthenticated;
-        final sawedOnboarding = await GetIt.I<SawedOnboardingUseCase>().call();
-        if (sawedOnboarding.isRight) {
-          if (!mounted) return;
-          context.router.replace(
-            authed
-                ? HomeRoute()
-                : sawedOnboarding.right
-                ? const AuthRoute()
-                : const OnboardingSliderRoute(),
-          );
-        }
-        if (!mounted) return;
-        context.router.replace(
-          authed ? HomeRoute() : const OnboardingSliderRoute(),
-        );
+
+        context.router.replace(routeDestination);
       });
     });
   }
