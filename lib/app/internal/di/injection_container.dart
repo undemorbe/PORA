@@ -1,20 +1,26 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
+import 'package:pora/app/features/auth_and_validation/JWT_access/data/datasource/local/secure.dart';
+import 'package:pora/app/features/auth_and_validation/JWT_access/data/datasource/remote/remote_tokens.dart';
+import 'package:pora/app/features/auth_and_validation/JWT_access/data/services/tokens_service.dart';
+import 'package:pora/app/features/auth_and_validation/JWT_access/domain/repositories/tokens_repository.dart';
+import 'package:pora/app/features/auth_and_validation/JWT_access/domain/usecases/refresh_token.dart';
+import 'package:pora/app/features/auth_and_validation/data/datasource/auth_remote.dart';
+import 'package:pora/app/features/auth_and_validation/data/service/auth_service.dart';
+import 'package:pora/app/features/auth_and_validation/domain/repository/auth_repository.dart';
+import 'package:pora/app/features/auth_and_validation/domain/usecase/send_otp.dart';
+import 'package:pora/app/features/auth_and_validation/domain/usecase/verify_otp.dart';
 import 'package:pora/app/features/onboarding/data/datasources/onboarding_local.dart';
 import 'package:pora/app/features/onboarding/data/services/onboarding_service.dart';
 import 'package:pora/app/features/onboarding/domain/repositories/onboarding_repository.dart';
 import 'package:pora/app/features/onboarding/domain/usecase/sawed_onboarding.dart';
+import 'package:pora/app/features/onboarding/domain/usecase/update_sawed_onboarding.dart';
 import 'package:pora/app/features/user/data/datasource/remote.dart';
 import 'package:pora/app/features/user/data/services/user/user_service.dart';
 import 'package:pora/app/features/user/domain/repository/user/user_repository.dart';
 import 'package:pora/app/features/user/domain/usecase/user/get_user.dart';
 import 'package:pora/app/features/user/domain/usecase/user/update_user.dart';
-import 'package:pora/app/internal/JWT_access/data/datasource/local/secure.dart';
-import 'package:pora/app/internal/JWT_access/data/datasource/remote/remote_tokens.dart';
-import 'package:pora/app/internal/JWT_access/data/services/tokens_service.dart';
-import 'package:pora/app/internal/JWT_access/domain/repositories/tokens_repository.dart';
-import 'package:pora/app/internal/JWT_access/domain/usecases/refresh_token.dart';
 import 'package:pora/app/internal/local_storage/abstract_local_db.dart';
 import 'package:pora/app/internal/local_storage/hive_local_db.dart';
 import 'package:pora/app/internal/localization/store/localization_store.dart';
@@ -24,6 +30,7 @@ import 'package:pora/app/internal/network/api_client/dio.dart';
 import 'package:pora/app/internal/router/app_router.dart';
 import 'package:pora/app/internal/router/guard/auth_state.dart';
 import 'package:pora/app/internal/theme/store/theme_store.dart';
+import 'package:pora/app/internal/uri_launcher/uri_launcher.dart';
 
 class InjectionContainer {
   final _getIt = GetIt.instance;
@@ -53,6 +60,7 @@ class InjectionContainer {
     //! NETWORK
     _getIt.registerLazySingleton<Dio>(() => DioClient.instance);
     _getIt.registerLazySingleton<ApiClient>(() => ApiClient(_getIt<Dio>()));
+    _getIt.registerLazySingleton<IUriLauncher>(() => UriLauncherImpl());
 
     //! STORAGE
     _getIt.registerSingletonAsync<ILocalDB<dynamic>>(
@@ -73,10 +81,22 @@ class InjectionContainer {
     _getIt.registerFactory<UpdateUserUseCase>(
       () => UpdateUserUseCase(_getIt<UserRepository>()),
     );
+    //! Auth(otp) feature
+    _getIt.registerFactory<SendOtpUseCase>(
+      () => SendOtpUseCase(authRepository: _getIt<AuthRepository>()),
+    );
+    _getIt.registerFactory<VerifyOtpUseCase>(
+      () => VerifyOtpUseCase(authRepository: _getIt<AuthRepository>()),
+    );
 
     //! Onboarding feature
-    _getIt.registerFactory<SawedOnboardingUseCase>(
-      () => SawedOnboardingUseCase(
+    _getIt.registerFactory<IsSawedOnboardingUseCase>(
+      () => IsSawedOnboardingUseCase(
+        onboardingRepository: _getIt<OnboardingRepository>(),
+      ),
+    );
+    _getIt.registerFactory<UpdateIsSawedOnboardingUseCase>(
+      () => UpdateIsSawedOnboardingUseCase(
         onboardingRepository: _getIt<OnboardingRepository>(),
       ),
     );
@@ -103,13 +123,21 @@ class InjectionContainer {
       ),
     );
 
+    //! Auth(otp) feature
+    _getIt.registerLazySingleton<AuthRemote>(
+      () => AuthRemoteImpl(apiClient: _getIt<ApiClient>()),
+    );
+    _getIt.registerLazySingleton<AuthRepository>(
+      () => AuthService(authRemote: _getIt<AuthRemote>()),
+    );
+
     //! ONBOARDING feature
-    _getIt.registerLazySingleton<OnboardingLocaleDataSource>(
-      () => OnboardingLocaleDataSource(iLocalDB: _getIt<ILocalDB>()),
+    _getIt.registerLazySingleton<OnboardingLocalDataSourceImpl>(
+      () => OnboardingLocalDataSourceImpl(iLocalDB: _getIt<ILocalDB>()),
     );
     _getIt.registerLazySingleton<OnboardingRepository>(
       () => OnboardingService(
-        onboardingLocaleDataSource: _getIt<OnboardingLocaleDataSource>(),
+        onboardingLocaleDataSource: _getIt<OnboardingLocalDataSourceImpl>(),
       ),
     );
   }

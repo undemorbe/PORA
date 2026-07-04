@@ -22,7 +22,7 @@ class OnboardingProgressHeader extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
+            const Text(
               'Pora',
               style: TextStyle(
                 fontFamily: kPoraFontFamily,

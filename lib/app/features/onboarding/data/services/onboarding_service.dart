@@ -3,7 +3,7 @@ import 'package:pora/app/features/onboarding/domain/entity/section_entity.dart';
 import 'package:pora/app/features/onboarding/domain/repositories/onboarding_repository.dart';
 
 class OnboardingService extends OnboardingRepository {
-  final OnboardingLocaleDataSource onboardingLocaleDataSource;
+  final OnboardingLocalDataSourceImpl onboardingLocaleDataSource;
 
   OnboardingService({required this.onboardingLocaleDataSource});
 
@@ -16,6 +16,13 @@ class OnboardingService extends OnboardingRepository {
   @override
   Future<bool> hasCompletedOnboarding() async {
     return await onboardingLocaleDataSource.hasCompletedOnboarding();
+  }
+
+  @override
+  Future<void> updateIsSawedOnboarding({required bool isSawed}) async {
+    return await onboardingLocaleDataSource.updateIsSawedOnboarding(
+      isSawed: isSawed,
+    );
   }
 
   @override

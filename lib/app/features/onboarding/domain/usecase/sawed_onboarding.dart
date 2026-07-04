@@ -2,10 +2,10 @@ import 'package:pora/app/features/onboarding/domain/repositories/onboarding_repo
 import 'package:pora/app/internal/errors/failure.dart';
 import 'package:pora/app/internal/extensions/either.dart';
 
-class SawedOnboardingUseCase {
+class IsSawedOnboardingUseCase {
   final OnboardingRepository onboardingRepository;
 
-  SawedOnboardingUseCase({required this.onboardingRepository});
+  IsSawedOnboardingUseCase({required this.onboardingRepository});
   Future<Either<Failure, bool>> call() async {
     bool? result = await onboardingRepository.hasCompletedOnboarding();
 

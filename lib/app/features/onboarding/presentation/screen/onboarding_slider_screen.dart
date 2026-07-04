@@ -20,6 +20,7 @@ class _OnboardingSliderPageState extends State<OnboardingSliderPage> {
   final _controller = PageController();
   int _index = 0;
 
+  //! Localize
   static const _slides = <OnboardingSlide>[
     OnboardingSlide(
       Color(0xFFFCEBC9),
@@ -53,6 +54,8 @@ class _OnboardingSliderPageState extends State<OnboardingSliderPage> {
         duration: const Duration(milliseconds: 350),
         curve: Curves.easeInOut,
       );
+    } else if (_index == _slides.length - 1) {
+      context.router.navigate(const AuthRoute());
     }
   }
 
@@ -74,9 +77,10 @@ class _OnboardingSliderPageState extends State<OnboardingSliderPage> {
                 children: [
                   TextButton(
                     onPressed: () {
-                      context.router.navigate(OnboardingBriefRoute());
+                      context.router.navigate(const AuthRoute());
                     },
                     child: Text(
+                      //! Localize
                       'Пропустить',
                       style: PoraText.bodyLarge.copyWith(
                         color: PoraColors.textSubtle,
