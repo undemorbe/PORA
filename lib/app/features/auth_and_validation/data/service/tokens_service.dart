@@ -1,8 +1,8 @@
-import 'package:pora/app/features/auth_and_validation/JWT_access/data/datasource/local/secure.dart';
-import 'package:pora/app/features/auth_and_validation/JWT_access/data/datasource/remote/remote_tokens.dart';
-import 'package:pora/app/features/auth_and_validation/JWT_access/data/models/tokens_model.dart';
-import 'package:pora/app/features/auth_and_validation/JWT_access/domain/entity/tokens_entity.dart';
-import 'package:pora/app/features/auth_and_validation/JWT_access/domain/repositories/tokens_repository.dart';
+import 'package:pora/app/features/auth_and_validation/data/datasource/local/secure_tokens.dart';
+import 'package:pora/app/features/auth_and_validation/data/datasource/remote/remote_tokens.dart';
+import 'package:pora/app/features/auth_and_validation/data/models/jwt_models/tokens_model.dart';
+import 'package:pora/app/features/auth_and_validation/domain/entity/tokens_entity.dart';
+import 'package:pora/app/features/auth_and_validation/domain/repository/tokens_repository.dart';
 import 'package:pora/app/internal/errors/failure.dart';
 import 'package:pora/app/internal/extensions/either.dart';
 

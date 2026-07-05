@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:pora/app/features/auth_and_validation/JWT_access/data/models/tokens_model.dart';
+import 'package:pora/app/features/auth_and_validation/data/models/jwt_models/tokens_model.dart';
 import 'package:pora/app/features/user/data/models/user/user_model.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';

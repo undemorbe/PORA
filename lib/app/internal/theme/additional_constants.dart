@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 
 //
 // Themes

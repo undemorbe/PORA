@@ -1,6 +1,5 @@
-import 'package:pora/app/features/auth_and_validation/JWT_access/data/models/tokens_model.dart';
-import 'package:pora/app/features/auth_and_validation/JWT_access/domain/entity/tokens_entity.dart';
-import 'package:pora/app/features/auth_and_validation/data/datasource/auth_remote.dart';
+import 'package:pora/app/features/auth_and_validation/domain/entity/tokens_entity.dart';
+import 'package:pora/app/features/auth_and_validation/data/datasource/remote/auth_remote.dart';
 import 'package:pora/app/features/auth_and_validation/domain/repository/auth_repository.dart';
 import 'package:pora/app/internal/errors/failure.dart';
 import 'package:pora/app/internal/errors/success.dart';

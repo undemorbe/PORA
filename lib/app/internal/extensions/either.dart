@@ -8,8 +8,9 @@ typedef Callback<T> = void Function(T value);
 ///   [Right] is used for "success".
 abstract class Either<L, R> {
   Either() {
-    if (!isLeft && !isRight)
+    if (!isLeft && !isRight) {
       throw Exception('The ether should be heir Left or Right.');
+    }
   }
 
   /// Represents the left side of [Either] class which by convention is a "Failure".
@@ -19,17 +20,19 @@ abstract class Either<L, R> {
   bool get isRight => this is Right<L, R>;
 
   L get left {
-    if (this is Left<L, R>)
+    if (this is Left<L, R>) {
       return (this as Left<L, R>).value;
-    else
+    } else {
       throw Exception('Illegal use. You should check isLeft() before calling ');
+    }
   }
 
   R get right {
-    if (this is Right<L, R>)
+    if (this is Right<L, R>) {
       return (this as Right<L, R>).value;
-    else
+    } else {
       throw Exception('Illegal use. You should check isRight() before calling');
+    }
   }
 
   void either(Callback<L> fnL, Callback<R> fnR) {

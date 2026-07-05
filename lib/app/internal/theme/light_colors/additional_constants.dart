@@ -49,7 +49,7 @@ abstract class PoraShadows {
   /// Мягкая тень карточки
   static List<BoxShadow> card = [
     BoxShadow(
-      color: const Color(0xFF5C4C38).withOpacity(0.08),
+      color: const Color(0xFF5C4C38).withValues(alpha: 0.08),
       blurRadius: 16,
       offset: const Offset(0, 6),
     ),
@@ -58,7 +58,7 @@ abstract class PoraShadows {
   /// Тень под акцентной (терракотовой) кнопкой
   static List<BoxShadow> warm = [
     BoxShadow(
-      color: PoraColors.primary.withOpacity(0.35),
+      color: PoraColors.primary.withValues(alpha: 0.35),
       blurRadius: 18,
       offset: const Offset(0, 8),
     ),
@@ -67,7 +67,7 @@ abstract class PoraShadows {
   /// Усиленная тень (карточка заказа, FAB)
   static List<BoxShadow> elevated = [
     BoxShadow(
-      color: PoraColors.primary.withOpacity(0.40),
+      color: PoraColors.primary.withValues(alpha: 0.40),
       blurRadius: 22,
       offset: const Offset(0, 10),
     ),

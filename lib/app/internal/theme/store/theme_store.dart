@@ -1,6 +1,5 @@
 import 'package:mobx/mobx.dart';
 import 'package:flutter/material.dart';
-import 'package:mobx/mobx.dart';
 part 'theme_store.g.dart';
 
 class ThemeStore = _ThemeStoreBase with _$ThemeStore;

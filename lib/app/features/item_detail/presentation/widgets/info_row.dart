@@ -27,7 +27,7 @@ class InfoRow extends StatelessWidget {
             ),
           ),
           if (value != null) Text(value!, style: PoraText.itemTitle),
-          if (trailing != null) trailing!,
+          ?trailing,
         ],
       ),
     );

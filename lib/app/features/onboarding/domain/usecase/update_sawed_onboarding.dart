@@ -11,7 +11,7 @@ class UpdateIsSawedOnboardingUseCase {
     try {
       await onboardingRepository.updateIsSawedOnboarding(isSawed: isSawed);
       return Right(const LocalDBSuccess());
-    } on Exception catch (e) {
+    } on Exception {
       return Left(const UnexpectedFailure('Local db failure'));
     }
   }
