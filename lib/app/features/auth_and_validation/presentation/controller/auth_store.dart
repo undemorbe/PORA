@@ -12,16 +12,22 @@ abstract class _AuthStoreBase with Store {
 
   @observable
   String? scaffoldMessage;
+  
+  @observable
+  bool? isLoading;
 
   @action
   Future<void> sendOtp({required String destination}) async {
+    isLoading = true;
     final result = await GetIt.I<SendOtpUseCase>().call(
       destination: destination,
     );
     if (result.isRight) {
+      isLoading = false;
       success = true;
     } else {
       success = false;
+      isLoading = false;
       scaffoldMessage = result.left.message;
     }
   }
@@ -31,13 +37,16 @@ abstract class _AuthStoreBase with Store {
     required String destination,
     required String code,
   }) async {
+    isLoading = true;
     final result = await GetIt.I<VerifyOtpUseCase>().call(
       destination: destination,
       otp: code,
     );
     if (result.isRight) {
+      isLoading = false;
       success = true;
     } else {
+      isLoading = false;
       success = false;
       //! Localize
       scaffoldMessage = 'Invalid OTP';

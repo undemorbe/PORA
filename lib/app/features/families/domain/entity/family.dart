@@ -1,18 +1,17 @@
-/// Семья (домохозяйство) пользователя. Цвета аватаров резолвятся в UI.
-class Family {
-  const Family({
-    required this.id,
-    required this.name,
-    required this.memberInitials,
-    this.itemCount = 0,
-    this.isCurrent = false,
-  });
+import 'package:equatable/equatable.dart';
+import 'package:pora/app/features/families/domain/entity/member.dart';
+
+abstract class FamilyEntity extends Equatable {
 
   final String id;
   final String name;
-  final List<String> memberInitials;
-  final int itemCount;
-
-  /// Активная (выбранная) семья.
+  final List<MemberEntity> members;
+  final MemberEntity owner;
+  final String createdAt;
   final bool isCurrent;
+
+  const FamilyEntity({required this.id, required this.name, required this.members, required this.owner, required this.createdAt, required this.isCurrent});
+  @override
+  List<Object?> get props => [id, name, members, owner, createdAt, isCurrent];
+
 }

@@ -3,7 +3,7 @@ import 'package:pora/app/features/auth_and_validation/domain/entity/tokens_entit
 import 'package:pora/app/internal/errors/failure.dart';
 import 'package:pora/app/internal/errors/success.dart';
 import 'package:pora/app/internal/extensions/either.dart';
-import 'package:pora/app/internal/extensions/string.dart';
+import 'package:pora/app/internal/extensions/string_validation_extension.dart';
 import 'package:pora/app/internal/network/api_client/api_client.dart';
 
 abstract class AuthRemote {
