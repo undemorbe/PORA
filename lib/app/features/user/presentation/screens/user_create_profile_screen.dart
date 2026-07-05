@@ -22,7 +22,6 @@ class _BriefProfilePageState extends State<BriefProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -67,8 +66,8 @@ class _BriefProfilePageState extends State<BriefProfilePage> {
                 children: [
                   TextButton(
                     onPressed: () {
-
-                       context.router.push(const BriefRoute());},
+                      context.router.push(const BriefRoute());
+                    },
                     child: Text(
                       'Пропустить',
                       style: PoraText.bodyLarge.copyWith(
@@ -79,7 +78,9 @@ class _BriefProfilePageState extends State<BriefProfilePage> {
                   const SizedBox(height: PoraSpacing.sm),
                   PoraPrimaryButton(
                     label: 'Далее',
-                    onPressed: () { context.router.push(const BriefRoute());},
+                    onPressed: () {
+                      context.router.push(const BriefRoute());
+                    },
                   ),
                 ],
               ),

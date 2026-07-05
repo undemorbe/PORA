@@ -34,130 +34,134 @@ class OTPConfirmationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    body: SafeArea(
-      child: Column(
-        children: [
-          Expanded(
-            child: ListView(
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView(
+                padding: const EdgeInsets.fromLTRB(
+                  PoraSpacing.screen,
+                  PoraSpacing.sm,
+                  PoraSpacing.screen,
+                  PoraSpacing.sm,
+                ),
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
+                  const OnboardingProgressHeader(step: 2),
+                  const SizedBox(height: 28),
+                  //! Localize
+                  Text('Осталось немного!', style: PoraText.display),
+                  const SizedBox(height: PoraSpacing.md + 5),
+                  //! Localize
+                  Column(
+                    crossAxisAlignment: .center,
+                    mainAxisAlignment: .center,
+                    children: [
+                      Text(
+                        'Введите код отправленный на ',
+                        style: PoraText.subtitle,
+                      ),
+                      Text(
+                        '${destinationController.text}',
+                        style: PoraText.caption,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: PoraSpacing.xxl),
+
+                  //! pinput
+                  PinputRoundedWithCustomCursor(
+                    onCompleted: (value) => authStore.verifyOtp(
+                      destination: destinationController.text,
+                      code: OTPController.text,
+                    ),
+                    controller: OTPController,
+                  ),
+
+                  const SizedBox(height: 20),
+                  Column(
+                    mainAxisSize: .min,
+                    mainAxisAlignment: .center,
+                    crossAxisAlignment: .center,
+                    children: [
+                      Text(
+                        'Не получили код?',
+                        style: PoraText.subtitle.copyWith(fontSize: 14),
+                      ),
+                      Text(
+                        'Отправить еще раз',
+                        style: PoraText.subtitle.copyWith(
+                          color: PoraColors.primary,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Padding(
               padding: const EdgeInsets.fromLTRB(
                 PoraSpacing.screen,
-                PoraSpacing.sm,
+                0,
                 PoraSpacing.screen,
-                PoraSpacing.sm,
+                PoraSpacing.xxl,
               ),
-              physics: const NeverScrollableScrollPhysics(),
-              children: [
-                const OnboardingProgressHeader(step: 2),
-                const SizedBox(height: 28),
-                //! Localize
-                Text('Осталось немного!', style: PoraText.display),
-                const SizedBox(height: PoraSpacing.md + 5),
-                //! Localize
-                Column(
-                  crossAxisAlignment: .center,
-                  mainAxisAlignment: .center,
-                  children: [
-                    Text(
-                      'Введите код отправленный на ',
-                      style: PoraText.subtitle,
-                    ),
-                    Text(
-                      '${destinationController.text}',
-                      style: PoraText.caption,
-                    ),
-                  ],
-                ),
-                const SizedBox(height: PoraSpacing.xxl),
-    
-                //! pinput
-                PinputRoundedWithCustomCursor(
-                  onCompleted: (value) => authStore.verifyOtp(
-                    destination: destinationController.text,
-                    code: OTPController.text,
-                  ),
-                  controller: OTPController,
-                ),
-    
-                const SizedBox(height: 20),
-                Column(
-                  mainAxisSize: .min,
-                  mainAxisAlignment: .center,
-                  crossAxisAlignment: .center,
-                  children: [
-                    Text(
-                      'Не получили код?',
-                      style: PoraText.subtitle.copyWith(fontSize: 14),
-                    ),
-                    Text(
-                      'Отправить еще раз',
-                      style: PoraText.subtitle.copyWith(
-                        color: PoraColors.primary,
-                        fontSize: 18,
+              child: Column(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      privacyStore.openPrivacy();
+                    },
+                    child: Text(
+                      'Продолжая, вы принимаете Условия и Политику конфиденциальности',
+                      style: PoraText.small.copyWith(
+                        height: 1.4,
+                        decoration: TextDecoration.underline,
                       ),
+                      textAlign: TextAlign.center,
                     ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(
-              PoraSpacing.screen,
-              0,
-              PoraSpacing.screen,
-              PoraSpacing.xxl,
-            ),
-            child: Column(
-              children: [
-                InkWell(
-                  onTap: () {
-                    privacyStore.openPrivacy();
-                  },
-                  child: Text(
-                    'Продолжая, вы принимаете Условия и Политику конфиденциальности',
-                    style: PoraText.small.copyWith(
-                      height: 1.4,
-                      decoration: TextDecoration.underline,
-                    ),
-                    textAlign: TextAlign.center,
                   ),
-                ),
-                const SizedBox(height: PoraSpacing.md),
-                Observer(
-                  builder: (_) {
-                    return PoraPrimaryButton(
-                      label: 'Проверить код',
-                      isLoading: authStore.isLoading,
-                      onPressed: () async {
-                        await authStore.verifyOtp(
-                          destination: destinationController.text,
-                          code: OTPController.text,
-                        ).whenComplete(
-                          () {
-                            
-                            if ((authStore.success == true && context.mounted)|| (dotenv.getBool('DEBUG') && context.mounted)) {
-                              context.router.replaceAll(
-                                [
-                                  const BriefProfileRoute()
-                                ]
-                              );
-                            }else {
-                              if(!context.mounted) return;
-                              PoraSnackbar.show(context, message: authStore.scaffoldMessage ?? 'Ошибка');
-                              authStore.success = null;
-                            }
-                          },
-                        );
-                      },
-                    );
-                  },
-                ),
-              ],
+                  const SizedBox(height: PoraSpacing.md),
+                  Observer(
+                    builder: (_) {
+                      return PoraPrimaryButton(
+                        label: 'Проверить код',
+                        isLoading: authStore.isLoading,
+                        onPressed: () async {
+                          await authStore
+                              .verifyOtp(
+                                destination: destinationController.text,
+                                code: OTPController.text,
+                              )
+                              .whenComplete(() {
+                                if ((authStore.success == true &&
+                                        context.mounted) ||
+                                    (dotenv.getBool('DEBUG') &&
+                                        context.mounted)) {
+                                  context.router.replaceAll([
+                                    const BriefProfileRoute(),
+                                  ]);
+                                } else {
+                                  if (!context.mounted) return;
+                                  PoraSnackbar.show(
+                                    context,
+                                    message:
+                                        authStore.scaffoldMessage ?? 'Ошибка',
+                                  );
+                                  authStore.success = null;
+                                }
+                              });
+                        },
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-    ),
     );
   }
 }

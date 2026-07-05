@@ -41,17 +41,17 @@ abstract class ApiClient {
 
   //! Families
   @POST('/families/create-family')
-  Future<String> createFamile({@Body() required Map<String, dynamic> nameOfFamilyBody});
-  
+  Future<String> createFamile({
+    @Body() required Map<String, dynamic> nameOfFamilyBody,
+  });
+
   @GET('/families/get-families')
   Future<List<FamilyModel>> getFamilies();
 
   @POST('/families/link_code')
-  Future<LinkCodeModel> getLinkCodeOfConcreteFamily({@Query('fid') required String familyId});
+  Future<LinkCodeModel> getLinkCodeOfConcreteFamily({
+    @Query('fid') required String familyId,
+  });
 
   //! WAIT FOR JOIN TO BE CREATED!!!!!!!!
-  
-
-
-
 }

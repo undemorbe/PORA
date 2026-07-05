@@ -12,7 +12,7 @@ abstract class _AuthStoreBase with Store {
 
   @observable
   String? scaffoldMessage;
-  
+
   @observable
   bool? isLoading;
 

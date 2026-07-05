@@ -21,8 +21,6 @@ import 'package:pora/app/features/auth_and_validation/presentation/screens/auth_
     as _i10;
 import 'package:pora/app/features/auth_and_validation/presentation/screens/auth_screen.dart'
     as _i2;
-import 'package:pora/app/features/user/presentation/screens/user_create_profile_screen.dart'
-    as _i4;
 import 'package:pora/app/features/brief/presentation/screens/brief_screen.dart'
     as _i3;
 import 'package:pora/app/features/household/presentation/screen/household_screen.dart'
@@ -49,6 +47,8 @@ import 'package:pora/app/features/settings/presentation/screen/settings_screen.d
     as _i16;
 import 'package:pora/app/features/splash/presentation/screen/splash.dart'
     as _i17;
+import 'package:pora/app/features/user/presentation/screens/user_create_profile_screen.dart'
+    as _i4;
 
 /// generated route for
 /// [_i1.AddItemPage]

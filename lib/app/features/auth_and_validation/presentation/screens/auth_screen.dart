@@ -43,7 +43,6 @@ class _AuthPageState extends State<AuthPage> {
                   PoraSpacing.sm,
                 ),
                 physics: const NeverScrollableScrollPhysics(),
-                
                 children: [
                   const OnboardingProgressHeader(step: 1),
                   const SizedBox(height: 28),
@@ -85,38 +84,34 @@ class _AuthPageState extends State<AuthPage> {
                   PoraPrimaryButton(
                     label: 'Присоединиться',
                     onPressed: () async {
-                      await authStore.sendOtp(
-                        destination: destinationController.text,
-                      ).whenComplete(
-
-                        () {
-
-                          //! UPD WHEN authStore.success is not null
-                          if(  (authStore.success == true && context.mounted) || (dotenv.getBool('DEBUG') && context.mounted)){
-                          context.router.navigate(
-                        OTPConfirmationRoute(
-                          authStore: authStore,
-                          isPhone: destinationController.text.isValidPhone(
-                            destinationController.text,
-                          ),
-                          privacyStore: privacyStore,
-                          OTPController: otpController,
-                          destinationController: destinationController,
-                        ),
-                      );
-                          }
-                          else{
-                            if(!context.mounted) return;
-                            PoraSnackbar.show(context, message: authStore.scaffoldMessage ?? 'Ошибка');
-                          authStore.success == null;
-                          }
-                        },
-                      );
-
-                      
+                      await authStore
+                          .sendOtp(destination: destinationController.text)
+                          .whenComplete(() {
+                            //! UPD WHEN authStore.success is not null
+                            if ((authStore.success == true &&
+                                    context.mounted) ||
+                                (dotenv.getBool('DEBUG') && context.mounted)) {
+                              context.router.navigate(
+                                OTPConfirmationRoute(
+                                  authStore: authStore,
+                                  isPhone: destinationController.text
+                                      .isValidPhone(destinationController.text),
+                                  privacyStore: privacyStore,
+                                  OTPController: otpController,
+                                  destinationController: destinationController,
+                                ),
+                              );
+                            } else {
+                              if (!context.mounted) return;
+                              PoraSnackbar.show(
+                                context,
+                                message: authStore.scaffoldMessage ?? 'Ошибка',
+                              );
+                              authStore.success == null;
+                            }
+                          });
                     },
                   ),
-               
                 ],
               ),
             ),

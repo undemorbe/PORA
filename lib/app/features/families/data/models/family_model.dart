@@ -7,13 +7,20 @@ part 'family_model.g.dart';
 class FamilyModel extends FamilyEntity {
   @JsonKey(name: 'members')
   final List<MemberModel> membersModels;
-  
+
   @JsonKey(name: 'owner')
-  final MemberModel ownerModel; 
+  final MemberModel ownerModel;
 
-   const FamilyModel({required super.id, required super.name, required this.membersModels, required this.ownerModel, required super.createdAt, required super.isCurrent}) 
-   : super(members: membersModels, owner: ownerModel);
+  const FamilyModel({
+    required super.id,
+    required super.name,
+    required this.membersModels,
+    required this.ownerModel,
+    required super.createdAt,
+    required super.isCurrent,
+  }) : super(members: membersModels, owner: ownerModel);
 
-  factory FamilyModel.fromJson(Map<String, dynamic> json) => _$FamilyModelFromJson(json);
+  factory FamilyModel.fromJson(Map<String, dynamic> json) =>
+      _$FamilyModelFromJson(json);
   Map<String, dynamic> toJson() => _$FamilyModelToJson(this);
 }

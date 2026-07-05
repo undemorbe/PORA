@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-abstract class LinkCodeEntity extends Equatable{
+abstract class LinkCodeEntity extends Equatable {
   final String linkCode;
   final String linkUrl;
 
