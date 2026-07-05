@@ -15,6 +15,8 @@ import 'package:pora/app/features/add_item/presentation/screen/add_item_screen.d
     as _i1;
 import 'package:pora/app/features/auth_and_validation/presentation/controller/auth_store.dart'
     as _i21;
+import 'package:pora/app/features/auth_and_validation/presentation/controller/privacy_store.dart'
+    as _i22;
 import 'package:pora/app/features/auth_and_validation/presentation/screens/auth_otp_confirm.dart'
     as _i11;
 import 'package:pora/app/features/auth_and_validation/presentation/screens/auth_screen.dart'
@@ -264,7 +266,9 @@ class OTPConfirmationRoute
     _i20.Key? key,
     required _i21.AuthStore authStore,
     required _i20.TextEditingController OTPController,
+    required bool isPhone,
     required _i20.TextEditingController destinationController,
+    required _i22.PrivacyStore privacyStore,
     List<_i19.PageRouteInfo>? children,
   }) : super(
          OTPConfirmationRoute.name,
@@ -272,7 +276,9 @@ class OTPConfirmationRoute
            key: key,
            authStore: authStore,
            OTPController: OTPController,
+           isPhone: isPhone,
            destinationController: destinationController,
+           privacyStore: privacyStore,
          ),
          initialChildren: children,
        );
@@ -287,7 +293,9 @@ class OTPConfirmationRoute
         key: args.key,
         authStore: args.authStore,
         OTPController: args.OTPController,
+        isPhone: args.isPhone,
         destinationController: args.destinationController,
+        privacyStore: args.privacyStore,
       );
     },
   );
@@ -298,7 +306,9 @@ class OTPConfirmationRouteArgs {
     this.key,
     required this.authStore,
     required this.OTPController,
+    required this.isPhone,
     required this.destinationController,
+    required this.privacyStore,
   });
 
   final _i20.Key? key;
@@ -307,11 +317,15 @@ class OTPConfirmationRouteArgs {
 
   final _i20.TextEditingController OTPController;
 
+  final bool isPhone;
+
   final _i20.TextEditingController destinationController;
+
+  final _i22.PrivacyStore privacyStore;
 
   @override
   String toString() {
-    return 'OTPConfirmationRouteArgs{key: $key, authStore: $authStore, OTPController: $OTPController, destinationController: $destinationController}';
+    return 'OTPConfirmationRouteArgs{key: $key, authStore: $authStore, OTPController: $OTPController, isPhone: $isPhone, destinationController: $destinationController, privacyStore: $privacyStore}';
   }
 
   @override
@@ -321,7 +335,9 @@ class OTPConfirmationRouteArgs {
     return key == other.key &&
         authStore == other.authStore &&
         OTPController == other.OTPController &&
-        destinationController == other.destinationController;
+        isPhone == other.isPhone &&
+        destinationController == other.destinationController &&
+        privacyStore == other.privacyStore;
   }
 
   @override
@@ -329,7 +345,9 @@ class OTPConfirmationRouteArgs {
       key.hashCode ^
       authStore.hashCode ^
       OTPController.hashCode ^
-      destinationController.hashCode;
+      isPhone.hashCode ^
+      destinationController.hashCode ^
+      privacyStore.hashCode;
 }
 
 /// generated route for
