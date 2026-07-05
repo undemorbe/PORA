@@ -51,10 +51,7 @@ abstract class PoraTheme {
       inputDecorationTheme: const InputDecorationTheme(
         filled: true,
         fillColor: PoraColors.surface,
-        contentPadding: EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 16,
-        ),
+        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         border: OutlineInputBorder(
           borderRadius: PoraRadii.input,
           borderSide: BorderSide(color: PoraColors.border),
@@ -128,10 +125,7 @@ abstract class PoraTheme {
       inputDecorationTheme: const InputDecorationTheme(
         filled: true,
         fillColor: PoraColorsDark.surfaceAlt,
-        contentPadding: EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 16,
-        ),
+        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         border: OutlineInputBorder(
           borderRadius: PoraRadii.input,
           borderSide: BorderSide(color: PoraColorsDark.border),
@@ -142,10 +136,7 @@ abstract class PoraTheme {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: PoraRadii.input,
-          borderSide: BorderSide(
-            color: PoraColorsDark.primary,
-            width: 1.5,
-          ),
+          borderSide: BorderSide(color: PoraColorsDark.primary, width: 1.5),
         ),
       ),
       switchTheme: SwitchThemeData(
