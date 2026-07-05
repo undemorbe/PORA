@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pora/app/features/auth_and_validation/presentation/controller/auth_store.dart';
 import 'package:pora/app/features/auth_and_validation/presentation/controller/privacy_store.dart';
@@ -134,9 +135,11 @@ class OTPConfirmationPage extends StatelessWidget {
                         ).whenComplete(
                           () {
                             
-                            if (authStore.success == true && context.mounted) {
-                              context.router.navigate(
-                                const FamiliesRoute()
+                            if ((authStore.success == true && context.mounted)|| (dotenv.getBool('DEBUG') && context.mounted)) {
+                              context.router.replaceAll(
+                                [
+                                  const BriefProfileRoute()
+                                ]
                               );
                             }else {
                               if(!context.mounted) return;

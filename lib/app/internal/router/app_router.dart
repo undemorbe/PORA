@@ -81,11 +81,11 @@ class AppRouter extends RootStackRouter {
       page: OnboardingSliderRoute.page,
       path: "/${OnboardingSliderRoute.name}",
     ),
-    AutoRoute(
-      page: FamiliesRoute.page,
-      path: "/${FamiliesRoute.name}",
-      guards: [_authGuard],
-    ),
+    // AutoRoute(
+    //   page: FamiliesRoute.page,
+    //   path: "/${FamiliesRoute.name}",
+    //   guards: [_authGuard],
+    // ),
     AutoRoute(page: BriefRoute.page, path: "/${BriefRoute.name}"),
     AutoRoute(page: BriefProfileRoute.page, path: "/${BriefProfileRoute.name}"),
   ];

@@ -10,11 +10,19 @@ import 'package:pora/app/internal/widgets/pora_buttons.dart';
 
 /// Онбординг, шаг 1 — имя и фото профиля.
 @RoutePage()
-class BriefProfilePage extends StatelessWidget {
+class BriefProfilePage extends StatefulWidget {
   const BriefProfilePage({super.key});
 
   @override
+  State<BriefProfilePage> createState() => _BriefProfilePageState();
+}
+
+class _BriefProfilePageState extends State<BriefProfilePage> {
+  final TextEditingController nameEditingController = TextEditingController();
+
+  @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -28,7 +36,7 @@ class BriefProfilePage extends StatelessWidget {
                   PoraSpacing.sm,
                 ),
                 children: [
-                  const OnboardingProgressHeader(step: 2),
+                  const OnboardingProgressHeader(step: 3),
                   const SizedBox(height: 28),
                   Text('Как вас зовут?', style: PoraText.display),
                   const SizedBox(height: PoraSpacing.md),
@@ -43,6 +51,7 @@ class BriefProfilePage extends StatelessWidget {
                     textCapitalization: TextCapitalization.words,
                     style: PoraText.bodyLarge.copyWith(fontSize: 18),
                     decoration: const InputDecoration(hintText: 'Ваше имя'),
+                    controller: nameEditingController,
                   ),
                 ],
               ),
@@ -57,7 +66,9 @@ class BriefProfilePage extends StatelessWidget {
               child: Column(
                 children: [
                   TextButton(
-                    onPressed: () => context.router.push(HomeRoute()),
+                    onPressed: () {
+
+                       context.router.push(const BriefRoute());},
                     child: Text(
                       'Пропустить',
                       style: PoraText.bodyLarge.copyWith(
@@ -68,7 +79,7 @@ class BriefProfilePage extends StatelessWidget {
                   const SizedBox(height: PoraSpacing.sm),
                   PoraPrimaryButton(
                     label: 'Далее',
-                    onPressed: () => context.router.push(const BriefRoute()),
+                    onPressed: () { context.router.push(const BriefRoute());},
                   ),
                 ],
               ),

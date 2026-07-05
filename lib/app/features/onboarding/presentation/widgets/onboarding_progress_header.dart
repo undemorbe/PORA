@@ -8,7 +8,7 @@ class OnboardingProgressHeader extends StatelessWidget {
   const OnboardingProgressHeader({
     super.key,
     required this.step,
-    this.total = 3,
+    this.total = 4,
   });
 
   final int step;

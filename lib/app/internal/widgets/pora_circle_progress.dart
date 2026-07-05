@@ -18,7 +18,7 @@ class PoraCircleProgress extends StatefulWidget {
   const PoraCircleProgress({
     super.key,
     this.value,
-    this.size = 72,
+    this.size = 55,
     this.strokeWidth = 7,
     this.gradientColors,
     this.trackColor,
