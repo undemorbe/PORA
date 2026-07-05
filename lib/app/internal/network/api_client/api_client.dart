@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:pora/app/features/auth_and_validation/JWT_access/data/models/tokens_model.dart';
+import 'package:pora/app/features/auth_and_validation/data/models/jwt_models/tokens_model.dart';
+import 'package:pora/app/features/families/data/models/family_model.dart';
+import 'package:pora/app/features/families/data/models/link_code_model.dart';
 import 'package:pora/app/features/user/data/models/user/user_model.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
@@ -36,4 +38,20 @@ abstract class ApiClient {
 
   @GET('/user/me')
   Future<UserModel> getUser();
+
+  //! Families
+  @POST('/families/create-family')
+  Future<String> createFamile({
+    @Body() required Map<String, dynamic> nameOfFamilyBody,
+  });
+
+  @GET('/families/get-families')
+  Future<List<FamilyModel>> getFamilies();
+
+  @POST('/families/link_code')
+  Future<LinkCodeModel> getLinkCodeOfConcreteFamily({
+    @Query('fid') required String familyId,
+  });
+
+  //! WAIT FOR JOIN TO BE CREATED!!!!!!!!
 }

@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class TokensEntity extends Equatable {
+abstract class TokensEntity extends Equatable {
   final String accessToken;
   final String refreshToken;
 

@@ -33,7 +33,7 @@ class OnboardingSlideView extends StatelessWidget {
               borderRadius: BorderRadius.circular(40),
               boxShadow: [
                 BoxShadow(
-                  color: const Color(0xFF5C4C38).withOpacity(0.14),
+                  color: const Color(0xFF5C4C38).withValues(alpha: 0.14),
                   blurRadius: 40,
                   offset: const Offset(0, 18),
                 ),

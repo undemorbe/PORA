@@ -38,7 +38,7 @@ abstract class PoraColorsDark {
     0xFF1A140F,
   ); // тёмный текст на светлом акценте
 
-  static Color inkAlpha(double a) => ink.withOpacity(a);
+  static Color inkAlpha(double a) => ink.withValues(alpha: a);
 }
 
 // -----------------------------------------------------------------------------
@@ -48,14 +48,14 @@ abstract class PoraColorsDark {
 abstract class PoraShadowsDark {
   static List<BoxShadow> card = [
     BoxShadow(
-      color: Colors.black.withOpacity(0.35),
+      color: Colors.black.withValues(alpha: 0.35),
       blurRadius: 16,
       offset: const Offset(0, 6),
     ),
   ];
   static List<BoxShadow> warm = [
     BoxShadow(
-      color: PoraColorsDark.primary.withOpacity(0.35),
+      color: PoraColorsDark.primary.withValues(alpha: 0.35),
       blurRadius: 20,
       offset: const Offset(0, 8),
     ),

@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
-import 'package:pora/app/features/auth_and_validation/JWT_access/data/datasource/local/secure.dart';
-import 'package:pora/app/features/auth_and_validation/JWT_access/domain/usecases/refresh_token.dart';
+import 'package:pora/app/features/auth_and_validation/data/datasource/local/secure_tokens.dart';
+import 'package:pora/app/features/auth_and_validation/domain/usecase/refresh_token.dart';
 import 'package:pora/app/internal/network/interceptors/auth_interceptor.dart';
 
 class DioClient {

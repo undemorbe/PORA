@@ -1,11 +1,17 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pora/app/features/auth_and_validation/presentation/controller/auth_store.dart';
+import 'package:pora/app/features/auth_and_validation/presentation/controller/privacy_store.dart';
+import 'package:pora/app/features/auth_and_validation/presentation/widgets/pinput.dart';
+import 'package:pora/app/internal/router/app_router.gr.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
+import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 import 'package:pora/app/internal/widgets/pora_buttons.dart';
 import 'package:pora/app/features/onboarding/presentation/widgets/onboarding_progress_header.dart';
+import 'package:pora/app/internal/widgets/pora_snackbar.dart';
 
 @RoutePage()
 class OTPConfirmationPage extends StatelessWidget {
@@ -13,10 +19,15 @@ class OTPConfirmationPage extends StatelessWidget {
   const OTPConfirmationPage({
     super.key,
     required this.authStore,
+    // ignore: non_constant_identifier_names
     required this.OTPController,
+    required this.isPhone,
     required this.destinationController,
+    required this.privacyStore,
   });
   final AuthStore authStore;
+  final bool isPhone;
+  final PrivacyStore privacyStore;
   final TextEditingController destinationController;
   // ignore: non_constant_identifier_names
   final TextEditingController OTPController;
@@ -34,25 +45,57 @@ class OTPConfirmationPage extends StatelessWidget {
                   PoraSpacing.screen,
                   PoraSpacing.sm,
                 ),
+                physics: const NeverScrollableScrollPhysics(),
                 children: [
-                  const OnboardingProgressHeader(step: 3),
+                  const OnboardingProgressHeader(step: 2),
                   const SizedBox(height: 28),
                   //! Localize
-                  Text('Почти тут', style: PoraText.display),
-                  const SizedBox(height: PoraSpacing.md),
-                  Text(
-                    'Введите номер телефона — пришлём код для входа.',
-                    style: PoraText.subtitle,
+                  Text('Осталось немного!', style: PoraText.display),
+                  const SizedBox(height: PoraSpacing.md + 5),
+                  //! Localize
+                  Column(
+                    crossAxisAlignment: .center,
+                    mainAxisAlignment: .center,
+                    children: [
+                      Text(
+                        'Введите код отправленный на ',
+                        style: PoraText.subtitle,
+                      ),
+                      Text(
+                        '${destinationController.text}',
+                        style: PoraText.caption,
+                      ),
+                    ],
                   ),
                   const SizedBox(height: PoraSpacing.xxl),
-                  TextField(
-                    controller: OTPController,
-                    keyboardType: TextInputType.phone,
-                    style: PoraText.bodyLarge.copyWith(fontSize: 18),
-                    decoration: const InputDecoration(
-                      hintText: '+7 900 000-00-00',
-                      prefixIcon: Icon(PhosphorIconsRegular.phone, size: 18),
+
+                  //! pinput
+                  PinputRoundedWithCustomCursor(
+                    onCompleted: (value) => authStore.verifyOtp(
+                      destination: destinationController.text,
+                      code: OTPController.text,
                     ),
+                    controller: OTPController,
+                  ),
+
+                  const SizedBox(height: 20),
+                  Column(
+                    mainAxisSize: .min,
+                    mainAxisAlignment: .center,
+                    crossAxisAlignment: .center,
+                    children: [
+                      Text(
+                        'Не получили код?',
+                        style: PoraText.subtitle.copyWith(fontSize: 14),
+                      ),
+                      Text(
+                        'Отправить еще раз',
+                        style: PoraText.subtitle.copyWith(
+                          color: PoraColors.primary,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -68,21 +111,48 @@ class OTPConfirmationPage extends StatelessWidget {
                 children: [
                   InkWell(
                     onTap: () {
-                      //! Opens conf policy!!!
+                      privacyStore.openPrivacy();
                     },
                     child: Text(
                       'Продолжая, вы принимаете Условия и Политику конфиденциальности',
-                      style: PoraText.small.copyWith(height: 1.4),
+                      style: PoraText.small.copyWith(
+                        height: 1.4,
+                        decoration: TextDecoration.underline,
+                      ),
                       textAlign: TextAlign.center,
                     ),
                   ),
                   const SizedBox(height: PoraSpacing.md),
-                  PoraPrimaryButton(
-                    label: 'Присоединиться',
-                    onPressed: () async {
-                      await authStore.verifyOtp(
-                        destination: destinationController.text,
-                        code: OTPController.text,
+                  Observer(
+                    builder: (_) {
+                      return PoraPrimaryButton(
+                        label: 'Проверить код',
+                        isLoading: authStore.isLoading,
+                        onPressed: () async {
+                          await authStore
+                              .verifyOtp(
+                                destination: destinationController.text,
+                                code: OTPController.text,
+                              )
+                              .whenComplete(() {
+                                if ((authStore.success == true &&
+                                        context.mounted) ||
+                                    (dotenv.getBool('DEBUG') &&
+                                        context.mounted)) {
+                                  context.router.replaceAll([
+                                    const BriefProfileRoute(),
+                                  ]);
+                                } else {
+                                  if (!context.mounted) return;
+                                  PoraSnackbar.show(
+                                    context,
+                                    message:
+                                        authStore.scaffoldMessage ?? 'Ошибка',
+                                  );
+                                  authStore.success = null;
+                                }
+                              });
+                        },
                       );
                     },
                   ),

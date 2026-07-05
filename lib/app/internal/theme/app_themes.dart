@@ -51,21 +51,18 @@ abstract class PoraTheme {
       inputDecorationTheme: const InputDecorationTheme(
         filled: true,
         fillColor: PoraColors.surface,
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 16,
-        ),
+        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         border: OutlineInputBorder(
           borderRadius: PoraRadii.input,
-          borderSide: const BorderSide(color: PoraColors.border),
+          borderSide: BorderSide(color: PoraColors.border),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: PoraRadii.input,
-          borderSide: const BorderSide(color: PoraColors.border),
+          borderSide: BorderSide(color: PoraColors.border),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: PoraRadii.input,
-          borderSide: const BorderSide(color: PoraColors.primary, width: 1.5),
+          borderSide: BorderSide(color: PoraColors.primary, width: 1.5),
         ),
       ),
       switchTheme: SwitchThemeData(
@@ -128,24 +125,18 @@ abstract class PoraTheme {
       inputDecorationTheme: const InputDecorationTheme(
         filled: true,
         fillColor: PoraColorsDark.surfaceAlt,
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 16,
-        ),
+        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         border: OutlineInputBorder(
           borderRadius: PoraRadii.input,
-          borderSide: const BorderSide(color: PoraColorsDark.border),
+          borderSide: BorderSide(color: PoraColorsDark.border),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: PoraRadii.input,
-          borderSide: const BorderSide(color: PoraColorsDark.border),
+          borderSide: BorderSide(color: PoraColorsDark.border),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: PoraRadii.input,
-          borderSide: const BorderSide(
-            color: PoraColorsDark.primary,
-            width: 1.5,
-          ),
+          borderSide: BorderSide(color: PoraColorsDark.primary, width: 1.5),
         ),
       ),
       switchTheme: SwitchThemeData(

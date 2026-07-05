@@ -1,13 +1,18 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pora/app/features/auth_and_validation/presentation/controller/auth_store.dart';
+import 'package:pora/app/features/auth_and_validation/presentation/widgets/auth_destination_field.dart';
 import 'package:pora/app/features/auth_and_validation/presentation/controller/privacy_store.dart';
+import 'package:pora/app/internal/extensions/string_validation_extension.dart';
 import 'package:pora/app/internal/router/app_router.gr.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
+import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 import 'package:pora/app/internal/widgets/pora_buttons.dart';
 import 'package:pora/app/features/onboarding/presentation/widgets/onboarding_progress_header.dart';
+import 'package:pora/app/internal/widgets/pora_snackbar.dart';
 
 @RoutePage()
 class AuthPage extends StatefulWidget {
@@ -37,26 +42,19 @@ class _AuthPageState extends State<AuthPage> {
                   PoraSpacing.screen,
                   PoraSpacing.sm,
                 ),
+                physics: const NeverScrollableScrollPhysics(),
                 children: [
-                  const OnboardingProgressHeader(step: 3),
+                  const OnboardingProgressHeader(step: 1),
                   const SizedBox(height: 28),
                   //! Localize
-                  Text('Почти тут', style: PoraText.display),
+                  Text('Почти с нами', style: PoraText.display),
                   const SizedBox(height: PoraSpacing.md),
                   Text(
-                    'Введите номер телефона — пришлём код для входа.',
+                    'Введите номер телефона или почту — пришлём код для входа.',
                     style: PoraText.subtitle,
                   ),
                   const SizedBox(height: PoraSpacing.xxl),
-                  TextField(
-                    keyboardType: TextInputType.phone,
-                    style: PoraText.bodyLarge.copyWith(fontSize: 18),
-                    decoration: const InputDecoration(
-                      hintText: '+7 900 000-00-00',
-                      prefixIcon: Icon(PhosphorIconsRegular.phone, size: 18),
-                    ),
-                    controller: destinationController,
-                  ),
+                  AuthDestinationField(controller: destinationController),
                 ],
               ),
             ),
@@ -85,17 +83,33 @@ class _AuthPageState extends State<AuthPage> {
                   const SizedBox(height: PoraSpacing.md),
                   PoraPrimaryButton(
                     label: 'Присоединиться',
-                    onPressed: () {
-                      authStore.sendOtp(
-                        destination: destinationController.text,
-                      );
-                      context.router.push(
-                        OTPConfirmationRoute(
-                          authStore: authStore,
-                          OTPController: otpController,
-                          destinationController: destinationController,
-                        ),
-                      );
+                    onPressed: () async {
+                      await authStore
+                          .sendOtp(destination: destinationController.text)
+                          .whenComplete(() {
+                            //! UPD WHEN authStore.success is not null
+                            if ((authStore.success == true &&
+                                    context.mounted) ||
+                                (dotenv.getBool('DEBUG') && context.mounted)) {
+                              context.router.navigate(
+                                OTPConfirmationRoute(
+                                  authStore: authStore,
+                                  isPhone: destinationController.text
+                                      .isValidPhone(destinationController.text),
+                                  privacyStore: privacyStore,
+                                  OTPController: otpController,
+                                  destinationController: destinationController,
+                                ),
+                              );
+                            } else {
+                              if (!context.mounted) return;
+                              PoraSnackbar.show(
+                                context,
+                                message: authStore.scaffoldMessage ?? 'Ошибка',
+                              );
+                              authStore.success == null;
+                            }
+                          });
                     },
                   ),
                 ],

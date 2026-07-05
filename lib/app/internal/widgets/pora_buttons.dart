@@ -3,11 +3,13 @@ import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
+import 'package:pora/app/internal/widgets/pora_circle_progress.dart';
 
 /// Основная (терракотовая) кнопка с тёплой тенью. Наследует ElevatedButtonTheme.
 class PoraPrimaryButton extends StatelessWidget {
   const PoraPrimaryButton({
     super.key,
+    this.isLoading,
     required this.label,
     this.onPressed,
     this.icon,
@@ -16,6 +18,7 @@ class PoraPrimaryButton extends StatelessWidget {
   final String label;
   final VoidCallback? onPressed;
   final IconData? icon;
+  final bool? isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +34,11 @@ class PoraPrimaryButton extends StatelessWidget {
         borderRadius: PoraRadii.button,
         boxShadow: onPressed == null ? null : PoraShadows.warm,
       ),
-      child: child,
+      child: isLoading == true ? const PoraCircleProgress() : child,
     );
   }
 }
 
-/// Вторичная (контурная) кнопка на светлой поверхности.
 class PoraOutlineButton extends StatelessWidget {
   const PoraOutlineButton({super.key, required this.label, this.onPressed});
 

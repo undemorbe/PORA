@@ -45,6 +45,24 @@ mixin _$AuthStore on _AuthStoreBase, Store {
     });
   }
 
+  late final _$isLoadingAtom = Atom(
+    name: '_AuthStoreBase.isLoading',
+    context: context,
+  );
+
+  @override
+  bool? get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool? value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
   late final _$sendOtpAsyncAction = AsyncAction(
     '_AuthStoreBase.sendOtp',
     context: context,
@@ -73,7 +91,8 @@ mixin _$AuthStore on _AuthStoreBase, Store {
   String toString() {
     return '''
 success: ${success},
-scaffoldMessage: ${scaffoldMessage}
+scaffoldMessage: ${scaffoldMessage},
+isLoading: ${isLoading}
     ''';
   }
 }

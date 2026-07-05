@@ -13,4 +13,7 @@ extension Validating on String {
 
     return phoneRegExp.hasMatch(cleanPhone);
   }
+
+  /// Только цифры (для OTP-кода и подобного ввода).
+  bool get isValidNumbers => RegExp(r'^\d+$').hasMatch(this);
 }

@@ -53,8 +53,8 @@ class ItemDetailPage extends StatelessWidget {
             ),
             const SizedBox(height: PoraSpacing.xxl),
 
-            PoraRowsCard(
-              children: const [
+            const PoraRowsCard(
+              children: [
                 InfoRow(label: 'Добавил(а)', trailing: AddedBy()),
                 InfoRow(label: 'Раздел', value: 'Молочное'),
                 InfoRow(label: 'Количество', value: '2 л'),
@@ -62,8 +62,8 @@ class ItemDetailPage extends StatelessWidget {
             ),
             const SizedBox(height: PoraSpacing.lg),
 
-            PoraRowsCard(
-              children: const [
+            const PoraRowsCard(
+              children: [
                 PoraSettingRow(
                   icon: PhosphorIconsRegular.clock,
                   label: 'Срочно',

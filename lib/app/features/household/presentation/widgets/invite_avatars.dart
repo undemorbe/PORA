@@ -11,21 +11,21 @@ class InviteAvatars extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return const Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const PoraAvatar(
+        PoraAvatar(
           initial: 'Б',
           color: PoraColors.primary,
           size: PoraSizes.avatarXl,
         ),
-        const SizedBox(width: 14),
-        const Text('🤍', style: TextStyle(fontSize: 22)),
-        const SizedBox(width: 14),
+        SizedBox(width: 14),
+        Text('🤍', style: TextStyle(fontSize: 22)),
+        SizedBox(width: 14),
         DashedCircle(
           size: PoraSizes.avatarXl,
           color: PoraColors.primary,
-          child: const PhosphorIcon(
+          child: PhosphorIcon(
             PhosphorIconsBold.plus,
             size: 28,
             color: PoraColors.primary,
