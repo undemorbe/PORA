@@ -83,7 +83,7 @@ class BriefPage extends StatelessWidget {
                 children: [
                   TextButton(
                     onPressed: () {
-                      context.router.navigate(HomeRoute());
+                      context.router.replaceAll([const MainShellRoute()]);
                     },
                     child: Text(
                       l.briefSkip,
@@ -95,7 +95,8 @@ class BriefPage extends StatelessWidget {
                   const SizedBox(height: PoraSpacing.sm),
                   PoraPrimaryButton(
                     label: l.briefNext,
-                    onPressed: () => context.router.push(HomeRoute()),
+                    onPressed: () =>
+                        context.router.replaceAll([const MainShellRoute()]),
                   ),
                 ],
               ),

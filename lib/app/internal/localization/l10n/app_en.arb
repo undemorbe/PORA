@@ -51,6 +51,10 @@
     "@authSubtitle": {
         "description": "authSubtitle"
     },
+    "authSubtitle2": "Начните вводить, сами определим, телефон это или почта.",
+    "@authSubtitle2": {
+        "description": "authSubtitle2"
+    },
     "authJoinButton": "Присоединиться",
     "@authJoinButton": {
         "description": "authJoinButton"
@@ -661,5 +665,21 @@
     "recipeParseButton": "Разобрать",
     "@recipeParseButton": {
         "description": "recipeParseButton"
+    },
+    "navList": "Список",
+    "@navList": {
+        "description": "navList"
+    },
+    "navPora": "Пора",
+    "@navPora": {
+        "description": "navPora"
+    },
+    "navOrder": "Заказ",
+    "@navOrder": {
+        "description": "navOrder"
+    },
+    "navProfile": "Профиль",
+    "@navProfile": {
+        "description": "navProfile"
     }
 }

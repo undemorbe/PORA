@@ -7,10 +7,16 @@ import 'package:pora/app/internal/widgets/section_label.dart';
 
 /// Секция списка: заголовок отдела + карточка со строками товаров.
 class SectionGroup extends StatelessWidget {
-  const SectionGroup({super.key, required this.section, required this.colorOf});
+  const SectionGroup({
+    super.key,
+    required this.section,
+    required this.colorOf,
+    this.onItemTap,
+  });
 
   final ListSection section;
   final Color Function(String initial) colorOf;
+  final void Function(ListItem item)? onItemTap;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +34,13 @@ class SectionGroup extends StatelessWidget {
         );
       }
       final item = section.items[i];
-      tiles.add(ListItemTile(item: item, addedByColor: colorOf(item.addedBy)));
+      tiles.add(
+        ListItemTile(
+          item: item,
+          addedByColor: colorOf(item.addedBy),
+          onTap: onItemTap == null ? null : () => onItemTap!(item),
+        ),
+      );
     }
 
     return Column(

@@ -22,21 +22,19 @@ class AppRouter extends RootStackRouter {
       page: OTPConfirmationRoute.page,
       path: "/${OTPConfirmationRoute.name}",
     ),
+    // Каркас с нижней навигацией; вкладки — вложенные маршруты.
     AutoRoute(
-      page: HomeRoute.page,
-      path: "/${HomeRoute.name}",
+      page: MainShellRoute.page,
+      path: "/main",
       guards: [_authGuard],
+      children: [
+        AutoRoute(page: HomeRoute.page, path: "list", initial: true),
+        AutoRoute(page: PredictionsRoute.page, path: "pora"),
+        AutoRoute(page: OrderRoute.page, path: "order"),
+        AutoRoute(page: SettingsRoute.page, path: "profile"),
+      ],
     ),
-    AutoRoute(
-      page: PredictionsRoute.page,
-      path: "/${PredictionsRoute.name}",
-      guards: [_authGuard],
-    ),
-    AutoRoute(
-      page: SettingsRoute.page,
-      path: "/${SettingsRoute.name}",
-      guards: [_authGuard],
-    ),
+    // Детальные экраны — поверх каркаса (полноэкранные, со своей «назад»).
     AutoRoute(
       page: ItemDetailRoute.page,
       path: "/${ItemDetailRoute.name}",
@@ -65,11 +63,6 @@ class AppRouter extends RootStackRouter {
     AutoRoute(
       page: NotificationsRoute.page,
       path: "/${NotificationsRoute.name}",
-      guards: [_authGuard],
-    ),
-    AutoRoute(
-      page: OrderRoute.page,
-      path: "/${OrderRoute.name}",
       guards: [_authGuard],
     ),
     AutoRoute(

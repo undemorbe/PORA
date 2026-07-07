@@ -15,7 +15,7 @@ abstract class _SplashStoreBase with Store {
     final sawedOnboarding = await GetIt.I<IsSawedOnboardingUseCase>().call();
     if (sawedOnboarding.isRight) {
       final routeDestination = authed
-          ? HomeRoute()
+          ? const MainShellRoute()
           : sawedOnboarding.right
           ? const AuthRoute()
           : const OnboardingSliderRoute();

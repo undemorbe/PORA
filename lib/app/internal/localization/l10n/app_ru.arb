@@ -15,6 +15,10 @@
     "@authUnderAppName2": {
         "description": "The second line under the app name"
     },
+    "authSubtitle2": "Начните вводить, сами определим, телефон это или почта.",
+    "@authSubtitle2": {
+        "description": "authSubtitle2"
+    },
     "authSignInExpansibleExpand": "Войти иным способом",
     "@authSignInExpansibleExpand": {
         "description": "The sign in with other methods title"
@@ -661,5 +665,21 @@
     "recipeParseButton": "Разобрать",
     "@recipeParseButton": {
         "description": "recipeParseButton"
+    },
+    "navList": "Список",
+    "@navList": {
+        "description": "navList"
+    },
+    "navPora": "Пора",
+    "@navPora": {
+        "description": "navPora"
+    },
+    "navOrder": "Заказ",
+    "@navOrder": {
+        "description": "navOrder"
+    },
+    "navProfile": "Профиль",
+    "@navProfile": {
+        "description": "navProfile"
     }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
+import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
@@ -13,12 +14,19 @@ class PoraBottomNav extends StatelessWidget {
   final PoraTab current;
   final ValueChanged<PoraTab>? onTap;
 
-  static const _items = <(PoraTab, IconData, String)>[
-    (PoraTab.list, PhosphorIconsRegular.listChecks, 'Список'),
-    (PoraTab.pora, PhosphorIconsRegular.clock, 'Пора'),
-    (PoraTab.order, PhosphorIconsRegular.shoppingCart, 'Заказ'),
-    (PoraTab.profile, PhosphorIconsRegular.user, 'Профиль'),
+  static const _items = <(PoraTab, IconData)>[
+    (PoraTab.list, PhosphorIconsRegular.listChecks),
+    (PoraTab.pora, PhosphorIconsRegular.clock),
+    (PoraTab.order, PhosphorIconsRegular.shoppingCart),
+    (PoraTab.profile, PhosphorIconsRegular.user),
   ];
+
+  String _labelOf(BuildContext context, PoraTab tab) => switch (tab) {
+    PoraTab.list => context.l10n.navList,
+    PoraTab.pora => context.l10n.navPora,
+    PoraTab.order => context.l10n.navOrder,
+    PoraTab.profile => context.l10n.navProfile,
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +41,12 @@ class PoraBottomNav extends StatelessWidget {
         top: false,
         child: Row(
           children: [
-            for (final (tab, icon, label) in _items)
+            for (final (tab, icon) in _items)
               Expanded(
                 child: _Tab(
                   tab: tab,
                   icon: icon,
-                  label: label,
+                  label: _labelOf(context, tab),
                   active: tab == current,
                   onTap: onTap,
                 ),

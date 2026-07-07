@@ -54,6 +54,8 @@ class _AuthPageState extends State<AuthPage> {
                   const SizedBox(height: PoraSpacing.xxl),
                   AuthDestinationField(controller: destinationController, ),
                   const SizedBox(height: PoraSpacing.xxl),
+                  Text(l.authSubtitle2, style: PoraText.subtitle),
+
                   
                 ],
               ),

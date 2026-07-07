@@ -5,9 +5,9 @@ import 'package:pora/app/features/settings/presentation/widgets/delivery_value.d
 import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/features/settings/presentation/widgets/household_members_row.dart';
 import 'package:pora/app/features/settings/presentation/widgets/profile_card.dart';
+import 'package:pora/app/internal/router/app_router.gr.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
-import 'package:pora/app/internal/widgets/pora_bottom_nav.dart';
 import 'package:pora/app/internal/widgets/pora_pill.dart';
 import 'package:pora/app/internal/widgets/pora_rows_card.dart';
 import 'package:pora/app/internal/widgets/pora_setting_row.dart';
@@ -21,7 +21,6 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const PoraBottomNav(current: PoraTab.profile),
       body: SafeArea(
         bottom: false,
         child: ListView(
@@ -39,7 +38,15 @@ class SettingsPage extends StatelessWidget {
             const SizedBox(height: PoraSpacing.xl),
 
             SectionLabel(context.l10n.settingsHouseholdSection),
-            const PoraRowsCard(children: [HouseholdMembersRow()]),
+            PoraRowsCard(
+              children: [
+                GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () => context.router.push(const HouseholdRoute()),
+                  child: const HouseholdMembersRow(),
+                ),
+              ],
+            ),
             const SizedBox(height: PoraSpacing.xl),
 
             SectionLabel(context.l10n.settingsAppSection),
@@ -49,6 +56,7 @@ class SettingsPage extends StatelessWidget {
                   icon: PhosphorIconsRegular.bell,
                   label: context.l10n.settingsNotifications,
                   trailing: PoraSettingRow.chevron,
+                  onTap: () => context.router.push(const NotificationsRoute()),
                 ),
                 PoraSettingRow(
                   icon: PhosphorIconsRegular.shoppingCart,
