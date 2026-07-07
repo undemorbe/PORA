@@ -19,6 +19,7 @@ class AuthGuard extends AutoRouteGuard {
       // как только _auth станет authenticated и сработает reevaluate,
       // навигация доведётся до изначальной цели автоматически.
       resolver.redirectUntil(const AuthRoute());
+      
     }
   }
 }

@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/app/features/search/presentation/widgets/result_row.dart';
+import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/widgets/pora_chip.dart';
@@ -51,38 +52,61 @@ class _SearchPageState extends State<SearchPage> {
             PoraSpacing.xxl,
           ),
           children: [
-            Text('Поиск', style: PoraText.title),
+            Text(context.l10n.searchTitle, style: PoraText.title),
             const SizedBox(height: PoraSpacing.lg),
             TextField(
               onChanged: (v) => setState(() => _query = v),
               style: PoraText.body,
-              decoration: const InputDecoration(
-                hintText: 'Продукт или рецепт…',
-                prefixIcon: Icon(
+              decoration: InputDecoration(
+                hintText: context.l10n.searchHint,
+                prefixIcon: const Icon(
                   PhosphorIconsRegular.magnifyingGlass,
                   size: 18,
                 ),
               ),
             ),
             const SizedBox(height: PoraSpacing.lg),
-            const Wrap(
+            Wrap(
               spacing: 9,
               runSpacing: 9,
               children: [
-                PoraChip(label: 'Всё', dense: true, selected: true),
-                PoraChip(label: 'Овощи', leading: '🥦', dense: true),
-                PoraChip(label: 'Молочное', leading: '🥛', dense: true),
-                PoraChip(label: 'Бакалея', leading: '🍝', dense: true),
-                PoraChip(label: 'Рецепты', leading: '🍳', dense: true),
+                PoraChip(
+                  label: context.l10n.searchFilterAll,
+                  dense: true,
+                  selected: true,
+                ),
+                PoraChip(
+                  label: context.l10n.searchFilterVegetables,
+                  leading: '🥦',
+                  dense: true,
+                ),
+                PoraChip(
+                  label: context.l10n.searchFilterDairy,
+                  leading: '🥛',
+                  dense: true,
+                ),
+                PoraChip(
+                  label: context.l10n.searchFilterGrocery,
+                  leading: '🍝',
+                  dense: true,
+                ),
+                PoraChip(
+                  label: context.l10n.searchFilterRecipes,
+                  leading: '🍳',
+                  dense: true,
+                ),
               ],
             ),
             const SizedBox(height: PoraSpacing.lg),
-            const SectionLabel('Результаты'),
+            SectionLabel(context.l10n.searchResults),
             if (results.isEmpty)
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: PoraSpacing.lg),
                 child: Center(
-                  child: Text('Ничего не найдено', style: PoraText.subtitle),
+                  child: Text(
+                    context.l10n.searchNothingFound,
+                    style: PoraText.subtitle,
+                  ),
                 ),
               )
             else

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
+import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
@@ -34,7 +35,7 @@ class OrderCtaCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Заказать всё в один тап',
+                        context.l10n.predictionsOrderTitle,
                         style: PoraText.heading.copyWith(
                           fontSize: 17,
                           color: PoraColors.inkInverse,
@@ -42,7 +43,7 @@ class OrderCtaCard extends StatelessWidget {
                       ),
                       const SizedBox(height: 3),
                       Text(
-                        'Самокат · доставка за 15 минут',
+                        context.l10n.predictionsOrderSubtitle,
                         style: PoraText.caption.copyWith(color: _subtle),
                       ),
                     ],
@@ -78,7 +79,7 @@ class OrderCtaCard extends StatelessWidget {
                     ),
                     const SizedBox(width: 6),
                     Text(
-                      '−15% на первый заказ',
+                      context.l10n.predictionsOrderDiscount,
                       style: PoraText.micro.copyWith(
                         fontSize: 13,
                         color: PoraColors.primaryDark,

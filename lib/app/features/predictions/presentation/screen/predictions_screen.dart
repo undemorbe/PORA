@@ -5,6 +5,7 @@ import 'package:pora/app/features/predictions/presentation/widgets/order_cta_car
 import 'package:pora/app/features/predictions/presentation/widgets/prediction_card.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
+import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 import 'package:pora/app/internal/widgets/pora_bottom_nav.dart';
 
@@ -52,10 +53,10 @@ class PredictionsPage extends StatelessWidget {
             PoraSpacing.xxl,
           ),
           children: [
-            Text('Пора докупить', style: PoraText.title),
+            Text(context.l10n.predictionsTitle, style: PoraText.title),
             const SizedBox(height: 6),
             Text(
-              'Скоро закончится — по вашим покупкам',
+              context.l10n.predictionsSubtitle,
               style: PoraText.caption,
             ),
             const SizedBox(height: PoraSpacing.xl),

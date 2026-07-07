@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:pora/app/features/onboarding/presentation/widgets/onboarding_progress_header.dart';
 import 'package:pora/app/features/onboarding/presentation/widgets/profile_photo_picker.dart';
+import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/router/app_router.gr.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
@@ -37,10 +38,10 @@ class _BriefProfilePageState extends State<BriefProfilePage> {
                 children: [
                   const OnboardingProgressHeader(step: 3),
                   const SizedBox(height: 28),
-                  Text('Как вас зовут?', style: PoraText.display),
+                  Text(context.l10n.userCreateProfileTitle, style: PoraText.display),
                   const SizedBox(height: PoraSpacing.md),
                   Text(
-                    'Добавьте имя и фото — их увидит партнёр в общем списке.',
+                    context.l10n.userCreateProfileSubtitle,
                     style: PoraText.subtitle,
                   ),
                   const SizedBox(height: PoraSpacing.xxl),
@@ -49,7 +50,9 @@ class _BriefProfilePageState extends State<BriefProfilePage> {
                   TextField(
                     textCapitalization: TextCapitalization.words,
                     style: PoraText.bodyLarge.copyWith(fontSize: 18),
-                    decoration: const InputDecoration(hintText: 'Ваше имя'),
+                    decoration: InputDecoration(
+                      hintText: context.l10n.userCreateProfileNameHint,
+                    ),
                     controller: nameEditingController,
                   ),
                 ],
@@ -69,7 +72,7 @@ class _BriefProfilePageState extends State<BriefProfilePage> {
                       context.router.push(const BriefRoute());
                     },
                     child: Text(
-                      'Пропустить',
+                      context.l10n.userCreateProfileSkip,
                       style: PoraText.bodyLarge.copyWith(
                         color: PoraColors.textSubtle,
                       ),
@@ -77,7 +80,7 @@ class _BriefProfilePageState extends State<BriefProfilePage> {
                   ),
                   const SizedBox(height: PoraSpacing.sm),
                   PoraPrimaryButton(
-                    label: 'Далее',
+                    label: context.l10n.userCreateProfileNext,
                     onPressed: () {
                       context.router.push(const BriefRoute());
                     },

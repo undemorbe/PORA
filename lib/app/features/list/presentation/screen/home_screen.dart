@@ -5,6 +5,7 @@ import 'package:pora/app/features/list/presentation/widgets/add_list_button.dart
 import 'package:pora/app/features/list/presentation/widgets/list_header.dart';
 import 'package:pora/app/features/list/presentation/widgets/section_group.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
+import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 import 'package:pora/app/internal/widgets/pora_bottom_nav.dart';
 
@@ -69,8 +70,8 @@ class HomePage extends StatelessWidget {
           ),
           children: [
             ListHeader(
-              title: familyName ?? 'Наш список',
-              subtitle: '2 человека · 8 продуктов',
+              title: familyName ?? context.l10n.listTitle,
+              subtitle: context.l10n.listMembersCount,
               members: const [
                 ('А', PoraColors.sage),
                 ('Б', PoraColors.primary),

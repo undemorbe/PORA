@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:pora/app/features/household/presentation/widgets/invite_avatars.dart';
 import 'package:pora/app/features/household/presentation/widgets/invite_code_card.dart';
+import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
@@ -22,33 +23,39 @@ class HouseholdPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const ScreenBackHeader(title: 'Пригласить партнёра'),
+              ScreenBackHeader(title: context.l10n.householdInviteTitle),
               const SizedBox(height: 34),
               const InviteAvatars(),
               const SizedBox(height: 30),
               Text(
-                'Готовьте вместе',
+                context.l10n.householdCookTogether,
                 style: PoraText.title,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: PoraSpacing.md),
               Text(
-                'Pora работает лучше вдвоём. Пригласите партнёра — список и напоминания станут общими.',
+                context.l10n.householdInviteDescription,
                 style: PoraText.subtitle,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 30),
               const InviteCodeCard(code: 'PORA-4827'),
               const SizedBox(height: PoraSpacing.lg),
-              PoraPrimaryButton(label: 'Поделиться ссылкой', onPressed: () {}),
+              PoraPrimaryButton(
+                label: context.l10n.householdShareLink,
+                onPressed: () {},
+              ),
               const SizedBox(height: PoraSpacing.md),
-              PoraOutlineButton(label: 'Показать QR-код', onPressed: () {}),
+              PoraOutlineButton(
+                label: context.l10n.householdShowQr,
+                onPressed: () {},
+              ),
               const Spacer(),
               Center(
                 child: TextButton(
                   onPressed: () {},
                   child: Text(
-                    'Сделаю позже',
+                    context.l10n.householdDoLater,
                     style: PoraText.bodyLarge.copyWith(
                       color: PoraColors.textSubtle,
                     ),

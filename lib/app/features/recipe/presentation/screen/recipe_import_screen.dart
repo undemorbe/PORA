@@ -4,6 +4,7 @@ import 'package:pora/app/features/recipe/presentation/widgets/dedup_banner.dart'
 import 'package:pora/app/features/recipe/presentation/widgets/ingredient_row.dart';
 import 'package:pora/app/features/recipe/presentation/widgets/recipe_link_field.dart';
 import 'package:pora/app/features/recipe/presentation/widgets/recipe_preview_card.dart';
+import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/widgets/pora_buttons.dart';
 import 'package:pora/app/internal/widgets/pora_rows_card.dart';
@@ -31,9 +32,11 @@ class RecipeImportPage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: PoraSpacing.screen),
-              child: ScreenBackHeader(title: 'Рецепт по ссылке'),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: PoraSpacing.screen,
+              ),
+              child: ScreenBackHeader(title: context.l10n.recipeImportTitle),
             ),
             Expanded(
               child: ListView(
@@ -46,19 +49,16 @@ class RecipeImportPage extends StatelessWidget {
                 children: [
                   const RecipeLinkField(url: 'eda.ru/recipe/carbonara'),
                   const SizedBox(height: PoraSpacing.lg),
-                  const RecipePreviewCard(
+                  RecipePreviewCard(
                     emoji: '🍝',
-                    title: 'Паста Карбонара',
-                    meta: 'eda.ru · 25 мин · 2 порции',
-                    found: '6 ингредиентов найдено',
+                    title: context.l10n.recipePreviewTitle,
+                    meta: context.l10n.recipePreviewMeta,
+                    found: context.l10n.recipePreviewFound,
                   ),
                   const SizedBox(height: PoraSpacing.md),
-                  const DedupBanner(
-                    text:
-                        '2 совпадения убрали, чтобы не дублировать с вашим списком',
-                  ),
+                  DedupBanner(text: context.l10n.recipeDedupBanner),
                   const SizedBox(height: PoraSpacing.lg),
-                  const SectionLabel('Ингредиенты'),
+                  SectionLabel(context.l10n.recipeIngredients),
                   PoraRowsCard(
                     children: [
                       for (final (name, qty, added, dup) in _ingredients)
@@ -81,7 +81,7 @@ class RecipeImportPage extends StatelessWidget {
                 PoraSpacing.xxl,
               ),
               child: PoraPrimaryButton(
-                label: 'Добавить 4 продукта в список',
+                label: context.l10n.recipeAddToListCta,
                 onPressed: () {},
               ),
             ),

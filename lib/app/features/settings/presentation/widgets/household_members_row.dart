@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
@@ -46,8 +47,13 @@ class HouseholdMembersRow extends StatelessWidget {
             ),
           ),
           const SizedBox(width: PoraSpacing.md),
-          Expanded(child: Text('Борис и Анна', style: PoraText.itemTitle)),
-          const PoraPill(label: 'Пригласить'),
+          Expanded(
+            child: Text(
+              context.l10n.settingsMembersNames,
+              style: PoraText.itemTitle,
+            ),
+          ),
+          PoraPill(label: context.l10n.settingsInvitePill),
         ],
       ),
     );

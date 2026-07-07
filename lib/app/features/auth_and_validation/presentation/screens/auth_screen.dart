@@ -5,6 +5,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pora/app/features/auth_and_validation/presentation/controller/auth_store.dart';
 import 'package:pora/app/features/auth_and_validation/presentation/widgets/auth_destination_field.dart';
 import 'package:pora/app/features/auth_and_validation/presentation/controller/privacy_store.dart';
+import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/extensions/string_validation_extension.dart';
 import 'package:pora/app/internal/router/app_router.gr.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
@@ -26,10 +27,11 @@ class _AuthPageState extends State<AuthPage> {
   final AuthStore authStore = AuthStore();
   final TextEditingController destinationController = TextEditingController();
   final TextEditingController otpController = TextEditingController();
-
+  int whichFieldIsActive = 0;
   @override
   Widget build(BuildContext context) {
     final PrivacyStore privacyStore = PrivacyStore();
+    final l = context.l10n;
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -46,15 +48,13 @@ class _AuthPageState extends State<AuthPage> {
                 children: [
                   const OnboardingProgressHeader(step: 1),
                   const SizedBox(height: 28),
-                  //! Localize
-                  Text('Почти с нами', style: PoraText.display),
+                  Text(l.authTitle, style: PoraText.display),
                   const SizedBox(height: PoraSpacing.md),
-                  Text(
-                    'Введите номер телефона или почту — пришлём код для входа.',
-                    style: PoraText.subtitle,
-                  ),
+                  Text(l.authSubtitle, style: PoraText.subtitle),
                   const SizedBox(height: PoraSpacing.xxl),
-                  AuthDestinationField(controller: destinationController),
+                  AuthDestinationField(controller: destinationController, ),
+                  const SizedBox(height: PoraSpacing.xxl),
+                  
                 ],
               ),
             ),
@@ -72,7 +72,7 @@ class _AuthPageState extends State<AuthPage> {
                       privacyStore.openPrivacy();
                     },
                     child: Text(
-                      'Продолжая, вы принимаете Условия и Политику конфиденциальности',
+                      l.authPrivatePolicy,
                       style: PoraText.small.copyWith(
                         height: 1.4,
                         decoration: TextDecoration.underline,
@@ -82,7 +82,7 @@ class _AuthPageState extends State<AuthPage> {
                   ),
                   const SizedBox(height: PoraSpacing.md),
                   PoraPrimaryButton(
-                    label: 'Присоединиться',
+                    label: l.authJoinButton,
                     onPressed: () async {
                       await authStore
                           .sendOtp(destination: destinationController.text)
@@ -105,7 +105,7 @@ class _AuthPageState extends State<AuthPage> {
                               if (!context.mounted) return;
                               PoraSnackbar.show(
                                 context,
-                                message: authStore.scaffoldMessage ?? 'Ошибка',
+                                message: authStore.scaffoldMessage ?? l.commonError,
                               );
                               authStore.success == null;
                             }

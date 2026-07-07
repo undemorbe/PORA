@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 import 'package:pora/app/internal/widgets/pora_card.dart';
@@ -22,15 +23,22 @@ class OrderSummary extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       child: Column(
         children: [
-          _SumRow('Товары', goods),
-          _SumRow('Скидка −15%', discount, color: PoraColors.success),
-          const _SumRow('Доставка', 'Бесплатно'),
+          _SumRow(context.l10n.orderSummaryGoods, goods),
+          _SumRow(
+            context.l10n.orderSummaryDiscount,
+            discount,
+            color: PoraColors.success,
+          ),
+          _SumRow(
+            context.l10n.orderSummaryDelivery,
+            context.l10n.orderSummaryFree,
+          ),
           Divider(
             height: 20,
             thickness: 1,
             color: Theme.of(context).dividerColor,
           ),
-          _SumRow('Итого', total, total: true),
+          _SumRow(context.l10n.orderSummaryTotal, total, total: true),
         ],
       ),
     );

@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/app/features/settings/presentation/widgets/delivery_value.dart';
+import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/features/settings/presentation/widgets/household_members_row.dart';
 import 'package:pora/app/features/settings/presentation/widgets/profile_card.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
@@ -31,53 +32,53 @@ class SettingsPage extends StatelessWidget {
             PoraSpacing.xxl,
           ),
           children: [
-            Text('Настройки', style: PoraText.title),
+            Text(context.l10n.settingsTitle, style: PoraText.title),
             const SizedBox(height: PoraSpacing.lg),
 
             const ProfileCard(),
             const SizedBox(height: PoraSpacing.xl),
 
-            const SectionLabel('Хозяйство'),
+            SectionLabel(context.l10n.settingsHouseholdSection),
             const PoraRowsCard(children: [HouseholdMembersRow()]),
             const SizedBox(height: PoraSpacing.xl),
 
-            const SectionLabel('Приложение'),
-            const PoraRowsCard(
+            SectionLabel(context.l10n.settingsAppSection),
+            PoraRowsCard(
               children: [
                 PoraSettingRow(
                   icon: PhosphorIconsRegular.bell,
-                  label: 'Уведомления',
+                  label: context.l10n.settingsNotifications,
                   trailing: PoraSettingRow.chevron,
                 ),
                 PoraSettingRow(
                   icon: PhosphorIconsRegular.shoppingCart,
-                  label: 'Доставка',
-                  trailing: DeliveryValue(),
+                  label: context.l10n.settingsDelivery,
+                  trailing: const DeliveryValue(),
                 ),
                 PoraSettingRow(
                   icon: PhosphorIconsRegular.star,
-                  label: 'Pora+ · без рекламы',
-                  trailing: PoraPill(label: 'Попробовать'),
+                  label: context.l10n.settingsProAd,
+                  trailing: PoraPill(label: context.l10n.settingsTryPill),
                 ),
                 PoraSettingRow(
                   icon: PhosphorIconsRegular.lock,
-                  label: 'Приватность и данные',
+                  label: context.l10n.settingsPrivacy,
                   trailing: PoraSettingRow.chevron,
                 ),
               ],
             ),
             const SizedBox(height: PoraSpacing.lg),
 
-            const PoraRowsCard(
+            PoraRowsCard(
               children: [
                 PoraSettingRow(
                   icon: PhosphorIconsRegular.info,
-                  label: 'О Pora',
+                  label: context.l10n.settingsAboutPora,
                   trailing: PoraSettingRow.chevron,
                 ),
                 PoraSettingRow(
                   icon: PhosphorIconsRegular.signOut,
-                  label: 'Выйти',
+                  label: context.l10n.settingsLogout,
                   danger: true,
                 ),
               ],

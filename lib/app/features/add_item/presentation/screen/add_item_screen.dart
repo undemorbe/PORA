@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/app/features/add_item/presentation/widgets/quantity_stepper.dart';
+import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
@@ -55,7 +56,7 @@ class _AddItemPageState extends State<AddItemPage> {
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
-                    Text('Добавить продукт', style: PoraText.navTitle),
+                    Text(context.l10n.addItemTitle, style: PoraText.navTitle),
                     Align(
                       alignment: Alignment.centerRight,
                       child: GestureDetector(
@@ -81,15 +82,15 @@ class _AddItemPageState extends State<AddItemPage> {
                 ),
                 children: [
                   TextFormField(
-                    initialValue: 'Авокадо',
+                    initialValue: context.l10n.addItemExampleValue,
                     style: PoraText.bodyLarge.copyWith(fontSize: 18),
-                    decoration: const InputDecoration(
-                      hintText: 'Название продукта',
+                    decoration: InputDecoration(
+                      hintText: context.l10n.addItemNameHint,
                     ),
                   ),
                   const SizedBox(height: PoraSpacing.xl),
 
-                  const SectionLabel('Количество'),
+                  SectionLabel(context.l10n.addItemQuantity),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -115,7 +116,7 @@ class _AddItemPageState extends State<AddItemPage> {
                   ),
                   const SizedBox(height: PoraSpacing.xxl),
 
-                  const SectionLabel('Раздел'),
+                  SectionLabel(context.l10n.addItemSection),
                   Wrap(
                     spacing: 9,
                     runSpacing: 9,
@@ -136,8 +137,8 @@ class _AddItemPageState extends State<AddItemPage> {
                     children: [
                       PoraSettingRow(
                         icon: PhosphorIconsRegular.clock,
-                        label: 'Срочно',
-                        subtitle: 'Нужно купить сегодня',
+                        label: context.l10n.addItemUrgent,
+                        subtitle: context.l10n.addItemUrgentSubtitle,
                         trailing: PoraToggle(
                           value: _urgent,
                           onChanged: (v) => setState(() => _urgent = v),
@@ -145,8 +146,8 @@ class _AddItemPageState extends State<AddItemPage> {
                       ),
                       PoraSettingRow(
                         icon: PhosphorIconsRegular.arrowsClockwise,
-                        label: 'Напоминать регулярно',
-                        subtitle: 'Каждые 7 дней',
+                        label: context.l10n.addItemRemind,
+                        subtitle: context.l10n.addItemRemindEvery,
                         trailing: PoraToggle(
                           value: _remind,
                           onChanged: (v) => setState(() => _remind = v),
@@ -165,7 +166,7 @@ class _AddItemPageState extends State<AddItemPage> {
                 PoraSpacing.xxl,
               ),
               child: PoraPrimaryButton(
-                label: 'Добавить в список',
+                label: context.l10n.addItemSubmit,
                 onPressed: () {},
               ),
             ),

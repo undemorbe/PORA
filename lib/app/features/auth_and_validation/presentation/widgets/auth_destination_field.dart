@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
+import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/extensions/string_validation_extension.dart';
 import 'package:pora/app/internal/formatters/email_input_formatter.dart';
 import 'package:pora/app/internal/formatters/phone_input_formatter.dart';
@@ -41,22 +42,28 @@ class _SmartAuthFormatter extends TextInputFormatter {
   }
 }
 
+
+
 class AuthDestinationField extends StatefulWidget {
   const AuthDestinationField({
     super.key,
+    this.initMode,
     required this.controller,
     this.onModeChanged,
   });
-
+  final bool? initMode;
   final TextEditingController controller;
   final ValueChanged<AuthFieldMode>? onModeChanged;
+  
 
   @override
   State<AuthDestinationField> createState() => _AuthDestinationFieldState();
 }
 
 class _AuthDestinationFieldState extends State<AuthDestinationField> {
-  AuthFieldMode _mode = AuthFieldMode.phone;
+  // AuthFieldMode _mode = AuthFieldMode.phone;
+  late AuthFieldMode _mode = widget.initMode == true ? AuthFieldMode.email : AuthFieldMode.phone;
+  
   bool _manual = false;
 
   late final _SmartAuthFormatter _formatter = _SmartAuthFormatter(
@@ -159,7 +166,7 @@ class _ModeToggleButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: onTap,
-      tooltip: isPhone ? 'Войти по почте' : 'Войти по телефону',
+      tooltip: isPhone ? context.l10n.authSwitchToEmail : context.l10n.authSwitchToPhone,
       splashRadius: 22,
       icon: _AnimatedSwap(
         child: PhosphorIcon(
