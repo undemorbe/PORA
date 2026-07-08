@@ -84,37 +84,40 @@ class _AuthPageState extends State<AuthPage> {
                     ),
                   ),
                   const SizedBox(height: PoraSpacing.md),
-                  authStore.isLoading ?? false ? const Center(child: PoraCircleProgress()) : PoraPrimaryButton(
-                    label: l.authJoinButton,
-                    onPressed: () async {
-                      await authStore
-                          .sendOtp(destination: destinationController.text)
-                          .whenComplete(() {
-                            //! UPD WHEN authStore.success is not null
-                            if ((authStore.success == true &&
-                                    context.mounted) ||
-                                (dotenv.getBool('DEBUG') && context.mounted)) {
-                              context.router.navigate(
-                                OTPConfirmationRoute(
-                                  authStore: authStore,
-                                  isPhone: destinationController.text
-                                      .isValidPhone(destinationController.text),
-                                  privacyStore: privacyStore,
-                                  OTPController: otpController,
-                                  destinationController: destinationController,
-                                ),
-                              );
-                            } else {
-                              if (!context.mounted) return;
-                              PoraSnackbar.show(
-                                context,
-                                message: authStore.scaffoldMessage ?? l.commonError,
-                              );
-                              authStore.success == null;
-                            }
-                          });
-                    },
-                  ),
+                   Observer(
+                    builder: (_) => PoraPrimaryButton(
+                      isLoading: authStore.isLoading ,
+                      label: l.authJoinButton,
+                      onPressed: () async {
+                        await authStore
+                            .sendOtp(destination: destinationController.text)
+                            .whenComplete(() {
+                              //! UPD WHEN authStore.success is not null
+                              if ((authStore.success == true &&
+                                      context.mounted) ||
+                                  (dotenv.getBool('DEBUG') && context.mounted)) {
+                                context.router.navigate(
+                                  OTPConfirmationRoute(
+                                    authStore: authStore,
+                                    isPhone: destinationController.text
+                                        .isValidPhone(destinationController.text),
+                                    privacyStore: privacyStore,
+                                    OTPController: otpController,
+                                    destinationController: destinationController,
+                                  ),
+                                );
+                              } else {
+                                if (!context.mounted) return;
+                                PoraSnackbar.show(
+                                  context,
+                                  message: authStore.scaffoldMessage ?? l.commonError,
+                                );
+                                authStore.success == null;
+                              }
+                            });
+                      },
+                                       ),
+                   ),
                 ],
               ),
             ),
