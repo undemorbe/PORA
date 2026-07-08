@@ -13,6 +13,7 @@ import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 import 'package:pora/app/internal/widgets/pora_buttons.dart';
 import 'package:pora/app/features/onboarding/presentation/widgets/onboarding_progress_header.dart';
+import 'package:pora/app/internal/widgets/pora_circle_progress.dart';
 import 'package:pora/app/internal/widgets/pora_snackbar.dart';
 
 @RoutePage()
@@ -83,7 +84,7 @@ class _AuthPageState extends State<AuthPage> {
                     ),
                   ),
                   const SizedBox(height: PoraSpacing.md),
-                  PoraPrimaryButton(
+                  authStore.isLoading ?? false ? const Center(child: PoraCircleProgress()) : PoraPrimaryButton(
                     label: l.authJoinButton,
                     onPressed: () async {
                       await authStore

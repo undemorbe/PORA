@@ -85,11 +85,16 @@ class OTPConfirmationPage extends StatelessWidget {
                         l.otpResendQuestion,
                         style: PoraText.subtitle.copyWith(fontSize: 14),
                       ),
-                      Text(
-                        l.otpResend,
-                        style: PoraText.subtitle.copyWith(
-                          color: PoraColors.primary,
-                          fontSize: 18,
+                      InkWell(
+                        onTap: () {
+                          authStore.sendOtp(destination: destinationController.text);
+                        },
+                        child: Text(
+                          l.otpResend,
+                          style: PoraText.subtitle.copyWith(
+                            color: PoraColors.primary,
+                            fontSize: 18,
+                          ),
                         ),
                       ),
                     ],
