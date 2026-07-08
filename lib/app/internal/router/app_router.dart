@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:pora/app/features/deeplink_debug/deeplinks.dart';
 import 'package:pora/app/internal/router/app_router.gr.dart';
 import 'package:pora/app/internal/router/guard/auth_guard.dart';
 import 'package:pora/app/internal/router/guard/auth_state.dart';
@@ -13,8 +12,6 @@ class AppRouter extends RootStackRouter {
 
   @override
   List<AutoRoute> get routes => [
-    AutoRoute(page: DeeplinkDebugRoute.page,path: '/api/families/join/:linkCode',),
-
     AutoRoute(
       page: SplashRoute.page,
       path: "/${SplashRoute.name}",

@@ -7,7 +7,6 @@ import 'package:pora/app/internal/localization/l10n/locales.dart';
 import 'package:pora/app/internal/localization/store/localization_store.dart';
 import 'package:pora/app/internal/logging/logger.dart';
 import 'package:pora/app/internal/router/app_router.dart';
-import 'package:pora/app/internal/router/app_router.gr.dart';
 import 'package:pora/app/internal/router/guard/auth_state.dart';
 import 'package:pora/app/internal/theme/app_themes.dart';
 import 'package:pora/app/internal/theme/store/theme_store.dart';
@@ -30,19 +29,6 @@ class MainApp extends StatelessWidget {
         reevaluateListenable: ReevaluateListenable.stream(
           injectionContainer.getIt<AuthState>().stream,
         ),
-        deepLinkBuilder: (deepLink) {
-          Logger.talker.debug(deepLink.path);
-            if(deepLink.path.contains('/api/families/join')) {
-              final segments = deepLink.uri.pathSegments;
-              final code = segments.isNotEmpty ? segments.last : ''; 
-
-              return  DeepLink(
-                [const OnboardingSliderRoute(), const AuthRoute(), DeeplinkDebugRoute(linkCode: code)],
-              );
-            } else {
-              return DeepLink.defaultPath;
-            }
-        },
       ),
 
       //! Theme

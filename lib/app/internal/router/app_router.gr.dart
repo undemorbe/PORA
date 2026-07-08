@@ -9,59 +9,58 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i20;
-import 'package:flutter/material.dart' as _i21;
+import 'package:auto_route/auto_route.dart' as _i19;
+import 'package:flutter/material.dart' as _i20;
 import 'package:pora/app/features/add_item/presentation/screen/add_item_screen.dart'
     as _i1;
 import 'package:pora/app/features/auth_and_validation/presentation/controller/auth_store.dart'
-    as _i22;
+    as _i21;
 import 'package:pora/app/features/auth_and_validation/presentation/controller/privacy_store.dart'
-    as _i23;
+    as _i22;
 import 'package:pora/app/features/auth_and_validation/presentation/screens/auth_otp_confirm.dart'
-    as _i12;
+    as _i11;
 import 'package:pora/app/features/auth_and_validation/presentation/screens/auth_screen.dart'
     as _i2;
 import 'package:pora/app/features/brief/presentation/screens/brief_screen.dart'
     as _i3;
-import 'package:pora/app/features/deeplink_debug/deeplinks.dart' as _i5;
 import 'package:pora/app/features/household/presentation/screen/household_screen.dart'
-    as _i7;
-import 'package:pora/app/features/insights/presentation/screen/insights_screen.dart'
-    as _i8;
-import 'package:pora/app/features/item_detail/presentation/screen/item_detail_screen.dart'
-    as _i9;
-import 'package:pora/app/features/list/presentation/screen/home_screen.dart'
     as _i6;
+import 'package:pora/app/features/insights/presentation/screen/insights_screen.dart'
+    as _i7;
+import 'package:pora/app/features/item_detail/presentation/screen/item_detail_screen.dart'
+    as _i8;
+import 'package:pora/app/features/list/presentation/screen/home_screen.dart'
+    as _i5;
 import 'package:pora/app/features/notifications/presentation/screen/notifications_screen.dart'
-    as _i11;
-import 'package:pora/app/features/onboarding/presentation/screen/onboarding_slider_screen.dart'
-    as _i13;
-import 'package:pora/app/features/order/presentation/screen/order_screen.dart'
-    as _i14;
-import 'package:pora/app/features/predictions/presentation/screen/predictions_screen.dart'
-    as _i15;
-import 'package:pora/app/features/recipe/presentation/screen/recipe_import_screen.dart'
-    as _i16;
-import 'package:pora/app/features/search/presentation/screen/search_screen.dart'
-    as _i17;
-import 'package:pora/app/features/settings/presentation/screen/settings_screen.dart'
-    as _i18;
-import 'package:pora/app/features/shell/presentation/screen/main_shell_screen.dart'
     as _i10;
+import 'package:pora/app/features/onboarding/presentation/screen/onboarding_slider_screen.dart'
+    as _i12;
+import 'package:pora/app/features/order/presentation/screen/order_screen.dart'
+    as _i13;
+import 'package:pora/app/features/predictions/presentation/screen/predictions_screen.dart'
+    as _i14;
+import 'package:pora/app/features/recipe/presentation/screen/recipe_import_screen.dart'
+    as _i15;
+import 'package:pora/app/features/search/presentation/screen/search_screen.dart'
+    as _i16;
+import 'package:pora/app/features/settings/presentation/screen/settings_screen.dart'
+    as _i17;
+import 'package:pora/app/features/shell/presentation/screen/main_shell_screen.dart'
+    as _i9;
 import 'package:pora/app/features/splash/presentation/screen/splash.dart'
-    as _i19;
+    as _i18;
 import 'package:pora/app/features/user/presentation/screens/user_create_profile_screen.dart'
     as _i4;
 
 /// generated route for
 /// [_i1.AddItemPage]
-class AddItemRoute extends _i20.PageRouteInfo<void> {
-  const AddItemRoute({List<_i20.PageRouteInfo>? children})
+class AddItemRoute extends _i19.PageRouteInfo<void> {
+  const AddItemRoute({List<_i19.PageRouteInfo>? children})
     : super(AddItemRoute.name, initialChildren: children);
 
   static const String name = 'AddItemRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i19.PageInfo page = _i19.PageInfo(
     name,
     builder: (data) {
       return const _i1.AddItemPage();
@@ -71,13 +70,13 @@ class AddItemRoute extends _i20.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.AuthPage]
-class AuthRoute extends _i20.PageRouteInfo<void> {
-  const AuthRoute({List<_i20.PageRouteInfo>? children})
+class AuthRoute extends _i19.PageRouteInfo<void> {
+  const AuthRoute({List<_i19.PageRouteInfo>? children})
     : super(AuthRoute.name, initialChildren: children);
 
   static const String name = 'AuthRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i19.PageInfo page = _i19.PageInfo(
     name,
     builder: (data) {
       return const _i2.AuthPage();
@@ -87,13 +86,13 @@ class AuthRoute extends _i20.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.BriefPage]
-class BriefRoute extends _i20.PageRouteInfo<void> {
-  const BriefRoute({List<_i20.PageRouteInfo>? children})
+class BriefRoute extends _i19.PageRouteInfo<void> {
+  const BriefRoute({List<_i19.PageRouteInfo>? children})
     : super(BriefRoute.name, initialChildren: children);
 
   static const String name = 'BriefRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i19.PageInfo page = _i19.PageInfo(
     name,
     builder: (data) {
       return const _i3.BriefPage();
@@ -103,13 +102,13 @@ class BriefRoute extends _i20.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.BriefProfilePage]
-class BriefProfileRoute extends _i20.PageRouteInfo<void> {
-  const BriefProfileRoute({List<_i20.PageRouteInfo>? children})
+class BriefProfileRoute extends _i19.PageRouteInfo<void> {
+  const BriefProfileRoute({List<_i19.PageRouteInfo>? children})
     : super(BriefProfileRoute.name, initialChildren: children);
 
   static const String name = 'BriefProfileRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i19.PageInfo page = _i19.PageInfo(
     name,
     builder: (data) {
       return const _i4.BriefProfilePage();
@@ -118,65 +117,13 @@ class BriefProfileRoute extends _i20.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i5.DeeplinkDebugPage]
-class DeeplinkDebugRoute extends _i20.PageRouteInfo<DeeplinkDebugRouteArgs> {
-  DeeplinkDebugRoute({
-    _i21.Key? key,
-    required String linkCode,
-    List<_i20.PageRouteInfo>? children,
-  }) : super(
-         DeeplinkDebugRoute.name,
-         args: DeeplinkDebugRouteArgs(key: key, linkCode: linkCode),
-         rawPathParams: {'linkCode': linkCode},
-         initialChildren: children,
-       );
-
-  static const String name = 'DeeplinkDebugRoute';
-
-  static _i20.PageInfo page = _i20.PageInfo(
-    name,
-    builder: (data) {
-      final pathParams = data.inheritedPathParams;
-      final args = data.argsAs<DeeplinkDebugRouteArgs>(
-        orElse: () =>
-            DeeplinkDebugRouteArgs(linkCode: pathParams.getString('linkCode')),
-      );
-      return _i5.DeeplinkDebugPage(key: args.key, linkCode: args.linkCode);
-    },
-  );
-}
-
-class DeeplinkDebugRouteArgs {
-  const DeeplinkDebugRouteArgs({this.key, required this.linkCode});
-
-  final _i21.Key? key;
-
-  final String linkCode;
-
-  @override
-  String toString() {
-    return 'DeeplinkDebugRouteArgs{key: $key, linkCode: $linkCode}';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    if (other is! DeeplinkDebugRouteArgs) return false;
-    return key == other.key && linkCode == other.linkCode;
-  }
-
-  @override
-  int get hashCode => key.hashCode ^ linkCode.hashCode;
-}
-
-/// generated route for
-/// [_i6.HomePage]
-class HomeRoute extends _i20.PageRouteInfo<HomeRouteArgs> {
+/// [_i5.HomePage]
+class HomeRoute extends _i19.PageRouteInfo<HomeRouteArgs> {
   HomeRoute({
-    _i21.Key? key,
+    _i20.Key? key,
     String? familyId,
     String? familyName,
-    List<_i20.PageRouteInfo>? children,
+    List<_i19.PageRouteInfo>? children,
   }) : super(
          HomeRoute.name,
          args: HomeRouteArgs(
@@ -189,13 +136,13 @@ class HomeRoute extends _i20.PageRouteInfo<HomeRouteArgs> {
 
   static const String name = 'HomeRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i19.PageInfo page = _i19.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<HomeRouteArgs>(
         orElse: () => const HomeRouteArgs(),
       );
-      return _i6.HomePage(
+      return _i5.HomePage(
         key: args.key,
         familyId: args.familyId,
         familyName: args.familyName,
@@ -207,7 +154,7 @@ class HomeRoute extends _i20.PageRouteInfo<HomeRouteArgs> {
 class HomeRouteArgs {
   const HomeRouteArgs({this.key, this.familyId, this.familyName});
 
-  final _i21.Key? key;
+  final _i20.Key? key;
 
   final String? familyId;
 
@@ -232,97 +179,97 @@ class HomeRouteArgs {
 }
 
 /// generated route for
-/// [_i7.HouseholdPage]
-class HouseholdRoute extends _i20.PageRouteInfo<void> {
-  const HouseholdRoute({List<_i20.PageRouteInfo>? children})
+/// [_i6.HouseholdPage]
+class HouseholdRoute extends _i19.PageRouteInfo<void> {
+  const HouseholdRoute({List<_i19.PageRouteInfo>? children})
     : super(HouseholdRoute.name, initialChildren: children);
 
   static const String name = 'HouseholdRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i19.PageInfo page = _i19.PageInfo(
     name,
     builder: (data) {
-      return const _i7.HouseholdPage();
+      return const _i6.HouseholdPage();
     },
   );
 }
 
 /// generated route for
-/// [_i8.InsightsPage]
-class InsightsRoute extends _i20.PageRouteInfo<void> {
-  const InsightsRoute({List<_i20.PageRouteInfo>? children})
+/// [_i7.InsightsPage]
+class InsightsRoute extends _i19.PageRouteInfo<void> {
+  const InsightsRoute({List<_i19.PageRouteInfo>? children})
     : super(InsightsRoute.name, initialChildren: children);
 
   static const String name = 'InsightsRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i19.PageInfo page = _i19.PageInfo(
     name,
     builder: (data) {
-      return const _i8.InsightsPage();
+      return const _i7.InsightsPage();
     },
   );
 }
 
 /// generated route for
-/// [_i9.ItemDetailPage]
-class ItemDetailRoute extends _i20.PageRouteInfo<void> {
-  const ItemDetailRoute({List<_i20.PageRouteInfo>? children})
+/// [_i8.ItemDetailPage]
+class ItemDetailRoute extends _i19.PageRouteInfo<void> {
+  const ItemDetailRoute({List<_i19.PageRouteInfo>? children})
     : super(ItemDetailRoute.name, initialChildren: children);
 
   static const String name = 'ItemDetailRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i19.PageInfo page = _i19.PageInfo(
     name,
     builder: (data) {
-      return const _i9.ItemDetailPage();
+      return const _i8.ItemDetailPage();
     },
   );
 }
 
 /// generated route for
-/// [_i10.MainShellPage]
-class MainShellRoute extends _i20.PageRouteInfo<void> {
-  const MainShellRoute({List<_i20.PageRouteInfo>? children})
+/// [_i9.MainShellPage]
+class MainShellRoute extends _i19.PageRouteInfo<void> {
+  const MainShellRoute({List<_i19.PageRouteInfo>? children})
     : super(MainShellRoute.name, initialChildren: children);
 
   static const String name = 'MainShellRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i19.PageInfo page = _i19.PageInfo(
     name,
     builder: (data) {
-      return const _i10.MainShellPage();
+      return const _i9.MainShellPage();
     },
   );
 }
 
 /// generated route for
-/// [_i11.NotificationsPage]
-class NotificationsRoute extends _i20.PageRouteInfo<void> {
-  const NotificationsRoute({List<_i20.PageRouteInfo>? children})
+/// [_i10.NotificationsPage]
+class NotificationsRoute extends _i19.PageRouteInfo<void> {
+  const NotificationsRoute({List<_i19.PageRouteInfo>? children})
     : super(NotificationsRoute.name, initialChildren: children);
 
   static const String name = 'NotificationsRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i19.PageInfo page = _i19.PageInfo(
     name,
     builder: (data) {
-      return const _i11.NotificationsPage();
+      return const _i10.NotificationsPage();
     },
   );
 }
 
 /// generated route for
-/// [_i12.OTPConfirmationPage]
+/// [_i11.OTPConfirmationPage]
 class OTPConfirmationRoute
-    extends _i20.PageRouteInfo<OTPConfirmationRouteArgs> {
+    extends _i19.PageRouteInfo<OTPConfirmationRouteArgs> {
   OTPConfirmationRoute({
-    _i21.Key? key,
-    required _i22.AuthStore authStore,
-    required _i21.TextEditingController OTPController,
+    _i20.Key? key,
+    required _i21.AuthStore authStore,
+    required _i20.TextEditingController OTPController,
     required bool isPhone,
-    required _i21.TextEditingController destinationController,
-    required _i23.PrivacyStore privacyStore,
-    List<_i20.PageRouteInfo>? children,
+    required _i20.TextEditingController destinationController,
+    required _i22.PrivacyStore privacyStore,
+    List<_i19.PageRouteInfo>? children,
   }) : super(
          OTPConfirmationRoute.name,
          args: OTPConfirmationRouteArgs(
@@ -338,11 +285,11 @@ class OTPConfirmationRoute
 
   static const String name = 'OTPConfirmationRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i19.PageInfo page = _i19.PageInfo(
     name,
     builder: (data) {
       final args = data.argsAs<OTPConfirmationRouteArgs>();
-      return _i12.OTPConfirmationPage(
+      return _i11.OTPConfirmationPage(
         key: args.key,
         authStore: args.authStore,
         OTPController: args.OTPController,
@@ -364,17 +311,17 @@ class OTPConfirmationRouteArgs {
     required this.privacyStore,
   });
 
-  final _i21.Key? key;
+  final _i20.Key? key;
 
-  final _i22.AuthStore authStore;
+  final _i21.AuthStore authStore;
 
-  final _i21.TextEditingController OTPController;
+  final _i20.TextEditingController OTPController;
 
   final bool isPhone;
 
-  final _i21.TextEditingController destinationController;
+  final _i20.TextEditingController destinationController;
 
-  final _i23.PrivacyStore privacyStore;
+  final _i22.PrivacyStore privacyStore;
 
   @override
   String toString() {
@@ -404,113 +351,113 @@ class OTPConfirmationRouteArgs {
 }
 
 /// generated route for
-/// [_i13.OnboardingSliderPage]
-class OnboardingSliderRoute extends _i20.PageRouteInfo<void> {
-  const OnboardingSliderRoute({List<_i20.PageRouteInfo>? children})
+/// [_i12.OnboardingSliderPage]
+class OnboardingSliderRoute extends _i19.PageRouteInfo<void> {
+  const OnboardingSliderRoute({List<_i19.PageRouteInfo>? children})
     : super(OnboardingSliderRoute.name, initialChildren: children);
 
   static const String name = 'OnboardingSliderRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i19.PageInfo page = _i19.PageInfo(
     name,
     builder: (data) {
-      return const _i13.OnboardingSliderPage();
+      return const _i12.OnboardingSliderPage();
     },
   );
 }
 
 /// generated route for
-/// [_i14.OrderPage]
-class OrderRoute extends _i20.PageRouteInfo<void> {
-  const OrderRoute({List<_i20.PageRouteInfo>? children})
+/// [_i13.OrderPage]
+class OrderRoute extends _i19.PageRouteInfo<void> {
+  const OrderRoute({List<_i19.PageRouteInfo>? children})
     : super(OrderRoute.name, initialChildren: children);
 
   static const String name = 'OrderRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i19.PageInfo page = _i19.PageInfo(
     name,
     builder: (data) {
-      return const _i14.OrderPage();
+      return const _i13.OrderPage();
     },
   );
 }
 
 /// generated route for
-/// [_i15.PredictionsPage]
-class PredictionsRoute extends _i20.PageRouteInfo<void> {
-  const PredictionsRoute({List<_i20.PageRouteInfo>? children})
+/// [_i14.PredictionsPage]
+class PredictionsRoute extends _i19.PageRouteInfo<void> {
+  const PredictionsRoute({List<_i19.PageRouteInfo>? children})
     : super(PredictionsRoute.name, initialChildren: children);
 
   static const String name = 'PredictionsRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i19.PageInfo page = _i19.PageInfo(
     name,
     builder: (data) {
-      return const _i15.PredictionsPage();
+      return const _i14.PredictionsPage();
     },
   );
 }
 
 /// generated route for
-/// [_i16.RecipeImportPage]
-class RecipeImportRoute extends _i20.PageRouteInfo<void> {
-  const RecipeImportRoute({List<_i20.PageRouteInfo>? children})
+/// [_i15.RecipeImportPage]
+class RecipeImportRoute extends _i19.PageRouteInfo<void> {
+  const RecipeImportRoute({List<_i19.PageRouteInfo>? children})
     : super(RecipeImportRoute.name, initialChildren: children);
 
   static const String name = 'RecipeImportRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i19.PageInfo page = _i19.PageInfo(
     name,
     builder: (data) {
-      return const _i16.RecipeImportPage();
+      return const _i15.RecipeImportPage();
     },
   );
 }
 
 /// generated route for
-/// [_i17.SearchPage]
-class SearchRoute extends _i20.PageRouteInfo<void> {
-  const SearchRoute({List<_i20.PageRouteInfo>? children})
+/// [_i16.SearchPage]
+class SearchRoute extends _i19.PageRouteInfo<void> {
+  const SearchRoute({List<_i19.PageRouteInfo>? children})
     : super(SearchRoute.name, initialChildren: children);
 
   static const String name = 'SearchRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i19.PageInfo page = _i19.PageInfo(
     name,
     builder: (data) {
-      return const _i17.SearchPage();
+      return const _i16.SearchPage();
     },
   );
 }
 
 /// generated route for
-/// [_i18.SettingsPage]
-class SettingsRoute extends _i20.PageRouteInfo<void> {
-  const SettingsRoute({List<_i20.PageRouteInfo>? children})
+/// [_i17.SettingsPage]
+class SettingsRoute extends _i19.PageRouteInfo<void> {
+  const SettingsRoute({List<_i19.PageRouteInfo>? children})
     : super(SettingsRoute.name, initialChildren: children);
 
   static const String name = 'SettingsRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i19.PageInfo page = _i19.PageInfo(
     name,
     builder: (data) {
-      return const _i18.SettingsPage();
+      return const _i17.SettingsPage();
     },
   );
 }
 
 /// generated route for
-/// [_i19.SplashPage]
-class SplashRoute extends _i20.PageRouteInfo<void> {
-  const SplashRoute({List<_i20.PageRouteInfo>? children})
+/// [_i18.SplashPage]
+class SplashRoute extends _i19.PageRouteInfo<void> {
+  const SplashRoute({List<_i19.PageRouteInfo>? children})
     : super(SplashRoute.name, initialChildren: children);
 
   static const String name = 'SplashRoute';
 
-  static _i20.PageInfo page = _i20.PageInfo(
+  static _i19.PageInfo page = _i19.PageInfo(
     name,
     builder: (data) {
-      return const _i19.SplashPage();
+      return const _i18.SplashPage();
     },
   );
 }
