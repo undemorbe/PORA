@@ -59,6 +59,10 @@
     "@authJoinButton": {
         "description": "authJoinButton"
     },
+    "userCreateProfileNameRequired": "Может все-же скажете имя?",
+    "@userCreateProfileNameRequired": {
+        "description": "userCreateProfileNameRequired"
+    },
     "commonError": "Ошибка",
     "@commonError": {
         "description": "commonError"

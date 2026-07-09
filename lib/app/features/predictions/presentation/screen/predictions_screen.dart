@@ -60,7 +60,10 @@ class PredictionsPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(context.l10n.predictionsTitle, style: PoraText.title),
+                      Text(
+                        context.l10n.predictionsTitle,
+                        style: PoraText.title,
+                      ),
                       const SizedBox(height: 6),
                       Text(
                         context.l10n.predictionsSubtitle,

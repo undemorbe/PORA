@@ -53,11 +53,9 @@ class _AuthPageState extends State<AuthPage> {
                   const SizedBox(height: PoraSpacing.md),
                   Text(l.authSubtitle, style: PoraText.subtitle),
                   const SizedBox(height: PoraSpacing.xxl),
-                  AuthDestinationField(controller: destinationController, ),
+                  AuthDestinationField(controller: destinationController),
                   const SizedBox(height: PoraSpacing.xxl),
                   Text(l.authSubtitle2, style: PoraText.subtitle),
-
-                  
                 ],
               ),
             ),
@@ -84,9 +82,9 @@ class _AuthPageState extends State<AuthPage> {
                     ),
                   ),
                   const SizedBox(height: PoraSpacing.md),
-                   Observer(
+                  Observer(
                     builder: (_) => PoraPrimaryButton(
-                      isLoading: authStore.isLoading ,
+                      isLoading: authStore.isLoading,
                       label: l.authJoinButton,
                       onPressed: () async {
                         await authStore
@@ -95,29 +93,35 @@ class _AuthPageState extends State<AuthPage> {
                               //! UPD WHEN authStore.success is not null
                               if ((authStore.success == true &&
                                       context.mounted) ||
-                                  (dotenv.getBool('DEBUG') && context.mounted)) {
+                                  (dotenv.getBool('DEBUG') &&
+                                      context.mounted)) {
                                 context.router.navigate(
                                   OTPConfirmationRoute(
                                     authStore: authStore,
                                     isPhone: destinationController.text
-                                        .isValidPhone(destinationController.text),
+                                        .isValidPhone(
+                                          destinationController.text,
+                                        ),
                                     privacyStore: privacyStore,
                                     OTPController: otpController,
-                                    destinationController: destinationController,
+                                    destinationController:
+                                        destinationController,
                                   ),
                                 );
                               } else {
                                 if (!context.mounted) return;
                                 PoraSnackbar.show(
                                   context,
-                                  message: authStore.scaffoldMessage ?? l.commonError,
+                                  message:
+                                      authStore.scaffoldMessage ??
+                                      l.commonError,
                                 );
                                 authStore.success == null;
                               }
                             });
                       },
-                                       ),
-                   ),
+                    ),
+                  ),
                 ],
               ),
             ),

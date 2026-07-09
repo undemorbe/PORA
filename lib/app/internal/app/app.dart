@@ -32,16 +32,18 @@ class MainApp extends StatelessWidget {
         ),
         deepLinkBuilder: (deepLink) {
           Logger.talker.debug(deepLink.path);
-            if(deepLink.path.contains('/api/families/join')) {
-              final segments = deepLink.uri.pathSegments;
-              final code = segments.isNotEmpty ? segments.last : ''; 
+          if (deepLink.path.contains('/api/families/join')) {
+            final segments = deepLink.uri.pathSegments;
+            final code = segments.isNotEmpty ? segments.last : '';
 
-              return  DeepLink(
-                [const OnboardingSliderRoute(), const AuthRoute(), DeeplinkDebugRoute(linkCode: code)],
-              );
-            } else {
-              return DeepLink.defaultPath;
-            }
+            return DeepLink([
+              const OnboardingSliderRoute(),
+              const AuthRoute(),
+              DeeplinkDebugRoute(linkCode: code),
+            ]);
+          } else {
+            return DeepLink.defaultPath;
+          }
         },
       ),
 

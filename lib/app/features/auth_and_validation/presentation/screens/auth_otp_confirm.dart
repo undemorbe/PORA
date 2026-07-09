@@ -87,7 +87,9 @@ class OTPConfirmationPage extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          authStore.sendOtp(destination: destinationController.text);
+                          authStore.sendOtp(
+                            destination: destinationController.text,
+                          );
                         },
                         child: Text(
                           l.otpResend,
@@ -142,14 +144,15 @@ class OTPConfirmationPage extends StatelessWidget {
                                     (dotenv.getBool('DEBUG') &&
                                         context.mounted)) {
                                   context.router.replaceAll([
-                                    const BriefProfileRoute(),
+                                    UserCreateProfileRoute(),
                                   ]);
                                 } else {
                                   if (!context.mounted) return;
                                   PoraSnackbar.show(
                                     context,
                                     message:
-                                        authStore.scaffoldMessage ?? l.commonError,
+                                        authStore.scaffoldMessage ??
+                                        l.commonError,
                                   );
                                   authStore.success = null;
                                 }

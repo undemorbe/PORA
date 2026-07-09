@@ -52,7 +52,10 @@ class ListHeader extends StatelessWidget {
         if (onRecipe != null)
           _HeaderAction(icon: PhosphorIconsRegular.link, onTap: onRecipe!),
         if (onNotifications != null)
-          _HeaderAction(icon: PhosphorIconsRegular.bell, onTap: onNotifications!),
+          _HeaderAction(
+            icon: PhosphorIconsRegular.bell,
+            onTap: onNotifications!,
+          ),
         const SizedBox(width: 6),
         SizedBox(
           height: _avatar,

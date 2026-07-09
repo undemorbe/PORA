@@ -84,5 +84,12 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app requires access to your photo library to let you select a profile picture.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app requires access to your camera to let you take photos directly within the app.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app requires access to your microphone to capture sound when recording video.</string>
+
 </dict>
 </plist>

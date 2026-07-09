@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:pora/app/features/auth_and_validation/data/models/jwt_models/tokens_model.dart';
 import 'package:pora/app/features/families/data/models/family_model.dart';
@@ -38,6 +40,10 @@ abstract class ApiClient {
 
   @GET('/user/me')
   Future<UserModel> getUser();
+
+  @POST('/user/save-image')
+  @MultiPart()
+  Future<String> saveUserImage({@Part(name: 'image') required File file});
 
   //! Families
   @POST('/families/create-family')

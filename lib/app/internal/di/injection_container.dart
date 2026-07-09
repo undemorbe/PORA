@@ -9,6 +9,7 @@ import 'package:pora/app/features/auth_and_validation/domain/usecase/refresh_tok
 import 'package:pora/app/features/auth_and_validation/data/datasource/remote/auth_remote.dart';
 import 'package:pora/app/features/auth_and_validation/data/service/auth_service.dart';
 import 'package:pora/app/features/auth_and_validation/domain/repository/auth_repository.dart';
+import 'package:pora/app/features/auth_and_validation/domain/usecase/save_tokens.dart';
 import 'package:pora/app/features/auth_and_validation/domain/usecase/send_otp.dart';
 import 'package:pora/app/features/auth_and_validation/domain/usecase/verify_otp.dart';
 import 'package:pora/app/features/onboarding/data/datasources/onboarding_local.dart';
@@ -73,6 +74,9 @@ class InjectionContainer {
     _getIt.registerFactory<RefreshTokenUseCase>(
       () => RefreshTokenUseCase(tokensRepository: _getIt<TokensRepository>()),
     );
+    _getIt.registerFactory<SaveTokensUseCase>(
+      () => SaveTokensUseCase(tokensRepository: _getIt<TokensRepository>()),
+    );
 
     //! USER feature
     _getIt.registerFactory<GetUserUseCase>(
@@ -81,6 +85,7 @@ class InjectionContainer {
     _getIt.registerFactory<UpdateUserUseCase>(
       () => UpdateUserUseCase(_getIt<UserRepository>()),
     );
+
     //! Auth(otp) feature
     _getIt.registerFactory<SendOtpUseCase>(
       () => SendOtpUseCase(authRepository: _getIt<AuthRepository>()),

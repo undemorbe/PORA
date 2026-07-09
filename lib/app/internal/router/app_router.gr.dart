@@ -18,40 +18,40 @@ import 'package:pora/app/features/auth_and_validation/presentation/controller/au
 import 'package:pora/app/features/auth_and_validation/presentation/controller/privacy_store.dart'
     as _i23;
 import 'package:pora/app/features/auth_and_validation/presentation/screens/auth_otp_confirm.dart'
-    as _i12;
+    as _i11;
 import 'package:pora/app/features/auth_and_validation/presentation/screens/auth_screen.dart'
     as _i2;
 import 'package:pora/app/features/brief/presentation/screens/brief_screen.dart'
     as _i3;
-import 'package:pora/app/features/deeplink_debug/deeplinks.dart' as _i5;
+import 'package:pora/app/features/deeplink_debug/deeplinks.dart' as _i4;
 import 'package:pora/app/features/household/presentation/screen/household_screen.dart'
-    as _i7;
-import 'package:pora/app/features/insights/presentation/screen/insights_screen.dart'
-    as _i8;
-import 'package:pora/app/features/item_detail/presentation/screen/item_detail_screen.dart'
-    as _i9;
-import 'package:pora/app/features/list/presentation/screen/home_screen.dart'
     as _i6;
+import 'package:pora/app/features/insights/presentation/screen/insights_screen.dart'
+    as _i7;
+import 'package:pora/app/features/item_detail/presentation/screen/item_detail_screen.dart'
+    as _i8;
+import 'package:pora/app/features/list/presentation/screen/home_screen.dart'
+    as _i5;
 import 'package:pora/app/features/notifications/presentation/screen/notifications_screen.dart'
-    as _i11;
-import 'package:pora/app/features/onboarding/presentation/screen/onboarding_slider_screen.dart'
-    as _i13;
-import 'package:pora/app/features/order/presentation/screen/order_screen.dart'
-    as _i14;
-import 'package:pora/app/features/predictions/presentation/screen/predictions_screen.dart'
-    as _i15;
-import 'package:pora/app/features/recipe/presentation/screen/recipe_import_screen.dart'
-    as _i16;
-import 'package:pora/app/features/search/presentation/screen/search_screen.dart'
-    as _i17;
-import 'package:pora/app/features/settings/presentation/screen/settings_screen.dart'
-    as _i18;
-import 'package:pora/app/features/shell/presentation/screen/main_shell_screen.dart'
     as _i10;
+import 'package:pora/app/features/onboarding/presentation/screen/onboarding_slider_screen.dart'
+    as _i12;
+import 'package:pora/app/features/order/presentation/screen/order_screen.dart'
+    as _i13;
+import 'package:pora/app/features/predictions/presentation/screen/predictions_screen.dart'
+    as _i14;
+import 'package:pora/app/features/recipe/presentation/screen/recipe_import_screen.dart'
+    as _i15;
+import 'package:pora/app/features/search/presentation/screen/search_screen.dart'
+    as _i16;
+import 'package:pora/app/features/settings/presentation/screen/settings_screen.dart'
+    as _i17;
+import 'package:pora/app/features/shell/presentation/screen/main_shell_screen.dart'
+    as _i9;
 import 'package:pora/app/features/splash/presentation/screen/splash.dart'
-    as _i19;
+    as _i18;
 import 'package:pora/app/features/user/presentation/screens/user_create_profile_screen.dart'
-    as _i4;
+    as _i19;
 
 /// generated route for
 /// [_i1.AddItemPage]
@@ -102,23 +102,7 @@ class BriefRoute extends _i20.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i4.BriefProfilePage]
-class BriefProfileRoute extends _i20.PageRouteInfo<void> {
-  const BriefProfileRoute({List<_i20.PageRouteInfo>? children})
-    : super(BriefProfileRoute.name, initialChildren: children);
-
-  static const String name = 'BriefProfileRoute';
-
-  static _i20.PageInfo page = _i20.PageInfo(
-    name,
-    builder: (data) {
-      return const _i4.BriefProfilePage();
-    },
-  );
-}
-
-/// generated route for
-/// [_i5.DeeplinkDebugPage]
+/// [_i4.DeeplinkDebugPage]
 class DeeplinkDebugRoute extends _i20.PageRouteInfo<DeeplinkDebugRouteArgs> {
   DeeplinkDebugRoute({
     _i21.Key? key,
@@ -141,7 +125,7 @@ class DeeplinkDebugRoute extends _i20.PageRouteInfo<DeeplinkDebugRouteArgs> {
         orElse: () =>
             DeeplinkDebugRouteArgs(linkCode: pathParams.getString('linkCode')),
       );
-      return _i5.DeeplinkDebugPage(key: args.key, linkCode: args.linkCode);
+      return _i4.DeeplinkDebugPage(key: args.key, linkCode: args.linkCode);
     },
   );
 }
@@ -170,7 +154,7 @@ class DeeplinkDebugRouteArgs {
 }
 
 /// generated route for
-/// [_i6.HomePage]
+/// [_i5.HomePage]
 class HomeRoute extends _i20.PageRouteInfo<HomeRouteArgs> {
   HomeRoute({
     _i21.Key? key,
@@ -195,7 +179,7 @@ class HomeRoute extends _i20.PageRouteInfo<HomeRouteArgs> {
       final args = data.argsAs<HomeRouteArgs>(
         orElse: () => const HomeRouteArgs(),
       );
-      return _i6.HomePage(
+      return _i5.HomePage(
         key: args.key,
         familyId: args.familyId,
         familyName: args.familyName,
@@ -232,7 +216,7 @@ class HomeRouteArgs {
 }
 
 /// generated route for
-/// [_i7.HouseholdPage]
+/// [_i6.HouseholdPage]
 class HouseholdRoute extends _i20.PageRouteInfo<void> {
   const HouseholdRoute({List<_i20.PageRouteInfo>? children})
     : super(HouseholdRoute.name, initialChildren: children);
@@ -242,13 +226,13 @@ class HouseholdRoute extends _i20.PageRouteInfo<void> {
   static _i20.PageInfo page = _i20.PageInfo(
     name,
     builder: (data) {
-      return const _i7.HouseholdPage();
+      return const _i6.HouseholdPage();
     },
   );
 }
 
 /// generated route for
-/// [_i8.InsightsPage]
+/// [_i7.InsightsPage]
 class InsightsRoute extends _i20.PageRouteInfo<void> {
   const InsightsRoute({List<_i20.PageRouteInfo>? children})
     : super(InsightsRoute.name, initialChildren: children);
@@ -258,13 +242,13 @@ class InsightsRoute extends _i20.PageRouteInfo<void> {
   static _i20.PageInfo page = _i20.PageInfo(
     name,
     builder: (data) {
-      return const _i8.InsightsPage();
+      return const _i7.InsightsPage();
     },
   );
 }
 
 /// generated route for
-/// [_i9.ItemDetailPage]
+/// [_i8.ItemDetailPage]
 class ItemDetailRoute extends _i20.PageRouteInfo<void> {
   const ItemDetailRoute({List<_i20.PageRouteInfo>? children})
     : super(ItemDetailRoute.name, initialChildren: children);
@@ -274,13 +258,13 @@ class ItemDetailRoute extends _i20.PageRouteInfo<void> {
   static _i20.PageInfo page = _i20.PageInfo(
     name,
     builder: (data) {
-      return const _i9.ItemDetailPage();
+      return const _i8.ItemDetailPage();
     },
   );
 }
 
 /// generated route for
-/// [_i10.MainShellPage]
+/// [_i9.MainShellPage]
 class MainShellRoute extends _i20.PageRouteInfo<void> {
   const MainShellRoute({List<_i20.PageRouteInfo>? children})
     : super(MainShellRoute.name, initialChildren: children);
@@ -290,13 +274,13 @@ class MainShellRoute extends _i20.PageRouteInfo<void> {
   static _i20.PageInfo page = _i20.PageInfo(
     name,
     builder: (data) {
-      return const _i10.MainShellPage();
+      return const _i9.MainShellPage();
     },
   );
 }
 
 /// generated route for
-/// [_i11.NotificationsPage]
+/// [_i10.NotificationsPage]
 class NotificationsRoute extends _i20.PageRouteInfo<void> {
   const NotificationsRoute({List<_i20.PageRouteInfo>? children})
     : super(NotificationsRoute.name, initialChildren: children);
@@ -306,13 +290,13 @@ class NotificationsRoute extends _i20.PageRouteInfo<void> {
   static _i20.PageInfo page = _i20.PageInfo(
     name,
     builder: (data) {
-      return const _i11.NotificationsPage();
+      return const _i10.NotificationsPage();
     },
   );
 }
 
 /// generated route for
-/// [_i12.OTPConfirmationPage]
+/// [_i11.OTPConfirmationPage]
 class OTPConfirmationRoute
     extends _i20.PageRouteInfo<OTPConfirmationRouteArgs> {
   OTPConfirmationRoute({
@@ -342,7 +326,7 @@ class OTPConfirmationRoute
     name,
     builder: (data) {
       final args = data.argsAs<OTPConfirmationRouteArgs>();
-      return _i12.OTPConfirmationPage(
+      return _i11.OTPConfirmationPage(
         key: args.key,
         authStore: args.authStore,
         OTPController: args.OTPController,
@@ -404,7 +388,7 @@ class OTPConfirmationRouteArgs {
 }
 
 /// generated route for
-/// [_i13.OnboardingSliderPage]
+/// [_i12.OnboardingSliderPage]
 class OnboardingSliderRoute extends _i20.PageRouteInfo<void> {
   const OnboardingSliderRoute({List<_i20.PageRouteInfo>? children})
     : super(OnboardingSliderRoute.name, initialChildren: children);
@@ -414,13 +398,13 @@ class OnboardingSliderRoute extends _i20.PageRouteInfo<void> {
   static _i20.PageInfo page = _i20.PageInfo(
     name,
     builder: (data) {
-      return const _i13.OnboardingSliderPage();
+      return const _i12.OnboardingSliderPage();
     },
   );
 }
 
 /// generated route for
-/// [_i14.OrderPage]
+/// [_i13.OrderPage]
 class OrderRoute extends _i20.PageRouteInfo<void> {
   const OrderRoute({List<_i20.PageRouteInfo>? children})
     : super(OrderRoute.name, initialChildren: children);
@@ -430,13 +414,13 @@ class OrderRoute extends _i20.PageRouteInfo<void> {
   static _i20.PageInfo page = _i20.PageInfo(
     name,
     builder: (data) {
-      return const _i14.OrderPage();
+      return const _i13.OrderPage();
     },
   );
 }
 
 /// generated route for
-/// [_i15.PredictionsPage]
+/// [_i14.PredictionsPage]
 class PredictionsRoute extends _i20.PageRouteInfo<void> {
   const PredictionsRoute({List<_i20.PageRouteInfo>? children})
     : super(PredictionsRoute.name, initialChildren: children);
@@ -446,13 +430,13 @@ class PredictionsRoute extends _i20.PageRouteInfo<void> {
   static _i20.PageInfo page = _i20.PageInfo(
     name,
     builder: (data) {
-      return const _i15.PredictionsPage();
+      return const _i14.PredictionsPage();
     },
   );
 }
 
 /// generated route for
-/// [_i16.RecipeImportPage]
+/// [_i15.RecipeImportPage]
 class RecipeImportRoute extends _i20.PageRouteInfo<void> {
   const RecipeImportRoute({List<_i20.PageRouteInfo>? children})
     : super(RecipeImportRoute.name, initialChildren: children);
@@ -462,13 +446,13 @@ class RecipeImportRoute extends _i20.PageRouteInfo<void> {
   static _i20.PageInfo page = _i20.PageInfo(
     name,
     builder: (data) {
-      return const _i16.RecipeImportPage();
+      return const _i15.RecipeImportPage();
     },
   );
 }
 
 /// generated route for
-/// [_i17.SearchPage]
+/// [_i16.SearchPage]
 class SearchRoute extends _i20.PageRouteInfo<void> {
   const SearchRoute({List<_i20.PageRouteInfo>? children})
     : super(SearchRoute.name, initialChildren: children);
@@ -478,13 +462,13 @@ class SearchRoute extends _i20.PageRouteInfo<void> {
   static _i20.PageInfo page = _i20.PageInfo(
     name,
     builder: (data) {
-      return const _i17.SearchPage();
+      return const _i16.SearchPage();
     },
   );
 }
 
 /// generated route for
-/// [_i18.SettingsPage]
+/// [_i17.SettingsPage]
 class SettingsRoute extends _i20.PageRouteInfo<void> {
   const SettingsRoute({List<_i20.PageRouteInfo>? children})
     : super(SettingsRoute.name, initialChildren: children);
@@ -494,13 +478,13 @@ class SettingsRoute extends _i20.PageRouteInfo<void> {
   static _i20.PageInfo page = _i20.PageInfo(
     name,
     builder: (data) {
-      return const _i18.SettingsPage();
+      return const _i17.SettingsPage();
     },
   );
 }
 
 /// generated route for
-/// [_i19.SplashPage]
+/// [_i18.SplashPage]
 class SplashRoute extends _i20.PageRouteInfo<void> {
   const SplashRoute({List<_i20.PageRouteInfo>? children})
     : super(SplashRoute.name, initialChildren: children);
@@ -510,7 +494,52 @@ class SplashRoute extends _i20.PageRouteInfo<void> {
   static _i20.PageInfo page = _i20.PageInfo(
     name,
     builder: (data) {
-      return const _i19.SplashPage();
+      return const _i18.SplashPage();
     },
   );
+}
+
+/// generated route for
+/// [_i19.UserCreateProfilePage]
+class UserCreateProfileRoute
+    extends _i20.PageRouteInfo<UserCreateProfileRouteArgs> {
+  UserCreateProfileRoute({_i21.Key? key, List<_i20.PageRouteInfo>? children})
+    : super(
+        UserCreateProfileRoute.name,
+        args: UserCreateProfileRouteArgs(key: key),
+        initialChildren: children,
+      );
+
+  static const String name = 'UserCreateProfileRoute';
+
+  static _i20.PageInfo page = _i20.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<UserCreateProfileRouteArgs>(
+        orElse: () => const UserCreateProfileRouteArgs(),
+      );
+      return _i19.UserCreateProfilePage(key: args.key);
+    },
+  );
+}
+
+class UserCreateProfileRouteArgs {
+  const UserCreateProfileRouteArgs({this.key});
+
+  final _i21.Key? key;
+
+  @override
+  String toString() {
+    return 'UserCreateProfileRouteArgs{key: $key}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! UserCreateProfileRouteArgs) return false;
+    return key == other.key;
+  }
+
+  @override
+  int get hashCode => key.hashCode;
 }

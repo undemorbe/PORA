@@ -23,7 +23,10 @@ class InviteCodeCard extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(context.l10n.householdInviteCodeLabel, style: PoraText.small),
+                Text(
+                  context.l10n.householdInviteCodeLabel,
+                  style: PoraText.small,
+                ),
                 const SizedBox(height: PoraSpacing.xs),
                 Text(code, style: PoraText.code),
               ],

@@ -188,6 +188,12 @@ abstract class AppLocalizations {
   /// **'Присоединиться'**
   String get authJoinButton;
 
+  /// userCreateProfileNameRequired
+  ///
+  /// In en, this message translates to:
+  /// **'Может все-же скажете имя?'**
+  String get userCreateProfileNameRequired;
+
   /// commonError
   ///
   /// In en, this message translates to:

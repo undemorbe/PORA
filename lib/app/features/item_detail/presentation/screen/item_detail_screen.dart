@@ -48,7 +48,10 @@ class ItemDetailPage extends StatelessWidget {
                   const SizedBox(height: 14),
                   Text(context.l10n.itemDetailName, style: PoraText.title),
                   const SizedBox(height: PoraSpacing.xs),
-                  Text(context.l10n.itemDetailSubtitle, style: PoraText.subtitle),
+                  Text(
+                    context.l10n.itemDetailSubtitle,
+                    style: PoraText.subtitle,
+                  ),
                 ],
               ),
             ),
@@ -56,9 +59,18 @@ class ItemDetailPage extends StatelessWidget {
 
             PoraRowsCard(
               children: [
-                InfoRow(label: context.l10n.itemDetailAddedBy, trailing: const AddedBy()),
-                InfoRow(label: context.l10n.itemDetailSection, value: context.l10n.itemDetailSectionValue),
-                InfoRow(label: context.l10n.itemDetailQuantity, value: context.l10n.itemDetailQuantityValue),
+                InfoRow(
+                  label: context.l10n.itemDetailAddedBy,
+                  trailing: const AddedBy(),
+                ),
+                InfoRow(
+                  label: context.l10n.itemDetailSection,
+                  value: context.l10n.itemDetailSectionValue,
+                ),
+                InfoRow(
+                  label: context.l10n.itemDetailQuantity,
+                  value: context.l10n.itemDetailQuantityValue,
+                ),
               ],
             ),
             const SizedBox(height: PoraSpacing.lg),
@@ -80,12 +92,13 @@ class ItemDetailPage extends StatelessWidget {
             ),
             const SizedBox(height: PoraSpacing.lg),
 
-            PredictionInsightBanner(
-              text: context.l10n.itemDetailInsight,
-            ),
+            PredictionInsightBanner(text: context.l10n.itemDetailInsight),
             const SizedBox(height: PoraSpacing.xl),
 
-            PoraPrimaryButton(label: context.l10n.itemDetailMarkBought, onPressed: () {}),
+            PoraPrimaryButton(
+              label: context.l10n.itemDetailMarkBought,
+              onPressed: () {},
+            ),
             const SizedBox(height: PoraSpacing.lg),
             Center(
               child: TextButton(

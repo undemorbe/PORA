@@ -57,6 +57,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get authJoinButton => 'Присоединиться';
 
   @override
+  String get userCreateProfileNameRequired => 'Может все-же скажете имя?';
+
+  @override
   String get commonError => 'Ошибка';
 
   @override

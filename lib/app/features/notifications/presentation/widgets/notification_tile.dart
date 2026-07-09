@@ -62,7 +62,9 @@ class NotificationTile extends StatelessWidget {
                   const SizedBox(height: PoraSpacing.sm),
                   Align(
                     alignment: Alignment.centerLeft,
-                    child: PoraPill(label: context.l10n.notificationsAddToListPill),
+                    child: PoraPill(
+                      label: context.l10n.notificationsAddToListPill,
+                    ),
                   ),
                 ] else if (time != null) ...[
                   const SizedBox(height: PoraSpacing.xs),

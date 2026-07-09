@@ -23,6 +23,10 @@
     "@authSignInExpansibleExpand": {
         "description": "The sign in with other methods title"
     },
+    "userCreateProfileNameRequired": "Может все-же скажете имя?",
+    "@userCreateProfileNameRequired": {
+        "description": "userCreateProfileNameRequired"
+    },
     "authSignInExpansibleCollapse": "Свернуть",
     "@authSignInExpansibleCollapse": {
         "description": "The sign in with other methods title"

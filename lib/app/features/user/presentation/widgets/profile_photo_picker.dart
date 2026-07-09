@@ -1,17 +1,24 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 
-/// Круглый пикер фото профиля с бейджем-камерой (UI; логику выбора добавит стор).
-class ProfilePhotoPicker extends StatelessWidget {
+class ProfilePhotoPicker extends StatefulWidget {
   const ProfilePhotoPicker({super.key, this.onTap});
 
   final VoidCallback? onTap;
 
   @override
+  State<ProfilePhotoPicker> createState() => _ProfilePhotoPickerState();
+}
+
+class _ProfilePhotoPickerState extends State<ProfilePhotoPicker> {
+  File? _imageFile;
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: widget.onTap,
       child: SizedBox(
         width: 120,
         height: 120,
@@ -25,7 +32,7 @@ class ProfilePhotoPicker extends StatelessWidget {
                 color: PoraColors.sandSoft,
                 shape: BoxShape.circle,
               ),
-              child: const PhosphorIcon(
+              child: _imageFile != null ? Image.file(_imageFile!) : const PhosphorIcon(
                 PhosphorIconsRegular.user,
                 size: 46,
                 color: PoraColors.primary,

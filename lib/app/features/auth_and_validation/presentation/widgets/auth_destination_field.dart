@@ -42,8 +42,6 @@ class _SmartAuthFormatter extends TextInputFormatter {
   }
 }
 
-
-
 class AuthDestinationField extends StatefulWidget {
   const AuthDestinationField({
     super.key,
@@ -54,7 +52,6 @@ class AuthDestinationField extends StatefulWidget {
   final bool? initMode;
   final TextEditingController controller;
   final ValueChanged<AuthFieldMode>? onModeChanged;
-  
 
   @override
   State<AuthDestinationField> createState() => _AuthDestinationFieldState();
@@ -62,8 +59,10 @@ class AuthDestinationField extends StatefulWidget {
 
 class _AuthDestinationFieldState extends State<AuthDestinationField> {
   // AuthFieldMode _mode = AuthFieldMode.phone;
-  late AuthFieldMode _mode = widget.initMode == true ? AuthFieldMode.email : AuthFieldMode.phone;
-  
+  late AuthFieldMode _mode = widget.initMode == true
+      ? AuthFieldMode.email
+      : AuthFieldMode.phone;
+
   bool _manual = false;
 
   late final _SmartAuthFormatter _formatter = _SmartAuthFormatter(
@@ -166,7 +165,9 @@ class _ModeToggleButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: onTap,
-      tooltip: isPhone ? context.l10n.authSwitchToEmail : context.l10n.authSwitchToPhone,
+      tooltip: isPhone
+          ? context.l10n.authSwitchToEmail
+          : context.l10n.authSwitchToPhone,
       splashRadius: 22,
       icon: _AnimatedSwap(
         child: PhosphorIcon(

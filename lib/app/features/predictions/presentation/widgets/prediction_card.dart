@@ -88,7 +88,10 @@ class PredictionCard extends StatelessWidget {
               const SizedBox(height: 7),
               GestureDetector(
                 onTap: onDismiss,
-                child: Text(context.l10n.predictionsDismiss, style: PoraText.small),
+                child: Text(
+                  context.l10n.predictionsDismiss,
+                  style: PoraText.small,
+                ),
               ),
             ],
           ),

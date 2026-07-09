@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:pora/app/features/user/data/datasource/remote.dart';
 import 'package:pora/app/features/user/data/models/user/user_model.dart';
 import 'package:pora/app/features/user/domain/entity/user/user_entity.dart';
 import 'package:pora/app/features/user/domain/repository/user/user_repository.dart';
 import 'package:pora/app/internal/errors/failure.dart';
+import 'package:pora/app/internal/errors/success.dart';
 import 'package:pora/app/internal/extensions/either.dart';
 
 class UserService implements UserRepository {
@@ -23,10 +26,16 @@ class UserService implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, UserEntity>> updateUser(UserEntity user) async {
+  Future<Either<Failure, Success>> updateUser({
+    UserEntity? user,
+    File? image,
+  }) async {
     try {
-      await remoteDataSource.updateUser(UserModel.fromEntity(user));
-      return Right(user);
+      await remoteDataSource.updateUser(
+        user != null ? UserModel.fromEntity(user) : null,
+        image,
+      );
+      return Right(const ServerSuccess());
     } on DioException catch (e) {
       return Left(_mapDioError(e));
     } catch (_) {

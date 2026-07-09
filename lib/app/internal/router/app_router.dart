@@ -13,7 +13,10 @@ class AppRouter extends RootStackRouter {
 
   @override
   List<AutoRoute> get routes => [
-    AutoRoute(page: DeeplinkDebugRoute.page,path: '/api/families/join/:linkCode',),
+    AutoRoute(
+      page: DeeplinkDebugRoute.page,
+      path: '/api/families/join/:linkCode',
+    ),
 
     AutoRoute(
       page: SplashRoute.page,
@@ -83,6 +86,9 @@ class AppRouter extends RootStackRouter {
     //   guards: [_authGuard],
     // ),
     AutoRoute(page: BriefRoute.page, path: "/${BriefRoute.name}"),
-    AutoRoute(page: BriefProfileRoute.page, path: "/${BriefProfileRoute.name}"),
+    AutoRoute(
+      page: UserCreateProfileRoute.page,
+      path: "/${UserCreateProfileRoute.name}",
+    ),
   ];
 }
