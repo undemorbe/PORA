@@ -269,18 +269,49 @@ class HouseholdConnectionRouteArgs {
 
 /// generated route for
 /// [_i7.HouseholdPage]
-class HouseholdRoute extends _i21.PageRouteInfo<void> {
-  const HouseholdRoute({List<_i21.PageRouteInfo>? children})
-    : super(HouseholdRoute.name, initialChildren: children);
+class HouseholdRoute extends _i21.PageRouteInfo<HouseholdRouteArgs> {
+  HouseholdRoute({
+    _i22.Key? key,
+    required String familyId,
+    List<_i21.PageRouteInfo>? children,
+  }) : super(
+         HouseholdRoute.name,
+         args: HouseholdRouteArgs(key: key, familyId: familyId),
+         initialChildren: children,
+       );
 
   static const String name = 'HouseholdRoute';
 
   static _i21.PageInfo page = _i21.PageInfo(
     name,
     builder: (data) {
-      return const _i7.HouseholdPage();
+      final args = data.argsAs<HouseholdRouteArgs>();
+      return _i7.HouseholdPage(key: args.key, familyId: args.familyId);
     },
   );
+}
+
+class HouseholdRouteArgs {
+  const HouseholdRouteArgs({this.key, required this.familyId});
+
+  final _i22.Key? key;
+
+  final String familyId;
+
+  @override
+  String toString() {
+    return 'HouseholdRouteArgs{key: $key, familyId: $familyId}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! HouseholdRouteArgs) return false;
+    return key == other.key && familyId == other.familyId;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ familyId.hashCode;
 }
 
 /// generated route for

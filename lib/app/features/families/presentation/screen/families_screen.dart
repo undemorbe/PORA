@@ -135,7 +135,8 @@ class FamiliesPage extends StatelessWidget {
             const SizedBox(height: PoraSpacing.sm),
             PoraOutlineButton(
               label: l.familiesCreateOrJoin,
-              onPressed: () => context.router.push(const HouseholdRoute()),
+              onPressed: () =>
+                  context.router.push(HouseholdRoute(familyId: '')),
             ),
           ],
         ),

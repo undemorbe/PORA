@@ -45,6 +45,24 @@ mixin _$InvitationsStore on _InvitationsStoreBase, Store {
     });
   }
 
+  late final _$linkCodeAtom = Atom(
+    name: '_InvitationsStoreBase.linkCode',
+    context: context,
+  );
+
+  @override
+  String? get linkCode {
+    _$linkCodeAtom.reportRead();
+    return super.linkCode;
+  }
+
+  @override
+  set linkCode(String? value) {
+    _$linkCodeAtom.reportWrite(value, super.linkCode, () {
+      super.linkCode = value;
+    });
+  }
+
   late final _$linkCodesAtom = Atom(
     name: '_InvitationsStoreBase.linkCodes',
     context: context,
@@ -77,11 +95,24 @@ mixin _$InvitationsStore on _InvitationsStoreBase, Store {
     );
   }
 
+  late final _$shareLinkCodeAsyncAction = AsyncAction(
+    '_InvitationsStoreBase.shareLinkCode',
+    context: context,
+  );
+
+  @override
+  Future<void> shareLinkCode({required String linkCode}) {
+    return _$shareLinkCodeAsyncAction.run(
+      () => super.shareLinkCode(linkCode: linkCode),
+    );
+  }
+
   @override
   String toString() {
     return '''
 isLoading: ${isLoading},
 isSuccess: ${isSuccess},
+linkCode: ${linkCode},
 linkCodes: ${linkCodes}
     ''';
   }

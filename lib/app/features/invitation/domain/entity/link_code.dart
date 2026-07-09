@@ -5,6 +5,7 @@ abstract class LinkCodeEntity extends Equatable {
   final String linkUrl;
 
   const LinkCodeEntity({required this.linkCode, required this.linkUrl});
+  
   @override
   List<Object?> get props => [linkCode, linkUrl];
 }
