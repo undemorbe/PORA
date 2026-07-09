@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/app/features/predictions/domain/entity/prediction.dart';
+import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
@@ -74,7 +75,7 @@ class PredictionCard extends StatelessWidget {
                       ),
                       const SizedBox(width: 3),
                       Text(
-                        'В список',
+                        context.l10n.predictionsAddToList,
                         style: PoraText.micro.copyWith(
                           fontSize: 13,
                           color: PoraColors.inkInverse,
@@ -87,7 +88,10 @@ class PredictionCard extends StatelessWidget {
               const SizedBox(height: 7),
               GestureDetector(
                 onTap: onDismiss,
-                child: Text('Не надо', style: PoraText.small),
+                child: Text(
+                  context.l10n.predictionsDismiss,
+                  style: PoraText.small,
+                ),
               ),
             ],
           ),

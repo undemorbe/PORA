@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:pora/app/features/notifications/presentation/widgets/notification_tile.dart';
+import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
@@ -26,9 +27,9 @@ class NotificationsPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Уведомления', style: PoraText.title),
+                Text(context.l10n.notificationsTitle, style: PoraText.title),
                 Text(
-                  'Прочитать все',
+                  context.l10n.notificationsReadAll,
                   style: PoraText.caption.copyWith(
                     color: PoraColors.primaryDark,
                     fontWeight: FontWeight.w600,
@@ -37,44 +38,44 @@ class NotificationsPage extends StatelessWidget {
               ],
             ),
             const SizedBox(height: PoraSpacing.lg),
-            const PoraRowsCard(
+            PoraRowsCard(
               children: [
                 NotificationTile(
                   emoji: '⏰',
                   tileColor: PoraColors.primaryTintStrong,
-                  title: 'По дороге домой захвати молоко',
-                  body: 'Оно кончилось — Анна отметила 10 минут назад.',
-                  time: '5 минут назад',
+                  title: context.l10n.notificationsMilkTitle,
+                  body: context.l10n.notificationsMilkBody,
+                  time: context.l10n.notificationsMilkTime,
                   unread: true,
                 ),
                 NotificationTile(
                   emoji: '🔮',
                   tileColor: PoraColors.primaryTint,
-                  title: 'Скоро закончится кофе',
-                  body: 'Покупаете ~раз в 14 дней, прошло 12.',
+                  title: context.l10n.notificationsCoffeeTitle,
+                  body: context.l10n.notificationsCoffeeBody,
                   mini: true,
                   unread: true,
                 ),
                 NotificationTile(
                   emoji: '👤',
                   tileColor: PoraColors.successTint,
-                  title: 'Анна добавила 2 продукта',
-                  body: 'Бананы и Хлеб — в общем списке.',
-                  time: 'Сегодня, 9:12',
+                  title: context.l10n.notificationsPartnerAddedTitle,
+                  body: context.l10n.notificationsPartnerAddedBody,
+                  time: context.l10n.notificationsPartnerAddedTime,
                 ),
                 NotificationTile(
                   emoji: '🎁',
                   tileColor: PoraColors.sandSoft,
-                  title: '−15% на первый заказ в Самокате',
-                  body: 'Промо активно ещё 6 дней.',
-                  time: 'Вчера',
+                  title: context.l10n.notificationsPromoTitle,
+                  body: context.l10n.notificationsPromoBody,
+                  time: context.l10n.notificationsPromoTime,
                 ),
                 NotificationTile(
                   emoji: '✅',
                   tileColor: PoraColors.successTint,
-                  title: 'Заказ доставлен',
-                  body: '8 продуктов · Самокат · ₽1 054.',
-                  time: 'Вчера',
+                  title: context.l10n.notificationsOrderDeliveredTitle,
+                  body: context.l10n.notificationsOrderDeliveredBody,
+                  time: context.l10n.notificationsPromoTime,
                 ),
               ],
             ),

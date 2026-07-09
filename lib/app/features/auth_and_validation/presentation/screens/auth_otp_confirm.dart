@@ -5,6 +5,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pora/app/features/auth_and_validation/presentation/controller/auth_store.dart';
 import 'package:pora/app/features/auth_and_validation/presentation/controller/privacy_store.dart';
 import 'package:pora/app/features/auth_and_validation/presentation/widgets/pinput.dart';
+import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/router/app_router.gr.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
@@ -33,6 +34,7 @@ class OTPConfirmationPage extends StatelessWidget {
   final TextEditingController OTPController;
   @override
   Widget build(BuildContext context) {
+    final l = context.l10n;
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -49,18 +51,13 @@ class OTPConfirmationPage extends StatelessWidget {
                 children: [
                   const OnboardingProgressHeader(step: 2),
                   const SizedBox(height: 28),
-                  //! Localize
-                  Text('Осталось немного!', style: PoraText.display),
+                  Text(l.otpTitle, style: PoraText.display),
                   const SizedBox(height: PoraSpacing.md + 5),
-                  //! Localize
                   Column(
                     crossAxisAlignment: .center,
                     mainAxisAlignment: .center,
                     children: [
-                      Text(
-                        'Введите код отправленный на ',
-                        style: PoraText.subtitle,
-                      ),
+                      Text(l.otpEnterCodeSentTo, style: PoraText.subtitle),
                       Text(
                         '${destinationController.text}',
                         style: PoraText.caption,
@@ -85,14 +82,21 @@ class OTPConfirmationPage extends StatelessWidget {
                     crossAxisAlignment: .center,
                     children: [
                       Text(
-                        'Не получили код?',
+                        l.otpResendQuestion,
                         style: PoraText.subtitle.copyWith(fontSize: 14),
                       ),
-                      Text(
-                        'Отправить еще раз',
-                        style: PoraText.subtitle.copyWith(
-                          color: PoraColors.primary,
-                          fontSize: 18,
+                      InkWell(
+                        onTap: () {
+                          authStore.sendOtp(
+                            destination: destinationController.text,
+                          );
+                        },
+                        child: Text(
+                          l.otpResend,
+                          style: PoraText.subtitle.copyWith(
+                            color: PoraColors.primary,
+                            fontSize: 18,
+                          ),
                         ),
                       ),
                     ],
@@ -114,7 +118,7 @@ class OTPConfirmationPage extends StatelessWidget {
                       privacyStore.openPrivacy();
                     },
                     child: Text(
-                      'Продолжая, вы принимаете Условия и Политику конфиденциальности',
+                      l.authPrivatePolicy,
                       style: PoraText.small.copyWith(
                         height: 1.4,
                         decoration: TextDecoration.underline,
@@ -126,7 +130,7 @@ class OTPConfirmationPage extends StatelessWidget {
                   Observer(
                     builder: (_) {
                       return PoraPrimaryButton(
-                        label: 'Проверить код',
+                        label: l.otpVerifyButton,
                         isLoading: authStore.isLoading,
                         onPressed: () async {
                           await authStore
@@ -140,14 +144,15 @@ class OTPConfirmationPage extends StatelessWidget {
                                     (dotenv.getBool('DEBUG') &&
                                         context.mounted)) {
                                   context.router.replaceAll([
-                                    const BriefProfileRoute(),
+                                    UserCreateProfileRoute(),
                                   ]);
                                 } else {
                                   if (!context.mounted) return;
                                   PoraSnackbar.show(
                                     context,
                                     message:
-                                        authStore.scaffoldMessage ?? 'Ошибка',
+                                        authStore.scaffoldMessage ??
+                                        l.commonError,
                                   );
                                   authStore.success = null;
                                 }

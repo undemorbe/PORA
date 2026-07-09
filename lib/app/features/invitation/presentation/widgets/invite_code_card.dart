@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/widgets/pora_card.dart';
@@ -22,7 +23,10 @@ class InviteCodeCard extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Код приглашения', style: PoraText.small),
+                Text(
+                  context.l10n.householdInviteCodeLabel,
+                  style: PoraText.small,
+                ),
                 const SizedBox(height: PoraSpacing.xs),
                 Text(code, style: PoraText.code),
               ],
@@ -30,7 +34,7 @@ class InviteCodeCard extends StatelessWidget {
           ),
           GestureDetector(
             onTap: onCopy,
-            child: const PoraPill(label: 'Копировать'),
+            child: PoraPill(label: context.l10n.householdCopyPill),
           ),
         ],
       ),

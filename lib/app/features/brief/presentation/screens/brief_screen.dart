@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:pora/app/features/onboarding/presentation/widgets/onboarding_progress_header.dart';
 import 'package:pora/app/internal/router/app_router.gr.dart';
 import 'package:flutter/material.dart';
+import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
@@ -14,23 +15,23 @@ import 'package:pora/app/internal/widgets/pora_chip.dart';
 class BriefPage extends StatelessWidget {
   const BriefPage({super.key});
 
-  static const _products = <(String, String, bool)>[
-    ('🥛', 'Молоко', true),
-    ('🍞', 'Хлеб', true),
-    ('🥚', 'Яйца', false),
-    ('☕', 'Кофе', true),
-    ('🧀', 'Сыр', false),
-    ('🍌', 'Бананы', false),
-    ('🧈', 'Масло', false),
-    ('💧', 'Вода', false),
-    ('🥦', 'Овощи', false),
-    ('🍅', 'Помидоры', false),
-    ('🍝', 'Паста', false),
-    ('🍗', 'Курица', false),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final l = context.l10n;
+    final products = <(String, String, bool)>[
+      ('🥛', l.briefItemMilk, true),
+      ('🍞', l.briefItemBread, true),
+      ('🥚', l.briefItemEggs, false),
+      ('☕', l.briefItemCoffee, true),
+      ('🧀', l.briefItemCheese, false),
+      ('🍌', l.briefItemBananas, false),
+      ('🧈', l.briefItemButter, false),
+      ('💧', l.briefItemWater, false),
+      ('🥦', l.briefItemVegetables, false),
+      ('🍅', l.briefItemTomatoes, false),
+      ('🍝', l.briefItemPasta, false),
+      ('🍗', l.briefItemChicken, false),
+    ];
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -49,15 +50,9 @@ class BriefPage extends StatelessWidget {
 
                   const SizedBox(height: PoraSpacing.lg),
 
-                  Text(
-                    'Что у вас часто заканчивается?',
-                    style: PoraText.display,
-                  ),
+                  Text(l.briefTitle, style: PoraText.display),
                   const SizedBox(height: PoraSpacing.md),
-                  Text(
-                    'Отметьте продукты — Pora напомнит вовремя. Это можно пропустить.',
-                    style: PoraText.subtitle,
-                  ),
+                  Text(l.briefSubtitle, style: PoraText.subtitle),
                   const SizedBox(height: PoraSpacing.xxl),
                   SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
@@ -65,7 +60,7 @@ class BriefPage extends StatelessWidget {
                       spacing: 10,
                       runSpacing: 12,
                       children: [
-                        for (final (emoji, name, selected) in _products)
+                        for (final (emoji, name, selected) in products)
                           PoraChip(
                             label: name,
                             leading: emoji,
@@ -88,10 +83,10 @@ class BriefPage extends StatelessWidget {
                 children: [
                   TextButton(
                     onPressed: () {
-                      context.router.navigate(HomeRoute());
+                      context.router.replaceAll([const MainShellRoute()]);
                     },
                     child: Text(
-                      'Пропустить',
+                      l.briefSkip,
                       style: PoraText.bodyLarge.copyWith(
                         color: PoraColors.textSubtle,
                       ),
@@ -99,8 +94,9 @@ class BriefPage extends StatelessWidget {
                   ),
                   const SizedBox(height: PoraSpacing.sm),
                   PoraPrimaryButton(
-                    label: 'Далее',
-                    onPressed: () => context.router.push(HomeRoute()),
+                    label: l.briefNext,
+                    onPressed: () =>
+                        context.router.replaceAll([const MainShellRoute()]),
                   ),
                 ],
               ),

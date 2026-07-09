@@ -6,6 +6,7 @@ import 'package:pora/app/features/item_detail/presentation/widgets/info_row.dart
 import 'package:pora/app/features/item_detail/presentation/widgets/prediction_insight_banner.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
+import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 import 'package:pora/app/internal/widgets/pora_buttons.dart';
 import 'package:pora/app/internal/widgets/pora_icon_tile.dart';
@@ -31,7 +32,7 @@ class ItemDetailPage extends StatelessWidget {
             PoraSpacing.xxl,
           ),
           children: [
-            const ScreenBackHeader(title: 'Молоко'),
+            ScreenBackHeader(title: context.l10n.itemDetailName),
             const SizedBox(height: PoraSpacing.lg),
 
             Center(
@@ -45,53 +46,65 @@ class ItemDetailPage extends StatelessWidget {
                     borderRadius: const BorderRadius.all(Radius.circular(24)),
                   ),
                   const SizedBox(height: 14),
-                  Text('Молоко', style: PoraText.title),
+                  Text(context.l10n.itemDetailName, style: PoraText.title),
                   const SizedBox(height: PoraSpacing.xs),
-                  Text('2 л · Молочное', style: PoraText.subtitle),
+                  Text(
+                    context.l10n.itemDetailSubtitle,
+                    style: PoraText.subtitle,
+                  ),
                 ],
               ),
             ),
             const SizedBox(height: PoraSpacing.xxl),
 
-            const PoraRowsCard(
+            PoraRowsCard(
               children: [
-                InfoRow(label: 'Добавил(а)', trailing: AddedBy()),
-                InfoRow(label: 'Раздел', value: 'Молочное'),
-                InfoRow(label: 'Количество', value: '2 л'),
+                InfoRow(
+                  label: context.l10n.itemDetailAddedBy,
+                  trailing: const AddedBy(),
+                ),
+                InfoRow(
+                  label: context.l10n.itemDetailSection,
+                  value: context.l10n.itemDetailSectionValue,
+                ),
+                InfoRow(
+                  label: context.l10n.itemDetailQuantity,
+                  value: context.l10n.itemDetailQuantityValue,
+                ),
               ],
             ),
             const SizedBox(height: PoraSpacing.lg),
 
-            const PoraRowsCard(
+            PoraRowsCard(
               children: [
                 PoraSettingRow(
                   icon: PhosphorIconsRegular.clock,
-                  label: 'Срочно',
-                  trailing: PoraToggle(value: true),
+                  label: context.l10n.itemDetailUrgent,
+                  trailing: const PoraToggle(value: true),
                 ),
                 PoraSettingRow(
                   icon: PhosphorIconsRegular.arrowsClockwise,
-                  label: 'Напоминать',
-                  subtitle: 'Каждые 7 дней',
-                  trailing: PoraToggle(value: true),
+                  label: context.l10n.itemDetailRemind,
+                  subtitle: context.l10n.itemDetailRemindEvery,
+                  trailing: const PoraToggle(value: true),
                 ),
               ],
             ),
             const SizedBox(height: PoraSpacing.lg),
 
-            const PredictionInsightBanner(
-              text:
-                  'Покупаете ~раз в 7 дней · последний раз 6 дней назад. Скоро предложу докупить.',
-            ),
+            PredictionInsightBanner(text: context.l10n.itemDetailInsight),
             const SizedBox(height: PoraSpacing.xl),
 
-            PoraPrimaryButton(label: 'Отметить купленным', onPressed: () {}),
+            PoraPrimaryButton(
+              label: context.l10n.itemDetailMarkBought,
+              onPressed: () {},
+            ),
             const SizedBox(height: PoraSpacing.lg),
             Center(
               child: TextButton(
                 onPressed: () {},
                 child: Text(
-                  'Удалить из списка',
+                  context.l10n.itemDetailDelete,
                   style: PoraText.bodyLarge.copyWith(
                     color: PoraColors.danger,
                     fontWeight: FontWeight.w600,

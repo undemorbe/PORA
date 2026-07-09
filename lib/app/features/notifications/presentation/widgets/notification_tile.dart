@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
@@ -59,9 +60,11 @@ class NotificationTile extends StatelessWidget {
                 Text(body, style: PoraText.caption.copyWith(height: 1.4)),
                 if (mini) ...[
                   const SizedBox(height: PoraSpacing.sm),
-                  const Align(
+                  Align(
                     alignment: Alignment.centerLeft,
-                    child: PoraPill(label: '＋ В список'),
+                    child: PoraPill(
+                      label: context.l10n.notificationsAddToListPill,
+                    ),
                   ),
                 ] else if (time != null) ...[
                   const SizedBox(height: PoraSpacing.xs),

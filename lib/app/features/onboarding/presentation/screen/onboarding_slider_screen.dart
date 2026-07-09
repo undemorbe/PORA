@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:pora/app/features/onboarding/presentation/widgets/onboarding_slide_view.dart';
+import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/router/app_router.gr.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
@@ -20,27 +21,31 @@ class _OnboardingSliderPageState extends State<OnboardingSliderPage> {
   final _controller = PageController();
   int _index = 0;
 
-  //! Localize
-  static const _slides = <OnboardingSlide>[
-    OnboardingSlide(
-      Color(0xFFFCEBC9),
-      '🧾',
-      'Рецепт → список\nза секунды',
-      'Киньте ссылку на рецепт — Pora соберёт ингредиенты и уберёт то, что уже есть.',
-    ),
-    OnboardingSlide(
-      Color(0xFFE6F0E6),
-      '👩‍❤️‍👨',
-      'Один список\nна двоих',
-      'Добавляйте вместе — видно, кто что внёс. Партнёр захватит нужное по дороге домой.',
-    ),
-    OnboardingSlide(
-      Color(0xFFFAE7DF),
-      '🔮',
-      'Pora знает,\nкогда пора',
-      'По вашим покупкам подскажет, что скоро закончится, и закажет в один тап.',
-    ),
-  ];
+  static const _slideCount = 3;
+
+  List<OnboardingSlide> _slidesOf(BuildContext context) {
+    final l = context.l10n;
+    return [
+      OnboardingSlide(
+        const Color(0xFFFCEBC9),
+        '🥗',
+        l.onboardingSlide1Title,
+        l.onboardingSlide1Body,
+      ),
+      OnboardingSlide(
+        const Color(0xFFE6F0E6),
+        '👩‍❤️‍👨',
+        l.onboardingSlide2Title,
+        l.onboardingSlide2Body,
+      ),
+      OnboardingSlide(
+        const Color(0xFFFAE7DF),
+        '🔮',
+        l.onboardingSlide3Title,
+        l.onboardingSlide3Body,
+      ),
+    ];
+  }
 
   @override
   void dispose() {
@@ -49,18 +54,20 @@ class _OnboardingSliderPageState extends State<OnboardingSliderPage> {
   }
 
   void _next() {
-    if (_index < _slides.length - 1) {
+    if (_index < _slideCount - 1) {
       _controller.nextPage(
         duration: const Duration(milliseconds: 350),
         curve: Curves.easeInOut,
       );
-    } else if (_index == _slides.length - 1) {
+    } else if (_index == _slideCount - 1) {
       context.router.navigate(const AuthRoute());
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final l = context.l10n;
+    final slides = _slidesOf(context);
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -80,8 +87,7 @@ class _OnboardingSliderPageState extends State<OnboardingSliderPage> {
                       context.router.navigate(const AuthRoute());
                     },
                     child: Text(
-                      //! Localize
-                      'Пропустить',
+                      l.onboardingSkip,
                       style: PoraText.bodyLarge.copyWith(
                         color: PoraColors.textSubtle,
                       ),
@@ -94,15 +100,15 @@ class _OnboardingSliderPageState extends State<OnboardingSliderPage> {
               child: PageView.builder(
                 controller: _controller,
                 onPageChanged: (i) => setState(() => _index = i),
-                itemCount: _slides.length,
+                itemCount: slides.length,
                 itemBuilder: (context, i) =>
-                    OnboardingSlideView(slide: _slides[i]),
+                    OnboardingSlideView(slide: slides[i]),
               ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                for (var i = 0; i < _slides.length; i++)
+                for (var i = 0; i < slides.length; i++)
                   AnimatedContainer(
                     duration: const Duration(milliseconds: 250),
                     margin: const EdgeInsets.symmetric(horizontal: 4),
@@ -126,7 +132,9 @@ class _OnboardingSliderPageState extends State<OnboardingSliderPage> {
                 40,
               ),
               child: PoraPrimaryButton(
-                label: _index == _slides.length - 1 ? 'Начать' : 'Далее',
+                label: _index == slides.length - 1
+                    ? l.onboardingStart
+                    : l.onboardingNext,
                 onPressed: _next,
               ),
             ),

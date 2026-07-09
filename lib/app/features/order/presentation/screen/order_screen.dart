@@ -5,6 +5,7 @@ import 'package:pora/app/features/order/presentation/widgets/cart_row.dart';
 import 'package:pora/app/features/order/presentation/widgets/order_summary.dart';
 import 'package:pora/app/features/order/presentation/widgets/slot_tile.dart';
 import 'package:pora/app/features/order/presentation/widgets/store_card.dart';
+import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/widgets/pora_buttons.dart';
@@ -72,13 +73,13 @@ class _OrderPageState extends State<OrderPage> {
                   PoraSpacing.md,
                 ),
                 children: [
-                  Text('Заказ', style: PoraText.title),
+                  Text(context.l10n.orderTitle, style: PoraText.title),
                   const SizedBox(height: PoraSpacing.lg),
 
                   const StoreCard(),
                   const SizedBox(height: PoraSpacing.lg),
 
-                  const SectionLabel('Корзина'),
+                  SectionLabel(context.l10n.orderCart),
                   PoraRowsCard(
                     children: [
                       for (var i = 0; i < _items.length; i++)
@@ -96,7 +97,7 @@ class _OrderPageState extends State<OrderPage> {
                   ),
                   const SizedBox(height: PoraSpacing.lg),
 
-                  const SectionLabel('Когда доставить'),
+                  SectionLabel(context.l10n.orderWhenToDeliver),
                   for (var i = 0; i < _slots.length; i++) ...[
                     SlotTile(
                       label: _slots[i].$1,
@@ -124,7 +125,7 @@ class _OrderPageState extends State<OrderPage> {
                 PoraSpacing.xxl,
               ),
               child: PoraPrimaryButton(
-                label: 'Заказать в Самокате · ${_rub(_total)}',
+                label: context.l10n.orderCheckoutCta(_rub(_total)),
                 onPressed: () {},
               ),
             ),

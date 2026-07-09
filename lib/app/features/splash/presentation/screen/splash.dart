@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/app/features/splash/presentation/store/splash_store.dart';
+import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 
@@ -132,7 +133,7 @@ class _SplashPageState extends State<SplashPage>
             FadeTransition(
               opacity: _tagline,
               child: Text(
-                'Список, который помнит за вас',
+                context.l10n.splashTagline,
                 style: PoraText.subtitle.copyWith(color: PoraColors.textSubtle),
               ),
             ),

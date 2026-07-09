@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/app/features/list/domain/entity/list_item.dart';
+import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
@@ -14,10 +15,12 @@ class ListItemTile extends StatelessWidget {
     super.key,
     required this.item,
     required this.addedByColor,
+    this.onTap,
   });
 
   final ListItem item;
   final Color addedByColor;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -28,39 +31,43 @@ class ListItemTile extends StatelessWidget {
           )
         : PoraText.itemTitle;
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: PoraSpacing.lg,
-        vertical: PoraSpacing.md,
-      ),
-      child: Row(
-        children: [
-          PoraCheckbox(checked: item.checked),
-          const SizedBox(width: PoraSpacing.md),
-          Expanded(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(item.name, style: nameStyle),
-                if (item.qty != null)
-                  Padding(
-                    padding: const EdgeInsets.only(top: PoraSpacing.xxs),
-                    child: Text(item.qty!, style: PoraText.small),
-                  ),
-              ],
-            ),
-          ),
-          if (item.urgent) ...[
-            const PoraPill(
-              label: 'Срочно',
-              icon: PhosphorIconsRegular.clock,
-              background: PoraColors.primaryTintStrong,
-            ),
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: PoraSpacing.lg,
+          vertical: PoraSpacing.md,
+        ),
+        child: Row(
+          children: [
+            PoraCheckbox(checked: item.checked),
             const SizedBox(width: PoraSpacing.md),
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(item.name, style: nameStyle),
+                  if (item.qty != null)
+                    Padding(
+                      padding: const EdgeInsets.only(top: PoraSpacing.xxs),
+                      child: Text(item.qty!, style: PoraText.small),
+                    ),
+                ],
+              ),
+            ),
+            if (item.urgent) ...[
+              PoraPill(
+                label: context.l10n.listUrgent,
+                icon: PhosphorIconsRegular.clock,
+                background: PoraColors.primaryTintStrong,
+              ),
+              const SizedBox(width: PoraSpacing.md),
+            ],
+            PoraAvatar(initial: item.addedBy, color: addedByColor),
           ],
-          PoraAvatar(initial: item.addedBy, color: addedByColor),
-        ],
+        ),
       ),
     );
   }

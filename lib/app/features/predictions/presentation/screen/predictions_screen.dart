@@ -1,12 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/app/features/predictions/domain/entity/prediction.dart';
 import 'package:pora/app/features/predictions/presentation/widgets/order_cta_card.dart';
 import 'package:pora/app/features/predictions/presentation/widgets/prediction_card.dart';
+import 'package:pora/app/internal/extensions/l10n_extension.dart';
+import 'package:pora/app/internal/router/app_router.gr.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
-import 'package:pora/app/internal/widgets/pora_bottom_nav.dart';
 
 /// Экран «Пора докупить» — предсказания пополнения + CTA заказа.
 /// Данные приходят из pora-ai (`GET /families/{id}/predictions`); пока демо.
@@ -41,7 +43,6 @@ class PredictionsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const PoraBottomNav(current: PoraTab.pora),
       body: SafeArea(
         bottom: false,
         child: ListView(
@@ -52,11 +53,38 @@ class PredictionsPage extends StatelessWidget {
             PoraSpacing.xxl,
           ),
           children: [
-            Text('Пора докупить', style: PoraText.title),
-            const SizedBox(height: 6),
-            Text(
-              'Скоро закончится — по вашим покупкам',
-              style: PoraText.caption,
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        context.l10n.predictionsTitle,
+                        style: PoraText.title,
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        context.l10n.predictionsSubtitle,
+                        style: PoraText.caption,
+                      ),
+                    ],
+                  ),
+                ),
+                GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () => context.router.push(const InsightsRoute()),
+                  child: const Padding(
+                    padding: EdgeInsets.all(6),
+                    child: PhosphorIcon(
+                      PhosphorIconsRegular.chartLineUp,
+                      size: 24,
+                      color: PoraColors.primary,
+                    ),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: PoraSpacing.xl),
             for (var i = 0; i < _predictions.length; i++)
@@ -68,7 +96,9 @@ class PredictionsPage extends StatelessWidget {
                 ),
               ),
             const SizedBox(height: PoraSpacing.sm),
-            const OrderCtaCard(),
+            OrderCtaCard(
+              onTap: () => AutoTabsRouter.of(context).setActiveIndex(2),
+            ),
           ],
         ),
       ),

@@ -11,12 +11,10 @@
     "@authUnderAppName1": {
         "description": "The first line under the app name"
     },
-
     "authUnderAppName2": "Рецепты, дом и доставка — в одном месте",
     "@authUnderAppName2": {
         "description": "The second line under the app name"
     },
-
     "authSignInExpansibleExpand": "Войти иным способом",
     "@authSignInExpansibleExpand": {
         "description": "The sign in with other methods title"
@@ -25,29 +23,703 @@
     "@authSignInExpansibleCollapse": {
         "description": "The sign in with other methods title"
     },
-
     "authSignInWithEmail": "Войти через email",
     "@authSignInWithEmail": {
         "description": "The sign in with email button text"
     },
-
     "authSignInWithGoogle": "Войти через Google",
     "@authSignInWithGoogle": {
         "description": "The sign in with Google button text"
     },
-
     "authSignInWithApple": "Войти через Apple",
     "@authSignInWithApple": {
         "description": "The sign in with Apple button text"
     },
-
     "authSignInWithPhone": "Войти через телефон",
     "@authSignInWithPhone": {
         "description": "The sign in with Phone button text"
     },
-
     "authPrivatePolicy": "Продолжая, вы соглашаетесь с\nУсловиями и Политикой конфиденциальности",
     "@authPrivatePolicy": {
         "description": "The private policy link text"
+    },
+    "authTitle": "Почти с нами",
+    "@authTitle": {
+        "description": "authTitle"
+    },
+    "authSubtitle": "Введите номер телефона или почту — пришлём код для входа.",
+    "@authSubtitle": {
+        "description": "authSubtitle"
+    },
+    "authSubtitle2": "Начните вводить, сами определим, телефон это или почта.",
+    "@authSubtitle2": {
+        "description": "authSubtitle2"
+    },
+    "authJoinButton": "Присоединиться",
+    "@authJoinButton": {
+        "description": "authJoinButton"
+    },
+    "userCreateProfileNameRequired": "Может все-же скажете имя?",
+    "@userCreateProfileNameRequired": {
+        "description": "userCreateProfileNameRequired"
+    },
+    "commonError": "Ошибка",
+    "@commonError": {
+        "description": "commonError"
+    },
+    "otpTitle": "Осталось немного!",
+    "@otpTitle": {
+        "description": "otpTitle"
+    },
+    "otpEnterCodeSentTo": "Введите код отправленный на ",
+    "@otpEnterCodeSentTo": {
+        "description": "otpEnterCodeSentTo"
+    },
+    "otpResendQuestion": "Не получили код?",
+    "@otpResendQuestion": {
+        "description": "otpResendQuestion"
+    },
+    "otpResend": "Отправить еще раз",
+    "@otpResend": {
+        "description": "otpResend"
+    },
+    "otpVerifyButton": "Проверить код",
+    "@otpVerifyButton": {
+        "description": "otpVerifyButton"
+    },
+    "otpValidationLength": "Введите 6-значный код",
+    "@otpValidationLength": {
+        "description": "otpValidationLength"
+    },
+    "otpValidationDigits": "Код состоит только из цифр",
+    "@otpValidationDigits": {
+        "description": "otpValidationDigits"
+    },
+    "authSwitchToEmail": "Войти по почте",
+    "@authSwitchToEmail": {
+        "description": "authSwitchToEmail"
+    },
+    "authSwitchToPhone": "Войти по телефону",
+    "@authSwitchToPhone": {
+        "description": "authSwitchToPhone"
+    },
+    "onboardingStep": "Шаг {step} из {total}",
+    "@onboardingStep": {
+        "placeholders": {
+            "step": {
+                "type": "int"
+            },
+            "total": {
+                "type": "int"
+            }
+        }
+    },
+    "onboardingSlide1Title": "Рецепт → список\nза секунды",
+    "@onboardingSlide1Title": {
+        "description": "onboardingSlide1Title"
+    },
+    "onboardingSlide1Body": "Киньте ссылку на рецепт — Pora соберёт ингредиенты и уберёт то, что уже есть.",
+    "@onboardingSlide1Body": {
+        "description": "onboardingSlide1Body"
+    },
+    "onboardingSlide2Title": "Один список\nна двоих",
+    "@onboardingSlide2Title": {
+        "description": "onboardingSlide2Title"
+    },
+    "onboardingSlide2Body": "Добавляйте вместе — видно, кто что внёс. Партнёр захватит нужное по дороге домой.",
+    "@onboardingSlide2Body": {
+        "description": "onboardingSlide2Body"
+    },
+    "onboardingSlide3Title": "Pora знает,\nкогда пора",
+    "@onboardingSlide3Title": {
+        "description": "onboardingSlide3Title"
+    },
+    "onboardingSlide3Body": "По вашим покупкам подскажет, что скоро закончится, и закажет в один тап.",
+    "@onboardingSlide3Body": {
+        "description": "onboardingSlide3Body"
+    },
+    "onboardingSkip": "Пропустить",
+    "@onboardingSkip": {
+        "description": "onboardingSkip"
+    },
+    "onboardingStart": "Начать",
+    "@onboardingStart": {
+        "description": "onboardingStart"
+    },
+    "onboardingNext": "Далее",
+    "@onboardingNext": {
+        "description": "onboardingNext"
+    },
+    "splashTagline": "Список, который помнит за вас",
+    "@splashTagline": {
+        "description": "splashTagline"
+    },
+    "briefTitle": "Что у вас часто заканчивается?",
+    "@briefTitle": {
+        "description": "briefTitle"
+    },
+    "briefSubtitle": "Отметьте продукты — Pora напомнит вовремя. Это можно пропустить.",
+    "@briefSubtitle": {
+        "description": "briefSubtitle"
+    },
+    "briefSkip": "Пропустить",
+    "@briefSkip": {
+        "description": "briefSkip"
+    },
+    "briefNext": "Далее",
+    "@briefNext": {
+        "description": "briefNext"
+    },
+    "briefItemMilk": "Молоко",
+    "@briefItemMilk": {
+        "description": "briefItemMilk"
+    },
+    "briefItemBread": "Хлеб",
+    "@briefItemBread": {
+        "description": "briefItemBread"
+    },
+    "briefItemEggs": "Яйца",
+    "@briefItemEggs": {
+        "description": "briefItemEggs"
+    },
+    "briefItemCoffee": "Кофе",
+    "@briefItemCoffee": {
+        "description": "briefItemCoffee"
+    },
+    "briefItemCheese": "Сыр",
+    "@briefItemCheese": {
+        "description": "briefItemCheese"
+    },
+    "briefItemBananas": "Бананы",
+    "@briefItemBananas": {
+        "description": "briefItemBananas"
+    },
+    "briefItemButter": "Масло",
+    "@briefItemButter": {
+        "description": "briefItemButter"
+    },
+    "briefItemWater": "Вода",
+    "@briefItemWater": {
+        "description": "briefItemWater"
+    },
+    "briefItemVegetables": "Овощи",
+    "@briefItemVegetables": {
+        "description": "briefItemVegetables"
+    },
+    "briefItemTomatoes": "Помидоры",
+    "@briefItemTomatoes": {
+        "description": "briefItemTomatoes"
+    },
+    "briefItemPasta": "Паста",
+    "@briefItemPasta": {
+        "description": "briefItemPasta"
+    },
+    "briefItemChicken": "Курица",
+    "@briefItemChicken": {
+        "description": "briefItemChicken"
+    },
+    "listTitle": "Наш список",
+    "@listTitle": {
+        "description": "listTitle"
+    },
+    "listMembersCount": "2 человека · 8 продуктов",
+    "@listMembersCount": {
+        "description": "listMembersCount"
+    },
+    "listUrgent": "Срочно",
+    "@listUrgent": {
+        "description": "listUrgent"
+    },
+    "listAdd": "Добавить",
+    "@listAdd": {
+        "description": "listAdd"
+    },
+    "predictionsTitle": "Пора докупить",
+    "@predictionsTitle": {
+        "description": "predictionsTitle"
+    },
+    "predictionsSubtitle": "Скоро закончится — по вашим покупкам",
+    "@predictionsSubtitle": {
+        "description": "predictionsSubtitle"
+    },
+    "predictionsOrderTitle": "Заказать всё в один тап",
+    "@predictionsOrderTitle": {
+        "description": "predictionsOrderTitle"
+    },
+    "predictionsOrderSubtitle": "Самокат · доставка за 15 минут",
+    "@predictionsOrderSubtitle": {
+        "description": "predictionsOrderSubtitle"
+    },
+    "predictionsOrderDiscount": "−15% на первый заказ",
+    "@predictionsOrderDiscount": {
+        "description": "predictionsOrderDiscount"
+    },
+    "predictionsAddToList": "В список",
+    "@predictionsAddToList": {
+        "description": "predictionsAddToList"
+    },
+    "predictionsDismiss": "Не надо",
+    "@predictionsDismiss": {
+        "description": "predictionsDismiss"
+    },
+    "itemDetailName": "Молоко",
+    "@itemDetailName": {
+        "description": "itemDetailName"
+    },
+    "itemDetailSubtitle": "2 л · Молочное",
+    "@itemDetailSubtitle": {
+        "description": "itemDetailSubtitle"
+    },
+    "itemDetailAddedBy": "Добавил(а)",
+    "@itemDetailAddedBy": {
+        "description": "itemDetailAddedBy"
+    },
+    "itemDetailSection": "Раздел",
+    "@itemDetailSection": {
+        "description": "itemDetailSection"
+    },
+    "itemDetailSectionValue": "Молочное",
+    "@itemDetailSectionValue": {
+        "description": "itemDetailSectionValue"
+    },
+    "itemDetailQuantity": "Количество",
+    "@itemDetailQuantity": {
+        "description": "itemDetailQuantity"
+    },
+    "itemDetailQuantityValue": "2 л",
+    "@itemDetailQuantityValue": {
+        "description": "itemDetailQuantityValue"
+    },
+    "itemDetailUrgent": "Срочно",
+    "@itemDetailUrgent": {
+        "description": "itemDetailUrgent"
+    },
+    "itemDetailRemind": "Напоминать",
+    "@itemDetailRemind": {
+        "description": "itemDetailRemind"
+    },
+    "itemDetailRemindEvery": "Каждые 7 дней",
+    "@itemDetailRemindEvery": {
+        "description": "itemDetailRemindEvery"
+    },
+    "itemDetailInsight": "Покупаете ~раз в 7 дней · последний раз 6 дней назад. Скоро предложу докупить.",
+    "@itemDetailInsight": {
+        "description": "itemDetailInsight"
+    },
+    "itemDetailMarkBought": "Отметить купленным",
+    "@itemDetailMarkBought": {
+        "description": "itemDetailMarkBought"
+    },
+    "itemDetailDelete": "Удалить из списка",
+    "@itemDetailDelete": {
+        "description": "itemDetailDelete"
+    },
+    "addItemTitle": "Добавить продукт",
+    "@addItemTitle": {
+        "description": "addItemTitle"
+    },
+    "addItemExampleValue": "Авокадо",
+    "@addItemExampleValue": {
+        "description": "addItemExampleValue"
+    },
+    "addItemNameHint": "Название продукта",
+    "@addItemNameHint": {
+        "description": "addItemNameHint"
+    },
+    "addItemQuantity": "Количество",
+    "@addItemQuantity": {
+        "description": "addItemQuantity"
+    },
+    "addItemSection": "Раздел",
+    "@addItemSection": {
+        "description": "addItemSection"
+    },
+    "addItemUrgent": "Срочно",
+    "@addItemUrgent": {
+        "description": "addItemUrgent"
+    },
+    "addItemUrgentSubtitle": "Нужно купить сегодня",
+    "@addItemUrgentSubtitle": {
+        "description": "addItemUrgentSubtitle"
+    },
+    "addItemRemind": "Напоминать регулярно",
+    "@addItemRemind": {
+        "description": "addItemRemind"
+    },
+    "addItemRemindEvery": "Каждые 7 дней",
+    "@addItemRemindEvery": {
+        "description": "addItemRemindEvery"
+    },
+    "addItemSubmit": "Добавить в список",
+    "@addItemSubmit": {
+        "description": "addItemSubmit"
+    },
+    "settingsTitle": "Настройки",
+    "@settingsTitle": {
+        "description": "settingsTitle"
+    },
+    "settingsHouseholdSection": "Хозяйство",
+    "@settingsHouseholdSection": {
+        "description": "settingsHouseholdSection"
+    },
+    "settingsAppSection": "Приложение",
+    "@settingsAppSection": {
+        "description": "settingsAppSection"
+    },
+    "settingsNotifications": "Уведомления",
+    "@settingsNotifications": {
+        "description": "settingsNotifications"
+    },
+    "settingsDelivery": "Доставка",
+    "@settingsDelivery": {
+        "description": "settingsDelivery"
+    },
+    "settingsProAd": "Pora+ · без рекламы",
+    "@settingsProAd": {
+        "description": "settingsProAd"
+    },
+    "settingsTryPill": "Попробовать",
+    "@settingsTryPill": {
+        "description": "settingsTryPill"
+    },
+    "settingsPrivacy": "Приватность и данные",
+    "@settingsPrivacy": {
+        "description": "settingsPrivacy"
+    },
+    "settingsAboutPora": "О Pora",
+    "@settingsAboutPora": {
+        "description": "settingsAboutPora"
+    },
+    "settingsLogout": "Выйти",
+    "@settingsLogout": {
+        "description": "settingsLogout"
+    },
+    "settingsMembersNames": "Борис и Анна",
+    "@settingsMembersNames": {
+        "description": "settingsMembersNames"
+    },
+    "settingsInvitePill": "Пригласить",
+    "@settingsInvitePill": {
+        "description": "settingsInvitePill"
+    },
+    "householdInviteTitle": "Пригласить партнёра",
+    "@householdInviteTitle": {
+        "description": "householdInviteTitle"
+    },
+    "householdCookTogether": "Готовьте вместе",
+    "@householdCookTogether": {
+        "description": "householdCookTogether"
+    },
+    "householdInviteDescription": "Pora работает лучше вдвоём. Пригласите партнёра — список и напоминания станут общими.",
+    "@householdInviteDescription": {
+        "description": "householdInviteDescription"
+    },
+    "householdShareLink": "Поделиться ссылкой",
+    "@householdShareLink": {
+        "description": "householdShareLink"
+    },
+    "householdShowQr": "Показать QR-код",
+    "@householdShowQr": {
+        "description": "householdShowQr"
+    },
+    "householdConnectToFamily": "Подключиться к семье",
+    "@householdConnectToFamily": {
+        "description": "householdConnectToFamily"
+    },
+    "householdInviteDescriptionWhenConnecting": "Определили код приглашения, но вы и сами можете его ввести, если мы ошиблись",
+    "@householdInviteDescriptionWhenConnecting": {
+        "description": "householdInviteDescriptionWhenConnecting"
+    },
+    "householdGotInvited": "Вас пригласили в семью",
+    "@householdGotInvited": {
+        "description": "householdGotInvited"
+    },
+    "householdWriteCode": "Введите код приглашения",
+    "@householdWriteCode": {
+        "description": "householdWriteCode"
+    },
+    "householdDoLater": "Сделаю позже",
+    "@householdDoLater": {
+        "description": "householdDoLater"
+    },
+    "householdInviteCodeLabel": "Код приглашения",
+    "@householdInviteCodeLabel": {
+        "description": "householdInviteCodeLabel"
+    },
+    "householdCopyPill": "Копировать",
+    "@householdCopyPill": {
+        "description": "householdCopyPill"
+    },
+    "notificationsTitle": "Уведомления",
+    "@notificationsTitle": {
+        "description": "notificationsTitle"
+    },
+    "notificationsReadAll": "Прочитать все",
+    "@notificationsReadAll": {
+        "description": "notificationsReadAll"
+    },
+    "notificationsMilkTitle": "По дороге домой захвати молоко",
+    "@notificationsMilkTitle": {
+        "description": "notificationsMilkTitle"
+    },
+    "notificationsMilkBody": "Оно кончилось — Анна отметила 10 минут назад.",
+    "@notificationsMilkBody": {
+        "description": "notificationsMilkBody"
+    },
+    "notificationsMilkTime": "5 минут назад",
+    "@notificationsMilkTime": {
+        "description": "notificationsMilkTime"
+    },
+    "notificationsCoffeeTitle": "Скоро закончится кофе",
+    "@notificationsCoffeeTitle": {
+        "description": "notificationsCoffeeTitle"
+    },
+    "notificationsCoffeeBody": "Покупаете ~раз в 14 дней, прошло 12.",
+    "@notificationsCoffeeBody": {
+        "description": "notificationsCoffeeBody"
+    },
+    "notificationsPartnerAddedTitle": "Анна добавила 2 продукта",
+    "@notificationsPartnerAddedTitle": {
+        "description": "notificationsPartnerAddedTitle"
+    },
+    "notificationsPartnerAddedBody": "Бананы и Хлеб — в общем списке.",
+    "@notificationsPartnerAddedBody": {
+        "description": "notificationsPartnerAddedBody"
+    },
+    "notificationsPartnerAddedTime": "Сегодня, 9:12",
+    "@notificationsPartnerAddedTime": {
+        "description": "notificationsPartnerAddedTime"
+    },
+    "notificationsPromoTitle": "−15% на первый заказ в Самокате",
+    "@notificationsPromoTitle": {
+        "description": "notificationsPromoTitle"
+    },
+    "notificationsPromoBody": "Промо активно ещё 6 дней.",
+    "@notificationsPromoBody": {
+        "description": "notificationsPromoBody"
+    },
+    "notificationsPromoTime": "Вчера",
+    "@notificationsPromoTime": {
+        "description": "notificationsPromoTime"
+    },
+    "notificationsOrderDeliveredTitle": "Заказ доставлен",
+    "@notificationsOrderDeliveredTitle": {
+        "description": "notificationsOrderDeliveredTitle"
+    },
+    "notificationsOrderDeliveredBody": "8 продуктов · Самокат · ₽1 054.",
+    "@notificationsOrderDeliveredBody": {
+        "description": "notificationsOrderDeliveredBody"
+    },
+    "notificationsAddToListPill": "＋ В список",
+    "@notificationsAddToListPill": {
+        "description": "notificationsAddToListPill"
+    },
+    "userCreateProfileTitle": "Как вас зовут?",
+    "@userCreateProfileTitle": {
+        "description": "userCreateProfileTitle"
+    },
+    "userCreateProfileSubtitle": "Добавьте имя и фото — их увидит партнёр в общем списке.",
+    "@userCreateProfileSubtitle": {
+        "description": "userCreateProfileSubtitle"
+    },
+    "userCreateProfileNameHint": "Ваше имя",
+    "@userCreateProfileNameHint": {
+        "description": "userCreateProfileNameHint"
+    },
+    "userCreateProfileSkip": "Пропустить",
+    "@userCreateProfileSkip": {
+        "description": "userCreateProfileSkip"
+    },
+    "userCreateProfileNext": "Далее",
+    "@userCreateProfileNext": {
+        "description": "userCreateProfileNext"
+    },
+    "searchTitle": "Поиск",
+    "@searchTitle": {
+        "description": "searchTitle"
+    },
+    "searchHint": "Продукт или рецепт…",
+    "@searchHint": {
+        "description": "searchHint"
+    },
+    "searchFilterAll": "Всё",
+    "@searchFilterAll": {
+        "description": "searchFilterAll"
+    },
+    "searchFilterVegetables": "Овощи",
+    "@searchFilterVegetables": {
+        "description": "searchFilterVegetables"
+    },
+    "searchFilterDairy": "Молочное",
+    "@searchFilterDairy": {
+        "description": "searchFilterDairy"
+    },
+    "searchFilterGrocery": "Бакалея",
+    "@searchFilterGrocery": {
+        "description": "searchFilterGrocery"
+    },
+    "searchFilterRecipes": "Рецепты",
+    "@searchFilterRecipes": {
+        "description": "searchFilterRecipes"
+    },
+    "searchResults": "Результаты",
+    "@searchResults": {
+        "description": "searchResults"
+    },
+    "searchNothingFound": "Ничего не найдено",
+    "@searchNothingFound": {
+        "description": "searchNothingFound"
+    },
+    "insightsTitle": "Инсайты",
+    "@insightsTitle": {
+        "description": "insightsTitle"
+    },
+    "insightsTipKicker": "✨ СОВЕТ PORA",
+    "@insightsTipKicker": {
+        "description": "insightsTipKicker"
+    },
+    "insightsTipTitle": "Вы любите карбонару!",
+    "@insightsTipTitle": {
+        "description": "insightsTipTitle"
+    },
+    "insightsTipBody": "Похожий профиль вкуса — попробуйте мак-н-чиз. 4 из 6 ингредиентов у вас уже бывают регулярно.",
+    "@insightsTipBody": {
+        "description": "insightsTipBody"
+    },
+    "insightsTipAction": "Открыть рецепт →",
+    "@insightsTipAction": {
+        "description": "insightsTipAction"
+    },
+    "insightsRunsOutMost": "Чаще всего заканчивается",
+    "@insightsRunsOutMost": {
+        "description": "insightsRunsOutMost"
+    },
+    "insightsFavoriteCuisines": "Любимые кухни",
+    "@insightsFavoriteCuisines": {
+        "description": "insightsFavoriteCuisines"
+    },
+    "insightsCuisineItalian": "Итальянская",
+    "@insightsCuisineItalian": {
+        "description": "insightsCuisineItalian"
+    },
+    "insightsCuisinePasta": "Паста",
+    "@insightsCuisinePasta": {
+        "description": "insightsCuisinePasta"
+    },
+    "insightsCuisineBreakfasts": "Завтраки",
+    "@insightsCuisineBreakfasts": {
+        "description": "insightsCuisineBreakfasts"
+    },
+    "insightsCuisineLight": "Лёгкое",
+    "@insightsCuisineLight": {
+        "description": "insightsCuisineLight"
+    },
+    "orderTitle": "Заказ",
+    "@orderTitle": {
+        "description": "orderTitle"
+    },
+    "orderCart": "Корзина",
+    "@orderCart": {
+        "description": "orderCart"
+    },
+    "orderWhenToDeliver": "Когда доставить",
+    "@orderWhenToDeliver": {
+        "description": "orderWhenToDeliver"
+    },
+    "orderCheckoutCta": "Заказать в Самокате · {total}",
+    "@orderCheckoutCta": {
+        "placeholders": {
+            "total": {
+                "type": "String"
+            }
+        }
+    },
+    "orderSummaryGoods": "Товары",
+    "@orderSummaryGoods": {
+        "description": "orderSummaryGoods"
+    },
+    "orderSummaryDiscount": "Скидка −15%",
+    "@orderSummaryDiscount": {
+        "description": "orderSummaryDiscount"
+    },
+    "orderSummaryDelivery": "Доставка",
+    "@orderSummaryDelivery": {
+        "description": "orderSummaryDelivery"
+    },
+    "orderSummaryFree": "Бесплатно",
+    "@orderSummaryFree": {
+        "description": "orderSummaryFree"
+    },
+    "orderSummaryTotal": "Итого",
+    "@orderSummaryTotal": {
+        "description": "orderSummaryTotal"
+    },
+    "recipeImportTitle": "Рецепт по ссылке",
+    "@recipeImportTitle": {
+        "description": "recipeImportTitle"
+    },
+    "recipePreviewTitle": "Паста Карбонара",
+    "@recipePreviewTitle": {
+        "description": "recipePreviewTitle"
+    },
+    "recipePreviewMeta": "eda.ru · 25 мин · 2 порции",
+    "@recipePreviewMeta": {
+        "description": "recipePreviewMeta"
+    },
+    "recipePreviewFound": "6 ингредиентов найдено",
+    "@recipePreviewFound": {
+        "description": "recipePreviewFound"
+    },
+    "recipeDedupBanner": "2 совпадения убрали, чтобы не дублировать с вашим списком",
+    "@recipeDedupBanner": {
+        "description": "recipeDedupBanner"
+    },
+    "recipeIngredients": "Ингредиенты",
+    "@recipeIngredients": {
+        "description": "recipeIngredients"
+    },
+    "recipeAddToListCta": "Добавить 4 продукта в список",
+    "@recipeAddToListCta": {
+        "description": "recipeAddToListCta"
+    },
+    "recipeParseButton": "Разобрать",
+    "@recipeParseButton": {
+        "description": "recipeParseButton"
+    },
+    "navList": "Список",
+    "@navList": {
+        "description": "navList"
+    },
+    "navPora": "Пора",
+    "@navPora": {
+        "description": "navPora"
+    },
+    "navOrder": "Заказ",
+    "@navOrder": {
+        "description": "navOrder"
+    },
+    "navProfile": "Профиль",
+    "@navProfile": {
+        "description": "navProfile"
+    },
+    "familiesTitle": "Семьи",
+    "@familiesTitle": {
+        "description": "familiesTitle"
+    },
+    "familiesSubtitle": "Выберите семью, чтобы открыть её список",
+    "@familiesSubtitle": {
+        "description": "familiesSubtitle"
+    },
+    "familiesCurrent": "Текущая",
+    "@familiesCurrent": {
+        "description": "familiesCurrent"
+    },
+    "familiesCreateOrJoin": "＋ Создать или присоединиться",
+    "@familiesCreateOrJoin": {
+        "description": "familiesCreateOrJoin"
+    },
+    "familiesNoUrgent": "Нет срочного",
+    "@familiesNoUrgent": {
+        "description": "familiesNoUrgent"
     }
 }

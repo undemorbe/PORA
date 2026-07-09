@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pora/app/features/insights/presentation/widgets/ai_tip_card.dart';
 import 'package:pora/app/features/insights/presentation/widgets/frequency_row.dart';
 import 'package:pora/app/features/insights/presentation/widgets/stat_card.dart';
+import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/widgets/pora_chip.dart';
@@ -38,7 +39,7 @@ class InsightsPage extends StatelessWidget {
             PoraSpacing.xxl,
           ),
           children: [
-            Text('Инсайты', style: PoraText.title),
+            Text(context.l10n.insightsTitle, style: PoraText.title),
             const SizedBox(height: PoraSpacing.lg),
 
             Row(
@@ -53,16 +54,15 @@ class InsightsPage extends StatelessWidget {
             ),
             const SizedBox(height: PoraSpacing.lg),
 
-            const AiTipCard(
-              kicker: '✨ СОВЕТ PORA',
-              title: 'Вы любите карбонару!',
-              body:
-                  'Похожий профиль вкуса — попробуйте мак-н-чиз. 4 из 6 ингредиентов у вас уже бывают регулярно.',
-              action: 'Открыть рецепт →',
+            AiTipCard(
+              kicker: context.l10n.insightsTipKicker,
+              title: context.l10n.insightsTipTitle,
+              body: context.l10n.insightsTipBody,
+              action: context.l10n.insightsTipAction,
             ),
             const SizedBox(height: PoraSpacing.xl),
 
-            const SectionLabel('Чаще всего заканчивается'),
+            SectionLabel(context.l10n.insightsRunsOutMost),
             PoraRowsCard(
               children: [
                 for (final (emoji, name, sub, pct) in _freq)
@@ -71,20 +71,32 @@ class InsightsPage extends StatelessWidget {
             ),
             const SizedBox(height: PoraSpacing.xl),
 
-            const SectionLabel('Любимые кухни'),
-            const Wrap(
+            SectionLabel(context.l10n.insightsFavoriteCuisines),
+            Wrap(
               spacing: 9,
               runSpacing: 9,
               children: [
                 PoraChip(
-                  label: 'Итальянская',
+                  label: context.l10n.insightsCuisineItalian,
                   leading: '🇮🇹',
                   dense: true,
                   selected: true,
                 ),
-                PoraChip(label: 'Паста', leading: '🍝', dense: true),
-                PoraChip(label: 'Завтраки', leading: '🍳', dense: true),
-                PoraChip(label: 'Лёгкое', leading: '🥗', dense: true),
+                PoraChip(
+                  label: context.l10n.insightsCuisinePasta,
+                  leading: '🍝',
+                  dense: true,
+                ),
+                PoraChip(
+                  label: context.l10n.insightsCuisineBreakfasts,
+                  leading: '🍳',
+                  dense: true,
+                ),
+                PoraChip(
+                  label: context.l10n.insightsCuisineLight,
+                  leading: '🥗',
+                  dense: true,
+                ),
               ],
             ),
           ],

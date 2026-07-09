@@ -22,21 +22,19 @@ class AppRouter extends RootStackRouter {
       page: OTPConfirmationRoute.page,
       path: "/${OTPConfirmationRoute.name}",
     ),
+    // Каркас с нижней навигацией; вкладки — вложенные маршруты.
     AutoRoute(
-      page: HomeRoute.page,
-      path: "/${HomeRoute.name}",
+      page: MainShellRoute.page,
+      path: "/main",
       guards: [_authGuard],
+      children: [
+        AutoRoute(page: HomeRoute.page, path: "list", initial: true),
+        AutoRoute(page: PredictionsRoute.page, path: "pora"),
+        AutoRoute(page: OrderRoute.page, path: "order"),
+        AutoRoute(page: SettingsRoute.page, path: "profile"),
+      ],
     ),
-    AutoRoute(
-      page: PredictionsRoute.page,
-      path: "/${PredictionsRoute.name}",
-      guards: [_authGuard],
-    ),
-    AutoRoute(
-      page: SettingsRoute.page,
-      path: "/${SettingsRoute.name}",
-      guards: [_authGuard],
-    ),
+    // Детальные экраны — поверх каркаса (полноэкранные, со своей «назад»).
     AutoRoute(
       page: ItemDetailRoute.page,
       path: "/${ItemDetailRoute.name}",
@@ -53,6 +51,11 @@ class AppRouter extends RootStackRouter {
       guards: [_authGuard],
     ),
     AutoRoute(
+      page: HouseholdConnectionRoute.page,
+      path: "/api/families/join/:link_code",
+    ),
+
+    AutoRoute(
       page: RecipeImportRoute.page,
       path: "/${RecipeImportRoute.name}",
       guards: [_authGuard],
@@ -68,11 +71,6 @@ class AppRouter extends RootStackRouter {
       guards: [_authGuard],
     ),
     AutoRoute(
-      page: OrderRoute.page,
-      path: "/${OrderRoute.name}",
-      guards: [_authGuard],
-    ),
-    AutoRoute(
       page: SearchRoute.page,
       path: "/${SearchRoute.name}",
       guards: [_authGuard],
@@ -81,12 +79,15 @@ class AppRouter extends RootStackRouter {
       page: OnboardingSliderRoute.page,
       path: "/${OnboardingSliderRoute.name}",
     ),
-    // AutoRoute(
-    //   page: FamiliesRoute.page,
-    //   path: "/${FamiliesRoute.name}",
-    //   guards: [_authGuard],
-    // ),
+    AutoRoute(
+      page: FamiliesRoute.page,
+      path: "/${FamiliesRoute.name}",
+      guards: [_authGuard],
+    ),
     AutoRoute(page: BriefRoute.page, path: "/${BriefRoute.name}"),
-    AutoRoute(page: BriefProfileRoute.page, path: "/${BriefProfileRoute.name}"),
+    AutoRoute(
+      page: UserCreateProfileRoute.page,
+      path: "/${UserCreateProfileRoute.name}",
+    ),
   ];
 }

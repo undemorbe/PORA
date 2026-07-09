@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
+import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/extensions/string_validation_extension.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
@@ -87,11 +88,10 @@ class _PinputRoundedWithCustomCursorState
         errorTextStyle: PoraText.small.copyWith(color: PoraColors.danger),
         validator: (value) {
           if (value == null || value.length < _length) {
-            return 'Введите 6-значный код';
+            return context.l10n.otpValidationLength;
           }
           if (!value.isValidNumbers) {
-            //!Localize
-            return 'Код состоит только из цифр';
+            return context.l10n.otpValidationDigits;
           }
           return null;
         },
