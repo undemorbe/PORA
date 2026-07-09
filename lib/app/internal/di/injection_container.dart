@@ -1,37 +1,6 @@
-import 'package:dio/dio.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:get_it/get_it.dart';
-import 'package:pora/app/features/auth_and_validation/data/datasource/local/secure_tokens.dart';
-import 'package:pora/app/features/auth_and_validation/data/datasource/remote/remote_tokens.dart';
-import 'package:pora/app/features/auth_and_validation/data/service/tokens_service.dart';
-import 'package:pora/app/features/auth_and_validation/domain/repository/tokens_repository.dart';
-import 'package:pora/app/features/auth_and_validation/domain/usecase/refresh_token.dart';
-import 'package:pora/app/features/auth_and_validation/data/datasource/remote/auth_remote.dart';
-import 'package:pora/app/features/auth_and_validation/data/service/auth_service.dart';
-import 'package:pora/app/features/auth_and_validation/domain/repository/auth_repository.dart';
-import 'package:pora/app/features/auth_and_validation/domain/usecase/save_tokens.dart';
-import 'package:pora/app/features/auth_and_validation/domain/usecase/send_otp.dart';
-import 'package:pora/app/features/auth_and_validation/domain/usecase/verify_otp.dart';
-import 'package:pora/app/features/onboarding/data/datasources/onboarding_local.dart';
-import 'package:pora/app/features/onboarding/data/services/onboarding_service.dart';
-import 'package:pora/app/features/onboarding/domain/repositories/onboarding_repository.dart';
-import 'package:pora/app/features/onboarding/domain/usecase/sawed_onboarding.dart';
-import 'package:pora/app/features/onboarding/domain/usecase/update_sawed_onboarding.dart';
-import 'package:pora/app/features/user/data/datasource/remote.dart';
-import 'package:pora/app/features/user/data/services/user/user_service.dart';
-import 'package:pora/app/features/user/domain/repository/user/user_repository.dart';
-import 'package:pora/app/features/user/domain/usecase/user/get_user.dart';
-import 'package:pora/app/features/user/domain/usecase/user/update_user.dart';
-import 'package:pora/app/internal/local_storage/abstract_local_db.dart';
-import 'package:pora/app/internal/local_storage/hive_local_db.dart';
-import 'package:pora/app/internal/localization/store/localization_store.dart';
-import 'package:pora/app/internal/logging/logger.dart';
-import 'package:pora/app/internal/network/api_client/api_client.dart';
-import 'package:pora/app/internal/network/api_client/dio.dart';
-import 'package:pora/app/internal/router/app_router.dart';
-import 'package:pora/app/internal/router/guard/auth_state.dart';
-import 'package:pora/app/internal/theme/store/theme_store.dart';
-import 'package:pora/app/internal/uri_launcher/uri_launcher.dart';
+import 'package:pora/app/internal/share/share_conf.dart';
+
+import 'export.dart';
 
 class InjectionContainer {
   final _getIt = GetIt.instance;
@@ -105,6 +74,20 @@ class InjectionContainer {
         onboardingRepository: _getIt<OnboardingRepository>(),
       ),
     );
+
+    //! Families
+
+    //! Invitations (linkCodes for families)
+    _getIt.registerFactory<GetInviteCodeUseCase>(
+      () => GetInviteCodeUseCase(
+        invitationsRepository: _getIt<InvitationsRepository>(),
+      ),
+    );
+    _getIt.registerFactory<ConnectWithInviteCodeUseCase>(
+      () => ConnectWithInviteCodeUseCase(
+        invitationsRepository: _getIt<InvitationsRepository>(),
+      ),
+    );
   }
 
   void _registerRepositories() {
@@ -144,6 +127,21 @@ class InjectionContainer {
       () => OnboardingService(
         onboardingLocaleDataSource: _getIt<OnboardingLocalDataSourceImpl>(),
       ),
+    );
+
+    //! Families
+
+    //! Invitations (linkCodes to families)
+    _getIt.registerLazySingleton<RemoteInvitations>(
+      () => RemoteInvitationsImpl(apiClient: _getIt<ApiClient>()),
+    );
+    _getIt.registerLazySingleton<InvitationsRepository>(
+      () => InvitationsService(remoteInvitations: _getIt<RemoteInvitations>()),
+    );
+
+    //! Sharing
+    _getIt.registerLazySingleton<SharingRepository>(
+      () => SharingRepositoryImpl(),
     );
   }
 }

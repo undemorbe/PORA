@@ -37,9 +37,8 @@ class MainApp extends StatelessWidget {
             final code = segments.isNotEmpty ? segments.last : '';
 
             return DeepLink([
-              const OnboardingSliderRoute(),
-              const AuthRoute(),
-              DeeplinkDebugRoute(linkCode: code),
+              HomeRoute(),
+              HouseholdConnectionRoute(linkCode: code),
             ]);
           } else {
             return DeepLink.defaultPath;

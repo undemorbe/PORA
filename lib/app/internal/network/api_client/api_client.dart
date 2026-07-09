@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:pora/app/features/auth_and_validation/data/models/jwt_models/tokens_model.dart';
 import 'package:pora/app/features/families/data/models/family_model.dart';
-import 'package:pora/app/features/families/data/models/link_code_model.dart';
+import 'package:pora/app/features/invitation/data/models/link_code_model.dart';
 import 'package:pora/app/features/user/data/models/user/user_model.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
@@ -58,6 +58,9 @@ abstract class ApiClient {
   Future<LinkCodeModel> getLinkCodeOfConcreteFamily({
     @Query('fid') required String familyId,
   });
+
+  @POST('/families/join/{link_code}')
+  Future<void> joinFamily({@Path('link_code') required String code});
 
   //! WAIT FOR JOIN TO BE CREATED!!!!!!!!
 }

@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:pora/app/features/deeplink_debug/deeplinks.dart';
 import 'package:pora/app/internal/router/app_router.gr.dart';
 import 'package:pora/app/internal/router/guard/auth_guard.dart';
 import 'package:pora/app/internal/router/guard/auth_state.dart';
@@ -13,11 +12,6 @@ class AppRouter extends RootStackRouter {
 
   @override
   List<AutoRoute> get routes => [
-    AutoRoute(
-      page: DeeplinkDebugRoute.page,
-      path: '/api/families/join/:linkCode',
-    ),
-
     AutoRoute(
       page: SplashRoute.page,
       path: "/${SplashRoute.name}",
@@ -57,6 +51,11 @@ class AppRouter extends RootStackRouter {
       guards: [_authGuard],
     ),
     AutoRoute(
+      page: HouseholdConnectionRoute.page,
+      path: "/api/families/join/:link_code",
+    ),
+
+    AutoRoute(
       page: RecipeImportRoute.page,
       path: "/${RecipeImportRoute.name}",
       guards: [_authGuard],
@@ -80,11 +79,11 @@ class AppRouter extends RootStackRouter {
       page: OnboardingSliderRoute.page,
       path: "/${OnboardingSliderRoute.name}",
     ),
-    // AutoRoute(
-    //   page: FamiliesRoute.page,
-    //   path: "/${FamiliesRoute.name}",
-    //   guards: [_authGuard],
-    // ),
+    AutoRoute(
+      page: FamiliesRoute.page,
+      path: "/${FamiliesRoute.name}",
+      guards: [_authGuard],
+    ),
     AutoRoute(page: BriefRoute.page, path: "/${BriefRoute.name}"),
     AutoRoute(
       page: UserCreateProfileRoute.page,

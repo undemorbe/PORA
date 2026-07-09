@@ -722,6 +722,30 @@ abstract class AppLocalizations {
   /// **'Показать QR-код'**
   String get householdShowQr;
 
+  /// householdConnectToFamily
+  ///
+  /// In en, this message translates to:
+  /// **'Подключиться к семье'**
+  String get householdConnectToFamily;
+
+  /// householdInviteDescriptionWhenConnecting
+  ///
+  /// In en, this message translates to:
+  /// **'Определили код приглашения, но вы и сами можете его ввести, если мы ошиблись'**
+  String get householdInviteDescriptionWhenConnecting;
+
+  /// householdGotInvited
+  ///
+  /// In en, this message translates to:
+  /// **'Вас пригласили в семью'**
+  String get householdGotInvited;
+
+  /// householdWriteCode
+  ///
+  /// In en, this message translates to:
+  /// **'Введите код приглашения'**
+  String get householdWriteCode;
+
   /// householdDoLater
   ///
   /// In en, this message translates to:
@@ -1111,6 +1135,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Профиль'**
   String get navProfile;
+
+  /// familiesTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Семьи'**
+  String get familiesTitle;
+
+  /// familiesSubtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Выберите семью, чтобы открыть её список'**
+  String get familiesSubtitle;
+
+  /// familiesCurrent
+  ///
+  /// In en, this message translates to:
+  /// **'Текущая'**
+  String get familiesCurrent;
+
+  /// familiesCreateOrJoin
+  ///
+  /// In en, this message translates to:
+  /// **'＋ Создать или присоединиться'**
+  String get familiesCreateOrJoin;
+
+  /// familiesNoUrgent
+  ///
+  /// In en, this message translates to:
+  /// **'Нет срочного'**
+  String get familiesNoUrgent;
 }
 
 class _AppLocalizationsDelegate

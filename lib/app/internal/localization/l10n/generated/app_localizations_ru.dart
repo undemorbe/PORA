@@ -332,6 +332,19 @@ class AppLocalizationsRu extends AppLocalizations {
   String get householdShowQr => 'Показать QR-код';
 
   @override
+  String get householdConnectToFamily => 'Подключиться к семье';
+
+  @override
+  String get householdInviteDescriptionWhenConnecting =>
+      'Определили код приглашения, но вы и сами можете его ввести, если мы ошиблись';
+
+  @override
+  String get householdGotInvited => 'Вас пригласили в семью';
+
+  @override
+  String get householdWriteCode => 'Введите код приглашения';
+
+  @override
   String get householdDoLater => 'Сделаю позже';
 
   @override
@@ -532,4 +545,19 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get navProfile => 'Профиль';
+
+  @override
+  String get familiesTitle => 'Семьи';
+
+  @override
+  String get familiesSubtitle => 'Выберите семью, чтобы открыть её список';
+
+  @override
+  String get familiesCurrent => 'Текущая';
+
+  @override
+  String get familiesCreateOrJoin => '＋ Создать или присоединиться';
+
+  @override
+  String get familiesNoUrgent => 'Нет срочного';
 }

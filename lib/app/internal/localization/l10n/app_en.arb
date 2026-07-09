@@ -422,6 +422,22 @@
     "@householdShowQr": {
         "description": "householdShowQr"
     },
+    "householdConnectToFamily": "Подключиться к семье",
+    "@householdConnectToFamily": {
+        "description": "householdConnectToFamily"
+    },
+    "householdInviteDescriptionWhenConnecting": "Определили код приглашения, но вы и сами можете его ввести, если мы ошиблись",
+    "@householdInviteDescriptionWhenConnecting": {
+        "description": "householdInviteDescriptionWhenConnecting"
+    },
+    "householdGotInvited": "Вас пригласили в семью",
+    "@householdGotInvited": {
+        "description": "householdGotInvited"
+    },
+    "householdWriteCode": "Введите код приглашения",
+    "@householdWriteCode": {
+        "description": "householdWriteCode"
+    },
     "householdDoLater": "Сделаю позже",
     "@householdDoLater": {
         "description": "householdDoLater"
@@ -685,5 +701,25 @@
     "navProfile": "Профиль",
     "@navProfile": {
         "description": "navProfile"
+    },
+    "familiesTitle": "Семьи",
+    "@familiesTitle": {
+        "description": "familiesTitle"
+    },
+    "familiesSubtitle": "Выберите семью, чтобы открыть её список",
+    "@familiesSubtitle": {
+        "description": "familiesSubtitle"
+    },
+    "familiesCurrent": "Текущая",
+    "@familiesCurrent": {
+        "description": "familiesCurrent"
+    },
+    "familiesCreateOrJoin": "＋ Создать или присоединиться",
+    "@familiesCreateOrJoin": {
+        "description": "familiesCreateOrJoin"
+    },
+    "familiesNoUrgent": "Нет срочного",
+    "@familiesNoUrgent": {
+        "description": "familiesNoUrgent"
     }
 }
