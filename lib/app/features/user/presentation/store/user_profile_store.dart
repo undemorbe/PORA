@@ -11,9 +11,10 @@ part 'user_profile_store.g.dart';
 class UserProfileStore = _UserProfileStoreBase with _$UserProfileStore;
 
 abstract class _UserProfileStoreBase with Store {
-  final TextEditingController nameEditingController = TextEditingController();
-
   final ImagePicker _picker = ImagePicker();
+
+  @observable
+  String name = '';
 
   @observable
   UserEntity? user;
@@ -23,11 +24,13 @@ abstract class _UserProfileStoreBase with Store {
 
   @action
   Future<void> pushUserInformation() async {
-    final name = nameEditingController.text.split(' ').first.isEmpty ? 'PORA-USER${DateTime.now().millisecondsSinceEpoch}' :  nameEditingController.text.split(' ').first;
-    final surname = nameEditingController.text.split(' ').length > 1
-        ? nameEditingController.text.split(' ').sublist(1).join(' ')
+    final nameToEntity = name.split(' ').first.isEmpty
+        ? 'PORA-USER${DateTime.now().millisecondsSinceEpoch}'
+        : name.split(' ').first;
+    final surname = name.split(' ').length > 1
+        ? name.split(' ').sublist(1).join(' ')
         : 'PITBULL';
-    user = UserEntity(name: name, surname: surname);
+    user = UserEntity(name: nameToEntity, surname: surname);
     await GetIt.I<UpdateUserUseCase>()(user: user, image: profileImage);
   }
 
@@ -42,10 +45,5 @@ abstract class _UserProfileStoreBase with Store {
     if (image != null) {
       profileImage = File(image.path);
     }
-  }
-
-  @action
-  void dispose() {
-    nameEditingController.dispose();
   }
 }

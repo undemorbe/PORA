@@ -29,6 +29,14 @@ class _AuthPageState extends State<AuthPage> {
   final TextEditingController destinationController = TextEditingController();
   final TextEditingController otpController = TextEditingController();
   int whichFieldIsActive = 0;
+
+  @override
+  void dispose() {
+    destinationController.dispose();
+    otpController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final PrivacyStore privacyStore = PrivacyStore();

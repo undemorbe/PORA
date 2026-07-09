@@ -16,6 +16,7 @@ class AuthService extends AuthRepository {
   }) async {
     final value = await authRemote.sendOtp(destination: destination);
     if (value.isRight) {
+      
       return Right(value.right);
     }
     return Left(value.left);

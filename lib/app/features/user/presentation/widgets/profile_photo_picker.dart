@@ -32,11 +32,13 @@ class _ProfilePhotoPickerState extends State<ProfilePhotoPicker> {
                 color: PoraColors.sandSoft,
                 shape: BoxShape.circle,
               ),
-              child: _imageFile != null ? Image.file(_imageFile!) : const PhosphorIcon(
-                PhosphorIconsRegular.user,
-                size: 46,
-                color: PoraColors.primary,
-              ),
+              child: _imageFile != null
+                  ? Image.file(_imageFile!)
+                  : const PhosphorIcon(
+                      PhosphorIconsRegular.user,
+                      size: 46,
+                      color: PoraColors.primary,
+                    ),
             ),
             Positioned(
               right: 0,

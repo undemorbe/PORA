@@ -12,10 +12,22 @@ import 'package:pora/app/internal/widgets/pora_buttons.dart';
 import 'package:pora/app/internal/widgets/pora_snackbar.dart';
 
 @RoutePage()
-class UserCreateProfilePage extends StatelessWidget {
-  UserCreateProfilePage({super.key});
+class UserCreateProfilePage extends StatefulWidget {
+  const UserCreateProfilePage({super.key});
 
+  @override
+  State<UserCreateProfilePage> createState() => _UserCreateProfilePageState();
+}
+
+class _UserCreateProfilePageState extends State<UserCreateProfilePage> {
   final UserProfileStore userStore = UserProfileStore();
+  final TextEditingController nameController = TextEditingController();
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +72,7 @@ class UserCreateProfilePage extends StatelessWidget {
                     decoration: InputDecoration(
                       hintText: context.l10n.userCreateProfileNameHint,
                     ),
-                    controller: userStore.nameEditingController,
+                    controller: nameController,
                   ),
                 ],
               ),
@@ -91,14 +103,15 @@ class UserCreateProfilePage extends StatelessWidget {
                   PoraPrimaryButton(
                     label: context.l10n.userCreateProfileNext,
                     onPressed: () async {
-                      if (context.mounted &&
-                          userStore.nameEditingController.text.isNotEmpty) {
+                      if (context.mounted && nameController.text.isNotEmpty) {
                         await userStore.pushUserInformation();
                         if (!context.mounted) return;
                         context.router.push(const BriefRoute());
-                      }
-                      else{
-                        PoraSnackbar.show(context, message: context.l10n.userCreateProfileNameRequired);
+                      } else {
+                        PoraSnackbar.show(
+                          context,
+                          message: context.l10n.userCreateProfileNameRequired,
+                        );
                       }
                     },
                   ),
