@@ -5,6 +5,7 @@ import 'package:pora/app/features/auth_and_validation/data/models/jwt_models/tok
 import 'package:pora/app/features/families/data/models/family_model.dart';
 import 'package:pora/app/features/invitation/data/models/link_code_model.dart';
 import 'package:pora/app/features/user/data/models/user/user_model.dart';
+import 'package:pora/app/features/user/data/models/user/user_update_model.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 
@@ -35,8 +36,8 @@ abstract class ApiClient {
   Future<void> logout();
 
   //! User
-  @POST('/user/update')
-  Future<void> updateUser({@Body() required UserModel userData});
+  @PATCH('/user/update')
+  Future<void> updateUser({@Body() required UserUpdateModel userData});
 
   @GET('/user/me')
   Future<UserModel> getUser();

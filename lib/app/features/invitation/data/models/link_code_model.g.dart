@@ -17,3 +17,13 @@ Map<String, dynamic> _$LinkCodeModelToJson(LinkCodeModel instance) =>
       'linkCode': instance.linkCode,
       'linkUrl': instance.linkUrl,
     };
+
+const _$LinkCodeModelJsonSchema = {
+  r'$schema': 'https://json-schema.org/draft/2020-12/schema',
+  'type': 'object',
+  'properties': {
+    'linkCode': {'type': 'string'},
+    'linkUrl': {'type': 'string'},
+  },
+  'required': ['linkCode', 'linkUrl'],
+};

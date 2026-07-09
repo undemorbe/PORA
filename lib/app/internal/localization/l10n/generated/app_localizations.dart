@@ -1165,6 +1165,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Нет срочного'**
   String get familiesNoUrgent;
+
+  /// welcomeBackTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Вспомнили вас!'**
+  String get welcomeBackTitle;
+
+  /// welcomeBackSubtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Секунду, открываем ваш список…'**
+  String get welcomeBackSubtitle;
 }
 
 class _AppLocalizationsDelegate

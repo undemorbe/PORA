@@ -560,4 +560,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get familiesNoUrgent => 'Нет срочного';
+
+  @override
+  String get welcomeBackTitle => 'Вспомнили вас!';
+
+  @override
+  String get welcomeBackSubtitle => 'Секунду, открываем ваш список…';
 }

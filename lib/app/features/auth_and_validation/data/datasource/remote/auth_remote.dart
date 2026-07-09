@@ -63,10 +63,14 @@ class AuthRemoteImpl implements AuthRemote {
           body: {'phone': destination, 'otp': otp},
         );
         return Right(value);
+      } else {
+        return Left(const ValidationFailure('Invalid destination'));
       }
-      return Left(const NetworkFailure('Invalid destination'));
-    } catch (e) {
+    } on DioException catch (e) {
       return Left(NetworkFailure('Failed to verify otp : $e'));
+    } catch (e) {
+      // Не сеть (например, ошибка разбора ответа) — не маскируем под Network.
+      return Left(ServerFailure('Failed to verify otp : $e'));
     }
   }
 }

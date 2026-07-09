@@ -1,11 +1,16 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
+import 'package:pora/app/features/auth_and_validation/data/datasource/local/secure_tokens.dart';
 import 'package:pora/app/features/settings/presentation/widgets/delivery_value.dart';
 import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/features/settings/presentation/widgets/household_members_row.dart';
 import 'package:pora/app/features/settings/presentation/widgets/profile_card.dart';
+import 'package:pora/app/internal/logging/logger.dart';
 import 'package:pora/app/internal/router/app_router.gr.dart';
+import 'package:pora/app/internal/router/guard/auth_state.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/widgets/pora_pill.dart';
@@ -17,6 +22,35 @@ import 'package:pora/app/internal/widgets/section_label.dart';
 @RoutePage()
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
+
+  //! refactor later — вынести в clean architecture (usecase + repository + store).
+  // Контракт: POST /authorize/logout с access-токеном в заголовке;
+  // после запроса access-токен удаляется на устройстве.
+  Future<void> _logout(BuildContext context) async {
+    final tokensStore = GetIt.I<TokensSecureStore>();
+    final dio = GetIt.I<Dio>();
+    try {
+      final access = await tokensStore.getAccessToken();
+      await dio.post(
+        '/authorize/logout',
+        options: Options(
+          headers: {
+            if (access != null) 'Authorization': 'Bearer $access',
+          },
+        ),
+      );
+    } catch (e) {
+      // Даже если сервер не ответил — выходим локально.
+      Logger.talker.warning('logout request failed: $e');
+    } finally {
+      // Токен удаляется на мобилке независимо от ответа сервера.
+      await tokensStore.clearTokens();
+      GetIt.I<AuthState>().setUnauthenticated();
+      if (context.mounted) {
+        context.router.replaceAll([const AuthRoute()]);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,6 +123,7 @@ class SettingsPage extends StatelessWidget {
                   icon: PhosphorIconsRegular.signOut,
                   label: context.l10n.settingsLogout,
                   danger: true,
+                  onTap: () => _logout(context),
                 ),
               ],
             ),

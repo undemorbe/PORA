@@ -721,5 +721,13 @@
     "familiesNoUrgent": "Нет срочного",
     "@familiesNoUrgent": {
         "description": "familiesNoUrgent"
+    },
+    "welcomeBackTitle": "Вспомнили вас!",
+    "@welcomeBackTitle": {
+        "description": "welcomeBackTitle"
+    },
+    "welcomeBackSubtitle": "Секунду, открываем ваш список…",
+    "@welcomeBackSubtitle": {
+        "description": "welcomeBackSubtitle"
     }
 }

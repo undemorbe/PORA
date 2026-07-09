@@ -6,6 +6,8 @@ class UserEntity extends Equatable {
     this.id,
     this.name,
     this.surname,
+    this.phone,
+    this.email,
     this.imageUrl,
     this.selfLists,
   });
@@ -13,11 +15,21 @@ class UserEntity extends Equatable {
   final String? id;
   final String? name;
   final String? surname;
+  final String? phone;
+  final String? email;
   final String? imageUrl;
 
   /// Идентификаторы списков покупок пользователя.
   final List<String>? selfLists;
 
   @override
-  List<Object?> get props => [id, name, surname, imageUrl, selfLists];
+  List<Object?> get props => [
+    id,
+    name,
+    surname,
+    phone,
+    email,
+    imageUrl,
+    selfLists,
+  ];
 }

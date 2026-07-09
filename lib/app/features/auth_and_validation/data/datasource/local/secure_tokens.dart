@@ -13,6 +13,10 @@ class TokensSecureStore {
   }) async {
     await _secureStorage.write(key: _accessTokenKey, value: accessToken);
     await _secureStorage.write(key: _refreshTokenKey, value: refreshToken);
+    // Наполняем sync-кэш, из которого AuthInterceptor берёт токен для заголовка
+    // Authorization. Без этого access-токен не попадает в запросы после входа.
+    _cachedAccessToken = accessToken;
+    _tokenExpiry = null;
   }
 
   // Получаем access токен

@@ -4,6 +4,7 @@ import 'package:pora/app/features/auth_and_validation/domain/usecase/save_tokens
 import 'package:pora/app/features/auth_and_validation/domain/usecase/send_otp.dart';
 import 'package:pora/app/features/auth_and_validation/domain/usecase/verify_otp.dart';
 import 'package:pora/app/features/onboarding/domain/usecase/update_sawed_onboarding.dart';
+import 'package:pora/app/internal/logging/logger.dart';
 part 'auth_store.g.dart';
 
 class AuthStore = _AuthStoreBase with _$AuthStore;
@@ -17,6 +18,15 @@ abstract class _AuthStoreBase with Store {
 
   @observable
   bool? isLoading;
+
+  /// Статус из verify-otp: `notRegistered` — новый пользователь.
+  @observable
+  String? status;
+
+  /// true — нужен экран создания профиля (новый пользователь).
+  /// Только точное `notRegistered` ведёт на создание профиля; всё
+  /// остальное (включая null/registered) — «Вспомнили вас» → главный экран.
+  bool get needsProfile => status?.trim() == 'notRegistered';
 
   @action
   Future<void> sendOtp({required String destination}) async {
@@ -45,10 +55,17 @@ abstract class _AuthStoreBase with Store {
       otp: code,
     );
     if (result.isRight) {
-      isLoading = false;
       success = true;
+      status = result.right.status;
+      Logger.talker.info(
+        'verifyOtp OK → status="$status", needsProfile=$needsProfile',
+      );
+      isLoading = false;
       await GetIt.I<SaveTokensUseCase>().call(tokens: result.right);
       await GetIt.I<UpdateIsSawedOnboardingUseCase>().call(isSawed: true);
+      // Авторизацию (AuthState.setAuthenticated) выставляем НЕ здесь, а в момент
+      // перехода в защищённую зону — иначе reevaluateListenable срабатывает
+      // прямо во время replaceAll и сбрасывает только что открытый маршрут.
     } else {
       isLoading = false;
       success = false;

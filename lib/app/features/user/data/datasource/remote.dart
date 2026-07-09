@@ -17,12 +17,10 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
   @override
   Future<void> updateUser(UserModel? model, File? image) async {
-    if (model != null && image != null) {
-      await apiClient.updateUser(userData: model);
-      await apiClient.saveUserImage(file: image);
-    } else if (model != null) {
-      await apiClient.updateUser(userData: model);
-    } else if (image != null) {
+    if (model != null) {
+      await apiClient.updateUser(userData: model.toUpdateModel());
+    }
+    if (image != null) {
       await apiClient.saveUserImage(file: image);
     }
   }

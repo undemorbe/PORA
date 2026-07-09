@@ -133,14 +133,14 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<void> updateUser({required UserModel userData}) async {
+  Future<void> updateUser({required UserUpdateModel userData}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(userData.toJson());
     final _options = _setStreamType<void>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
+      Options(method: 'PATCH', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
             '/user/update',

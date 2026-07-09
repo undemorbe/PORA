@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
@@ -14,16 +12,13 @@ abstract class _UserProfileStoreBase with Store {
   final ImagePicker _picker = ImagePicker();
 
   @observable
-  String name = '';
-
-  @observable
   UserEntity? user;
 
   @observable
   File? profileImage;
 
   @action
-  Future<void> pushUserInformation() async {
+  Future<void> pushUserInformation({required String name}) async {
     final nameToEntity = name.split(' ').first.isEmpty
         ? 'PORA-USER${DateTime.now().millisecondsSinceEpoch}'
         : name.split(' ').first;
