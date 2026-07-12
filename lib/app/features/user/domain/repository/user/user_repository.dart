@@ -7,5 +7,6 @@ import 'package:pora/app/internal/extensions/either.dart';
 
 abstract class UserRepository {
   Future<Either<Failure, UserEntity>> getUser();
+  Future<Either<Failure, Success>> logout();
   Future<Either<Failure, Success>> updateUser({UserEntity? user, File? image});
 }

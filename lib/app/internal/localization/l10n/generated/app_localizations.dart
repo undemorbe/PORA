@@ -1178,6 +1178,24 @@ abstract class AppLocalizations {
   /// **'Попробуйте обновить'**
   String get tryToUpdate;
 
+  /// checkOut
+  ///
+  /// In en, this message translates to:
+  /// **'Проверить'**
+  String get checkOut;
+
+  /// settingsMore
+  ///
+  /// In en, this message translates to:
+  /// **'Углубленные'**
+  String get settingsMore;
+
+  /// listsYour
+  ///
+  /// In en, this message translates to:
+  /// **'Ваш личный список'**
+  String get listsYour;
+
   /// familiesNoUrgent
   ///
   /// In en, this message translates to:

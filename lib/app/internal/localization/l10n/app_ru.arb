@@ -724,7 +724,19 @@
     },     "tryToUpdate": "Попробуйте обновить",
     "@tryToUpdate": {
         "description": "tryToUpdate"
+    },       "checkOut": "Проверить",
+    "@checkOut": {
+        "description": "checkOut"
     },
+           "settingsMore": "Углубленные",
+    "@settingsMore": {
+        "description": "settingsMore"
+    },
+          "listsYour": "Ваш личный список",
+    "@listsYour": {
+        "description": "listsYour"
+    },
+
     "familiesCreateOrJoin": "＋ Создать или присоединиться",
     "@familiesCreateOrJoin": {
         "description": "familiesCreateOrJoin"

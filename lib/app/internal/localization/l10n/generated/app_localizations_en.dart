@@ -568,6 +568,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tryToUpdate => 'Попробуйте обновить';
 
   @override
+  String get checkOut => 'Проверить';
+
+  @override
+  String get settingsMore => 'Углубленные';
+
+  @override
+  String get listsYour => 'Ваш личный список';
+
+  @override
   String get familiesNoUrgent => 'Нет срочного';
 
   @override

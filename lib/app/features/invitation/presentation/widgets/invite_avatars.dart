@@ -15,18 +15,18 @@ class InviteAvatars extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         PoraAvatar(
-          initial: 'Б',
+          initial: 'you',
           color: PoraColors.primary,
           size: PoraSizes.avatarXl,
         ),
         SizedBox(width: 14),
-        Text('🤍', style: TextStyle(fontSize: 22)),
+        Text('🤍', style: TextStyle(fontSize: 24)),
         SizedBox(width: 14),
         DashedCircle(
           size: PoraSizes.avatarXl,
           color: PoraColors.primary,
           child: PhosphorIcon(
-            PhosphorIconsBold.plus,
+            PhosphorIconsBold.questionMark,
             size: 28,
             color: PoraColors.primary,
           ),

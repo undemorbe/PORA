@@ -21,49 +21,56 @@ abstract class _InvitationsStoreBase with Store {
   @observable
   String? linkCode;
 
+  @observable
+  String? linkUrl;
+  
+
+
   @action
   Future<void> copyToClipboard(String textToCopy) async {
     await Clipboard.setData(ClipboardData(text: textToCopy));
   }
 
+  @action
   Future<void> connectToFamily({
     required String code,
   }) async {
-    isLoading == true;
-    isSuccess == null;
+    isLoading = true;
+    isSuccess = null;
     final result = await GetIt.I<ConnectWithInviteCodeUseCase>().call(
       code: code,
     );
     if (result.isRight) {
-      isSuccess == true;
-      isLoading == false;
+      isSuccess = true;
+      isLoading = false;
     } else {
-      isSuccess == false;
-      isLoading == false;
+      isSuccess = false;
+      isLoading = false;
     }
   }
 
   //! Connect someone
-  @observable
-  LinkCodeEntity? linkCodes;
+
 
   @action
-  Future<LinkCodeEntity?> generateLinkCode({
+  Future<void> generateLinkCode({
     required String familyId,
   }) async {
-    isSuccess == null;
-    isLoading == true;
+    isSuccess = null;
+    isLoading = true;
     final linkCode = await GetIt.I<GetInviteCodeUseCase>().call(
       familyId: familyId,
     );
     if (linkCode.isRight) {
-      isSuccess == true;
-      isLoading == false;
-      return linkCode.right;
+      isSuccess = true;
+      isLoading = false;
+      this.linkCode = linkCode.right.linkCode; 
+      linkUrl = linkCode.right.linkUrl; 
     } else {
-      isSuccess == false;
-      isLoading == false;
-      return null;
+      isSuccess = false;
+      isLoading = false;
+      this.linkCode = null;
+      linkUrl = null;
     }
   }
 

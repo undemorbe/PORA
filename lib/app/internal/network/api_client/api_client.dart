@@ -55,7 +55,7 @@ abstract class ApiClient {
   @GET('/families')
   Future<FamiliesModels> getFamilies();
 
-  @POST('/families/link-code')
+  @GET('/families/link-code')
   Future<LinkCodeModel> getLinkCodeOfConcreteFamily({
     @Query('family-id') required String familyId,
   });

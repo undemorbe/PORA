@@ -8,14 +8,16 @@ class PoraAvatar extends StatelessWidget {
   const PoraAvatar({
     super.key,
     required this.initial,
-    required this.color,
+     this.color,
     this.size = PoraSizes.avatarXs,
     this.ring,
+    this.imageUrl
   });
 
   final String initial;
-  final Color color;
+  final Color? color;
   final double size;
+  final String? imageUrl;
 
   /// Обводка (для перекрывающихся аватаров — цвет фона).
   final Color? ring;
@@ -27,6 +29,7 @@ class PoraAvatar extends StatelessWidget {
       height: size,
       alignment: Alignment.center,
       decoration: BoxDecoration(
+        image: imageUrl != null ? DecorationImage(image: Image.network(imageUrl??'',cacheHeight: 200, fit: BoxFit.cover,cacheWidth: 200,).image) : null,
         color: color,
         shape: BoxShape.circle,
         border: ring != null ? Border.all(color: ring!, width: 2) : null,

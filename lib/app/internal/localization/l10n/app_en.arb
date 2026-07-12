@@ -730,6 +730,19 @@
     "@tryToUpdate": {
         "description": "tryToUpdate"
     },
+       "checkOut": "Проверить",
+    "@checkOut": {
+        "description": "checkOut"
+    },
+           "settingsMore": "Углубленные",
+    "@settingsMore": {
+        "description": "settingsMore"
+    },
+          "listsYour": "Ваш личный список",
+    "@listsYour": {
+        "description": "listsYour"
+    },
+
     "familiesNoUrgent": "Нет срочного",
     "@familiesNoUrgent": {
         "description": "familiesNoUrgent"

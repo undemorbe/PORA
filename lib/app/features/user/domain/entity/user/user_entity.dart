@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 /// Доменная сущность пользователя.
 class UserEntity extends Equatable {
@@ -17,9 +18,11 @@ class UserEntity extends Equatable {
   final String? surname;
   final String? phone;
   final String? email;
+  @JsonKey(name: 'image-url')
   final String? imageUrl;
 
   /// Идентификаторы списков покупок пользователя.
+  @JsonKey(name: 'lists')
   final List<String>? selfLists;
 
   @override

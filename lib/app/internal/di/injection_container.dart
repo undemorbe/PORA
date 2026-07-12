@@ -42,6 +42,9 @@ class InjectionContainer {
     _getIt.registerSingletonAsync<ILocalDB<dynamic>>(
       () async => HiveLocalDB<dynamic>()..init(),
     );
+
+    //! Image Picker
+    _getIt.registerLazySingleton(() => ,);
   }
 
   void _registerUsecases() {

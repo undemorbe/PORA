@@ -65,31 +65,35 @@ class _InvitePageState extends State<InvitePage> {
               ),
               const SizedBox(height: 30),
               Observer(
-                builder: (_) {
-                  if (invitationsStore.isLoading == true) {
-                    return const Center(child: PoraCircleProgress());
-                  } else if (invitationsStore.isSuccess == true &&
-                      invitationsStore.isLoading == false) {
-                    return InviteCodeCard(
-                      code:
-                          invitationsStore.linkCodes?.linkCode ??
-                          context.l10n.commonError,
-                    );
-                  }else if( invitationsStore.isSuccess == false){
-
+              builder: (_) {
+                if (invitationsStore.isLoading == true) {
+                  return const Center(child: PoraCircleProgress());
+                } else if (invitationsStore.isSuccess == true) {
+                  return InviteCodeCard(
+                    code: invitationsStore.linkCode ?? context.l10n.commonError,
+                  );
+                } else if (invitationsStore.isSuccess == false) {
                   return Center(child: Text(context.l10n.commonError));
-                  }
-                  return Center(child: Row(
+                }
+                
+                return Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center, 
                     children: [
                       Text(context.l10n.tryToUpdate),
-                      IconButton(onPressed: () {
-                        invitationsStore.generateLinkCode(familyId: widget.familyId,);
-                      }, icon:const PhosphorIcon(PhosphorIcons.uploadDuotone))
+                      const SizedBox(width: 8), 
+                      IconButton(
+                        onPressed: () {
+                          invitationsStore.generateLinkCode(familyId: widget.familyId);
+                        },
+                        icon: const PhosphorIcon(PhosphorIcons.arrowsClockwiseDuotone), // Changed to an appropriate action icon
+                      )
                     ],
-                  ),);
-                   
-                },
-              ),
+                  ),
+                );
+              },
+            ),
+
               const SizedBox(height: PoraSpacing.lg),
               PoraPrimaryButton(
                 label: context.l10n.householdShareLink,
@@ -104,9 +108,11 @@ class _InvitePageState extends State<InvitePage> {
                     fullscreenDialog: false,
                     builder: (context) {
                       //! Check
-                      return Center(
+                      return Align(
+                        alignment: const AlignmentGeometry.xy(0, -.3),
                         child: Container(
                           padding: const EdgeInsets.all(24.0),
+                          margin: const .all(15),
                           decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.inverseSurface,
                             borderRadius: BorderRadius.circular(24.0),
@@ -142,7 +148,7 @@ class _InvitePageState extends State<InvitePage> {
                             ),
 
                             data:
-                                invitationsStore.linkCodes?.linkUrl ??
+                                invitationsStore.linkUrl ??
                                 context.l10n.commonError,
                           ),
                         ),

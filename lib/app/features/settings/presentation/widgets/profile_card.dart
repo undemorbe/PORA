@@ -13,11 +13,15 @@ class ProfileCard extends StatelessWidget {
     this.name = 'Борис',
     this.email = 'stankovb08@gmail.com',
     this.onTap,
+    this.ringColor,this.colorOfAvatar, this.imageUrl
   });
 
   final String name;
   final String email;
+  final String? imageUrl;
+  final Color? colorOfAvatar;
   final VoidCallback? onTap;
+  final Color? ringColor;
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +34,11 @@ class ProfileCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            const PoraAvatar(
-              initial: 'Б',
-              color: PoraColors.primary,
+             PoraAvatar(
+              imageUrl: imageUrl,
+              initial: name[0],
+              color: colorOfAvatar,
+              ring: ringColor,
               size: PoraSizes.avatarLg,
             ),
             const SizedBox(width: 13),
