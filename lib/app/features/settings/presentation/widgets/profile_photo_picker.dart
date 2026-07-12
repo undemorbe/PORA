@@ -1,23 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
+import 'package:pora/app/features/settings/presentation/store/settings_store.dart';
 import 'package:pora/app/features/user/presentation/store/user_profile_store.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 
-class ProfilePhotoPickerUserCreation extends StatelessWidget {
-  const ProfilePhotoPickerUserCreation({
+class ProfilePhotoPickerSettings extends StatelessWidget {
+  const ProfilePhotoPickerSettings({
     super.key,
     this.onTap,
-    required this.userProfileStore,
+    required this.settingsStore,
   });
 
   final VoidCallback? onTap;
-  final UserProfileStore userProfileStore;
+  final SettingsStore settingsStore;
 
-  ImageProvider? _getImageProvider(UserProfileStore store) {
-    if (store.profileImage != null) {
-      return FileImage(store.profileImage!);
+  ImageProvider? _getImageProvider(SettingsStore store) {
+    // Если в сторе хранится локальный файл после выбора в галерее
+    if (store.profileImageFile != null) {
+      return FileImage(store.profileImageFile!);
     }
+
+    // Если в сторе хранится URL-строка, полученная из JSON (image-url)
+    if (store.profileImageUrl != null && store.profileImageUrl!.isNotEmpty) {
+      return NetworkImage(store.profileImageUrl!);
+    }
+
     return null;
   }
 
@@ -25,8 +33,8 @@ class ProfilePhotoPickerUserCreation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Observer(
       builder: (context) {
-        final imageProvider = _getImageProvider(userProfileStore);
-        final isLoading = userProfileStore.isLoadingImage;
+        final imageProvider = _getImageProvider(settingsStore);
+        final isLoading = settingsStore.isLoadingImage;
         return _buildPickerStack(context, imageProvider,isLoading );
       },
     );

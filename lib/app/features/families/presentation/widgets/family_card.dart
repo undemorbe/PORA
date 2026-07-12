@@ -33,7 +33,6 @@ class FamilyCard extends StatelessWidget {
         ? 0.0
         : _avatar + (members.length - 1) * _overlap;
     return Slidable(
-      
       startActionPane: ActionPane(
         motion: const StretchMotion(),
         children: [
@@ -79,9 +78,7 @@ class FamilyCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: PoraSpacing.sm),
-              Text(
-                family.name,
-              ),
+              Text(family.name),
               const PhosphorIcon(
                 PhosphorIconsRegular.caretRight,
                 size: 20,

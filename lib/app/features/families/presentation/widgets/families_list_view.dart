@@ -18,26 +18,22 @@ class FamiliesListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Observer(
       builder: (context) {
-         if (store.isLoading == true) {
-          return const Center(child: PoraCircleProgress());}
-        else if (store.families.isEmpty) {
+        if (store.isLoading == true) {
+          return const Center(child: PoraCircleProgress());
+        } else if (store.families.isEmpty) {
           return const Center(child: Text('No families found'));
-        
         } else if (store.success == false) {
           PoraSnackbar.show(context, message: context.l10n.errorDuringLoading);
         }
-            if (store.families.isEmpty) return const SizedBox.shrink();
-
+        if (store.families.isEmpty) return const SizedBox.shrink();
 
         return ListView.builder(
           // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          //   crossAxisCount: 2, 
+          //   crossAxisCount: 2,
           //   crossAxisSpacing: 8.0,
           //   mainAxisSpacing: 8.0,
-          //   childAspectRatio: 1.0, 
+          //   childAspectRatio: 1.0,
           // ),
-
-
           itemCount: store.families.length,
           itemBuilder: (context, index) {
             final family = store.families[index];
@@ -45,9 +41,9 @@ class FamiliesListView extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: PoraSpacing.md),
               child: FamilyCard(
                 family: family,
-                  onTap: () => context.router.push(
-                    ListRoute(familyId: family.id, familyName: family.name),
-                  ),
+                onTap: () => context.router.push(
+                  ListRoute(familyId: family.id, familyName: family.name),
+                ),
               ),
             );
           },

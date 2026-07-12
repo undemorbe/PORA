@@ -31,6 +31,8 @@ dependencies:
   pretty_qr_code: ^3.6.0
   share_plus: ^13.2.0
   flutter_slidable: ^4.0.3
+  image_cropper: ^12.2.1
+  flutter_image_compress: ^2.4.0
   
 
 dev_dependencies:

@@ -18,6 +18,7 @@ class UserEntity extends Equatable {
   final String? surname;
   final String? phone;
   final String? email;
+
   @JsonKey(name: 'image-url')
   final String? imageUrl;
 

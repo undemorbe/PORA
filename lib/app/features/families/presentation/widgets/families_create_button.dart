@@ -9,7 +9,11 @@ import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 import 'package:pora/app/internal/widgets/pora_buttons.dart';
 
 class FamiliesCreateButton extends StatelessWidget {
-  const FamiliesCreateButton({super.key, required this.familyTextController, required this.familiesStore});
+  const FamiliesCreateButton({
+    super.key,
+    required this.familyTextController,
+    required this.familiesStore,
+  });
 
   final TextEditingController familyTextController;
   final FamiliesStore familiesStore;
@@ -18,79 +22,65 @@ class FamiliesCreateButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final l = context.l10n;
     return Container(
-                    margin: const .symmetric(horizontal: 25),
-                    padding: const .only(top: 2),
-                    child: PoraOutlineButton(
-                      label: l.familiesCreate,
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) => Dialog(
-                            backgroundColor: Theme.of(
-                              context,
-                            ).colorScheme.surface,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                mainAxisSize: .min,
-                                children: [
-                                  Text(
-                                    context.l10n.familiesCreateDialog,
-                                    style: PoraText.heading.copyWith(
-                                      color: PoraColors.ink,
-                                    ),
-                                  ),
-                                  const SizedBox(height: PoraSpacing.md),
-                                  TextField(
-                                    autocorrect: true,
-                                    controller: familyTextController,
-                                    onSubmitted: (value) async {
-                                      context.maybePop();
-                                        if (familyTextController
-                                            .text
-                                            .isNotEmpty) {
-                                          await familiesStore
-                                              .createFamily(
-                                                name: value,
-                                              )
-                                              .whenComplete(() async {
-                                                await familiesStore
-                                                    .getFamilies();
-                                              });
-                                        }
-                                    },
-                                    maxLength: 24,
-                                  ),
-                                  Padding(
-                                    padding:const .all(15),
-                                    child: PoraPrimaryButton(
-                                      label: l.familiesCreate,
-                                      icon: PhosphorIcons.plusBold,
-                                      isLoading: false,
-                                      onPressed: () async {
-                                        context.maybePop();
-                                        if (familyTextController
-                                            .text
-                                            .isNotEmpty) {
-                                          await familiesStore
-                                              .createFamily(
-                                                name: familyTextController.text,
-                                              )
-                                              .whenComplete(() async {
-                                                await familiesStore
-                                                    .getFamilies();
-                                              });
-                                        }
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
-                      },
+      margin: const .symmetric(horizontal: 25),
+      padding: const .only(top: 2),
+      child: PoraOutlineButton(
+        label: l.familiesCreate,
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (context) => Dialog(
+              backgroundColor: Theme.of(context).colorScheme.surface,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisSize: .min,
+                  children: [
+                    Text(
+                      context.l10n.familiesCreateDialog,
+                      style: PoraText.heading.copyWith(color: PoraColors.ink),
                     ),
-                  );
+                    const SizedBox(height: PoraSpacing.md),
+                    TextField(
+                      autocorrect: true,
+                      controller: familyTextController,
+                      onSubmitted: (value) async {
+                        context.maybePop();
+                        if (familyTextController.text.isNotEmpty) {
+                          await familiesStore
+                              .createFamily(name: value)
+                              .whenComplete(() async {
+                                await familiesStore.getFamilies();
+                              });
+                        }
+                      },
+                      maxLength: 24,
+                    ),
+                    Padding(
+                      padding: const .all(15),
+                      child: PoraPrimaryButton(
+                        label: l.familiesCreate,
+                        icon: PhosphorIcons.plusBold,
+                        isLoading: false,
+                        onPressed: () async {
+                          context.maybePop();
+                          if (familyTextController.text.isNotEmpty) {
+                            await familiesStore
+                                .createFamily(name: familyTextController.text)
+                                .whenComplete(() async {
+                                  await familiesStore.getFamilies();
+                                });
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
   }
 }

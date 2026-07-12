@@ -7,11 +7,11 @@ class MemberModel extends MemberEntity {
   const MemberModel({
     required super.id,
     required super.name,
-     super.imageUrl,
+    super.imageUrl,
     required super.joinedAt,
-    required super.colorCode,  super.surname,
+    required super.colorCode,
+    super.surname,
   });
-
 
   factory MemberModel.fromJson(Map<String, dynamic> json) =>
       _$MemberModelFromJson(json);

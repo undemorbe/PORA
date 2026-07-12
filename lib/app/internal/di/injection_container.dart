@@ -1,9 +1,11 @@
+import 'package:image_picker/image_picker.dart';
 import 'package:pora/app/features/families/data/datasource/remote/family_remote.dart';
 import 'package:pora/app/features/families/data/service/family_service.dart';
 import 'package:pora/app/features/families/domain/repository/family_repository.dart';
 import 'package:pora/app/features/families/domain/usecase/create_family.dart';
 import 'package:pora/app/features/families/domain/usecase/delete_family.dart';
 import 'package:pora/app/features/families/domain/usecase/get_families.dart';
+import 'package:pora/app/internal/formatters/image_formatter.dart';
 import 'package:pora/app/internal/share/share_conf.dart';
 
 import 'export.dart';
@@ -44,7 +46,11 @@ class InjectionContainer {
     );
 
     //! Image Picker
-    _getIt.registerLazySingleton(() => ,);
+    _getIt.registerLazySingleton<ImagePicker>(() => ImagePicker());
+
+    _getIt.registerLazySingleton<ImageProcessingService>(
+      () => ImageProcessingService(),
+    );
   }
 
   void _registerUsecases() {

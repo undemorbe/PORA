@@ -8,6 +8,7 @@ import 'package:pora/app/features/auth_and_validation/data/datasource/local/secu
 import 'package:pora/app/features/auth_and_validation/presentation/controller/privacy_store.dart';
 import 'package:pora/app/features/settings/presentation/store/settings_store.dart';
 import 'package:pora/app/features/settings/presentation/widgets/delivery_value.dart';
+import 'package:pora/app/features/settings/presentation/widgets/profile_photo_picker.dart';
 import 'package:pora/app/features/user/presentation/widgets/profile_photo_picker.dart';
 import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/features/settings/presentation/widgets/household_members_row.dart';
@@ -26,7 +27,7 @@ import 'package:pora/app/internal/widgets/section_label.dart';
 /// Экран настроек: профиль, хозяйство, группы настроек.
 @RoutePage()
 class SettingsPage extends StatefulWidget {
-  SettingsPage({super.key});
+  const SettingsPage({super.key});
 
   @override
   State<SettingsPage> createState() => _SettingsPageState();
@@ -48,96 +49,99 @@ class _SettingsPageState extends State<SettingsPage> {
     return Scaffold(
       body: SafeArea(
         bottom: false,
-        child: ListView(
-          padding: const EdgeInsets.fromLTRB(
-            PoraSpacing.screen,
-            6,
-            PoraSpacing.screen,
-            PoraSpacing.xxl,
-          ),
-          children: [
-            Text(context.l10n.settingsTitle, style: PoraText.title),
-            const SizedBox(height: PoraSpacing.lg),
-
-            Observer(
-              builder: (_) {
-                return ProfileCard(
-                  name: settingsStore.user?.name ?? 'You',
-                  imageUrl: settingsStore.user?.imageUrl,
-                  colorOfAvatar: PoraColors.primary,
-                );
-              },
+        child: RefreshIndicator.adaptive(
+          onRefresh: () => settingsStore.getUserMe(),
+          child: ListView(
+            padding: const EdgeInsets.fromLTRB(
+              PoraSpacing.screen,
+              6,
+              PoraSpacing.screen,
+              PoraSpacing.xxl,
             ),
-            const SizedBox(height: PoraSpacing.xl),
+            children: [
+              Text(context.l10n.settingsTitle, style: PoraText.title),
+              const SizedBox(height: PoraSpacing.lg),
 
-            SectionLabel(context.l10n.listsYour),
+              Observer(
+                builder: (_) {
+                  return ProfileCard(
+                    settingsStore: settingsStore,
+                    name:
+                        "${settingsStore.user?.name ?? 'You'} ${settingsStore.user?.surname ?? ''}",
+                    imageUrl: settingsStore.user?.imageUrl,
+                    colorOfAvatar: PoraColors.primary,
+                    email:
+                        (settingsStore.user?.phone ??
+                            settingsStore.user?.email) ??
+                        'unknown@unk.nown',
+                  );
+                },
+              ),
+              const SizedBox(height: PoraSpacing.xl),
 
-            //! List
-            PoraRowsCard(
-              children: [
-                GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-                  child: const HouseholdMembersRow(),
-                  onTap: () => context.router.push(InviteRoute(familyId: '')),
-                ),
-              ],
-            ),
-                Center(
-                    child: ProfilePhotoPicker(
-                      onTap: () async {
-                        await userStore.setProfileImage();
-                      },
-                      userProfileStore: userStore,
-                    ),
+              SectionLabel(context.l10n.listsYour),
+
+              //! List
+              PoraRowsCard(
+                children: [
+                  GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    child: const HouseholdMembersRow(),
+                    onTap: () => context.router.push(InviteRoute(familyId: '')),
                   ),
-            const SizedBox(height: PoraSpacing.xl),
+                ],
+              ),
 
-            SectionLabel(context.l10n.settingsAppSection),
-            PoraRowsCard(
-              children: [
-                PoraSettingRow(
-                  icon: PhosphorIconsRegular.bell,
-                  label: context.l10n.settingsNotifications,
-                  trailing: PoraSettingRow.chevron,
-                  onTap: () => context.router.push(const NotificationsRoute()),
-                ),
-                PoraSettingRow(
-                  icon: PhosphorIconsRegular.shoppingCart,
-                  label: context.l10n.settingsDelivery,
-                  trailing: const DeliveryValue(),
-                ),
-                PoraSettingRow(
-                  icon: PhosphorIconsRegular.gear,
-                  label: context.l10n.settingsTitle,
-                  trailing: PoraPill(label: context.l10n.settingsMore),
-                ),
-                PoraSettingRow(
-                  icon: PhosphorIconsRegular.lock,
-                  label: context.l10n.settingsPrivacy,
-                  trailing: PoraSettingRow.chevron,
-                  onTap: () => privacyStore.openPrivacy(),
-                ),
-              ],
-            ),
-            const SizedBox(height: PoraSpacing.lg),
+              const SizedBox(height: PoraSpacing.xl),
 
-            PoraRowsCard(
-              children: [
-                PoraSettingRow(
-                  icon: PhosphorIconsRegular.info,
-                  label: context.l10n.settingsAboutPora,
-                  trailing: PoraSettingRow.chevron,
-                  onTap: () => showAboutDialog(context: context),
-                ),
-                PoraSettingRow(
-                  icon: PhosphorIconsRegular.signOut,
-                  label: context.l10n.settingsLogout,
-                  danger: true,
-                  onTap: () => settingsStore.logout(),
-                ),
-              ],
-            ),
-          ],
+              SectionLabel(context.l10n.settingsAppSection),
+              PoraRowsCard(
+                children: [
+                  PoraSettingRow(
+                    icon: PhosphorIconsRegular.bell,
+                    label: context.l10n.settingsNotifications,
+                    trailing: PoraSettingRow.chevron,
+                    onTap: () =>
+                        context.router.push(const NotificationsRoute()),
+                  ),
+                  PoraSettingRow(
+                    icon: PhosphorIconsRegular.shoppingCart,
+                    label: context.l10n.settingsDelivery,
+                    trailing: const DeliveryValue(),
+                  ),
+                  PoraSettingRow(
+                    icon: PhosphorIconsRegular.gear,
+                    label: context.l10n.settingsTitle,
+                    trailing: PoraPill(label: context.l10n.settingsMore),
+                  ),
+                  PoraSettingRow(
+                    icon: PhosphorIconsRegular.lock,
+                    label: context.l10n.settingsPrivacy,
+                    trailing: PoraSettingRow.chevron,
+                    onTap: () => privacyStore.openPrivacy(),
+                  ),
+                ],
+              ),
+              const SizedBox(height: PoraSpacing.lg),
+
+              PoraRowsCard(
+                children: [
+                  PoraSettingRow(
+                    icon: PhosphorIconsRegular.info,
+                    label: context.l10n.settingsAboutPora,
+                    trailing: PoraSettingRow.chevron,
+                    onTap: () => showAboutDialog(context: context),
+                  ),
+                  PoraSettingRow(
+                    icon: PhosphorIconsRegular.signOut,
+                    label: context.l10n.settingsLogout,
+                    danger: true,
+                    onTap: () => settingsStore.logout(),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

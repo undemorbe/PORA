@@ -20,7 +20,7 @@ class MainShellPage extends StatelessWidget {
         FamiliesRoute(),
         const PredictionsRoute(),
         const OrderRoute(),
-         SettingsRoute(),
+        SettingsRoute(),
       ],
       // Плавная кросс-фейд-анимация между вкладками.
       transitionBuilder: (context, child, animation) =>

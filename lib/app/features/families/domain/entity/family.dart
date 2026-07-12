@@ -11,7 +11,6 @@ abstract class FamiliesEntity extends Equatable {
   List<Object?> get props => [families];
 }
 
-
 abstract class FamilyEntity extends Equatable {
   final String id;
   final String name;

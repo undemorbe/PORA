@@ -5,24 +5,16 @@ import 'package:pora/app/features/user/domain/entity/user/user_entity.dart';
 part 'user_model.g.dart';
 
 @JsonSerializable()
-class UserModel {
+class UserModel extends UserEntity {
   const UserModel({
-    this.id,
-    this.name,
-    this.surname,
-    this.phone,
-    this.email,
-    this.imageUrl,
-    this.selfLists,
+    super.id,
+    super.name,
+    super.surname,
+    super.phone,
+    super.email,
+    super.imageUrl,
+    super.selfLists,
   });
-
-  final String? id;
-  final String? name;
-  final String? surname;
-  final String? phone;
-  final String? email;
-  final String? imageUrl;
-  final List<String>? selfLists;
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);

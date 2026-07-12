@@ -23,8 +23,6 @@ abstract class _InvitationsStoreBase with Store {
 
   @observable
   String? linkUrl;
-  
-
 
   @action
   Future<void> copyToClipboard(String textToCopy) async {
@@ -32,9 +30,7 @@ abstract class _InvitationsStoreBase with Store {
   }
 
   @action
-  Future<void> connectToFamily({
-    required String code,
-  }) async {
+  Future<void> connectToFamily({required String code}) async {
     isLoading = true;
     isSuccess = null;
     final result = await GetIt.I<ConnectWithInviteCodeUseCase>().call(
@@ -51,11 +47,8 @@ abstract class _InvitationsStoreBase with Store {
 
   //! Connect someone
 
-
   @action
-  Future<void> generateLinkCode({
-    required String familyId,
-  }) async {
+  Future<void> generateLinkCode({required String familyId}) async {
     isSuccess = null;
     isLoading = true;
     final linkCode = await GetIt.I<GetInviteCodeUseCase>().call(
@@ -64,8 +57,8 @@ abstract class _InvitationsStoreBase with Store {
     if (linkCode.isRight) {
       isSuccess = true;
       isLoading = false;
-      this.linkCode = linkCode.right.linkCode; 
-      linkUrl = linkCode.right.linkUrl; 
+      this.linkCode = linkCode.right.linkCode;
+      linkUrl = linkCode.right.linkUrl;
     } else {
       isSuccess = false;
       isLoading = false;

@@ -8,10 +8,10 @@ class PoraAvatar extends StatelessWidget {
   const PoraAvatar({
     super.key,
     required this.initial,
-     this.color,
+    this.color,
     this.size = PoraSizes.avatarXs,
     this.ring,
-    this.imageUrl
+    this.imageUrl,
   });
 
   final String initial;
@@ -29,7 +29,16 @@ class PoraAvatar extends StatelessWidget {
       height: size,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        image: imageUrl != null ? DecorationImage(image: Image.network(imageUrl??'',cacheHeight: 200, fit: BoxFit.cover,cacheWidth: 200,).image) : null,
+        image: imageUrl != null
+            ? DecorationImage(
+                image: Image.network(
+                  imageUrl ?? '',
+                  cacheHeight: 200,
+                  fit: BoxFit.cover,
+                  cacheWidth: 200,
+                ).image,
+              )
+            : null,
         color: color,
         shape: BoxShape.circle,
         border: ring != null ? Border.all(color: ring!, width: 2) : null,

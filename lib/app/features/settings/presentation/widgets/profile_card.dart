@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pora/app/features/settings/presentation/store/settings_store.dart';
+import 'package:pora/app/features/settings/presentation/widgets/profile_photo_picker.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
@@ -13,7 +15,10 @@ class ProfileCard extends StatelessWidget {
     this.name = 'Борис',
     this.email = 'stankovb08@gmail.com',
     this.onTap,
-    this.ringColor,this.colorOfAvatar, this.imageUrl
+    required this.settingsStore,
+    this.ringColor,
+    this.colorOfAvatar,
+    this.imageUrl,
   });
 
   final String name;
@@ -22,6 +27,7 @@ class ProfileCard extends StatelessWidget {
   final Color? colorOfAvatar;
   final VoidCallback? onTap;
   final Color? ringColor;
+  final SettingsStore settingsStore;
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +40,13 @@ class ProfileCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-             PoraAvatar(
-              imageUrl: imageUrl,
-              initial: name[0],
-              color: colorOfAvatar,
-              ring: ringColor,
-              size: PoraSizes.avatarLg,
+            Center(
+              child: ProfilePhotoPickerSettings(
+                onTap: () async {
+                  await settingsStore.setProfileImage();
+                },
+                settingsStore: settingsStore,
+              ),
             ),
             const SizedBox(width: 13),
             Expanded(

@@ -34,9 +34,8 @@ class _InvitePageState extends State<InvitePage> {
     super.initState();
   }
 
-  void generateLinkCodes() async{
+  void generateLinkCodes() async {
     await invitationsStore.generateLinkCode(familyId: widget.familyId);
-
   }
 
   @override
@@ -65,34 +64,39 @@ class _InvitePageState extends State<InvitePage> {
               ),
               const SizedBox(height: 30),
               Observer(
-              builder: (_) {
-                if (invitationsStore.isLoading == true) {
-                  return const Center(child: PoraCircleProgress());
-                } else if (invitationsStore.isSuccess == true) {
-                  return InviteCodeCard(
-                    code: invitationsStore.linkCode ?? context.l10n.commonError,
+                builder: (_) {
+                  if (invitationsStore.isLoading == true) {
+                    return const Center(child: PoraCircleProgress());
+                  } else if (invitationsStore.isSuccess == true) {
+                    return InviteCodeCard(
+                      code:
+                          invitationsStore.linkCode ?? context.l10n.commonError,
+                    );
+                  } else if (invitationsStore.isSuccess == false) {
+                    return Center(child: Text(context.l10n.commonError));
+                  }
+
+                  return Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(context.l10n.tryToUpdate),
+                        const SizedBox(width: 8),
+                        IconButton(
+                          onPressed: () {
+                            invitationsStore.generateLinkCode(
+                              familyId: widget.familyId,
+                            );
+                          },
+                          icon: const PhosphorIcon(
+                            PhosphorIcons.arrowsClockwiseDuotone,
+                          ), // Changed to an appropriate action icon
+                        ),
+                      ],
+                    ),
                   );
-                } else if (invitationsStore.isSuccess == false) {
-                  return Center(child: Text(context.l10n.commonError));
-                }
-                
-                return Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center, 
-                    children: [
-                      Text(context.l10n.tryToUpdate),
-                      const SizedBox(width: 8), 
-                      IconButton(
-                        onPressed: () {
-                          invitationsStore.generateLinkCode(familyId: widget.familyId);
-                        },
-                        icon: const PhosphorIcon(PhosphorIcons.arrowsClockwiseDuotone), // Changed to an appropriate action icon
-                      )
-                    ],
-                  ),
-                );
-              },
-            ),
+                },
+              ),
 
               const SizedBox(height: PoraSpacing.lg),
               PoraPrimaryButton(

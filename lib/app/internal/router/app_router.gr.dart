@@ -523,46 +523,18 @@ class SearchRoute extends _i22.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i18.SettingsPage]
-class SettingsRoute extends _i22.PageRouteInfo<SettingsRouteArgs> {
-  SettingsRoute({_i23.Key? key, List<_i22.PageRouteInfo>? children})
-    : super(
-        SettingsRoute.name,
-        args: SettingsRouteArgs(key: key),
-        initialChildren: children,
-      );
+class SettingsRoute extends _i22.PageRouteInfo<void> {
+  const SettingsRoute({List<_i22.PageRouteInfo>? children})
+    : super(SettingsRoute.name, initialChildren: children);
 
   static const String name = 'SettingsRoute';
 
   static _i22.PageInfo page = _i22.PageInfo(
     name,
     builder: (data) {
-      final args = data.argsAs<SettingsRouteArgs>(
-        orElse: () => const SettingsRouteArgs(),
-      );
-      return _i18.SettingsPage(key: args.key);
+      return const _i18.SettingsPage();
     },
   );
-}
-
-class SettingsRouteArgs {
-  const SettingsRouteArgs({this.key});
-
-  final _i23.Key? key;
-
-  @override
-  String toString() {
-    return 'SettingsRouteArgs{key: $key}';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    if (other is! SettingsRouteArgs) return false;
-    return key == other.key;
-  }
-
-  @override
-  int get hashCode => key.hashCode;
 }
 
 /// generated route for

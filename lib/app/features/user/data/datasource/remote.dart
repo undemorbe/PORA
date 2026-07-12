@@ -14,7 +14,9 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   final ApiClient apiClient;
 
   @override
-  Future<UserModel> getUser()async {return await apiClient.getUser();}
+  Future<UserModel> getUser() async {
+    return await apiClient.getUser();
+  }
 
   @override
   Future<void> updateUser(UserModel? model, File? image) async {
@@ -25,11 +27,9 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       await apiClient.saveUserImage(file: image);
     }
   }
-  
+
   @override
   Future<void> logout() async {
     await apiClient.logout();
   }
-
-  
 }

@@ -16,10 +16,10 @@ abstract class MemberEntity extends Equatable {
   const MemberEntity({
     required this.id,
     required this.name,
-     this.imageUrl,
+    this.imageUrl,
     required this.joinedAt,
     required this.colorCode,
-     this.surname,
+    this.surname,
   });
 
   @override

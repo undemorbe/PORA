@@ -13,8 +13,6 @@ class UserService implements UserRepository {
   const UserService(this.remoteDataSource);
   final UserRemoteDataSource remoteDataSource;
 
-  
-
   @override
   Future<Either<Failure, UserEntity>> getUser() async {
     try {
@@ -56,18 +54,15 @@ class UserService implements UserRepository {
         return const ServerFailure('Unknown error');
     }
   }
-  
+
   @override
   Future<Either<Failure, Success>> logout() async {
-    try{
+    try {
       await remoteDataSource.logout();
       return Right(const ServerSuccess());
-    } on DioException catch(e){
+    } on DioException catch (e) {
       return Left(_mapDioError(e));
-    }
-     
-    
-    catch (_){
+    } catch (_) {
       return Left(const ServerFailure('Unknown'));
     }
   }

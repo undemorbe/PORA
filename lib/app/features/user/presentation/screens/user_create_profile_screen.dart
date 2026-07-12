@@ -58,7 +58,7 @@ class _UserCreateProfilePageState extends State<UserCreateProfilePage> {
                   const SizedBox(height: PoraSpacing.xxl),
                   // avatar
                   Center(
-                    child: ProfilePhotoPicker(
+                    child: ProfilePhotoPickerUserCreation(
                       onTap: () async {
                         await userStore.setProfileImage();
                       },

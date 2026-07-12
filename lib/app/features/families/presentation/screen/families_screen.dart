@@ -24,8 +24,7 @@ class _FamiliesPageState extends State<FamiliesPage>
     with TickerProviderStateMixin {
   late final TextEditingController familyTextController;
 
-  late final FamiliesStore familiesStore ;
-
+  late final FamiliesStore familiesStore;
 
   @override
   void initState() {
@@ -39,7 +38,6 @@ class _FamiliesPageState extends State<FamiliesPage>
     familyTextController.dispose();
     super.dispose();
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +53,11 @@ class _FamiliesPageState extends State<FamiliesPage>
             PoraSpacing.xxs,
           ),
           child: RefreshIndicator.adaptive(
-            onRefresh:()=> familiesStore.getFamilies(),
+            onRefresh: () => familiesStore.getFamilies(),
             child: Column(
               mainAxisSize: .max,
               mainAxisAlignment: .spaceBetween,
-                  
+
               children: [
                 Column(
                   mainAxisSize: .min,
@@ -70,9 +68,9 @@ class _FamiliesPageState extends State<FamiliesPage>
                     const SizedBox(height: PoraSpacing.xl),
                   ],
                 ),
-                  
+
                 Expanded(child: FamiliesListView(store: familiesStore)),
-                  
+
                 Column(
                   mainAxisSize: .min,
                   children: [
@@ -85,7 +83,10 @@ class _FamiliesPageState extends State<FamiliesPage>
                         );
                       },
                     ),
-                    FamiliesCreateButton(familyTextController: familyTextController, familiesStore: familiesStore),
+                    FamiliesCreateButton(
+                      familyTextController: familyTextController,
+                      familiesStore: familiesStore,
+                    ),
                   ],
                 ),
               ],
