@@ -1,3 +1,9 @@
+import 'package:pora/app/features/families/data/datasource/remote/family_remote.dart';
+import 'package:pora/app/features/families/data/service/family_service.dart';
+import 'package:pora/app/features/families/domain/repository/family_repository.dart';
+import 'package:pora/app/features/families/domain/usecase/create_family.dart';
+import 'package:pora/app/features/families/domain/usecase/delete_family.dart';
+import 'package:pora/app/features/families/domain/usecase/get_families.dart';
 import 'package:pora/app/internal/share/share_conf.dart';
 
 import 'export.dart';
@@ -76,6 +82,15 @@ class InjectionContainer {
     );
 
     //! Families
+    _getIt.registerFactory<GetFamiliesUseCase>(
+      () => GetFamiliesUseCase(familyRepository: _getIt<FamilyRepository>()),
+    );
+    _getIt.registerFactory<CreateFamilyUseCase>(
+      () => CreateFamilyUseCase(familyRepository: _getIt<FamilyRepository>()),
+    );
+    _getIt.registerFactory<DeleteFamilyUseCase>(
+      () => DeleteFamilyUseCase(familyRepository: _getIt<FamilyRepository>()),
+    );
 
     //! Invitations (linkCodes for families)
     _getIt.registerFactory<GetInviteCodeUseCase>(
@@ -130,6 +145,14 @@ class InjectionContainer {
     );
 
     //! Families
+    _getIt.registerLazySingleton<FamilyRemoteDataSource>(
+      () => FamilyRemoteDataSourceImpl(apiClient: _getIt<ApiClient>()),
+    );
+    _getIt.registerLazySingleton<FamilyRepository>(
+      () => FamilyService(
+        familyRemoteDataSource: _getIt<FamilyRemoteDataSource>(),
+      ),
+    );
 
     //! Invitations (linkCodes to families)
     _getIt.registerLazySingleton<RemoteInvitations>(

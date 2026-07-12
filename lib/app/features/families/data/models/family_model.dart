@@ -9,13 +9,13 @@ class FamilyModel extends FamilyEntity {
   const FamilyModel({
     required super.id,
     required super.name,
-    required this.members,
+    this.members,
     required this.owner,
     required super.createdAt,
     required super.isCurrent,
   }) : super(members: members, owner: owner);
   @override
-  final List<MemberModel> members;
+  final List<MemberModel?>? members;
   @override
   final MemberModel owner;
 

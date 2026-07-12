@@ -55,7 +55,7 @@ class BriefPage extends StatelessWidget {
                   PoraSpacing.sm,
                 ),
                 children: [
-                  const OnboardingProgressHeader(step: 1),
+                  const OnboardingProgressHeader(step: 4),
 
                   const SizedBox(height: PoraSpacing.lg),
 

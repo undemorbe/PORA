@@ -17,7 +17,7 @@ class MainShellPage extends StatelessWidget {
     return AutoTabsScaffold(
       // Порядок должен совпадать с индексами PoraTab.
       routes: [
-        HomeRoute(),
+        FamiliesRoute(),
         const PredictionsRoute(),
         const OrderRoute(),
         const SettingsRoute(),

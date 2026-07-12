@@ -15,8 +15,8 @@ import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 /// Пока с демо-данными; при интеграции список берётся по familyId
 /// (GET /families/{id}/lists) через MobX-стор + WebSocket.
 @RoutePage()
-class HomePage extends StatelessWidget {
-  const HomePage({super.key, this.familyId, this.familyName});
+class ListPage extends StatelessWidget {
+  const ListPage({super.key, this.familyId, this.familyName});
 
   /// Идентификатор выбранной семьи (null — семья по умолчанию).
   final String? familyId;

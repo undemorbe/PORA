@@ -752,6 +752,12 @@ abstract class AppLocalizations {
   /// **'Сделаю позже'**
   String get householdDoLater;
 
+  /// householdCopyCode
+  ///
+  /// In en, this message translates to:
+  /// **'Скопировали в буфер обмена!'**
+  String get householdCopyCode;
+
   /// householdInviteCodeLabel
   ///
   /// In en, this message translates to:
@@ -1160,6 +1166,18 @@ abstract class AppLocalizations {
   /// **'＋ Создать или присоединиться'**
   String get familiesCreateOrJoin;
 
+  /// familiesCreateDialog
+  ///
+  /// In en, this message translates to:
+  /// **'Как назовем семью?'**
+  String get familiesCreateDialog;
+
+  /// tryToUpdate
+  ///
+  /// In en, this message translates to:
+  /// **'Попробуйте обновить'**
+  String get tryToUpdate;
+
   /// familiesNoUrgent
   ///
   /// In en, this message translates to:
@@ -1177,6 +1195,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Секунду, открываем ваш список…'**
   String get welcomeBackSubtitle;
+
+  /// errorDuringLoading
+  ///
+  /// In en, this message translates to:
+  /// **'Ошибка при загрузке'**
+  String get errorDuringLoading;
+
+  /// nameOfFamily
+  ///
+  /// In en, this message translates to:
+  /// **'Имя семьи'**
+  String get familyName;
+
+  /// createButton
+  ///
+  /// In en, this message translates to:
+  /// **'Создать'**
+  String get familiesCreate;
+
+  /// connectButton
+  ///
+  /// In en, this message translates to:
+  /// **'Присоединиться'**
+  String get familiesConnect;
 }
 
 class _AppLocalizationsDelegate

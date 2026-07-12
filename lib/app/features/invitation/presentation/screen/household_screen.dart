@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/app/features/invitation/presentation/store/invitations_store.dart';
 import 'package:pora/app/features/invitation/presentation/widgets/invite_avatars.dart';
 import 'package:pora/app/features/invitation/presentation/widgets/invite_code_card.dart';
@@ -15,12 +16,28 @@ import 'package:pretty_qr_code/pretty_qr_code.dart';
 
 /// Подключение партнёра к семье: код приглашения, ссылка, QR.
 @RoutePage()
-class HouseholdPage extends StatelessWidget {
-  HouseholdPage({super.key, required this.familyId});
+class InvitePage extends StatefulWidget {
+  const InvitePage({super.key, required this.familyId});
 
   final String familyId;
 
+  @override
+  State<InvitePage> createState() => _InvitePageState();
+}
+
+class _InvitePageState extends State<InvitePage> {
   final InvitationsStore invitationsStore = InvitationsStore();
+
+  @override
+  void initState() {
+    generateLinkCodes();
+    super.initState();
+  }
+
+  void generateLinkCodes() async{
+    await invitationsStore.generateLinkCode(familyId: widget.familyId);
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +75,19 @@ class HouseholdPage extends StatelessWidget {
                           invitationsStore.linkCodes?.linkCode ??
                           context.l10n.commonError,
                     );
-                  }
+                  }else if( invitationsStore.isSuccess == false){
+
                   return Center(child: Text(context.l10n.commonError));
+                  }
+                  return Center(child: Row(
+                    children: [
+                      Text(context.l10n.tryToUpdate),
+                      IconButton(onPressed: () {
+                        invitationsStore.generateLinkCode(familyId: widget.familyId,);
+                      }, icon:const PhosphorIcon(PhosphorIcons.uploadDuotone))
+                    ],
+                  ),);
+                   
                 },
               ),
               const SizedBox(height: PoraSpacing.lg),

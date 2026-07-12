@@ -26,15 +26,15 @@ import 'package:pora/app/features/brief/presentation/screens/brief_screen.dart'
 import 'package:pora/app/features/families/presentation/screen/families_screen.dart'
     as _i4;
 import 'package:pora/app/features/insights/presentation/screen/insights_screen.dart'
-    as _i8;
+    as _i5;
 import 'package:pora/app/features/invitation/presentation/screen/connection_to_other/household_connection_screen.dart'
     as _i6;
 import 'package:pora/app/features/invitation/presentation/screen/household_screen.dart'
     as _i7;
 import 'package:pora/app/features/item_detail/presentation/screen/item_detail_screen.dart'
+    as _i8;
+import 'package:pora/app/features/list/presentation/screen/list_screen.dart'
     as _i9;
-import 'package:pora/app/features/list/presentation/screen/home_screen.dart'
-    as _i5;
 import 'package:pora/app/features/notifications/presentation/screen/notifications_screen.dart'
     as _i11;
 import 'package:pora/app/features/onboarding/presentation/screen/onboarding_slider_screen.dart'
@@ -108,216 +108,22 @@ class BriefRoute extends _i22.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.FamiliesPage]
-class FamiliesRoute extends _i22.PageRouteInfo<FamiliesRouteArgs> {
-  FamiliesRoute({_i23.Key? key, List<_i22.PageRouteInfo>? children})
-    : super(
-        FamiliesRoute.name,
-        args: FamiliesRouteArgs(key: key),
-        initialChildren: children,
-      );
+class FamiliesRoute extends _i22.PageRouteInfo<void> {
+  const FamiliesRoute({List<_i22.PageRouteInfo>? children})
+    : super(FamiliesRoute.name, initialChildren: children);
 
   static const String name = 'FamiliesRoute';
 
   static _i22.PageInfo page = _i22.PageInfo(
     name,
     builder: (data) {
-      final args = data.argsAs<FamiliesRouteArgs>(
-        orElse: () => const FamiliesRouteArgs(),
-      );
-      return _i4.FamiliesPage(key: args.key);
+      return const _i4.FamiliesPage();
     },
   );
 }
 
-class FamiliesRouteArgs {
-  const FamiliesRouteArgs({this.key});
-
-  final _i23.Key? key;
-
-  @override
-  String toString() {
-    return 'FamiliesRouteArgs{key: $key}';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    if (other is! FamiliesRouteArgs) return false;
-    return key == other.key;
-  }
-
-  @override
-  int get hashCode => key.hashCode;
-}
-
 /// generated route for
-/// [_i5.HomePage]
-class HomeRoute extends _i22.PageRouteInfo<HomeRouteArgs> {
-  HomeRoute({
-    _i23.Key? key,
-    String? familyId,
-    String? familyName,
-    List<_i22.PageRouteInfo>? children,
-  }) : super(
-         HomeRoute.name,
-         args: HomeRouteArgs(
-           key: key,
-           familyId: familyId,
-           familyName: familyName,
-         ),
-         initialChildren: children,
-       );
-
-  static const String name = 'HomeRoute';
-
-  static _i22.PageInfo page = _i22.PageInfo(
-    name,
-    builder: (data) {
-      final args = data.argsAs<HomeRouteArgs>(
-        orElse: () => const HomeRouteArgs(),
-      );
-      return _i5.HomePage(
-        key: args.key,
-        familyId: args.familyId,
-        familyName: args.familyName,
-      );
-    },
-  );
-}
-
-class HomeRouteArgs {
-  const HomeRouteArgs({this.key, this.familyId, this.familyName});
-
-  final _i23.Key? key;
-
-  final String? familyId;
-
-  final String? familyName;
-
-  @override
-  String toString() {
-    return 'HomeRouteArgs{key: $key, familyId: $familyId, familyName: $familyName}';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    if (other is! HomeRouteArgs) return false;
-    return key == other.key &&
-        familyId == other.familyId &&
-        familyName == other.familyName;
-  }
-
-  @override
-  int get hashCode => key.hashCode ^ familyId.hashCode ^ familyName.hashCode;
-}
-
-/// generated route for
-/// [_i6.HouseholdConnectionPage]
-class HouseholdConnectionRoute
-    extends _i22.PageRouteInfo<HouseholdConnectionRouteArgs> {
-  HouseholdConnectionRoute({
-    _i23.Key? key,
-    required String linkCode,
-    List<_i22.PageRouteInfo>? children,
-  }) : super(
-         HouseholdConnectionRoute.name,
-         args: HouseholdConnectionRouteArgs(key: key, linkCode: linkCode),
-         rawPathParams: {'linkCode': linkCode},
-         initialChildren: children,
-       );
-
-  static const String name = 'HouseholdConnectionRoute';
-
-  static _i22.PageInfo page = _i22.PageInfo(
-    name,
-    builder: (data) {
-      final pathParams = data.inheritedPathParams;
-      final args = data.argsAs<HouseholdConnectionRouteArgs>(
-        orElse: () => HouseholdConnectionRouteArgs(
-          linkCode: pathParams.getString('linkCode'),
-        ),
-      );
-      return _i6.HouseholdConnectionPage(
-        key: args.key,
-        linkCode: args.linkCode,
-      );
-    },
-  );
-}
-
-class HouseholdConnectionRouteArgs {
-  const HouseholdConnectionRouteArgs({this.key, required this.linkCode});
-
-  final _i23.Key? key;
-
-  final String linkCode;
-
-  @override
-  String toString() {
-    return 'HouseholdConnectionRouteArgs{key: $key, linkCode: $linkCode}';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    if (other is! HouseholdConnectionRouteArgs) return false;
-    return key == other.key && linkCode == other.linkCode;
-  }
-
-  @override
-  int get hashCode => key.hashCode ^ linkCode.hashCode;
-}
-
-/// generated route for
-/// [_i7.HouseholdPage]
-class HouseholdRoute extends _i22.PageRouteInfo<HouseholdRouteArgs> {
-  HouseholdRoute({
-    _i23.Key? key,
-    required String familyId,
-    List<_i22.PageRouteInfo>? children,
-  }) : super(
-         HouseholdRoute.name,
-         args: HouseholdRouteArgs(key: key, familyId: familyId),
-         initialChildren: children,
-       );
-
-  static const String name = 'HouseholdRoute';
-
-  static _i22.PageInfo page = _i22.PageInfo(
-    name,
-    builder: (data) {
-      final args = data.argsAs<HouseholdRouteArgs>();
-      return _i7.HouseholdPage(key: args.key, familyId: args.familyId);
-    },
-  );
-}
-
-class HouseholdRouteArgs {
-  const HouseholdRouteArgs({this.key, required this.familyId});
-
-  final _i23.Key? key;
-
-  final String familyId;
-
-  @override
-  String toString() {
-    return 'HouseholdRouteArgs{key: $key, familyId: $familyId}';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    if (other is! HouseholdRouteArgs) return false;
-    return key == other.key && familyId == other.familyId;
-  }
-
-  @override
-  int get hashCode => key.hashCode ^ familyId.hashCode;
-}
-
-/// generated route for
-/// [_i8.InsightsPage]
+/// [_i5.InsightsPage]
 class InsightsRoute extends _i22.PageRouteInfo<void> {
   const InsightsRoute({List<_i22.PageRouteInfo>? children})
     : super(InsightsRoute.name, initialChildren: children);
@@ -327,13 +133,114 @@ class InsightsRoute extends _i22.PageRouteInfo<void> {
   static _i22.PageInfo page = _i22.PageInfo(
     name,
     builder: (data) {
-      return const _i8.InsightsPage();
+      return const _i5.InsightsPage();
     },
   );
 }
 
 /// generated route for
-/// [_i9.ItemDetailPage]
+/// [_i6.InvitationConnectPage]
+class InvitationConnectRoute
+    extends _i22.PageRouteInfo<InvitationConnectRouteArgs> {
+  InvitationConnectRoute({
+    _i23.Key? key,
+    required String linkCode,
+    List<_i22.PageRouteInfo>? children,
+  }) : super(
+         InvitationConnectRoute.name,
+         args: InvitationConnectRouteArgs(key: key, linkCode: linkCode),
+         rawPathParams: {'linkCode': linkCode},
+         initialChildren: children,
+       );
+
+  static const String name = 'InvitationConnectRoute';
+
+  static _i22.PageInfo page = _i22.PageInfo(
+    name,
+    builder: (data) {
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<InvitationConnectRouteArgs>(
+        orElse: () => InvitationConnectRouteArgs(
+          linkCode: pathParams.getString('linkCode'),
+        ),
+      );
+      return _i6.InvitationConnectPage(key: args.key, linkCode: args.linkCode);
+    },
+  );
+}
+
+class InvitationConnectRouteArgs {
+  const InvitationConnectRouteArgs({this.key, required this.linkCode});
+
+  final _i23.Key? key;
+
+  final String linkCode;
+
+  @override
+  String toString() {
+    return 'InvitationConnectRouteArgs{key: $key, linkCode: $linkCode}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! InvitationConnectRouteArgs) return false;
+    return key == other.key && linkCode == other.linkCode;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ linkCode.hashCode;
+}
+
+/// generated route for
+/// [_i7.InvitePage]
+class InviteRoute extends _i22.PageRouteInfo<InviteRouteArgs> {
+  InviteRoute({
+    _i23.Key? key,
+    required String familyId,
+    List<_i22.PageRouteInfo>? children,
+  }) : super(
+         InviteRoute.name,
+         args: InviteRouteArgs(key: key, familyId: familyId),
+         initialChildren: children,
+       );
+
+  static const String name = 'InviteRoute';
+
+  static _i22.PageInfo page = _i22.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<InviteRouteArgs>();
+      return _i7.InvitePage(key: args.key, familyId: args.familyId);
+    },
+  );
+}
+
+class InviteRouteArgs {
+  const InviteRouteArgs({this.key, required this.familyId});
+
+  final _i23.Key? key;
+
+  final String familyId;
+
+  @override
+  String toString() {
+    return 'InviteRouteArgs{key: $key, familyId: $familyId}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! InviteRouteArgs) return false;
+    return key == other.key && familyId == other.familyId;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ familyId.hashCode;
+}
+
+/// generated route for
+/// [_i8.ItemDetailPage]
 class ItemDetailRoute extends _i22.PageRouteInfo<void> {
   const ItemDetailRoute({List<_i22.PageRouteInfo>? children})
     : super(ItemDetailRoute.name, initialChildren: children);
@@ -343,9 +250,71 @@ class ItemDetailRoute extends _i22.PageRouteInfo<void> {
   static _i22.PageInfo page = _i22.PageInfo(
     name,
     builder: (data) {
-      return const _i9.ItemDetailPage();
+      return const _i8.ItemDetailPage();
     },
   );
+}
+
+/// generated route for
+/// [_i9.ListPage]
+class ListRoute extends _i22.PageRouteInfo<ListRouteArgs> {
+  ListRoute({
+    _i23.Key? key,
+    String? familyId,
+    String? familyName,
+    List<_i22.PageRouteInfo>? children,
+  }) : super(
+         ListRoute.name,
+         args: ListRouteArgs(
+           key: key,
+           familyId: familyId,
+           familyName: familyName,
+         ),
+         initialChildren: children,
+       );
+
+  static const String name = 'ListRoute';
+
+  static _i22.PageInfo page = _i22.PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<ListRouteArgs>(
+        orElse: () => const ListRouteArgs(),
+      );
+      return _i9.ListPage(
+        key: args.key,
+        familyId: args.familyId,
+        familyName: args.familyName,
+      );
+    },
+  );
+}
+
+class ListRouteArgs {
+  const ListRouteArgs({this.key, this.familyId, this.familyName});
+
+  final _i23.Key? key;
+
+  final String? familyId;
+
+  final String? familyName;
+
+  @override
+  String toString() {
+    return 'ListRouteArgs{key: $key, familyId: $familyId, familyName: $familyName}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! ListRouteArgs) return false;
+    return key == other.key &&
+        familyId == other.familyId &&
+        familyName == other.familyName;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ familyId.hashCode ^ familyName.hashCode;
 }
 
 /// generated route for

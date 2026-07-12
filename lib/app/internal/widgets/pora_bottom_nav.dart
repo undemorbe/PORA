@@ -84,7 +84,7 @@ class _Tab extends StatelessWidget {
         children: [
           PhosphorIcon(icon, size: 22, color: color),
           const SizedBox(height: 4),
-          Text(label, style: PoraText.micro.copyWith(color: color)),
+          Text(label, style: PoraText.micro.copyWith(color: color, fontSize: 10)),
         ],
       ),
     );

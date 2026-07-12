@@ -81,15 +81,25 @@ mixin _$InvitationsStore on _InvitationsStoreBase, Store {
     });
   }
 
+  late final _$copyToClipboardAsyncAction = AsyncAction(
+    '_InvitationsStoreBase.copyToClipboard',
+    context: context,
+  );
+
+  @override
+  Future<void> copyToClipboard(String textToCopy) {
+    return _$copyToClipboardAsyncAction.run(
+      () => super.copyToClipboard(textToCopy),
+    );
+  }
+
   late final _$generateLinkCodeAsyncAction = AsyncAction(
     '_InvitationsStoreBase.generateLinkCode',
     context: context,
   );
 
   @override
-  Future<Either<Failure, LinkCodeEntity>> generateLinkCode({
-    required String familyId,
-  }) {
+  Future<LinkCodeEntity?> generateLinkCode({required String familyId}) {
     return _$generateLinkCodeAsyncAction.run(
       () => super.generateLinkCode(familyId: familyId),
     );

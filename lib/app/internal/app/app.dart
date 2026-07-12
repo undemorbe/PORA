@@ -35,10 +35,9 @@ class MainApp extends StatelessWidget {
           if (deepLink.path.contains('/api/families/join')) {
             final segments = deepLink.uri.pathSegments;
             final code = segments.isNotEmpty ? segments.last : '';
-
             return DeepLink([
-              HomeRoute(),
-              HouseholdConnectionRoute(linkCode: code),
+              FamiliesRoute(),
+              InvitationConnectRoute(linkCode: code),
             ]);
           } else {
             return DeepLink.defaultPath;

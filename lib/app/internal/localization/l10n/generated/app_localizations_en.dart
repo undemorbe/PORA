@@ -348,6 +348,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get householdDoLater => 'Сделаю позже';
 
   @override
+  String get householdCopyCode => 'Скопировали в буфер обмена!';
+
+  @override
   String get householdInviteCodeLabel => 'Код приглашения';
 
   @override
@@ -559,6 +562,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get familiesCreateOrJoin => '＋ Создать или присоединиться';
 
   @override
+  String get familiesCreateDialog => 'Как назовем семью?';
+
+  @override
+  String get tryToUpdate => 'Попробуйте обновить';
+
+  @override
   String get familiesNoUrgent => 'Нет срочного';
 
   @override
@@ -566,4 +575,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get welcomeBackSubtitle => 'Секунду, открываем ваш список…';
+
+  @override
+  String get errorDuringLoading => 'Ошибка при загрузке';
+
+  @override
+  String get familyName => 'Имя семьи';
+
+  @override
+  String get familiesCreate => 'Создать';
+
+  @override
+  String get familiesConnect => 'Присоединиться';
 }

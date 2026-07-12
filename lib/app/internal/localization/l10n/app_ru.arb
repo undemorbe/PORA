@@ -414,6 +414,10 @@
     "@householdInviteDescription": {
         "description": "householdInviteDescription"
     },
+    "householdCopyCode": "Скопировали в буфер обмена!",
+    "@householdCopyCode": {
+        "description": "householdCopyCode"
+    },
     "householdShareLink": "Поделиться ссылкой",
     "@householdShareLink": {
         "description": "householdShareLink"
@@ -714,6 +718,13 @@
     "@familiesCurrent": {
         "description": "familiesCurrent"
     },
+    "familiesCreateDialog": "Как назовем семью?",
+    "@familiesCreateDialog": {
+        "description": "familiesCreateDialog"
+    },     "tryToUpdate": "Попробуйте обновить",
+    "@tryToUpdate": {
+        "description": "tryToUpdate"
+    },
     "familiesCreateOrJoin": "＋ Создать или присоединиться",
     "@familiesCreateOrJoin": {
         "description": "familiesCreateOrJoin"
@@ -729,5 +740,20 @@
     "welcomeBackSubtitle": "Секунду, открываем ваш список…",
     "@welcomeBackSubtitle": {
         "description": "welcomeBackSubtitle"
-    }
+    },
+    "errorDuringLoading": "Ошибка при загрузке",
+    "@errorDuringLoading": {
+        "description": "errorDuringLoading"
+    }, "familyName": "Имя семьи",
+    "@familyName": {
+        "description": "nameOfFamily"
+    }, "familiesCreate": "Создать",
+    "@familiesCreate": {
+        "description": "createButton"
+    },
+
+    "familiesConnect": "Присоединиться",
+    "@familiesConnect": {
+        "description": "connectButton"
+     }
 }

@@ -75,8 +75,7 @@ class SettingsPage extends StatelessWidget {
                 GestureDetector(
                   behavior: HitTestBehavior.opaque,
                   child: const HouseholdMembersRow(),
-                  onTap: () =>
-                      context.router.push(HouseholdRoute(familyId: '')),
+                  onTap: () => context.router.push(InviteRoute(familyId: '')),
                 ),
               ],
             ),

@@ -260,7 +260,7 @@ class _ApiClient implements ApiClient {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/families/get-families',
+            '/families',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -282,14 +282,14 @@ class _ApiClient implements ApiClient {
     required String familyId,
   }) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'fid': familyId};
+    final queryParameters = <String, dynamic>{r'family-id': familyId};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<LinkCodeModel>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/families/link_code',
+            '/families/link-code',
             queryParameters: queryParameters,
             data: _data,
           )

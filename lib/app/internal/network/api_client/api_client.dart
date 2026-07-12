@@ -52,12 +52,12 @@ abstract class ApiClient {
     @Body() required Map<String, dynamic> nameOfFamilyBody,
   });
 
-  @GET('/families/get-families')
+  @GET('/families')
   Future<FamiliesModels> getFamilies();
 
-  @POST('/families/link_code')
+  @POST('/families/link-code')
   Future<LinkCodeModel> getLinkCodeOfConcreteFamily({
-    @Query('fid') required String familyId,
+    @Query('family-id') required String familyId,
   });
 
   @POST('/families/join/{link_code}')

@@ -7,6 +7,8 @@ part 'families_models.g.dart';
 class FamiliesModels extends FamiliesEntity {
   const FamiliesModels({required this.families}) : super(families: families);
   @override
+  @JsonValue('families')
+  // ignore: overridden_fields
   final List<FamilyModel> families;
 
   factory FamiliesModels.fromJson(Map<String, dynamic> json) =>

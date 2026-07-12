@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:mobx/mobx.dart';
 import 'package:pora/app/features/invitation/domain/entity/link_code.dart';
 import 'package:pora/app/internal/di/export.dart';
@@ -20,7 +21,12 @@ abstract class _InvitationsStoreBase with Store {
   @observable
   String? linkCode;
 
-  Future<Either<Failure, Success>> connectToFamily({
+  @action
+  Future<void> copyToClipboard(String textToCopy) async {
+    await Clipboard.setData(ClipboardData(text: textToCopy));
+  }
+
+  Future<void> connectToFamily({
     required String code,
   }) async {
     isLoading == true;
@@ -31,11 +37,9 @@ abstract class _InvitationsStoreBase with Store {
     if (result.isRight) {
       isSuccess == true;
       isLoading == false;
-      return Right(result.right);
     } else {
       isSuccess == false;
       isLoading == false;
-      return Left(result.left);
     }
   }
 
@@ -44,7 +48,7 @@ abstract class _InvitationsStoreBase with Store {
   LinkCodeEntity? linkCodes;
 
   @action
-  Future<Either<Failure, LinkCodeEntity>> generateLinkCode({
+  Future<LinkCodeEntity?> generateLinkCode({
     required String familyId,
   }) async {
     isSuccess == null;
@@ -55,11 +59,11 @@ abstract class _InvitationsStoreBase with Store {
     if (linkCode.isRight) {
       isSuccess == true;
       isLoading == false;
-      return Right(linkCode.right);
+      return linkCode.right;
     } else {
       isSuccess == false;
       isLoading == false;
-      return Left(linkCode.left);
+      return null;
     }
   }
 
