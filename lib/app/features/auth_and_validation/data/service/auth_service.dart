@@ -32,8 +32,8 @@ class AuthService extends AuthRepository {
     );
     if (value.isRight) {
       return Right(value.right);
-    }else{
-    return Left(value.left);
+    } else {
+      return Left(value.left);
     }
   }
 }

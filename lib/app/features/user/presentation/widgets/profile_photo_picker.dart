@@ -7,7 +7,11 @@ import 'package:pora/app/features/user/presentation/store/user_profile_store.dar
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 
 class ProfilePhotoPicker extends StatefulWidget {
-  const ProfilePhotoPicker({super.key, this.onTap, required this.userProfileStore});
+  const ProfilePhotoPicker({
+    super.key,
+    this.onTap,
+    required this.userProfileStore,
+  });
 
   final VoidCallback? onTap;
   final UserProfileStore userProfileStore;

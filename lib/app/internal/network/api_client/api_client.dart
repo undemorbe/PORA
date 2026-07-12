@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:pora/app/features/auth_and_validation/data/models/jwt_models/tokens_model.dart';
-import 'package:pora/app/features/families/data/models/family_model.dart';
+import 'package:pora/app/features/families/data/models/families_models.dart';
 import 'package:pora/app/features/invitation/data/models/link_code_model.dart';
 import 'package:pora/app/features/user/data/models/user/user_model.dart';
 import 'package:pora/app/features/user/data/models/user/user_update_model.dart';
@@ -48,12 +48,12 @@ abstract class ApiClient {
 
   //! Families
   @POST('/families/create-family')
-  Future<String> createFamile({
+  Future<String> createFamily({
     @Body() required Map<String, dynamic> nameOfFamilyBody,
   });
 
   @GET('/families/get-families')
-  Future<List<FamilyModel>> getFamilies();
+  Future<FamiliesModels> getFamilies();
 
   @POST('/families/link_code')
   Future<LinkCodeModel> getLinkCodeOfConcreteFamily({
@@ -63,5 +63,13 @@ abstract class ApiClient {
   @POST('/families/join/{link_code}')
   Future<void> joinFamily({@Path('link_code') required String code});
 
-  //! WAIT FOR JOIN TO BE CREATED!!!!!!!!
+  @GET('/families/{fid}/lists')
+  Future<String> getFamilyPreviewShoppingList({
+    @Path('fid') required String familyId,
+  });
+
+  @DELETE('/families/{fid}')
+  Future<void> deleteFamily({@Path('fid') required String familyId});
+
+  //!
 }

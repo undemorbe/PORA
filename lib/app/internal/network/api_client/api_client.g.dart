@@ -221,7 +221,7 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<String> createFamile({
+  Future<String> createFamily({
     required Map<String, dynamic> nameOfFamilyBody,
   }) async {
     final _extra = <String, dynamic>{};
@@ -251,12 +251,12 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<List<FamilyModel>> getFamilies() async {
+  Future<FamiliesModels> getFamilies() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<FamilyModel>>(
+    final _options = _setStreamType<FamiliesModels>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -266,12 +266,10 @@ class _ApiClient implements ApiClient {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<FamilyModel> _value;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late FamiliesModels _value;
     try {
-      _value = _result.data!
-          .map((dynamic i) => FamilyModel.fromJson(i as Map<String, dynamic>))
-          .toList();
+      _value = FamiliesModels.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
@@ -319,6 +317,54 @@ class _ApiClient implements ApiClient {
           .compose(
             _dio.options,
             '/families/join/${code}',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    await _dio.fetch<void>(_options);
+  }
+
+  @override
+  Future<String> getFamilyPreviewShoppingList({
+    required String familyId,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<String>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/families/${familyId}/lists',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<String>(_options);
+    late String _value;
+    try {
+      _value = _result.data!;
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options, response: _result);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<void> deleteFamily({required String familyId}) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<void>(
+      Options(method: 'DELETE', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/families/${familyId}',
             queryParameters: queryParameters,
             data: _data,
           )

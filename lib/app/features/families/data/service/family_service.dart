@@ -1,0 +1,29 @@
+import 'package:pora/app/features/families/data/datasource/remote/family_remote.dart';
+import 'package:pora/app/features/families/domain/entity/family.dart';
+import 'package:pora/app/features/families/domain/repository/family_repository.dart';
+import 'package:pora/app/internal/errors/failure.dart';
+import 'package:pora/app/internal/errors/success.dart';
+import 'package:pora/app/internal/extensions/either.dart';
+
+class FamilyService implements FamilyRepository {
+  final FamilyRemoteDataSource familyRemoteDataSource;
+
+  FamilyService({required this.familyRemoteDataSource});
+
+  @override
+  Future<Either<Failure, List<FamilyEntity>>> getFamilies() async {
+    return await familyRemoteDataSource.getFamilies();
+  }
+
+  @override
+  Future<Either<Failure, Success>> createFamily({required String name}) async {
+    return await familyRemoteDataSource.createFamily(name: name);
+  }
+
+  @override
+  Future<Either<Failure, Success>> deleteFamily({
+    required String familyId,
+  }) async {
+    return await familyRemoteDataSource.deleteFamily(familyId: familyId);
+  }
+}

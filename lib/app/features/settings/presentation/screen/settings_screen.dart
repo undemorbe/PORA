@@ -34,9 +34,7 @@ class SettingsPage extends StatelessWidget {
       await dio.post(
         '/authorize/logout',
         options: Options(
-          headers: {
-            if (access != null) 'Authorization': 'Bearer $access',
-          },
+          headers: {if (access != null) 'Authorization': 'Bearer $access'},
         ),
       );
     } catch (e) {

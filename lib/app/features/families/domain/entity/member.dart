@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 abstract class MemberEntity extends Equatable {
   final String id;
   final String name;
+  final String? surname;
   final String? imageUrl;
   final String joinedAt;
   final String colorCode;
@@ -10,11 +11,12 @@ abstract class MemberEntity extends Equatable {
   const MemberEntity({
     required this.id,
     required this.name,
-    required this.imageUrl,
+    this.imageUrl,
     required this.joinedAt,
     required this.colorCode,
+    this.surname,
   });
 
   @override
-  List<Object?> get props => [id, name, imageUrl, joinedAt, colorCode];
+  List<Object?> get props => [id, name, imageUrl, joinedAt, colorCode, surname];
 }

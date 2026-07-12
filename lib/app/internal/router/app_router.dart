@@ -23,10 +23,7 @@ class AppRouter extends RootStackRouter {
       path: "/${OTPConfirmationRoute.name}",
     ),
     // Промежуточный экран для вернувшегося пользователя.
-    AutoRoute(
-      page: WelcomeBackRoute.page,
-      path: "/${WelcomeBackRoute.name}",
-    ),
+    AutoRoute(page: WelcomeBackRoute.page, path: "/${WelcomeBackRoute.name}"),
     // Каркас с нижней навигацией; вкладки — вложенные маршруты.
     AutoRoute(
       page: MainShellRoute.page,

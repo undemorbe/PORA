@@ -61,7 +61,8 @@ class _UserCreateProfilePageState extends State<UserCreateProfilePage> {
                     child: ProfilePhotoPicker(
                       onTap: () async {
                         await userStore.setProfileImage();
-                      }, userProfileStore: userStore,
+                      },
+                      userProfileStore: userStore,
                     ),
                   ),
 
@@ -89,7 +90,8 @@ class _UserCreateProfilePageState extends State<UserCreateProfilePage> {
                   TextButton(
                     onPressed: () async {
                       await userStore.pushUserInformation(
-                      name: nameController.text);
+                        name: nameController.text,
+                      );
                       if (!context.mounted) return;
                       context.router.push(const BriefRoute());
                     },
@@ -105,7 +107,9 @@ class _UserCreateProfilePageState extends State<UserCreateProfilePage> {
                     label: context.l10n.userCreateProfileNext,
                     onPressed: () async {
                       if (context.mounted && nameController.text.isNotEmpty) {
-                        await userStore.pushUserInformation(name: nameController.text);
+                        await userStore.pushUserInformation(
+                          name: nameController.text,
+                        );
                         if (!context.mounted) return;
                         context.router.push(const BriefRoute());
                       } else {

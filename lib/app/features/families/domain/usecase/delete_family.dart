@@ -1,15 +1,15 @@
-import 'package:pora/app/features/families/domain/entity/family.dart';
 import 'package:pora/app/features/families/domain/repository/family_repository.dart';
 import 'package:pora/app/internal/errors/failure.dart';
+import 'package:pora/app/internal/errors/success.dart';
 import 'package:pora/app/internal/extensions/either.dart';
 
-class GetFamiliesUseCase {
+class DeleteFamilyUseCase {
   final FamilyRepository familyRepository;
 
-  const GetFamiliesUseCase({required this.familyRepository});
+  const DeleteFamilyUseCase({required this.familyRepository});
 
-  Future<Either<Failure, List<FamilyEntity>>> call() async {
-    final response = await familyRepository.getFamilies();
+  Future<Either<Failure, Success>> call({required String familyId}) async {
+    final response = await familyRepository.deleteFamily(familyId: familyId);
     if (response.isLeft) {
       return Left(response.left);
     }
