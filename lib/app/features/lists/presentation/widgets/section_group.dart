@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pora/app/features/list/domain/entity/list_item.dart';
-import 'package:pora/app/features/list/presentation/widgets/list_item_tile.dart';
+import 'package:pora/app/features/lists/domain/entity/lists/list_section.dart';
+import 'package:pora/app/features/lists/domain/entity/lists/lists.dart';
+import 'package:pora/app/features/lists/domain/entity/products/product.dart';
+import 'package:pora/app/features/lists/presentation/widgets/list_item_tile.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/widgets/pora_card.dart';
 import 'package:pora/app/internal/widgets/section_label.dart';
@@ -10,13 +12,13 @@ class SectionGroup extends StatelessWidget {
   const SectionGroup({
     super.key,
     required this.section,
-    required this.colorOf,
-    this.onItemTap,
+    this.onProductTap,
+    this.onListTap,
   });
 
-  final ListSection section;
-  final Color Function(String initial) colorOf;
-  final void Function(ListItem item)? onItemTap;
+  final ListSectionEntity section;
+  final void Function(ProductEntity product)? onProductTap;
+  final void Function(ListSectionEntity listid)? onListTap;
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +39,10 @@ class SectionGroup extends StatelessWidget {
       tiles.add(
         ListItemTile(
           item: item,
-          addedByColor: colorOf(item.addedBy),
-          onTap: onItemTap == null ? null : () => onItemTap!(item),
+          addedBy: item.addedBy,
+          onTap: onProductTap == null
+              ? () => onListTap!(section)
+              : () => onProductTap!(item),
         ),
       );
     }
@@ -46,7 +50,7 @@ class SectionGroup extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SectionLabel(section.title),
+        SectionLabel(section.name),
         PoraCard(
           padding: const EdgeInsets.symmetric(vertical: PoraSpacing.xs),
           child: Column(children: tiles),

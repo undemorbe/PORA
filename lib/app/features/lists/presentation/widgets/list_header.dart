@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
+import 'package:pora/app/features/families/domain/entity/member.dart';
+import 'package:pora/app/internal/extensions/color_parser.dart';
+import 'package:pora/app/internal/extensions/string_extension.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 import 'package:pora/app/internal/widgets/pora_avatar.dart';
@@ -19,8 +22,7 @@ class ListHeader extends StatelessWidget {
   final String title;
   final String subtitle;
 
-  /// Участники: (инициал, цвет). Аватары накладываются друг на друга.
-  final List<(String, Color)> members;
+  final List<MemberEntity> members;
 
   final VoidCallback? onSearch;
   final VoidCallback? onRecipe;
@@ -66,9 +68,10 @@ class ListHeader extends StatelessWidget {
                 Positioned(
                   left: i * _overlap,
                   child: PoraAvatar(
-                    initial: members[i].$1,
-                    color: members[i].$2,
+                    initial: members[i].name.initials,
+                    color: memberColor(members[i], (i % 10) % 4),
                     size: _avatar,
+                    imageUrl: members[i].imageUrl,
                     ring: Theme.of(context).scaffoldBackgroundColor,
                   ),
                 ),

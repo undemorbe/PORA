@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/app/internal/extensions/l10n_extension.dart';
-import 'package:pora/app/internal/extensions/string_validation_extension.dart';
+import 'package:pora/app/internal/extensions/string_extension.dart';
 import 'package:pora/app/internal/formatters/email_input_formatter.dart';
 import 'package:pora/app/internal/formatters/phone_input_formatter.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';

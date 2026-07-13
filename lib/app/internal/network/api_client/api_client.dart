@@ -4,6 +4,11 @@ import 'package:dio/dio.dart';
 import 'package:pora/app/features/auth_and_validation/data/models/jwt_models/tokens_model.dart';
 import 'package:pora/app/features/families/data/models/families_models.dart';
 import 'package:pora/app/features/invitation/data/models/link_code_model.dart';
+import 'package:pora/app/features/lists/data/models/lists/list_model.dart';
+import 'package:pora/app/features/lists/data/models/lists/lists_array_model.dart';
+import 'package:pora/app/features/lists/data/models/products/product_model.dart';
+import 'package:pora/app/features/lists/domain/entity/lists/lists_array.dart';
+import 'package:pora/app/features/lists/domain/entity/products/product.dart';
 import 'package:pora/app/features/user/data/models/user/user_model.dart';
 import 'package:pora/app/features/user/data/models/user/user_update_model.dart';
 import 'package:retrofit/error_logger.dart';
@@ -64,12 +69,26 @@ abstract class ApiClient {
   Future<void> joinFamily({@Path('link_code') required String code});
 
   @GET('/families/{fid}/lists')
-  Future<String> getFamilyPreviewShoppingList({
+  Future<ListsArrayModel> getFamilyPreviewShoppingList({
     @Path('fid') required String familyId,
   });
 
   @DELETE('/families/{fid}')
   Future<void> deleteFamily({@Path('fid') required String familyId});
 
-  //!
+  //! Lists
+  @POST('/lists/create-list')
+  Future<void> createList({@Body() required Map<String, dynamic> body});
+
+  @GET('/lists/{lid}')
+  Future<ListModel> getList({@Path('lid') required String listId});
+
+  @POST('/lists/{lid}/items')
+  Future<void> addItem({
+    @Path('lid') required String listId,
+    @Body() required ProductModel product,
+  });
+
+  @DELETE('/lists/{lid}')
+  Future<void> deleteList({@Path('lid') required String listId});
 }

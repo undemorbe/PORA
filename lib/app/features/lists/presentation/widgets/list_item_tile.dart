@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
-import 'package:pora/app/features/list/domain/entity/list_item.dart';
+import 'package:pora/app/features/families/domain/entity/member.dart';
+import 'package:pora/app/features/lists/domain/entity/products/product.dart';
+import 'package:pora/app/internal/extensions/color_parser.dart';
 import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
@@ -14,12 +16,12 @@ class ListItemTile extends StatelessWidget {
   const ListItemTile({
     super.key,
     required this.item,
-    required this.addedByColor,
+    required this.addedBy,
     this.onTap,
   });
 
-  final ListItem item;
-  final Color addedByColor;
+  final ProductEntity item;
+  final MemberEntity addedBy;
   final VoidCallback? onTap;
 
   @override
@@ -41,6 +43,7 @@ class ListItemTile extends StatelessWidget {
         ),
         child: Row(
           children: [
+            //! add check box handle
             PoraCheckbox(checked: item.checked),
             const SizedBox(width: PoraSpacing.md),
             Expanded(
@@ -49,10 +52,13 @@ class ListItemTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(item.name, style: nameStyle),
-                  if (item.qty != null)
+                  if (item.quantity != 0)
                     Padding(
                       padding: const EdgeInsets.only(top: PoraSpacing.xxs),
-                      child: Text(item.qty!, style: PoraText.small),
+                      child: Text(
+                        item.quantity.toString(),
+                        style: PoraText.small,
+                      ),
                     ),
                 ],
               ),
@@ -65,7 +71,11 @@ class ListItemTile extends StatelessWidget {
               ),
               const SizedBox(width: PoraSpacing.md),
             ],
-            PoraAvatar(initial: item.addedBy, color: addedByColor),
+            PoraAvatar(
+              initial: addedBy.name[0],
+              color: memberColor(addedBy, 0),
+              imageUrl: addedBy.imageUrl,
+            ),
           ],
         ),
       ),

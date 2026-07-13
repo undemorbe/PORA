@@ -1196,6 +1196,24 @@ abstract class AppLocalizations {
   /// **'Ваш личный список'**
   String get listsYour;
 
+  /// human
+  ///
+  /// In en, this message translates to:
+  /// **'человека'**
+  String get human;
+
+  /// products
+  ///
+  /// In en, this message translates to:
+  /// **'продуктов'**
+  String get products;
+
+  /// lists
+  ///
+  /// In en, this message translates to:
+  /// **'списков'**
+  String get lists;
+
   /// familiesNoUrgent
   ///
   /// In en, this message translates to:

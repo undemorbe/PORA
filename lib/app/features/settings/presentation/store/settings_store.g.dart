@@ -54,6 +54,24 @@ mixin _$SettingsStore on _SettingsStoreBase, Store {
     });
   }
 
+  late final _$isLoadingImageAtom = Atom(
+    name: '_SettingsStoreBase.isLoadingImage',
+    context: context,
+  );
+
+  @override
+  bool? get isLoadingImage {
+    _$isLoadingImageAtom.reportRead();
+    return super.isLoadingImage;
+  }
+
+  @override
+  set isLoadingImage(bool? value) {
+    _$isLoadingImageAtom.reportWrite(value, super.isLoadingImage, () {
+      super.isLoadingImage = value;
+    });
+  }
+
   late final _$setProfileImageAsyncAction = AsyncAction(
     '_SettingsStoreBase.setProfileImage',
     context: context,
@@ -89,6 +107,7 @@ mixin _$SettingsStore on _SettingsStoreBase, Store {
     return '''
 user: ${user},
 profileImageFile: ${profileImageFile},
+isLoadingImage: ${isLoadingImage},
 profileImageUrl: ${profileImageUrl}
     ''';
   }

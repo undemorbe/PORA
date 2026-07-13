@@ -27,12 +27,16 @@ class ProfilePhotoPickerUserCreation extends StatelessWidget {
       builder: (context) {
         final imageProvider = _getImageProvider(userProfileStore);
         final isLoading = userProfileStore.isLoadingImage;
-        return _buildPickerStack(context, imageProvider,isLoading );
+        return _buildPickerStack(context, imageProvider, isLoading);
       },
     );
   }
 
-  Widget _buildPickerStack(BuildContext context, ImageProvider? imageProvider, bool? isLoading) {
+  Widget _buildPickerStack(
+    BuildContext context,
+    ImageProvider? imageProvider,
+    bool? isLoading,
+  ) {
     return GestureDetector(
       onTap: isLoading == true ? null : onTap,
       child: SizedBox(

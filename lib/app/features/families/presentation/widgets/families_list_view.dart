@@ -41,9 +41,9 @@ class FamiliesListView extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: PoraSpacing.md),
               child: FamilyCard(
                 family: family,
-                onTap: () => context.router.push(
-                  ListRoute(familyId: family.id, familyName: family.name),
-                ),
+                // onTap: () => context.router.push(
+                // ListRoute(familyId: family.id, familyName: family.name),
+                // ),
               ),
             );
           },

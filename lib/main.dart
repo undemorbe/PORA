@@ -27,12 +27,20 @@ Future<void> _initializeApp(InjectionContainer container) async {
   await localDB.init();
   final refreshed = await container.getIt<RefreshTokenUseCase>().call();
   final auth = container.getIt<AuthState>();
-  (refreshed?.isRight ?? false)
-      ? auth.setAuthenticated()
-      : auth.setUnauthenticated();
+  if(refreshed != null && refreshed.isLeft){
+  final tokensStore = container.getIt<TokensSecureStore>();
+  final accessToken = await tokensStore.getAccessToken();
+  final refreshToken = await tokensStore.getRefreshToken();
+  if(accessToken != null && refreshToken != null){
+    auth.setAuthenticated();
+  }else{
+    auth.setUnauthenticated();
+  }
+  }else{
+    auth.setAuthenticated();
+  }
 
-  // Наполняем sync-кэш токена для AuthInterceptor при холодном старте
-  // (иначе до первого saveTokens Authorization не подставляется).
+  
   final tokensStore = container.getIt<TokensSecureStore>();
   tokensStore.updateCache(await tokensStore.getAccessToken());
 

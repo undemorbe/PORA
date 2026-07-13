@@ -577,6 +577,15 @@ class AppLocalizationsRu extends AppLocalizations {
   String get listsYour => 'Ваш личный список';
 
   @override
+  String get human => 'человека';
+
+  @override
+  String get products => 'продуктов';
+
+  @override
+  String get lists => 'списков';
+
+  @override
   String get familiesNoUrgent => 'Нет срочного';
 
   @override

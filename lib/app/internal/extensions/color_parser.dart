@@ -14,12 +14,6 @@ Color memberColor(MemberEntity? member, int index) {
   return _parseHex(member.colorCode) ?? _fallback[index % _fallback.length];
 }
 
-/// Инициал участника — первая буква имени в верхнем регистре.
-String memberInitial(MemberEntity? member) {
-  if (member == null) return '';
-  return member.name.isEmpty ? '?' : member.name.substring(0, 1).toUpperCase();
-}
-
 Color? _parseHex(String raw) {
   var s = raw.replaceAll('#', '').trim();
   if (s.length == 6) s = 'FF$s';

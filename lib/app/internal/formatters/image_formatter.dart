@@ -8,19 +8,10 @@ class ImageProcessingService {
   static Future<File?>? RepublicImageProcess(File pickedFile) async {
     final croppedFile = await ImageCropper().cropImage(
       sourcePath: pickedFile.path,
-      aspectRatio: const CropAspectRatio(
-        ratioX: 1,
-        ratioY: 1,
-      ),
+      aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
       uiSettings: [
-        AndroidUiSettings(
-          toolbarTitle: "Resize",
-          lockAspectRatio: true,
-        ),
-        IOSUiSettings(
-          title: 'Resize',
-          aspectRatioLockEnabled: true,
-        ),
+        AndroidUiSettings(toolbarTitle: "Resize", lockAspectRatio: true),
+        IOSUiSettings(title: 'Resize', aspectRatioLockEnabled: true),
       ],
     );
 

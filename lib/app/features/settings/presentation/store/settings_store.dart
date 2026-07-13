@@ -44,7 +44,7 @@ abstract class _SettingsStoreBase with Store {
         await GetIt.I<UpdateUserUseCase>()
             .call(image: File(processedImage.path))
             .whenComplete(() => getUserMe());
-            isLoadingImage = false;
+        isLoadingImage = false;
       }
     } catch (e) {
       Logger.talker.error("Error processing image: $e");

@@ -11,7 +11,6 @@ part 'user_profile_store.g.dart';
 class UserProfileStore = _UserProfileStoreBase with _$UserProfileStore;
 
 abstract class _UserProfileStoreBase with Store {
-
   @observable
   UserEntity? user;
 
@@ -38,7 +37,7 @@ abstract class _UserProfileStoreBase with Store {
     return user;
   }
 
-@action
+  @action
   Future<void> setProfileImage() async {
     final imagePicker = GetIt.I<ImagePicker>();
     final XFile? pickedFile = await imagePicker.pickImage(
@@ -56,9 +55,10 @@ abstract class _UserProfileStoreBase with Store {
 
       if (processedImage != null) {
         profileImage = processedImage;
-        await GetIt.I<UpdateUserUseCase>()
-            .call(image: File(processedImage.path));
-            isLoadingImage = false;
+        await GetIt.I<UpdateUserUseCase>().call(
+          image: File(processedImage.path),
+        );
+        isLoadingImage = false;
       }
     } catch (e) {
       Logger.talker.error("Error processing image: $e");

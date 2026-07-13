@@ -4,8 +4,9 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/app/features/families/domain/entity/family.dart';
 import 'package:pora/app/features/families/domain/entity/member.dart';
-import 'package:pora/app/features/families/presentation/widgets/member_color.dart';
+import 'package:pora/app/internal/extensions/color_parser.dart';
 import 'package:pora/app/internal/extensions/l10n_extension.dart';
+import 'package:pora/app/internal/extensions/string_extension.dart';
 import 'package:pora/app/internal/router/app_router.gr.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
@@ -68,8 +69,9 @@ class FamilyCard extends StatelessWidget {
                       Positioned(
                         left: i * _overlap,
                         child: PoraAvatar(
-                          initial: memberInitial(members[i]),
+                          initial: members[i].name.initials,
                           color: memberColor(members[i], i),
+                          imageUrl: members[i].imageUrl,
                           size: _avatar,
                           ring: ring,
                         ),

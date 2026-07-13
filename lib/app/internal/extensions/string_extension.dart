@@ -17,3 +17,9 @@ extension Validating on String {
   /// Только цифры (для OTP-кода и подобного ввода).
   bool get isValidNumbers => RegExp(r'^\d+$').hasMatch(this);
 }
+
+extension Initials on String {
+  String get initials {
+    return isEmpty ? '?' : substring(0, 1).toUpperCase();
+  }
+}

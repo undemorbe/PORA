@@ -45,6 +45,24 @@ mixin _$UserProfileStore on _UserProfileStoreBase, Store {
     });
   }
 
+  late final _$isLoadingImageAtom = Atom(
+    name: '_UserProfileStoreBase.isLoadingImage',
+    context: context,
+  );
+
+  @override
+  bool? get isLoadingImage {
+    _$isLoadingImageAtom.reportRead();
+    return super.isLoadingImage;
+  }
+
+  @override
+  set isLoadingImage(bool? value) {
+    _$isLoadingImageAtom.reportWrite(value, super.isLoadingImage, () {
+      super.isLoadingImage = value;
+    });
+  }
+
   late final _$pushUserInformationAsyncAction = AsyncAction(
     '_UserProfileStoreBase.pushUserInformation',
     context: context,
@@ -88,7 +106,8 @@ mixin _$UserProfileStore on _UserProfileStoreBase, Store {
   String toString() {
     return '''
 user: ${user},
-profileImage: ${profileImage}
+profileImage: ${profileImage},
+isLoadingImage: ${isLoadingImage}
     ''';
   }
 }

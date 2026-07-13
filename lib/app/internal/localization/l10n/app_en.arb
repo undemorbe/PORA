@@ -742,7 +742,18 @@
     "@listsYour": {
         "description": "listsYour"
     },
-
+    "human": "человека",
+    "@human": {
+        "description" : "human"
+    },
+    "products": "продуктов",
+    "@products": {
+        "description" : "products"
+    },
+    "lists": "списков",
+    "@lists": {
+        "description" : "lists"
+    },
     "familiesNoUrgent": "Нет срочного",
     "@familiesNoUrgent": {
         "description": "familiesNoUrgent"

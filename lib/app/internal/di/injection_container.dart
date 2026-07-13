@@ -5,6 +5,14 @@ import 'package:pora/app/features/families/domain/repository/family_repository.d
 import 'package:pora/app/features/families/domain/usecase/create_family.dart';
 import 'package:pora/app/features/families/domain/usecase/delete_family.dart';
 import 'package:pora/app/features/families/domain/usecase/get_families.dart';
+import 'package:pora/app/features/lists/data/datasource/remote/lists_remote.dart';
+import 'package:pora/app/features/lists/data/service/lists_service.dart';
+import 'package:pora/app/features/lists/domain/repository/lists_repository.dart';
+import 'package:pora/app/features/lists/domain/usecase/add_item_to_list.dart';
+import 'package:pora/app/features/lists/domain/usecase/create_list.dart';
+import 'package:pora/app/features/lists/domain/usecase/delete_list.dart';
+import 'package:pora/app/features/lists/domain/usecase/get_families_lists.dart';
+import 'package:pora/app/features/lists/domain/usecase/get_list_data.dart';
 import 'package:pora/app/internal/formatters/image_formatter.dart';
 import 'package:pora/app/internal/share/share_conf.dart';
 
@@ -112,6 +120,21 @@ class InjectionContainer {
         invitationsRepository: _getIt<InvitationsRepository>(),
       ),
     );
+    _getIt.registerFactory<AddItemToListUseCase>(
+      () => AddItemToListUseCase(listsRepository: _getIt<ListsRepository>()),
+    );
+    _getIt.registerFactory<CreateListUseCase>(
+      () => CreateListUseCase(listsRepository: _getIt<ListsRepository>()),
+    );
+    _getIt.registerFactory<DeleteListUseCase>(
+      () => DeleteListUseCase(listsRepository: _getIt<ListsRepository>()),
+    );
+    _getIt.registerFactory<GetFamiliesListsUseCase>(
+      () => GetFamiliesListsUseCase(listsRepository: _getIt<ListsRepository>()),
+    );
+    _getIt.registerFactory<GetConcreteListUseCase>(
+      () => GetConcreteListUseCase(listsRepository: _getIt<ListsRepository>()),
+    );
   }
 
   void _registerRepositories() {
@@ -174,6 +197,13 @@ class InjectionContainer {
     //! Sharing
     _getIt.registerLazySingleton<SharingRepository>(
       () => SharingRepositoryImpl(),
+    );
+    //! Lists
+    _getIt.registerLazySingleton<ListsRemote>(
+      () => ListsRemoteImpl(apiClient: _getIt<ApiClient>()),
+    );
+    _getIt.registerLazySingleton<ListsRepository>(
+      () => ListsService(listsRemote: _getIt<ListsRemote>()),
     );
   }
 }
