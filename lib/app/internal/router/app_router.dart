@@ -39,6 +39,12 @@ class AppRouter extends RootStackRouter {
       path: "/${ItemDetailRoute.name}",
       guards: [_authGuard],
     ),
+
+    AutoRoute(
+      page: PreviewListsRoute.page,
+      path: "/${PreviewListsRoute.name}",
+      guards: [_authGuard],
+    ),
     AutoRoute(
       page: ListRoute.page,
       path: "/${ListRoute.name}",

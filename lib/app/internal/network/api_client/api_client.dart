@@ -7,8 +7,6 @@ import 'package:pora/app/features/invitation/data/models/link_code_model.dart';
 import 'package:pora/app/features/lists/data/models/lists/list_model.dart';
 import 'package:pora/app/features/lists/data/models/lists/lists_array_model.dart';
 import 'package:pora/app/features/lists/data/models/products/product_model.dart';
-import 'package:pora/app/features/lists/domain/entity/lists/lists_array.dart';
-import 'package:pora/app/features/lists/domain/entity/products/product.dart';
 import 'package:pora/app/features/user/data/models/user/user_model.dart';
 import 'package:pora/app/features/user/data/models/user/user_update_model.dart';
 import 'package:retrofit/error_logger.dart';

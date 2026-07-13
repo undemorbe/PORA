@@ -586,6 +586,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get lists => 'списков';
 
   @override
+  String get connectionSuccess => 'Присоединились';
+
+  @override
   String get familiesNoUrgent => 'Нет срочного';
 
   @override

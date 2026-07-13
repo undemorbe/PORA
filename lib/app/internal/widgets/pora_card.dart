@@ -11,11 +11,13 @@ class PoraCard extends StatelessWidget {
     this.padding = EdgeInsets.zero,
     this.radius = PoraRadii.card,
     this.color,
+    this.imageUrl,
   });
 
   final Widget child;
   final EdgeInsetsGeometry padding;
   final BorderRadius radius;
+  final String? imageUrl;
   final Color? color;
 
   @override
@@ -26,6 +28,9 @@ class PoraCard extends StatelessWidget {
         color: color ?? Theme.of(context).colorScheme.surface,
         borderRadius: radius,
         boxShadow: PoraShadows.card,
+        image: imageUrl != null
+            ? DecorationImage(image: NetworkImage(imageUrl!), fit: BoxFit.cover)
+            : null,
       ),
       child: child,
     );

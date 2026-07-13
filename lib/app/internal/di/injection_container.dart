@@ -13,6 +13,7 @@ import 'package:pora/app/features/lists/domain/usecase/create_list.dart';
 import 'package:pora/app/features/lists/domain/usecase/delete_list.dart';
 import 'package:pora/app/features/lists/domain/usecase/get_families_lists.dart';
 import 'package:pora/app/features/lists/domain/usecase/get_list_data.dart';
+import 'package:pora/app/features/user/domain/usecase/user/logout.dart';
 import 'package:pora/app/internal/formatters/image_formatter.dart';
 import 'package:pora/app/internal/share/share_conf.dart';
 
@@ -77,6 +78,9 @@ class InjectionContainer {
     _getIt.registerFactory<UpdateUserUseCase>(
       () => UpdateUserUseCase(_getIt<UserRepository>()),
     );
+    _getIt.registerFactory<LogoutUseCase>(
+      () => LogoutUseCase(repository: _getIt<UserRepository>()),
+    );
 
     //! Auth(otp) feature
     _getIt.registerFactory<SendOtpUseCase>(
@@ -120,6 +124,8 @@ class InjectionContainer {
         invitationsRepository: _getIt<InvitationsRepository>(),
       ),
     );
+
+    //! Lists
     _getIt.registerFactory<AddItemToListUseCase>(
       () => AddItemToListUseCase(listsRepository: _getIt<ListsRepository>()),
     );

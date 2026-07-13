@@ -99,9 +99,20 @@ class _InvitationConnectPageState extends State<InvitationConnectPage> {
                 label: context.l10n.householdConnectToFamily,
                 //! Connect with invite code + deeplink
                 onPressed: () async {
-                  await invitationsStore.connectToFamily(
-                    code: invitationsStore.linkCode ?? widget.linkCode,
-                  );
+                  await invitationsStore
+                      .connectToFamily(
+                        code: invitationsStore.linkCode ?? widget.linkCode,
+                      )
+                      .whenComplete(() {
+                        if (invitationsStore.isSuccess == true &&
+                            context.mounted) {
+                          PoraSnackbar.show(
+                            context,
+                            message: context.l10n.connectionSuccess,
+                          );
+                          context.router.pop();
+                        }
+                      });
                 },
               ),
               const Spacer(),

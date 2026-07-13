@@ -754,6 +754,10 @@
     "@lists": {
         "description" : "lists"
     },
+       "connectionSuccess": "Присоединились",
+    "@connectionSuccess": {
+        "description" : "connectionSuccess"
+    },
     "familiesNoUrgent": "Нет срочного",
     "@familiesNoUrgent": {
         "description": "familiesNoUrgent"

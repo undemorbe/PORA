@@ -59,7 +59,7 @@ class _PreviewListsPageState extends State<PreviewListsPage> {
                 //! Do search, recipe, notifications
                 title: widget.familyName,
                 subtitle:
-                    "${widget.members.length} ${context.l10n.human} · ${listStore.listsWithPreview?.lists.length} ${context.l10n.lists}",
+                    "${widget.members.length} ${context.l10n.human} · ${listStore.listsWithPreview?.lists?.length} ${context.l10n.lists}",
                 members: widget.members,
               ),
               const SizedBox(height: PoraSpacing.xl),

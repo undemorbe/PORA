@@ -739,6 +739,10 @@
     "@human": {
         "description" : "human"
     },
+           "connectionSuccess": "Присоединились",
+    "@connectionSuccess": {
+        "description" : "connectionSuccess"
+    },
     "products": "продуктов",
     "@products": {
         "description" : "products"

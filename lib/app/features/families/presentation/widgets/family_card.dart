@@ -4,6 +4,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/app/features/families/domain/entity/family.dart';
 import 'package:pora/app/features/families/domain/entity/member.dart';
+import 'package:pora/app/internal/di/export.dart';
 import 'package:pora/app/internal/extensions/color_parser.dart';
 import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/extensions/string_extension.dart';

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:pora/app/features/auth_and_validation/data/datasource/local/secure_tokens.dart';
 import 'package:pora/app/features/auth_and_validation/domain/usecase/refresh_token.dart';
 import 'package:pora/app/internal/app/app.dart';
@@ -27,20 +28,20 @@ Future<void> _initializeApp(InjectionContainer container) async {
   await localDB.init();
   final refreshed = await container.getIt<RefreshTokenUseCase>().call();
   final auth = container.getIt<AuthState>();
-  if(refreshed != null && refreshed.isLeft){
-  final tokensStore = container.getIt<TokensSecureStore>();
-  final accessToken = await tokensStore.getAccessToken();
-  final refreshToken = await tokensStore.getRefreshToken();
-  if(accessToken != null && refreshToken != null){
-    auth.setAuthenticated();
-  }else{
-    auth.setUnauthenticated();
-  }
-  }else{
+  if (refreshed != null && refreshed.isLeft) {
+    final tokensStore = container.getIt<TokensSecureStore>();
+    final accessToken = await tokensStore.getAccessToken();
+    final refreshToken = await tokensStore.getRefreshToken();
+    if (accessToken != null && refreshToken != null ||
+        dotenv.getBool('DEBUG')) {
+      auth.setAuthenticated();
+    } else {
+      auth.setUnauthenticated();
+    }
+  } else {
     auth.setAuthenticated();
   }
 
-  
   final tokensStore = container.getIt<TokensSecureStore>();
   tokensStore.updateCache(await tokensStore.getAccessToken());
 

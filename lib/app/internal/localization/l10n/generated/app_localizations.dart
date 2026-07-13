@@ -1214,6 +1214,12 @@ abstract class AppLocalizations {
   /// **'списков'**
   String get lists;
 
+  /// connectionSuccess
+  ///
+  /// In en, this message translates to:
+  /// **'Присоединились'**
+  String get connectionSuccess;
+
   /// familiesNoUrgent
   ///
   /// In en, this message translates to:
