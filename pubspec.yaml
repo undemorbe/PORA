@@ -52,6 +52,7 @@ flutter:
 
   assets:
     - .env
+    - assets/app_logo.png
 
   fonts:
       - family: Inter
