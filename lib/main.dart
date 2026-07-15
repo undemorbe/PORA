@@ -1,71 +1,31 @@
-import 'dart:async';
-
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:pora/app/features/auth_and_validation/data/datasource/local/secure_tokens.dart';
-import 'package:pora/app/features/auth_and_validation/domain/usecase/refresh_token.dart';
 import 'package:pora/app/internal/app/app.dart';
+import 'package:pora/app/internal/bootstrap/app_bootstrap.dart';
 import 'package:pora/app/internal/di/injection_container.dart';
-import 'package:pora/app/internal/notifications/deep_link_handler.dart';
-import 'package:pora/app/internal/notifications/notification_service.dart';
-import 'package:pora/app/internal/router/guard/auth_state.dart';
-import 'package:pora/app/internal/local_storage/abstract_local_db.dart';
-import 'package:pora/app/internal/localization/store/localization_store.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // Быстрая часть: DI-регистрации + dotenv (~10-50ms).
   final injectionContainer = InjectionContainer();
   await injectionContainer.init();
 
-  await _initializeApp(injectionContainer);
-
-  runApp(MainApp(injectionContainer: injectionContainer));
-}
-
-Future<void> _initializeApp(InjectionContainer container) async {
-  final localDB = container.getIt<ILocalDB<dynamic>>();
-  await localDB.init();
-
-  // Firebase + push. Должно быть до auth flow — иначе fcmToken пустой при
-  // первом verifyOtp.
-  await Firebase.initializeApp();
-  await NotificationService.instance.init();
-  DeepLinkHandler.instance.bindToAuth();
-
-  final refreshed = await container.getIt<RefreshTokenUseCase>().call();
-  final auth = container.getIt<AuthState>();
-  if (refreshed != null && refreshed.isLeft) {
-    final tokensStore = container.getIt<TokensSecureStore>();
-    final accessToken = await tokensStore.getAccessToken();
-    final refreshToken = await tokensStore.getRefreshToken();
-    if (accessToken != null && refreshToken != null ||
-        dotenv.getBool('DEBUG')) {
-      auth.setAuthenticated();
-    } else {
-      auth.setUnauthenticated();
-    }
-  } else {
-    auth.setAuthenticated();
-  }
-
-  final tokensStore = container.getIt<TokensSecureStore>();
-  tokensStore.updateCache(await tokensStore.getAccessToken());
-
-  final localizationStore = container.getIt<LocalizationStore>();
-  await localizationStore.initialise();
-
+  // System chrome — синхронно, копейки.
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark,
     ),
   );
-
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+
+  // Тяжёлая часть (Hive/Firebase/FCM/refresh/локализация) уходит в фон.
+  // Splash её дождётся перед навигацией.
+  AppBootstrap.instance.start(injectionContainer);
+
+  runApp(MainApp(injectionContainer: injectionContainer));
 }

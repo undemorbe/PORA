@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:json_annotation/json_annotation.dart';
 import 'package:pora/app/features/families/domain/entity/member.dart';
 
 abstract class ProductEntity extends Equatable {
@@ -10,10 +9,10 @@ abstract class ProductEntity extends Equatable {
   final int priority;
   final bool urgent;
   final bool checked;
-  @JsonKey(name: 'remind-every-day')
   final bool? remindEveryDay;
-  @JsonKey(name: 'added-by')
-  final MemberEntity addedBy;
+
+  /// Для личных списков поле отсутствует — null.
+  final MemberEntity? addedBy;
 
   const ProductEntity({
     required this.name,
@@ -24,18 +23,19 @@ abstract class ProductEntity extends Equatable {
     required this.urgent,
     required this.checked,
     required this.remindEveryDay,
-    required this.addedBy,
+    this.addedBy,
   });
+
   @override
   List<Object?> get props => [
-    name,
-    id,
-    quantity,
-    unit,
-    priority,
-    urgent,
-    checked,
-    remindEveryDay,
-    addedBy,
-  ];
+        name,
+        id,
+        quantity,
+        unit,
+        priority,
+        urgent,
+        checked,
+        remindEveryDay,
+        addedBy,
+      ];
 }

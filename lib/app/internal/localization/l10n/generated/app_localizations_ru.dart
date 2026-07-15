@@ -629,4 +629,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get quantityLabel => 'Кол-во';
+
+  @override
+  String get personal => 'Личное';
 }

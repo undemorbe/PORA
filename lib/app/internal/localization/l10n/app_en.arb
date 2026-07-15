@@ -800,5 +800,7 @@
     "cancel": "Cancel",
     "@cancel": { "description": "cancel" },
     "quantityLabel": "Qty",
-    "@quantityLabel": { "description": "quantityLabel" }
+    "@quantityLabel": { "description": "quantityLabel" },
+    "personal": "Personal",
+    "@personal": { "description": "personal" }
 }

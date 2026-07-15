@@ -1,21 +1,13 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:get_it/get_it.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
-import 'package:pora/app/features/auth_and_validation/data/datasource/local/secure_tokens.dart';
 import 'package:pora/app/features/auth_and_validation/presentation/controller/privacy_store.dart';
 import 'package:pora/app/features/settings/presentation/store/settings_store.dart';
 import 'package:pora/app/features/settings/presentation/widgets/delivery_value.dart';
-import 'package:pora/app/features/settings/presentation/widgets/profile_photo_picker.dart';
-import 'package:pora/app/features/user/presentation/widgets/profile_photo_picker.dart';
 import 'package:pora/app/internal/extensions/l10n_extension.dart';
-import 'package:pora/app/features/settings/presentation/widgets/household_members_row.dart';
 import 'package:pora/app/features/settings/presentation/widgets/profile_card.dart';
-import 'package:pora/app/internal/logging/logger.dart';
 import 'package:pora/app/internal/router/app_router.gr.dart';
-import 'package:pora/app/internal/router/guard/auth_state.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
@@ -81,13 +73,16 @@ class _SettingsPageState extends State<SettingsPage> {
 
               SectionLabel(context.l10n.listsYour),
 
-              //! List
+              //! Personal lists — invite/members не показываем.
               PoraRowsCard(
                 children: [
-                  GestureDetector(
-                    behavior: HitTestBehavior.opaque,
-                    child: const HouseholdMembersRow(),
-                    onTap: () => context.router.push(InviteRoute(familyId: '')),
+                  PoraSettingRow(
+                    icon: PhosphorIconsRegular.user,
+                    label: context.l10n.personal,
+                    trailing: PoraSettingRow.chevron,
+                    onTap: () => context.router.push(
+                      PreviewListsRoute(isPersonal: true),
+                    ),
                   ),
                 ],
               ),

@@ -49,6 +49,11 @@ abstract class ApiClient {
   @MultiPart()
   Future<String> saveUserImage({@Part(name: 'image') required File file});
 
+  @PUT('/user/device')
+  Future<void> updateUserDevice({
+    @Body() required Map<String, dynamic> body,
+  });
+
   //! Families
   @POST('/families/create-family')
   Future<String> createFamily({

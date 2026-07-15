@@ -14,6 +14,7 @@ import 'package:pora/app/features/lists/domain/usecase/delete_list.dart';
 import 'package:pora/app/features/lists/domain/usecase/get_families_lists.dart';
 import 'package:pora/app/features/lists/domain/usecase/get_list_data.dart';
 import 'package:pora/app/features/user/domain/usecase/user/logout.dart';
+import 'package:pora/app/features/user/domain/usecase/user/update_device_token.dart';
 import 'package:pora/app/internal/formatters/image_formatter.dart';
 import 'package:pora/app/internal/notifications/notification_service.dart';
 import 'package:pora/app/internal/share/share_conf.dart';
@@ -86,6 +87,9 @@ class InjectionContainer {
     );
     _getIt.registerFactory<LogoutUseCase>(
       () => LogoutUseCase(repository: _getIt<UserRepository>()),
+    );
+    _getIt.registerFactory<UpdateDeviceTokenUseCase>(
+      () => UpdateDeviceTokenUseCase(repository: _getIt<UserRepository>()),
     );
 
     //! Auth(otp) feature

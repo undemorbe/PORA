@@ -1303,6 +1303,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Qty'**
   String get quantityLabel;
+
+  /// personal
+  ///
+  /// In en, this message translates to:
+  /// **'Personal'**
+  String get personal;
 }
 
 class _AppLocalizationsDelegate

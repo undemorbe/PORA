@@ -181,6 +181,16 @@ mixin _$ListStore on _ListStoreBase, Store {
     );
   }
 
+  late final _$loadPersonalListsAsyncAction = AsyncAction(
+    '_ListStoreBase.loadPersonalLists',
+    context: context,
+  );
+
+  @override
+  Future<void> loadPersonalLists() {
+    return _$loadPersonalListsAsyncAction.run(() => super.loadPersonalLists());
+  }
+
   late final _$_ListStoreBaseActionController = ActionController(
     name: '_ListStoreBase',
     context: context,

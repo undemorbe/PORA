@@ -10,18 +10,23 @@ import 'package:pora/app/features/lists/presentation/widgets/section_builder.dar
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/extensions/l10n_extension.dart';
 
-/// Превью списков покупок семьи: карточки со списками + high-priority секциями.
+/// Превью списков.
+/// - `isPersonal == true` → личные списки пользователя (без members/invite).
+/// - иначе → списки семьи (нужны familyId/familyName/members).
 @RoutePage()
 class PreviewListsPage extends StatefulWidget {
   const PreviewListsPage({
     super.key,
-    required this.familyId,
-    required this.familyName,
-    required this.members,
+    this.familyId,
+    this.familyName,
+    this.members,
+    this.isPersonal = false,
   });
-  final String familyId;
-  final String familyName;
-  final List<MemberEntity> members;
+
+  final String? familyId;
+  final String? familyName;
+  final List<MemberEntity>? members;
+  final bool isPersonal;
 
   @override
   State<PreviewListsPage> createState() => _PreviewListsPageState();
@@ -30,27 +35,38 @@ class PreviewListsPage extends StatefulWidget {
 class _PreviewListsPageState extends State<PreviewListsPage> {
   late final ListStore listStore;
 
+  bool get _isPersonal => widget.isPersonal;
+
   @override
   void initState() {
     super.initState();
-    listStore = ListStore()..getFamilyLists(fid: widget.familyId);
+    listStore = ListStore();
+    _refresh();
+  }
+
+  Future<void> _refresh() {
+    if (_isPersonal) return listStore.loadPersonalLists();
+    return listStore.getFamilyLists(fid: widget.familyId ?? '');
+  }
+
+  void _openCreateSheet() {
+    showCreateListSheet(
+      context,
+      listStore: listStore,
+      // Личные — без familyId, backend создаёт под пользователем.
+      familyId: _isPersonal ? null : widget.familyId,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: AddListButton(
-        onTap: () => showCreateListSheet(
-          context,
-          listStore: listStore,
-          familyId: widget.familyId,
-        ),
-      ),
+      floatingActionButton: AddListButton(onTap: _openCreateSheet),
       body: SafeArea(
         bottom: false,
         child: RefreshIndicator.adaptive(
-          onRefresh: () => listStore.getFamilyLists(fid: widget.familyId),
+          onRefresh: _refresh,
           child: ListView(
             padding: const EdgeInsets.fromLTRB(
               PoraSpacing.screen,
@@ -63,11 +79,19 @@ class _PreviewListsPageState extends State<PreviewListsPage> {
                 builder: (context) {
                   final count =
                       listStore.listsWithPreview?.lists.length ?? 0;
+                  if (_isPersonal) {
+                    return ListHeader(
+                      title: context.l10n.personal,
+                      subtitle: '$count ${context.l10n.lists}',
+                      members: const [],
+                    );
+                  }
+                  final members = widget.members ?? const <MemberEntity>[];
                   return ListHeader(
-                    title: widget.familyName,
+                    title: widget.familyName ?? '',
                     subtitle:
-                        "${widget.members.length} ${context.l10n.human} · $count ${context.l10n.lists}",
-                    members: widget.members,
+                        "${members.length} ${context.l10n.human} · $count ${context.l10n.lists}",
+                    members: members,
                   );
                 },
               ),

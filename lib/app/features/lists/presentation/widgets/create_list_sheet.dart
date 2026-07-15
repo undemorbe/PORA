@@ -10,7 +10,7 @@ import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 Future<bool> showCreateListSheet(
   BuildContext context, {
   required ListStore listStore,
-  required String familyId,
+  required String? familyId,
 }) async {
   final result = await showModalBottomSheet<bool>(
     context: context,
@@ -31,7 +31,7 @@ class _CreateListSheet extends StatefulWidget {
   const _CreateListSheet({required this.listStore, required this.familyId});
 
   final ListStore listStore;
-  final String familyId;
+  final String? familyId;
 
   @override
   State<_CreateListSheet> createState() => _CreateListSheetState();

@@ -795,5 +795,7 @@
     "cancel": "Отмена",
     "@cancel": { "description": "cancel" },
     "quantityLabel": "Кол-во",
-    "@quantityLabel": { "description": "quantityLabel" }
+    "@quantityLabel": { "description": "quantityLabel" },
+    "personal": "Личное",
+    "@personal": { "description": "personal" }
 }

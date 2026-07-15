@@ -17,13 +17,15 @@ class ListItemTile extends StatelessWidget {
   const ListItemTile({
     super.key,
     required this.item,
-    required this.addedBy,
+    this.addedBy,
     this.onTap,
     this.isCompact = false,
   });
 
   final ProductEntity item;
-  final MemberEntity addedBy;
+
+  /// null для личных списков — аватар не рисуется.
+  final MemberEntity? addedBy;
   final VoidCallback? onTap;
   final bool isCompact;
 
@@ -93,11 +95,12 @@ class ListItemTile extends StatelessWidget {
               ),
               const SizedBox(width: PoraSpacing.sm),
             ],
-            PoraAvatar(
-              initial: addedBy.name.isEmpty ? '?' : addedBy.name[0],
-              color: memberColor(addedBy, 0),
-              imageUrl: addedBy.imageUrl,
-            ),
+            if (addedBy != null)
+              PoraAvatar(
+                initial: addedBy!.name.isEmpty ? '?' : addedBy!.name[0],
+                color: memberColor(addedBy!, 0),
+                imageUrl: addedBy!.imageUrl,
+              ),
           ],
         ),
       ),

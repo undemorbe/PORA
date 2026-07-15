@@ -629,4 +629,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get quantityLabel => 'Qty';
+
+  @override
+  String get personal => 'Personal';
 }

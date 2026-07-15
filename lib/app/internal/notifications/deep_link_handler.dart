@@ -7,16 +7,25 @@ import 'package:pora/app/internal/router/guard/auth_state.dart';
 /// Роутит push-payload (`RemoteMessage.data`) в auto_route.
 ///
 /// Payload contract (backend кладёт в data):
-///   `{ "screen": "name", ... }`
+///   ```
+///   {
+///     "type": "urgent",           // тип события (только для UI-эмодзи/цвета)
+///     "screen": "notifications",  // куда роутить
+///     "family-id": "...",         // опционально
+///     "list-id": "...",           // требуется для screen=list
+///     "item-id": "..."            // опционально, будущее (ItemDetail)
+///   }
+///   ```
+/// Reminder и обычные notifications имеют одинаковый `data` — отличаются
+/// только `title`/`body`, поэтому обрабатываются одним кодом.
 ///
 /// Supported `screen` values:
-///   - `notifications` -> NotificationsRoute
+///   - `notifications` → NotificationsRoute
 ///   - `predictions` / `pora` → PredictionsRoute (tab)
 ///   - `order` → OrderRoute (tab)
 ///   - `settings` / `profile` → SettingsRoute (tab)
 ///   - `families` → FamiliesRoute (tab)
-///   - `list` → NotificationsRoute (fallback: ListRoute требует name/members
-///     из семьи, cold-start их нет — открываем центр уведомлений).
+///   - `list` → ListRoute(listId=data['list-id'])
 ///
 /// Cold-start: если роутер ещё не готов или пользователь не залогинен,
 /// payload кладётся в [_pending] и раскрывается через [flushPending].
@@ -89,9 +98,10 @@ class DeepLinkHandler {
         await router.push(const FamiliesRoute());
         return;
       case 'list':
-        final listId = data['listId']?.toString();
+        // Контракт backend: ключ `list-id` (hyphen).
+        final listId = (data['list-id'] ?? data['listId'])?.toString();
         if (listId == null || listId.isEmpty) {
-          Logger.talker.warning('DeepLink screen=list without listId');
+          Logger.talker.warning('DeepLink screen=list without list-id');
           await router.push(const NotificationsRoute());
           return;
         }

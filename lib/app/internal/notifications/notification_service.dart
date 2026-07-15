@@ -10,6 +10,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pora/app/features/notifications/domain/entity/notification_entity.dart';
 import 'package:pora/app/internal/logging/logger.dart';
 import 'package:pora/app/internal/notifications/deep_link_handler.dart';
+import 'package:pora/app/internal/notifications/device_token_sync.dart';
 
 /// Имя Hive-бокса для истории уведомлений.
 /// Хранится под собственным ключом (не через [ILocalDB]), т.к. background
@@ -55,7 +56,10 @@ class NotificationService {
   NotificationService._();
   static final NotificationService instance = NotificationService._();
 
-  final FirebaseMessaging _fcm = FirebaseMessaging.instance;
+  /// Ленивое — обращение к `FirebaseMessaging.instance` до
+  /// `Firebase.initializeApp()` бросает `[core/no-app]`. Инициализируется
+  /// в [init] после того как Firebase готов.
+  late final FirebaseMessaging _fcm;
   final FlutterLocalNotificationsPlugin _local =
       FlutterLocalNotificationsPlugin();
   final StreamController<NotificationEntity> _stream =
@@ -79,6 +83,9 @@ class NotificationService {
   Future<void> init() async {
     if (_initialized) return;
     _initialized = true;
+
+    // Firebase уже должен быть initialized выше по стеку (AppBootstrap).
+    _fcm = FirebaseMessaging.instance;
 
     await Hive.openBox<String>(kNotificationsBoxName);
 
@@ -120,6 +127,8 @@ class NotificationService {
     _fcm.onTokenRefresh.listen((token) {
       _fcmToken = token;
       Logger.talker.info('FCM token refreshed: $token');
+      // Отправляем на бэкенд если пользователь уже authed.
+      syncDeviceToken();
     });
 
     FirebaseMessaging.onBackgroundMessage(firebaseBackgroundHandler);

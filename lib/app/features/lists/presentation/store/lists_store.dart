@@ -8,6 +8,7 @@ import 'package:pora/app/features/lists/domain/usecase/create_list.dart';
 import 'package:pora/app/features/lists/domain/usecase/delete_list.dart';
 import 'package:pora/app/features/lists/domain/usecase/get_families_lists.dart';
 import 'package:pora/app/features/lists/domain/usecase/get_list_data.dart';
+import 'package:pora/app/features/user/domain/usecase/user/get_user.dart';
 part 'lists_store.g.dart';
 
 class ListStore = _ListStoreBase with _$ListStore;
@@ -69,7 +70,9 @@ abstract class _ListStoreBase with Store {
     final byId = <String, MemberEntity>{};
     for (final s in sections) {
       for (final p in s.items) {
-        byId.putIfAbsent(p.addedBy.id, () => p.addedBy);
+        final by = p.addedBy;
+        if (by == null) continue;
+        byId.putIfAbsent(by.id, () => by);
       }
     }
     return byId.values.toList();
@@ -143,12 +146,37 @@ abstract class _ListStoreBase with Store {
       isSuccess = true;
       if (fid != null) {
         await getFamilyLists(fid: fid);
+      } else {
+        await loadPersonalLists();
       }
     } else {
       isSuccess = false;
       errorMessage = response.left.message;
     }
   }
+
+  /// Личные списки — читаются из `user/me`, не отдельным endpoint.
+  @action
+  Future<void> loadPersonalLists() async {
+    isSuccess = null;
+    errorMessage = null;
+    isLoading = true;
+    final response = await getIt<GetUserUseCase>().call();
+    isLoading = false;
+    if (response.isRight) {
+      isSuccess = true;
+      listsWithPreview = _PersonalArray(
+        response.right.selfLists ?? const [],
+      );
+    } else {
+      isSuccess = false;
+      errorMessage = response.left.message;
+    }
+  }
+}
+
+class _PersonalArray extends ListsArrayEntity {
+  const _PersonalArray(List<ListEntity> lists) : super(lists: lists);
 }
 
 class _RemovedList extends ListsArrayEntity {
