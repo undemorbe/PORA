@@ -34,17 +34,19 @@ class ListsRemoteImpl implements ListsRemote {
     required ProductEntity product,
   }) async {
     try {
-      ProductModel prod = ProductModel(
-        name: product.name,
-        id: product.id,
-        quantity: product.quantity,
-        unit: product.unit,
-        priority: product.priority,
-        urgent: product.urgent,
-        checked: product.checked,
-        remindEveryDay: product.remindEveryDay,
-        addedBy: product.addedBy,
-      );
+      final prod = product is ProductModel
+          ? product
+          : ProductModel(
+              name: product.name,
+              id: product.id,
+              quantity: product.quantity,
+              unit: product.unit,
+              priority: product.priority,
+              urgent: product.urgent,
+              checked: product.checked,
+              remindEveryDay: product.remindEveryDay,
+              addedBy: product.addedBy,
+            );
       await apiClient.addItem(listId: lid, product: prod);
       return Right(const ServerSuccess());
     } on Exception catch (e) {

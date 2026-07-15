@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pora/app/features/lists/domain/entity/lists/list_section.dart';
-import 'package:pora/app/features/lists/domain/entity/lists/lists.dart';
 import 'package:pora/app/features/lists/domain/entity/products/product.dart';
 import 'package:pora/app/features/lists/presentation/widgets/list_item_tile.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';

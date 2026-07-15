@@ -15,6 +15,7 @@ import 'package:pora/app/features/lists/domain/usecase/get_families_lists.dart';
 import 'package:pora/app/features/lists/domain/usecase/get_list_data.dart';
 import 'package:pora/app/features/user/domain/usecase/user/logout.dart';
 import 'package:pora/app/internal/formatters/image_formatter.dart';
+import 'package:pora/app/internal/notifications/notification_service.dart';
 import 'package:pora/app/internal/share/share_conf.dart';
 
 import 'export.dart';
@@ -52,6 +53,11 @@ class InjectionContainer {
     //! STORAGE
     _getIt.registerSingletonAsync<ILocalDB<dynamic>>(
       () async => HiveLocalDB<dynamic>()..init(),
+    );
+
+    //! Notifications
+    _getIt.registerSingleton<NotificationService>(
+      NotificationService.instance,
     );
 
     //! Image Picker

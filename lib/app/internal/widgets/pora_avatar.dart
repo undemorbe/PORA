@@ -3,7 +3,7 @@ import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 
-/// Круглый аватар-инициал (метка «от кого», участники семьи, профиль).
+/// Круглый аватар: сетевое фото если есть, иначе инициал на цветном фоне.
 class PoraAvatar extends StatelessWidget {
   const PoraAvatar({
     super.key,
@@ -24,24 +24,19 @@ class PoraAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    final hasImage = imageUrl != null && imageUrl!.isNotEmpty;
+    final borderSide = ring != null
+        ? Border.all(color: ring!, width: 2)
+        : null;
+
+    final fallback = Container(
       width: size,
       height: size,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        image: imageUrl != null
-            ? DecorationImage(
-                image: Image.network(
-                  imageUrl ?? '',
-                  cacheHeight: 200,
-                  fit: BoxFit.cover,
-                  cacheWidth: 200,
-                ).image,
-              )
-            : null,
-        color: color,
+        color: color ?? PoraColors.primary,
         shape: BoxShape.circle,
-        border: ring != null ? Border.all(color: ring!, width: 2) : null,
+        border: borderSide,
       ),
       child: Text(
         initial,
@@ -51,6 +46,30 @@ class PoraAvatar extends StatelessWidget {
           fontSize: size * 0.42,
           color: PoraColors.inkInverse,
         ),
+      ),
+    );
+
+    if (!hasImage) return fallback;
+
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: borderSide,
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: Image.network(
+        imageUrl!,
+        width: size,
+        height: size,
+        fit: BoxFit.cover,
+        cacheWidth: (size * MediaQuery.of(context).devicePixelRatio).round(),
+        errorBuilder: (_, __, ___) => fallback,
+        loadingBuilder: (context, child, progress) {
+          if (progress == null) return child;
+          return fallback;
+        },
       ),
     );
   }

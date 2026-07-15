@@ -5,6 +5,7 @@ import 'package:pora/app/features/auth_and_validation/domain/usecase/send_otp.da
 import 'package:pora/app/features/auth_and_validation/domain/usecase/verify_otp.dart';
 import 'package:pora/app/features/onboarding/domain/usecase/update_sawed_onboarding.dart';
 import 'package:pora/app/internal/logging/logger.dart';
+import 'package:pora/app/internal/notifications/notification_service.dart';
 part 'auth_store.g.dart';
 
 class AuthStore = _AuthStoreBase with _$AuthStore;
@@ -50,9 +51,12 @@ abstract class _AuthStoreBase with Store {
     required String code,
   }) async {
     isLoading = true;
+    final notifications = NotificationService.instance;
     final result = await GetIt.I<VerifyOtpUseCase>().call(
       destination: destination,
       otp: code,
+      deviceToken: notifications.fcmToken,
+      deviceType: notifications.deviceType,
     );
     if (result.isRight) {
       success = true;

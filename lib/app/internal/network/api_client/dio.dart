@@ -3,7 +3,12 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pora/app/features/auth_and_validation/data/datasource/local/secure_tokens.dart';
 import 'package:pora/app/features/auth_and_validation/domain/usecase/refresh_token.dart';
+import 'package:pora/app/features/user/domain/usecase/user/logout.dart';
+import 'package:pora/app/internal/logging/logger.dart';
 import 'package:pora/app/internal/network/interceptors/auth_interceptor.dart';
+import 'package:pora/app/internal/network/interceptors/error_interceptor.dart';
+import 'package:talker_dio_logger/talker_dio_logger_interceptor.dart';
+import 'package:talker_dio_logger/talker_dio_logger_settings.dart';
 
 class DioClient {
   static Dio? _instance;
@@ -38,43 +43,26 @@ class DioClient {
           }
           return null;
         },
-        onRefreshFailed: () {
-          // Выход из системы при неудачном обновлении токена
-          // GetIt.I<AuthRepository>().logout();
-          // Можно добавить навигацию на экран входа
+        onRefreshFailed: () async {
+          await GetIt.I<LogoutUseCase>().call();
         },
         dioProvider: () => DioClient.instance, // Используем настроенный Dio
       ),
 
       // Логирование
-      LogInterceptor(
-        request: true,
-        requestBody: true,
-        responseBody: true,
-        responseHeader: false,
+      TalkerDioLogger(
+          settings: const TalkerDioLoggerSettings(
+          printRequestHeaders: true,
+          printResponseHeaders: true,
+          printResponseMessage: true,
+        ),talker: Logger.talker,
       ),
 
       // Обработка ошибок
-      _ErrorInterceptor(),
+      ErrorInterceptor(),
     ]);
 
     return dio;
   }
 }
 
-class _ErrorInterceptor extends Interceptor {
-  @override
-  void onError(DioException err, ErrorInterceptorHandler handler) {
-    // Обработка общих ошибок
-    if (err.type == DioExceptionType.connectionTimeout ||
-        err.type == DioExceptionType.receiveTimeout) {
-      // Ошибка таймаута
-    }
-
-    if (err.type == DioExceptionType.connectionError) {
-      // Нет интернета
-    }
-
-    handler.next(err);
-  }
-}

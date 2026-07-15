@@ -1,15 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pora/app/features/families/domain/entity/member.dart';
 import 'package:pora/app/features/lists/presentation/store/lists_store.dart';
 import 'package:pora/app/features/lists/presentation/widgets/add_list_button.dart';
+import 'package:pora/app/features/lists/presentation/widgets/create_list_sheet.dart';
 import 'package:pora/app/features/lists/presentation/widgets/list_header.dart';
 import 'package:pora/app/features/lists/presentation/widgets/section_builder.dart';
-import 'package:pora/app/internal/router/app_router.gr.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/extensions/l10n_extension.dart';
 
-/// Конкретный список покупок выбранной семьи.
+/// Превью списков покупок семьи: карточки со списками + high-priority секциями.
 @RoutePage()
 class PreviewListsPage extends StatefulWidget {
   const PreviewListsPage({
@@ -27,7 +28,6 @@ class PreviewListsPage extends StatefulWidget {
 }
 
 class _PreviewListsPageState extends State<PreviewListsPage> {
-  /// Контроллер
   late final ListStore listStore;
 
   @override
@@ -41,7 +41,11 @@ class _PreviewListsPageState extends State<PreviewListsPage> {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: AddListButton(
-        onTap: () => context.router.push(const AddItemRoute()),
+        onTap: () => showCreateListSheet(
+          context,
+          listStore: listStore,
+          familyId: widget.familyId,
+        ),
       ),
       body: SafeArea(
         bottom: false,
@@ -52,18 +56,22 @@ class _PreviewListsPageState extends State<PreviewListsPage> {
               PoraSpacing.screen,
               PoraSpacing.sm,
               PoraSpacing.screen,
-              100, // место под плавающую кнопку
+              100,
             ),
             children: [
-              ListHeader(
-                //! Do search, recipe, notifications
-                title: widget.familyName,
-                subtitle:
-                    "${widget.members.length} ${context.l10n.human} · ${listStore.listsWithPreview?.lists?.length} ${context.l10n.lists}",
-                members: widget.members,
+              Observer(
+                builder: (context) {
+                  final count =
+                      listStore.listsWithPreview?.lists.length ?? 0;
+                  return ListHeader(
+                    title: widget.familyName,
+                    subtitle:
+                        "${widget.members.length} ${context.l10n.human} · $count ${context.l10n.lists}",
+                    members: widget.members,
+                  );
+                },
               ),
               const SizedBox(height: PoraSpacing.xl),
-
               SectionBuilder(
                 listStore: listStore,
                 isPreview: true,

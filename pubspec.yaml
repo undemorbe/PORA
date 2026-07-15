@@ -18,6 +18,7 @@ dependencies:
   get_it: ^9.2.1
   flutter_dotenv: ^6.0.1
   talker_flutter: ^5.1.17
+  talker_dio_logger: ^5.1.19
   pinput: ^6.0.2
   equatable: ^2.0.8
   phosphoricons_flutter: ^1.0.0
@@ -33,6 +34,9 @@ dependencies:
   flutter_slidable: ^4.0.3
   image_cropper: ^12.2.1
   flutter_image_compress: ^2.4.0
+  firebase_core: ^2.24.2
+  firebase_messaging: ^14.6.5
+  flutter_local_notifications: ^17.0.0
   
 
 dev_dependencies:

@@ -11,18 +11,21 @@ import 'package:pora/app/internal/widgets/pora_avatar.dart';
 import 'package:pora/app/internal/widgets/pora_checkbox.dart';
 import 'package:pora/app/internal/widgets/pora_pill.dart';
 
-/// Одна строка товара: чекбокс · название/кол-во · (срочно) · аватар «от кого».
+/// Одна строка товара.
+/// `isCompact` — превью-режим: без priority/remindEveryDay/чекбокса.
 class ListItemTile extends StatelessWidget {
   const ListItemTile({
     super.key,
     required this.item,
     required this.addedBy,
     this.onTap,
+    this.isCompact = false,
   });
 
   final ProductEntity item;
   final MemberEntity addedBy;
   final VoidCallback? onTap;
+  final bool isCompact;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +36,8 @@ class ListItemTile extends StatelessWidget {
           )
         : PoraText.itemTitle;
 
+    final qty = _formatQuantity(item);
+
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: onTap,
@@ -42,21 +47,31 @@ class ListItemTile extends StatelessWidget {
           vertical: PoraSpacing.md,
         ),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            //! add check box handle
-            PoraCheckbox(checked: item.checked),
-            const SizedBox(width: PoraSpacing.md),
+            if (!isCompact) ...[
+              PoraCheckbox(checked: item.checked),
+              const SizedBox(width: PoraSpacing.md),
+            ],
             Expanded(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(item.name, style: nameStyle),
-                  if (item.quantity != 0)
+                  if (qty != null)
                     Padding(
                       padding: const EdgeInsets.only(top: PoraSpacing.xxs),
                       child: Text(
-                        item.quantity.toString(),
+                        '${context.l10n.quantityLabel}: $qty',
+                        style: PoraText.small,
+                      ),
+                    ),
+                  if (!isCompact && item.priority > 0)
+                    Padding(
+                      padding: const EdgeInsets.only(top: PoraSpacing.xxs),
+                      child: Text(
+                        '${context.l10n.priorityLabel}: ${item.priority}',
                         style: PoraText.small,
                       ),
                     ),
@@ -69,10 +84,17 @@ class ListItemTile extends StatelessWidget {
                 icon: PhosphorIconsRegular.clock,
                 background: PoraColors.primaryTintStrong,
               ),
-              const SizedBox(width: PoraSpacing.md),
+              const SizedBox(width: PoraSpacing.sm),
+            ],
+            if (!isCompact && (item.remindEveryDay ?? false)) ...[
+              PoraPill(
+                label: context.l10n.everyDay,
+                icon: PhosphorIconsRegular.bell,
+              ),
+              const SizedBox(width: PoraSpacing.sm),
             ],
             PoraAvatar(
-              initial: addedBy.name[0],
+              initial: addedBy.name.isEmpty ? '?' : addedBy.name[0],
               color: memberColor(addedBy, 0),
               imageUrl: addedBy.imageUrl,
             ),
@@ -80,5 +102,11 @@ class ListItemTile extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String? _formatQuantity(ProductEntity item) {
+    if (item.quantity <= 0) return null;
+    final unit = item.unit.trim();
+    return unit.isEmpty ? '${item.quantity}' : '${item.quantity} $unit';
   }
 }

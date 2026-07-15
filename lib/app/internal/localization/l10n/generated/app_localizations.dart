@@ -1261,6 +1261,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Присоединиться'**
   String get familiesConnect;
+
+  /// showAll
+  ///
+  /// In en, this message translates to:
+  /// **'Show all'**
+  String get showAll;
+
+  /// priorityLabel
+  ///
+  /// In en, this message translates to:
+  /// **'Priority'**
+  String get priorityLabel;
+
+  /// everyDay
+  ///
+  /// In en, this message translates to:
+  /// **'Every day'**
+  String get everyDay;
+
+  /// newList
+  ///
+  /// In en, this message translates to:
+  /// **'New list'**
+  String get newList;
+
+  /// listNamePlaceholder
+  ///
+  /// In en, this message translates to:
+  /// **'List name'**
+  String get listNamePlaceholder;
+
+  /// cancel
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// quantityLabel
+  ///
+  /// In en, this message translates to:
+  /// **'Qty'**
+  String get quantityLabel;
 }
 
 class _AppLocalizationsDelegate

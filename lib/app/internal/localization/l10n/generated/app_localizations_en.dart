@@ -608,4 +608,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get familiesConnect => 'Присоединиться';
+
+  @override
+  String get showAll => 'Show all';
+
+  @override
+  String get priorityLabel => 'Priority';
+
+  @override
+  String get everyDay => 'Every day';
+
+  @override
+  String get newList => 'New list';
+
+  @override
+  String get listNamePlaceholder => 'List name';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get quantityLabel => 'Qty';
 }

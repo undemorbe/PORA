@@ -81,11 +81,6 @@ class AppRouter extends RootStackRouter {
       guards: [_authGuard],
     ),
     AutoRoute(
-      page: SearchRoute.page,
-      path: "/${SearchRoute.name}",
-      guards: [_authGuard],
-    ),
-    AutoRoute(
       page: OnboardingSliderRoute.page,
       path: "/${OnboardingSliderRoute.name}",
     ),

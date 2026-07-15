@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -7,6 +8,8 @@ import 'package:pora/app/features/auth_and_validation/data/datasource/local/secu
 import 'package:pora/app/features/auth_and_validation/domain/usecase/refresh_token.dart';
 import 'package:pora/app/internal/app/app.dart';
 import 'package:pora/app/internal/di/injection_container.dart';
+import 'package:pora/app/internal/notifications/deep_link_handler.dart';
+import 'package:pora/app/internal/notifications/notification_service.dart';
 import 'package:pora/app/internal/router/guard/auth_state.dart';
 import 'package:pora/app/internal/local_storage/abstract_local_db.dart';
 import 'package:pora/app/internal/localization/store/localization_store.dart';
@@ -24,8 +27,14 @@ void main() async {
 
 Future<void> _initializeApp(InjectionContainer container) async {
   final localDB = container.getIt<ILocalDB<dynamic>>();
-
   await localDB.init();
+
+  // Firebase + push. Должно быть до auth flow — иначе fcmToken пустой при
+  // первом verifyOtp.
+  await Firebase.initializeApp();
+  await NotificationService.instance.init();
+  DeepLinkHandler.instance.bindToAuth();
+
   final refreshed = await container.getIt<RefreshTokenUseCase>().call();
   final auth = container.getIt<AuthState>();
   if (refreshed != null && refreshed.isLeft) {

@@ -786,5 +786,19 @@
     "familiesConnect": "Присоединиться",
     "@familiesConnect": {
         "description": "connectButton"
-     }
+     },
+    "showAll": "Show all",
+    "@showAll": { "description": "showAll" },
+    "priorityLabel": "Priority",
+    "@priorityLabel": { "description": "priorityLabel" },
+    "everyDay": "Every day",
+    "@everyDay": { "description": "everyDay" },
+    "newList": "New list",
+    "@newList": { "description": "newList" },
+    "listNamePlaceholder": "List name",
+    "@listNamePlaceholder": { "description": "listNamePlaceholder" },
+    "cancel": "Cancel",
+    "@cancel": { "description": "cancel" },
+    "quantityLabel": "Qty",
+    "@quantityLabel": { "description": "quantityLabel" }
 }

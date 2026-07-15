@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/app/features/search/presentation/widgets/result_row.dart';
@@ -10,7 +9,7 @@ import 'package:pora/app/internal/widgets/pora_rows_card.dart';
 import 'package:pora/app/internal/widgets/section_label.dart';
 
 /// Поиск продуктов и рецептов с живой фильтрацией.
-@RoutePage()
+/// Legacy standalone-экран. Search теперь inline на concrete list.
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
 

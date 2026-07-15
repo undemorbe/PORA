@@ -608,4 +608,25 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get familiesConnect => 'Присоединиться';
+
+  @override
+  String get showAll => 'Показать все';
+
+  @override
+  String get priorityLabel => 'Приоритет';
+
+  @override
+  String get everyDay => 'Каждый день';
+
+  @override
+  String get newList => 'Новый список';
+
+  @override
+  String get listNamePlaceholder => 'Название списка';
+
+  @override
+  String get cancel => 'Отмена';
+
+  @override
+  String get quantityLabel => 'Кол-во';
 }

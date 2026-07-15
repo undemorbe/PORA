@@ -11,6 +11,8 @@ abstract class AuthRemote {
   Future<Either<Failure, TokensEntity>> verifyOtp({
     required String destination,
     required String otp,
+    required String? deviceToken,
+    required String deviceType,
   });
 }
 
@@ -51,16 +53,23 @@ class AuthRemoteImpl implements AuthRemote {
   Future<Either<Failure, TokensEntity>> verifyOtp({
     required String destination,
     required String otp,
+    required String? deviceToken,
+    required String deviceType,
   }) async {
+    Map<String, dynamic> baseBody() => {
+          'otp': otp,
+          'device-token': deviceToken,
+          'device-type': deviceType,
+        };
     try {
       if (destination.isValidEmail(destination)) {
         final value = await apiClient.verifyOtp(
-          body: {'email': destination, 'otp': otp},
+          body: {...baseBody(), 'email': destination},
         );
         return Right(value);
       } else if (destination.isValidPhone(destination)) {
         final value = await apiClient.verifyOtp(
-          body: {'phone': destination, 'otp': otp},
+          body: {...baseBody(), 'phone': destination},
         );
         return Right(value);
       } else {
@@ -69,7 +78,6 @@ class AuthRemoteImpl implements AuthRemote {
     } on DioException catch (e) {
       return Left(NetworkFailure('Failed to verify otp : $e'));
     } catch (e) {
-      // Не сеть (например, ошибка разбора ответа) — не маскируем под Network.
       return Left(ServerFailure('Failed to verify otp : $e'));
     }
   }

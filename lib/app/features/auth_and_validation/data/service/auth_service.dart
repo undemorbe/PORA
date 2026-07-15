@@ -25,15 +25,14 @@ class AuthService extends AuthRepository {
   Future<Either<Failure, TokensEntity>> verifyOtp({
     required String destination,
     required String otp,
+    required String? deviceToken,
+    required String deviceType,
   }) async {
-    final value = await authRemote.verifyOtp(
+    return authRemote.verifyOtp(
       destination: destination,
       otp: otp,
+      deviceToken: deviceToken,
+      deviceType: deviceType,
     );
-    if (value.isRight) {
-      return Right(value.right);
-    } else {
-      return Left(value.left);
-    }
   }
 }

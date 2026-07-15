@@ -16,6 +16,22 @@ mixin _$ListStore on _ListStoreBase, Store {
     () => super.productsAmount,
     name: '_ListStoreBase.productsAmount',
   )).value;
+  Computed<List<ListSectionEntity>>? _$filteredSectionsComputed;
+
+  @override
+  List<ListSectionEntity> get filteredSections =>
+      (_$filteredSectionsComputed ??= Computed<List<ListSectionEntity>>(
+        () => super.filteredSections,
+        name: '_ListStoreBase.filteredSections',
+      )).value;
+  Computed<List<MemberEntity>>? _$derivedMembersComputed;
+
+  @override
+  List<MemberEntity> get derivedMembers =>
+      (_$derivedMembersComputed ??= Computed<List<MemberEntity>>(
+        () => super.derivedMembers,
+        name: '_ListStoreBase.derivedMembers',
+      )).value;
 
   late final _$listAtom = Atom(name: '_ListStoreBase.list', context: context);
 
@@ -38,13 +54,13 @@ mixin _$ListStore on _ListStoreBase, Store {
   );
 
   @override
-  bool? get isLoading {
+  bool get isLoading {
     _$isLoadingAtom.reportRead();
     return super.isLoading;
   }
 
   @override
-  set isLoading(bool? value) {
+  set isLoading(bool value) {
     _$isLoadingAtom.reportWrite(value, super.isLoading, () {
       super.isLoading = value;
     });
@@ -68,6 +84,24 @@ mixin _$ListStore on _ListStoreBase, Store {
     });
   }
 
+  late final _$errorMessageAtom = Atom(
+    name: '_ListStoreBase.errorMessage',
+    context: context,
+  );
+
+  @override
+  String? get errorMessage {
+    _$errorMessageAtom.reportRead();
+    return super.errorMessage;
+  }
+
+  @override
+  set errorMessage(String? value) {
+    _$errorMessageAtom.reportWrite(value, super.errorMessage, () {
+      super.errorMessage = value;
+    });
+  }
+
   late final _$listsWithPreviewAtom = Atom(
     name: '_ListStoreBase.listsWithPreview',
     context: context,
@@ -83,6 +117,21 @@ mixin _$ListStore on _ListStoreBase, Store {
   set listsWithPreview(ListsArrayEntity? value) {
     _$listsWithPreviewAtom.reportWrite(value, super.listsWithPreview, () {
       super.listsWithPreview = value;
+    });
+  }
+
+  late final _$queryAtom = Atom(name: '_ListStoreBase.query', context: context);
+
+  @override
+  String get query {
+    _$queryAtom.reportRead();
+    return super.query;
+  }
+
+  @override
+  set query(String value) {
+    _$queryAtom.reportWrite(value, super.query, () {
+      super.query = value;
     });
   }
 
@@ -132,14 +181,47 @@ mixin _$ListStore on _ListStoreBase, Store {
     );
   }
 
+  late final _$_ListStoreBaseActionController = ActionController(
+    name: '_ListStoreBase',
+    context: context,
+  );
+
+  @override
+  void setQuery(String value) {
+    final _$actionInfo = _$_ListStoreBaseActionController.startAction(
+      name: '_ListStoreBase.setQuery',
+    );
+    try {
+      return super.setQuery(value);
+    } finally {
+      _$_ListStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void clearQuery() {
+    final _$actionInfo = _$_ListStoreBaseActionController.startAction(
+      name: '_ListStoreBase.clearQuery',
+    );
+    try {
+      return super.clearQuery();
+    } finally {
+      _$_ListStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
 list: ${list},
 isLoading: ${isLoading},
 isSuccess: ${isSuccess},
+errorMessage: ${errorMessage},
 listsWithPreview: ${listsWithPreview},
-productsAmount: ${productsAmount}
+query: ${query},
+productsAmount: ${productsAmount},
+filteredSections: ${filteredSections},
+derivedMembers: ${derivedMembers}
     ''';
   }
 }
