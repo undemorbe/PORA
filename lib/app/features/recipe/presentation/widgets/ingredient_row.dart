@@ -13,21 +13,25 @@ class IngredientRow extends StatelessWidget {
     this.qty,
     required this.added,
     this.dup,
+    this.onTap,
   });
 
   final String name;
   final String? qty;
   final bool added;
   final String? dup;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: PoraSpacing.lg,
-        vertical: 13,
-      ),
-      child: Row(
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: PoraSpacing.lg,
+          vertical: 13,
+        ),
+        child: Row(
         children: [
           PoraCheckbox(checked: added),
           const SizedBox(width: PoraSpacing.md),
@@ -57,6 +61,7 @@ class IngredientRow extends StatelessWidget {
               foreground: PoraColors.textSubtle,
             ),
         ],
+      ),
       ),
     );
   }

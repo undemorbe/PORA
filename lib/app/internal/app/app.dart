@@ -36,7 +36,7 @@ class MainApp extends StatelessWidget {
             final segments = deepLink.uri.pathSegments;
             final code = segments.isNotEmpty ? segments.last : '';
             return DeepLink([
-              FamiliesRoute(),
+              const FamiliesRoute(),
               InvitationConnectRoute(linkCode: code),
             ]);
           } else {

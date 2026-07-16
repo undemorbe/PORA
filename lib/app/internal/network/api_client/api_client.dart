@@ -94,4 +94,11 @@ abstract class ApiClient {
 
   @DELETE('/lists/{lid}')
   Future<void> deleteList({@Path('lid') required String listId});
+
+  //! Items
+  @PUT('/items/{iid}')
+  Future<void> updateItem({
+    @Path('iid') required String itemId,
+    @Body() required Map<String, dynamic> body,
+  });
 }

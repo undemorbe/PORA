@@ -30,7 +30,6 @@ class AppRouter extends RootStackRouter {
       children: [
         AutoRoute(page: FamiliesRoute.page, path: "family_list", initial: true),
         AutoRoute(page: PredictionsRoute.page, path: "pora"),
-        AutoRoute(page: OrderRoute.page, path: "order"),
         AutoRoute(page: SettingsRoute.page, path: "profile"),
       ],
     ),

@@ -13,6 +13,11 @@ import 'package:pora/app/features/lists/domain/usecase/create_list.dart';
 import 'package:pora/app/features/lists/domain/usecase/delete_list.dart';
 import 'package:pora/app/features/lists/domain/usecase/get_families_lists.dart';
 import 'package:pora/app/features/lists/domain/usecase/get_list_data.dart';
+import 'package:pora/app/features/lists/domain/usecase/update_item.dart';
+import 'package:pora/app/features/recipe/data/datasource/recipe_scraper.dart';
+import 'package:pora/app/features/recipe/data/service/recipe_service.dart';
+import 'package:pora/app/features/recipe/domain/repository/recipe_repository.dart';
+import 'package:pora/app/features/recipe/domain/usecase/parse_recipe_from_url.dart';
 import 'package:pora/app/features/user/domain/usecase/user/logout.dart';
 import 'package:pora/app/features/user/domain/usecase/user/update_device_token.dart';
 import 'package:pora/app/internal/formatters/image_formatter.dart';
@@ -151,6 +156,14 @@ class InjectionContainer {
     _getIt.registerFactory<GetConcreteListUseCase>(
       () => GetConcreteListUseCase(listsRepository: _getIt<ListsRepository>()),
     );
+    _getIt.registerFactory<UpdateItemUseCase>(
+      () => UpdateItemUseCase(repository: _getIt<ListsRepository>()),
+    );
+
+    //! Recipe
+    _getIt.registerFactory<ParseRecipeFromUrlUseCase>(
+      () => ParseRecipeFromUrlUseCase(repository: _getIt<RecipeRepository>()),
+    );
   }
 
   void _registerRepositories() {
@@ -220,6 +233,12 @@ class InjectionContainer {
     );
     _getIt.registerLazySingleton<ListsRepository>(
       () => ListsService(listsRemote: _getIt<ListsRemote>()),
+    );
+
+    //! Recipe
+    _getIt.registerLazySingleton<RecipeScraper>(() => HttpRecipeScraper());
+    _getIt.registerLazySingleton<RecipeRepository>(
+      () => RecipeService(scraper: _getIt<RecipeScraper>()),
     );
   }
 }

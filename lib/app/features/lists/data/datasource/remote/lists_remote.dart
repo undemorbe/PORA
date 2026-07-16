@@ -21,6 +21,16 @@ abstract class ListsRemote {
     required ProductEntity product,
   });
   Future<Either<Failure, Success>> deleteList({required String lid});
+  Future<Either<Failure, Success>> updateItem({
+    required String itemId,
+    required String name,
+    required String section,
+    required int quantity,
+    required String unit,
+    required int priority,
+    required bool urgent,
+    required int? remindEveryDays,
+  });
 }
 
 class ListsRemoteImpl implements ListsRemote {
@@ -96,6 +106,36 @@ class ListsRemoteImpl implements ListsRemote {
     try {
       final response = await apiClient.getList(listId: lid);
       return Right(response);
+    } on Exception catch (e) {
+      return Left(NetworkFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Success>> updateItem({
+    required String itemId,
+    required String name,
+    required String section,
+    required int quantity,
+    required String unit,
+    required int priority,
+    required bool urgent,
+    required int? remindEveryDays,
+  }) async {
+    try {
+      await apiClient.updateItem(
+        itemId: itemId,
+        body: {
+          'name': name,
+          'section': section,
+          'quantity': quantity,
+          'unit': unit,
+          'priority': priority,
+          'urgent': urgent,
+          'remind-every-days': remindEveryDays,
+        },
+      );
+      return Right(const ServerSuccess());
     } on Exception catch (e) {
       return Left(NetworkFailure(e.toString()));
     }

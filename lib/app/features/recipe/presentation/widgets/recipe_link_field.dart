@@ -7,10 +7,16 @@ import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 
 /// Поле ссылки на рецепт + кнопка «Разобрать».
 class RecipeLinkField extends StatelessWidget {
-  const RecipeLinkField({super.key, required this.url, this.onParse});
+  const RecipeLinkField({
+    super.key,
+    required this.controller,
+    required this.onParse,
+    this.busy = false,
+  });
 
-  final String url;
-  final VoidCallback? onParse;
+  final TextEditingController controller;
+  final VoidCallback onParse;
+  final bool busy;
 
   @override
   Widget build(BuildContext context) {
@@ -30,27 +36,47 @@ class RecipeLinkField extends StatelessWidget {
           ),
           const SizedBox(width: PoraSpacing.md),
           Expanded(
-            child: Text(
-              url,
+            child: TextField(
+              controller: controller,
+              keyboardType: TextInputType.url,
+              textInputAction: TextInputAction.go,
+              autocorrect: false,
+              onSubmitted: (_) => onParse(),
               style: PoraText.body.copyWith(color: PoraColors.textSecondary),
-              overflow: TextOverflow.ellipsis,
+              decoration: const InputDecoration(
+                hintText: 'https://…',
+                isCollapsed: true,
+                border: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+                contentPadding: EdgeInsets.symmetric(vertical: 8),
+              ),
             ),
           ),
           GestureDetector(
-            onTap: onParse,
+            onTap: busy ? null : onParse,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-              decoration: const BoxDecoration(
-                color: PoraColors.primary,
+              decoration: BoxDecoration(
+                color: busy ? PoraColors.textMuted : PoraColors.primary,
                 borderRadius: PoraRadii.md,
               ),
-              child: Text(
-                context.l10n.recipeParseButton,
-                style: PoraText.micro.copyWith(
-                  fontSize: 13,
-                  color: PoraColors.inkInverse,
-                ),
-              ),
+              child: busy
+                  ? const SizedBox(
+                      width: 14,
+                      height: 14,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: PoraColors.inkInverse,
+                      ),
+                    )
+                  : Text(
+                      context.l10n.recipeParseButton,
+                      style: PoraText.micro.copyWith(
+                        fontSize: 13,
+                        color: PoraColors.inkInverse,
+                      ),
+                    ),
             ),
           ),
         ],

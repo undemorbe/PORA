@@ -44,4 +44,27 @@ class ListsService implements ListsRepository {
   Future<Either<Failure, ListEntity>> getList({required String lid}) {
     return listsRemote.getList(lid: lid);
   }
+
+  @override
+  Future<Either<Failure, Success>> updateItem({
+    required String itemId,
+    required String name,
+    required String section,
+    required int quantity,
+    required String unit,
+    required int priority,
+    required bool urgent,
+    required int? remindEveryDays,
+  }) {
+    return listsRemote.updateItem(
+      itemId: itemId,
+      name: name,
+      section: section,
+      quantity: quantity,
+      unit: unit,
+      priority: priority,
+      urgent: urgent,
+      remindEveryDays: remindEveryDays,
+    );
+  }
 }

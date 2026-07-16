@@ -96,8 +96,9 @@ class _ListPageState extends State<ListPage> {
                         "${members.length} ${context.l10n.human} · ${listStore.productsAmount} ${context.l10n.products}",
                     members: members,
                     onSearch: _toggleSearch,
-                    onRecipe: () =>
-                        context.router.push(const RecipeImportRoute()),
+                    onRecipe: () => context.router.push(
+                      RecipeImportRoute(lid: widget.listId),
+                    ),
                     onNotifications: () =>
                         context.router.push(const NotificationsRoute()),
                   );

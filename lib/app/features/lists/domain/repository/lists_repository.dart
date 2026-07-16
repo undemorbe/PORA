@@ -19,4 +19,16 @@ abstract class ListsRepository {
     required ProductEntity product,
   });
   Future<Either<Failure, Success>> deleteList({required String lid});
+
+  /// PUT /items/{iid} — backend требует **все** поля в теле.
+  Future<Either<Failure, Success>> updateItem({
+    required String itemId,
+    required String name,
+    required String section,
+    required int quantity,
+    required String unit,
+    required int priority,
+    required bool urgent,
+    required int? remindEveryDays,
+  });
 }
