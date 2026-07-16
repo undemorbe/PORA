@@ -8,6 +8,7 @@ import 'package:pora/app/features/notifications/presentation/widgets/notificatio
 import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
+import 'package:pora/app/internal/theme/context_colors.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 import 'package:pora/app/internal/widgets/pora_rows_card.dart';
 
@@ -68,7 +69,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
                           context.l10n.notificationsReadAll,
                           style: PoraText.caption.copyWith(
                             color: store.unreadCount == 0
-                                ? PoraColors.textMuted
+                                ? context.colors.textMuted
                                 : PoraColors.primaryDark,
                             fontWeight: FontWeight.w600,
                           ),

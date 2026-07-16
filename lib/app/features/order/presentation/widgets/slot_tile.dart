@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
+import 'package:pora/app/internal/theme/context_colors.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 
 /// Слот времени доставки (радио-выбор).
@@ -30,7 +31,7 @@ class SlotTile extends StatelessWidget {
               : Theme.of(context).colorScheme.surface,
           borderRadius: PoraRadii.input,
           border: Border.all(
-            color: selected ? PoraColors.primary : PoraColors.border,
+            color: selected ? PoraColors.primary : context.colors.border,
             width: selected ? 1.5 : 1,
           ),
         ),

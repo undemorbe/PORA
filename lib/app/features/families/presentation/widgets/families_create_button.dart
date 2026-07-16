@@ -5,7 +5,7 @@ import 'package:pora/app/features/families/presentation/store/families_store.dar
 import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/theme/light_colors/additional_constants.dart';
-import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
+import 'package:pora/app/internal/theme/context_colors.dart';
 import 'package:pora/app/internal/widgets/pora_buttons.dart';
 
 class FamiliesCreateButton extends StatelessWidget {
@@ -38,7 +38,7 @@ class FamiliesCreateButton extends StatelessWidget {
                   children: [
                     Text(
                       context.l10n.familiesCreateDialog,
-                      style: PoraText.heading.copyWith(color: PoraColors.ink),
+                      style: PoraText.heading.copyWith(color: context.colors.ink),
                     ),
                     const SizedBox(height: PoraSpacing.md),
                     TextField(

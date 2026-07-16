@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pora/app/features/add_item/presentation/widgets/quantity_stepper.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
+import 'package:pora/app/internal/theme/context_colors.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 
 /// Строка корзины: эмодзи · название · счётчик · сумма.
@@ -46,7 +47,7 @@ class CartRow extends StatelessWidget {
               style: PoraText.caption.copyWith(
                 fontSize: 14,
                 fontWeight: FontWeight.w700,
-                color: PoraColors.ink,
+                color: context.colors.ink,
               ),
             ),
           ),

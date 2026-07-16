@@ -159,6 +159,28 @@ mixin _$ListStore on _ListStoreBase, Store {
     );
   }
 
+  late final _$toggleItemBoughtAsyncAction = AsyncAction(
+    '_ListStoreBase.toggleItemBought',
+    context: context,
+  );
+
+  @override
+  Future<bool> toggleItemBought({required String itemId}) {
+    return _$toggleItemBoughtAsyncAction.run(
+      () => super.toggleItemBought(itemId: itemId),
+    );
+  }
+
+  late final _$deleteItemAsyncAction = AsyncAction(
+    '_ListStoreBase.deleteItem',
+    context: context,
+  );
+
+  @override
+  Future<void> deleteItem({required String itemId}) {
+    return _$deleteItemAsyncAction.run(() => super.deleteItem(itemId: itemId));
+  }
+
   late final _$deleteListAsyncAction = AsyncAction(
     '_ListStoreBase.deleteList',
     context: context,

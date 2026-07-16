@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
-import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
+import 'package:pora/app/internal/theme/context_colors.dart';
 
 /// Строка «поле — значение» в карточке деталей товара.
 class InfoRow extends StatelessWidget {
@@ -13,6 +13,7 @@ class InfoRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final c = context.colors;
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: PoraSpacing.lg,
@@ -23,10 +24,14 @@ class InfoRow extends StatelessWidget {
           Expanded(
             child: Text(
               label,
-              style: PoraText.itemTitle.copyWith(color: PoraColors.textMuted),
+              style: PoraText.itemTitle.copyWith(color: c.textMuted),
             ),
           ),
-          if (value != null) Text(value!, style: PoraText.itemTitle),
+          if (value != null)
+            Text(
+              value!,
+              style: PoraText.itemTitle.copyWith(color: c.ink),
+            ),
           ?trailing,
         ],
       ),

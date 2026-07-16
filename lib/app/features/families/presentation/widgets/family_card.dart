@@ -34,23 +34,24 @@ class FamilyCard extends StatelessWidget {
     final avatarsWidth = members.isEmpty
         ? 0.0
         : _avatar + (members.length - 1) * _overlap;
-    return Slidable(
-      startActionPane: ActionPane(
-        motion: const StretchMotion(),
-        children: [
-          //Invite
-          SlidableAction(
-            onPressed: (context) {
-              context.router.navigate(InviteRoute(familyId: family.id));
-            },
-            backgroundColor: PoraColors.primary,
-            foregroundColor: PoraColors.progressTrack,
-            icon: PhosphorIcons.plus,
-            label: context.l10n.settingsInvitePill,
-          ),
-        ],
-      ),
-      child: GestureDetector(
+    return ClipRRect(
+      borderRadius: PoraRadii.card,
+      child: Slidable(
+        startActionPane: ActionPane(
+          motion: const StretchMotion(),
+          children: [
+            SlidableAction(
+              onPressed: (context) {
+                context.router.navigate(InviteRoute(familyId: family.id));
+              },
+              backgroundColor: PoraColors.primary,
+              foregroundColor: PoraColors.progressTrack,
+              icon: PhosphorIcons.plus,
+              label: context.l10n.settingsInvitePill,
+            ),
+          ],
+        ),
+        child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: onTap,
         child: PoraCard(
@@ -90,6 +91,7 @@ class FamilyCard extends StatelessWidget {
             ],
           ),
         ),
+      ),
       ),
     );
   }

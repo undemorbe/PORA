@@ -1,7 +1,5 @@
-import 'package:pora/app/features/lists/data/models/products/product_model.dart';
 import 'package:pora/app/features/lists/domain/entity/lists/lists.dart';
 import 'package:pora/app/features/lists/domain/entity/lists/lists_array.dart';
-import 'package:pora/app/features/lists/domain/entity/products/product.dart';
 import 'package:pora/app/internal/di/export.dart';
 import 'package:pora/app/internal/errors/failure.dart';
 import 'package:pora/app/internal/errors/success.dart';
@@ -16,53 +14,13 @@ abstract class ListsRemote {
     String? fid,
   });
   Future<Either<Failure, ListEntity>> getList({required String lid});
-  Future<Either<Failure, Success>> addItemToList({
-    required String lid,
-    required ProductEntity product,
-  });
   Future<Either<Failure, Success>> deleteList({required String lid});
-  Future<Either<Failure, Success>> updateItem({
-    required String itemId,
-    required String name,
-    required String section,
-    required int quantity,
-    required String unit,
-    required int priority,
-    required bool urgent,
-    required int? remindEveryDays,
-  });
 }
 
 class ListsRemoteImpl implements ListsRemote {
   final ApiClient apiClient;
 
   const ListsRemoteImpl({required this.apiClient});
-
-  @override
-  Future<Either<Failure, Success>> addItemToList({
-    required String lid,
-    required ProductEntity product,
-  }) async {
-    try {
-      final prod = product is ProductModel
-          ? product
-          : ProductModel(
-              name: product.name,
-              id: product.id,
-              quantity: product.quantity,
-              unit: product.unit,
-              priority: product.priority,
-              urgent: product.urgent,
-              checked: product.checked,
-              remindEveryDay: product.remindEveryDay,
-              addedBy: product.addedBy,
-            );
-      await apiClient.addItem(listId: lid, product: prod);
-      return Right(const ServerSuccess());
-    } on Exception catch (e) {
-      return Left(NetworkFailure(e.toString()));
-    }
-  }
 
   @override
   Future<Either<Failure, Success>> createList({
@@ -106,36 +64,6 @@ class ListsRemoteImpl implements ListsRemote {
     try {
       final response = await apiClient.getList(listId: lid);
       return Right(response);
-    } on Exception catch (e) {
-      return Left(NetworkFailure(e.toString()));
-    }
-  }
-
-  @override
-  Future<Either<Failure, Success>> updateItem({
-    required String itemId,
-    required String name,
-    required String section,
-    required int quantity,
-    required String unit,
-    required int priority,
-    required bool urgent,
-    required int? remindEveryDays,
-  }) async {
-    try {
-      await apiClient.updateItem(
-        itemId: itemId,
-        body: {
-          'name': name,
-          'section': section,
-          'quantity': quantity,
-          'unit': unit,
-          'priority': priority,
-          'urgent': urgent,
-          'remind-every-days': remindEveryDays,
-        },
-      );
-      return Right(const ServerSuccess());
     } on Exception catch (e) {
       return Left(NetworkFailure(e.toString()));
     }

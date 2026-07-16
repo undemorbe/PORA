@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
+import 'package:pora/app/features/families/presentation/store/selected_family_store.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/app/features/families/domain/entity/member.dart';
 import 'package:pora/app/features/lists/presentation/store/lists_store.dart';
@@ -10,6 +12,7 @@ import 'package:pora/app/features/lists/presentation/widgets/section_builder.dar
 import 'package:pora/app/internal/router/app_router.gr.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
+import 'package:pora/app/internal/theme/context_colors.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 import 'package:pora/app/internal/extensions/l10n_extension.dart';
 
@@ -68,7 +71,10 @@ class _ListPageState extends State<ListPage> {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: AddListButton(
-        onTap: () => context.router.push(const AddItemRoute()),
+        onTap: () async {
+          await context.router.push(AddItemRoute(lid: widget.listId));
+          await listStore.getConcreteList(lid: widget.listId);
+        },
       ),
       body: SafeArea(
         bottom: false,
@@ -95,12 +101,24 @@ class _ListPageState extends State<ListPage> {
                     subtitle:
                         "${members.length} ${context.l10n.human} · ${listStore.productsAmount} ${context.l10n.products}",
                     members: members,
+                    onBack: () => context.router.maybePop(),
                     onSearch: _toggleSearch,
                     onRecipe: () => context.router.push(
                       RecipeImportRoute(lid: widget.listId),
                     ),
                     onNotifications: () =>
                         context.router.push(const NotificationsRoute()),
+                    onMembersTap: members.isEmpty
+                        ? null
+                        : () => context.router.push(
+                              MembersRoute(
+                                members: members,
+                                ownerId: GetIt.I<SelectedFamilyStore>()
+                                    .current
+                                    ?.owner
+                                    .id,
+                              ),
+                            ),
                   );
                 },
               ),
@@ -120,7 +138,7 @@ class _ListPageState extends State<ListPage> {
                     : const SizedBox.shrink(),
               ),
               const SizedBox(height: PoraSpacing.xl),
-              SectionBuilder(listStore: listStore, isPreview: false),
+              SectionBuilder(listStore: listStore, isPreview: false, lid: widget.listId),
             ],
           ),
         ),
@@ -142,20 +160,21 @@ class _SearchField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final c = context.colors;
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
+        color: c.surface,
         borderRadius: PoraRadii.input,
-        border: Border.all(color: PoraColors.border),
+        border: Border.all(color: c.border),
         boxShadow: PoraShadows.card,
       ),
       padding: const EdgeInsets.symmetric(horizontal: PoraSpacing.md),
       child: Row(
         children: [
-          const PhosphorIcon(
+          Icon(
             PhosphorIconsRegular.magnifyingGlass,
             size: 18,
-            color: PoraColors.textMuted,
+            color: c.textMuted,
           ),
           const SizedBox(width: PoraSpacing.sm),
           Expanded(
@@ -163,7 +182,7 @@ class _SearchField extends StatelessWidget {
               controller: controller,
               autofocus: true,
               onChanged: onChanged,
-              style: PoraText.body,
+              style: PoraText.body.copyWith(color: c.ink),
               decoration: InputDecoration(
                 hintText: context.l10n.searchHint,
                 isCollapsed: true,
@@ -179,12 +198,12 @@ class _SearchField extends StatelessWidget {
           GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: onClose,
-            child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: PoraSpacing.xs),
-              child: PhosphorIcon(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: PoraSpacing.xs),
+              child: Icon(
                 PhosphorIconsRegular.x,
                 size: 16,
-                color: PoraColors.textMuted,
+                color: c.textMuted,
               ),
             ),
           ),

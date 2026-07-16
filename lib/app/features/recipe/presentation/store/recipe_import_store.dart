@@ -1,10 +1,10 @@
 import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
+import 'package:pora/app/features/item_detail/domain/usecase/add_item.dart';
+import 'package:pora/app/features/item_detail/domain/usecase/update_item.dart';
 import 'package:pora/app/features/lists/domain/entity/lists/lists.dart';
 import 'package:pora/app/features/lists/domain/entity/products/product.dart';
-import 'package:pora/app/features/lists/domain/usecase/add_item_to_list.dart';
 import 'package:pora/app/features/lists/domain/usecase/get_list_data.dart';
-import 'package:pora/app/features/lists/domain/usecase/update_item.dart';
 import 'package:pora/app/features/recipe/data/datasource/boyer_moore.dart';
 import 'package:pora/app/features/recipe/domain/entity/recipe.dart';
 import 'package:pora/app/features/recipe/domain/entity/recipe_ingredient.dart';
@@ -143,7 +143,7 @@ abstract class _RecipeImportStoreBase with Store {
   @action
   Future<List<String>> addSelected() async {
     final errs = <String>[];
-    final addUC = GetIt.I<AddItemToListUseCase>();
+    final addUC = GetIt.I<AddItemUseCase>();
     final updateUC = GetIt.I<UpdateItemUseCase>();
 
     for (var i = 0; i < rows.length; i++) {
@@ -153,10 +153,12 @@ abstract class _RecipeImportStoreBase with Store {
       if (row.hasDuplicate) {
         // dup + checked → пропустить (уже в списке).
         if (isChecked) continue;
-        // dup + unchecked → user хочет добавить: увеличиваем quantity
-        // существующего item через PUT /items/{iid}.
+        // dup + unchecked → добавить количество к существующему через
+        // PUT /items/{iid}.
         final dup = row.duplicate!;
-        final section = _sectionForItem(dup) ?? 'Разное';
+        final section = dup.section.isNotEmpty
+            ? dup.section
+            : (_sectionForItem(dup) ?? 'Разное');
         final addQty = _parseQty(row.ingredient.quantity);
         final res = await updateUC.call(
           itemId: dup.id,
@@ -172,9 +174,16 @@ abstract class _RecipeImportStoreBase with Store {
       } else {
         // non-dup: checked → добавить, unchecked → пропустить.
         if (!isChecked) continue;
+        final ing = row.ingredient;
         final res = await addUC.call(
-          lid: lid,
-          product: _asProduct(row.ingredient),
+          listId: lid,
+          name: ing.name,
+          section: 'Разное',
+          quantity: _parseQty(ing.quantity),
+          unit: ing.unit ?? '',
+          priority: 0,
+          urgent: false,
+          remindEveryDays: null,
         );
         if (res.isLeft) errs.add(res.left.message);
       }
@@ -197,12 +206,6 @@ abstract class _RecipeImportStoreBase with Store {
     return int.tryParse(match?.group(0) ?? '') ?? 1;
   }
 
-  ProductEntity _asProduct(RecipeIngredient ing) => _RecipeProduct(
-        name: ing.name,
-        quantity: _parseQty(ing.quantity),
-        unit: ing.unit ?? '',
-      );
-
   @action
   void reset() {
     recipe = null;
@@ -213,18 +216,3 @@ abstract class _RecipeImportStoreBase with Store {
   }
 }
 
-/// Продукт для отправки на сервер (id/priority/urgent пустые — backend
-/// сам сгенерит; addedBy подставляется на бэке).
-class _RecipeProduct extends ProductEntity {
-  const _RecipeProduct({
-    required super.name,
-    required super.quantity,
-    required super.unit,
-  }) : super(
-          id: '',
-          priority: 0,
-          urgent: false,
-          checked: false,
-          remindEveryDay: null,
-        );
-}

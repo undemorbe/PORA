@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
-import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
+import 'package:pora/app/internal/theme/context_colors.dart';
 import 'package:pora/app/internal/widgets/pora_checkbox.dart';
 import 'package:pora/app/internal/widgets/pora_pill.dart';
 
@@ -24,6 +24,7 @@ class IngredientRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final c = context.colors;
     return InkWell(
       onTap: onTap,
       child: Padding(
@@ -32,36 +33,39 @@ class IngredientRow extends StatelessWidget {
           vertical: 13,
         ),
         child: Row(
-        children: [
-          PoraCheckbox(checked: added),
-          const SizedBox(width: PoraSpacing.md),
-          Expanded(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  name,
-                  style: PoraText.itemTitle.copyWith(
-                    color: added ? PoraColors.ink : PoraColors.textSubtle,
+          children: [
+            PoraCheckbox(checked: added),
+            const SizedBox(width: PoraSpacing.md),
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    name,
+                    style: PoraText.itemTitle.copyWith(
+                      color: added ? c.ink : c.textSubtle,
+                    ),
                   ),
-                ),
-                if (qty != null)
-                  Padding(
-                    padding: const EdgeInsets.only(top: PoraSpacing.xxs),
-                    child: Text(qty!, style: PoraText.small),
-                  ),
-              ],
+                  if (qty != null)
+                    Padding(
+                      padding: const EdgeInsets.only(top: PoraSpacing.xxs),
+                      child: Text(
+                        qty!,
+                        style: PoraText.small.copyWith(color: c.textSubtle),
+                      ),
+                    ),
+                ],
+              ),
             ),
-          ),
-          if (dup != null)
-            PoraPill(
-              label: dup!,
-              background: const Color(0xFFEFE6DA),
-              foreground: PoraColors.textSubtle,
-            ),
-        ],
-      ),
+            if (dup != null)
+              PoraPill(
+                label: dup!,
+                background: c.surfaceAlt,
+                foreground: c.textSubtle,
+              ),
+          ],
+        ),
       ),
     );
   }

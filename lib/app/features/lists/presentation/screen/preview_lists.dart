@@ -7,6 +7,9 @@ import 'package:pora/app/features/lists/presentation/widgets/add_list_button.dar
 import 'package:pora/app/features/lists/presentation/widgets/create_list_sheet.dart';
 import 'package:pora/app/features/lists/presentation/widgets/list_header.dart';
 import 'package:pora/app/features/lists/presentation/widgets/section_builder.dart';
+import 'package:pora/app/features/families/presentation/store/selected_family_store.dart';
+import 'package:pora/app/internal/router/app_router.gr.dart';
+import 'package:get_it/get_it.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/extensions/l10n_extension.dart';
 
@@ -84,6 +87,7 @@ class _PreviewListsPageState extends State<PreviewListsPage> {
                       title: context.l10n.personal,
                       subtitle: '$count ${context.l10n.lists}',
                       members: const [],
+                      onBack: () => context.router.maybePop(),
                     );
                   }
                   final members = widget.members ?? const <MemberEntity>[];
@@ -92,6 +96,18 @@ class _PreviewListsPageState extends State<PreviewListsPage> {
                     subtitle:
                         "${members.length} ${context.l10n.human} · $count ${context.l10n.lists}",
                     members: members,
+                    onBack: () => context.router.maybePop(),
+                    onMembersTap: members.isEmpty
+                        ? null
+                        : () => context.router.push(
+                              MembersRoute(
+                                members: members,
+                                ownerId: GetIt.I<SelectedFamilyStore>()
+                                    .current
+                                    ?.owner
+                                    .id,
+                              ),
+                            ),
                   );
                 },
               ),

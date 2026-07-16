@@ -7,6 +7,7 @@ import 'package:pora/app/features/auth_and_validation/domain/usecase/refresh_tok
 import 'package:pora/app/internal/di/injection_container.dart';
 import 'package:pora/app/internal/local_storage/abstract_local_db.dart';
 import 'package:pora/app/internal/localization/store/localization_store.dart';
+import 'package:pora/app/internal/theme/store/theme_store.dart';
 import 'package:pora/app/internal/logging/logger.dart';
 import 'package:pora/app/internal/notifications/deep_link_handler.dart';
 import 'package:pora/app/internal/notifications/device_token_sync.dart';
@@ -77,6 +78,7 @@ class AppBootstrap {
 
   Future<void> _initLocalization(InjectionContainer container) async {
     await container.getIt<LocalizationStore>().initialise();
+    await container.getIt<ThemeStore>().initialiseTheme();
   }
 
   Future<void> _refreshAndAuth(InjectionContainer container) async {

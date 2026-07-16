@@ -104,10 +104,10 @@ abstract class AppLocalizations {
   /// **'Pora'**
   String get appName;
 
-  /// The language of the application
+  /// language
   ///
   /// In en, this message translates to:
-  /// **'English'**
+  /// **'Language'**
   String get language;
 
   /// The first line under the app name
@@ -1309,6 +1309,336 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Personal'**
   String get personal;
+
+  /// notify
+  ///
+  /// In en, this message translates to:
+  /// **'Notify'**
+  String get notify;
+
+  /// notifyEveryone
+  ///
+  /// In en, this message translates to:
+  /// **'Everyone'**
+  String get notifyEveryone;
+
+  /// notifyRecipients
+  ///
+  /// In en, this message translates to:
+  /// **'To'**
+  String get notifyRecipients;
+
+  /// notifyAddCustom
+  ///
+  /// In en, this message translates to:
+  /// **'Add name'**
+  String get notifyAddCustom;
+
+  /// notifyMessageLabel
+  ///
+  /// In en, this message translates to:
+  /// **'Message'**
+  String get notifyMessageLabel;
+
+  /// notifyHint placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'Grab {itemName} urgently'**
+  String notifyHint(String itemName);
+
+  /// notifySend
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get notifySend;
+
+  /// notifySent
+  ///
+  /// In en, this message translates to:
+  /// **'Notification sent'**
+  String get notifySent;
+
+  /// advancedSettings
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced settings'**
+  String get advancedSettings;
+
+  /// appearance
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get appearance;
+
+  /// themeSection
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get themeSection;
+
+  /// themeLight
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get themeLight;
+
+  /// themeDark
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get themeDark;
+
+  /// themeSystem
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get themeSystem;
+
+  /// notificationsPermission
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications permission'**
+  String get notificationsPermission;
+
+  /// granted
+  ///
+  /// In en, this message translates to:
+  /// **'Granted'**
+  String get granted;
+
+  /// denied
+  ///
+  /// In en, this message translates to:
+  /// **'Denied'**
+  String get denied;
+
+  /// notDetermined
+  ///
+  /// In en, this message translates to:
+  /// **'Not requested'**
+  String get notDetermined;
+
+  /// requestPermission
+  ///
+  /// In en, this message translates to:
+  /// **'Request'**
+  String get requestPermission;
+
+  /// confirmations
+  ///
+  /// In en, this message translates to:
+  /// **'Confirmations'**
+  String get confirmations;
+
+  /// askBeforeDelete
+  ///
+  /// In en, this message translates to:
+  /// **'Ask before deletion'**
+  String get askBeforeDelete;
+
+  /// about
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get about;
+
+  /// version
+  ///
+  /// In en, this message translates to:
+  /// **'Version'**
+  String get version;
+
+  /// deleteItemTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Delete item?'**
+  String get deleteItemTitle;
+
+  /// deleteItemBody
+  ///
+  /// In en, this message translates to:
+  /// **'This cannot be undone.'**
+  String get deleteItemBody;
+
+  /// dontAskAgain
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t ask again'**
+  String get dontAskAgain;
+
+  /// delete
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// returnToList
+  ///
+  /// In en, this message translates to:
+  /// **'Return to list'**
+  String get returnToList;
+
+  /// nooneToNotify
+  ///
+  /// In en, this message translates to:
+  /// **'No one to notify'**
+  String get nooneToNotify;
+
+  /// notFound
+  ///
+  /// In en, this message translates to:
+  /// **'Not found'**
+  String get notFound;
+
+  /// recipeEmptyHint
+  ///
+  /// In en, this message translates to:
+  /// **'Paste a recipe URL and tap “Parse”'**
+  String get recipeEmptyHint;
+
+  /// recipeDupMark
+  ///
+  /// In en, this message translates to:
+  /// **'already in list'**
+  String get recipeDupMark;
+
+  /// done
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get done;
+
+  /// errorGeneric
+  ///
+  /// In en, this message translates to:
+  /// **'Error'**
+  String get errorGeneric;
+
+  /// pushToken
+  ///
+  /// In en, this message translates to:
+  /// **'Push token'**
+  String get pushToken;
+
+  /// resync
+  ///
+  /// In en, this message translates to:
+  /// **'Sync'**
+  String get resync;
+
+  /// tokenSynced
+  ///
+  /// In en, this message translates to:
+  /// **'Token synced'**
+  String get tokenSynced;
+
+  /// deleteListTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Delete list?'**
+  String get deleteListTitle;
+
+  /// deleteListBody placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'List “{listName}” and all its items will be deleted. This cannot be undone.'**
+  String deleteListBody(String listName);
+
+  /// membersScreenTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Members'**
+  String get membersScreenTitle;
+
+  /// owner
+  ///
+  /// In en, this message translates to:
+  /// **'Owner'**
+  String get owner;
+
+  /// member
+  ///
+  /// In en, this message translates to:
+  /// **'Member'**
+  String get member;
+
+  /// addProduct
+  ///
+  /// In en, this message translates to:
+  /// **'Add product'**
+  String get addProduct;
+
+  /// productName
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get productName;
+
+  /// section
+  ///
+  /// In en, this message translates to:
+  /// **'Section'**
+  String get section;
+
+  /// unit
+  ///
+  /// In en, this message translates to:
+  /// **'Unit'**
+  String get unit;
+
+  /// priorityHigh
+  ///
+  /// In en, this message translates to:
+  /// **'High'**
+  String get priorityHigh;
+
+  /// priorityMed
+  ///
+  /// In en, this message translates to:
+  /// **'Medium'**
+  String get priorityMed;
+
+  /// priorityLow
+  ///
+  /// In en, this message translates to:
+  /// **'Low'**
+  String get priorityLow;
+
+  /// urgent
+  ///
+  /// In en, this message translates to:
+  /// **'Urgent'**
+  String get urgent;
+
+  /// remindEvery
+  ///
+  /// In en, this message translates to:
+  /// **'Remind every'**
+  String get remindEvery;
+
+  /// days
+  ///
+  /// In en, this message translates to:
+  /// **'d'**
+  String get days;
+
+  /// customValue
+  ///
+  /// In en, this message translates to:
+  /// **'Custom…'**
+  String get customValue;
+
+  /// save
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// addedByName placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'Added by: {name}'**
+  String addedByName(String name);
 }
 
 class _AppLocalizationsDelegate

@@ -7,7 +7,7 @@ import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/router/guard/auth_state.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
-import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
+import 'package:pora/app/internal/theme/context_colors.dart';
 import 'package:pora/app/internal/widgets/pora_buttons.dart';
 import 'package:pora/app/internal/widgets/pora_chip.dart';
 
@@ -95,7 +95,7 @@ class BriefPage extends StatelessWidget {
                     child: Text(
                       l.briefSkip,
                       style: PoraText.bodyLarge.copyWith(
-                        color: PoraColors.textSubtle,
+                        color: context.colors.textSubtle,
                       ),
                     ),
                   ),

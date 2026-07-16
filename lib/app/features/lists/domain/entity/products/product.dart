@@ -4,6 +4,11 @@ import 'package:pora/app/features/families/domain/entity/member.dart';
 abstract class ProductEntity extends Equatable {
   final String name;
   final String id;
+
+  /// Название секции (backend возвращает в `GET /items/{iid}`). Не всегда
+  /// доступно в контекстах list-view (там section группируется snapshot'ом),
+  /// поэтому пустая строка допустима.
+  final String section;
   final int quantity;
   final String unit;
   final int priority;
@@ -23,6 +28,7 @@ abstract class ProductEntity extends Equatable {
     required this.urgent,
     required this.checked,
     required this.remindEveryDay,
+    this.section = '',
     this.addedBy,
   });
 
@@ -30,6 +36,7 @@ abstract class ProductEntity extends Equatable {
   List<Object?> get props => [
         name,
         id,
+        section,
         quantity,
         unit,
         priority,

@@ -1,12 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/app/features/families/domain/entity/member.dart';
 import 'package:pora/app/features/lists/domain/entity/lists/lists.dart';
 import 'package:pora/app/features/lists/domain/entity/products/product.dart';
+import 'package:pora/app/features/item_detail/presentation/store/item_details_store.dart';
+import 'package:pora/app/features/item_detail/presentation/widgets/notify_sheet.dart';
 import 'package:pora/app/features/lists/presentation/store/lists_store.dart';
 import 'package:pora/app/features/lists/presentation/widgets/list_item_tile.dart';
+import 'package:pora/app/features/lists/presentation/widgets/delete_list_dialog.dart';
 import 'package:pora/app/features/lists/presentation/widgets/section_group.dart';
 import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/router/app_router.gr.dart';
@@ -23,25 +27,29 @@ class SectionBuilder extends StatelessWidget {
     required this.listStore,
     required this.isPreview,
     this.members,
+    this.lid
   });
 
   final ListStore listStore;
   final bool isPreview;
+  final String? lid;
   final List<MemberEntity>? members;
 
   @override
   Widget build(BuildContext context) {
     return Observer(
       builder: (context) {
+        // AnimatedSwitcher plavne переключает loading ↔ content ↔ error.
+        final Widget child;
         if (listStore.isLoading) {
-          return const Padding(
+          child = const Padding(
+            key: ValueKey('loading'),
             padding: EdgeInsets.symmetric(vertical: PoraSpacing.xl),
             child: Center(child: CircularProgressIndicator.adaptive()),
           );
-        }
-
-        if (listStore.errorMessage != null) {
-          return Center(
+        } else if (listStore.errorMessage != null) {
+          child = Center(
+            key: const ValueKey('error'),
             child: Padding(
               padding: const EdgeInsets.all(PoraSpacing.lg),
               child: Text(
@@ -51,9 +59,28 @@ class SectionBuilder extends StatelessWidget {
               ),
             ),
           );
+        } else {
+          child = KeyedSubtree(
+            key: const ValueKey('content'),
+            child: isPreview ? _buildPreview(context) : _buildConcrete(context),
+          );
         }
-
-        return isPreview ? _buildPreview(context) : _buildConcrete(context);
+        return AnimatedSwitcher(
+          duration: const Duration(milliseconds: 240),
+          switchInCurve: Curves.easeOutCubic,
+          switchOutCurve: Curves.easeInCubic,
+          transitionBuilder: (child, anim) => FadeTransition(
+            opacity: anim,
+            child: SlideTransition(
+              position: Tween<Offset>(
+                begin: const Offset(0, 0.02),
+                end: Offset.zero,
+              ).animate(anim),
+              child: child,
+            ),
+          ),
+          child: child,
+        );
       },
     );
   }
@@ -73,6 +100,11 @@ class SectionBuilder extends StatelessWidget {
             child: _PreviewListCard(
               list: list,
               members: members ?? const [],
+              onDelete: () async {
+                final ok =
+                    await confirmDeleteList(context, listName: list.name);
+                if (ok) await listStore.deleteList(lid: list.id);
+              },
             ),
           ),
       ],
@@ -95,25 +127,48 @@ class SectionBuilder extends StatelessWidget {
       );
     }
 
-    void onProductTap(ProductEntity _) {
-      context.router.push(const ItemDetailRoute());
+    void onProductTap(ProductEntity p) {
+      context.router.push(ItemDetailRoute(itemId: p.id,additionalEffectOnDeletion: () => listStore.getConcreteList(lid: lid??'',),));
+    }
+
+    Future<void> onNotify(ProductEntity p) async {
+      // Одноразовый store — только для notify() action.
+      final s = ItemDetailsStore(itemId: p.id);
+      await showNotifySheet(
+        context,
+        store: s,
+        itemName: p.name,
+        candidates: listStore.derivedMembers,
+      );
     }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         for (final section in sections)
-          SectionGroup(section: section, onProductTap: onProductTap),
+          SectionGroup(
+            section: section,
+            onProductTap: onProductTap,
+            onDeleteConfirmed: (p) => listStore.deleteItem(itemId: p.id),
+            onNotify: onNotify,
+            onToggleBought: (p) =>
+                listStore.toggleItemBought(itemId: p.id),
+          ),
       ],
     );
   }
 }
 
 class _PreviewListCard extends StatelessWidget {
-  const _PreviewListCard({required this.list, required this.members});
+  const _PreviewListCard({
+    required this.list,
+    required this.members,
+    required this.onDelete,
+  });
 
   final ListEntity list;
   final List<MemberEntity> members;
+  final Future<void> Function() onDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -127,7 +182,7 @@ class _PreviewListCard extends StatelessWidget {
       ListRoute(listId: list.id, listName: list.name, members: members),
     );
 
-    return GestureDetector(
+    final card = GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: openList,
       child: PoraCard(
@@ -179,6 +234,27 @@ class _PreviewListCard extends StatelessWidget {
               ),
           ],
         ),
+      ),
+    );
+
+    return ClipRRect(
+      borderRadius: PoraRadii.card,
+      child: Slidable(
+        key: ValueKey('preview_${list.id}'),
+        endActionPane: ActionPane(
+          motion: const BehindMotion(),
+          extentRatio: 0.28,
+          children: [
+            SlidableAction(
+              onPressed: (_) => onDelete(),
+              backgroundColor: PoraColors.danger,
+              foregroundColor: PoraColors.inkInverse,
+              icon: PhosphorIconsFill.trash,
+              label: context.l10n.delete,
+            ),
+          ],
+        ),
+        child: card,
       ),
     );
   }

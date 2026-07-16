@@ -106,8 +106,10 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                   PoraSettingRow(
                     icon: PhosphorIconsRegular.gear,
-                    label: context.l10n.settingsTitle,
-                    trailing: PoraPill(label: context.l10n.settingsMore),
+                    label: context.l10n.advancedSettings,
+                    trailing: PoraSettingRow.chevron,
+                    onTap: () =>
+                        context.router.push(const AdvancedSettingsRoute()),
                   ),
                   PoraSettingRow(
                     icon: PhosphorIconsRegular.lock,

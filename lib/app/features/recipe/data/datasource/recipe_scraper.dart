@@ -147,11 +147,16 @@ class HttpRecipeScraper implements RecipeScraper {
         'Рецепт';
     final image = _metaContent(doc, 'og:image');
 
-    // Ищем контейнеры с "ingredient" в class/id.
-    final candidates = <dom.Element>[
-      ...doc.querySelectorAll('[class*="ingredient" i]'),
-      ...doc.querySelectorAll('[id*="ingredient" i]'),
-    ];
+    // Ищем контейнеры с "ingredient" в class/id. package:html не
+    // поддерживает `[attr*="v" i]` — обходим все узлы вручную.
+    final candidates = <dom.Element>[];
+    for (final el in doc.querySelectorAll('*')) {
+      final cls = (el.attributes['class'] ?? '').toLowerCase();
+      final id = (el.attributes['id'] ?? '').toLowerCase();
+      if (cls.contains('ingredient') || id.contains('ingredient')) {
+        candidates.add(el);
+      }
+    }
 
     final items = <RecipeIngredient>[];
     for (final c in candidates) {

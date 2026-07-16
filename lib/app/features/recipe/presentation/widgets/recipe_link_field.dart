@@ -3,6 +3,7 @@ import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
+import 'package:pora/app/internal/theme/context_colors.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 
 /// Поле ссылки на рецепт + кнопка «Разобрать».
@@ -25,14 +26,14 @@ class RecipeLinkField extends StatelessWidget {
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: PoraRadii.input,
-        border: Border.all(color: PoraColors.border),
+        border: Border.all(color: context.colors.border),
       ),
       child: Row(
         children: [
-          const PhosphorIcon(
+          PhosphorIcon(
             PhosphorIconsRegular.link,
             size: 16,
-            color: PoraColors.textSubtle,
+            color: context.colors.textSubtle,
           ),
           const SizedBox(width: PoraSpacing.md),
           Expanded(
@@ -58,7 +59,7 @@ class RecipeLinkField extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               decoration: BoxDecoration(
-                color: busy ? PoraColors.textMuted : PoraColors.primary,
+                color: busy ? context.colors.textMuted : PoraColors.primary,
                 borderRadius: PoraRadii.md,
               ),
               child: busy

@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 
-//
-// Themes
-//
-enum ThemeMode { light, dark }
-
 // -----------------------------------------------------------------------------
 //  SPACING  (8pt-сетка, padding экрана = 24)
 // -----------------------------------------------------------------------------
@@ -30,6 +25,11 @@ abstract class PoraRadii {
   static const Radius _button = Radius.circular(16);
   static const Radius _card = Radius.circular(18);
   static const Radius _tile = Radius.circular(24);
+
+  /// Публичный доступ к скруглению карточек — для partial rounded углов
+  /// (например slidable clip первого/последнего tile в PoraCard).
+  static const Radius cardR = _card;
+  static const Radius tileR = _tile;
 
   static const BorderRadius sm = BorderRadius.all(_sm); // чекбокс
   static const BorderRadius md = BorderRadius.all(_md); // мелкие пилюли-кнопки

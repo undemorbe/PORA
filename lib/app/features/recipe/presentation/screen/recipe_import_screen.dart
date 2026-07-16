@@ -56,7 +56,7 @@ class _RecipeImportPageState extends State<RecipeImportPage> {
     final errs = await store.addSelected();
     if (!mounted) return;
     if (errs.isEmpty) {
-      PoraSnackbar.show(context, message: 'Готово');
+      PoraSnackbar.show(context, message: context.l10n.done);
       Navigator.of(context).maybePop();
     } else {
       PoraSnackbar.show(context, message: errs.first);
@@ -118,7 +118,7 @@ class _RecipeImportPageState extends State<RecipeImportPage> {
                               ),
                               added: store.selected.contains(i),
                               dup: store.rows[i].hasDuplicate
-                                  ? 'уже в списке'
+                                  ? context.l10n.recipeDupMark
                                   : null,
                               onTap: () => store.toggle(i),
                             ),
@@ -164,7 +164,7 @@ class _EmptyHint extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: PoraSpacing.xxl),
       child: Center(
         child: Text(
-          'Вставьте ссылку на рецепт и нажмите «Разобрать»',
+          context.l10n.recipeEmptyHint,
           style: PoraText.subtitle,
           textAlign: TextAlign.center,
         ),

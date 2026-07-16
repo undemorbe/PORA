@@ -12,7 +12,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get appName => 'ПОРА';
 
   @override
-  String get language => 'Русский';
+  String get language => 'Язык';
 
   @override
   String get authUnderAppName1 => 'Общий список для пар и семей';
@@ -426,7 +426,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get searchTitle => 'Поиск';
 
   @override
-  String get searchHint => 'Продукт или рецепт…';
+  String get searchHint => 'Название продукта…';
 
   @override
   String get searchFilterAll => 'Всё';
@@ -632,4 +632,176 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get personal => 'Личное';
+
+  @override
+  String get notify => 'Уведомить';
+
+  @override
+  String get notifyEveryone => 'Всем';
+
+  @override
+  String get notifyRecipients => 'Кому';
+
+  @override
+  String get notifyAddCustom => 'Добавить имя';
+
+  @override
+  String get notifyMessageLabel => 'Сообщение';
+
+  @override
+  String notifyHint(String itemName) {
+    return 'Срочно купи $itemName';
+  }
+
+  @override
+  String get notifySend => 'Отправить';
+
+  @override
+  String get notifySent => 'Уведомление отправлено';
+
+  @override
+  String get advancedSettings => 'Расширенные настройки';
+
+  @override
+  String get appearance => 'Внешний вид';
+
+  @override
+  String get themeSection => 'Тема';
+
+  @override
+  String get themeLight => 'Светлая';
+
+  @override
+  String get themeDark => 'Тёмная';
+
+  @override
+  String get themeSystem => 'Как в системе';
+
+  @override
+  String get notificationsPermission => 'Разрешения на уведомления';
+
+  @override
+  String get granted => 'Разрешено';
+
+  @override
+  String get denied => 'Запрещено';
+
+  @override
+  String get notDetermined => 'Не запрошено';
+
+  @override
+  String get requestPermission => 'Запросить';
+
+  @override
+  String get confirmations => 'Подтверждения';
+
+  @override
+  String get askBeforeDelete => 'Спрашивать перед удалением';
+
+  @override
+  String get about => 'О приложении';
+
+  @override
+  String get version => 'Версия';
+
+  @override
+  String get deleteItemTitle => 'Удалить продукт?';
+
+  @override
+  String get deleteItemBody => 'Действие нельзя отменить.';
+
+  @override
+  String get dontAskAgain => 'Не спрашивать снова';
+
+  @override
+  String get delete => 'Удалить';
+
+  @override
+  String get returnToList => 'Вернуть в список';
+
+  @override
+  String get nooneToNotify => 'Некого уведомлять';
+
+  @override
+  String get notFound => 'Не найдено';
+
+  @override
+  String get recipeEmptyHint =>
+      'Вставьте ссылку на рецепт и нажмите «Разобрать»';
+
+  @override
+  String get recipeDupMark => 'уже в списке';
+
+  @override
+  String get done => 'Готово';
+
+  @override
+  String get errorGeneric => 'Ошибка';
+
+  @override
+  String get pushToken => 'Push-токен';
+
+  @override
+  String get resync => 'Синхронизировать';
+
+  @override
+  String get tokenSynced => 'Токен отправлен';
+
+  @override
+  String get deleteListTitle => 'Удалить список?';
+
+  @override
+  String deleteListBody(String listName) {
+    return 'Список «$listName» и все продукты в нём будут удалены. Действие нельзя отменить.';
+  }
+
+  @override
+  String get membersScreenTitle => 'Участники';
+
+  @override
+  String get owner => 'Владелец';
+
+  @override
+  String get member => 'Участник';
+
+  @override
+  String get addProduct => 'Добавить продукт';
+
+  @override
+  String get productName => 'Название';
+
+  @override
+  String get section => 'Раздел';
+
+  @override
+  String get unit => 'Единица';
+
+  @override
+  String get priorityHigh => 'Высокий';
+
+  @override
+  String get priorityMed => 'Средний';
+
+  @override
+  String get priorityLow => 'Низкий';
+
+  @override
+  String get urgent => 'Срочно';
+
+  @override
+  String get remindEvery => 'Напоминать каждые';
+
+  @override
+  String get days => 'дн.';
+
+  @override
+  String get customValue => 'Своё…';
+
+  @override
+  String get save => 'Сохранить';
+
+  @override
+  String addedByName(String name) {
+    return 'Добавил(а): $name';
+  }
 }

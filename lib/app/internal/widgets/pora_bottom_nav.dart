@@ -3,9 +3,10 @@ import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
+import 'package:pora/app/internal/theme/context_colors.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 
-enum PoraTab { list, pora, order, profile }
+enum PoraTab { list, pora, profile }
 
 /// Нижняя навигация приложения (Список · Пора · Заказ · Профиль).
 class PoraBottomNav extends StatelessWidget {
@@ -17,14 +18,12 @@ class PoraBottomNav extends StatelessWidget {
   static const _items = <(PoraTab, IconData)>[
     (PoraTab.list, PhosphorIconsRegular.listChecks),
     (PoraTab.pora, PhosphorIconsRegular.clock),
-    (PoraTab.order, PhosphorIconsRegular.shoppingCart),
     (PoraTab.profile, PhosphorIconsRegular.user),
   ];
 
   String _labelOf(BuildContext context, PoraTab tab) => switch (tab) {
     PoraTab.list => context.l10n.navList,
     PoraTab.pora => context.l10n.navPora,
-    PoraTab.order => context.l10n.navOrder,
     PoraTab.profile => context.l10n.navProfile,
   };
 
@@ -75,7 +74,7 @@ class _Tab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = active ? PoraColors.primary : PoraColors.textSubtle;
+    final color = active ? PoraColors.primary : context.colors.textSubtle;
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () => onTap?.call(tab),

@@ -1,11 +1,10 @@
-import 'package:pora/app/features/lists/domain/repository/lists_repository.dart';
+import 'package:pora/app/features/item_detail/domain/repository/items_repository.dart';
 import 'package:pora/app/internal/errors/failure.dart';
 import 'package:pora/app/internal/errors/success.dart';
 import 'package:pora/app/internal/extensions/either.dart';
 
 class UpdateItemUseCase {
-  final ListsRepository repository;
-
+  final ItemsRepository repository;
   const UpdateItemUseCase({required this.repository});
 
   Future<Either<Failure, Success>> call({
@@ -17,16 +16,15 @@ class UpdateItemUseCase {
     required int priority,
     required bool urgent,
     required int? remindEveryDays,
-  }) {
-    return repository.updateItem(
-      itemId: itemId,
-      name: name,
-      section: section,
-      quantity: quantity,
-      unit: unit,
-      priority: priority,
-      urgent: urgent,
-      remindEveryDays: remindEveryDays,
-    );
-  }
+  }) =>
+      repository.updateItem(
+        itemId: itemId,
+        name: name,
+        section: section,
+        quantity: quantity,
+        unit: unit,
+        priority: priority,
+        urgent: urgent,
+        remindEveryDays: remindEveryDays,
+      );
 }

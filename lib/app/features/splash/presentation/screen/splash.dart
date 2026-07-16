@@ -5,6 +5,7 @@ import 'package:pora/app/features/splash/presentation/store/splash_store.dart';
 import 'package:pora/app/internal/bootstrap/app_bootstrap.dart';
 import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
+import 'package:pora/app/internal/theme/context_colors.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 
 /// Splash: тележка въезжает слева → буквы «Pora» появляются → продукты
@@ -199,48 +200,48 @@ class _SplashPageState extends State<SplashPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: PoraColors.cream,
+      backgroundColor: context.colors.bg,
       body: Center(
-        child: Transform.translate(
-          offset: const Offset(-24, 0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-            SlideTransition(
-              position: _cartOut,
-              child: SlideTransition(
-                position: _cartIn,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    // Cart + падающие продукты в общем Stack.
-                    SizedBox(
-                      width: _cartSize + 18,
-                      height: _cartSize + 20,
-                      child: Stack(
-                        clipBehavior: Clip.none,
-                        children: [
-                          // Продукты — ниже слоем. Тележка их перекрывает,
-                          // создавая эффект «упало внутрь».
-                          for (var i = 0; i < _items.length; i++) _drop(i),
-                          Positioned(
-                            left: 0,
-                            bottom: 0,
-                            child: FadeTransition(
-                              opacity: _cartFade,
-                              child: const PhosphorIcon(
-                                PhosphorIconsFill.shoppingCart,
-                                size: _cartSize,
-                                color: PoraColors.primary,
-                              ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+          SlideTransition(
+            position: _cartOut,
+            child: SlideTransition(
+              position: _cartIn,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  // Cart + падающие продукты в общем Stack.
+                  SizedBox(
+                    width: _cartSize + 18,
+                    height: _cartSize + 20,
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        // Продукты — ниже слоем. Тележка их перекрывает,
+                        // создавая эффект «упало внутрь».
+                        for (var i = 0; i < _items.length; i++) _drop(i),
+                        Positioned(
+                          left: 0,
+                          bottom: 0,
+                          child: FadeTransition(
+                            opacity: _cartFade,
+                            child: const PhosphorIcon(
+                              PhosphorIconsFill.shoppingCart,
+                              size: _cartSize,
+                              color: PoraColors.primary,
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(width: 14),
-                    FadeTransition(
+                  ),
+                  const SizedBox(width: 14),
+                  Transform.translate(
+                    offset: const Offset(0, 10),
+                    child: FadeTransition(
                       opacity: _lettersFade,
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -250,21 +251,21 @@ class _SplashPageState extends State<SplashPage>
                         ],
                       ),
                     ),
-                  ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 18),
+          FadeTransition(
+            opacity: _tagline,
+            child: Text(
+              context.l10n.splashTagline,
+              style: PoraText.subtitle.copyWith(color: PoraColors.textSubtle),
+            ),
+          ),
+        ],
                 ),
-              ),
-            ),
-            const SizedBox(height: 18),
-            FadeTransition(
-              opacity: _tagline,
-              child: Text(
-                context.l10n.splashTagline,
-                style: PoraText.subtitle.copyWith(color: PoraColors.textSubtle),
-              ),
-            ),
-          ],
-        ),
-      ),
     ),
     );
   }

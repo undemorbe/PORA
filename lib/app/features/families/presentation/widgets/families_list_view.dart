@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pora/app/features/families/domain/entity/member.dart';
 import 'package:pora/app/features/families/presentation/store/families_store.dart';
+import 'package:pora/app/features/families/presentation/store/selected_family_store.dart';
 import 'package:pora/app/features/families/presentation/widgets/family_card.dart';
+import 'package:get_it/get_it.dart';
 import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/router/app_router.gr.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
@@ -42,15 +44,18 @@ class FamiliesListView extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: PoraSpacing.md),
               child: FamilyCard(
                 family: family,
-                onTap: () => context.router.push(
-                  PreviewListsRoute(
-                    familyId: family.id,
-                    familyName: family.name,
-                    members:
-                        family.members?.whereType<MemberEntity>().toList() ??
-                        [],
-                  ),
-                ),
+                onTap: () {
+                  GetIt.I<SelectedFamilyStore>().select(family);
+                  context.router.push(
+                    PreviewListsRoute(
+                      familyId: family.id,
+                      familyName: family.name,
+                      members:
+                          family.members?.whereType<MemberEntity>().toList() ??
+                          [],
+                    ),
+                  );
+                },
               ),
             );
           },

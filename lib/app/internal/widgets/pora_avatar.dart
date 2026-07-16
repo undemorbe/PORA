@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pora/app/internal/logging/logger.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 
-/// Круглый аватар: сетевое фото если есть, иначе инициал на цветном фоне.
+/// Круглый аватар: сетевое фото → fallback инициал на цветном фоне.
 class PoraAvatar extends StatelessWidget {
   const PoraAvatar({
     super.key,
@@ -24,10 +25,9 @@ class PoraAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final hasImage = imageUrl != null && imageUrl!.isNotEmpty;
-    final borderSide = ring != null
-        ? Border.all(color: ring!, width: 2)
-        : null;
+    final hasImage = imageUrl != null &&
+        imageUrl!.isNotEmpty &&
+        Uri.tryParse(imageUrl!)?.hasAbsolutePath == true;
 
     final fallback = Container(
       width: size,
@@ -36,7 +36,6 @@ class PoraAvatar extends StatelessWidget {
       decoration: BoxDecoration(
         color: color ?? PoraColors.primary,
         shape: BoxShape.circle,
-        border: borderSide,
       ),
       child: Text(
         initial,
@@ -49,27 +48,44 @@ class PoraAvatar extends StatelessWidget {
       ),
     );
 
-    if (!hasImage) return fallback;
-
-    return Container(
-      width: size,
-      height: size,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: borderSide,
-      ),
-      clipBehavior: Clip.antiAlias,
-      child: Image.network(
-        imageUrl!,
+    // Border живёт снаружи ClipOval — иначе обрезается.
+    Widget wrap(Widget child) {
+      if (ring == null) return child;
+      return Container(
         width: size,
         height: size,
-        fit: BoxFit.cover,
-        cacheWidth: (size * MediaQuery.of(context).devicePixelRatio).round(),
-        errorBuilder: (_, __, ___) => fallback,
-        loadingBuilder: (context, child, progress) {
-          if (progress == null) return child;
-          return fallback;
-        },
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(color: ring!, width: 2),
+        ),
+        child: Padding(padding: const EdgeInsets.all(2), child: child),
+      );
+    }
+
+    if (!hasImage) return wrap(fallback);
+
+    return wrap(
+      ClipOval(
+        child: Image.network(
+          imageUrl!,
+          width: size,
+          height: size,
+          fit: BoxFit.cover,
+          errorBuilder: (context, error, stack) {
+            Logger.talker.warning(
+              'Avatar image failed: $imageUrl → $error',
+            );
+            return fallback;
+          },
+          loadingBuilder: (context, child, progress) {
+            if (progress == null) return child;
+            // Плавное появление: fade fallback → image.
+            return AnimatedSwitcher(
+              duration: const Duration(milliseconds: 180),
+              child: fallback,
+            );
+          },
+        ),
       ),
     );
   }

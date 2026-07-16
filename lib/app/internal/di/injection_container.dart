@@ -3,17 +3,26 @@ import 'package:pora/app/features/families/data/datasource/remote/family_remote.
 import 'package:pora/app/features/families/data/service/family_service.dart';
 import 'package:pora/app/features/families/domain/repository/family_repository.dart';
 import 'package:pora/app/features/families/domain/usecase/create_family.dart';
+import 'package:pora/app/features/families/presentation/store/selected_family_store.dart';
 import 'package:pora/app/features/families/domain/usecase/delete_family.dart';
 import 'package:pora/app/features/families/domain/usecase/get_families.dart';
 import 'package:pora/app/features/lists/data/datasource/remote/lists_remote.dart';
 import 'package:pora/app/features/lists/data/service/lists_service.dart';
 import 'package:pora/app/features/lists/domain/repository/lists_repository.dart';
-import 'package:pora/app/features/lists/domain/usecase/add_item_to_list.dart';
 import 'package:pora/app/features/lists/domain/usecase/create_list.dart';
 import 'package:pora/app/features/lists/domain/usecase/delete_list.dart';
 import 'package:pora/app/features/lists/domain/usecase/get_families_lists.dart';
+import 'package:pora/app/features/item_detail/data/datasource/items_remote.dart';
+import 'package:pora/app/features/item_detail/data/datasource/local_prefs.dart';
+import 'package:pora/app/features/item_detail/data/service/items_service.dart';
+import 'package:pora/app/features/item_detail/domain/repository/items_repository.dart';
+import 'package:pora/app/features/item_detail/domain/usecase/add_item.dart';
+import 'package:pora/app/features/item_detail/domain/usecase/delete_item.dart';
+import 'package:pora/app/features/item_detail/domain/usecase/get_item.dart';
+import 'package:pora/app/features/item_detail/domain/usecase/mark_item_bought.dart';
+import 'package:pora/app/features/item_detail/domain/usecase/notify_about_item.dart';
+import 'package:pora/app/features/item_detail/domain/usecase/update_item.dart';
 import 'package:pora/app/features/lists/domain/usecase/get_list_data.dart';
-import 'package:pora/app/features/lists/domain/usecase/update_item.dart';
 import 'package:pora/app/features/recipe/data/datasource/recipe_scraper.dart';
 import 'package:pora/app/features/recipe/data/service/recipe_service.dart';
 import 'package:pora/app/features/recipe/domain/repository/recipe_repository.dart';
@@ -49,6 +58,7 @@ class InjectionContainer {
     _getIt.registerSingleton<AuthState>(AuthState());
     _getIt.registerSingleton<AppRouter>(AppRouter(_getIt<AuthState>()));
     _getIt.registerSingleton<ThemeStore>(ThemeStore());
+    _getIt.registerSingleton<SelectedFamilyStore>(SelectedFamilyStore());
     _getIt.registerLazySingleton<TokensSecureStore>(() => TokensSecureStore());
 
     //! NETWORK
@@ -141,9 +151,6 @@ class InjectionContainer {
     );
 
     //! Lists
-    _getIt.registerFactory<AddItemToListUseCase>(
-      () => AddItemToListUseCase(listsRepository: _getIt<ListsRepository>()),
-    );
     _getIt.registerFactory<CreateListUseCase>(
       () => CreateListUseCase(listsRepository: _getIt<ListsRepository>()),
     );
@@ -156,8 +163,25 @@ class InjectionContainer {
     _getIt.registerFactory<GetConcreteListUseCase>(
       () => GetConcreteListUseCase(listsRepository: _getIt<ListsRepository>()),
     );
+
+    //! Items
+    _getIt.registerFactory<GetItemUseCase>(
+      () => GetItemUseCase(repository: _getIt<ItemsRepository>()),
+    );
+    _getIt.registerFactory<AddItemUseCase>(
+      () => AddItemUseCase(repository: _getIt<ItemsRepository>()),
+    );
     _getIt.registerFactory<UpdateItemUseCase>(
-      () => UpdateItemUseCase(repository: _getIt<ListsRepository>()),
+      () => UpdateItemUseCase(repository: _getIt<ItemsRepository>()),
+    );
+    _getIt.registerFactory<DeleteItemUseCase>(
+      () => DeleteItemUseCase(repository: _getIt<ItemsRepository>()),
+    );
+    _getIt.registerFactory<NotifyAboutItemUseCase>(
+      () => NotifyAboutItemUseCase(repository: _getIt<ItemsRepository>()),
+    );
+    _getIt.registerFactory<MarkItemBoughtUseCase>(
+      () => MarkItemBoughtUseCase(repository: _getIt<ItemsRepository>()),
     );
 
     //! Recipe
@@ -239,6 +263,17 @@ class InjectionContainer {
     _getIt.registerLazySingleton<RecipeScraper>(() => HttpRecipeScraper());
     _getIt.registerLazySingleton<RecipeRepository>(
       () => RecipeService(scraper: _getIt<RecipeScraper>()),
+    );
+
+    //! Items
+    _getIt.registerLazySingleton<ItemsRemote>(
+      () => ItemsRemoteImpl(apiClient: _getIt<ApiClient>()),
+    );
+    _getIt.registerLazySingleton<ItemsRepository>(
+      () => ItemsService(remote: _getIt<ItemsRemote>()),
+    );
+    _getIt.registerLazySingleton<ItemDetailsPrefs>(
+      () => ItemDetailsPrefs(db: _getIt<ILocalDB<dynamic>>()),
     );
   }
 }

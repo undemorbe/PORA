@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:pora/app/features/auth_and_validation/data/models/jwt_models/tokens_model.dart';
 import 'package:pora/app/features/families/data/models/families_models.dart';
+import 'package:pora/app/features/item_detail/data/models/add_item_response.dart';
 import 'package:pora/app/features/invitation/data/models/link_code_model.dart';
 import 'package:pora/app/features/lists/data/models/lists/list_model.dart';
 import 'package:pora/app/features/lists/data/models/lists/lists_array_model.dart';
@@ -87,17 +88,35 @@ abstract class ApiClient {
   Future<ListModel> getList({@Path('lid') required String listId});
 
   @POST('/lists/{lid}/items')
-  Future<void> addItem({
+  Future<AddItemResponse> addItem({
     @Path('lid') required String listId,
-    @Body() required ProductModel product,
+    @Body() required Map<String, dynamic> body,
   });
 
   @DELETE('/lists/{lid}')
   Future<void> deleteList({@Path('lid') required String listId});
 
   //! Items
+  @GET('/items/{iid}')
+  Future<ProductModel> getItem({@Path('iid') required String itemId});
+
   @PUT('/items/{iid}')
   Future<void> updateItem({
+    @Path('iid') required String itemId,
+    @Body() required Map<String, dynamic> body,
+  });
+
+  @DELETE('/items/{iid}')
+  Future<void> deleteItem({@Path('iid') required String itemId});
+
+  @POST('/items/{iid}/notify')
+  Future<void> notifyAboutItem({
+    @Path('iid') required String itemId,
+    @Body() required Map<String, dynamic> body,
+  });
+
+  @PATCH('/items/{iid}/bought')
+  Future<void> markItemBought({
     @Path('iid') required String itemId,
     @Body() required Map<String, dynamic> body,
   });

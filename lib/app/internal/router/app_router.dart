@@ -83,6 +83,16 @@ class AppRouter extends RootStackRouter {
       page: OnboardingSliderRoute.page,
       path: "/${OnboardingSliderRoute.name}",
     ),
+    AutoRoute(
+      page: AdvancedSettingsRoute.page,
+      path: "/${AdvancedSettingsRoute.name}",
+      guards: [_authGuard],
+    ),
+    AutoRoute(
+      page: MembersRoute.page,
+      path: "/${MembersRoute.name}",
+      guards: [_authGuard],
+    ),
     AutoRoute(page: BriefRoute.page, path: "/${BriefRoute.name}"),
     AutoRoute(
       page: UserCreateProfileRoute.page,

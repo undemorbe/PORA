@@ -2,9 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/app/internal/extensions/l10n_extension.dart';
+import 'package:pora/app/internal/notifications/device_token_sync.dart';
 import 'package:pora/app/internal/router/app_router.gr.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
+import 'package:pora/app/internal/theme/context_colors.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 
 /// Промежуточный экран для вернувшегося пользователя: «Вспомнили вас!».
@@ -35,6 +37,9 @@ class _WelcomeBackPageState extends State<WelcomeBackPage>
     _fade = CurvedAnimation(parent: _c, curve: const Interval(0.0, 0.6));
     _c.forward();
 
+    // User only что залогинился — регистрируем устройство на backend.
+    syncDeviceToken();
+
     // Пауза и переход на главный экран.
     Future.delayed(const Duration(milliseconds: 1600), () {
       if (!mounted) return;
@@ -52,7 +57,7 @@ class _WelcomeBackPageState extends State<WelcomeBackPage>
   Widget build(BuildContext context) {
     final l = context.l10n;
     return Scaffold(
-      backgroundColor: PoraColors.cream,
+      backgroundColor: context.colors.bg,
       body: SafeArea(
         child: Center(
           child: Column(
@@ -85,7 +90,7 @@ class _WelcomeBackPageState extends State<WelcomeBackPage>
                     Text(
                       l.welcomeBackSubtitle,
                       style: PoraText.subtitle.copyWith(
-                        color: PoraColors.textSubtle,
+                        color: context.colors.textSubtle,
                       ),
                       textAlign: TextAlign.center,
                     ),

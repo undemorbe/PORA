@@ -18,7 +18,6 @@ class MainShellPage extends StatelessWidget {
       // Порядок должен совпадать с индексами PoraTab.
       routes: [
   const        FamiliesRoute(),
-  const RecipeImportRoute(),
         const PredictionsRoute(),
       const  SettingsRoute(),
       ],

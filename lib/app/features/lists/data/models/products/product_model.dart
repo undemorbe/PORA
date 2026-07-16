@@ -11,6 +11,7 @@ class ProductModel extends ProductEntity {
     required super.urgent,
     required super.checked,
     required super.remindEveryDay,
+    super.section,
     super.addedBy,
   });
 
@@ -19,6 +20,7 @@ class ProductModel extends ProductEntity {
     return ProductModel(
       name: json['name'] as String,
       id: json['id'] as String,
+      section: (json['section'] as String?) ?? '',
       quantity: (json['quantity'] as num?)?.toInt() ?? 0,
       unit: (json['unit'] as String?) ?? '',
       priority: (json['priority'] as num?)?.toInt() ?? 0,
@@ -36,6 +38,7 @@ class ProductModel extends ProductEntity {
     return {
       'name': name,
       'id': id,
+      'section': section,
       'quantity': quantity,
       'unit': unit,
       'priority': priority,
