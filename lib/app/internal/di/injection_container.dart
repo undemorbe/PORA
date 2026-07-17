@@ -72,9 +72,7 @@ class InjectionContainer {
     );
 
     //! Notifications
-    _getIt.registerSingleton<NotificationService>(
-      NotificationService.instance,
-    );
+    _getIt.registerSingleton<NotificationService>(NotificationService.instance);
 
     //! Image Picker
     _getIt.registerLazySingleton<ImagePicker>(() => ImagePicker());

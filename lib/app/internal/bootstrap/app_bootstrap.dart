@@ -1,5 +1,7 @@
 import 'dart:async';
-
+import 'package:pora/app/internal/di/export.dart';
+import 'package:pora/app/internal/network/websocket/app_websocket.dart';
+import 'package:web_socket_channel/status.dart' as status;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:pora/app/features/auth_and_validation/data/datasource/local/secure_tokens.dart';
@@ -13,6 +15,7 @@ import 'package:pora/app/internal/notifications/deep_link_handler.dart';
 import 'package:pora/app/internal/notifications/device_token_sync.dart';
 import 'package:pora/app/internal/notifications/notification_service.dart';
 import 'package:pora/app/internal/router/guard/auth_state.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 
 /// Тяжёлая инициализация, идущая параллельно со splash-анимацией.
 ///
@@ -48,10 +51,12 @@ class AppBootstrap {
 
       // Три параллельных ветки — независимы, ускоряют cold start.
       await Future.wait<void>([
-        _initFirebaseAndPush(),
         _initLocalization(container),
         _refreshAndAuth(container),
       ]);
+      try {
+        await _initFirebaseAndPush();
+      } catch (e) {}
 
       // Депендс от secure store (запись в кэш) — после refresh.
       final tokensStore = container.getIt<TokensSecureStore>();
@@ -59,6 +64,7 @@ class AppBootstrap {
 
       // Auth готов + FCM token готов → регистрируем устройство.
       // No-op если не authed либо fcmToken пустой.
+      await _openAppWebsocket();
       bindDeviceTokenSyncToAuth();
       unawaited(syncDeviceToken());
 
@@ -88,8 +94,7 @@ class AppBootstrap {
       final tokensStore = container.getIt<TokensSecureStore>();
       final accessToken = await tokensStore.getAccessToken();
       final refreshToken = await tokensStore.getRefreshToken();
-      if (accessToken != null && refreshToken != null ||
-          dotenv.getBool('DEBUG')) {
+      if (accessToken != null && refreshToken != null) {
         auth.setAuthenticated();
       } else {
         auth.setUnauthenticated();
@@ -97,5 +102,24 @@ class AppBootstrap {
     } else {
       auth.setAuthenticated();
     }
+  }
+
+  Future<void> _openAppWebsocket() async {
+    Logger.talker.debug('Starting openning ws');
+    final wsUrl = Uri.parse(dotenv.get('WS_URL'));
+    final auth = GetIt.I<AuthState>();
+    if (auth.isAuthenticated) {
+      Logger.talker.debug('Auth = true, creating ws');
+
+      AppWebsocket.instance.connect(wsUrl);
+    }
+
+    auth.stream.listen((event) {
+      if (event == AuthStatus.authenticated) {
+        AppWebsocket.instance.connect(wsUrl);
+      } else {
+        AppWebsocket.instance.disconnect();
+      }
+    });
   }
 }
