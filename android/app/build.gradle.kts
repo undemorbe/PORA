@@ -6,11 +6,14 @@ plugins {
     id("kotlin-android")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
-    id("com.google.gms.google-services") version "4.5.0" apply false
+    // Google-services должен apply'иться, чтобы google-services.json превратился
+    // в firebase_options на нативной стороне.
+    id("com.google.gms.google-services")
 }
 
-dependencies{
-    implementation(platform("com.google.firebase:firebase-bom:34.15.0"))
+dependencies {
+    // Desugar 2.1.4+ требуется flutter_local_notifications 18.x.
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
 }
 
 val keystoreProperties = Properties().apply {
@@ -26,22 +29,20 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+        isCoreLibraryDesugaringEnabled = true
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+        jvmTarget = "17"
     }
 
-
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "com.boris.pora"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        multiDexEnabled = true
     }
 
     signingConfigs {
@@ -59,6 +60,14 @@ android {
     buildTypes {
         release {
             signingConfig = signingConfigs.getByName("release")
+            // Отключаем R8 — иначе Firebase/Hive reflection теряет классы, apk
+            // молча падает на устройстве. При необходимости — включить и
+            // добавить keep-rules в proguard-rules.pro.
+            isMinifyEnabled = false
+            isShrinkResources = false
+        }
+        debug {
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
 }
@@ -66,5 +75,3 @@ android {
 flutter {
     source = "../.."
 }
-
-apply plugin: 'com.google.gms.google-services'

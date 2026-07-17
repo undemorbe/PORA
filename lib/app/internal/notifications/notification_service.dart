@@ -90,7 +90,7 @@ class NotificationService {
     await Hive.openBox<String>(kNotificationsBoxName);
 
     await _local.initialize(
-      const InitializationSettings(
+      settings: const InitializationSettings(
         android: AndroidInitializationSettings('@mipmap/ic_launcher'),
         iOS: DarwinInitializationSettings(),
       ),
@@ -171,10 +171,10 @@ class NotificationService {
     final notif = message.notification;
     if (notif == null) return;
     await _local.show(
-      DateTime.now().millisecondsSinceEpoch.remainder(1 << 31),
-      notif.title,
-      notif.body,
-      NotificationDetails(
+      id: DateTime.now().millisecondsSinceEpoch.remainder(1 << 31),
+      title: notif.title,
+      body: notif.body,
+      notificationDetails: NotificationDetails(
         android: AndroidNotificationDetails(
           _kAndroidChannel.id,
           _kAndroidChannel.name,

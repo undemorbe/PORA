@@ -39,7 +39,6 @@ class SectionBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return Observer(
       builder: (context) {
-        // AnimatedSwitcher plavne переключает loading ↔ content ↔ error.
         final Widget child;
         if (listStore.isLoading) {
           child = const Padding(
