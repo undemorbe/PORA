@@ -29,28 +29,28 @@ class AppColors {
   });
 
   factory AppColors._light() => const AppColors._(
-        ink: PoraColors.ink,
-        inkInverse: PoraColors.inkInverse,
-        textMuted: PoraColors.textMuted,
-        textSubtle: PoraColors.textSubtle,
-        surface: PoraColors.surface,
-        surfaceAlt: PoraColors.surface,
-        border: PoraColors.border,
-        divider: PoraColors.divider,
-        bg: PoraColors.cream,
-      );
+    ink: PoraColors.ink,
+    inkInverse: PoraColors.inkInverse,
+    textMuted: PoraColors.textMuted,
+    textSubtle: PoraColors.textSubtle,
+    surface: PoraColors.surface,
+    surfaceAlt: PoraColors.surface,
+    border: PoraColors.border,
+    divider: PoraColors.divider,
+    bg: PoraColors.cream,
+  );
 
   factory AppColors._dark() => const AppColors._(
-        ink: PoraColorsDark.ink,
-        inkInverse: PoraColorsDark.inkInverse,
-        textMuted: PoraColorsDark.textMuted,
-        textSubtle: PoraColorsDark.textSubtle,
-        surface: PoraColorsDark.surface,
-        surfaceAlt: PoraColorsDark.surfaceAlt,
-        border: PoraColorsDark.border,
-        divider: PoraColorsDark.divider,
-        bg: PoraColorsDark.bg,
-      );
+    ink: PoraColorsDark.ink,
+    inkInverse: PoraColorsDark.inkInverse,
+    textMuted: PoraColorsDark.textMuted,
+    textSubtle: PoraColorsDark.textSubtle,
+    surface: PoraColorsDark.surface,
+    surfaceAlt: PoraColorsDark.surfaceAlt,
+    border: PoraColorsDark.border,
+    divider: PoraColorsDark.divider,
+    bg: PoraColorsDark.bg,
+  );
 
   final Color ink;
   final Color inkInverse;

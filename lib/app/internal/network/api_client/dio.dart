@@ -51,11 +51,12 @@ class DioClient {
 
       // Логирование
       TalkerDioLogger(
-          settings: const TalkerDioLoggerSettings(
+        settings: const TalkerDioLoggerSettings(
           printRequestHeaders: true,
           printResponseHeaders: true,
           printResponseMessage: true,
-        ),talker: Logger.talker,
+        ),
+        talker: Logger.talker,
       ),
 
       // Обработка ошибок
@@ -65,4 +66,3 @@ class DioClient {
     return dio;
   }
 }
-

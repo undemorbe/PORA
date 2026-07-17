@@ -25,7 +25,8 @@ class PoraAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final hasImage = imageUrl != null &&
+    final hasImage =
+        imageUrl != null &&
         imageUrl!.isNotEmpty &&
         Uri.tryParse(imageUrl!)?.hasAbsolutePath == true;
 
@@ -72,9 +73,7 @@ class PoraAvatar extends StatelessWidget {
           height: size,
           fit: BoxFit.cover,
           errorBuilder: (context, error, stack) {
-            Logger.talker.warning(
-              'Avatar image failed: $imageUrl → $error',
-            );
+            Logger.talker.warning('Avatar image failed: $imageUrl → $error');
             return fallback;
           },
           loadingBuilder: (context, child, progress) {

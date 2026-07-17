@@ -30,9 +30,7 @@ class PoraChip extends StatelessWidget {
             ? const EdgeInsets.symmetric(horizontal: 13, vertical: 8)
             : const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
         decoration: BoxDecoration(
-          color: selected
-              ? PoraColors.primaryTint
-              : context.colors.surface,
+          color: selected ? PoraColors.primaryTint : context.colors.surface,
           borderRadius: PoraRadii.pill,
           border: Border.all(
             color: selected ? PoraColors.primary : context.colors.border,

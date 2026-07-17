@@ -57,9 +57,7 @@ class DeepLinkHandler {
 
     if (router == null || auth == null || !auth.isAuthenticated) {
       _pending = data;
-      Logger.talker.info(
-        'DeepLink pending (router/auth not ready): $data',
-      );
+      Logger.talker.info('DeepLink pending (router/auth not ready): $data');
       return;
     }
 

@@ -40,14 +40,9 @@ Future<void> syncDeviceToken() async {
   final useCase = _tryGet<UpdateDeviceTokenUseCase>();
   if (useCase == null) return;
 
-  final res = await useCase.call(
-    deviceToken: token,
-    deviceType: ns.deviceType,
-  );
+  final res = await useCase.call(deviceToken: token, deviceType: ns.deviceType);
   if (res.isLeft) {
-    Logger.talker.warning(
-      'syncDeviceToken failed: ${res.left.message}',
-    );
+    Logger.talker.warning('syncDeviceToken failed: ${res.left.message}');
   }
 }
 

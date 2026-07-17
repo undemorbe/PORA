@@ -40,8 +40,8 @@ NotificationEntity _messageToEntity(
   RemoteMessage message, {
   required bool unread,
 }) {
-  final id = message.messageId ??
-      DateTime.now().microsecondsSinceEpoch.toString();
+  final id =
+      message.messageId ?? DateTime.now().microsecondsSinceEpoch.toString();
   return NotificationEntity(
     id: id,
     title: message.notification?.title,
@@ -99,7 +99,8 @@ class NotificationService {
 
     await _local
         .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
+          AndroidFlutterLocalNotificationsPlugin
+        >()
         ?.createNotificationChannel(_kAndroidChannel);
 
     final settings = await _fcm.requestPermission(
@@ -157,10 +158,7 @@ class NotificationService {
     );
   }
 
-  Future<void> _persist(
-    RemoteMessage message, {
-    required bool unread,
-  }) async {
+  Future<void> _persist(RemoteMessage message, {required bool unread}) async {
     final box = await _openBox();
     final entity = _messageToEntity(message, unread: unread);
     await box.put(entity.id, jsonEncode(entity.toJson()));
@@ -210,8 +208,9 @@ class NotificationService {
     if (raw == null) return;
     try {
       final decoded = jsonDecode(raw) as Map<String, dynamic>;
-      final entity =
-          NotificationEntity.fromJson(decoded).copyWith(unread: false);
+      final entity = NotificationEntity.fromJson(
+        decoded,
+      ).copyWith(unread: false);
       await box.put(id, jsonEncode(entity.toJson()));
     } catch (_) {}
   }
@@ -223,8 +222,9 @@ class NotificationService {
       if (raw == null) continue;
       try {
         final decoded = jsonDecode(raw) as Map<String, dynamic>;
-        final entity =
-            NotificationEntity.fromJson(decoded).copyWith(unread: false);
+        final entity = NotificationEntity.fromJson(
+          decoded,
+        ).copyWith(unread: false);
         await box.put(key, jsonEncode(entity.toJson()));
       } catch (_) {}
     }

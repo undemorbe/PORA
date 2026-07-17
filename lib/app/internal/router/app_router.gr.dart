@@ -841,18 +841,55 @@ class SplashRoute extends _i24.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i22.UserCreateProfilePage]
-class UserCreateProfileRoute extends _i24.PageRouteInfo<void> {
-  const UserCreateProfileRoute({List<_i24.PageRouteInfo>? children})
-    : super(UserCreateProfileRoute.name, initialChildren: children);
+class UserCreateProfileRoute
+    extends _i24.PageRouteInfo<UserCreateProfileRouteArgs> {
+  UserCreateProfileRoute({
+    _i25.Key? key,
+    bool isUpdating = false,
+    List<_i24.PageRouteInfo>? children,
+  }) : super(
+         UserCreateProfileRoute.name,
+         args: UserCreateProfileRouteArgs(key: key, isUpdating: isUpdating),
+         initialChildren: children,
+       );
 
   static const String name = 'UserCreateProfileRoute';
 
   static _i24.PageInfo page = _i24.PageInfo(
     name,
     builder: (data) {
-      return const _i22.UserCreateProfilePage();
+      final args = data.argsAs<UserCreateProfileRouteArgs>(
+        orElse: () => const UserCreateProfileRouteArgs(),
+      );
+      return _i22.UserCreateProfilePage(
+        key: args.key,
+        isUpdating: args.isUpdating,
+      );
     },
   );
+}
+
+class UserCreateProfileRouteArgs {
+  const UserCreateProfileRouteArgs({this.key, this.isUpdating = false});
+
+  final _i25.Key? key;
+
+  final bool isUpdating;
+
+  @override
+  String toString() {
+    return 'UserCreateProfileRouteArgs{key: $key, isUpdating: $isUpdating}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! UserCreateProfileRouteArgs) return false;
+    return key == other.key && isUpdating == other.isUpdating;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ isUpdating.hashCode;
 }
 
 /// generated route for
