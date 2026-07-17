@@ -7,7 +7,10 @@ import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 
 /// Диалог подтверждения удаления списка. Без «не спрашивать» — удаление
 /// списка более редкое и деструктивное действие чем items.
-Future<bool> confirmDeleteList(BuildContext context, {required String listName}) async {
+Future<bool> confirmDeleteList(
+  BuildContext context, {
+  required String listName,
+}) async {
   final ok = await showDialog<bool>(
     context: context,
     builder: (_) {

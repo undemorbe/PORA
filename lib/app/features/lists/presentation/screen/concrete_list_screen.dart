@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -6,6 +8,9 @@ import 'package:pora/app/features/families/presentation/store/selected_family_st
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/app/features/families/domain/entity/member.dart';
 import 'package:pora/app/features/lists/presentation/store/lists_store.dart';
+import 'package:pora/app/internal/network/websocket/app_websocket.dart';
+import 'package:pora/app/internal/network/websocket/debouncer.dart';
+import 'package:pora/app/internal/network/websocket/model/ws_data_model.dart';
 import 'package:pora/app/features/lists/presentation/widgets/add_list_button.dart';
 import 'package:pora/app/features/lists/presentation/widgets/list_header.dart';
 import 'package:pora/app/features/lists/presentation/widgets/section_builder.dart';
@@ -43,16 +48,26 @@ class _ListPageState extends State<ListPage> {
   late final ListStore listStore;
   bool _searchOpen = false;
   final _searchController = TextEditingController();
+  StreamSubscription<WsDataModel>? _wsSub;
+  final _debouncer = Debouncer();
 
   @override
   void initState() {
     super.initState();
     listStore = ListStore()..getConcreteList(lid: widget.listId);
+    _wsSub = AppWebsocket.instance.events.listen((event) {
+      if (event.lid != widget.listId) return;
+      _debouncer.call(_refresh);
+    });
   }
+
+  Future<void> _refresh() => listStore.getConcreteList(lid: widget.listId);
 
   @override
   void dispose() {
     _searchController.dispose();
+    _wsSub?.cancel();
+    _debouncer.cancel();
     super.dispose();
   }
 
@@ -90,9 +105,7 @@ class _ListPageState extends State<ListPage> {
             children: [
               Observer(
                 builder: (context) {
-                  final title = widget.listName ??
-                      listStore.list?.name ??
-                      '';
+                  final title = widget.listName ?? listStore.list?.name ?? '';
                   final members = widget.members?.isNotEmpty == true
                       ? widget.members!
                       : listStore.derivedMembers;
@@ -111,14 +124,14 @@ class _ListPageState extends State<ListPage> {
                     onMembersTap: members.isEmpty
                         ? null
                         : () => context.router.push(
-                              MembersRoute(
-                                members: members,
-                                ownerId: GetIt.I<SelectedFamilyStore>()
-                                    .current
-                                    ?.owner
-                                    .id,
-                              ),
+                            MembersRoute(
+                              members: members,
+                              ownerId: GetIt.I<SelectedFamilyStore>()
+                                  .current
+                                  ?.owner
+                                  .id,
                             ),
+                          ),
                   );
                 },
               ),
@@ -138,7 +151,11 @@ class _ListPageState extends State<ListPage> {
                     : const SizedBox.shrink(),
               ),
               const SizedBox(height: PoraSpacing.xl),
-              SectionBuilder(listStore: listStore, isPreview: false, lid: widget.listId),
+              SectionBuilder(
+                listStore: listStore,
+                isPreview: false,
+                lid: widget.listId,
+              ),
             ],
           ),
         ),
@@ -200,11 +217,7 @@ class _SearchField extends StatelessWidget {
             onTap: onClose,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: PoraSpacing.xs),
-              child: Icon(
-                PhosphorIconsRegular.x,
-                size: 16,
-                color: c.textMuted,
-              ),
+              child: Icon(PhosphorIconsRegular.x, size: 16, color: c.textMuted),
             ),
           ),
         ],

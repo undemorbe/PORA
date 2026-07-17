@@ -34,15 +34,15 @@ abstract class ProductEntity extends Equatable {
 
   @override
   List<Object?> get props => [
-        name,
-        id,
-        section,
-        quantity,
-        unit,
-        priority,
-        urgent,
-        checked,
-        remindEveryDay,
-        addedBy,
-      ];
+    name,
+    id,
+    section,
+    quantity,
+    unit,
+    priority,
+    urgent,
+    checked,
+    remindEveryDay,
+    addedBy,
+  ];
 }

@@ -15,8 +15,7 @@ class ListsService implements ListsRepository {
   Future<Either<Failure, Success>> createList({
     required String name,
     String? fid,
-  }) =>
-      listsRemote.createList(name: name, fid: fid);
+  }) => listsRemote.createList(name: name, fid: fid);
 
   @override
   Future<Either<Failure, Success>> deleteList({required String lid}) =>
@@ -25,8 +24,7 @@ class ListsService implements ListsRepository {
   @override
   Future<Either<Failure, ListsArrayEntity>> getFamilyLists({
     required String fid,
-  }) =>
-      listsRemote.getFamilyLists(fid: fid);
+  }) => listsRemote.getFamilyLists(fid: fid);
 
   @override
   Future<Either<Failure, ListEntity>> getList({required String lid}) =>

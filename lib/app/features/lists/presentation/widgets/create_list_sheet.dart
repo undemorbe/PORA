@@ -19,10 +19,8 @@ Future<bool> showCreateListSheet(
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
     ),
-    builder: (ctx) => _CreateListSheet(
-      listStore: listStore,
-      familyId: familyId,
-    ),
+    builder: (ctx) =>
+        _CreateListSheet(listStore: listStore, familyId: familyId),
   );
   return result ?? false;
 }

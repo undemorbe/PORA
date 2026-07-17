@@ -1,7 +1,12 @@
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pora/app/features/families/domain/entity/member.dart';
+import 'package:pora/app/internal/network/websocket/app_websocket.dart';
+import 'package:pora/app/internal/network/websocket/debouncer.dart';
+import 'package:pora/app/internal/network/websocket/model/ws_data_model.dart';
 import 'package:pora/app/features/lists/presentation/store/lists_store.dart';
 import 'package:pora/app/features/lists/presentation/widgets/add_list_button.dart';
 import 'package:pora/app/features/lists/presentation/widgets/create_list_sheet.dart';
@@ -37,6 +42,8 @@ class PreviewListsPage extends StatefulWidget {
 
 class _PreviewListsPageState extends State<PreviewListsPage> {
   late final ListStore listStore;
+  StreamSubscription<WsDataModel>? _wsSub;
+  final _debouncer = Debouncer();
 
   bool get _isPersonal => widget.isPersonal;
 
@@ -45,11 +52,34 @@ class _PreviewListsPageState extends State<PreviewListsPage> {
     super.initState();
     listStore = ListStore();
     _refresh();
+    if (!_isPersonal) _subscribeWs();
+  }
+
+  void _subscribeWs() {
+    _wsSub = AppWebsocket.instance.events.listen((event) {
+      // Preview слушает изменения в текущей семье:
+      //   family-id (только) → member joined / renamed
+      //   family-id + list-id → список создан/удалён/переименован
+      final matchesFamily = event.fid == widget.familyId;
+      if (!matchesFamily) return;
+      final isListEvent = event.lid != null && event.iid == null;
+      final isFamilyOnly = event.lid == null && event.iid == null;
+      if (isListEvent || isFamilyOnly) {
+        _debouncer.call(_refresh);
+      }
+    });
   }
 
   Future<void> _refresh() {
     if (_isPersonal) return listStore.loadPersonalLists();
     return listStore.getFamilyLists(fid: widget.familyId ?? '');
+  }
+
+  @override
+  void dispose() {
+    _wsSub?.cancel();
+    _debouncer.cancel();
+    super.dispose();
   }
 
   void _openCreateSheet() {
@@ -80,8 +110,7 @@ class _PreviewListsPageState extends State<PreviewListsPage> {
             children: [
               Observer(
                 builder: (context) {
-                  final count =
-                      listStore.listsWithPreview?.lists.length ?? 0;
+                  final count = listStore.listsWithPreview?.lists.length ?? 0;
                   if (_isPersonal) {
                     return ListHeader(
                       title: context.l10n.personal,
@@ -100,14 +129,14 @@ class _PreviewListsPageState extends State<PreviewListsPage> {
                     onMembersTap: members.isEmpty
                         ? null
                         : () => context.router.push(
-                              MembersRoute(
-                                members: members,
-                                ownerId: GetIt.I<SelectedFamilyStore>()
-                                    .current
-                                    ?.owner
-                                    .id,
-                              ),
+                            MembersRoute(
+                              members: members,
+                              ownerId: GetIt.I<SelectedFamilyStore>()
+                                  .current
+                                  ?.owner
+                                  .id,
                             ),
+                          ),
                   );
                 },
               ),

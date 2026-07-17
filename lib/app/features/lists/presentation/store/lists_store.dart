@@ -157,11 +157,7 @@ abstract class _ListStoreBase with Store {
       }).toList();
       return _FilteredSection(name: s.name, items: items);
     }).toList();
-    list = _ConcreteList(
-      id: cur.id,
-      name: cur.name,
-      sections: newSections,
-    );
+    list = _ConcreteList(id: cur.id, name: cur.name, sections: newSections);
   }
 
   @action
@@ -172,10 +168,12 @@ abstract class _ListStoreBase with Store {
       final cur = list;
       if (cur != null) {
         final newSections = cur.sections
-            .map((s) => _FilteredSection(
-                  name: s.name,
-                  items: s.items.where((p) => p.id != itemId).toList(),
-                ))
+            .map(
+              (s) => _FilteredSection(
+                name: s.name,
+                items: s.items.where((p) => p.id != itemId).toList(),
+              ),
+            )
             .where((s) => s.items.isNotEmpty)
             .toList();
         list = _ConcreteList(id: cur.id, name: cur.name, sections: newSections);
@@ -233,9 +231,7 @@ abstract class _ListStoreBase with Store {
     isLoading = false;
     if (response.isRight) {
       isSuccess = true;
-      listsWithPreview = _PersonalArray(
-        response.right.selfLists ?? const [],
-      );
+      listsWithPreview = _PersonalArray(response.right.selfLists ?? const []);
     } else {
       isSuccess = false;
       errorMessage = response.left.message;
@@ -265,16 +261,16 @@ class _ConcreteList extends ListEntity {
 
 class _CheckedProduct extends ProductEntity {
   _CheckedProduct(ProductEntity src, {required bool checked})
-      : super(
-          name: src.name,
-          id: src.id,
-          section: src.section,
-          quantity: src.quantity,
-          unit: src.unit,
-          priority: src.priority,
-          urgent: src.urgent,
-          checked: checked,
-          remindEveryDay: src.remindEveryDay,
-          addedBy: src.addedBy,
-        );
+    : super(
+        name: src.name,
+        id: src.id,
+        section: src.section,
+        quantity: src.quantity,
+        unit: src.unit,
+        priority: src.priority,
+        urgent: src.urgent,
+        checked: checked,
+        remindEveryDay: src.remindEveryDay,
+        addedBy: src.addedBy,
+      );
 }
