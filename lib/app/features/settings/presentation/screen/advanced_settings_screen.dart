@@ -182,10 +182,10 @@ class _ThemePicker extends StatelessWidget {
   }
 
   String _label(dynamic l, ThemeMode m) => switch (m) {
-        ThemeMode.system => l.themeSystem,
-        ThemeMode.light => l.themeLight,
-        ThemeMode.dark => l.themeDark,
-      };
+    ThemeMode.system => l.themeSystem,
+    ThemeMode.light => l.themeLight,
+    ThemeMode.dark => l.themeDark,
+  };
 }
 
 class _LanguagePicker extends StatelessWidget {
@@ -259,8 +259,7 @@ class _PermissionRow extends StatelessWidget {
     final l = context.l10n;
     final (label, color, canRequest) = switch (status) {
       AuthorizationStatus.authorized ||
-      AuthorizationStatus.provisional =>
-        (l.granted, PoraColors.success, false),
+      AuthorizationStatus.provisional => (l.granted, PoraColors.success, false),
       AuthorizationStatus.denied => (l.denied, PoraColors.danger, true),
       _ => (l.notDetermined, context.colors.textMuted, true),
     };
@@ -269,10 +268,7 @@ class _PermissionRow extends StatelessWidget {
       title: Text(l.notificationsPermission, style: PoraText.itemTitle),
       subtitle: Text(label, style: PoraText.small.copyWith(color: color)),
       trailing: canRequest
-          ? TextButton(
-              onPressed: onRequest,
-              child: Text(l.requestPermission),
-            )
+          ? TextButton(onPressed: onRequest, child: Text(l.requestPermission))
           : const Icon(Icons.check, color: PoraColors.success),
     );
   }

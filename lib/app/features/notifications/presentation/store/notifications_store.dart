@@ -11,7 +11,7 @@ abstract class _NotificationsStoreBase with Store {
   final NotificationService service;
 
   _NotificationsStoreBase({NotificationService? service})
-      : service = service ?? NotificationService.instance;
+    : service = service ?? NotificationService.instance;
 
   @observable
   ObservableList<NotificationEntity> items =
@@ -43,9 +43,7 @@ abstract class _NotificationsStoreBase with Store {
   @action
   Future<void> markAllRead() async {
     await service.markAllRead();
-    items = ObservableList.of(
-      items.map((n) => n.copyWith(unread: false)),
-    );
+    items = ObservableList.of(items.map((n) => n.copyWith(unread: false)));
   }
 
   @action

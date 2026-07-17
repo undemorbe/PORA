@@ -100,13 +100,12 @@ abstract class _RecipeImportStoreBase with Store {
     // Дефолт selected:
     //  - non-dup checked (добавить),
     //  - dup checked (пропустить — user сам снимет чтобы форсить).
-    selected = ObservableSet<int>.of(
-      List<int>.generate(rows.length, (i) => i),
-    );
+    selected = ObservableSet<int>.of(List<int>.generate(rows.length, (i) => i));
   }
 
   List<RecipeRow> _buildRows(List<RecipeIngredient> ings) {
-    final existing = _existingList?.sections
+    final existing =
+        _existingList?.sections
             .expand<ProductEntity>((s) => s.items)
             .toList() ??
         const <ProductEntity>[];
@@ -125,8 +124,7 @@ abstract class _RecipeImportStoreBase with Store {
     for (final p in existing) {
       final hay = _normalize(p.name);
       // Boyer-Moore либо substring в обе стороны.
-      if (boyerMooreContains(hay, needle) ||
-          boyerMooreContains(needle, hay)) {
+      if (boyerMooreContains(hay, needle) || boyerMooreContains(needle, hay)) {
         return p;
       }
     }
@@ -215,4 +213,3 @@ abstract class _RecipeImportStoreBase with Store {
     url = '';
   }
 }
-

@@ -16,8 +16,8 @@ import 'package:pora/app/internal/widgets/pora_snackbar.dart';
 
 @RoutePage()
 class UserCreateProfilePage extends StatefulWidget {
-  const UserCreateProfilePage({super.key});
-
+  const UserCreateProfilePage({super.key, this.isUpdating = false});
+  final bool isUpdating;
   @override
   State<UserCreateProfilePage> createState() => _UserCreateProfilePageState();
 }
@@ -54,7 +54,9 @@ class _UserCreateProfilePageState extends State<UserCreateProfilePage> {
                   PoraSpacing.sm,
                 ),
                 children: [
-                  const OnboardingProgressHeader(step: 3),
+                  widget.isUpdating
+                      ? const SizedBox.shrink()
+                      : const OnboardingProgressHeader(step: 3),
                   const SizedBox(height: 28),
                   Text(
                     context.l10n.userCreateProfileTitle,
@@ -99,9 +101,13 @@ class _UserCreateProfilePageState extends State<UserCreateProfilePage> {
                 children: [
                   TextButton(
                     onPressed: () async {
-                      await _finish();
-                      if (!context.mounted) return;
-                      context.router.push(const BriefRoute());
+                      if (widget.isUpdating) {
+                        context.router.pop();
+                      } else {
+                        await _finish();
+                        if (!context.mounted) return;
+                        context.router.push(const BriefRoute());
+                      }
                     },
                     child: Text(
                       context.l10n.userCreateProfileSkip,
@@ -112,12 +118,18 @@ class _UserCreateProfilePageState extends State<UserCreateProfilePage> {
                   ),
                   const SizedBox(height: PoraSpacing.sm),
                   PoraPrimaryButton(
-                    label: context.l10n.userCreateProfileNext,
+                    label: widget.isUpdating
+                        ? context.l10n.update
+                        : context.l10n.userCreateProfileNext,
                     onPressed: () async {
                       if (context.mounted && nameController.text.isNotEmpty) {
                         await _finish();
                         if (!context.mounted) return;
-                        context.router.push(const BriefRoute());
+                        if (widget.isUpdating) {
+                          context.router.pop();
+                        } else {
+                          context.router.push(const BriefRoute());
+                        }
                       } else {
                         PoraSnackbar.show(
                           context,

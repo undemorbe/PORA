@@ -1,10 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/app/features/auth_and_validation/presentation/controller/privacy_store.dart';
 import 'package:pora/app/features/settings/presentation/store/settings_store.dart';
 import 'package:pora/app/features/settings/presentation/widgets/delivery_value.dart';
+import 'package:pora/app/internal/di/export.dart';
 import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/features/settings/presentation/widgets/profile_card.dart';
 import 'package:pora/app/internal/router/app_router.gr.dart';
@@ -15,6 +17,7 @@ import 'package:pora/app/internal/widgets/pora_pill.dart';
 import 'package:pora/app/internal/widgets/pora_rows_card.dart';
 import 'package:pora/app/internal/widgets/pora_setting_row.dart';
 import 'package:pora/app/internal/widgets/section_label.dart';
+import 'package:talker_flutter/talker_flutter.dart';
 
 /// Экран настроек: профиль, хозяйство, группы настроек.
 @RoutePage()
@@ -66,6 +69,13 @@ class _SettingsPageState extends State<SettingsPage> {
                         (settingsStore.user?.phone ??
                             settingsStore.user?.email) ??
                         'unknown@unk.nown',
+                    onTap: () {
+                      if (settingsStore.user != null) {
+                        context.router.push(
+                          UserCreateProfileRoute(isUpdating: true),
+                        );
+                      }
+                    },
                   );
                 },
               ),
@@ -117,6 +127,18 @@ class _SettingsPageState extends State<SettingsPage> {
                     trailing: PoraSettingRow.chevron,
                     onTap: () => privacyStore.openPrivacy(),
                   ),
+                  if (dotenv.getBool('DEBUG'))
+                    PoraSettingRow(
+                      icon: PhosphorIconsRegular.lock,
+                      label: context.l10n.settingsPrivacy,
+                      trailing: PoraSettingRow.chevron,
+                      onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              TalkerScreen(talker: Logger.talker),
+                        ),
+                      ),
+                    ),
                 ],
               ),
               const SizedBox(height: PoraSpacing.lg),

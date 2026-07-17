@@ -89,8 +89,9 @@ class SectionGroup extends StatelessWidget {
       onTap: onProductTap == null
           ? () => onListTap!(section)
           : () => onProductTap!(item),
-      onCheckboxTap:
-          onToggleBought == null ? null : () => onToggleBought!(item),
+      onCheckboxTap: onToggleBought == null
+          ? null
+          : () => onToggleBought!(item),
     );
 
     // Slidable только на concrete-list режим (когда есть product tap

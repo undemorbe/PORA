@@ -1214,6 +1214,12 @@ abstract class AppLocalizations {
   /// **'списков'**
   String get lists;
 
+  /// update
+  ///
+  /// In en, this message translates to:
+  /// **'Обновить'**
+  String get update;
+
   /// connectionSuccess
   ///
   /// In en, this message translates to:

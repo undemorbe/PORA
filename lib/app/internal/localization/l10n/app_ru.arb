@@ -554,6 +554,10 @@
     "@searchFilterVegetables": {
         "description": "searchFilterVegetables"
     },
+       "update": "Обновить",
+    "@update": {
+        "description" : "update"
+    },
     "searchFilterDairy": "Молочное",
     "@searchFilterDairy": {
         "description": "searchFilterDairy"

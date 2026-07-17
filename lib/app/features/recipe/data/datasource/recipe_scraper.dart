@@ -57,7 +57,9 @@ class HttpRecipeScraper implements RecipeScraper {
 
   Uri _normalizeUrl(String raw) {
     final trimmed = raw.trim();
-    final withScheme = trimmed.startsWith('http') ? trimmed : 'https://$trimmed';
+    final withScheme = trimmed.startsWith('http')
+        ? trimmed
+        : 'https://$trimmed';
     return Uri.parse(withScheme);
   }
 
@@ -109,8 +111,8 @@ class HttpRecipeScraper implements RecipeScraper {
     }
     if (node is Map<String, dynamic>) {
       final type = node['@type'];
-      final isRecipe = type == 'Recipe' ||
-          (type is List && type.contains('Recipe'));
+      final isRecipe =
+          type == 'Recipe' || (type is List && type.contains('Recipe'));
       if (isRecipe) return node;
 
       final graph = node['@graph'];
@@ -142,7 +144,8 @@ class HttpRecipeScraper implements RecipeScraper {
   // ---------- HTML fallback ----------
 
   RecipeEntity _fromHtmlHeuristics(dom.Document doc, String sourceUrl) {
-    final title = _metaContent(doc, 'og:title') ??
+    final title =
+        _metaContent(doc, 'og:title') ??
         doc.querySelector('title')?.text.trim() ??
         'Рецепт';
     final image = _metaContent(doc, 'og:image');
@@ -178,7 +181,8 @@ class HttpRecipeScraper implements RecipeScraper {
   }
 
   String? _metaContent(dom.Document doc, String property) {
-    final el = doc.querySelector('meta[property="$property"]') ??
+    final el =
+        doc.querySelector('meta[property="$property"]') ??
         doc.querySelector('meta[name="$property"]');
     return el?.attributes['content']?.trim();
   }
@@ -214,10 +218,28 @@ class HttpRecipeScraper implements RecipeScraper {
   bool _isKnownUnit(String? u) {
     if (u == null) return false;
     const units = {
-      'г', 'кг', 'мг',
-      'мл', 'л',
-      'шт', 'ч', 'ст', 'ложка', 'ложек', 'стакан', 'стаканов',
-      'g', 'kg', 'ml', 'l', 'oz', 'lb', 'cup', 'cups', 'tsp', 'tbsp',
+      'г',
+      'кг',
+      'мг',
+      'мл',
+      'л',
+      'шт',
+      'ч',
+      'ст',
+      'ложка',
+      'ложек',
+      'стакан',
+      'стаканов',
+      'g',
+      'kg',
+      'ml',
+      'l',
+      'oz',
+      'lb',
+      'cup',
+      'cups',
+      'tsp',
+      'tbsp',
     };
     return units.contains(u.toLowerCase().replaceAll('.', ''));
   }

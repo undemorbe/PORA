@@ -161,9 +161,8 @@ class _NotificationsPageState extends State<NotificationsPage> {
 
   String _formatTime(DateTime dt) {
     final now = DateTime.now();
-    final sameDay = dt.year == now.year &&
-        dt.month == now.month &&
-        dt.day == now.day;
+    final sameDay =
+        dt.year == now.year && dt.month == now.month && dt.day == now.day;
     return sameDay
         ? DateFormat.Hm().format(dt)
         : DateFormat('d MMM').format(dt);

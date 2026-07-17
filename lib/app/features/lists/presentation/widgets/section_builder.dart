@@ -27,7 +27,7 @@ class SectionBuilder extends StatelessWidget {
     required this.listStore,
     required this.isPreview,
     this.members,
-    this.lid
+    this.lid,
   });
 
   final ListStore listStore;
@@ -100,8 +100,10 @@ class SectionBuilder extends StatelessWidget {
               list: list,
               members: members ?? const [],
               onDelete: () async {
-                final ok =
-                    await confirmDeleteList(context, listName: list.name);
+                final ok = await confirmDeleteList(
+                  context,
+                  listName: list.name,
+                );
                 if (ok) await listStore.deleteList(lid: list.id);
               },
             ),
@@ -127,7 +129,13 @@ class SectionBuilder extends StatelessWidget {
     }
 
     void onProductTap(ProductEntity p) {
-      context.router.push(ItemDetailRoute(itemId: p.id,additionalEffectOnDeletion: () => listStore.getConcreteList(lid: lid??'',),));
+      context.router.push(
+        ItemDetailRoute(
+          itemId: p.id,
+          additionalEffectOnDeletion: () =>
+              listStore.getConcreteList(lid: lid ?? ''),
+        ),
+      );
     }
 
     Future<void> onNotify(ProductEntity p) async {
@@ -150,8 +158,7 @@ class SectionBuilder extends StatelessWidget {
             onProductTap: onProductTap,
             onDeleteConfirmed: (p) => listStore.deleteItem(itemId: p.id),
             onNotify: onNotify,
-            onToggleBought: (p) =>
-                listStore.toggleItemBought(itemId: p.id),
+            onToggleBought: (p) => listStore.toggleItemBought(itemId: p.id),
           ),
       ],
     );
@@ -171,9 +178,7 @@ class _PreviewListCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final allItems = <ProductEntity>[
-      for (final s in list.sections) ...s.items,
-    ];
+    final allItems = <ProductEntity>[for (final s in list.sections) ...s.items];
     final visible = allItems.take(_kPreviewProductsLimit).toList();
     final hidden = allItems.length - visible.length;
 
@@ -240,7 +245,7 @@ class _PreviewListCard extends StatelessWidget {
       borderRadius: PoraRadii.card,
       child: Slidable(
         key: ValueKey('preview_${list.id}'),
-        endActionPane: ActionPane(
+        startActionPane: ActionPane(
           motion: const BehindMotion(),
           extentRatio: 0.28,
           children: [

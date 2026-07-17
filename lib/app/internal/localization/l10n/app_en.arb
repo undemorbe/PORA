@@ -754,6 +754,10 @@
     "@lists": {
         "description" : "lists"
     },
+    "update": "Обновить",
+    "@update": {
+        "description" : "update"
+    },
        "connectionSuccess": "Присоединились",
     "@connectionSuccess": {
         "description" : "connectionSuccess"

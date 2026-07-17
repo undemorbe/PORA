@@ -57,20 +57,15 @@ class _SplashPageState extends State<SplashPage>
     );
 
     // 0 → 0.22: cart in (easeOutBack — лёгкий отскок).
-    _cartIn = Tween<Offset>(
-      begin: const Offset(-1.8, 0),
-      end: Offset.zero,
-    ).animate(
-      CurvedAnimation(
-        parent: _c,
-        curve: const Interval(0.0, 0.22, curve: Curves.easeOutBack),
-      ),
-    );
+    _cartIn = Tween<Offset>(begin: const Offset(-1.8, 0), end: Offset.zero)
+        .animate(
+          CurvedAnimation(
+            parent: _c,
+            curve: const Interval(0.0, 0.22, curve: Curves.easeOutBack),
+          ),
+        );
 
-    _cartFade = CurvedAnimation(
-      parent: _c,
-      curve: const Interval(0.0, 0.15),
-    );
+    _cartFade = CurvedAnimation(parent: _c, curve: const Interval(0.0, 0.15));
 
     _lettersFade = CurvedAnimation(
       parent: _c,
@@ -108,15 +103,13 @@ class _SplashPageState extends State<SplashPage>
     );
 
     // 0.82 → 1.0: cart out (easeInBack — разгон с оттяжкой).
-    _cartOut = Tween<Offset>(
-      begin: Offset.zero,
-      end: const Offset(2.4, 0),
-    ).animate(
-      CurvedAnimation(
-        parent: _c,
-        curve: const Interval(0.82, 1.0, curve: Curves.easeInBack),
-      ),
-    );
+    _cartOut = Tween<Offset>(begin: Offset.zero, end: const Offset(2.4, 0))
+        .animate(
+          CurvedAnimation(
+            parent: _c,
+            curve: const Interval(0.82, 1.0, curve: Curves.easeInBack),
+          ),
+        );
 
     _navigateWhenReady(controller);
   }
@@ -190,10 +183,7 @@ class _SplashPageState extends State<SplashPage>
           ),
         );
       },
-      child: Text(
-        _items[i],
-        style: const TextStyle(fontSize: _itemSize),
-      ),
+      child: Text(_items[i], style: const TextStyle(fontSize: _itemSize)),
     );
   }
 
@@ -205,68 +195,68 @@ class _SplashPageState extends State<SplashPage>
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-          SlideTransition(
-            position: _cartOut,
-            child: SlideTransition(
-              position: _cartIn,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  // Cart + падающие продукты в общем Stack.
-                  SizedBox(
-                    width: _cartSize + 18,
-                    height: _cartSize + 20,
-                    child: Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        // Продукты — ниже слоем. Тележка их перекрывает,
-                        // создавая эффект «упало внутрь».
-                        for (var i = 0; i < _items.length; i++) _drop(i),
-                        Positioned(
-                          left: 0,
-                          bottom: 0,
-                          child: FadeTransition(
-                            opacity: _cartFade,
-                            child: const PhosphorIcon(
-                              PhosphorIconsFill.shoppingCart,
-                              size: _cartSize,
-                              color: PoraColors.primary,
+            SlideTransition(
+              position: _cartOut,
+              child: SlideTransition(
+                position: _cartIn,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    // Cart + падающие продукты в общем Stack.
+                    SizedBox(
+                      width: _cartSize + 18,
+                      height: _cartSize + 20,
+                      child: Stack(
+                        clipBehavior: Clip.none,
+                        children: [
+                          // Продукты — ниже слоем. Тележка их перекрывает,
+                          // создавая эффект «упало внутрь».
+                          for (var i = 0; i < _items.length; i++) _drop(i),
+                          Positioned(
+                            left: 0,
+                            bottom: 0,
+                            child: FadeTransition(
+                              opacity: _cartFade,
+                              child: const PhosphorIcon(
+                                PhosphorIconsFill.shoppingCart,
+                                size: _cartSize,
+                                color: PoraColors.primary,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(width: 14),
-                  Transform.translate(
-                    offset: const Offset(0, 10),
-                    child: FadeTransition(
-                      opacity: _lettersFade,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          for (var i = 0; i < _letters.length; i++)
-                            _letter(_letters[i], i),
                         ],
                       ),
                     ),
-                  ),
-                ],
+                    const SizedBox(width: 14),
+                    Transform.translate(
+                      offset: const Offset(0, 10),
+                      child: FadeTransition(
+                        opacity: _lettersFade,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            for (var i = 0; i < _letters.length; i++)
+                              _letter(_letters[i], i),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 18),
-          FadeTransition(
-            opacity: _tagline,
-            child: Text(
-              context.l10n.splashTagline,
-              style: PoraText.subtitle.copyWith(color: PoraColors.textSubtle),
+            const SizedBox(height: 18),
+            FadeTransition(
+              opacity: _tagline,
+              child: Text(
+                context.l10n.splashTagline,
+                style: PoraText.subtitle.copyWith(color: PoraColors.textSubtle),
+              ),
             ),
-          ),
-        ],
-                ),
-    ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -30,44 +30,41 @@ class UserModel extends UserEntity {
   }
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'surname': surname,
-        'phone': phone,
-        'email': email,
-        'image-url': imageUrl,
-        'lists': selfLists
-            ?.whereType<ListModel>()
-            .map((l) => l.toJson())
-            .toList(),
-      };
+    'id': id,
+    'name': name,
+    'surname': surname,
+    'phone': phone,
+    'email': email,
+    'image-url': imageUrl,
+    'lists': selfLists?.whereType<ListModel>().map((l) => l.toJson()).toList(),
+  };
 
   factory UserModel.fromEntity(UserEntity u) => UserModel(
-        id: u.id,
-        name: u.name,
-        surname: u.surname,
-        phone: u.phone,
-        email: u.email,
-        imageUrl: u.imageUrl,
-        selfLists: u.selfLists,
-      );
+    id: u.id,
+    name: u.name,
+    surname: u.surname,
+    phone: u.phone,
+    email: u.email,
+    imageUrl: u.imageUrl,
+    selfLists: u.selfLists,
+  );
 
   UserEntity toEntity() => UserEntity(
-        id: id,
-        name: name,
-        surname: surname,
-        phone: phone,
-        email: email,
-        imageUrl: imageUrl,
-        selfLists: selfLists,
-      );
+    id: id,
+    name: name,
+    surname: surname,
+    phone: phone,
+    email: email,
+    imageUrl: imageUrl,
+    selfLists: selfLists,
+  );
 
   UserUpdateModel toUpdateModel() => UserUpdateModel(
-        phone: _orNull(phone),
-        email: _orNull(email),
-        name: _orNull(name),
-        surname: _orNull(surname),
-      );
+    phone: _orNull(phone),
+    email: _orNull(email),
+    name: _orNull(name),
+    surname: _orNull(surname),
+  );
 
   static String? _orNull(String? v) => (v == null || v.isEmpty) ? null : v;
 }

@@ -102,8 +102,7 @@ class _RecipeImportPageState extends State<RecipeImportPage> {
                             store.recipe!.servings!,
                           '${store.rows.length} ${context.l10n.recipeIngredients.toLowerCase()}',
                         ].join(' · '),
-                        found:
-                            '${store.selectedCount}/${store.rows.length}',
+                        found: '${store.selectedCount}/${store.rows.length}',
                       ),
                       const SizedBox(height: PoraSpacing.lg),
                       SectionLabel(context.l10n.recipeIngredients),

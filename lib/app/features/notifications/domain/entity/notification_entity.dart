@@ -36,13 +36,13 @@ class NotificationEntity extends Equatable {
   }
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'title': title,
-        'body': body,
-        'data': data,
-        'receivedAt': receivedAt.toIso8601String(),
-        'unread': unread,
-      };
+    'id': id,
+    'title': title,
+    'body': body,
+    'data': data,
+    'receivedAt': receivedAt.toIso8601String(),
+    'unread': unread,
+  };
 
   factory NotificationEntity.fromJson(Map<String, dynamic> json) =>
       NotificationEntity(
@@ -52,7 +52,7 @@ class NotificationEntity extends Equatable {
         data: (json['data'] as Map?)?.cast<String, dynamic>() ?? const {},
         receivedAt:
             DateTime.tryParse(json['receivedAt'] as String? ?? '') ??
-                DateTime.now(),
+            DateTime.now(),
         unread: (json['unread'] as bool?) ?? true,
       );
 
