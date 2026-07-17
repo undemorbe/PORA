@@ -21,11 +21,11 @@ class ListModel extends ListEntity {
   }
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'sections': sections
-            .whereType<ListSectionModel>()
-            .map((s) => s.toJson())
-            .toList(),
-      };
+    'id': id,
+    'name': name,
+    'sections': sections
+        .whereType<ListSectionModel>()
+        .map((s) => s.toJson())
+        .toList(),
+  };
 }

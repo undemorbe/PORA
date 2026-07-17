@@ -16,15 +16,14 @@ class UpdateItemUseCase {
     required int priority,
     required bool urgent,
     required int? remindEveryDays,
-  }) =>
-      repository.updateItem(
-        itemId: itemId,
-        name: name,
-        section: section,
-        quantity: quantity,
-        unit: unit,
-        priority: priority,
-        urgent: urgent,
-        remindEveryDays: remindEveryDays,
-      );
+  }) => repository.updateItem(
+    itemId: itemId,
+    name: name,
+    section: section,
+    quantity: quantity,
+    unit: unit,
+    priority: priority,
+    urgent: urgent,
+    remindEveryDays: remindEveryDays,
+  );
 }

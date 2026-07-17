@@ -15,9 +15,6 @@ class ListsArrayModel extends ListsArrayEntity {
   }
 
   Map<String, dynamic> toJson() => {
-        'lists': lists
-            .whereType<ListModel>()
-            .map((l) => l.toJson())
-            .toList(),
-      };
+    'lists': lists.whereType<ListModel>().map((l) => l.toJson()).toList(),
+  };
 }

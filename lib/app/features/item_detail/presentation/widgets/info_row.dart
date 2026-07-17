@@ -28,10 +28,7 @@ class InfoRow extends StatelessWidget {
             ),
           ),
           if (value != null)
-            Text(
-              value!,
-              style: PoraText.itemTitle.copyWith(color: c.ink),
-            ),
+            Text(value!, style: PoraText.itemTitle.copyWith(color: c.ink)),
           ?trailing,
         ],
       ),

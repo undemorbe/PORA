@@ -78,10 +78,12 @@ class _NotifySheetState extends State<_NotifySheet> {
     final q = _query.trim().toLowerCase();
     if (q.isEmpty) return const [];
     return widget.candidates
-        .where((m) =>
-            !_selectedIds.contains(m.id) &&
-            (m.name.toLowerCase().contains(q) ||
-                (m.surname ?? '').toLowerCase().contains(q)))
+        .where(
+          (m) =>
+              !_selectedIds.contains(m.id) &&
+              (m.name.toLowerCase().contains(q) ||
+                  (m.surname ?? '').toLowerCase().contains(q)),
+        )
         .toList();
   }
 
@@ -196,9 +198,7 @@ class _NotifySheetState extends State<_NotifySheet> {
                               child: Row(
                                 children: [
                                   PoraAvatar(
-                                    initial: m.name.isEmpty
-                                        ? '?'
-                                        : m.name[0],
+                                    initial: m.name.isEmpty ? '?' : m.name[0],
                                     color: memberColor(m, 0),
                                     size: 24,
                                     imageUrl: m.imageUrl,

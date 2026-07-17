@@ -2,10 +2,7 @@ import 'package:pora/app/features/lists/data/models/products/product_model.dart'
 import 'package:pora/app/features/lists/domain/entity/lists/list_section.dart';
 
 class ListSectionModel extends ListSectionEntity {
-  const ListSectionModel({
-    required super.name,
-    required super.items,
-  });
+  const ListSectionModel({required super.name, required super.items});
 
   factory ListSectionModel.fromJson(Map<String, dynamic> json) {
     final raw = json['items'] as List?;
@@ -19,10 +16,7 @@ class ListSectionModel extends ListSectionEntity {
   }
 
   Map<String, dynamic> toJson() => {
-        'name': name,
-        'items': items
-            .whereType<ProductModel>()
-            .map((p) => p.toJson())
-            .toList(),
-      };
+    'name': name,
+    'items': items.whereType<ProductModel>().map((p) => p.toJson()).toList(),
+  };
 }

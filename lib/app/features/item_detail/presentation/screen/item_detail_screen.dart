@@ -23,7 +23,11 @@ import 'package:pora/app/internal/widgets/screen_back_header.dart';
 /// Карточка товара: детали, тумблеры, удаление.
 @RoutePage()
 class ItemDetailPage extends StatefulWidget {
-  const ItemDetailPage({super.key, required this.itemId, required this.additionalEffectOnDeletion});
+  const ItemDetailPage({
+    super.key,
+    required this.itemId,
+    required this.additionalEffectOnDeletion,
+  });
 
   final String itemId;
   final VoidCallback additionalEffectOnDeletion;
@@ -200,10 +204,7 @@ class _Body extends StatelessWidget {
           ],
         ),
         const SizedBox(height: PoraSpacing.xl),
-        PoraPrimaryButton(
-          label: context.l10n.notify,
-          onPressed: onNotify,
-        ),
+        PoraPrimaryButton(label: context.l10n.notify, onPressed: onNotify),
         const SizedBox(height: PoraSpacing.md),
         PoraPrimaryButton(
           label: item.checked

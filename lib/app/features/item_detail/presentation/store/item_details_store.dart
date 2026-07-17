@@ -11,18 +11,18 @@ part 'item_details_store.g.dart';
 
 class _PatchedProduct extends ProductEntity {
   _PatchedProduct(ProductEntity src, {required bool checked})
-      : super(
-          name: src.name,
-          id: src.id,
-          section: src.section,
-          quantity: src.quantity,
-          unit: src.unit,
-          priority: src.priority,
-          urgent: src.urgent,
-          checked: checked,
-          remindEveryDay: src.remindEveryDay,
-          addedBy: src.addedBy,
-        );
+    : super(
+        name: src.name,
+        id: src.id,
+        section: src.section,
+        quantity: src.quantity,
+        unit: src.unit,
+        priority: src.priority,
+        urgent: src.urgent,
+        checked: checked,
+        remindEveryDay: src.remindEveryDay,
+        addedBy: src.addedBy,
+      );
 }
 
 class ItemDetailsStore = _ItemDetailsStoreBase with _$ItemDetailsStore;

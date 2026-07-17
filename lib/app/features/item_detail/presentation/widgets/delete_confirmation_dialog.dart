@@ -44,10 +44,7 @@ class _DeleteDialogState extends State<_DeleteDialog> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            l.deleteItemBody,
-            style: PoraText.body.copyWith(color: c.ink),
-          ),
+          Text(l.deleteItemBody, style: PoraText.body.copyWith(color: c.ink)),
           const SizedBox(height: PoraSpacing.lg),
           Row(
             children: [
