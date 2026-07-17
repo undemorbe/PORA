@@ -57,10 +57,10 @@ class AuthRemoteImpl implements AuthRemote {
     required String deviceType,
   }) async {
     Map<String, dynamic> baseBody() => {
-          'otp': otp,
-          'device-token': deviceToken,
-          'device-type': deviceType,
-        };
+      'otp': otp,
+      'device-token': deviceToken,
+      'device-type': deviceType,
+    };
     try {
       if (destination.isValidEmail(destination)) {
         final value = await apiClient.verifyOtp(

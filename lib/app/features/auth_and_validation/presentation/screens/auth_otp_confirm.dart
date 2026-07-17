@@ -84,7 +84,7 @@ class OTPConfirmationPage extends StatelessWidget {
                             // иначе → авторизуемся и «Вспомнили вас» → главный.
                             if (authStore.needsProfile) {
                               context.router.replaceAll([
-                                const UserCreateProfileRoute(),
+                                UserCreateProfileRoute(),
                               ]);
                             } else {
                               GetIt.I<AuthState>().setAuthenticated();
@@ -176,7 +176,7 @@ class OTPConfirmationPage extends StatelessWidget {
                             // иначе → авторизуемся и «Вспомнили вас» → главный.
                             if (authStore.needsProfile) {
                               context.router.replaceAll([
-                                const UserCreateProfileRoute(),
+                                UserCreateProfileRoute(),
                               ]);
                             } else {
                               GetIt.I<AuthState>().setAuthenticated();

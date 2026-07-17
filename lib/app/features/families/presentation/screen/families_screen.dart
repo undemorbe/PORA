@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:math';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
@@ -5,6 +8,9 @@ import 'package:pora/app/features/families/presentation/store/families_store.dar
 import 'package:pora/app/features/families/presentation/widgets/families_create_button.dart';
 import 'package:pora/app/features/families/presentation/widgets/families_list_view.dart';
 import 'package:pora/app/internal/extensions/l10n_extension.dart';
+import 'package:pora/app/internal/network/websocket/app_websocket.dart';
+import 'package:pora/app/internal/network/websocket/debouncer.dart';
+import 'package:pora/app/internal/network/websocket/model/ws_data_model.dart';
 import 'package:pora/app/internal/router/app_router.gr.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
@@ -25,17 +31,28 @@ class _FamiliesPageState extends State<FamiliesPage>
   late final TextEditingController familyTextController;
 
   late final FamiliesStore familiesStore;
+  StreamSubscription<WsDataModel>? subscription;
+  final debouncer = Debouncer();
 
   @override
   void initState() {
+    super.initState();
     familyTextController = TextEditingController();
     familiesStore = FamiliesStore();
-    super.initState();
+    subscription = AppWebsocket.instance.events.listen((event) {
+      if (event.fid != null && event.iid == null && event.lid == null) {
+        debouncer.call(() {
+          familiesStore.getFamilies();
+        });
+      }
+    });
   }
 
   @override
   void dispose() {
     familyTextController.dispose();
+    subscription?.cancel();
+    debouncer.cancel();
     super.dispose();
   }
 
