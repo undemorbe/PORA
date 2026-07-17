@@ -63,22 +63,46 @@ mixin _$InvitationsStore on _InvitationsStoreBase, Store {
     });
   }
 
-  late final _$linkCodesAtom = Atom(
-    name: '_InvitationsStoreBase.linkCodes',
+  late final _$linkUrlAtom = Atom(
+    name: '_InvitationsStoreBase.linkUrl',
     context: context,
   );
 
   @override
-  LinkCodeEntity? get linkCodes {
-    _$linkCodesAtom.reportRead();
-    return super.linkCodes;
+  String? get linkUrl {
+    _$linkUrlAtom.reportRead();
+    return super.linkUrl;
   }
 
   @override
-  set linkCodes(LinkCodeEntity? value) {
-    _$linkCodesAtom.reportWrite(value, super.linkCodes, () {
-      super.linkCodes = value;
+  set linkUrl(String? value) {
+    _$linkUrlAtom.reportWrite(value, super.linkUrl, () {
+      super.linkUrl = value;
     });
+  }
+
+  late final _$copyToClipboardAsyncAction = AsyncAction(
+    '_InvitationsStoreBase.copyToClipboard',
+    context: context,
+  );
+
+  @override
+  Future<void> copyToClipboard(String textToCopy) {
+    return _$copyToClipboardAsyncAction.run(
+      () => super.copyToClipboard(textToCopy),
+    );
+  }
+
+  late final _$connectToFamilyAsyncAction = AsyncAction(
+    '_InvitationsStoreBase.connectToFamily',
+    context: context,
+  );
+
+  @override
+  Future<void> connectToFamily({required String code}) {
+    return _$connectToFamilyAsyncAction.run(
+      () => super.connectToFamily(code: code),
+    );
   }
 
   late final _$generateLinkCodeAsyncAction = AsyncAction(
@@ -87,9 +111,7 @@ mixin _$InvitationsStore on _InvitationsStoreBase, Store {
   );
 
   @override
-  Future<Either<Failure, LinkCodeEntity>> generateLinkCode({
-    required String familyId,
-  }) {
+  Future<void> generateLinkCode({required String familyId}) {
     return _$generateLinkCodeAsyncAction.run(
       () => super.generateLinkCode(familyId: familyId),
     );
@@ -113,7 +135,7 @@ mixin _$InvitationsStore on _InvitationsStoreBase, Store {
 isLoading: ${isLoading},
 isSuccess: ${isSuccess},
 linkCode: ${linkCode},
-linkCodes: ${linkCodes}
+linkUrl: ${linkUrl}
     ''';
   }
 }

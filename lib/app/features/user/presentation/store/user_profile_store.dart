@@ -1,29 +1,27 @@
 import 'dart:io';
-
-import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 import 'package:pora/app/features/user/domain/entity/user/user_entity.dart';
 import 'package:pora/app/features/user/domain/usecase/user/update_user.dart';
+import 'package:pora/app/internal/formatters/image_formatter.dart';
+import 'package:pora/app/internal/logging/logger.dart';
 part 'user_profile_store.g.dart';
 
 class UserProfileStore = _UserProfileStoreBase with _$UserProfileStore;
 
 abstract class _UserProfileStoreBase with Store {
-  final ImagePicker _picker = ImagePicker();
-
-  @observable
-  String name = '';
-
   @observable
   UserEntity? user;
 
   @observable
   File? profileImage;
 
+  @observable
+  bool? isLoadingImage;
+
   @action
-  Future<void> pushUserInformation() async {
+  Future<void> pushUserInformation({required String name}) async {
     final nameToEntity = name.split(' ').first.isEmpty
         ? 'PORA-USER${DateTime.now().millisecondsSinceEpoch}'
         : name.split(' ').first;
@@ -41,9 +39,31 @@ abstract class _UserProfileStoreBase with Store {
 
   @action
   Future<void> setProfileImage() async {
-    final image = await _picker.pickImage(source: ImageSource.gallery);
-    if (image != null) {
-      profileImage = File(image.path);
+    final imagePicker = GetIt.I<ImagePicker>();
+    final XFile? pickedFile = await imagePicker.pickImage(
+      source: ImageSource.gallery,
+    );
+    if (pickedFile == null) return;
+    try {
+      isLoadingImage = true;
+
+      // Run the pipeline
+      final File? processedImage =
+          await ImageProcessingService.RepublicImageProcess(
+            File(pickedFile.path),
+          );
+
+      if (processedImage != null) {
+        profileImage = processedImage;
+        await GetIt.I<UpdateUserUseCase>().call(
+          image: File(processedImage.path),
+        );
+        isLoadingImage = false;
+      }
+    } catch (e) {
+      Logger.talker.error("Error processing image: $e");
+    } finally {
+      isLoadingImage = false;
     }
   }
 }

@@ -27,6 +27,18 @@ mixin _$LocalizationStore on _LocalizationStoreBase, Store {
     });
   }
 
+  late final _$setCurrentLocaleAsyncAction = AsyncAction(
+    '_LocalizationStoreBase.setCurrentLocale',
+    context: context,
+  );
+
+  @override
+  Future<void> setCurrentLocale({required String newLocale}) {
+    return _$setCurrentLocaleAsyncAction.run(
+      () => super.setCurrentLocale(newLocale: newLocale),
+    );
+  }
+
   late final _$initialiseAsyncAction = AsyncAction(
     '_LocalizationStoreBase.initialise',
     context: context,
@@ -37,23 +49,6 @@ mixin _$LocalizationStore on _LocalizationStoreBase, Store {
     return _$initialiseAsyncAction.run(
       () => super.initialise(localDB: localDB),
     );
-  }
-
-  late final _$_LocalizationStoreBaseActionController = ActionController(
-    name: '_LocalizationStoreBase',
-    context: context,
-  );
-
-  @override
-  void setCurrentLocale({required String newLocale}) {
-    final _$actionInfo = _$_LocalizationStoreBaseActionController.startAction(
-      name: '_LocalizationStoreBase.setCurrentLocale',
-    );
-    try {
-      return super.setCurrentLocale(newLocale: newLocale);
-    } finally {
-      _$_LocalizationStoreBaseActionController.endAction(_$actionInfo);
-    }
   }
 
   @override

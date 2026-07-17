@@ -2,7 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
 import 'package:pora/app/features/auth_and_validation/presentation/controller/auth_store.dart';
+import 'package:pora/app/internal/router/guard/auth_state.dart';
 import 'package:pora/app/features/auth_and_validation/presentation/controller/privacy_store.dart';
 import 'package:pora/app/features/auth_and_validation/presentation/widgets/pinput.dart';
 import 'package:pora/app/internal/extensions/l10n_extension.dart';
@@ -67,12 +69,41 @@ class OTPConfirmationPage extends StatelessWidget {
                   const SizedBox(height: PoraSpacing.xxl),
 
                   //! pinput
-                  PinputRoundedWithCustomCursor(
-                    onCompleted: (value) => authStore.verifyOtp(
-                      destination: destinationController.text,
-                      code: OTPController.text,
-                    ),
-                    controller: OTPController,
+                  Observer(
+                    builder: (_) {
+                      return PinputRoundedWithCustomCursor(
+                        onCompleted: (value) async {
+                          await authStore.verifyOtp(
+                            destination: destinationController.text,
+                            code: value,
+                          );
+
+                          if ((authStore.success == true && context.mounted)) {
+                            // notRegistered → создание профиля (без авторизации);
+                            // иначе → авторизуемся и «Вспомнили вас» → главный.
+                            if (authStore.needsProfile) {
+                              context.router.replaceAll([
+                                UserCreateProfileRoute(),
+                              ]);
+                            } else {
+                              GetIt.I<AuthState>().setAuthenticated();
+                              context.router.replaceAll([
+                                const WelcomeBackRoute(),
+                              ]);
+                            }
+                          } else {
+                            if (!context.mounted) return;
+                            PoraSnackbar.show(
+                              context,
+                              message:
+                                  authStore.scaffoldMessage ?? l.commonError,
+                            );
+                            authStore.success = null;
+                          }
+                        },
+                        controller: OTPController,
+                      );
+                    },
                   ),
 
                   const SizedBox(height: 20),
@@ -86,8 +117,8 @@ class OTPConfirmationPage extends StatelessWidget {
                         style: PoraText.subtitle.copyWith(fontSize: 14),
                       ),
                       InkWell(
-                        onTap: () {
-                          authStore.sendOtp(
+                        onTap: () async {
+                          await authStore.sendOtp(
                             destination: destinationController.text,
                           );
                         },
@@ -133,30 +164,33 @@ class OTPConfirmationPage extends StatelessWidget {
                         label: l.otpVerifyButton,
                         isLoading: authStore.isLoading,
                         onPressed: () async {
-                          await authStore
-                              .verifyOtp(
-                                destination: destinationController.text,
-                                code: OTPController.text,
-                              )
-                              .whenComplete(() {
-                                if ((authStore.success == true &&
-                                        context.mounted) ||
-                                    (dotenv.getBool('DEBUG') &&
-                                        context.mounted)) {
-                                  context.router.replaceAll([
-                                    UserCreateProfileRoute(),
-                                  ]);
-                                } else {
-                                  if (!context.mounted) return;
-                                  PoraSnackbar.show(
-                                    context,
-                                    message:
-                                        authStore.scaffoldMessage ??
-                                        l.commonError,
-                                  );
-                                  authStore.success = null;
-                                }
-                              });
+                          await authStore.verifyOtp(
+                            destination: destinationController.text,
+                            code: OTPController.text,
+                          );
+
+                          if ((authStore.success == true && context.mounted)) {
+                            // notRegistered → создание профиля (без авторизации);
+                            // иначе → авторизуемся и «Вспомнили вас» → главный.
+                            if (authStore.needsProfile) {
+                              context.router.replaceAll([
+                                UserCreateProfileRoute(),
+                              ]);
+                            } else {
+                              GetIt.I<AuthState>().setAuthenticated();
+                              context.router.replaceAll([
+                                const WelcomeBackRoute(),
+                              ]);
+                            }
+                          } else {
+                            if (!context.mounted) return;
+                            PoraSnackbar.show(
+                              context,
+                              message:
+                                  authStore.scaffoldMessage ?? l.commonError,
+                            );
+                            authStore.success = null;
+                          }
                         },
                       );
                     },

@@ -63,6 +63,24 @@ mixin _$AuthStore on _AuthStoreBase, Store {
     });
   }
 
+  late final _$statusAtom = Atom(
+    name: '_AuthStoreBase.status',
+    context: context,
+  );
+
+  @override
+  String? get status {
+    _$statusAtom.reportRead();
+    return super.status;
+  }
+
+  @override
+  set status(String? value) {
+    _$statusAtom.reportWrite(value, super.status, () {
+      super.status = value;
+    });
+  }
+
   late final _$sendOtpAsyncAction = AsyncAction(
     '_AuthStoreBase.sendOtp',
     context: context,
@@ -92,7 +110,8 @@ mixin _$AuthStore on _AuthStoreBase, Store {
     return '''
 success: ${success},
 scaffoldMessage: ${scaffoldMessage},
-isLoading: ${isLoading}
+isLoading: ${isLoading},
+status: ${status}
     ''';
   }
 }

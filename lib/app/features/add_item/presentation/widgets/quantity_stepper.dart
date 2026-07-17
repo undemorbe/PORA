@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
+import 'package:pora/app/internal/theme/context_colors.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 
 /// Счётчик количества: − N + .
@@ -26,11 +27,11 @@ class QuantityStepper extends StatelessWidget {
         const SizedBox(width: PoraSpacing.lg),
         Text(
           '$value',
-          style: const TextStyle(
+          style: TextStyle(
             fontFamily: kPoraFontFamily,
             fontSize: 20,
             fontWeight: FontWeight.w700,
-            color: PoraColors.ink,
+            color: context.colors.ink,
           ),
         ),
         const SizedBox(width: PoraSpacing.lg),
@@ -47,9 +48,9 @@ class QuantityStepper extends StatelessWidget {
         height: 38,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surface,
+          color: context.colors.surface,
           borderRadius: PoraRadii.sm,
-          border: Border.all(color: PoraColors.border),
+          border: Border.all(color: context.colors.border),
         ),
         child: PhosphorIcon(icon, size: 17, color: PoraColors.primaryDark),
       ),

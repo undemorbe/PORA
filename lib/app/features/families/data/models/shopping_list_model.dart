@@ -5,7 +5,7 @@ part 'shopping_list_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class ShoppingListModel extends ShoppingListEntity {
-  @JsonKey(name: 'highPriorityProducts')
+  @JsonValue('lists')
   final List<ProductModel> highPriorityProductsModels;
 
   const ShoppingListModel({

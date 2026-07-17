@@ -11,7 +11,7 @@ ShoppingListModel _$ShoppingListModelFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       name: json['name'] as String,
       highPriorityProductsModels:
-          (json['highPriorityProducts'] as List<dynamic>)
+          (json['highPriorityProductsModels'] as List<dynamic>)
               .map((e) => ProductModel.fromJson(e as Map<String, dynamic>))
               .toList(),
     );
@@ -20,7 +20,7 @@ Map<String, dynamic> _$ShoppingListModelToJson(ShoppingListModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'highPriorityProducts': instance.highPriorityProductsModels
+      'highPriorityProductsModels': instance.highPriorityProductsModels
           .map((e) => e.toJson())
           .toList(),
     };

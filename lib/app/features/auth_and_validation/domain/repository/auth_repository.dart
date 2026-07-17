@@ -8,5 +8,7 @@ abstract class AuthRepository {
   Future<Either<Failure, TokensEntity>> verifyOtp({
     required String destination,
     required String otp,
+    required String? deviceToken,
+    required String deviceType,
   });
 }

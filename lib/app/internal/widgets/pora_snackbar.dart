@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
+import 'package:pora/app/internal/theme/context_colors.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 
 /// Тип уведомления — задаёт акцентный цвет и иконку по умолчанию.
@@ -78,13 +79,14 @@ class _PoraSnackContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final c = context.colors;
     return ClipRRect(
       borderRadius: PoraRadii.card,
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: PoraColors.surface,
+          color: c.surface,
           borderRadius: PoraRadii.card,
-          border: Border.all(color: PoraColors.border),
+          border: Border.all(color: c.border),
           boxShadow: PoraShadows.card,
         ),
         child: IntrinsicHeight(
@@ -113,7 +115,7 @@ class _PoraSnackContent extends StatelessWidget {
                       child: Text(
                         message,
                         style: PoraText.body.copyWith(
-                          color: PoraColors.ink,
+                          color: c.ink,
                           fontWeight: FontWeight.w600,
                         ),
                       ),

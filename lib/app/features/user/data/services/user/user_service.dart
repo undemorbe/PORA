@@ -54,4 +54,34 @@ class UserService implements UserRepository {
         return const ServerFailure('Unknown error');
     }
   }
+
+  @override
+  Future<Either<Failure, Success>> updateDeviceToken({
+    required String deviceToken,
+    required String deviceType,
+  }) async {
+    try {
+      await remoteDataSource.updateDevice(
+        deviceToken: deviceToken,
+        deviceType: deviceType,
+      );
+      return Right(const ServerSuccess());
+    } on DioException catch (e) {
+      return Left(_mapDioError(e));
+    } catch (_) {
+      return Left(const ServerFailure('Unknown error'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Success>> logout() async {
+    try {
+      await remoteDataSource.logout();
+      return Right(const ServerSuccess());
+    } on DioException catch (e) {
+      return Left(_mapDioError(e));
+    } catch (_) {
+      return Left(const ServerFailure('Unknown'));
+    }
+  }
 }

@@ -4,7 +4,12 @@ part 'tokens_model.g.dart';
 
 @JsonSerializable(createJsonSchema: true)
 class TokensModel extends TokensEntity {
-  const TokensModel({required super.accessToken, required super.refreshToken});
+  // Бэкенд отдаёт ключи через дефис: access-token / refresh-token.
+  const TokensModel({
+    @JsonKey(name: 'access-token') required super.accessToken,
+    @JsonKey(name: 'refresh-token') required super.refreshToken,
+    @JsonKey(name: 'status') super.status,
+  });
 
   factory TokensModel.fromJson(Map<String, dynamic> json) =>
       _$TokensModelFromJson(json);

@@ -6,14 +6,12 @@ import 'package:pora/app/features/auth_and_validation/presentation/controller/au
 import 'package:pora/app/features/auth_and_validation/presentation/widgets/auth_destination_field.dart';
 import 'package:pora/app/features/auth_and_validation/presentation/controller/privacy_store.dart';
 import 'package:pora/app/internal/extensions/l10n_extension.dart';
-import 'package:pora/app/internal/extensions/string_validation_extension.dart';
+import 'package:pora/app/internal/extensions/string_extension.dart';
 import 'package:pora/app/internal/router/app_router.gr.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
-import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 import 'package:pora/app/internal/widgets/pora_buttons.dart';
 import 'package:pora/app/features/onboarding/presentation/widgets/onboarding_progress_header.dart';
-import 'package:pora/app/internal/widgets/pora_circle_progress.dart';
 import 'package:pora/app/internal/widgets/pora_snackbar.dart';
 
 @RoutePage()

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 import 'package:pora/app/internal/extensions/l10n_extension.dart';
-import 'package:pora/app/internal/extensions/string_validation_extension.dart';
+import 'package:pora/app/internal/extensions/string_extension.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
+import 'package:pora/app/internal/theme/context_colors.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 
 /// 6-значный OTP-ввод в фирменном стиле Pora.
@@ -37,18 +38,19 @@ class _PinputRoundedWithCustomCursorState
 
   @override
   Widget build(BuildContext context) {
+    final c = context.colors;
     final defaultPinTheme = PinTheme(
       width: 52,
       height: PoraSizes.fieldHeight,
       textStyle: PoraText.code.copyWith(
         fontSize: 22,
         fontWeight: FontWeight.w700,
-        color: PoraColors.ink,
+        color: c.ink,
       ),
       decoration: BoxDecoration(
-        color: PoraColors.surface,
+        color: c.surface,
         borderRadius: PoraRadii.input,
-        border: Border.all(color: PoraColors.border),
+        border: Border.all(color: c.border),
       ),
     );
 
@@ -111,7 +113,7 @@ class _PinputRoundedWithCustomCursorState
         ),
         onCompleted: (pin) {
           if (_formKey.currentState?.validate() == true) {
-            widget.onCompleted?.call(pin);
+            widget.onCompleted  ?.call(pin);
           }
         },
       ),

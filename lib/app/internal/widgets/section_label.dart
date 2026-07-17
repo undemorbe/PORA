@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
+import 'package:pora/app/internal/theme/context_colors.dart';
 
 /// Заголовок-разделитель секции («МОЛОЧНОЕ», «РЕЗУЛЬТАТЫ» …).
 class SectionLabel extends StatelessWidget {
@@ -15,7 +16,10 @@ class SectionLabel extends StatelessWidget {
         left: PoraSpacing.xs,
         bottom: PoraSpacing.sm,
       ),
-      child: Text(text.toUpperCase(), style: PoraText.overline),
+      child: Text(
+        text.toUpperCase(),
+        style: PoraText.overline.copyWith(color: context.colors.textSubtle),
+      ),
     );
   }
 }

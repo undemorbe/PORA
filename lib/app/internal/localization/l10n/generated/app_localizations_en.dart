@@ -12,7 +12,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appName => 'Pora';
 
   @override
-  String get language => 'English';
+  String get language => 'Language';
 
   @override
   String get authUnderAppName1 => 'Общий список для пар и семей';
@@ -348,6 +348,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get householdDoLater => 'Сделаю позже';
 
   @override
+  String get householdCopyCode => 'Скопировали в буфер обмена!';
+
+  @override
   String get householdInviteCodeLabel => 'Код приглашения';
 
   @override
@@ -559,5 +562,248 @@ class AppLocalizationsEn extends AppLocalizations {
   String get familiesCreateOrJoin => '＋ Создать или присоединиться';
 
   @override
+  String get familiesCreateDialog => 'Как назовем семью?';
+
+  @override
+  String get tryToUpdate => 'Попробуйте обновить';
+
+  @override
+  String get checkOut => 'Проверить';
+
+  @override
+  String get settingsMore => 'Углубленные';
+
+  @override
+  String get listsYour => 'Ваш личный список';
+
+  @override
+  String get human => 'человека';
+
+  @override
+  String get products => 'продуктов';
+
+  @override
+  String get lists => 'списков';
+
+  @override
+  String get update => 'Обновить';
+
+  @override
+  String get connectionSuccess => 'Присоединились';
+
+  @override
   String get familiesNoUrgent => 'Нет срочного';
+
+  @override
+  String get welcomeBackTitle => 'Вспомнили вас!';
+
+  @override
+  String get welcomeBackSubtitle => 'Секунду, открываем ваш список…';
+
+  @override
+  String get errorDuringLoading => 'Ошибка при загрузке';
+
+  @override
+  String get familyName => 'Имя семьи';
+
+  @override
+  String get familiesCreate => 'Создать';
+
+  @override
+  String get familiesConnect => 'Присоединиться';
+
+  @override
+  String get showAll => 'Show all';
+
+  @override
+  String get priorityLabel => 'Priority';
+
+  @override
+  String get everyDay => 'Every day';
+
+  @override
+  String get newList => 'New list';
+
+  @override
+  String get listNamePlaceholder => 'List name';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get quantityLabel => 'Qty';
+
+  @override
+  String get personal => 'Personal';
+
+  @override
+  String get notify => 'Notify';
+
+  @override
+  String get notifyEveryone => 'Everyone';
+
+  @override
+  String get notifyRecipients => 'To';
+
+  @override
+  String get notifyAddCustom => 'Add name';
+
+  @override
+  String get notifyMessageLabel => 'Message';
+
+  @override
+  String notifyHint(String itemName) {
+    return 'Grab $itemName urgently';
+  }
+
+  @override
+  String get notifySend => 'Send';
+
+  @override
+  String get notifySent => 'Notification sent';
+
+  @override
+  String get advancedSettings => 'Advanced settings';
+
+  @override
+  String get appearance => 'Appearance';
+
+  @override
+  String get themeSection => 'Theme';
+
+  @override
+  String get themeLight => 'Light';
+
+  @override
+  String get themeDark => 'Dark';
+
+  @override
+  String get themeSystem => 'System';
+
+  @override
+  String get notificationsPermission => 'Notifications permission';
+
+  @override
+  String get granted => 'Granted';
+
+  @override
+  String get denied => 'Denied';
+
+  @override
+  String get notDetermined => 'Not requested';
+
+  @override
+  String get requestPermission => 'Request';
+
+  @override
+  String get confirmations => 'Confirmations';
+
+  @override
+  String get askBeforeDelete => 'Ask before deletion';
+
+  @override
+  String get about => 'About';
+
+  @override
+  String get version => 'Version';
+
+  @override
+  String get deleteItemTitle => 'Delete item?';
+
+  @override
+  String get deleteItemBody => 'This cannot be undone.';
+
+  @override
+  String get dontAskAgain => 'Don\'t ask again';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get returnToList => 'Return to list';
+
+  @override
+  String get nooneToNotify => 'No one to notify';
+
+  @override
+  String get notFound => 'Not found';
+
+  @override
+  String get recipeEmptyHint => 'Paste a recipe URL and tap “Parse”';
+
+  @override
+  String get recipeDupMark => 'already in list';
+
+  @override
+  String get done => 'Done';
+
+  @override
+  String get errorGeneric => 'Error';
+
+  @override
+  String get pushToken => 'Push token';
+
+  @override
+  String get resync => 'Sync';
+
+  @override
+  String get tokenSynced => 'Token synced';
+
+  @override
+  String get deleteListTitle => 'Delete list?';
+
+  @override
+  String deleteListBody(String listName) {
+    return 'List “$listName” and all its items will be deleted. This cannot be undone.';
+  }
+
+  @override
+  String get membersScreenTitle => 'Members';
+
+  @override
+  String get owner => 'Owner';
+
+  @override
+  String get member => 'Member';
+
+  @override
+  String get addProduct => 'Add product';
+
+  @override
+  String get productName => 'Name';
+
+  @override
+  String get section => 'Section';
+
+  @override
+  String get unit => 'Unit';
+
+  @override
+  String get priorityHigh => 'High';
+
+  @override
+  String get priorityMed => 'Medium';
+
+  @override
+  String get priorityLow => 'Low';
+
+  @override
+  String get urgent => 'Urgent';
+
+  @override
+  String get remindEvery => 'Remind every';
+
+  @override
+  String get days => 'd';
+
+  @override
+  String get customValue => 'Custom…';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String addedByName(String name) {
+    return 'Added by: $name';
+  }
 }

@@ -11,7 +11,14 @@ class VerifyOtpUseCase {
   Future<Either<Failure, TokensEntity>> call({
     required String destination,
     required String otp,
-  }) async {
-    return await authRepository.verifyOtp(destination: destination, otp: otp);
+    required String? deviceToken,
+    required String deviceType,
+  }) {
+    return authRepository.verifyOtp(
+      destination: destination,
+      otp: otp,
+      deviceToken: deviceToken,
+      deviceType: deviceType,
+    );
   }
 }

@@ -17,9 +17,8 @@ class MainShellPage extends StatelessWidget {
     return AutoTabsScaffold(
       // Порядок должен совпадать с индексами PoraTab.
       routes: [
-        HomeRoute(),
+        const FamiliesRoute(),
         const PredictionsRoute(),
-        const OrderRoute(),
         const SettingsRoute(),
       ],
       // Плавная кросс-фейд-анимация между вкладками.

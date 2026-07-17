@@ -7,15 +7,17 @@ import 'package:pora/app/features/invitation/presentation/widgets/invite_code_ca
 import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
+import 'package:pora/app/internal/theme/context_colors.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 import 'package:pora/app/internal/widgets/pora_buttons.dart';
+import 'package:pora/app/internal/widgets/pora_snackbar.dart';
 import 'package:pora/app/internal/widgets/screen_back_header.dart';
 
 /// Подключение себя к семье
 
 @RoutePage()
-class HouseholdConnectionPage extends StatefulWidget {
-  const HouseholdConnectionPage({
+class InvitationConnectPage extends StatefulWidget {
+  const InvitationConnectPage({
     super.key,
     @PathParam('linkCode') required this.linkCode,
   });
@@ -23,11 +25,10 @@ class HouseholdConnectionPage extends StatefulWidget {
   final String linkCode;
 
   @override
-  State<HouseholdConnectionPage> createState() =>
-      _HouseholdConnectionPageState();
+  State<InvitationConnectPage> createState() => _InvitationConnectPageState();
 }
 
-class _HouseholdConnectionPageState extends State<HouseholdConnectionPage> {
+class _InvitationConnectPageState extends State<InvitationConnectPage> {
   final InvitationsStore invitationsStore = InvitationsStore();
   final TextEditingController codeController = TextEditingController();
 
@@ -67,6 +68,20 @@ class _HouseholdConnectionPageState extends State<HouseholdConnectionPage> {
                 builder: (_) {
                   return InviteCodeCard(
                     code: invitationsStore.linkCode ?? widget.linkCode,
+                    onCopy: () async {
+                      await invitationsStore
+                          .copyToClipboard(
+                            invitationsStore.linkCode ?? widget.linkCode,
+                          )
+                          .whenComplete(() {
+                            if (context.mounted) {
+                              PoraSnackbar.show(
+                                context,
+                                message: context.l10n.householdCopyCode,
+                              );
+                            }
+                          });
+                    },
                   );
                 },
               ),
@@ -85,9 +100,20 @@ class _HouseholdConnectionPageState extends State<HouseholdConnectionPage> {
                 label: context.l10n.householdConnectToFamily,
                 //! Connect with invite code + deeplink
                 onPressed: () async {
-                  await invitationsStore.connectToFamily(
-                    code: invitationsStore.linkCode ?? widget.linkCode,
-                  );
+                  await invitationsStore
+                      .connectToFamily(
+                        code: invitationsStore.linkCode ?? widget.linkCode,
+                      )
+                      .whenComplete(() {
+                        if (invitationsStore.isSuccess == true &&
+                            context.mounted) {
+                          PoraSnackbar.show(
+                            context,
+                            message: context.l10n.connectionSuccess,
+                          );
+                          context.router.pop();
+                        }
+                      });
                 },
               ),
               const Spacer(),
@@ -99,7 +125,7 @@ class _HouseholdConnectionPageState extends State<HouseholdConnectionPage> {
                   child: Text(
                     context.l10n.householdDoLater,
                     style: PoraText.bodyLarge.copyWith(
-                      color: PoraColors.textSubtle,
+                      color: context.colors.textSubtle,
                     ),
                   ),
                 ),

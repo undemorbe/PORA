@@ -1,47 +1,31 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pora/app/features/auth_and_validation/domain/usecase/refresh_token.dart';
 import 'package:pora/app/internal/app/app.dart';
+import 'package:pora/app/internal/bootstrap/app_bootstrap.dart';
 import 'package:pora/app/internal/di/injection_container.dart';
-import 'package:pora/app/internal/router/guard/auth_state.dart';
-import 'package:pora/app/internal/local_storage/abstract_local_db.dart';
-import 'package:pora/app/internal/localization/store/localization_store.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // Быстрая часть: DI-регистрации + dotenv (~10-50ms).
   final injectionContainer = InjectionContainer();
   await injectionContainer.init();
 
-  await _initializeApp(injectionContainer);
-
-  runApp(MainApp(injectionContainer: injectionContainer));
-}
-
-Future<void> _initializeApp(InjectionContainer container) async {
-  final localDB = container.getIt<ILocalDB<dynamic>>();
-
-  await localDB.init();
-  final refreshed = await container.getIt<RefreshTokenUseCase>().call();
-  final auth = container.getIt<AuthState>();
-  (refreshed?.isRight ?? false)
-      ? auth.setAuthenticated()
-      : auth.setUnauthenticated();
-
-  final localizationStore = container.getIt<LocalizationStore>();
-  await localizationStore.initialise();
-
+  // System chrome — синхронно, копейки.
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark,
     ),
   );
-
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+
+  // Тяжёлая часть (Hive/Firebase/FCM/refresh/локализация) уходит в фон.
+  // Splash её дождётся перед навигацией.
+  AppBootstrap.instance.start(injectionContainer);
+
+  runApp(MainApp(injectionContainer: injectionContainer));
 }

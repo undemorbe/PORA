@@ -1,76 +1,66 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
+import 'package:pora/app/features/add_item/presentation/store/add_item_store.dart';
+import 'package:pora/app/features/add_item/presentation/widgets/add_item_header.dart';
+import 'package:pora/app/features/add_item/presentation/widgets/priority_selector.dart';
 import 'package:pora/app/features/add_item/presentation/widgets/quantity_stepper.dart';
+import 'package:pora/app/features/add_item/presentation/widgets/remind_days_counter.dart';
+import 'package:pora/app/features/add_item/presentation/widgets/section_selector.dart';
+import 'package:pora/app/features/add_item/presentation/widgets/unit_selector.dart';
 import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
-import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 import 'package:pora/app/internal/widgets/pora_buttons.dart';
-import 'package:pora/app/internal/widgets/pora_chip.dart';
 import 'package:pora/app/internal/widgets/pora_rows_card.dart';
 import 'package:pora/app/internal/widgets/pora_setting_row.dart';
+import 'package:pora/app/internal/widgets/pora_snackbar.dart';
 import 'package:pora/app/internal/widgets/pora_toggle.dart';
 import 'package:pora/app/internal/widgets/section_label.dart';
 
-/// Добавить продукт вручную: поле, количество, раздел, тумблеры.
+/// Добавление продукта в конкретный список.
 @RoutePage()
 class AddItemPage extends StatefulWidget {
-  const AddItemPage({super.key});
+  const AddItemPage({super.key, required this.lid});
+
+  final String lid;
 
   @override
   State<AddItemPage> createState() => _AddItemPageState();
 }
 
 class _AddItemPageState extends State<AddItemPage> {
-  int _qty = 2;
-  String _unit = 'шт';
-  String _section = 'Овощи и фрукты';
-  bool _urgent = false;
-  bool _remind = true;
+  late final AddItemStore store = AddItemStore(lid: widget.lid);
+  final TextEditingController _nameController = TextEditingController();
 
-  static const _units = ['шт', 'г', 'кг', 'л'];
-  static const _sections = <(String, String)>[
-    ('🥦', 'Овощи и фрукты'),
-    ('🥛', 'Молочное'),
-    ('🍝', 'Бакалея'),
-    ('🧃', 'Напитки'),
-  ];
+  @override
+  void dispose() {
+    _nameController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _submit() async {
+    final ok = await store.submit();
+    if (!mounted) return;
+    if (ok) {
+      Navigator.of(context).pop(true);
+    } else if (store.errorMessage != null) {
+      PoraSnackbar.show(context, message: store.errorMessage!);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    final l = context.l10n;
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
-            // Шапка
-            Padding(
-              padding: const EdgeInsets.fromLTRB(
-                PoraSpacing.screen,
-                PoraSpacing.sm,
-                PoraSpacing.screen,
-                0,
-              ),
-              child: SizedBox(
-                height: 40,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Text(context.l10n.addItemTitle, style: PoraText.navTitle),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: GestureDetector(
-                        onTap: () => context.router.maybePop(),
-                        child: const PhosphorIcon(
-                          PhosphorIconsRegular.x,
-                          size: 22,
-                          color: PoraColors.textSubtle,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+            AddItemHeader(
+              title: l.addProduct,
+              onBack: () => Navigator.of(context).maybePop(),
+              onClose: () => Navigator.of(context).maybePop(),
             ),
             Expanded(
               child: ListView(
@@ -81,79 +71,84 @@ class _AddItemPageState extends State<AddItemPage> {
                   PoraSpacing.lg,
                 ),
                 children: [
-                  TextFormField(
-                    initialValue: context.l10n.addItemExampleValue,
+                  TextField(
+                    controller: _nameController,
+                    autofocus: true,
+                    textCapitalization: TextCapitalization.sentences,
+                    onChanged: store.setName,
                     style: PoraText.bodyLarge.copyWith(fontSize: 18),
-                    decoration: InputDecoration(
-                      hintText: context.l10n.addItemNameHint,
+                    decoration: InputDecoration(hintText: l.productName),
+                  ),
+                  const SizedBox(height: PoraSpacing.xl),
+
+                  SectionLabel(l.addItemQuantity),
+                  Observer(
+                    builder: (_) => QuantityStepper(
+                      value: store.quantity,
+                      onDecrement: store.decrement,
+                      onIncrement: store.increment,
+                    ),
+                  ),
+                  const SizedBox(height: PoraSpacing.lg),
+
+                  SectionLabel(l.unit),
+                  Observer(
+                    builder: (_) => UnitSelector(
+                      value: store.unit,
+                      isCustom: store.hasCustomUnit,
+                      onChanged: store.setUnit,
                     ),
                   ),
                   const SizedBox(height: PoraSpacing.xl),
 
-                  SectionLabel(context.l10n.addItemQuantity),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      QuantityStepper(
-                        value: _qty,
-                        onDecrement: () =>
-                            setState(() => _qty = _qty > 1 ? _qty - 1 : 1),
-                        onIncrement: () => setState(() => _qty++),
-                      ),
-                      Wrap(
-                        spacing: PoraSpacing.sm,
-                        children: [
-                          for (final u in _units)
-                            PoraChip(
-                              label: u,
-                              dense: true,
-                              selected: u == _unit,
-                              onTap: () => setState(() => _unit = u),
-                            ),
-                        ],
-                      ),
-                    ],
+                  SectionLabel(l.section),
+                  Observer(
+                    builder: (_) => SectionSelector(
+                      value: store.section,
+                      isCustom: store.hasCustomSection,
+                      onChanged: store.setSection,
+                    ),
                   ),
-                  const SizedBox(height: PoraSpacing.xxl),
+                  const SizedBox(height: PoraSpacing.xl),
 
-                  SectionLabel(context.l10n.addItemSection),
-                  Wrap(
-                    spacing: 9,
-                    runSpacing: 9,
-                    children: [
-                      for (final (emoji, name) in _sections)
-                        PoraChip(
-                          label: name,
-                          leading: emoji,
-                          dense: true,
-                          selected: name == _section,
-                          onTap: () => setState(() => _section = name),
-                        ),
-                    ],
+                  SectionLabel(l.priorityLabel),
+                  Observer(
+                    builder: (_) => PrioritySelector(
+                      value: store.priority,
+                      onChanged: store.setPriority,
+                    ),
                   ),
-                  const SizedBox(height: PoraSpacing.xxl),
+                  const SizedBox(height: PoraSpacing.xl),
 
-                  PoraRowsCard(
-                    children: [
-                      PoraSettingRow(
-                        icon: PhosphorIconsRegular.clock,
-                        label: context.l10n.addItemUrgent,
-                        subtitle: context.l10n.addItemUrgentSubtitle,
-                        trailing: PoraToggle(
-                          value: _urgent,
-                          onChanged: (v) => setState(() => _urgent = v),
+                  Observer(
+                    builder: (_) => PoraRowsCard(
+                      children: [
+                        PoraSettingRow(
+                          icon: PhosphorIconsRegular.clock,
+                          label: l.urgent,
+                          trailing: PoraToggle(
+                            value: store.urgent,
+                            onChanged: store.toggleUrgent,
+                          ),
                         ),
-                      ),
-                      PoraSettingRow(
-                        icon: PhosphorIconsRegular.arrowsClockwise,
-                        label: context.l10n.addItemRemind,
-                        subtitle: context.l10n.addItemRemindEvery,
-                        trailing: PoraToggle(
-                          value: _remind,
-                          onChanged: (v) => setState(() => _remind = v),
+                        PoraSettingRow(
+                          icon: PhosphorIconsRegular.arrowsClockwise,
+                          label: l.remindEvery,
+                          subtitle: store.remind
+                              ? '${store.remindDays} ${l.days}'
+                              : null,
+                          trailing: PoraToggle(
+                            value: store.remind,
+                            onChanged: store.toggleRemind,
+                          ),
                         ),
-                      ),
-                    ],
+                        if (store.remind)
+                          RemindDaysCounter(
+                            value: store.remindDays,
+                            onChanged: store.setRemindDays,
+                          ),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -165,9 +160,12 @@ class _AddItemPageState extends State<AddItemPage> {
                 PoraSpacing.screen,
                 PoraSpacing.xxl,
               ),
-              child: PoraPrimaryButton(
-                label: context.l10n.addItemSubmit,
-                onPressed: () {},
+              child: Observer(
+                builder: (_) => PoraPrimaryButton(
+                  label: l.save,
+                  isLoading: store.busy,
+                  onPressed: store.canSubmit ? _submit : null,
+                ),
               ),
             ),
           ],

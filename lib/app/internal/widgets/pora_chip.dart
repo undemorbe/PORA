@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
+import 'package:pora/app/internal/theme/context_colors.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 
 /// Выбираемый чип: продукты онбординга, разделы, единицы, кухни, фильтры.
@@ -29,12 +30,10 @@ class PoraChip extends StatelessWidget {
             ? const EdgeInsets.symmetric(horizontal: 13, vertical: 8)
             : const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
         decoration: BoxDecoration(
-          color: selected
-              ? PoraColors.primaryTint
-              : Theme.of(context).colorScheme.surface,
+          color: selected ? PoraColors.primaryTint : context.colors.surface,
           borderRadius: PoraRadii.pill,
           border: Border.all(
-            color: selected ? PoraColors.primary : PoraColors.border,
+            color: selected ? PoraColors.primary : context.colors.border,
             width: selected ? 1.5 : 1,
           ),
         ),
@@ -53,7 +52,7 @@ class PoraChip extends StatelessWidget {
                 fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
                 color: selected
                     ? PoraColors.primaryDark
-                    : PoraColors.textSecondary,
+                    : context.colors.textMuted,
               ),
             ),
           ],

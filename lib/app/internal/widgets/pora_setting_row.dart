@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
+import 'package:pora/app/internal/theme/context_colors.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 
 /// Строка настройки/детали: иконка · подпись · трейлинг (шеврон/пилюля/тумблер).
@@ -32,7 +33,8 @@ class PoraSettingRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = danger ? PoraColors.danger : PoraColors.ink;
+    final color = danger ? PoraColors.danger : context.colors.ink;
+    final subtle = context.colors.textSubtle;
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: onTap,
@@ -54,7 +56,10 @@ class PoraSettingRow extends StatelessWidget {
                   if (subtitle != null)
                     Padding(
                       padding: const EdgeInsets.only(top: PoraSpacing.xxs),
-                      child: Text(subtitle!, style: PoraText.small),
+                      child: Text(
+                        subtitle!,
+                        style: PoraText.small.copyWith(color: subtle),
+                      ),
                     ),
                 ],
               ),

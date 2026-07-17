@@ -3,7 +3,7 @@ import 'package:pora/app/features/auth_and_validation/domain/entity/tokens_entit
 import 'package:pora/app/internal/errors/failure.dart';
 import 'package:pora/app/internal/errors/success.dart';
 import 'package:pora/app/internal/extensions/either.dart';
-import 'package:pora/app/internal/extensions/string_validation_extension.dart';
+import 'package:pora/app/internal/extensions/string_extension.dart';
 import 'package:pora/app/internal/network/api_client/api_client.dart';
 
 abstract class AuthRemote {
@@ -11,6 +11,8 @@ abstract class AuthRemote {
   Future<Either<Failure, TokensEntity>> verifyOtp({
     required String destination,
     required String otp,
+    required String? deviceToken,
+    required String deviceType,
   });
 }
 
@@ -51,22 +53,32 @@ class AuthRemoteImpl implements AuthRemote {
   Future<Either<Failure, TokensEntity>> verifyOtp({
     required String destination,
     required String otp,
+    required String? deviceToken,
+    required String deviceType,
   }) async {
+    Map<String, dynamic> baseBody() => {
+      'otp': otp,
+      'device-token': deviceToken,
+      'device-type': deviceType,
+    };
     try {
       if (destination.isValidEmail(destination)) {
         final value = await apiClient.verifyOtp(
-          body: {'email': destination, 'otp': otp},
+          body: {...baseBody(), 'email': destination},
         );
         return Right(value);
       } else if (destination.isValidPhone(destination)) {
         final value = await apiClient.verifyOtp(
-          body: {'phone': destination, 'otp': otp},
+          body: {...baseBody(), 'phone': destination},
         );
         return Right(value);
+      } else {
+        return Left(const ValidationFailure('Invalid destination'));
       }
-      return Left(const NetworkFailure('Invalid destination'));
-    } catch (e) {
+    } on DioException catch (e) {
       return Left(NetworkFailure('Failed to verify otp : $e'));
+    } catch (e) {
+      return Left(ServerFailure('Failed to verify otp : $e'));
     }
   }
 }
