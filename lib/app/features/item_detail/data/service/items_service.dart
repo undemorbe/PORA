@@ -99,10 +99,7 @@ class ItemsService implements ItemsRepository {
     required String message,
   }) async {
     try {
-      await remote.notify(
-        itemId: itemId,
-        body: {'to': to, 'message': message},
-      );
+      await remote.notify(itemId: itemId, body: {'to': to, 'message': message});
       return Right(const ServerSuccess());
     } on Exception catch (e) {
       return Left(NetworkFailure(e.toString()));
@@ -131,12 +128,12 @@ class ItemsService implements ItemsRepository {
     required bool urgent,
     required int? remindEveryDays,
   }) => {
-        'name': name,
-        'section': section,
-        'quantity': quantity,
-        'unit': unit,
-        'priority': priority,
-        'urgent': urgent,
-        'remind-every-days': remindEveryDays,
-      };
+    'name': name,
+    'section': section,
+    'quantity': quantity,
+    'unit': unit,
+    'priority': priority,
+    'urgent': urgent,
+    'remind-every-days': remindEveryDays,
+  };
 }

@@ -13,6 +13,7 @@ import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 import 'package:pora/app/internal/widgets/pora_avatar.dart';
 import 'package:pora/app/internal/widgets/pora_card.dart';
+import 'package:pora/app/internal/widgets/pora_snackbar.dart';
 
 /// Карточка семьи: аватары участников (инициалы из members), название,
 class FamilyCard extends StatelessWidget {
@@ -39,6 +40,8 @@ class FamilyCard extends StatelessWidget {
       child: Slidable(
         startActionPane: ActionPane(
           motion: const StretchMotion(),
+          extentRatio: 0.56,
+
           children: [
             SlidableAction(
               onPressed: (context) {
@@ -49,49 +52,64 @@ class FamilyCard extends StatelessWidget {
               icon: PhosphorIcons.plus,
               label: context.l10n.settingsInvitePill,
             ),
+            SlidableAction(
+              onPressed: (context) {
+                PoraSnackbar.show(context, message: 'Временно не работает');
+              },
+              backgroundColor: PoraColors.danger,
+              foregroundColor: PoraColors.progressTrack,
+              icon: PhosphorIcons.trash,
+              label: context.l10n.delete,
+            ),
           ],
         ),
         child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: onTap,
-        child: PoraCard(
-          padding: const EdgeInsets.symmetric(
-            horizontal: PoraSpacing.lg,
-            vertical: 14,
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: avatarsWidth,
-                height: _avatar,
-                child: Stack(
+          behavior: HitTestBehavior.opaque,
+          onTap: onTap,
+          child: PoraCard(
+            padding: const EdgeInsets.symmetric(
+              horizontal: PoraSpacing.lg,
+              vertical: 14,
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: .spaceBetween,
+              children: [
+                Row(
+                  mainAxisSize: .min,
                   children: [
-                    for (var i = 0; i < members.length; i++)
-                      Positioned(
-                        left: i * _overlap,
-                        child: PoraAvatar(
-                          initial: members[i].name.initials,
-                          color: memberColor(members[i], i),
-                          imageUrl: members[i].imageUrl,
-                          size: _avatar,
-                          ring: ring,
-                        ),
+                    SizedBox(
+                      width: avatarsWidth,
+                      height: _avatar,
+                      child: Stack(
+                        children: [
+                          for (var i = 0; i < members.length; i++)
+                            Positioned(
+                              left: i * _overlap,
+                              child: PoraAvatar(
+                                initial: members[i].name.initials,
+                                color: memberColor(members[i], i),
+                                imageUrl: members[i].imageUrl,
+                                size: _avatar,
+                                ring: ring,
+                              ),
+                            ),
+                        ],
                       ),
+                    ),
+                    const SizedBox(width: PoraSpacing.sm),
+                    Text(family.name),
                   ],
                 ),
-              ),
-              const SizedBox(width: PoraSpacing.sm),
-              Text(family.name),
-              const PhosphorIcon(
-                PhosphorIconsRegular.caretRight,
-                size: 20,
-                color: Color(0xFFC9BEAE),
-              ),
-            ],
+                const PhosphorIcon(
+                  PhosphorIconsRegular.caretRight,
+                  size: 20,
+                  color: Color(0xFFC9BEAE),
+                ),
+              ],
+            ),
           ),
         ),
-      ),
       ),
     );
   }

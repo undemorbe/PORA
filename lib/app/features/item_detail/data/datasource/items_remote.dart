@@ -18,10 +18,7 @@ abstract class ItemsRemote {
     required String itemId,
     required Map<String, dynamic> body,
   });
-  Future<void> markBought({
-    required String itemId,
-    required bool checked,
-  });
+  Future<void> markBought({required String itemId, required bool checked});
 }
 
 class ItemsRemoteImpl implements ItemsRemote {
@@ -36,15 +33,13 @@ class ItemsRemoteImpl implements ItemsRemote {
   Future<AddItemResponse> addItem({
     required String listId,
     required Map<String, dynamic> body,
-  }) =>
-      apiClient.addItem(listId: listId, body: body);
+  }) => apiClient.addItem(listId: listId, body: body);
 
   @override
   Future<void> updateItem({
     required String itemId,
     required Map<String, dynamic> body,
-  }) =>
-      apiClient.updateItem(itemId: itemId, body: body);
+  }) => apiClient.updateItem(itemId: itemId, body: body);
 
   @override
   Future<void> deleteItem({required String itemId}) =>
@@ -54,13 +49,9 @@ class ItemsRemoteImpl implements ItemsRemote {
   Future<void> notify({
     required String itemId,
     required Map<String, dynamic> body,
-  }) =>
-      apiClient.notifyAboutItem(itemId: itemId, body: body);
+  }) => apiClient.notifyAboutItem(itemId: itemId, body: body);
 
   @override
-  Future<void> markBought({
-    required String itemId,
-    required bool checked,
-  }) =>
+  Future<void> markBought({required String itemId, required bool checked}) =>
       apiClient.markItemBought(itemId: itemId, body: {'checked': checked});
 }

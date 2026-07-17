@@ -11,6 +11,5 @@ class NotifyAboutItemUseCase {
     required String itemId,
     required List<String>? to,
     required String message,
-  }) =>
-      repository.notify(itemId: itemId, to: to, message: message);
+  }) => repository.notify(itemId: itemId, to: to, message: message);
 }

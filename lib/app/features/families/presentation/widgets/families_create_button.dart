@@ -38,7 +38,9 @@ class FamiliesCreateButton extends StatelessWidget {
                   children: [
                     Text(
                       context.l10n.familiesCreateDialog,
-                      style: PoraText.heading.copyWith(color: context.colors.ink),
+                      style: PoraText.heading.copyWith(
+                        color: context.colors.ink,
+                      ),
                     ),
                     const SizedBox(height: PoraSpacing.md),
                     TextField(

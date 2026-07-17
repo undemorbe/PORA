@@ -5,8 +5,7 @@ part 'selected_family_store.g.dart';
 /// Singleton — хранит выбранную семью между экранами (preview → concrete →
 /// members). Позволяет получить `owner` и `members` без пробрасывания
 /// через route args.
-class SelectedFamilyStore = _SelectedFamilyStoreBase
-    with _$SelectedFamilyStore;
+class SelectedFamilyStore = _SelectedFamilyStoreBase with _$SelectedFamilyStore;
 
 abstract class _SelectedFamilyStoreBase with Store {
   @observable
