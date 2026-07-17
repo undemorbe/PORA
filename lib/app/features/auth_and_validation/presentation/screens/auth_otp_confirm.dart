@@ -78,8 +78,7 @@ class OTPConfirmationPage extends StatelessWidget {
                             code: value,
                           );
 
-                          if ((authStore.success == true && context.mounted) ||
-                              (dotenv.getBool('DEBUG') && context.mounted)) {
+                          if ((authStore.success == true && context.mounted)) {
                             // notRegistered → создание профиля (без авторизации);
                             // иначе → авторизуемся и «Вспомнили вас» → главный.
                             if (authStore.needsProfile) {
@@ -170,8 +169,7 @@ class OTPConfirmationPage extends StatelessWidget {
                             code: OTPController.text,
                           );
 
-                          if ((authStore.success == true && context.mounted) ||
-                              (dotenv.getBool('DEBUG') && context.mounted)) {
+                          if ((authStore.success == true && context.mounted)) {
                             // notRegistered → создание профиля (без авторизации);
                             // иначе → авторизуемся и «Вспомнили вас» → главный.
                             if (authStore.needsProfile) {

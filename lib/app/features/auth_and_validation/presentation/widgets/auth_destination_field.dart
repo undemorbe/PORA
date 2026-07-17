@@ -43,7 +43,7 @@ class _SmartAuthFormatter extends TextInputFormatter {
 }
 
 class AuthDestinationField extends StatefulWidget {
-  const AuthDestinationField({
+  const   AuthDestinationField({
     super.key,
     this.initMode,
     required this.controller,
@@ -128,9 +128,7 @@ class _AuthDestinationFieldState extends State<AuthDestinationField> {
       children: [
         TextField(
           controller: widget.controller,
-          keyboardType: _isPhone
-              ? TextInputType.phone
-              : TextInputType.emailAddress,
+          keyboardType: TextInputType.text,
           textInputAction: TextInputAction.done,
           autocorrect: false,
           enableSuggestions: !_isPhone,

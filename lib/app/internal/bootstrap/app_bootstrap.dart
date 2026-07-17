@@ -51,12 +51,11 @@ class AppBootstrap {
 
       // Три параллельных ветки — независимы, ускоряют cold start.
       await Future.wait<void>([
+        _initFirebaseAndPush(),
         _initLocalization(container),
         _refreshAndAuth(container),
       ]);
-      try {
-        await _initFirebaseAndPush();
-      } catch (e) {}
+     
 
       // Депендс от secure store (запись в кэш) — после refresh.
       final tokensStore = container.getIt<TokensSecureStore>();
@@ -100,7 +99,7 @@ class AppBootstrap {
         auth.setUnauthenticated();
       }
     } else {
-      auth.setAuthenticated();
+      auth.setUnauthenticated();
     }
   }
 
