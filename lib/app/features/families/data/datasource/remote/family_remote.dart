@@ -1,6 +1,4 @@
 import 'package:pora/app/features/families/data/models/families_models.dart';
-import 'package:pora/app/features/families/data/models/family_model.dart';
-import 'package:pora/app/features/families/data/models/member_model.dart';
 import 'package:pora/app/features/families/domain/entity/family.dart';
 import 'package:pora/app/internal/di/export.dart';
 import 'package:pora/app/internal/errors/failure.dart';

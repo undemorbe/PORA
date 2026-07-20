@@ -9,9 +9,9 @@ import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/theme/context_colors.dart';
-import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 import 'package:pora/app/internal/widgets/pora_buttons.dart';
 import 'package:pora/app/internal/widgets/pora_circle_progress.dart';
+import 'package:pora/app/internal/widgets/pora_snackbar.dart';
 import 'package:pora/app/internal/widgets/screen_back_header.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 
@@ -31,8 +31,8 @@ class _InvitePageState extends State<InvitePage> {
 
   @override
   void initState() {
-    generateLinkCodes();
     super.initState();
+    generateLinkCodes();
   }
 
   void generateLinkCodes() async {
@@ -70,6 +70,20 @@ class _InvitePageState extends State<InvitePage> {
                     return const Center(child: PoraCircleProgress());
                   } else if (invitationsStore.isSuccess == true) {
                     return InviteCodeCard(
+                       onCopy: () async {
+                      await invitationsStore
+                          .copyToClipboard(
+                            invitationsStore.linkCode ?? 'Error' ,
+                          )
+                          .whenComplete(() {
+                            if (context.mounted) {
+                              PoraSnackbar.show(
+                                context,
+                                message: context.l10n.householdCopyCode,
+                              );
+                            }
+                          });
+                      },
                       code:
                           invitationsStore.linkCode ?? context.l10n.commonError,
                     );
@@ -102,7 +116,9 @@ class _InvitePageState extends State<InvitePage> {
               const SizedBox(height: PoraSpacing.lg),
               PoraPrimaryButton(
                 label: context.l10n.householdShareLink,
-                onPressed: () {},
+                onPressed: () async {
+                  await invitationsStore.shareLinkCode(linkCodeOrLinkUrl: invitationsStore.linkUrl??invitationsStore.linkCode??'Error sharing code');
+                },
               ),
               const SizedBox(height: PoraSpacing.md),
               PoraOutlineButton(
@@ -123,7 +139,7 @@ class _InvitePageState extends State<InvitePage> {
                             borderRadius: BorderRadius.circular(24.0),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
+                                color: Colors.black.withValues(alpha: 0.1),
                                 blurRadius: 20,
                                 offset: const Offset(0, 10),
                               ),

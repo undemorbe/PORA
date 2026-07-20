@@ -1645,6 +1645,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Added by: {name}'**
   String addedByName(String name);
+
+  /// splashLoadingSlow
+  ///
+  /// In en, this message translates to:
+  /// **'Almost there…'**
+  String get splashLoadingSlow;
+
+  /// splashLoadingVerySlow
+  ///
+  /// In en, this message translates to:
+  /// **'Still loading… checking connection'**
+  String get splashLoadingVerySlow;
+
+  /// noInternet
+  ///
+  /// In en, this message translates to:
+  /// **'No internet connection'**
+  String get noInternet;
+
+  /// retry
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
 }
 
 class _AppLocalizationsDelegate

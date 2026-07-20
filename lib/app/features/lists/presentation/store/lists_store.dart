@@ -260,7 +260,7 @@ class _ConcreteList extends ListEntity {
 }
 
 class _CheckedProduct extends ProductEntity {
-  _CheckedProduct(ProductEntity src, {required bool checked})
+  _CheckedProduct(ProductEntity src, {required super.checked})
     : super(
         name: src.name,
         id: src.id,
@@ -269,7 +269,6 @@ class _CheckedProduct extends ProductEntity {
         unit: src.unit,
         priority: src.priority,
         urgent: src.urgent,
-        checked: checked,
         remindEveryDay: src.remindEveryDay,
         addedBy: src.addedBy,
       );

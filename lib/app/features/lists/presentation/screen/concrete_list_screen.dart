@@ -121,7 +121,9 @@ class _ListPageState extends State<ListPage> {
                     ),
                     onNotifications: () =>
                         context.router.push(const NotificationsRoute()),
-                    onMembersTap: members.isEmpty
+                    onMembersTap: 
+                    
+                    members.isEmpty
                         ? null
                         : () => context.router.push(
                             MembersRoute(

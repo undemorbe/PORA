@@ -26,7 +26,7 @@ class RecipeRow {
 }
 
 abstract class _RecipeImportStoreBase with Store {
-  _RecipeImportStoreBase({required this.lid, this.fid});
+  _RecipeImportStoreBase({required this.lid}) : fid = null;
 
   final String lid;
   final String? fid;

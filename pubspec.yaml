@@ -8,7 +8,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_localization: ^0.4.0
+  flutter_localization: ^0.4.1
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   mobx: ^2.6.0
@@ -40,8 +40,10 @@ dependencies:
   http: ^1.2.0
   html: ^0.15.4
   web_socket_channel: ^3.0.3
-  
-
+  connectivity_plus: ^6.1.0
+  liquid_glass_easy: ^3.3.1
+  path_provider: any
+  collection: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

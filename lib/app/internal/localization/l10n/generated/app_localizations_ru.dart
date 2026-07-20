@@ -807,4 +807,16 @@ class AppLocalizationsRu extends AppLocalizations {
   String addedByName(String name) {
     return 'Добавил(а): $name';
   }
+
+  @override
+  String get splashLoadingSlow => 'Уже почти загрузились…';
+
+  @override
+  String get splashLoadingVerySlow => 'Всё ещё грузимся… проверяем связь';
+
+  @override
+  String get noInternet => 'Нет подключения к интернету';
+
+  @override
+  String get retry => 'Обновить';
 }

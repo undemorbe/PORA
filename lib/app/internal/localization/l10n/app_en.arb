@@ -927,5 +927,13 @@
     "@addedByName": {
         "description": "addedByName placeholder",
         "placeholders": { "name": { "type": "String" } }
-    }
+    },
+    "splashLoadingSlow": "Almost there…",
+    "@splashLoadingSlow": { "description": "splashLoadingSlow" },
+    "splashLoadingVerySlow": "Still loading… checking connection",
+    "@splashLoadingVerySlow": { "description": "splashLoadingVerySlow" },
+    "noInternet": "No internet connection",
+    "@noInternet": { "description": "noInternet" },
+    "retry": "Retry",
+    "@retry": { "description": "retry" }
 }

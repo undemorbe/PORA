@@ -1,37 +1,4 @@
-import 'package:image_picker/image_picker.dart';
-import 'package:pora/app/features/families/data/datasource/remote/family_remote.dart';
-import 'package:pora/app/features/families/data/service/family_service.dart';
-import 'package:pora/app/features/families/domain/repository/family_repository.dart';
-import 'package:pora/app/features/families/domain/usecase/create_family.dart';
-import 'package:pora/app/features/families/presentation/store/selected_family_store.dart';
-import 'package:pora/app/features/families/domain/usecase/delete_family.dart';
-import 'package:pora/app/features/families/domain/usecase/get_families.dart';
-import 'package:pora/app/features/lists/data/datasource/remote/lists_remote.dart';
-import 'package:pora/app/features/lists/data/service/lists_service.dart';
-import 'package:pora/app/features/lists/domain/repository/lists_repository.dart';
-import 'package:pora/app/features/lists/domain/usecase/create_list.dart';
-import 'package:pora/app/features/lists/domain/usecase/delete_list.dart';
-import 'package:pora/app/features/lists/domain/usecase/get_families_lists.dart';
-import 'package:pora/app/features/item_detail/data/datasource/items_remote.dart';
-import 'package:pora/app/features/item_detail/data/datasource/local_prefs.dart';
-import 'package:pora/app/features/item_detail/data/service/items_service.dart';
-import 'package:pora/app/features/item_detail/domain/repository/items_repository.dart';
-import 'package:pora/app/features/item_detail/domain/usecase/add_item.dart';
-import 'package:pora/app/features/item_detail/domain/usecase/delete_item.dart';
-import 'package:pora/app/features/item_detail/domain/usecase/get_item.dart';
-import 'package:pora/app/features/item_detail/domain/usecase/mark_item_bought.dart';
-import 'package:pora/app/features/item_detail/domain/usecase/notify_about_item.dart';
-import 'package:pora/app/features/item_detail/domain/usecase/update_item.dart';
-import 'package:pora/app/features/lists/domain/usecase/get_list_data.dart';
-import 'package:pora/app/features/recipe/data/datasource/recipe_scraper.dart';
-import 'package:pora/app/features/recipe/data/service/recipe_service.dart';
-import 'package:pora/app/features/recipe/domain/repository/recipe_repository.dart';
-import 'package:pora/app/features/recipe/domain/usecase/parse_recipe_from_url.dart';
-import 'package:pora/app/features/user/domain/usecase/user/logout.dart';
-import 'package:pora/app/features/user/domain/usecase/user/update_device_token.dart';
-import 'package:pora/app/internal/formatters/image_formatter.dart';
-import 'package:pora/app/internal/notifications/notification_service.dart';
-import 'package:pora/app/internal/share/share_conf.dart';
+
 
 import 'export.dart';
 
@@ -59,6 +26,7 @@ class InjectionContainer {
     _getIt.registerSingleton<AppRouter>(AppRouter(_getIt<AuthState>()));
     _getIt.registerSingleton<ThemeStore>(ThemeStore());
     _getIt.registerSingleton<SelectedFamilyStore>(SelectedFamilyStore());
+    _getIt.registerSingleton<ConnectivityStore>(ConnectivityStore());
     _getIt.registerLazySingleton<TokensSecureStore>(() => TokensSecureStore());
 
     //! NETWORK
@@ -74,9 +42,9 @@ class InjectionContainer {
     //! Notifications
     _getIt.registerSingleton<NotificationService>(NotificationService.instance);
 
-    //! Image Picker
+    //! Image 
     _getIt.registerLazySingleton<ImagePicker>(() => ImagePicker());
-
+    
     _getIt.registerLazySingleton<ImageProcessingService>(
       () => ImageProcessingService(),
     );
@@ -249,6 +217,7 @@ class InjectionContainer {
     _getIt.registerLazySingleton<SharingRepository>(
       () => SharingRepositoryImpl(),
     );
+    
     //! Lists
     _getIt.registerLazySingleton<ListsRemote>(
       () => ListsRemoteImpl(apiClient: _getIt<ApiClient>()),

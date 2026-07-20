@@ -3,8 +3,6 @@ import 'package:pora/app/features/settings/presentation/store/settings_store.dar
 import 'package:pora/app/features/settings/presentation/widgets/profile_photo_picker.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
-import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
-import 'package:pora/app/internal/widgets/pora_avatar.dart';
 import 'package:pora/app/internal/widgets/pora_card.dart';
 import 'package:pora/app/internal/widgets/pora_setting_row.dart';
 

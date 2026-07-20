@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pora/app/features/auth_and_validation/presentation/controller/auth_store.dart';
@@ -61,7 +60,7 @@ class OTPConfirmationPage extends StatelessWidget {
                     children: [
                       Text(l.otpEnterCodeSentTo, style: PoraText.subtitle),
                       Text(
-                        '${destinationController.text}',
+                        destinationController.text,
                         style: PoraText.caption,
                       ),
                     ],

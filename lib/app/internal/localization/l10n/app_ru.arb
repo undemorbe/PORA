@@ -922,5 +922,13 @@
     "@addedByName": {
         "description": "addedByName placeholder",
         "placeholders": { "name": { "type": "String" } }
-    }
+    },
+    "splashLoadingSlow": "Уже почти загрузились…",
+    "@splashLoadingSlow": { "description": "splashLoadingSlow" },
+    "splashLoadingVerySlow": "Всё ещё грузимся… проверяем связь",
+    "@splashLoadingVerySlow": { "description": "splashLoadingVerySlow" },
+    "noInternet": "Нет подключения к интернету",
+    "@noInternet": { "description": "noInternet" },
+    "retry": "Обновить",
+    "@retry": { "description": "retry" }
 }

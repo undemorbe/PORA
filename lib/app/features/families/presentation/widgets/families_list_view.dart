@@ -24,6 +24,7 @@ class FamiliesListView extends StatelessWidget {
         if (store.isLoading == true) {
           return const Center(child: PoraCircleProgress());
         } else if (store.families.isEmpty) {
+          //!Localize and add widget
           return const Center(child: Text('No families found'));
         } else if (store.success == false) {
           PoraSnackbar.show(context, message: context.l10n.errorDuringLoading);
@@ -40,6 +41,8 @@ class FamiliesListView extends StatelessWidget {
           itemCount: store.families.length,
           itemBuilder: (context, index) {
             final family = store.families[index];
+            final allMembers = family.members?.whereType<MemberEntity>().toList()??[];
+            allMembers.insert(0, family.owner);
             return Padding(
               padding: const EdgeInsets.only(bottom: PoraSpacing.md),
               child: FamilyCard(
@@ -51,8 +54,7 @@ class FamiliesListView extends StatelessWidget {
                       familyId: family.id,
                       familyName: family.name,
                       members:
-                          family.members?.whereType<MemberEntity>().toList() ??
-                          [],
+                          allMembers,
                     ),
                   );
                 },

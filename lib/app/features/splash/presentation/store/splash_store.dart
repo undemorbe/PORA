@@ -11,16 +11,16 @@ class SplashStore = _SplashStoreBase with _$SplashStore;
 abstract class _SplashStoreBase with Store {
   @action
   Future<PageRouteInfo> whereToRoute() async {
-    final authed = GetIt.instance<AuthState>().isAuthenticated;
+    final auth = GetIt.instance<AuthState>();
     final sawedOnboarding = await GetIt.I<IsSawedOnboardingUseCase>().call();
-    if (sawedOnboarding.isRight) {
-      final routeDestination = authed
-          ? const MainShellRoute()
-          : sawedOnboarding.right
-          ? const AuthRoute()
-          : const OnboardingSliderRoute();
-      return routeDestination;
+    if(sawedOnboarding.isRight){
+      if(auth.status == AuthStatus.authenticated){
+        return const MainShellRoute();
+      }else{
+        return const AuthRoute();
+      }
+    }else{
+      return const OnboardingSliderRoute();
     }
-    return const OnboardingSliderRoute();
   }
 }

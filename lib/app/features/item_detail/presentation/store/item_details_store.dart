@@ -10,7 +10,7 @@ import 'package:pora/app/features/lists/domain/entity/products/product.dart';
 part 'item_details_store.g.dart';
 
 class _PatchedProduct extends ProductEntity {
-  _PatchedProduct(ProductEntity src, {required bool checked})
+  _PatchedProduct(ProductEntity src, {required super.checked})
     : super(
         name: src.name,
         id: src.id,
@@ -19,7 +19,6 @@ class _PatchedProduct extends ProductEntity {
         unit: src.unit,
         priority: src.priority,
         urgent: src.urgent,
-        checked: checked,
         remindEveryDay: src.remindEveryDay,
         addedBy: src.addedBy,
       );

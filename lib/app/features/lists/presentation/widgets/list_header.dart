@@ -5,7 +5,6 @@ import 'package:pora/app/internal/extensions/color_parser.dart';
 import 'package:pora/app/internal/extensions/string_extension.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/theme/context_colors.dart';
-import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 import 'package:pora/app/internal/widgets/pora_avatar.dart';
 
 /// Шапка списка: заголовок + подпись + действия + аватары участников.

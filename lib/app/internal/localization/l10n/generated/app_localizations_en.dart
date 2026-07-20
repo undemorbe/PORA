@@ -806,4 +806,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String addedByName(String name) {
     return 'Added by: $name';
   }
+
+  @override
+  String get splashLoadingSlow => 'Almost there…';
+
+  @override
+  String get splashLoadingVerySlow => 'Still loading… checking connection';
+
+  @override
+  String get noInternet => 'No internet connection';
+
+  @override
+  String get retry => 'Retry';
 }

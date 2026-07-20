@@ -101,7 +101,7 @@ class _PoraCircleProgressState extends State<PoraCircleProgress>
         builder: (context, animatedValue, _) {
           return AnimatedBuilder(
             animation: _c,
-            builder: (context, __) {
+            builder: (context, _) {
               return CustomPaint(
                 painter: _PoraCircleProgressPainter(
                   progress: _indeterminate ? null : animatedValue,
