@@ -158,6 +158,10 @@
     "@briefTitle": {
         "description": "briefTitle"
     },
+     "briefDeletionTitle": "Вы уверены что хотите удалить продукт?",
+    "@briefDeletionTitle": {
+        "description": "briefDeletionTitle"
+    },
     "briefAddYourOwn": "Добавить",
     "@briefAddYourOwn": {
         "description": "briefAddYourOwn"
@@ -170,6 +174,11 @@
     "@briefInputEmoji": {
         "description": "briefInputEmoji"
     },
+            "briefAlreadyContains": "Данный продукт уже выбран",
+    "@briefAlreadyContains": {
+        "description": "briefAlreadyContains"
+    },
+    
     "briefSubtitle": "Отметьте продукты — Pora напомнит вовремя. Это можно пропустить.",
     "@briefSubtitle": {
         "description": "briefSubtitle"
@@ -944,8 +953,11 @@
     "@splashLoadingSlow": { "description": "splashLoadingSlow" },
     "splashLoadingVerySlow": "Still loading… checking connection",
     "@splashLoadingVerySlow": { "description": "splashLoadingVerySlow" },
+    
     "noInternet": "No internet connection",
     "@noInternet": { "description": "noInternet" },
+    "noInternetButLoadYouLocally": "No internet connection, but we will load you locally",
+    "@noInternetButLoadYouLocally": { "description": "noInternetButLoadYouLocally" },
     "retry": "Retry",
     "@retry": { "description": "retry" },
     "groupsTitle": "Your groups",

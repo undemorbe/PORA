@@ -113,7 +113,7 @@ class _PinputRoundedWithCustomCursorState
         ),
         onCompleted: (pin) {
           if (_formKey.currentState?.validate() == true) {
-            widget.onCompleted  ?.call(pin);
+            widget.onCompleted?.call(pin);
           }
         },
       ),

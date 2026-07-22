@@ -131,6 +131,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get briefTitle => 'Что у вас часто заканчивается?';
 
   @override
+  String get briefDeletionTitle => 'Вы уверены что хотите удалить продукт?';
+
+  @override
   String get briefAddYourOwn => 'Добавить';
 
   @override
@@ -138,6 +141,9 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get briefInputEmoji => 'Введите эмодзи/обозначение для продукта';
+
+  @override
+  String get briefAlreadyContains => 'Данный продукт уже выбран';
 
   @override
   String get briefSubtitle =>
@@ -825,6 +831,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get noInternet => 'Нет подключения к интернету';
+
+  @override
+  String get noInternetButLoadYouLocally =>
+      'Нет интернета, но впустим вас и так!';
 
   @override
   String get retry => 'Обновить';

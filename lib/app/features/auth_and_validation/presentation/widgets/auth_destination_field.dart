@@ -42,7 +42,7 @@ class _SmartAuthFormatter extends TextInputFormatter {
 }
 
 class AuthDestinationField extends StatefulWidget {
-  const   AuthDestinationField({
+  const AuthDestinationField({
     super.key,
     this.initMode,
     required this.controller,

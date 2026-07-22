@@ -164,6 +164,13 @@
     },        "briefInputProduct": "Введите продукт или вид",
     "@briefInputProduct": {
         "description": "briefInputProduct"
+    },        "briefAlreadyContains": "Данный продукт уже выбран",
+    "@briefAlreadyContains": {
+        "description": "briefAlreadyContains"
+    },
+       "briefDeletionTitle": "Вы уверены что хотите удалить продукт?",
+    "@briefDeletionTitle": {
+        "description": "briefDeletionTitle"
     },
         "briefInputEmoji": "Введите эмодзи/обозначение для продукта",
     "@briefInputEmoji": {
@@ -878,6 +885,9 @@
     "@nooneToNotify": { "description": "nooneToNotify" },
     "notFound": "Не найдено",
     "@notFound": { "description": "notFound" },
+
+    "@noInternet": { "description": "noInternet" },
+    "noInternetButLoadYouLocally": "Нет интернета, но впустим вас и так!",
     "recipeEmptyHint": "Вставьте ссылку на рецепт и нажмите «Разобрать»",
     "@recipeEmptyHint": { "description": "recipeEmptyHint" },
     "recipeDupMark": "уже в списке",

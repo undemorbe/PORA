@@ -13,13 +13,13 @@ abstract class _SplashStoreBase with Store {
   Future<PageRouteInfo> whereToRoute() async {
     final auth = GetIt.instance<AuthState>();
     final sawedOnboarding = await GetIt.I<IsSawedOnboardingUseCase>().call();
-    if(sawedOnboarding.isRight){
-      if(auth.status == AuthStatus.authenticated){
+    if (sawedOnboarding.isRight) {
+      if (auth.status == AuthStatus.authenticated) {
         return const MainShellRoute();
-      }else{
+      } else {
         return const AuthRoute();
       }
-    }else{
+    } else {
       return const OnboardingSliderRoute();
     }
   }

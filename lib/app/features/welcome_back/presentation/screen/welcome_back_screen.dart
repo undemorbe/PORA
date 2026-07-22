@@ -43,7 +43,7 @@ class _WelcomeBackPageState extends State<WelcomeBackPage>
     // Пауза и переход на главный экран.
     Future.delayed(const Duration(milliseconds: 1600), () {
       if (!mounted) return;
-      context.router.replaceAll([const MainShellRoute()]);
+      context.router.navigate(const MainShellRoute());
     });
   }
 

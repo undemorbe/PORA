@@ -70,19 +70,19 @@ class _InvitePageState extends State<InvitePage> {
                     return const Center(child: PoraCircleProgress());
                   } else if (invitationsStore.isSuccess == true) {
                     return InviteCodeCard(
-                       onCopy: () async {
-                      await invitationsStore
-                          .copyToClipboard(
-                            invitationsStore.linkCode ?? 'Error' ,
-                          )
-                          .whenComplete(() {
-                            if (context.mounted) {
-                              PoraSnackbar.show(
-                                context,
-                                message: context.l10n.householdCopyCode,
-                              );
-                            }
-                          });
+                      onCopy: () async {
+                        await invitationsStore
+                            .copyToClipboard(
+                              invitationsStore.linkCode ?? 'Error',
+                            )
+                            .whenComplete(() {
+                              if (context.mounted) {
+                                PoraSnackbar.show(
+                                  context,
+                                  message: context.l10n.householdCopyCode,
+                                );
+                              }
+                            });
                       },
                       code:
                           invitationsStore.linkCode ?? context.l10n.commonError,
@@ -117,7 +117,12 @@ class _InvitePageState extends State<InvitePage> {
               PoraPrimaryButton(
                 label: context.l10n.householdShareLink,
                 onPressed: () async {
-                  await invitationsStore.shareLinkCode(linkCodeOrLinkUrl: invitationsStore.linkUrl??invitationsStore.linkCode??'Error sharing code');
+                  await invitationsStore.shareLinkCode(
+                    linkCodeOrLinkUrl:
+                        invitationsStore.linkUrl ??
+                        invitationsStore.linkCode ??
+                        'Error sharing code',
+                  );
                 },
               ),
               const SizedBox(height: PoraSpacing.md),

@@ -15,7 +15,7 @@ class SharingRepositoryImpl implements SharingRepository {
 
   @override
   Future<void> shareUri({required String uri}) async {
-    final params = ShareParams(uri: Uri.parse(uri),);
+    final params = ShareParams(uri: Uri.parse(uri));
     await _sharePlus.share(params);
   }
 }

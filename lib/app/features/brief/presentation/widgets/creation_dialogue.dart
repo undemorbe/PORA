@@ -8,6 +8,7 @@ import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/widgets/pora_buttons.dart';
+import 'package:pora/app/internal/widgets/pora_snackbar.dart';
 
 class BriefCreationDialogue extends StatefulWidget {
   const BriefCreationDialogue({super.key, required this.briefStore});
@@ -42,9 +43,14 @@ class _BriefCreationDialogueState extends State<BriefCreationDialogue> {
               ),
                 ),
             ),
-            PoraOutlineButton(
+            PoraPrimaryButton(
+              icon: PhosphorIcons.plus,
               onPressed: () {
-                widget.briefStore.addToSelectedProducts(
+                if(nameController.text.isEmpty){
+                  PoraSnackbar.show(context, message: context.l10n.briefInputProduct, type: PoraSnackType.failure);
+                  return;
+                }
+                final result = widget.briefStore.addToSelectedProducts(
                   BriefProductEntity(
                     title: nameController.text,
                     leading: emojiLeadingController.text.isEmpty
@@ -52,6 +58,11 @@ class _BriefCreationDialogueState extends State<BriefCreationDialogue> {
                         : emojiLeadingController.text,
                   ),
                 );
+                  context.router.maybePop();
+                if(!result){
+                  PoraSnackbar.show(context, message: context.l10n.briefAlreadyContains,type: PoraSnackType.failure);
+                }
+
               },
               label: context.l10n.save,
             ),

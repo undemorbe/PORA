@@ -40,9 +40,7 @@ abstract class _InvitationsStoreBase with Store {
     }
   }
 
-  Future<void> shareLink(
-    String linkCode,
-  ) async {
+  Future<void> shareLink(String linkCode) async {
     final sharing = GetIt.I<SharingRepository>();
     await sharing.shareUri(uri: linkCode);
   }

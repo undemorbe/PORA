@@ -5,12 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:liquid_glass_easy/liquid_glass_easy.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/app/internal/extensions/l10n_extension.dart';
-import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/theme/context_colors.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 
-enum PoraTab { list, pora, profile }
+enum PoraTab { group, pora, profile }
 
 /// Плавающая нижняя навигация в стиле Apple:
 ///   - iOS → liquid-glass (реальный blur backdrop) через `liquid_glass_easy`.
@@ -25,25 +24,25 @@ class PoraBottomNav extends StatelessWidget {
   final PoraTab current;
   final ValueChanged<PoraTab>? onTap;
 
-  static const _order = [PoraTab.list, PoraTab.pora, PoraTab.profile];
+  static const _order = [PoraTab.group, PoraTab.pora, PoraTab.profile];
 
   static const _icons = {
-    PoraTab.list: PhosphorIconsRegular.listChecks,
+    PoraTab.group: PhosphorIconsRegular.listChecks,
     PoraTab.pora: PhosphorIconsRegular.clock,
     PoraTab.profile: PhosphorIconsRegular.user,
   };
 
   static const _iconsFill = {
-    PoraTab.list: PhosphorIconsFill.listChecks,
+    PoraTab.group: PhosphorIconsFill.listChecks,
     PoraTab.pora: PhosphorIconsFill.clock,
     PoraTab.profile: PhosphorIconsFill.user,
   };
 
   String _label(BuildContext context, PoraTab t) => switch (t) {
-        PoraTab.list => context.l10n.navList,
-        PoraTab.pora => context.l10n.navPora,
-        PoraTab.profile => context.l10n.navProfile,
-      };
+    PoraTab.group => context.l10n.navList,
+    PoraTab.pora => context.l10n.navPora,
+    PoraTab.profile => context.l10n.navProfile,
+  };
 
   int get _selectedIndex => _order.indexOf(current);
 
@@ -57,26 +56,27 @@ class PoraBottomNav extends StatelessWidget {
       return SafeArea(
         top: false,
         child: Padding(
-          padding: EdgeInsets.only(bottom: bottomInset > 0 ? 8 : 16),
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: SizedBox(
+          padding: EdgeInsets.only(
+            bottom: bottomInset > 0 ? 8 : 16,
+            left: 12,
+            right: 12,
+          ),
+          child: SizedBox(
+            width: barWidth,
+            child: LiquidGlassBottomNavBar(
+              selectedIndex: _selectedIndex,
+              onChanged: (i) => onTap?.call(_order[i]),
               width: barWidth,
-              child: LiquidGlassBottomNavBar(
-                selectedIndex: _selectedIndex,
-                onChanged: (i) => onTap?.call(_order[i]),
-                width: barWidth,
-                height: 64,
-                margin: EdgeInsets.zero,
-                items: [
-                  for (final t in _order)
-                    LiquidGlassTabBarItem(
-                      icon: _icons[t]!,
-                      selectedIcon: _iconsFill[t],
-                      label: _label(context, t),
-                    ),
-                ],
-              ),
+              height: 64,
+              margin: EdgeInsets.zero,
+              items: [
+                for (final t in _order)
+                  LiquidGlassTabBarItem(
+                    icon: _icons[t]!,
+                    selectedIcon: _iconsFill[t],
+                    label: _label(context, t),
+                  ),
+              ],
             ),
           ),
         ),
@@ -120,44 +120,41 @@ class _AndroidFloatingBar extends StatelessWidget {
     return SafeArea(
       top: false,
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 12),
-        child: Align(
-          alignment: Alignment.bottomCenter,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(32),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 18, sigmaY: 18),
-              child: Container(
-                width: width,
-                height: 64,
-                decoration: BoxDecoration(
-                  color: c.surface.withValues(alpha: 0.72),
-                  borderRadius: BorderRadius.circular(32),
-                  border: Border.all(
-                    color: c.border.withValues(alpha: 0.6),
-                    width: 0.5,
+        padding: const EdgeInsets.only(bottom: 12, left: 12, right: 12),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(32),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 18, sigmaY: 18),
+            child: Container(
+              width: width,
+              height: 64,
+              decoration: BoxDecoration(
+                color: c.surface.withValues(alpha: 0.72),
+                borderRadius: BorderRadius.circular(32),
+                border: Border.all(
+                  color: c.border.withValues(alpha: 0.6),
+                  width: 0.5,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.10),
+                    blurRadius: 20,
+                    offset: const Offset(0, 6),
                   ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.10),
-                      blurRadius: 20,
-                      offset: const Offset(0, 6),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    for (final t in order)
-                      Expanded(
-                        child: _Tab(
-                          active: t == current,
-                          icon: t == current ? iconsFill[t]! : icons[t]!,
-                          label: labelOf(t),
-                          onTap: () => onTap?.call(t),
-                        ),
+                ],
+              ),
+              child: Row(
+                children: [
+                  for (final t in order)
+                    Expanded(
+                      child: _Tab(
+                        active: t == current,
+                        icon: t == current ? iconsFill[t]! : icons[t]!,
+                        label: labelOf(t),
+                        onTap: () => onTap?.call(t),
                       ),
-                  ],
-                ),
+                    ),
+                ],
               ),
             ),
           ),

@@ -47,31 +47,13 @@ mixin _$BriefStore on _BriefStoreBase, Store {
     });
   }
 
-  late final _$creatingNewAtom = Atom(
-    name: '_BriefStoreBase.creatingNew',
-    context: context,
-  );
-
-  @override
-  bool get creatingNew {
-    _$creatingNewAtom.reportRead();
-    return super.creatingNew;
-  }
-
-  @override
-  set creatingNew(bool value) {
-    _$creatingNewAtom.reportWrite(value, super.creatingNew, () {
-      super.creatingNew = value;
-    });
-  }
-
   late final _$_BriefStoreBaseActionController = ActionController(
     name: '_BriefStoreBase',
     context: context,
   );
 
   @override
-  void addToSelectedProducts(BriefProductEntity product) {
+  bool addToSelectedProducts(BriefProductEntity product) {
     final _$actionInfo = _$_BriefStoreBaseActionController.startAction(
       name: '_BriefStoreBase.addToSelectedProducts',
     );
@@ -89,6 +71,18 @@ mixin _$BriefStore on _BriefStoreBase, Store {
     );
     try {
       return super.removeFromSelected(product);
+    } finally {
+      _$_BriefStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void deleteProduct(BriefProductEntity product) {
+    final _$actionInfo = _$_BriefStoreBaseActionController.startAction(
+      name: '_BriefStoreBase.deleteProduct',
+    );
+    try {
+      return super.deleteProduct(product);
     } finally {
       _$_BriefStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -121,8 +115,7 @@ mixin _$BriefStore on _BriefStoreBase, Store {
   @override
   String toString() {
     return '''
-allProducts: ${allProducts},
-creatingNew: ${creatingNew}
+allProducts: ${allProducts}
     ''';
   }
 }

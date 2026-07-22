@@ -41,7 +41,8 @@ class FamiliesListView extends StatelessWidget {
           itemCount: store.families.length,
           itemBuilder: (context, index) {
             final family = store.families[index];
-            final allMembers = family.members?.whereType<MemberEntity>().toList()??[];
+            final allMembers =
+                family.members?.whereType<MemberEntity>().toList() ?? [];
             allMembers.insert(0, family.owner);
             return Padding(
               padding: const EdgeInsets.only(bottom: PoraSpacing.md),
@@ -53,8 +54,7 @@ class FamiliesListView extends StatelessWidget {
                     PreviewListsRoute(
                       familyId: family.id,
                       familyName: family.name,
-                      members:
-                          allMembers,
+                      members: allMembers,
                     ),
                   );
                 },

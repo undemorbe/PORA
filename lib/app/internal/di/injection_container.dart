@@ -1,4 +1,4 @@
-
+import 'package:pora/app/features/brief/presentation/controller/brief_store.dart';
 
 import 'export.dart';
 
@@ -42,9 +42,9 @@ class InjectionContainer {
     //! Notifications
     _getIt.registerSingleton<NotificationService>(NotificationService.instance);
 
-    //! Image 
+    //! Image
     _getIt.registerLazySingleton<ImagePicker>(() => ImagePicker());
-    
+
     _getIt.registerLazySingleton<ImageProcessingService>(
       () => ImageProcessingService(),
     );
@@ -194,6 +194,8 @@ class InjectionContainer {
         onboardingLocaleDataSource: _getIt<OnboardingLocalDataSourceImpl>(),
       ),
     );
+    //! Brief feature
+    _getIt.registerLazySingleton<BriefStore>(() => BriefStore());
 
     //! Families
     _getIt.registerLazySingleton<FamilyRemoteDataSource>(
@@ -217,7 +219,7 @@ class InjectionContainer {
     _getIt.registerLazySingleton<SharingRepository>(
       () => SharingRepositoryImpl(),
     );
-    
+
     //! Lists
     _getIt.registerLazySingleton<ListsRemote>(
       () => ListsRemoteImpl(apiClient: _getIt<ApiClient>()),

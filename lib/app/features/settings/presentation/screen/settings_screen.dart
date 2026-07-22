@@ -128,7 +128,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   if (dotenv.getBool('DEBUG'))
                     PoraSettingRow(
                       icon: PhosphorIconsRegular.lock,
-                      label: context.l10n.settingsPrivacy,
+                      label: 'Open debug route',
                       trailing: PoraSettingRow.chevron,
                       onTap: () => Navigator.of(context).push(
                         MaterialPageRoute(
@@ -136,6 +136,12 @@ class _SettingsPageState extends State<SettingsPage> {
                               TalkerScreen(talker: Logger.talker),
                         ),
                       ),
+                    ),
+                  if (dotenv.getBool('DEBUG'))
+                    PoraSettingRow(
+                      icon: Icons.add_ic_call,
+                      label: 'Open especcial route',
+                      onTap: () => context.router.push(BriefRoute()),
                     ),
                 ],
               ),

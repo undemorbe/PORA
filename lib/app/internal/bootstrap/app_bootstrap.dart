@@ -47,7 +47,6 @@ class AppBootstrap {
         _initLocalization(container),
         _refreshAndAuth(container),
       ]);
-     
 
       // Депендс от secure store (запись в кэш) — после refresh.
       final tokensStore = container.getIt<TokensSecureStore>();
@@ -85,16 +84,16 @@ class AppBootstrap {
       final tokensStore = container.getIt<TokensSecureStore>();
       final accessToken = await tokensStore.getAccessToken();
       final refreshToken = await tokensStore.getRefreshToken();
-        if (accessToken != null && refreshToken != null) {
-          auth.setAuthenticated();
-        } else {
-          auth.setUnauthenticated();
-        }
+      if (accessToken != null && refreshToken != null) {
+        auth.setAuthenticated();
+      } else {
+        auth.setUnauthenticated();
+      }
     } else {
       final tokensStore = container.getIt<TokensSecureStore>();
       final accessToken = await tokensStore.getAccessToken();
       final refreshToken = await tokensStore.getRefreshToken();
-           if (accessToken != null && refreshToken != null) {
+      if (accessToken != null && refreshToken != null) {
         auth.setAuthenticated();
       } else {
         auth.setUnauthenticated();

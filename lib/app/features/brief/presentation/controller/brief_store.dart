@@ -12,21 +12,32 @@ abstract class _BriefStoreBase with Store {
 
   //UI
   @observable
-  
   ObservableSet<BriefProductEntity> allProducts = ObservableSet();
 
-  @observable
-  bool creatingNew = false;
 
   @action
-  void addToSelectedProducts(BriefProductEntity product) {
+  bool addToSelectedProducts(BriefProductEntity product) {
+    if(allProducts.contains(product)){
+
+      if(_selectedProducts.contains(product)){
+        return false;
+      }
+      _selectedProducts.add(product);
+      return true;
+    }
     _selectedProducts.add(product);
     allProducts.add(product);
+    return true;
   }
 
   @action
   void removeFromSelected(BriefProductEntity product) {
     _selectedProducts.remove(product);
+  }
+  @action
+  void deleteProduct(BriefProductEntity product){
+    allProducts.remove(product);
+    removeFromSelected(product);
   }
 
   @action

@@ -6,17 +6,12 @@ import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/network/connectivity/connectivity_store.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
-import 'package:pora/app/internal/theme/context_colors.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 
 /// Оборачивает [child] баннером «нет интернета» который выезжает сверху.
 /// `onRetry` — обычно вызывает `refresh` текущей страницы.
 class NoInternetWrapper extends StatelessWidget {
-  const NoInternetWrapper({
-    super.key,
-    required this.child,
-    this.onRetry,
-  });
+  const NoInternetWrapper({super.key, required this.child, this.onRetry});
 
   final Widget child;
   final Future<void> Function()? onRetry;
@@ -49,10 +44,12 @@ class NoInternetWrapper extends StatelessWidget {
                         PoraSpacing.md,
                         0,
                       ),
-                      child: _Banner(onRetry: () async {
-                        await store.recheck();
-                        if (store.online && onRetry != null) await onRetry!();
-                      }),
+                      child: _Banner(
+                        onRetry: () async {
+                          await store.recheck();
+                          if (store.online && onRetry != null) await onRetry!();
+                        },
+                      ),
                     ),
                   ),
                 ),

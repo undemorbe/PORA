@@ -8,7 +8,7 @@ import 'package:pora/app/internal/network/api_client/api_client.dart';
 
 abstract class FamilyRemoteDataSource {
   Future<Either<Failure, List<FamilyEntity>>> getFamilies();
-  Future<Either<Failure, Success>> createFamily({required String name});
+  Future<Either<Failure, String>> createFamily({required String name});
   Future<Either<Failure, Success>> deleteFamily({required String familyId});
 }
 
@@ -28,10 +28,10 @@ class FamilyRemoteDataSourceImpl implements FamilyRemoteDataSource {
   }
 
   @override
-  Future<Either<Failure, Success>> createFamily({required String name}) async {
+  Future<Either<Failure, String>> createFamily({required String name}) async {
     try {
-      await apiClient.createFamily(nameOfFamilyBody: {'name': name});
-      return Right(const ServerSuccess());
+      final id = await apiClient.createFamily(nameOfFamilyBody: {'name': name});
+      return Right(id);
     } on Exception catch (e) {
       return Left(NetworkFailure(e.toString()));
     }

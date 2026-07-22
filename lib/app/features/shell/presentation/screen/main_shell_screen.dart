@@ -18,7 +18,7 @@ class MainShellPage extends StatelessWidget {
       child: AutoTabsScaffold(
         extendBody: true,
         routes: [
-          const FamiliesRoute(),
+          const GroupsRoute(),
           const PredictionsRoute(),
           const SettingsRoute(),
         ],

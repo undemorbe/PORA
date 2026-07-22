@@ -59,10 +59,7 @@ class OTPConfirmationPage extends StatelessWidget {
                     mainAxisAlignment: .center,
                     children: [
                       Text(l.otpEnterCodeSentTo, style: PoraText.subtitle),
-                      Text(
-                        destinationController.text,
-                        style: PoraText.caption,
-                      ),
+                      Text(destinationController.text, style: PoraText.caption),
                     ],
                   ),
                   const SizedBox(height: PoraSpacing.xxl),

@@ -34,7 +34,7 @@ class _RecipeImportPageState extends State<RecipeImportPage> {
   @override
   void initState() {
     super.initState();
-    store = RecipeImportStore(lid: widget.lid, );
+    store = RecipeImportStore(lid: widget.lid);
     store.loadExisting();
   }
 

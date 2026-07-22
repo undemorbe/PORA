@@ -9,7 +9,8 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pora/app/features/notifications/domain/entity/notification_entity.dart';
 import 'package:pora/app/internal/di/export.dart' show ILocalDB;
-import 'package:pora/app/internal/local_storage/abstract_local_db.dart' show ILocalDB;
+import 'package:pora/app/internal/local_storage/abstract_local_db.dart'
+    show ILocalDB;
 import 'package:pora/app/internal/logging/logger.dart';
 import 'package:pora/app/internal/notifications/deep_link_handler.dart';
 import 'package:pora/app/internal/notifications/device_token_sync.dart';

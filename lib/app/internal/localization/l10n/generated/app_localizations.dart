@@ -326,6 +326,12 @@ abstract class AppLocalizations {
   /// **'Что у вас часто заканчивается?'**
   String get briefTitle;
 
+  /// briefDeletionTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Вы уверены что хотите удалить продукт?'**
+  String get briefDeletionTitle;
+
   /// briefAddYourOwn
   ///
   /// In en, this message translates to:
@@ -343,6 +349,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Введите эмодзи/обозначение для продукта'**
   String get briefInputEmoji;
+
+  /// briefAlreadyContains
+  ///
+  /// In en, this message translates to:
+  /// **'Данный продукт уже выбран'**
+  String get briefAlreadyContains;
 
   /// briefSubtitle
   ///
@@ -1681,6 +1693,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No internet connection'**
   String get noInternet;
+
+  /// noInternetButLoadYouLocally
+  ///
+  /// In en, this message translates to:
+  /// **'No internet connection, but we will load you locally'**
+  String get noInternetButLoadYouLocally;
 
   /// retry
   ///
