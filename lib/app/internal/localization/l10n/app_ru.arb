@@ -158,6 +158,17 @@
     "@briefTitle": {
         "description": "briefTitle"
     },
+    "briefAddYourOwn": "Добавить",
+    "@briefAddYourOwn": {
+        "description": "briefAddYourOwn"
+    },        "briefInputProduct": "Введите продукт или вид",
+    "@briefInputProduct": {
+        "description": "briefInputProduct"
+    },
+        "briefInputEmoji": "Введите эмодзи/обозначение для продукта",
+    "@briefInputEmoji": {
+        "description": "briefInputEmoji"
+    },
     "briefSubtitle": "Отметьте продукты — Pora напомнит вовремя. Это можно пропустить.",
     "@briefSubtitle": {
         "description": "briefSubtitle"
@@ -930,5 +941,23 @@
     "noInternet": "Нет подключения к интернету",
     "@noInternet": { "description": "noInternet" },
     "retry": "Обновить",
-    "@retry": { "description": "retry" }
+    "@retry": { "description": "retry" },
+    "groupsTitle": "Ваши группы",
+    "@groupsTitle": { "description": "groupsTitle" },
+    "groupsSubtitle": "Список равен группе. Пригласите людей — они увидят список.",
+    "@groupsSubtitle": { "description": "groupsSubtitle" },
+    "groupCreate": "Создать группу",
+    "@groupCreate": { "description": "groupCreate" },
+    "groupConnect": "Присоединиться",
+    "@groupConnect": { "description": "groupConnect" },
+    "groupNameHint": "Название группы",
+    "@groupNameHint": { "description": "groupNameHint" },
+    "groupPersonal": "Личная",
+    "@groupPersonal": { "description": "groupPersonal" },
+    "groupShared": "Общая",
+    "@groupShared": { "description": "groupShared" },
+    "noGroups": "Пока нет ни одной группы",
+    "@noGroups": { "description": "noGroups" },
+    "settingsChangeThemeIOSEasterEgg": "* To change your theme, go to Settings > PORA > Theme\n* Select a new theme from the settings menu\n* Tap on 'Theme' in the app's settings to switch between light and dark modes",
+    "@settingsChangeThemeIOSEasterEgg" : {"description": "ios easter egg on advanced settings when tapped few times"}
 }

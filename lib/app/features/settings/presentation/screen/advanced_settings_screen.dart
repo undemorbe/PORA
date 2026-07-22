@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -16,6 +18,7 @@ import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/theme/context_colors.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 import 'package:pora/app/internal/theme/store/theme_store.dart';
+import 'package:pora/app/internal/widgets/pora_buttons.dart';
 import 'package:pora/app/internal/widgets/pora_rows_card.dart';
 import 'package:pora/app/internal/widgets/pora_snackbar.dart';
 import 'package:pora/app/internal/widgets/screen_back_header.dart';
@@ -166,13 +169,16 @@ class _ThemePicker extends StatelessWidget {
             (ThemeMode.light, PhosphorIconsRegular.sun),
             (ThemeMode.dark, PhosphorIconsRegular.moon),
           ])
-            RadioListTile<ThemeMode>(
+            RadioListTile<ThemeMode>.adaptive(
               value: entry.$1,
               groupValue: store.themeMode,
               onChanged: (v) {
                 if (v != null) store.setThemeMode(v);
               },
               activeColor: PoraColors.primary,
+              radioBackgroundColor: WidgetStateColor.resolveWith((_) {
+                return Theme.of(context).colorScheme.onSurface;
+              }),
               secondary: Icon(entry.$2),
               title: Text(_label(l, entry.$1), style: PoraText.itemTitle),
             ),
@@ -206,8 +212,9 @@ class _LanguagePicker extends StatelessWidget {
       builder: (context) => PoraRowsCard(
         children: [
           for (final locale in Locales.supportedLocales)
-            RadioListTile<String>(
+            RadioListTile<String>.adaptive(
               value: locale.languageCode,
+
               groupValue: store.currentLocale,
               onChanged: (v) {
                 if (v != null) store.setCurrentLocale(newLocale: v);

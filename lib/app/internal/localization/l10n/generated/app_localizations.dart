@@ -326,6 +326,24 @@ abstract class AppLocalizations {
   /// **'Что у вас часто заканчивается?'**
   String get briefTitle;
 
+  /// briefAddYourOwn
+  ///
+  /// In en, this message translates to:
+  /// **'Добавить'**
+  String get briefAddYourOwn;
+
+  /// briefInputProduct
+  ///
+  /// In en, this message translates to:
+  /// **'Введите продукт или вид'**
+  String get briefInputProduct;
+
+  /// briefInputEmoji
+  ///
+  /// In en, this message translates to:
+  /// **'Введите эмодзи/обозначение для продукта'**
+  String get briefInputEmoji;
+
   /// briefSubtitle
   ///
   /// In en, this message translates to:
@@ -1669,6 +1687,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Retry'**
   String get retry;
+
+  /// groupsTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Your groups'**
+  String get groupsTitle;
+
+  /// groupsSubtitle
+  ///
+  /// In en, this message translates to:
+  /// **'A list is a group. Invite people — they\'ll see the list.'**
+  String get groupsSubtitle;
+
+  /// groupCreate
+  ///
+  /// In en, this message translates to:
+  /// **'Create group'**
+  String get groupCreate;
+
+  /// groupConnect
+  ///
+  /// In en, this message translates to:
+  /// **'Join'**
+  String get groupConnect;
+
+  /// groupNameHint
+  ///
+  /// In en, this message translates to:
+  /// **'Group name'**
+  String get groupNameHint;
+
+  /// groupPersonal
+  ///
+  /// In en, this message translates to:
+  /// **'Personal'**
+  String get groupPersonal;
+
+  /// groupShared
+  ///
+  /// In en, this message translates to:
+  /// **'Shared'**
+  String get groupShared;
+
+  /// noGroups
+  ///
+  /// In en, this message translates to:
+  /// **'No groups yet'**
+  String get noGroups;
+
+  /// ios easter egg on advanced settings when tapped few times
+  ///
+  /// In en, this message translates to:
+  /// **'* To change your theme, go to Settings > PORA > Theme\n* Select a new theme from the settings menu\n* Tap on \'Theme\' in the app\'s settings to switch between light and dark modes'**
+  String get settingsChangeThemeIOSEasterEgg;
 }
 
 class _AppLocalizationsDelegate

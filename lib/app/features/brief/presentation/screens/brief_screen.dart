@@ -1,4 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
+import 'package:pora/app/features/brief/domain/entity/brief_product.dart';
+import 'package:pora/app/features/brief/presentation/controller/brief_store.dart';
+import 'package:pora/app/features/brief/presentation/widgets/creation_dialogue.dart';
+import 'package:pora/app/features/brief/presentation/widgets/selection_chip.dart';
 import 'package:pora/app/features/onboarding/presentation/widgets/onboarding_progress_header.dart';
 import 'package:pora/app/internal/router/app_router.gr.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +32,7 @@ class BriefPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final briefStore = GetIt.I<BriefStore>();
     final l = context.l10n;
     final products = <(String, String, bool)>[
       ('🥛', l.briefItemMilk, true),
@@ -65,17 +72,44 @@ class BriefPage extends StatelessWidget {
                   const SizedBox(height: PoraSpacing.xxl),
                   SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
-                    child: Wrap(
-                      spacing: 10,
-                      runSpacing: 12,
-                      children: [
-                        for (final (emoji, name, selected) in products)
-                          PoraChip(
-                            label: name,
-                            leading: emoji,
-                            selected: selected,
-                          ),
-                      ],
+                    child: Observer(
+                      builder: (_) {
+                        return Wrap(
+                          spacing: 10,
+                          runSpacing: 12,
+                          children: [
+                            
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.3,
+                              child: ListView.builder(
+                                itemBuilder: (context, index) {
+                                  final product = briefStore.allProducts
+                                      .elementAt(index);
+                                  return PoraSelectionChip(
+                                    briefStore: briefStore,
+                                    briefProductEntity: product,
+                                  );
+                                },
+                                itemCount: briefStore.allProducts.length,
+                              ),
+                            ),
+                            PoraChip(
+                              label: context.l10n.briefAddYourOwn,
+                              leading: '+',
+                              onTap: () async {
+                                await showAdaptiveDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return BriefCreationDialogue(
+                                      briefStore: briefStore,
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                          ],
+                        );
+                      },
                     ),
                   ),
                 ],

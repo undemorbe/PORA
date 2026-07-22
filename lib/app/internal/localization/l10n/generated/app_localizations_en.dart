@@ -131,6 +131,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get briefTitle => 'Что у вас часто заканчивается?';
 
   @override
+  String get briefAddYourOwn => 'Добавить';
+
+  @override
+  String get briefInputProduct => 'Введите продукт или вид';
+
+  @override
+  String get briefInputEmoji => 'Введите эмодзи/обозначение для продукта';
+
+  @override
   String get briefSubtitle =>
       'Отметьте продукты — Pora напомнит вовремя. Это можно пропустить.';
 
@@ -818,4 +827,33 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get retry => 'Retry';
+
+  @override
+  String get groupsTitle => 'Your groups';
+
+  @override
+  String get groupsSubtitle =>
+      'A list is a group. Invite people — they\'ll see the list.';
+
+  @override
+  String get groupCreate => 'Create group';
+
+  @override
+  String get groupConnect => 'Join';
+
+  @override
+  String get groupNameHint => 'Group name';
+
+  @override
+  String get groupPersonal => 'Personal';
+
+  @override
+  String get groupShared => 'Shared';
+
+  @override
+  String get noGroups => 'No groups yet';
+
+  @override
+  String get settingsChangeThemeIOSEasterEgg =>
+      '* To change your theme, go to Settings > PORA > Theme\n* Select a new theme from the settings menu\n* Tap on \'Theme\' in the app\'s settings to switch between light and dark modes';
 }
