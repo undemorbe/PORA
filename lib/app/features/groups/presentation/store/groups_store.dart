@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 import 'package:pora/app/features/families/domain/entity/member.dart';
 import 'package:pora/app/features/families/domain/usecase/create_family.dart';
+import 'package:pora/app/features/families/domain/usecase/delete_family.dart';
 import 'package:pora/app/features/families/domain/usecase/get_families.dart';
 import 'package:pora/app/features/groups/domain/entity/group.dart';
 import 'package:pora/app/features/lists/domain/usecase/create_list.dart';
@@ -91,11 +94,11 @@ abstract class _GroupsStoreBase with Store {
           errorMessage = famRes.left.message;
           return false;
         }
-        final fid = famRes.right;
+        final fid = jsonDecode(famRes.right) as Map<String,dynamic>;
         // 2. createList(name, fid) — создаём default list с тем же именем.
         final listRes = await GetIt.I<CreateListUseCase>().call(
           name: name,
-          fid: fid,
+          fid: fid['id'],
         );
         if (listRes.isLeft) {
           isLoading = false;
@@ -123,10 +126,14 @@ abstract class _GroupsStoreBase with Store {
   @action
   Future<void> deleteGroup(GroupEntity g) async {
     final res = await GetIt.I<DeleteListUseCase>().call(lid: g.list.id);
+    final fam = await GetIt.I<DeleteFamilyUseCase>().call(familyId: g.familyId??'');
     if (res.isRight) {
       groups.removeWhere((x) => x.list.id == g.list.id);
     } else {
       errorMessage = res.left.message;
     }
+    if (res.isLeft) {
+      Logger.talker.error('deleteFamily failed', res.left.message);
+    } 
   }
 }

@@ -23,11 +23,11 @@ abstract class _UserProfileStoreBase with Store {
   @action
   Future<void> pushUserInformation({required String name}) async {
     final nameToEntity = name.split(' ').first.isEmpty
-        ? 'PORA-USER${DateTime.now().millisecondsSinceEpoch}'
+        ? 'User${DateTime.now().millisecondsSinceEpoch}'
         : name.split(' ').first;
     final surname = name.split(' ').length > 1
         ? name.split(' ').sublist(1).join(' ')
-        : 'PITBULL';
+        : '';
     user = UserEntity(name: nameToEntity, surname: surname);
     await GetIt.I<UpdateUserUseCase>()(user: user, image: profileImage);
   }

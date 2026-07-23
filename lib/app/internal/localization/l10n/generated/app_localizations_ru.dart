@@ -867,4 +867,136 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get settingsChangeThemeIOSEasterEgg =>
       '* To change your theme, go to Settings > PORA > Theme\n* Select a new theme from the settings menu\n* Tap on \'Theme\' in the app\'s settings to switch between light and dark modes';
+
+  @override
+  String get tutorialTitle => 'Как это работает';
+
+  @override
+  String get tutorialSkip => 'Пропустить';
+
+  @override
+  String get tutorialNext => 'Далее';
+
+  @override
+  String get tutorialDone => 'Начать';
+
+  @override
+  String get tutorialInviteTitle => 'Пригласите близких';
+
+  @override
+  String get tutorialInviteBody =>
+      'Свайп группы вправо → «Пригласить». Партнёр видит тот же список.';
+
+  @override
+  String get tutorialAddTitle => 'Добавить продукт';
+
+  @override
+  String get tutorialAddBody =>
+      'Кнопка «+» внизу списка. Название, количество, раздел, приоритет — и готово.';
+
+  @override
+  String get tutorialEditTitle => 'Изменить и отметить';
+
+  @override
+  String get tutorialEditBody =>
+      'Тап по чекбоксу — куплено. Тап по строке — детали и правки.';
+
+  @override
+  String get tutorialDeleteTitle => 'Удалить';
+
+  @override
+  String get tutorialDeleteBody =>
+      'Свайп продукта влево → «Удалить». Диалог подтверждения — можно отключить.';
+
+  @override
+  String get tutorialAiTitle => 'Импорт рецепта';
+
+  @override
+  String get tutorialAiBody =>
+      'Ссылку на рецепт — в поле, «Разобрать». Ингредиенты падают в список, дубли отмечаются.';
+
+  @override
+  String get tutorialSettingsTitle => 'Всё под рукой';
+
+  @override
+  String get tutorialSettingsBody =>
+      'Тема, язык, уведомления и подтверждения — в «Профиль → Расширенные настройки».';
+
+  @override
+  String get showTutorial => 'Показать туториал';
+
+  @override
+  String get tutorialSampleGroupFamily => 'Семья';
+
+  @override
+  String get tutorialSampleMilk => 'Молоко';
+
+  @override
+  String get tutorialSampleBread => 'Хлеб';
+
+  @override
+  String get tutorialSampleAvocado => 'Авокадо';
+
+  @override
+  String get tutorialSampleMilkQty => 'Молоко 2×1л';
+
+  @override
+  String get tutorialSampleCoffee => 'Кофе';
+
+  @override
+  String get tutorialSampleCola => 'Кола';
+
+  @override
+  String get tutorialSampleRecipeUrl => 'recipe.example/pasta';
+
+  @override
+  String get tutorialSampleIngredient1 => 'Спагетти 400 г';
+
+  @override
+  String get tutorialSampleIngredient2 => 'Помидоры 500 г';
+
+  @override
+  String get tutorialSampleIngredient3 => 'Чеснок 3 зубчика';
+
+  @override
+  String get tutorialSampleToggleTheme => 'Тема';
+
+  @override
+  String get tutorialSampleToggleNotif => 'Уведомления';
+
+  @override
+  String get tutorialSampleToggleConfirm => 'Подтверждение';
+
+  @override
+  String get tutorialConnectTitle => 'Присоединиться по коду';
+
+  @override
+  String get tutorialConnectBody =>
+      'Партнёр даёт ссылку или код. Вставьте — попадаете в общий список.';
+
+  @override
+  String get tutorialNotifyTitle => 'Пинг «срочно нужно»';
+
+  @override
+  String get tutorialNotifyBody =>
+      'Тап «!» на продукте — партнёру прилетит push «срочно купи». Без звонков.';
+
+  @override
+  String get tutorialOutroTitle => 'А с остальным разберётесь сами';
+
+  @override
+  String get tutorialOutroBody =>
+      'Тыкайте, свайпайте, ошибайтесь — приложение прощает почти всё.';
+
+  @override
+  String get tutorialSampleInviteCode => 'PORA-4F72';
+
+  @override
+  String get tutorialSamplePushSender => 'Аня';
+
+  @override
+  String get tutorialSamplePushBody => 'Срочно нужно молоко';
+
+  @override
+  String get tutorialSampleInviteMessage => 'Присоединяйся к списку';
 }

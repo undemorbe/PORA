@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:pora/app/internal/widgets/deletion_dialogue.dart';
 import 'package:pora/app/features/groups/presentation/store/groups_store.dart';
 import 'package:pora/app/features/groups/presentation/widgets/create_group_sheet.dart';
 import 'package:pora/app/features/groups/presentation/widgets/group_card.dart';
@@ -37,11 +38,14 @@ class _GroupsPageState extends State<GroupsPage> {
       store.load();
       _sub = AppWebsocket.instance.events.listen((e) {
         // Любое событие → refresh (общая переорганизация — редко, ok).
-        _debouncer.call(store.load);
+        _debouncer.call((() {
+         store.load(); 
+        }));
       });
-    } on Exception catch (e) {
+    } on Exception {
       // TODO
     }
+    
   }
 
   @override
@@ -110,7 +114,16 @@ class _GroupsPageState extends State<GroupsPage> {
                           final g = store.groups[i];
                           return GroupCard(
                             group: g,
-                            onDelete: () => store.deleteGroup(g),
+                            onDelete: () async {
+                              await showAdaptiveDialog(
+                                context: context,
+                                builder: (context) => DeletionDialogue(
+                                  onDelete: () {
+                                    store.deleteGroup(g);
+                                  },
+                                ),
+                              );
+                            },
                           );
                         },
                       );

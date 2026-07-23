@@ -54,6 +54,7 @@ export 'package:pora/app/features/lists/domain/usecase/delete_list.dart';
 export 'package:pora/app/features/lists/domain/usecase/get_families_lists.dart';
 export 'package:pora/app/features/item_detail/data/datasource/items_remote.dart';
 export 'package:pora/app/features/item_detail/data/datasource/local_prefs.dart';
+export 'package:pora/app/features/tutorial/data/tutorial_prefs.dart';
 export 'package:pora/app/features/item_detail/data/service/items_service.dart';
 export 'package:pora/app/features/item_detail/domain/repository/items_repository.dart';
 export 'package:pora/app/features/item_detail/domain/usecase/add_item.dart';

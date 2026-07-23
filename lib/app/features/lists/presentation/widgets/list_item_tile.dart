@@ -79,7 +79,7 @@ class ListItemTile extends StatelessWidget {
                         ),
                       ),
                     ),
-                  if (!isCompact && item.priority > 0)
+                  if (!isCompact && item.priority >= 0)
                     Padding(
                       padding: const EdgeInsets.only(top: PoraSpacing.xxs),
                       child: Text(

@@ -1,12 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/app/features/brief/domain/entity/brief_product.dart';
 import 'package:pora/app/features/brief/presentation/controller/brief_store.dart';
 import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
-import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/widgets/pora_buttons.dart';
 import 'package:pora/app/internal/widgets/pora_snackbar.dart';
 
@@ -30,24 +28,34 @@ class _BriefCreationDialogueState extends State<BriefCreationDialogue> {
         child: Column(
           mainAxisSize: .min,
           children: [
-            TextField(controller: nameController,maxLength: 15,decoration: InputDecoration(
-              hintText: context.l10n.briefInputProduct
-            ),),
+            TextField(
+              controller: nameController,
+              maxLength: 15,
+              decoration: InputDecoration(
+                hintText: context.l10n.briefInputProduct,
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               //! Add emoji keyboard type
-              child: TextField(controller: emojiLeadingController,maxLength: 3,
-              //  inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[emoji]'))],
-              decoration: InputDecoration(
-                hintText: context.l10n.briefInputEmoji,
-              ),
+              child: TextField(
+                controller: emojiLeadingController,
+                maxLength: 3,
+                //  inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[emoji]'))],
+                decoration: InputDecoration(
+                  hintText: context.l10n.briefInputEmoji,
                 ),
+              ),
             ),
             PoraPrimaryButton(
               icon: PhosphorIcons.plus,
               onPressed: () {
-                if(nameController.text.isEmpty){
-                  PoraSnackbar.show(context, message: context.l10n.briefInputProduct, type: PoraSnackType.failure);
+                if (nameController.text.isEmpty) {
+                  PoraSnackbar.show(
+                    context,
+                    message: context.l10n.briefInputProduct,
+                    type: PoraSnackType.failure,
+                  );
                   return;
                 }
                 final result = widget.briefStore.addToSelectedProducts(
@@ -58,11 +66,14 @@ class _BriefCreationDialogueState extends State<BriefCreationDialogue> {
                         : emojiLeadingController.text,
                   ),
                 );
-                  context.router.maybePop();
-                if(!result){
-                  PoraSnackbar.show(context, message: context.l10n.briefAlreadyContains,type: PoraSnackType.failure);
+                context.router.maybePop();
+                if (!result) {
+                  PoraSnackbar.show(
+                    context,
+                    message: context.l10n.briefAlreadyContains,
+                    type: PoraSnackType.failure,
+                  );
                 }
-
               },
               label: context.l10n.save,
             ),

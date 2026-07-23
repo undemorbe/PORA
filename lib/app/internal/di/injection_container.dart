@@ -244,5 +244,8 @@ class InjectionContainer {
     _getIt.registerLazySingleton<ItemDetailsPrefs>(
       () => ItemDetailsPrefs(db: _getIt<ILocalDB<dynamic>>()),
     );
+    _getIt.registerLazySingleton<TutorialPrefs>(
+      () => TutorialPrefs(_getIt<ILocalDB<dynamic>>()),
+    );
   }
 }

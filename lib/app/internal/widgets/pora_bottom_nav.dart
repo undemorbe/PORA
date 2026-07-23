@@ -53,6 +53,10 @@ class PoraBottomNav extends StatelessWidget {
     final barWidth = w > 400 ? 360.0 : w - 32.0;
 
     if (Platform.isIOS) {
+      // Чистое стекло — без подложки. Читаемость достигается через:
+      //  1. Сильную мягкую тень снизу (отделяет от фона).
+      //  2. Двойной hairline: outer тёмный + inner светлый — как у
+      //     Apple system tab bar. Работает и на light, и на dark.
       return SafeArea(
         top: false,
         child: Padding(
@@ -61,21 +65,62 @@ class PoraBottomNav extends StatelessWidget {
             left: 12,
             right: 12,
           ),
-          child: SizedBox(
-            width: barWidth,
-            child: LiquidGlassBottomNavBar(
-              selectedIndex: _selectedIndex,
-              onChanged: (i) => onTap?.call(_order[i]),
-              width: barWidth,
-              height: 64,
-              margin: EdgeInsets.zero,
-              items: [
-                for (final t in _order)
-                  LiquidGlassTabBarItem(
-                    icon: _icons[t]!,
-                    selectedIcon: _iconsFill[t],
-                    label: _label(context, t),
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(32),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.28),
+                  blurRadius: 36,
+                  offset: const Offset(0, 14),
+                  spreadRadius: -6,
+                ),
+              ],
+            ),
+            child: Stack(
+              children: [
+                SizedBox(
+                  width: barWidth,
+                  child: LiquidGlassBottomNavBar(
+                    selectedIndex: _selectedIndex,
+                    onChanged: (i) => onTap?.call(_order[i]),
+                    width: barWidth,
+                    height: 64,
+                    margin: EdgeInsets.zero,
+                    items: [
+                      for (final t in _order)
+                        LiquidGlassTabBarItem(
+                          icon: _icons[t]!,
+                          selectedIcon: _iconsFill[t],
+                          label: _label(context, t),
+                        ),
+                    ],
                   ),
+                ),
+                // Двойной hairline поверх стекла — не блокирует тапы.
+                Positioned.fill(
+                  child: IgnorePointer(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(32),
+                        border: Border.all(
+                          color: Colors.black.withValues(alpha: 0.14),
+                          width: 0.6,
+                        ),
+                      ),
+                      child: Container(
+                        margin: const EdgeInsets.all(0.6),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(31.4),
+                          border: Border.all(
+                            color: Colors.white.withValues(alpha: 0.55),
+                            width: 0.6,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -129,17 +174,18 @@ class _AndroidFloatingBar extends StatelessWidget {
               width: width,
               height: 64,
               decoration: BoxDecoration(
-                color: c.surface.withValues(alpha: 0.72),
+                // В light bg cream + surface белый = мало контраста.
+                // Используем surfaceAlt (в dark он темнее surface;
+                // в light всё равно surface белый — контраст даёт border+shadow).
+                color: c.surfaceAlt,
                 borderRadius: BorderRadius.circular(32),
-                border: Border.all(
-                  color: c.border.withValues(alpha: 0.6),
-                  width: 0.5,
-                ),
+                border: Border.all(color: PoraColors.borderStrong, width: 1),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.10),
-                    blurRadius: 20,
-                    offset: const Offset(0, 6),
+                    color: Colors.black.withValues(alpha: 0.22),
+                    blurRadius: 32,
+                    offset: const Offset(0, 12),
+                    spreadRadius: -4,
                   ),
                 ],
               ),

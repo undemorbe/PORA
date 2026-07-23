@@ -94,6 +94,7 @@ class AppRouter extends RootStackRouter {
       guards: [_authGuard],
     ),
     AutoRoute(page: BriefRoute.page, path: "/${BriefRoute.name}"),
+    AutoRoute(page: TutorialRoute.page, path: "/${TutorialRoute.name}"),
     AutoRoute(
       page: UserCreateProfileRoute.page,
       path: "/${UserCreateProfileRoute.name}",

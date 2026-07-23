@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:pora/app/internal/di/export.dart';
 import 'package:pora/app/internal/network/websocket/app_websocket.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -43,11 +44,15 @@ class AppBootstrap {
 
       // Три параллельных ветки — независимы, ускоряют cold start.
       await Future.wait<void>([
-        _initFirebaseAndPush(),
+        
         _initLocalization(container),
         _refreshAndAuth(container),
       ]);
-
+        if(!Platform.isIOS){
+            //!!!!! Add ios compatibility
+        _initFirebaseAndPush();
+        }
+      
       // Депендс от secure store (запись в кэш) — после refresh.
       final tokensStore = container.getIt<TokensSecureStore>();
       tokensStore.updateCache(await tokensStore.getAccessToken());

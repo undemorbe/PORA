@@ -1759,6 +1759,252 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'* To change your theme, go to Settings > PORA > Theme\n* Select a new theme from the settings menu\n* Tap on \'Theme\' in the app\'s settings to switch between light and dark modes'**
   String get settingsChangeThemeIOSEasterEgg;
+
+  /// tutorialTitle
+  ///
+  /// In en, this message translates to:
+  /// **'How it works'**
+  String get tutorialTitle;
+
+  /// tutorialSkip
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get tutorialSkip;
+
+  /// tutorialNext
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get tutorialNext;
+
+  /// tutorialDone
+  ///
+  /// In en, this message translates to:
+  /// **'Start'**
+  String get tutorialDone;
+
+  /// tutorialInviteTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Invite your people'**
+  String get tutorialInviteTitle;
+
+  /// tutorialInviteBody
+  ///
+  /// In en, this message translates to:
+  /// **'Swipe a group right → Invite. Your partner sees the same list.'**
+  String get tutorialInviteBody;
+
+  /// tutorialAddTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Add a product'**
+  String get tutorialAddTitle;
+
+  /// tutorialAddBody
+  ///
+  /// In en, this message translates to:
+  /// **'Tap + at the bottom of the list. Name, qty, section, priority — done.'**
+  String get tutorialAddBody;
+
+  /// tutorialEditTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Edit and check off'**
+  String get tutorialEditTitle;
+
+  /// tutorialEditBody
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the checkbox — bought. Tap the row — details and edits.'**
+  String get tutorialEditBody;
+
+  /// tutorialDeleteTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get tutorialDeleteTitle;
+
+  /// tutorialDeleteBody
+  ///
+  /// In en, this message translates to:
+  /// **'Swipe a product left → Delete. Confirmation can be turned off.'**
+  String get tutorialDeleteBody;
+
+  /// tutorialAiTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Import a recipe'**
+  String get tutorialAiTitle;
+
+  /// tutorialAiBody
+  ///
+  /// In en, this message translates to:
+  /// **'Paste a recipe URL, tap Parse. Ingredients drop into the list, duplicates marked.'**
+  String get tutorialAiBody;
+
+  /// tutorialSettingsTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Everything in reach'**
+  String get tutorialSettingsTitle;
+
+  /// tutorialSettingsBody
+  ///
+  /// In en, this message translates to:
+  /// **'Theme, language, notifications, confirmations — Profile → Advanced settings.'**
+  String get tutorialSettingsBody;
+
+  /// showTutorial
+  ///
+  /// In en, this message translates to:
+  /// **'Show tutorial'**
+  String get showTutorial;
+
+  /// sample group name in invite animation
+  ///
+  /// In en, this message translates to:
+  /// **'Family'**
+  String get tutorialSampleGroupFamily;
+
+  /// sample product
+  ///
+  /// In en, this message translates to:
+  /// **'Milk'**
+  String get tutorialSampleMilk;
+
+  /// sample product
+  ///
+  /// In en, this message translates to:
+  /// **'Bread'**
+  String get tutorialSampleBread;
+
+  /// sample product added in add animation
+  ///
+  /// In en, this message translates to:
+  /// **'Avocado'**
+  String get tutorialSampleAvocado;
+
+  /// sample product with qty
+  ///
+  /// In en, this message translates to:
+  /// **'Milk 2×1L'**
+  String get tutorialSampleMilkQty;
+
+  /// sample product
+  ///
+  /// In en, this message translates to:
+  /// **'Coffee'**
+  String get tutorialSampleCoffee;
+
+  /// sample product deleted
+  ///
+  /// In en, this message translates to:
+  /// **'Cola'**
+  String get tutorialSampleCola;
+
+  /// sample recipe url shown in AI import animation
+  ///
+  /// In en, this message translates to:
+  /// **'recipe.example/pasta'**
+  String get tutorialSampleRecipeUrl;
+
+  /// sample recipe ingredient
+  ///
+  /// In en, this message translates to:
+  /// **'Spaghetti 400 g'**
+  String get tutorialSampleIngredient1;
+
+  /// sample recipe ingredient
+  ///
+  /// In en, this message translates to:
+  /// **'Tomatoes 500 g'**
+  String get tutorialSampleIngredient2;
+
+  /// sample recipe ingredient
+  ///
+  /// In en, this message translates to:
+  /// **'Garlic 3 cloves'**
+  String get tutorialSampleIngredient3;
+
+  /// toggle label in settings animation
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get tutorialSampleToggleTheme;
+
+  /// toggle label in settings animation
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get tutorialSampleToggleNotif;
+
+  /// toggle label in settings animation
+  ///
+  /// In en, this message translates to:
+  /// **'Confirmation'**
+  String get tutorialSampleToggleConfirm;
+
+  /// tutorialConnectTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Join by code'**
+  String get tutorialConnectTitle;
+
+  /// tutorialConnectBody
+  ///
+  /// In en, this message translates to:
+  /// **'Partner sends a link or code. Paste it — you\'re in the shared list.'**
+  String get tutorialConnectBody;
+
+  /// tutorialNotifyTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Ping «need it now»'**
+  String get tutorialNotifyTitle;
+
+  /// tutorialNotifyBody
+  ///
+  /// In en, this message translates to:
+  /// **'Tap «!» on a product — your partner gets a push «buy it now». No calls needed.'**
+  String get tutorialNotifyBody;
+
+  /// tutorialOutroTitle
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ll figure out the rest'**
+  String get tutorialOutroTitle;
+
+  /// tutorialOutroBody
+  ///
+  /// In en, this message translates to:
+  /// **'Tap, swipe, mess up — the app forgives almost anything.'**
+  String get tutorialOutroBody;
+
+  /// sample invite code in connect animation
+  ///
+  /// In en, this message translates to:
+  /// **'PORA-4F72'**
+  String get tutorialSampleInviteCode;
+
+  /// sample partner name in notify push preview
+  ///
+  /// In en, this message translates to:
+  /// **'Anna'**
+  String get tutorialSamplePushSender;
+
+  /// sample push body in notify animation
+  ///
+  /// In en, this message translates to:
+  /// **'Need milk, urgent'**
+  String get tutorialSamplePushBody;
+
+  /// sample chat message text before the invite link
+  ///
+  /// In en, this message translates to:
+  /// **'Join the list'**
+  String get tutorialSampleInviteMessage;
 }
 
 class _AppLocalizationsDelegate

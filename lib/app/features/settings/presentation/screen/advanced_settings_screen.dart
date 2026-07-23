@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -8,6 +6,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/app/features/item_detail/data/datasource/local_prefs.dart';
+import 'package:pora/app/internal/router/app_router.gr.dart';
 import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/localization/l10n/locales.dart';
 import 'package:pora/app/internal/localization/store/localization_store.dart';
@@ -18,7 +17,6 @@ import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/theme/context_colors.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 import 'package:pora/app/internal/theme/store/theme_store.dart';
-import 'package:pora/app/internal/widgets/pora_buttons.dart';
 import 'package:pora/app/internal/widgets/pora_rows_card.dart';
 import 'package:pora/app/internal/widgets/pora_snackbar.dart';
 import 'package:pora/app/internal/widgets/screen_back_header.dart';
@@ -139,6 +137,13 @@ class _AdvancedSettingsPageState extends State<AdvancedSettingsPage> {
               SectionLabel(l.about),
               PoraRowsCard(
                 children: [
+                  ListTile(
+                    leading: const Icon(PhosphorIconsRegular.question),
+                    title: Text(l.showTutorial, style: PoraText.itemTitle),
+                    trailing: const Icon(PhosphorIconsRegular.caretRight),
+                    onTap: () =>
+                        context.router.push(TutorialRoute(fromSettings: true)),
+                  ),
                   ListTile(
                     leading: const Icon(PhosphorIconsRegular.info),
                     title: Text(l.version, style: PoraText.itemTitle),

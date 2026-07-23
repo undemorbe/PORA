@@ -88,7 +88,6 @@ class _ListPageState extends State<ListPage> {
       floatingActionButton: AddListButton(
         onTap: () async {
           await context.router.push(AddItemRoute(lid: widget.listId));
-          await listStore.getConcreteList(lid: widget.listId);
         },
       ),
       body: SafeArea(

@@ -26,10 +26,6 @@ class GroupCard extends StatelessWidget {
 
   final GroupEntity group;
   final Future<void> Function() onDelete;
-
-  static const double _avatar = 28;
-  static const double _overlap = 18;
-
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
@@ -147,7 +143,7 @@ class GroupCard extends StatelessWidget {
       borderRadius: PoraRadii.card,
       child: Slidable(
         key: ValueKey('group_${list.id}'),
-        endActionPane: ActionPane(
+        startActionPane: ActionPane(
           motion: const BehindMotion(),
           extentRatio: group.isPersonal ? 0.28 : 0.56,
           children: [

@@ -8,9 +8,12 @@ import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 const String kPoraFontFamily = 'Inter';
 
 abstract class PoraText {
+  // color намеренно НЕ задан — иначе dark theme перекрывается чёрным
+  // (color в TextStyle побеждает ambient DefaultTextStyle).
+  // Виджет берёт цвет из Theme.textTheme.bodyMedium.color через
+  // DefaultTextStyle — в light это ink, в dark — dark.ink.
   static const TextStyle _base = TextStyle(
     fontFamily: kPoraFontFamily,
-    color: PoraColors.ink,
     height: 1.25,
   );
 

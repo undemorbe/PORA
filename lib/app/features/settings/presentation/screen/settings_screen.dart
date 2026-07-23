@@ -68,11 +68,9 @@ class _SettingsPageState extends State<SettingsPage> {
                             settingsStore.user?.email) ??
                         'unknown@unk.nown',
                     onTap: () {
-                      if (settingsStore.user != null) {
-                        context.router.push(
-                          UserCreateProfileRoute(isUpdating: true),
-                        );
-                      }
+                      context.router.push(
+                        UserCreateProfileRoute(isUpdating: true),
+                      );
                     },
                   );
                 },

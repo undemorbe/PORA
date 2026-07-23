@@ -125,10 +125,9 @@ class _SplashPageState extends State<SplashPage>
     _slow2 = Timer(const Duration(milliseconds: 4000), () {
       if (mounted) setState(() => _slowTier = 2);
     });
- _slow3 = Timer(const Duration(milliseconds: 7000), () {
+    _slow3 = Timer(const Duration(milliseconds: 7000), () {
       if (mounted) setState(() => _slowTier = 3);
     });
-
 
     _navigateWhenReady(controller);
   }
@@ -287,7 +286,9 @@ class _SplashPageState extends State<SplashPage>
                       child: Text(
                         _slowTier == 1
                             ? context.l10n.splashLoadingSlow
-                            : _slowTier == 2 ? context.l10n.splashLoadingVerySlow : context.l10n.noInternetButLoadYouLocally ,
+                            : _slowTier == 2
+                            ? context.l10n.splashLoadingVerySlow
+                            : context.l10n.noInternetButLoadYouLocally,
                         style: PoraText.small.copyWith(
                           color: context.colors.textMuted,
                         ),

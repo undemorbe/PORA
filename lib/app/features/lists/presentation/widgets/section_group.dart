@@ -112,6 +112,12 @@ class SectionGroup extends StatelessWidget {
               icon: PhosphorIconsFill.bell,
               label: context.l10n.notify,
             ),
+        ],
+      ),
+      endActionPane: ActionPane(
+        motion: const BehindMotion(),
+        extentRatio: .56,
+        children: [
           SlidableAction(
             onPressed: (ctx) async {
               final ok = await confirmDeleteItem(ctx);
@@ -124,6 +130,7 @@ class SectionGroup extends StatelessWidget {
           ),
         ],
       ),
+
       child: tile,
     );
   }
