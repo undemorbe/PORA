@@ -1,4 +1,3 @@
-import 'package:pora/app/features/invitation/domain/entity/link_code.dart';
 import 'package:pora/app/features/invitation/domain/repository/invitations_repository.dart';
 import 'package:pora/app/internal/errors/failure.dart';
 import 'package:pora/app/internal/errors/success.dart';

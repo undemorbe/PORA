@@ -1,9 +1,9 @@
+import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 import 'package:pora/app/features/families/domain/entity/family.dart';
 import 'package:pora/app/features/families/domain/usecase/create_family.dart';
 import 'package:pora/app/features/families/domain/usecase/delete_family.dart';
 import 'package:pora/app/features/families/domain/usecase/get_families.dart';
-import 'package:pora/app/internal/di/export.dart';
 part 'families_store.g.dart';
 
 class FamiliesStore = _FamiliesStoreBase with _$FamiliesStore;

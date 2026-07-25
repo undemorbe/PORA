@@ -12,7 +12,7 @@ class AuthGuard extends AutoRouteGuard {
 
   @override
   void onNavigation(NavigationResolver resolver, StackRouter router) {
-    if (_auth.isAuthenticated) {
+    if (_auth.status == AuthStatus.authenticated) {
       resolver.next();
     } else {
       // Уводим на экран входа и запоминаем исходный маршрут:

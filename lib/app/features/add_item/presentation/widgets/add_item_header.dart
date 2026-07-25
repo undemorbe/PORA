@@ -10,12 +10,10 @@ class AddItemHeader extends StatelessWidget {
     super.key,
     required this.title,
     required this.onBack,
-    required this.onClose,
   });
 
   final String title;
   final VoidCallback onBack;
-  final VoidCallback onClose;
 
   @override
   Widget build(BuildContext context) {
@@ -40,14 +38,7 @@ class AddItemHeader extends StatelessWidget {
               ),
             ),
             Text(title, style: PoraText.navTitle),
-            Align(
-              alignment: Alignment.centerRight,
-              child: _IconBtn(
-                icon: PhosphorIconsRegular.x,
-                color: context.colors.textSubtle,
-                onTap: onClose,
-              ),
-            ),
+            
           ],
         ),
       ),

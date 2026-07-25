@@ -1,11 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:mobx/mobx.dart';
-import 'package:pora/app/features/invitation/domain/entity/link_code.dart';
 import 'package:pora/app/internal/di/export.dart';
-import 'package:pora/app/internal/errors/failure.dart';
-import 'package:pora/app/internal/errors/success.dart';
-import 'package:pora/app/internal/extensions/either.dart';
-import 'package:pora/app/internal/share/share_conf.dart';
 part 'invitations_store.g.dart';
 
 class InvitationsStore = _InvitationsStoreBase with _$InvitationsStore;
@@ -45,6 +40,11 @@ abstract class _InvitationsStoreBase with Store {
     }
   }
 
+  Future<void> shareLink(String linkCode) async {
+    final sharing = GetIt.I<SharingRepository>();
+    await sharing.shareUri(uri: linkCode);
+  }
+
   //! Connect someone
 
   @action
@@ -68,11 +68,11 @@ abstract class _InvitationsStoreBase with Store {
   }
 
   @action
-  Future<void> shareLinkCode({required String linkCode}) async {
+  Future<void> shareLinkCode({required String linkCodeOrLinkUrl}) async {
     try {
-      await GetIt.I<SharingRepository>().shareUri(uri: linkCode);
+      await GetIt.I<SharingRepository>().shareUri(uri: linkCodeOrLinkUrl);
     } catch (e) {
-      await GetIt.I<SharingRepository>().shareText(text: linkCode);
+      await GetIt.I<SharingRepository>().shareText(text: linkCodeOrLinkUrl);
     }
   }
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/app/features/settings/presentation/store/settings_store.dart';
-import 'package:pora/app/features/user/presentation/store/user_profile_store.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 
 class ProfilePhotoPickerSettings extends StatelessWidget {

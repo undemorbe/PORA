@@ -59,8 +59,7 @@ class _AddItemPageState extends State<AddItemPage> {
           children: [
             AddItemHeader(
               title: l.addProduct,
-              onBack: () => Navigator.of(context).maybePop(),
-              onClose: () => Navigator.of(context).maybePop(),
+              onBack: () => context.router.maybePop(),
             ),
             Expanded(
               child: ListView(

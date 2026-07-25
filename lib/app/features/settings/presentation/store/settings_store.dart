@@ -1,11 +1,8 @@
 import 'dart:io';
 
-import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
 import 'package:pora/app/features/user/domain/entity/user/user_entity.dart';
-import 'package:pora/app/features/user/domain/usecase/user/logout.dart';
 import 'package:pora/app/internal/di/export.dart';
-import 'package:pora/app/internal/formatters/image_formatter.dart';
 part 'settings_store.g.dart';
 
 class SettingsStore = _SettingsStoreBase with _$SettingsStore;

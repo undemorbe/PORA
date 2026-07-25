@@ -131,6 +131,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get briefTitle => 'Что у вас часто заканчивается?';
 
   @override
+  String get briefDeletionTitle => 'Вы уверены что хотите удалить продукт?';
+
+  @override
+  String get briefAddYourOwn => 'Добавить';
+
+  @override
+  String get briefInputProduct => 'Введите продукт или вид';
+
+  @override
+  String get briefInputEmoji => 'Введите эмодзи/обозначение для продукта';
+
+  @override
+  String get briefAlreadyContains => 'Данный продукт уже выбран';
+
+  @override
   String get briefSubtitle =>
       'Отметьте продукты — Pora напомнит вовремя. Это можно пропустить.';
 
@@ -806,4 +821,181 @@ class AppLocalizationsEn extends AppLocalizations {
   String addedByName(String name) {
     return 'Added by: $name';
   }
+
+  @override
+  String get splashLoadingSlow => 'Almost there…';
+
+  @override
+  String get splashLoadingVerySlow => 'Still loading… checking connection';
+
+  @override
+  String get noInternet => 'No internet connection';
+
+  @override
+  String get noInternetButLoadYouLocally =>
+      'No internet connection, but we will load you locally';
+
+  @override
+  String get retry => 'Retry';
+
+  @override
+  String get groupsTitle => 'Your groups';
+
+  @override
+  String get groupsSubtitle =>
+      'A list is a group. Invite people — they\'ll see the list.';
+
+  @override
+  String get groupCreate => 'Create group';
+
+  @override
+  String get groupConnect => 'Join';
+
+  @override
+  String get groupNameHint => 'Group name';
+
+  @override
+  String get groupPersonal => 'Personal';
+
+  @override
+  String get groupShared => 'Shared';
+
+  @override
+  String get noGroups => 'No groups yet';
+
+  @override
+  String get settingsChangeThemeIOSEasterEgg =>
+      '* To change your theme, go to Settings > PORA > Theme\n* Select a new theme from the settings menu\n* Tap on \'Theme\' in the app\'s settings to switch between light and dark modes';
+
+  @override
+  String get tutorialTitle => 'How it works';
+
+  @override
+  String get tutorialSkip => 'Skip';
+
+  @override
+  String get tutorialNext => 'Next';
+
+  @override
+  String get tutorialDone => 'Start';
+
+  @override
+  String get tutorialInviteTitle => 'Invite your people';
+
+  @override
+  String get tutorialInviteBody =>
+      'Swipe a group right → Invite. Your partner sees the same list.';
+
+  @override
+  String get tutorialAddTitle => 'Add a product';
+
+  @override
+  String get tutorialAddBody =>
+      'Tap + at the bottom of the list. Name, qty, section, priority — done.';
+
+  @override
+  String get tutorialEditTitle => 'Edit and check off';
+
+  @override
+  String get tutorialEditBody =>
+      'Tap the checkbox — bought. Tap the row — details and edits.';
+
+  @override
+  String get tutorialDeleteTitle => 'Delete';
+
+  @override
+  String get tutorialDeleteBody =>
+      'Swipe a product left → Delete. Confirmation can be turned off.';
+
+  @override
+  String get tutorialAiTitle => 'Import a recipe';
+
+  @override
+  String get tutorialAiBody =>
+      'Paste a recipe URL, tap Parse. Ingredients drop into the list, duplicates marked.';
+
+  @override
+  String get tutorialSettingsTitle => 'Everything in reach';
+
+  @override
+  String get tutorialSettingsBody =>
+      'Theme, language, notifications, confirmations — Profile → Advanced settings.';
+
+  @override
+  String get showTutorial => 'Show tutorial';
+
+  @override
+  String get tutorialSampleGroupFamily => 'Family';
+
+  @override
+  String get tutorialSampleMilk => 'Milk';
+
+  @override
+  String get tutorialSampleBread => 'Bread';
+
+  @override
+  String get tutorialSampleAvocado => 'Avocado';
+
+  @override
+  String get tutorialSampleMilkQty => 'Milk 2×1L';
+
+  @override
+  String get tutorialSampleCoffee => 'Coffee';
+
+  @override
+  String get tutorialSampleCola => 'Cola';
+
+  @override
+  String get tutorialSampleRecipeUrl => 'recipe.example/pasta';
+
+  @override
+  String get tutorialSampleIngredient1 => 'Spaghetti 400 g';
+
+  @override
+  String get tutorialSampleIngredient2 => 'Tomatoes 500 g';
+
+  @override
+  String get tutorialSampleIngredient3 => 'Garlic 3 cloves';
+
+  @override
+  String get tutorialSampleToggleTheme => 'Theme';
+
+  @override
+  String get tutorialSampleToggleNotif => 'Notifications';
+
+  @override
+  String get tutorialSampleToggleConfirm => 'Confirmation';
+
+  @override
+  String get tutorialConnectTitle => 'Join by code';
+
+  @override
+  String get tutorialConnectBody =>
+      'Partner sends a link or code. Paste it — you\'re in the shared list.';
+
+  @override
+  String get tutorialNotifyTitle => 'Ping «need it now»';
+
+  @override
+  String get tutorialNotifyBody =>
+      'Tap «!» on a product — your partner gets a push «buy it now». No calls needed.';
+
+  @override
+  String get tutorialOutroTitle => 'You\'ll figure out the rest';
+
+  @override
+  String get tutorialOutroBody =>
+      'Tap, swipe, mess up — the app forgives almost anything.';
+
+  @override
+  String get tutorialSampleInviteCode => 'PORA-4F72';
+
+  @override
+  String get tutorialSamplePushSender => 'Anna';
+
+  @override
+  String get tutorialSamplePushBody => 'Need milk, urgent';
+
+  @override
+  String get tutorialSampleInviteMessage => 'Join the list';
 }

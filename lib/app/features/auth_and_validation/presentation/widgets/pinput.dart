@@ -48,9 +48,11 @@ class _PinputRoundedWithCustomCursorState
         color: c.ink,
       ),
       decoration: BoxDecoration(
-        color: c.surface,
+        // surfaceAlt в dark ярче bg — на тёмном фоне ячейки видны.
+        // В light он равен surface (белый) — тоже ок.
+        color: c.surfaceAlt,
         borderRadius: PoraRadii.input,
-        border: Border.all(color: c.border),
+        border: Border.all(color: c.border, width: 1.2),
       ),
     );
 
@@ -113,7 +115,7 @@ class _PinputRoundedWithCustomCursorState
         ),
         onCompleted: (pin) {
           if (_formKey.currentState?.validate() == true) {
-            widget.onCompleted  ?.call(pin);
+            widget.onCompleted?.call(pin);
           }
         },
       ),

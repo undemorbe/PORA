@@ -16,9 +16,8 @@ class FamilyService implements FamilyRepository {
   }
 
   @override
-  Future<Either<Failure, Success>> createFamily({required String name}) async {
-    return await familyRemoteDataSource.createFamily(name: name);
-  }
+  Future<Either<Failure, String>> createFamily({required String name}) =>
+      familyRemoteDataSource.createFamily(name: name);
 
   @override
   Future<Either<Failure, Success>> deleteFamily({

@@ -5,7 +5,6 @@ import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/extensions/string_extension.dart';
 import 'package:pora/app/internal/formatters/email_input_formatter.dart';
 import 'package:pora/app/internal/formatters/phone_input_formatter.dart';
-import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 
@@ -43,7 +42,7 @@ class _SmartAuthFormatter extends TextInputFormatter {
 }
 
 class AuthDestinationField extends StatefulWidget {
-  const   AuthDestinationField({
+  const AuthDestinationField({
     super.key,
     this.initMode,
     required this.controller,

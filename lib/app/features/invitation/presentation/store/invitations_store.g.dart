@@ -123,9 +123,9 @@ mixin _$InvitationsStore on _InvitationsStoreBase, Store {
   );
 
   @override
-  Future<void> shareLinkCode({required String linkCode}) {
+  Future<void> shareLinkCode({required String linkCodeOrLinkUrl}) {
     return _$shareLinkCodeAsyncAction.run(
-      () => super.shareLinkCode(linkCode: linkCode),
+      () => super.shareLinkCode(linkCodeOrLinkUrl: linkCodeOrLinkUrl),
     );
   }
 

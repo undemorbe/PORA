@@ -1,21 +1,11 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:pora/app/internal/di/export.dart';
 import 'package:pora/app/internal/network/websocket/app_websocket.dart';
-import 'package:web_socket_channel/status.dart' as status;
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:pora/app/features/auth_and_validation/data/datasource/local/secure_tokens.dart';
-import 'package:pora/app/features/auth_and_validation/domain/usecase/refresh_token.dart';
 import 'package:pora/app/internal/di/injection_container.dart';
-import 'package:pora/app/internal/local_storage/abstract_local_db.dart';
-import 'package:pora/app/internal/localization/store/localization_store.dart';
-import 'package:pora/app/internal/theme/store/theme_store.dart';
-import 'package:pora/app/internal/logging/logger.dart';
 import 'package:pora/app/internal/notifications/deep_link_handler.dart';
 import 'package:pora/app/internal/notifications/device_token_sync.dart';
-import 'package:pora/app/internal/notifications/notification_service.dart';
-import 'package:pora/app/internal/router/guard/auth_state.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
 
 /// Тяжёлая инициализация, идущая параллельно со splash-анимацией.
 ///
@@ -49,14 +39,20 @@ class AppBootstrap {
       final localDB = container.getIt<ILocalDB<dynamic>>();
       await localDB.init();
 
+      // Connectivity — быстрый init, синхронно.
+      unawaited(container.getIt<ConnectivityStore>().init());
+
       // Три параллельных ветки — независимы, ускоряют cold start.
       await Future.wait<void>([
-        _initFirebaseAndPush(),
+        
         _initLocalization(container),
         _refreshAndAuth(container),
       ]);
-     
-
+        if(!Platform.isIOS){
+            //!!!!! Add ios compatibility
+        _initFirebaseAndPush();
+        }
+      
       // Депендс от secure store (запись в кэш) — после refresh.
       final tokensStore = container.getIt<TokensSecureStore>();
       tokensStore.updateCache(await tokensStore.getAccessToken());
@@ -99,7 +95,14 @@ class AppBootstrap {
         auth.setUnauthenticated();
       }
     } else {
-      auth.setUnauthenticated();
+      final tokensStore = container.getIt<TokensSecureStore>();
+      final accessToken = await tokensStore.getAccessToken();
+      final refreshToken = await tokensStore.getRefreshToken();
+      if (accessToken != null && refreshToken != null) {
+        auth.setAuthenticated();
+      } else {
+        auth.setUnauthenticated();
+      }
     }
   }
 
@@ -109,7 +112,6 @@ class AppBootstrap {
     final auth = GetIt.I<AuthState>();
     if (auth.isAuthenticated) {
       Logger.talker.debug('Auth = true, creating ws');
-
       AppWebsocket.instance.connect(wsUrl);
     }
 

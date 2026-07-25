@@ -28,7 +28,7 @@ class AppRouter extends RootStackRouter {
       path: "/main",
       guards: [_authGuard],
       children: [
-        AutoRoute(page: FamiliesRoute.page, path: "family_list", initial: true),
+        AutoRoute(page: GroupsRoute.page, path: "groups", initial: true),
         AutoRoute(page: PredictionsRoute.page, path: "pora"),
         AutoRoute(page: SettingsRoute.page, path: "profile"),
       ],
@@ -94,6 +94,7 @@ class AppRouter extends RootStackRouter {
       guards: [_authGuard],
     ),
     AutoRoute(page: BriefRoute.page, path: "/${BriefRoute.name}"),
+    AutoRoute(page: TutorialRoute.page, path: "/${TutorialRoute.name}"),
     AutoRoute(
       page: UserCreateProfileRoute.page,
       path: "/${UserCreateProfileRoute.name}",

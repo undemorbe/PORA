@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
@@ -44,6 +46,12 @@ class _SplashPageState extends State<SplashPage>
   static const double _itemSize = 26;
   static const double _dropStartY = -90;
   static const double _dropEndY = -12;
+
+  /// Слоу-load message tier (0 = default, 1 = slow, 2 = very slow,3 = end).
+  int _slowTier = 0;
+  Timer? _slow1;
+  Timer? _slow2;
+  Timer? _slow3;
 
   @override
   void initState() {
@@ -111,6 +119,16 @@ class _SplashPageState extends State<SplashPage>
           ),
         );
 
+    _slow1 = Timer(const Duration(milliseconds: 3000), () {
+      if (mounted) setState(() => _slowTier = 1);
+    });
+    _slow2 = Timer(const Duration(milliseconds: 4000), () {
+      if (mounted) setState(() => _slowTier = 2);
+    });
+    _slow3 = Timer(const Duration(milliseconds: 7000), () {
+      if (mounted) setState(() => _slowTier = 3);
+    });
+
     _navigateWhenReady(controller);
   }
 
@@ -128,6 +146,9 @@ class _SplashPageState extends State<SplashPage>
 
   @override
   void dispose() {
+    _slow1?.cancel();
+    _slow2?.cancel();
+    _slow3?.cancel();
     _c.dispose();
     super.dispose();
   }
@@ -253,6 +274,27 @@ class _SplashPageState extends State<SplashPage>
                 context.l10n.splashTagline,
                 style: PoraText.subtitle.copyWith(color: PoraColors.textSubtle),
               ),
+            ),
+            const SizedBox(height: 12),
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 240),
+              child: _slowTier == 0
+                  ? const SizedBox.shrink()
+                  : Padding(
+                      key: ValueKey(_slowTier),
+                      padding: const EdgeInsets.symmetric(horizontal: 32),
+                      child: Text(
+                        _slowTier == 1
+                            ? context.l10n.splashLoadingSlow
+                            : _slowTier == 2
+                            ? context.l10n.splashLoadingVerySlow
+                            : context.l10n.noInternetButLoadYouLocally,
+                        style: PoraText.small.copyWith(
+                          color: context.colors.textMuted,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
             ),
           ],
         ),

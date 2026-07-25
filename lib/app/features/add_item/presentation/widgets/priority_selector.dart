@@ -17,9 +17,9 @@ class PrioritySelector extends StatelessWidget {
   Widget build(BuildContext context) {
     final l = context.l10n;
     final entries = <(int, String)>[
-      (0, l.priorityLow),
-      (1, l.priorityMed),
-      (2, l.priorityHigh),
+      (1, l.priorityLow),
+      (2, l.priorityMed),
+      (3, l.priorityHigh),
     ];
     return Wrap(
       spacing: PoraSpacing.sm,

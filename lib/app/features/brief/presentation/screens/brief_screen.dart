@@ -1,5 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:pora/app/features/brief/presentation/controller/brief_store.dart';
+import 'package:pora/app/features/brief/presentation/widgets/brief_creation_dialogue.dart';
+import 'package:pora/app/features/brief/presentation/widgets/selection_chip.dart';
 import 'package:pora/app/features/onboarding/presentation/widgets/onboarding_progress_header.dart';
+import 'package:pora/app/features/tutorial/data/tutorial_prefs.dart';
 import 'package:pora/app/internal/router/app_router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -17,30 +22,24 @@ import 'package:pora/app/internal/widgets/pora_chip.dart';
 class BriefPage extends StatelessWidget {
   const BriefPage({super.key});
 
-  /// Завершение онбординга нового пользователя: выдаём авторизацию перед
-  /// входом в защищённую зону, затем открываем главный экран.
-  void _enterApp(BuildContext context) {
-    GetIt.I<AuthState>().setAuthenticated();
-    context.router.replaceAll([const MainShellRoute()]);
+  /// Завершение онбординга нового пользователя. Если tutorial ещё не
+  /// показывали — открываем его (`fromSettings: false` → он сам выдаст auth
+  /// и уведёт в MainShell). Иначе идём в главный экран напрямую.
+  Future<void> _enterApp(BuildContext context) async {
+    final seen = await GetIt.I<TutorialPrefs>().hasSeen();
+    if (!context.mounted) return;
+    if (seen) {
+      GetIt.I<AuthState>().setAuthenticated();
+      context.router.replaceAll([const MainShellRoute()]);
+    } else {
+      context.router.replaceAll([TutorialRoute()]);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    final briefStore = GetIt.I<BriefStore>();
     final l = context.l10n;
-    final products = <(String, String, bool)>[
-      ('🥛', l.briefItemMilk, true),
-      ('🍞', l.briefItemBread, true),
-      ('🥚', l.briefItemEggs, false),
-      ('☕', l.briefItemCoffee, true),
-      ('🧀', l.briefItemCheese, false),
-      ('🍌', l.briefItemBananas, false),
-      ('🧈', l.briefItemButter, false),
-      ('💧', l.briefItemWater, false),
-      ('🥦', l.briefItemVegetables, false),
-      ('🍅', l.briefItemTomatoes, false),
-      ('🍝', l.briefItemPasta, false),
-      ('🍗', l.briefItemChicken, false),
-    ];
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -65,17 +64,36 @@ class BriefPage extends StatelessWidget {
                   const SizedBox(height: PoraSpacing.xxl),
                   SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
-                    child: Wrap(
-                      spacing: 10,
-                      runSpacing: 12,
-                      children: [
-                        for (final (emoji, name, selected) in products)
-                          PoraChip(
-                            label: name,
-                            leading: emoji,
-                            selected: selected,
-                          ),
-                      ],
+                    child: Observer(
+                      builder: (_) {
+                        return Wrap(
+                          spacing: 10,
+                          runSpacing: 12,
+                          children: [
+                            ...briefStore.allProducts.map(
+                              (product) => PoraSelectionChip(
+                                briefStore: briefStore,
+                                briefProductEntity: product,
+                              ),
+                            ),
+
+                            PoraChip(
+                              label: context.l10n.briefAddYourOwn,
+                              leading: '+',
+                              onTap: () async {
+                                await showAdaptiveDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return BriefCreationDialogue(
+                                      briefStore: briefStore,
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                          ],
+                        );
+                      },
                     ),
                   ),
                 ],

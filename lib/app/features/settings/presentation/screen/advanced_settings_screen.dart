@@ -6,6 +6,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/app/features/item_detail/data/datasource/local_prefs.dart';
+import 'package:pora/app/internal/router/app_router.gr.dart';
 import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/localization/l10n/locales.dart';
 import 'package:pora/app/internal/localization/store/localization_store.dart';
@@ -137,6 +138,13 @@ class _AdvancedSettingsPageState extends State<AdvancedSettingsPage> {
               PoraRowsCard(
                 children: [
                   ListTile(
+                    leading: const Icon(PhosphorIconsRegular.question),
+                    title: Text(l.showTutorial, style: PoraText.itemTitle),
+                    trailing: const Icon(PhosphorIconsRegular.caretRight),
+                    onTap: () =>
+                        context.router.push(TutorialRoute(fromSettings: true)),
+                  ),
+                  ListTile(
                     leading: const Icon(PhosphorIconsRegular.info),
                     title: Text(l.version, style: PoraText.itemTitle),
                     trailing: Text('1.0.0', style: PoraText.small),
@@ -166,13 +174,16 @@ class _ThemePicker extends StatelessWidget {
             (ThemeMode.light, PhosphorIconsRegular.sun),
             (ThemeMode.dark, PhosphorIconsRegular.moon),
           ])
-            RadioListTile<ThemeMode>(
+            RadioListTile<ThemeMode>.adaptive(
               value: entry.$1,
               groupValue: store.themeMode,
               onChanged: (v) {
                 if (v != null) store.setThemeMode(v);
               },
               activeColor: PoraColors.primary,
+              radioBackgroundColor: WidgetStateColor.resolveWith((_) {
+                return Theme.of(context).colorScheme.onSurface;
+              }),
               secondary: Icon(entry.$2),
               title: Text(_label(l, entry.$1), style: PoraText.itemTitle),
             ),
@@ -206,8 +217,9 @@ class _LanguagePicker extends StatelessWidget {
       builder: (context) => PoraRowsCard(
         children: [
           for (final locale in Locales.supportedLocales)
-            RadioListTile<String>(
+            RadioListTile<String>.adaptive(
               value: locale.languageCode,
+
               groupValue: store.currentLocale,
               onChanged: (v) {
                 if (v != null) store.setCurrentLocale(newLocale: v);

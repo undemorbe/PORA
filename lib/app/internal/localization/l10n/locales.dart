@@ -5,8 +5,8 @@ class Locales {
   static final supportedLocales = [
     const Locale('ru'),
     const Locale('en'),
-    const Locale('fr'),
-    const Locale('de'),
-    const Locale('es'),
+    // const Locale('fr'),
+    // const Locale('de'),
+    // const Locale('es'),
   ];
 }

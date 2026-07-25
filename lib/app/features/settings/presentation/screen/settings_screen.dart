@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/app/features/auth_and_validation/presentation/controller/privacy_store.dart';
@@ -13,7 +12,6 @@ import 'package:pora/app/internal/router/app_router.gr.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
 import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
-import 'package:pora/app/internal/widgets/pora_pill.dart';
 import 'package:pora/app/internal/widgets/pora_rows_card.dart';
 import 'package:pora/app/internal/widgets/pora_setting_row.dart';
 import 'package:pora/app/internal/widgets/section_label.dart';
@@ -70,11 +68,9 @@ class _SettingsPageState extends State<SettingsPage> {
                             settingsStore.user?.email) ??
                         'unknown@unk.nown',
                     onTap: () {
-                      if (settingsStore.user != null) {
-                        context.router.push(
-                          UserCreateProfileRoute(isUpdating: true),
-                        );
-                      }
+                      context.router.push(
+                        UserCreateProfileRoute(isUpdating: true),
+                      );
                     },
                   );
                 },
@@ -130,7 +126,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   if (dotenv.getBool('DEBUG'))
                     PoraSettingRow(
                       icon: PhosphorIconsRegular.lock,
-                      label: context.l10n.settingsPrivacy,
+                      label: 'Open debug route',
                       trailing: PoraSettingRow.chevron,
                       onTap: () => Navigator.of(context).push(
                         MaterialPageRoute(
@@ -138,6 +134,12 @@ class _SettingsPageState extends State<SettingsPage> {
                               TalkerScreen(talker: Logger.talker),
                         ),
                       ),
+                    ),
+                  if (dotenv.getBool('DEBUG'))
+                    PoraSettingRow(
+                      icon: Icons.add_ic_call,
+                      label: 'Open especcial route',
+                      onTap: () => context.router.push(BriefRoute()),
                     ),
                 ],
               ),
