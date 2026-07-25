@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/app/features/onboarding/presentation/widgets/onboarding_progress_header.dart';
 import 'package:pora/app/features/user/presentation/store/user_profile_store.dart';
 import 'package:pora/app/features/user/presentation/widgets/profile_photo_picker.dart';
@@ -13,6 +14,7 @@ import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/theme/context_colors.dart';
 import 'package:pora/app/internal/widgets/pora_buttons.dart';
 import 'package:pora/app/internal/widgets/pora_snackbar.dart';
+import 'package:pora/app/internal/widgets/screen_back_header.dart';
 
 @RoutePage()
 class UserCreateProfilePage extends StatefulWidget {
@@ -45,6 +47,10 @@ class _UserCreateProfilePageState extends State<UserCreateProfilePage> {
       body: SafeArea(
         child: Column(
           children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: PoraSpacing.screen),
+              child: ScreenBackHeader(title: context.l10n.profileNameUpdate),
+            ),
             Expanded(
               child: ListView(
                 padding: const EdgeInsets.fromLTRB(

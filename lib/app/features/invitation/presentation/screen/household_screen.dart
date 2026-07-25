@@ -70,6 +70,7 @@ class _InvitePageState extends State<InvitePage> {
                     return const Center(child: PoraCircleProgress());
                   } else if (invitationsStore.isSuccess == true) {
                     return InviteCodeCard(
+                      controller: null,
                       onCopy: () async {
                         await invitationsStore
                             .copyToClipboard(

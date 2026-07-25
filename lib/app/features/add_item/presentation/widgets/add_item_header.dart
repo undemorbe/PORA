@@ -6,11 +6,7 @@ import 'package:pora/app/internal/theme/context_colors.dart';
 
 /// Шапка экрана добавления: back слева, title по центру, close справа.
 class AddItemHeader extends StatelessWidget {
-  const AddItemHeader({
-    super.key,
-    required this.title,
-    required this.onBack,
-  });
+  const AddItemHeader({super.key, required this.title, required this.onBack});
 
   final String title;
   final VoidCallback onBack;
@@ -38,7 +34,6 @@ class AddItemHeader extends StatelessWidget {
               ),
             ),
             Text(title, style: PoraText.navTitle),
-            
           ],
         ),
       ),

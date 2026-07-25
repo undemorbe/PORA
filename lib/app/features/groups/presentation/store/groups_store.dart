@@ -94,7 +94,7 @@ abstract class _GroupsStoreBase with Store {
           errorMessage = famRes.left.message;
           return false;
         }
-        final fid = jsonDecode(famRes.right) as Map<String,dynamic>;
+        final fid = jsonDecode(famRes.right) as Map<String, dynamic>;
         // 2. createList(name, fid) — создаём default list с тем же именем.
         final listRes = await GetIt.I<CreateListUseCase>().call(
           name: name,
@@ -126,7 +126,9 @@ abstract class _GroupsStoreBase with Store {
   @action
   Future<void> deleteGroup(GroupEntity g) async {
     final res = await GetIt.I<DeleteListUseCase>().call(lid: g.list.id);
-    final fam = await GetIt.I<DeleteFamilyUseCase>().call(familyId: g.familyId??'');
+    final fam = await GetIt.I<DeleteFamilyUseCase>().call(
+      familyId: g.familyId ?? '',
+    );
     if (res.isRight) {
       groups.removeWhere((x) => x.list.id == g.list.id);
     } else {
@@ -134,6 +136,6 @@ abstract class _GroupsStoreBase with Store {
     }
     if (res.isLeft) {
       Logger.talker.error('deleteFamily failed', res.left.message);
-    } 
+    }
   }
 }

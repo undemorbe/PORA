@@ -8,9 +8,15 @@ import 'package:pora/app/internal/widgets/pora_pill.dart';
 
 /// Карточка кода приглашения с кнопкой «Копировать».
 class InviteCodeCard extends StatelessWidget {
-  const InviteCodeCard({super.key, required this.code, this.onCopy});
+  const InviteCodeCard({
+    super.key,
+    required this.code,
+    this.onCopy,
+    this.controller,
+  });
 
   final String code;
+  final TextEditingController? controller;
   final VoidCallback? onCopy;
 
   @override
@@ -29,18 +35,34 @@ class InviteCodeCard extends StatelessWidget {
                   style: PoraText.small,
                 ),
                 const SizedBox(height: PoraSpacing.xs),
-                Text(code, style: PoraText.code),
+                controller != null
+                    ? TextField(
+                        controller: controller,
+                        style: PoraText.code,
+                        autocorrect: false,
+                        decoration: InputDecoration(
+                          disabledBorder: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          border: InputBorder.none,
+                          hintText: "gW3...",
+                          contentPadding: .zero,
+                        ),
+                      )
+                    : Text(code, style: PoraText.code),
               ],
             ),
           ),
-          InkWell(
-            borderRadius: BorderRadius.circular(14),
-            enableFeedback: true,
-            splashColor: PoraColors.success,
-            onTap: onCopy,
+          controller == null
+              ? InkWell(
+                  borderRadius: BorderRadius.circular(14),
+                  enableFeedback: true,
+                  splashColor: PoraColors.success,
+                  onTap: onCopy,
 
-            child: PoraPill(label: context.l10n.householdCopyPill),
-          ),
+                  child: PoraPill(label: context.l10n.householdCopyPill),
+                )
+              : const SizedBox.shrink(),
         ],
       ),
     );

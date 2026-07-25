@@ -1,5 +1,10 @@
+import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 import 'package:pora/app/features/brief/domain/entity/brief_product.dart';
+import 'package:pora/app/features/brief/domain/entity/brief_product_list.dart';
+import 'package:pora/app/features/brief/domain/repository/brief_repository.dart';
+import 'package:pora/app/features/brief/domain/usecases/get_brief.dart';
+import 'package:pora/app/features/brief/domain/usecases/post_brief.dart';
 part 'brief_store.g.dart';
 
 //! CREATE LOGIC
@@ -44,6 +49,17 @@ abstract class _BriefStoreBase with Store {
     return _selectedProducts.contains(product);
   }
 
-  @action
-  void getSelectedProducts() {}
+  //Api
+  Future<void> postBrief() async {
+    final repo = GetIt.I<PostBriefUseCase>();
+    await repo.call(
+      products: BriefProductListEntity(products: _selectedProducts.toList()),
+    );
+  }
+
+  Future<void> getBrief() async {
+    final repo = GetIt.I<GetBriefUseCase>();
+    final briefList = await repo.call();
+    _selectedProducts.addAll(briefList.products);
+  }
 }

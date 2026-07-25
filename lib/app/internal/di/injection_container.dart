@@ -1,3 +1,8 @@
+import 'package:pora/app/features/brief/data/datasource/brief_remote.dart';
+import 'package:pora/app/features/brief/data/services/brief_service.dart';
+import 'package:pora/app/features/brief/domain/repository/brief_repository.dart';
+import 'package:pora/app/features/brief/domain/usecases/get_brief.dart';
+import 'package:pora/app/features/brief/domain/usecases/post_brief.dart';
 import 'package:pora/app/features/brief/presentation/controller/brief_store.dart';
 
 import 'export.dart';
@@ -71,6 +76,14 @@ class InjectionContainer {
     );
     _getIt.registerFactory<UpdateDeviceTokenUseCase>(
       () => UpdateDeviceTokenUseCase(repository: _getIt<UserRepository>()),
+    );
+
+    //! Brief
+    _getIt.registerFactory<GetBriefUseCase>(
+      () => GetBriefUseCase(briefRepository: _getIt<BriefRepository>()),
+    );
+    _getIt.registerFactory<PostBriefUseCase>(
+      () => PostBriefUseCase(briefRepository: _getIt<BriefRepository>()),
     );
 
     //! Auth(otp) feature
@@ -163,6 +176,14 @@ class InjectionContainer {
     );
     _getIt.registerLazySingleton<UserRepository>(
       () => UserService(_getIt<UserRemoteDataSource>()),
+    );
+
+    //! Brief
+    _getIt.registerLazySingleton<BriefRemote>(
+      () => BriefRemoteImpl(apiClient: _getIt<ApiClient>()),
+    );
+    _getIt.registerLazySingleton<BriefRepository>(
+      () => BriefService(briefRemote: _getIt<BriefRemote>()),
     );
 
     //! JWT (tokens) feature

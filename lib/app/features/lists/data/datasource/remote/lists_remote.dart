@@ -28,7 +28,7 @@ class ListsRemoteImpl implements ListsRemote {
     String? fid,
   }) async {
     try {
-      await apiClient.createList(body: {'family-id': fid, 'name': name,});
+      await apiClient.createList(body: {'family-id': fid, 'name': name});
       return Right(const ServerSuccess());
     } on Exception catch (e) {
       return Left(NetworkFailure(e.toString()));

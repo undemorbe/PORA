@@ -39,13 +39,12 @@ class _GroupsPageState extends State<GroupsPage> {
       _sub = AppWebsocket.instance.events.listen((e) {
         // Любое событие → refresh (общая переорганизация — редко, ok).
         _debouncer.call((() {
-         store.load(); 
+          store.load();
         }));
       });
     } on Exception {
       // TODO
     }
-    
   }
 
   @override
@@ -121,6 +120,7 @@ class _GroupsPageState extends State<GroupsPage> {
                                   onDelete: () {
                                     store.deleteGroup(g);
                                   },
+                                  title: context.l10n.groupDeletionTitle,
                                 ),
                               );
                             },

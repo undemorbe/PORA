@@ -829,11 +829,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get splashLoadingVerySlow => 'Still loading… checking connection';
 
   @override
+  String get profileNameUpdate => 'Profile updating';
+
+  @override
+  String get briefSnackBar => 'Maybe you forgot to select any products?';
+
+  @override
   String get noInternet => 'No internet connection';
 
   @override
   String get noInternetButLoadYouLocally =>
       'No internet connection, but we will load you locally';
+
+  @override
+  String get groupDeletionTitle => 'Are you sure want to delete group?';
 
   @override
   String get retry => 'Retry';

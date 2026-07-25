@@ -830,11 +830,20 @@ class AppLocalizationsRu extends AppLocalizations {
   String get splashLoadingVerySlow => 'Всё ещё грузимся… проверяем связь';
 
   @override
+  String get profileNameUpdate => 'Обновление профиля';
+
+  @override
+  String get briefSnackBar => 'Может все-же добавим \nчто-нибудь?';
+
+  @override
   String get noInternet => 'Нет подключения к интернету';
 
   @override
   String get noInternetButLoadYouLocally =>
       'Нет интернета, но впустим вас и так!';
+
+  @override
+  String get groupDeletionTitle => 'Are you sure want to delete group?';
 
   @override
   String get retry => 'Обновить';

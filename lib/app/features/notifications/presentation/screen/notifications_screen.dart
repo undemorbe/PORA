@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
+import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/app/features/notifications/domain/entity/notification_entity.dart';
 import 'package:pora/app/features/notifications/presentation/store/notifications_store.dart';
 import 'package:pora/app/features/notifications/presentation/widgets/notification_tile.dart';
@@ -56,6 +57,14 @@ class _NotificationsPageState extends State<NotificationsPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+                        onTap: () => context.router.maybePop(),
+                        child: const PhosphorIcon(
+                          PhosphorIconsRegular.caretLeft,
+                          size: 26,
+                        ),
+                      ),
                       Text(
                         context.l10n.notificationsTitle,
                         style: PoraText.title,

@@ -101,18 +101,6 @@ mixin _$BriefStore on _BriefStoreBase, Store {
   }
 
   @override
-  void getSelectedProducts() {
-    final _$actionInfo = _$_BriefStoreBaseActionController.startAction(
-      name: '_BriefStoreBase.getSelectedProducts',
-    );
-    try {
-      return super.getSelectedProducts();
-    } finally {
-      _$_BriefStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
 allProducts: ${allProducts}

@@ -885,6 +885,12 @@
     "@nooneToNotify": { "description": "nooneToNotify" },
     "notFound": "Не найдено",
     "@notFound": { "description": "notFound" },
+    "profileNameUpdate": "Обновление профиля",
+    "@profileNameUpdate": { "description": "profileNameUpdate" },
+    "briefSnackBar": "Может все-же добавим \nчто-нибудь?",
+    "@briefSnackBar": { "description": "briefSnackBar" },
+    "@groupDeletionTitle": { "description": "groupDeletionTitle" },
+    "groupDeletionTitle": "Are you sure want to delete group?",
 
     "@noInternet": { "description": "noInternet" },
     "noInternetButLoadYouLocally": "Нет интернета, но впустим вас и так!",

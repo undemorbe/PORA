@@ -44,15 +44,14 @@ class AppBootstrap {
 
       // Три параллельных ветки — независимы, ускоряют cold start.
       await Future.wait<void>([
-        
         _initLocalization(container),
         _refreshAndAuth(container),
       ]);
-        if(!Platform.isIOS){
-            //!!!!! Add ios compatibility
+      if (!Platform.isIOS) {
+        //!!!!! Add ios compatibility
         _initFirebaseAndPush();
-        }
-      
+      }
+
       // Депендс от secure store (запись в кэш) — после refresh.
       final tokensStore = container.getIt<TokensSecureStore>();
       tokensStore.updateCache(await tokensStore.getAccessToken());

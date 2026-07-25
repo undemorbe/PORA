@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:pora/app/features/auth_and_validation/data/models/jwt_models/tokens_model.dart';
+import 'package:pora/app/features/brief/data/models/brief_product_model_list.dart';
 import 'package:pora/app/features/families/data/models/families_models.dart';
 import 'package:pora/app/features/item_detail/data/models/add_item_response.dart';
 import 'package:pora/app/features/invitation/data/models/link_code_model.dart';
@@ -52,6 +53,15 @@ abstract class ApiClient {
 
   @PUT('/user/device')
   Future<void> updateUserDevice({@Body() required Map<String, dynamic> body});
+
+  //! Brief
+  @POST('user/statistics/brief')
+  Future<void> setUserBrief({
+    @Body() required Map<String, dynamic> productsList,
+  });
+
+  @GET('user/statistics/get-brief')
+  Future<BriefProductModelList> getUserBrief();
 
   //! Families
   @POST('/families/create-family')

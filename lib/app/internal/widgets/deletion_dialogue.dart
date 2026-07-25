@@ -8,9 +8,10 @@ import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 import 'package:pora/app/internal/widgets/pora_buttons.dart';
 
 class DeletionDialogue extends StatelessWidget {
-  const DeletionDialogue({super.key, required this.onDelete});
+  const DeletionDialogue({super.key, required this.onDelete, this.title});
 
   final VoidCallback onDelete;
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class DeletionDialogue extends StatelessWidget {
                 right: 7,
               ),
               child: Text(
-                context.l10n.briefDeletionTitle,
+                title ?? context.l10n.briefDeletionTitle,
                 style: PoraText.title.copyWith(color: PoraColors.danger),
                 textAlign: TextAlign.center,
               ),

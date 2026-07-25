@@ -1688,6 +1688,18 @@ abstract class AppLocalizations {
   /// **'Still loading… checking connection'**
   String get splashLoadingVerySlow;
 
+  /// profileNameUpdate
+  ///
+  /// In en, this message translates to:
+  /// **'Profile updating'**
+  String get profileNameUpdate;
+
+  /// briefSnackBar
+  ///
+  /// In en, this message translates to:
+  /// **'Maybe you forgot to select any products?'**
+  String get briefSnackBar;
+
   /// noInternet
   ///
   /// In en, this message translates to:
@@ -1699,6 +1711,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No internet connection, but we will load you locally'**
   String get noInternetButLoadYouLocally;
+
+  /// groupDeletionTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure want to delete group?'**
+  String get groupDeletionTitle;
 
   /// retry
   ///

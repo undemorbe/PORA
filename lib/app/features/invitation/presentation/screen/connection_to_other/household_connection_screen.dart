@@ -66,6 +66,7 @@ class _InvitationConnectPageState extends State<InvitationConnectPage> {
               Observer(
                 builder: (_) {
                   return InviteCodeCard(
+                    controller: codeController,
                     code: invitationsStore.linkCode ?? widget.linkCode,
                     onCopy: () async {
                       await invitationsStore
@@ -85,16 +86,7 @@ class _InvitationConnectPageState extends State<InvitationConnectPage> {
                 },
               ),
               const SizedBox(height: PoraSpacing.lg),
-              TextField(
-                controller: codeController,
-                textCapitalization: TextCapitalization.words,
-                style: PoraText.bodyLarge.copyWith(fontSize: 18),
-                onChanged: (value) => invitationsStore.linkCode = value,
-                decoration: InputDecoration(
-                  hintText: context.l10n.householdWriteCode,
-                ),
-              ),
-              const SizedBox(height: PoraSpacing.md),
+
               PoraOutlineButton(
                 label: context.l10n.householdConnectToFamily,
                 //! Connect with invite code + deeplink

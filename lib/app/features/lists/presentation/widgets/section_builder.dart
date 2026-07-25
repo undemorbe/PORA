@@ -99,6 +99,7 @@ class SectionBuilder extends StatelessWidget {
             child: _PreviewListCard(
               list: list,
               members: members ?? const [],
+
               onDelete: () async {
                 final ok = await confirmDeleteList(
                   context,

@@ -15,6 +15,7 @@ import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/theme/context_colors.dart';
 import 'package:pora/app/internal/widgets/pora_buttons.dart';
 import 'package:pora/app/internal/widgets/pora_chip.dart';
+import 'package:pora/app/internal/widgets/pora_snackbar.dart';
 
 /// Онбординг-бриф — «Что у вас часто заканчивается?». Решает cold start
 /// движка предсказаний: пользователь отмечает частые продукты.
@@ -38,7 +39,7 @@ class BriefPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final briefStore = GetIt.I<BriefStore>();
+    final briefStore = GetIt.I<BriefStore>()..getBrief();
     final l = context.l10n;
     return Scaffold(
       body: SafeArea(
@@ -120,7 +121,14 @@ class BriefPage extends StatelessWidget {
                   const SizedBox(height: PoraSpacing.sm),
                   PoraPrimaryButton(
                     label: l.briefNext,
-                    onPressed: () => _enterApp(context),
+                    onPressed: () {
+                      if (briefStore.selectedProducts.isEmpty) {
+                        PoraSnackbar.show(context, message: l.briefSnackBar);
+                        return;
+                      }
+                      briefStore.postBrief();
+                      _enterApp(context);
+                    },
                   ),
                 ],
               ),
