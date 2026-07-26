@@ -6,8 +6,8 @@ import 'package:pora/app/internal/theme/app_text_styles.dart';
 import 'package:pora/app/internal/theme/light_colors/app_colors.dart';
 
 /// Терракотовая карточка-CTA «Заказать всё в один тап» (партнёрка с доставкой).
-class OrderCtaCard extends StatelessWidget {
-  const OrderCtaCard({super.key, this.onTap});
+class PredictionOfProductOnRequest extends StatelessWidget {
+  const PredictionOfProductOnRequest({super.key, this.onTap});
 
   final VoidCallback? onTap;
 

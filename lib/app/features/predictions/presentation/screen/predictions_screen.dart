@@ -4,6 +4,7 @@ import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/app/features/predictions/domain/entity/prediction.dart';
 import 'package:pora/app/features/predictions/presentation/widgets/order_cta_card.dart';
 import 'package:pora/app/features/predictions/presentation/widgets/prediction_card.dart';
+import 'package:pora/app/internal/di/export.dart';
 import 'package:pora/app/internal/extensions/l10n_extension.dart';
 import 'package:pora/app/internal/router/app_router.gr.dart';
 import 'package:pora/app/internal/theme/additional_constants.dart';
@@ -96,8 +97,33 @@ class PredictionsPage extends StatelessWidget {
                 ),
               ),
             const SizedBox(height: PoraSpacing.sm),
-            OrderCtaCard(
-              onTap: () => AutoTabsRouter.of(context).setActiveIndex(2),
+            PredictionOfProductOnRequest(
+              onTap: () async {
+                final dio = GetIt.I<Dio>();
+                final items = await dio.get(
+                  'https://019f6ed6-a9f9-7f44-9869-9dfea74c0b4f.tunnel4.com/api/user/statistics/products',
+                );
+                Logger.talker.debug(items.data);
+                final airequest = await dio.post(
+                  'https://openrouter.ai/api/v1/chat/completions',
+                  options: Options(
+                    headers: {
+                      'Authorization':
+                          'Bearer ${dotenv.get('OPEN_ROUTER_API')}',
+                    },
+                  ),
+                  data: {
+                    'model': 'inclusionai/ling-3.0-flash:free',
+                    'messages': [
+                      {
+                        'role': 'user',
+                        'content': 'What is the capital of France?',
+                      },
+                    ],
+                  },
+                );
+                print(airequest.data);
+              },
             ),
           ],
         ),
