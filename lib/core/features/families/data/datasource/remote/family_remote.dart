@@ -1,0 +1,51 @@
+import 'package:pora/core/features/families/data/models/families_models.dart';
+import 'package:pora/core/features/families/domain/entity/family.dart';
+import 'package:pora/core/internal/di/export.dart';
+import 'package:pora/core/internal/errors/failure.dart';
+import 'package:pora/core/internal/errors/success.dart';
+import 'package:pora/core/internal/extensions/either.dart';
+import 'package:pora/core/internal/network/api_client/api_client.dart';
+
+abstract class FamilyRemoteDataSource {
+  Future<Either<Failure, List<FamilyEntity>>> getFamilies();
+  Future<Either<Failure, String>> createFamily({required String name});
+  Future<Either<Failure, Success>> deleteFamily({required String familyId});
+}
+
+class FamilyRemoteDataSourceImpl implements FamilyRemoteDataSource {
+  final ApiClient apiClient;
+
+  const FamilyRemoteDataSourceImpl({required this.apiClient});
+
+  @override
+  Future<Either<Failure, List<FamilyEntity>>> getFamilies() async {
+    try {
+      FamiliesModels response = await apiClient.getFamilies();
+      return Right(response.families);
+    } catch (e) {
+      return Left(NetworkFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> createFamily({required String name}) async {
+    try {
+      final id = await apiClient.createFamily(nameOfFamilyBody: {'name': name});
+      return Right(id);
+    } on Exception catch (e) {
+      return Left(NetworkFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Success>> deleteFamily({
+    required String familyId,
+  }) async {
+    try {
+      await apiClient.deleteFamily(familyId: familyId);
+      return Right(const ServerSuccess());
+    } on Exception catch (e) {
+      return Left(NetworkFailure(e.toString()));
+    }
+  }
+}

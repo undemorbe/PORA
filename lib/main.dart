@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pora/app/internal/app/app.dart';
-import 'package:pora/app/internal/bootstrap/app_bootstrap.dart';
-import 'package:pora/app/internal/di/injection_container.dart';
+import 'package:pora/core/internal/app/app.dart';
+import 'package:pora/core/internal/bootstrap/app_bootstrap.dart';
+import 'package:pora/core/internal/di/injection_container.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

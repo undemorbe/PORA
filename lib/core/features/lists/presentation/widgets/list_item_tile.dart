@@ -1,0 +1,137 @@
+import 'package:flutter/material.dart';
+import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
+import 'package:pora/core/features/families/domain/entity/member.dart';
+import 'package:pora/core/features/lists/domain/entity/products/product.dart';
+import 'package:pora/core/features/lists/presentation/widgets/strike_through_text.dart';
+import 'package:pora/core/internal/extensions/color_parser.dart';
+import 'package:pora/core/internal/extensions/l10n_extension.dart';
+import 'package:pora/core/internal/theme/additional_constants.dart';
+import 'package:pora/core/internal/theme/app_text_styles.dart';
+import 'package:pora/core/internal/theme/context_colors.dart';
+import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
+import 'package:pora/core/internal/widgets/pora_avatar.dart';
+import 'package:pora/core/internal/widgets/pora_checkbox.dart';
+import 'package:pora/core/internal/widgets/pora_pill.dart';
+
+/// Одна строка товара.
+/// `isCompact` — превью-режим: без priority/remindEveryDay/чекбокса.
+/// `onCheckboxTap` — тап по чекбоксу (PATCH bought). Если null — чекбокс read-only.
+class ListItemTile extends StatelessWidget {
+  const ListItemTile({
+    super.key,
+    required this.item,
+    this.addedBy,
+    this.onTap,
+    this.onCheckboxTap,
+    this.isCompact = false,
+  });
+
+  final ProductEntity item;
+
+  /// null для личных списков — аватар не рисуется.
+  final MemberEntity? addedBy;
+  final VoidCallback? onTap;
+  final VoidCallback? onCheckboxTap;
+  final bool isCompact;
+
+  @override
+  Widget build(BuildContext context) {
+    final qty = _formatQuantity(item);
+
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: PoraSpacing.lg,
+          vertical: PoraSpacing.md,
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            if (!isCompact) ...[
+              GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: onCheckboxTap,
+                child: PoraCheckbox(checked: item.checked),
+              ),
+              const SizedBox(width: PoraSpacing.md),
+            ],
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  StrikeThroughText(
+                    text: item.name,
+                    style: PoraText.itemTitle,
+                    struck: item.checked,
+                    activeColor: context.colors.ink,
+                    mutedColor: context.colors.textMuted,
+                  ),
+                  if (qty != null)
+                    Padding(
+                      padding: const EdgeInsets.only(top: PoraSpacing.xxs),
+                      child: Text(
+                        '${context.l10n.quantityLabel}: $qty',
+                        style: PoraText.small.copyWith(
+                          color: context.colors.textSubtle,
+                        ),
+                      ),
+                    ),
+                  if (!isCompact && item.priority >= 0)
+                    Padding(
+                      padding: const EdgeInsets.only(top: PoraSpacing.xxs),
+                      child: Text(
+                        '${context.l10n.priorityLabel}: ${item.priority}',
+                        style: PoraText.small.copyWith(
+                          color: context.colors.textSubtle,
+                        ),
+                      ),
+                    ),
+                  if (!isCompact && addedBy != null)
+                    Padding(
+                      padding: const EdgeInsets.only(top: PoraSpacing.xxs),
+                      child: Text(
+                        context.l10n.addedByName(addedBy!.name),
+                        style: PoraText.small.copyWith(
+                          color: context.colors.textSubtle,
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            ),
+            if (item.urgent) ...[
+              PoraPill(
+                label: context.l10n.listUrgent,
+                icon: PhosphorIconsRegular.clock,
+                background: PoraColors.primaryTintStrong,
+              ),
+              const SizedBox(width: PoraSpacing.sm),
+            ],
+            if (!isCompact && (item.remindEveryDay ?? false)) ...[
+              PoraPill(
+                label: context.l10n.everyDay,
+                icon: PhosphorIconsRegular.bell,
+              ),
+              const SizedBox(width: PoraSpacing.sm),
+            ],
+            if (addedBy != null)
+              PoraAvatar(
+                initial: addedBy!.name.isEmpty ? '?' : addedBy!.name[0],
+                color: memberColor(addedBy!, 0),
+                imageUrl: addedBy!.imageUrl,
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  String? _formatQuantity(ProductEntity item) {
+    if (item.quantity <= 0) return null;
+    final unit = item.unit.trim();
+    return unit.isEmpty ? '${item.quantity}' : '${item.quantity} $unit';
+  }
+}
