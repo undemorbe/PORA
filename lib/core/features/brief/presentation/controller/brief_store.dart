@@ -2,7 +2,6 @@ import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 import 'package:pora/core/features/brief/domain/entity/brief_product.dart';
 import 'package:pora/core/features/brief/domain/entity/brief_product_list.dart';
-import 'package:pora/core/features/brief/domain/repository/brief_repository.dart';
 import 'package:pora/core/features/brief/domain/usecases/get_brief.dart';
 import 'package:pora/core/features/brief/domain/usecases/post_brief.dart';
 part 'brief_store.g.dart';

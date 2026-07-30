@@ -23,6 +23,10 @@
     "@authSignInExpansibleExpand": {
         "description": "The sign in with other methods title"
     },
+     "sendAgainAfter": "Отправить еще раз через...",
+    "@sendAgainAfter": {
+        "description": "The sign in with other methods title"
+    },
     "userCreateProfileNameRequired": "Может все-же скажете имя?",
     "@userCreateProfileNameRequired": {
         "description": "userCreateProfileNameRequired"

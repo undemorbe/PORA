@@ -503,7 +503,7 @@ class _ApiClient implements ApiClient {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/lists/${listId}/items',
+            '/lists/${listId}/item',
             queryParameters: queryParameters,
             data: _data,
           )

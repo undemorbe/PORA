@@ -118,10 +118,12 @@ class _AuthPageState extends State<AuthPage> {
                                 if (!context.mounted) return;
                                 PoraSnackbar.show(
                                   context,
+                                  type: PoraSnackType.failure,
                                   message:
                                       authStore.scaffoldMessage ??
                                       l.commonError,
                                 );
+                                // ignore: unnecessary_statements
                                 authStore.success == null;
                               }
                             });

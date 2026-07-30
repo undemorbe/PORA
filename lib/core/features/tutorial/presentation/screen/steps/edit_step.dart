@@ -45,10 +45,7 @@ class EditStep extends StatelessWidget {
                 top: 156,
                 child: TutorialRowTile(title: l.tutorialSampleCoffee),
               ),
-              TutorialFinger(
-                position: const Offset(14, 48),
-                scale: fingerScale,
-              ),
+              TutorialFinger(position: const Offset(5, 48), scale: fingerScale),
             ],
           );
         },

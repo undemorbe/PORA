@@ -23,6 +23,10 @@
     "@authSignInExpansibleCollapse": {
         "description": "The sign in with other methods title"
     },
+         "sendAgainAfter": "Отправить еще раз через...",
+    "@sendAgainAfter": {
+        "description": "The sign in with other methods title"
+    },
     "authSignInWithEmail": "Войти через email",
     "@authSignInWithEmail": {
         "description": "The sign in with email button text"

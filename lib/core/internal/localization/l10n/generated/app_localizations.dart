@@ -134,6 +134,12 @@ abstract class AppLocalizations {
   /// **'Свернуть'**
   String get authSignInExpansibleCollapse;
 
+  /// The sign in with other methods title
+  ///
+  /// In en, this message translates to:
+  /// **'Отправить еще раз через...'**
+  String get sendAgainAfter;
+
   /// The sign in with email button text
   ///
   /// In en, this message translates to:

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pora/core/features/auth_and_validation/presentation/controller/auth_store.dart';
+import 'package:pora/core/features/auth_and_validation/presentation/widgets/resend_otp.dart';
 import 'package:pora/core/internal/router/guard/auth_state.dart';
 import 'package:pora/core/features/auth_and_validation/presentation/controller/privacy_store.dart';
 import 'package:pora/core/features/auth_and_validation/presentation/widgets/pinput.dart';
@@ -10,7 +11,6 @@ import 'package:pora/core/internal/extensions/l10n_extension.dart';
 import 'package:pora/core/internal/router/app_router.gr.dart';
 import 'package:pora/core/internal/theme/additional_constants.dart';
 import 'package:pora/core/internal/theme/app_text_styles.dart';
-import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
 import 'package:pora/core/internal/widgets/pora_buttons.dart';
 import 'package:pora/core/features/onboarding/presentation/widgets/onboarding_progress_header.dart';
 import 'package:pora/core/internal/widgets/pora_snackbar.dart';
@@ -112,20 +112,12 @@ class OTPConfirmationPage extends StatelessWidget {
                         l.otpResendQuestion,
                         style: PoraText.subtitle.copyWith(fontSize: 14),
                       ),
-                      InkWell(
-                        onTap: () async {
+                      ResendOtp(onTap: () async{
                           await authStore.sendOtp(
                             destination: destinationController.text,
                           );
-                        },
-                        child: Text(
-                          l.otpResend,
-                          style: PoraText.subtitle.copyWith(
-                            color: PoraColors.primary,
-                            fontSize: 18,
-                          ),
-                        ),
-                      ),
+                      },),
+                  
                     ],
                   ),
                 ],

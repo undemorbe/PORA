@@ -20,7 +20,7 @@ part 'api_client.g.dart';
 /// (перевод ошибок в репозиториях). Authorization подставляет AuthInterceptor.
 @RestApi()
 abstract class ApiClient {
-  factory ApiClient(Dio dio, {String? baseUrl}) = _ApiClient;
+  factory ApiClient(Dio dio) = _ApiClient;
 
   //! Authorization
   @GET('/authorize/refresh')

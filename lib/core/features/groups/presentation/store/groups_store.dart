@@ -126,9 +126,7 @@ abstract class _GroupsStoreBase with Store {
   @action
   Future<void> deleteGroup(GroupEntity g) async {
     final res = await GetIt.I<DeleteListUseCase>().call(lid: g.list.id);
-    await GetIt.I<DeleteFamilyUseCase>().call(
-      familyId: g.familyId ?? '',
-    );
+    await GetIt.I<DeleteFamilyUseCase>().call(familyId: g.familyId ?? '');
     if (res.isRight) {
       groups.removeWhere((x) => x.list.id == g.list.id);
     } else {

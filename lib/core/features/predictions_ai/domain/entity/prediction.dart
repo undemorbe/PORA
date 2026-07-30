@@ -1,6 +1,6 @@
 /// Предсказание пополнения (экран «Пора докупить»).
-class Prediction {
-  const Prediction({
+class PredictionEntity {
+  const PredictionEntity({
     required this.emoji,
     required this.name,
     required this.meta,

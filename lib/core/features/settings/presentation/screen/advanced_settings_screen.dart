@@ -138,6 +138,18 @@ class _AdvancedSettingsPageState extends State<AdvancedSettingsPage> {
               PoraRowsCard(
                 children: [
                   ListTile(
+                    leading: const Icon(PhosphorIconsFill.sparkle),
+                    title: Text('AI Помощник', style: PoraText.itemTitle),
+                    subtitle: Text(
+                      'Рецепты, советы, замены',
+                      style: PoraText.small.copyWith(
+                        color: context.colors.textSubtle,
+                      ),
+                    ),
+                    trailing: const Icon(PhosphorIconsRegular.caretRight),
+                    onTap: () => context.router.push(const AiPoraRoute()),
+                  ),
+                  ListTile(
                     leading: const Icon(PhosphorIconsRegular.question),
                     title: Text(l.showTutorial, style: PoraText.itemTitle),
                     trailing: const Icon(PhosphorIconsRegular.caretRight),

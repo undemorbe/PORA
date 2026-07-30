@@ -84,10 +84,12 @@ class AppBootstrap {
   Future<void> _refreshAndAuth(InjectionContainer container) async {
     final refreshed = await container.getIt<RefreshTokenUseCase>().call();
     final auth = container.getIt<AuthState>();
-    if (refreshed != null && refreshed.isLeft) {
+
+    if (refreshed?.isRight ?? false) {
       final tokensStore = container.getIt<TokensSecureStore>();
       final accessToken = await tokensStore.getAccessToken();
       final refreshToken = await tokensStore.getRefreshToken();
+
       if (accessToken != null && refreshToken != null) {
         auth.setAuthenticated();
       } else {
@@ -97,6 +99,7 @@ class AppBootstrap {
       final tokensStore = container.getIt<TokensSecureStore>();
       final accessToken = await tokensStore.getAccessToken();
       final refreshToken = await tokensStore.getRefreshToken();
+
       if (accessToken != null && refreshToken != null) {
         auth.setAuthenticated();
       } else {

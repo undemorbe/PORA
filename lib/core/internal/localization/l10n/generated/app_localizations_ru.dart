@@ -27,6 +27,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get authSignInExpansibleCollapse => 'Свернуть';
 
   @override
+  String get sendAgainAfter => 'Отправить еще раз через...';
+
+  @override
   String get authSignInWithEmail => 'Войти через email';
 
   @override

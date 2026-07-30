@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
-import 'package:pora/core/features/predictions/domain/entity/prediction.dart';
+import 'package:pora/core/features/predictions_ai/domain/entity/prediction.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
 import 'package:pora/core/internal/theme/additional_constants.dart';
 import 'package:pora/core/internal/theme/app_text_styles.dart';
@@ -17,7 +17,7 @@ class PredictionCard extends StatelessWidget {
     this.onDismiss,
   });
 
-  final Prediction prediction;
+  final PredictionEntity prediction;
   final Color tileColor;
   final VoidCallback? onAdd;
   final VoidCallback? onDismiss;
