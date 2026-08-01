@@ -9,6 +9,7 @@ import 'package:pora/core/features/invitation/data/models/link_code_model.dart';
 import 'package:pora/core/features/lists/data/models/lists/list_model.dart';
 import 'package:pora/core/features/lists/data/models/lists/lists_array_model.dart';
 import 'package:pora/core/features/lists/data/models/products/product_model.dart';
+import 'package:pora/core/features/settings/data/models/message_model.dart';
 import 'package:pora/core/features/user/data/models/user/user_model.dart';
 import 'package:pora/core/features/user/data/models/user/user_update_model.dart';
 import 'package:retrofit/error_logger.dart';
@@ -130,4 +131,7 @@ abstract class ApiClient {
     @Path('iid') required String itemId,
     @Body() required Map<String, dynamic> body,
   });
+
+  @POST('/help/message')
+  Future<void> sendSupportMessage({@Body() required Map<String, dynamic> body});
 }

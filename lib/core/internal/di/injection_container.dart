@@ -4,6 +4,10 @@ import 'package:pora/core/features/brief/domain/repository/brief_repository.dart
 import 'package:pora/core/features/brief/domain/usecases/get_brief.dart';
 import 'package:pora/core/features/brief/domain/usecases/post_brief.dart';
 import 'package:pora/core/features/brief/presentation/controller/brief_store.dart';
+import 'package:pora/core/features/settings/data/datasource/support_remote.dart';
+import 'package:pora/core/features/settings/data/service/support_service.dart';
+import 'package:pora/core/features/settings/domain/repository/support_repository.dart';
+import 'package:pora/core/features/settings/domain/usecase/send_support_msg.dart';
 
 import 'export.dart';
 
@@ -162,10 +166,13 @@ class InjectionContainer {
     _getIt.registerFactory<MarkItemBoughtUseCase>(
       () => MarkItemBoughtUseCase(repository: _getIt<ItemsRepository>()),
     );
-
     //! Recipe
     _getIt.registerFactory<ParseRecipeFromUrlUseCase>(
       () => ParseRecipeFromUrlUseCase(repository: _getIt<RecipeRepository>()),
+    );
+    //! Support
+    _getIt.registerFactory<SendSupportMsgUseCase>(
+      () => SendSupportMsgUseCase(repository: _getIt<SupportRepository>()),
     );
   }
 
@@ -267,6 +274,14 @@ class InjectionContainer {
     );
     _getIt.registerLazySingleton<TutorialPrefs>(
       () => TutorialPrefs(_getIt<ILocalDB<dynamic>>()),
+    );
+
+    //! Support messaging
+    _getIt.registerLazySingleton<SupportRemote>(
+      () => SupportRemoteImpl(apiClient: _getIt<ApiClient>()),
+    );
+    _getIt.registerLazySingleton<SupportRepository>(
+      () => SupportService(remoteDataSource: _getIt<SupportRemote>()),
     );
   }
 }

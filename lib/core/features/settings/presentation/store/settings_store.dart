@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:mobx/mobx.dart';
+import 'package:pora/core/features/settings/domain/entity/message_entity.dart';
+import 'package:pora/core/features/settings/domain/usecase/send_support_msg.dart';
 import 'package:pora/core/features/user/domain/entity/user/user_entity.dart';
 import 'package:pora/core/internal/di/export.dart';
 part 'settings_store.g.dart';
@@ -68,6 +70,8 @@ abstract class _SettingsStoreBase with Store {
 
   @action
   Future<void> sendSupportMessage({required String text}) async {
-    Logger.talker.debug('send msg $text');
+    await GetIt.I<SendSupportMsgUseCase>().call(
+      message: MessageEntity(title: 'User complaince', message: text),
+    );
   }
 }

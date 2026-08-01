@@ -145,7 +145,6 @@ class _SettingsPageState extends State<SettingsPage> {
                       label: 'Open especcial route',
                       onTap: () => context.router.push(BriefRoute()),
                     ),
-                  
                 ],
               ),
               const SizedBox(height: PoraSpacing.lg),
@@ -157,7 +156,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     label: context.l10n.settingsAboutPora,
                     trailing: PoraSettingRow.chevron,
                     onTap: () => showAboutDialog(context: context),
-                  ),PoraSettingRow(
+                  ),
+                  PoraSettingRow(
                     icon: PhosphorIcons.phone,
                     label: context.l10n.supportMessage,
                     onTap: () => showBottomSheet(
@@ -165,7 +165,9 @@ class _SettingsPageState extends State<SettingsPage> {
                       builder: (context) {
                         return SupportMessageBottomSheet(
                           messageController: supportMessageController,
-                          onTap: () => settingsStore.sendSupportMessage(text: supportMessageController.text,),
+                          onTap: () => settingsStore.sendSupportMessage(
+                            text: supportMessageController.text,
+                          ),
                         );
                       },
                     ),

@@ -28,7 +28,7 @@ class SupportMessageBottomSheet extends StatelessWidget {
           children: [
             Divider(
               endIndent: mqs.width * 0.39,
-              indent: mqs.width*0.39,
+              indent: mqs.width * 0.39,
               thickness: 2,
             ),
             Center(
@@ -56,7 +56,13 @@ class SupportMessageBottomSheet extends StatelessWidget {
             const SizedBox(height: PoraSpacing.screen),
             PoraPrimaryButton(label: context.l10n.notifySend, onPressed: onTap),
             const SizedBox(height: PoraSpacing.xxs),
-            Text(context.l10n.supportMessageBottomSheetUnderButtonText, style: PoraText.micro.copyWith(color: Theme.of(context).colorScheme.error,),textAlign: .center,),
+            Text(
+              context.l10n.supportMessageBottomSheetUnderButtonText,
+              style: PoraText.micro.copyWith(
+                color: Theme.of(context).colorScheme.error,
+              ),
+              textAlign: .center,
+            ),
           ],
         ),
       ),

@@ -102,6 +102,18 @@ mixin _$SettingsStore on _SettingsStoreBase, Store {
     return _$logoutAsyncAction.run(() => super.logout());
   }
 
+  late final _$sendSupportMessageAsyncAction = AsyncAction(
+    '_SettingsStoreBase.sendSupportMessage',
+    context: context,
+  );
+
+  @override
+  Future<void> sendSupportMessage({required String text}) {
+    return _$sendSupportMessageAsyncAction.run(
+      () => super.sendSupportMessage(text: text),
+    );
+  }
+
   @override
   String toString() {
     return '''
