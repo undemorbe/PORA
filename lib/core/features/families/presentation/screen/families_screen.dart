@@ -14,6 +14,7 @@ import 'package:pora/core/internal/theme/app_text_styles.dart';
 import 'package:pora/core/internal/widgets/pora_buttons.dart';
 
 /// Выбор семьи: у пользователя может быть несколько семей — тап открывает её.
+@Deprecated('use groups page instead')
 @RoutePage()
 class FamiliesPage extends StatefulWidget {
   const FamiliesPage({super.key});

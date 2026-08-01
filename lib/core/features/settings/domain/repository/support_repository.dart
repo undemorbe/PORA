@@ -5,6 +5,6 @@ import 'package:pora/core/internal/extensions/either.dart';
 
 abstract class SupportRepository {
   Future<Either<Failure, Success>> sendSupportMessage({
-   required MessageEntity message
+    required MessageEntity message,
   });
 }

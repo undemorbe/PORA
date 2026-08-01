@@ -108,12 +108,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     onTap: () =>
                         context.router.push(const NotificationsRoute()),
                   ),
-                  //!Rm or change
-                  // PoraSettingRow(
-                  //   icon: PhosphorIconsRegular.shoppingCart,
-                  //   label: context.l10n.settingsDelivery,
-                  //   trailing: const DeliveryValue(),
-                  // ),
+
                   PoraSettingRow(
                     icon: PhosphorIconsRegular.gear,
                     label: context.l10n.advancedSettings,
@@ -159,6 +154,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                   PoraSettingRow(
                     icon: PhosphorIcons.phone,
+                    trailing: PoraSettingRow.chevron,
                     label: context.l10n.supportMessage,
                     onTap: () => showBottomSheet(
                       context: context,

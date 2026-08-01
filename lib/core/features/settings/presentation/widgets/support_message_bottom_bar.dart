@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
@@ -55,6 +56,11 @@ class SupportMessageBottomSheet extends StatelessWidget {
             ),
             const SizedBox(height: PoraSpacing.screen),
             PoraPrimaryButton(label: context.l10n.notifySend, onPressed: onTap),
+            const SizedBox(height: PoraSpacing.xxs),
+            PoraPrimaryButton(
+              label: context.l10n.cancel,
+              onPressed: () => context.pop(),
+            ),
             const SizedBox(height: PoraSpacing.xxs),
             Text(
               context.l10n.supportMessageBottomSheetUnderButtonText,

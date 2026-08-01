@@ -5,6 +5,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:pora/core/features/predictions_ai/presentation/widgets/pora_chat_sheet.dart';
+import 'package:pora/core/features/predictions_ai/presentation/widgets/tip_topics_editor.dart';
+import 'package:pora/core/internal/widgets/fade_slide_in.dart';
 import 'package:get_it/get_it.dart';
 import 'package:liquid_glass_easy/liquid_glass_easy.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
@@ -101,86 +104,130 @@ class _AdvancedSettingsPageState extends State<AdvancedSettingsPage> {
               PoraSpacing.xxl,
             ),
             children: [
-              ScreenBackHeader(title: l.advancedSettings),
-              const SizedBox(height: PoraSpacing.lg),
-
-              SectionLabel(l.appearance),
-              const _ThemePicker(),
-              const SizedBox(height: PoraSpacing.lg),
-
-              SectionLabel(l.language),
-              const _LanguagePicker(),
-              const SizedBox(height: PoraSpacing.lg),
-
-              SectionLabel(l.notificationsPermission),
-              PoraRowsCard(
-                children: [
-                  _PermissionRow(
-                    status: _notifStatus,
-                    onRequest: _requestPermission,
-                  ),
-                  _PushTokenRow(onResync: _resyncDeviceToken),
-                ],
+              FadeSlideIn(
+                delay: const Duration(milliseconds: 40),
+                child: ScreenBackHeader(title: l.advancedSettings),
               ),
               const SizedBox(height: PoraSpacing.lg),
 
-              SectionLabel(l.confirmations),
-              PoraRowsCard(
-                children: [
-                  Platform.isIOS
-                      ? ListTile(
-                          title: Text(
-                            l.askBeforeDelete,
-                            style: PoraText.itemTitle,
-                          ),
-                          leading: const Icon(PhosphorIconsRegular.trash),
-                          contentPadding: .only(left: 16),
-                          trailing: LiquidGlassToggle(
+              FadeSlideIn(
+                delay: const Duration(milliseconds: 100),
+                child: SectionLabel(l.appearance),
+              ),
+              const FadeSlideIn(
+                delay: Duration(milliseconds: 140),
+                child: _ThemePicker(),
+              ),
+              const SizedBox(height: PoraSpacing.lg),
+
+              FadeSlideIn(
+                delay: const Duration(milliseconds: 200),
+                child: SectionLabel(l.language),
+              ),
+              const FadeSlideIn(
+                delay: Duration(milliseconds: 240),
+                child: _LanguagePicker(),
+              ),
+              const SizedBox(height: PoraSpacing.lg),
+
+              FadeSlideIn(
+                delay: const Duration(milliseconds: 300),
+                child: SectionLabel(l.notificationsPermission),
+              ),
+              FadeSlideIn(
+                delay: const Duration(milliseconds: 340),
+                child: PoraRowsCard(
+                  children: [
+                    _PermissionRow(
+                      status: _notifStatus,
+                      onRequest: _requestPermission,
+                    ),
+                    _PushTokenRow(onResync: _resyncDeviceToken),
+                  ],
+                ),
+              ),
+              const SizedBox(height: PoraSpacing.lg),
+
+              FadeSlideIn(
+                delay: const Duration(milliseconds: 400),
+                child: SectionLabel(l.confirmations),
+              ),
+              FadeSlideIn(
+                delay: const Duration(milliseconds: 440),
+                child: PoraRowsCard(
+                  children: [
+                    Platform.isIOS
+                        ? ListTile(
+                            title: Text(
+                              l.askBeforeDelete,
+                              style: PoraText.itemTitle,
+                            ),
+                            leading: const Icon(PhosphorIconsRegular.trash),
+                            contentPadding: .only(left: 16),
+                            trailing: LiquidGlassToggle(
+                              value: _askBeforeDelete,
+                              onChanged: _setDeletePref,
+                            ),
+                          )
+                        : SwitchListTile(
+                            title: Text(
+                              l.askBeforeDelete,
+                              style: PoraText.itemTitle,
+                            ),
+                            secondary: const Icon(PhosphorIconsRegular.trash),
                             value: _askBeforeDelete,
                             onChanged: _setDeletePref,
                           ),
-                        )
-                      : SwitchListTile(
-                          title: Text(
-                            l.askBeforeDelete,
-                            style: PoraText.itemTitle,
-                          ),
-                          secondary: const Icon(PhosphorIconsRegular.trash),
-                          value: _askBeforeDelete,
-                          onChanged: _setDeletePref,
-                        ),
-                ],
+                  ],
+                ),
               ),
               const SizedBox(height: PoraSpacing.lg),
 
-              SectionLabel(l.about),
-              PoraRowsCard(
-                children: [
-                  ListTile(
-                    leading: const Icon(PhosphorIconsFill.sparkle),
-                    title: Text('AI Помощник', style: PoraText.itemTitle),
-                    subtitle: Text(
-                      'Рецепты, советы, замены',
-                      style: PoraText.small.copyWith(
-                        color: context.colors.textSubtle,
+              FadeSlideIn(
+                delay: const Duration(milliseconds: 470),
+                child: SectionLabel(l.tipTopicsSectionTitle),
+              ),
+              const FadeSlideIn(
+                delay: Duration(milliseconds: 490),
+                child: TipTopicsEditor(),
+              ),
+              const SizedBox(height: PoraSpacing.lg),
+
+              FadeSlideIn(
+                delay: const Duration(milliseconds: 500),
+                child: SectionLabel(l.about),
+              ),
+              FadeSlideIn(
+                delay: const Duration(milliseconds: 540),
+                child: PoraRowsCard(
+                  children: [
+                    ListTile(
+                      leading: const Icon(PhosphorIconsFill.sparkle),
+                      title: Text(l.aiCtaTitle, style: PoraText.itemTitle),
+                      subtitle: Text(
+                        l.aiCtaSubtitle,
+                        style: PoraText.small.copyWith(
+                          color: context.colors.textSubtle,
+                        ),
+                      ),
+                      trailing: const Icon(PhosphorIconsRegular.caretRight),
+                      onTap: () => openPoraChatSheet(context),
+                    ),
+                    ListTile(
+                      leading: const Icon(PhosphorIconsRegular.question),
+                      title: Text(l.showTutorial, style: PoraText.itemTitle),
+                      trailing: const Icon(PhosphorIconsRegular.caretRight),
+                      onTap: () => context.router.push(
+                        TutorialRoute(fromSettings: true),
                       ),
                     ),
-                    trailing: const Icon(PhosphorIconsRegular.caretRight),
-                    onTap: () => context.router.push(const AiPoraRoute()),
-                  ),
-                  ListTile(
-                    leading: const Icon(PhosphorIconsRegular.question),
-                    title: Text(l.showTutorial, style: PoraText.itemTitle),
-                    trailing: const Icon(PhosphorIconsRegular.caretRight),
-                    onTap: () =>
-                        context.router.push(TutorialRoute(fromSettings: true)),
-                  ),
-                  ListTile(
-                    leading: const Icon(PhosphorIconsRegular.info),
-                    title: Text(l.version, style: PoraText.itemTitle),
-                    trailing: Text('1.0.0', style: PoraText.small),
-                  ),
-                ],
+                    ListTile(
+                      leading: const Icon(PhosphorIconsRegular.info),
+                      title: Text(l.version, style: PoraText.itemTitle),
+                      trailing: Text('1.0.0', style: PoraText.small),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

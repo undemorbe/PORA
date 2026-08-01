@@ -8,6 +8,11 @@ import 'package:pora/core/internal/widgets/deletion_dialogue.dart';
 import 'package:pora/core/features/groups/presentation/store/groups_store.dart';
 import 'package:pora/core/features/groups/presentation/widgets/create_group_sheet.dart';
 import 'package:pora/core/features/groups/presentation/widgets/group_card.dart';
+import 'package:pora/core/features/groups/presentation/widgets/groups_empty_state.dart';
+import 'package:pora/core/features/groups/presentation/widgets/groups_error_state.dart';
+import 'package:pora/core/features/groups/presentation/widgets/groups_loading.dart';
+import 'package:pora/core/features/predictions_ai/presentation/widgets/pora_cta_card.dart';
+import 'package:pora/core/internal/widgets/fade_slide_in.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
 import 'package:pora/core/internal/network/websocket/app_websocket.dart';
 import 'package:pora/core/internal/network/websocket/debouncer.dart';
@@ -96,42 +101,51 @@ class _GroupsPageState extends State<GroupsPage> {
                     child: Observer(
                       builder: (context) {
                         if (store.isLoading && store.groups.isEmpty) {
-                          return const Center(
-                            child: CircularProgressIndicator.adaptive(),
+                          return const GroupsLoading();
+                        }
+                        if (store.errorMessage != null &&
+                            store.groups.isEmpty) {
+                          return GroupsErrorState(
+                            message: store.errorMessage,
+                            onRetry: store.load,
                           );
                         }
                         if (store.groups.isEmpty) {
-                          return Center(
-                            child: Text(
-                              l.noGroups,
-                              style: PoraText.subtitle.copyWith(
-                                color: context.colors.textSubtle,
-                              ),
-                            ),
+                          return GroupsEmptyState(
+                            onCreate: () =>
+                                showCreateGroupSheet(context, store: store),
                           );
                         }
-                        return ListView.separated(
-                          physics: const AlwaysScrollableScrollPhysics(),
-                          itemCount: store.groups.length,
-                          separatorBuilder: (_, _) =>
-                              const SizedBox(height: PoraSpacing.md),
-                          itemBuilder: (_, i) {
-                            final g = store.groups[i];
-                            return GroupCard(
-                              group: g,
-                              onDelete: () async {
-                                await showAdaptiveDialog(
-                                  context: context,
-                                  builder: (context) => DeletionDialogue(
-                                    onDelete: () {
-                                      store.deleteGroup(g);
-                                    },
-                                    title: context.l10n.groupDeletionTitle,
-                                  ),
-                                );
-                              },
-                            );
-                          },
+                        return AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 260),
+                          child: ListView.separated(
+                            key: ValueKey(store.groups.length),
+                            physics: const AlwaysScrollableScrollPhysics(),
+                            itemCount: store.groups.length,
+                            separatorBuilder: (_, _) =>
+                                const SizedBox(height: PoraSpacing.md),
+                            itemBuilder: (_, i) {
+                              final g = store.groups[i];
+                              return FadeSlideIn(
+                                key: ValueKey('grp-${g.list.id}'),
+                                delay: Duration(milliseconds: 40 * i),
+                                child: GroupCard(
+                                  group: g,
+                                  onDelete: () async {
+                                    await showAdaptiveDialog(
+                                      context: context,
+                                      builder: (context) => DeletionDialogue(
+                                        onDelete: () {
+                                          store.deleteGroup(g);
+                                        },
+                                        title: context.l10n.groupDeletionTitle,
+                                      ),
+                                    );
+                                  },
+                                ),
+                              );
+                            },
+                          ),
                         );
                       },
                     ),
@@ -144,7 +158,8 @@ class _GroupsPageState extends State<GroupsPage> {
                     ),
                   ),
                   const SizedBox(height: PoraSpacing.sm),
-                  //! Add hero?
+                  const PoraCtaCard(),
+                  const SizedBox(height: PoraSpacing.sm),
                   PoraPrimaryButton(
                     label: l.groupCreate,
                     onPressed: () =>

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/core/features/predictions_ai/domain/entity/prediction.dart';
+import 'package:pora/core/internal/widgets/press_scale.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
 import 'package:pora/core/internal/theme/additional_constants.dart';
 import 'package:pora/core/internal/theme/app_text_styles.dart';
@@ -54,7 +55,7 @@ class PredictionCard extends StatelessWidget {
           Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              GestureDetector(
+              PressScale(
                 onTap: onAdd,
                 child: Container(
                   padding: const EdgeInsets.symmetric(

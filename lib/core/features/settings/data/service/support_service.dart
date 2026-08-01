@@ -6,11 +6,13 @@ import 'package:pora/core/internal/errors/success.dart';
 import 'package:pora/core/internal/extensions/either.dart';
 
 class SupportService implements SupportRepository {
-  final SupportRemote remoteDataSource ;
+  final SupportRemote remoteDataSource;
 
   const SupportService({required this.remoteDataSource});
   @override
-  Future<Either<Failure, Success>> sendSupportMessage({required MessageEntity message}) async {
+  Future<Either<Failure, Success>> sendSupportMessage({
+    required MessageEntity message,
+  }) async {
     return await remoteDataSource.sendSupportMessage(message: message);
   }
 }

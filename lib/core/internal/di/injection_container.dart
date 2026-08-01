@@ -43,6 +43,47 @@ class InjectionContainer {
     _getIt.registerLazySingleton<ApiClient>(() => ApiClient(_getIt<Dio>()));
     _getIt.registerLazySingleton<IUriLauncher>(() => UriLauncherImpl());
 
+    //! AI (OpenRouter — отдельный Dio с Bearer из dotenv)
+    _getIt.registerLazySingleton<OpenRouterApiClient>(() {
+      final baseUrl = dotenv.maybeGet('AI_API_URL') ?? '';
+      final key = dotenv.maybeGet('AI_API_KEY') ?? '';
+      final dio = Dio(
+        BaseOptions(
+          baseUrl: baseUrl,
+          connectTimeout: const Duration(seconds: 20),
+          receiveTimeout: const Duration(seconds: 30),
+          headers: {
+            'Authorization': 'Bearer $key',
+            'Content-Type': 'application/json',
+            'HTTP-Referer': 'https://pora.app',
+            'X-Title': 'PORA',
+          },
+        ),
+      );
+      return OpenRouterApiClient(dio);
+    });
+    _getIt.registerLazySingleton<AiRemote>(
+      () => AiRemoteImpl(
+        client: _getIt<OpenRouterApiClient>(),
+        model: dotenv.maybeGet('AI_MODEL') ?? '',
+      ),
+    );
+    _getIt.registerLazySingleton<AiRepository>(
+      () => AiService(remote: _getIt<AiRemote>()),
+    );
+    _getIt.registerFactory<GenerateTipUseCase>(
+      () => GenerateTipUseCase(repository: _getIt<AiRepository>()),
+    );
+    _getIt.registerFactory<ChatWithPoraUseCase>(
+      () => ChatWithPoraUseCase(repository: _getIt<AiRepository>()),
+    );
+    _getIt.registerLazySingleton<TipTopicsPrefs>(
+      () => TipTopicsPrefs(_getIt<ILocalDB<dynamic>>()),
+    );
+    _getIt.registerLazySingleton<TipTopicsStore>(
+      () => TipTopicsStore(prefs: _getIt<TipTopicsPrefs>()),
+    );
+
     //! STORAGE
     _getIt.registerSingletonAsync<ILocalDB<dynamic>>(
       () async => HiveLocalDB<dynamic>()..init(),

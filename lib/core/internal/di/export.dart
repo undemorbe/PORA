@@ -73,3 +73,15 @@ export 'package:pora/core/features/user/domain/usecase/user/update_device_token.
 export 'package:pora/core/internal/formatters/image_formatter.dart';
 export 'package:pora/core/internal/notifications/notification_service.dart';
 export 'package:pora/core/internal/links/share_conf.dart';
+// AI (OpenRouter clean-arch)
+export 'package:pora/core/features/predictions_ai/data/datasource/ai_remote.dart';
+export 'package:pora/core/features/predictions_ai/data/datasource/ai_remote_impl.dart';
+export 'package:pora/core/features/predictions_ai/data/datasource/openrouter_api_client.dart';
+export 'package:pora/core/features/predictions_ai/data/service/ai_service.dart';
+export 'package:pora/core/features/predictions_ai/domain/repository/ai_repository.dart';
+export 'package:pora/core/features/predictions_ai/domain/usecase/chat_with_pora.dart';
+export 'package:pora/core/features/predictions_ai/domain/usecase/generate_tip.dart';
+export 'package:pora/core/features/predictions_ai/data/prefs/tip_topics_prefs.dart';
+export 'package:pora/core/features/predictions_ai/presentation/store/ai_chat_store.dart';
+export 'package:pora/core/features/predictions_ai/presentation/store/ai_tip_store.dart';
+export 'package:pora/core/features/predictions_ai/presentation/store/tip_topics_store.dart';

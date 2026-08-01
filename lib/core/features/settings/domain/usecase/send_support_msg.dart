@@ -5,13 +5,12 @@ import 'package:pora/core/internal/errors/success.dart';
 import 'package:pora/core/internal/extensions/either.dart';
 
 class SendSupportMsgUseCase {
-
   final SupportRepository repository;
 
   const SendSupportMsgUseCase({required this.repository});
 
   Future<Either<Failure, Success>> call({
-    required MessageEntity message
+    required MessageEntity message,
   }) async {
     return await repository.sendSupportMessage(message: message);
   }
