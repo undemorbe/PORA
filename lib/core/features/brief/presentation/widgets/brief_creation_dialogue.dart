@@ -95,9 +95,15 @@ class _BriefCreationDialogueState extends State<BriefCreationDialogue> {
                     contentPadding: .only(left: 16),
                     trailing: LiquidGlassToggle(
                       value: _isAllergen,
-                      onChanged: (v) => _isAllergen = v,
+                    onChanged: (v) {
+                      setState(() {
+                        
+                      _isAllergen = v;
+                      emojiLeadingController.text = _isAllergen ? "❌❌❌" : "";
+                      });
+                    },
                     ),
-                  )
+                  ) 
                 : SwitchListTile(
                     title: Text(
                       context.l10n.allergen,
@@ -106,8 +112,11 @@ class _BriefCreationDialogueState extends State<BriefCreationDialogue> {
                     secondary: const Icon(PhosphorIconsRegular.trash),
                     value: _isAllergen,
                     onChanged: (v) {
+                      setState(() {
                       _isAllergen = v;
+                        
                       emojiLeadingController.text = _isAllergen ? "❌❌❌" : "";
+                      });
                     },
 
                   ),

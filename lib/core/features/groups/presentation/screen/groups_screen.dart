@@ -157,8 +157,8 @@ class _GroupsPageState extends State<GroupsPage> {
                       InvitationConnectRoute(linkCode: '8QwR...'),
                     ),
                   ),
-                  const SizedBox(height: PoraSpacing.sm),
-                  const PoraCtaCard(),
+                  // const SizedBox(height: PoraSpacing.sm),
+                  // const PoraCtaCard(),
                   const SizedBox(height: PoraSpacing.sm),
                   PoraPrimaryButton(
                     label: l.groupCreate,

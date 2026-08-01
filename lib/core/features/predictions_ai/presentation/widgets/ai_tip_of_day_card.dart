@@ -58,7 +58,9 @@ class _AiTipOfDayCardState extends State<AiTipOfDayCard> {
   Future<void> _fetch() async {
     final l = context.l10n;
     final locale = Localizations.localeOf(context).languageCode;
-    _currentTopicText = _pickTopic();
+    // setState — чтобы заголовок «СОВЕТ ДНЯ · [ТЕМА]» перерисовался сразу
+    // при рефреше, не дожидаясь ответа модели.
+    setState(() => _currentTopicText = _pickTopic());
     await _store.load(
       topic: _currentTopicText!,
       languageCode: locale,
