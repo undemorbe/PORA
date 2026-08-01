@@ -1027,4 +1027,174 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get supportMessageBottomSheetUnderButtonText =>
       'We will answer as soon as possible, and mail to your gmail or inapp!';
+
+  @override
+  String get allergen => 'Allergen';
+
+  @override
+  String get predictionsGreeting => 'Your day with PORA';
+
+  @override
+  String get predictionsGreetingSub => 'Smart hints from your purchases';
+
+  @override
+  String get predictionsSectionSoon => 'Running out soon';
+
+  @override
+  String get predictionsSectionOften => 'You buy often';
+
+  @override
+  String get predictionsAskPora => 'Ask PORA';
+
+  @override
+  String get kpiWeek => 'items per week';
+
+  @override
+  String get kpiRecipes => 'recipes this month';
+
+  @override
+  String get kpiDaysToRun => 'days until restock';
+
+  @override
+  String get fallbackTip1 =>
+      'Store herbs like a bouquet: in a glass of water covered with a bag — lasts 2 weeks.';
+
+  @override
+  String get fallbackTip2 =>
+      'Add salt to dough at the end — it slows down yeast.';
+
+  @override
+  String get fallbackTip3 =>
+      'To stop onions stinging, chill them for 15 minutes in the freezer before cutting.';
+
+  @override
+  String get fallbackTip4 =>
+      'Oversalted soup? A raw potato for 10 minutes soaks up the extra salt.';
+
+  @override
+  String get fallbackTip5 =>
+      'Check egg freshness in water: sinks — fresh, floats — discard.';
+
+  @override
+  String get fallbackTip6 =>
+      'Reheat pizza in a covered skillet — the crust crisps back up.';
+
+  @override
+  String get fallbackTip7 =>
+      'Frozen meat slices thinner — 20 minutes in the freezer before cutting.';
+
+  @override
+  String get fallbackTip8 =>
+      'Roll a lemon on the counter before cutting — you\'ll get more juice.';
+
+  @override
+  String get fallbackTip9 =>
+      'A pinch of sugar in tomato sauce cuts the acidity.';
+
+  @override
+  String get fallbackTip10 =>
+      'Bread keeps a month in the freezer; toasting it goes straight from frozen.';
+
+  @override
+  String get aiTipOfDayLabel => 'TIP OF THE DAY';
+
+  @override
+  String get aiTipOfDayTopic => 'today';
+
+  @override
+  String get aiCtaTitle => 'Ask PORA';
+
+  @override
+  String get aiCtaSubtitle => 'recipes · swaps · tips';
+
+  @override
+  String get chatSheetTitle => 'PORA';
+
+  @override
+  String get chatSheetSubtitle => 'ask about food, groceries, substitutions';
+
+  @override
+  String get chatEmptyTitle => 'Start a conversation';
+
+  @override
+  String get chatEmptyExamplesLabel => 'Example questions:';
+
+  @override
+  String get chatSample1 => 'What can I cook with chicken and rice?';
+
+  @override
+  String get chatSample2 => 'What can substitute sour cream in dough?';
+
+  @override
+  String get chatSample3 => 'How do I store herbs so they don\'t wilt?';
+
+  @override
+  String get chatSample4 => 'Quick 20-minute dinner recipe';
+
+  @override
+  String get chatTyping => 'PORA is typing…';
+
+  @override
+  String get chatInputHint => 'Ask anything…';
+
+  @override
+  String get aiModelBadge => 'Powered by OpenRouter · ling-3.0-flash';
+
+  @override
+  String get seeAll => 'See all';
+
+  @override
+  String get tipTopicHerbs => 'herbs';
+
+  @override
+  String get tipTopicBaking => 'baking';
+
+  @override
+  String get tipTopicSoups => 'soups';
+
+  @override
+  String get tipTopicMeat => 'meat';
+
+  @override
+  String get tipTopicFish => 'fish';
+
+  @override
+  String get tipTopicVegetables => 'vegetables';
+
+  @override
+  String get tipTopicStorage => 'food storage';
+
+  @override
+  String get tipTopicKitchenHacks => 'kitchen hacks';
+
+  @override
+  String get tipTopicSpices => 'spices';
+
+  @override
+  String get tipTopicDough => 'dough';
+
+  @override
+  String get tipTopicBreakfast => 'breakfasts';
+
+  @override
+  String get tipTopicDinner => 'dinners';
+
+  @override
+  String get tipTopicsSectionTitle => 'Tip topics';
+
+  @override
+  String get tipTopicsSectionDescription =>
+      'Pick which topics the tip is drawn from';
+
+  @override
+  String get tipTopicsAddCustom => 'Add your own topic';
+
+  @override
+  String get tipTopicsCustomLabel => 'Custom';
+
+  @override
+  String get tipTopicsPredefinedLabel => 'Predefined';
+
+  @override
+  String get tipTopicsEmpty => 'No topics selected — tip will be generic';
 }

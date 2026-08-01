@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:pora/core/internal/errors/api_error_code.dart';
 
 abstract class Failure extends Equatable {
   final String message;
@@ -6,6 +7,27 @@ abstract class Failure extends Equatable {
 
   @override
   List<Object?> get props => [message];
+}
+
+/// Ошибка от бэка с типизированным [code]. UI и usecase'ы могут ветвиться:
+/// `if (f is ApiFailure && f.code == ApiErrorCode.otpExpired) …`.
+class ApiFailure extends Failure {
+  const ApiFailure({
+    required this.code,
+    required String message,
+    this.statusCode,
+  }) : super(message);
+
+  final ApiErrorCode code;
+  final int? statusCode;
+
+  bool get isAuthLoss =>
+      code == ApiErrorCode.unauthorized ||
+      code == ApiErrorCode.accessTokenExpired ||
+      code == ApiErrorCode.refreshTokenExpired;
+
+  @override
+  List<Object?> get props => [message, code, statusCode];
 }
 
 // 1. Ошибка сервера (например, API вернул 500 или 404)

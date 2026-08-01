@@ -2059,6 +2059,324 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'We will answer as soon as possible, and mail to your gmail or inapp!'**
   String get supportMessageBottomSheetUnderButtonText;
+
+  /// Allergen toggle label
+  ///
+  /// In en, this message translates to:
+  /// **'Allergen'**
+  String get allergen;
+
+  /// predictions main greeting
+  ///
+  /// In en, this message translates to:
+  /// **'Your day with PORA'**
+  String get predictionsGreeting;
+
+  /// predictions greeting subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Smart hints from your purchases'**
+  String get predictionsGreetingSub;
+
+  /// section title
+  ///
+  /// In en, this message translates to:
+  /// **'Running out soon'**
+  String get predictionsSectionSoon;
+
+  /// section title
+  ///
+  /// In en, this message translates to:
+  /// **'You buy often'**
+  String get predictionsSectionOften;
+
+  /// FAB label
+  ///
+  /// In en, this message translates to:
+  /// **'Ask PORA'**
+  String get predictionsAskPora;
+
+  /// kpi label
+  ///
+  /// In en, this message translates to:
+  /// **'items per week'**
+  String get kpiWeek;
+
+  /// kpi label
+  ///
+  /// In en, this message translates to:
+  /// **'recipes this month'**
+  String get kpiRecipes;
+
+  /// kpi label
+  ///
+  /// In en, this message translates to:
+  /// **'days until restock'**
+  String get kpiDaysToRun;
+
+  /// fallback tip
+  ///
+  /// In en, this message translates to:
+  /// **'Store herbs like a bouquet: in a glass of water covered with a bag — lasts 2 weeks.'**
+  String get fallbackTip1;
+
+  /// fallback tip
+  ///
+  /// In en, this message translates to:
+  /// **'Add salt to dough at the end — it slows down yeast.'**
+  String get fallbackTip2;
+
+  /// fallback tip
+  ///
+  /// In en, this message translates to:
+  /// **'To stop onions stinging, chill them for 15 minutes in the freezer before cutting.'**
+  String get fallbackTip3;
+
+  /// fallback tip
+  ///
+  /// In en, this message translates to:
+  /// **'Oversalted soup? A raw potato for 10 minutes soaks up the extra salt.'**
+  String get fallbackTip4;
+
+  /// fallback tip
+  ///
+  /// In en, this message translates to:
+  /// **'Check egg freshness in water: sinks — fresh, floats — discard.'**
+  String get fallbackTip5;
+
+  /// fallback tip
+  ///
+  /// In en, this message translates to:
+  /// **'Reheat pizza in a covered skillet — the crust crisps back up.'**
+  String get fallbackTip6;
+
+  /// fallback tip
+  ///
+  /// In en, this message translates to:
+  /// **'Frozen meat slices thinner — 20 minutes in the freezer before cutting.'**
+  String get fallbackTip7;
+
+  /// fallback tip
+  ///
+  /// In en, this message translates to:
+  /// **'Roll a lemon on the counter before cutting — you\'ll get more juice.'**
+  String get fallbackTip8;
+
+  /// fallback tip
+  ///
+  /// In en, this message translates to:
+  /// **'A pinch of sugar in tomato sauce cuts the acidity.'**
+  String get fallbackTip9;
+
+  /// fallback tip
+  ///
+  /// In en, this message translates to:
+  /// **'Bread keeps a month in the freezer; toasting it goes straight from frozen.'**
+  String get fallbackTip10;
+
+  /// kicker
+  ///
+  /// In en, this message translates to:
+  /// **'TIP OF THE DAY'**
+  String get aiTipOfDayLabel;
+
+  /// default topic passed to tip prompt
+  ///
+  /// In en, this message translates to:
+  /// **'today'**
+  String get aiTipOfDayTopic;
+
+  /// CTA title
+  ///
+  /// In en, this message translates to:
+  /// **'Ask PORA'**
+  String get aiCtaTitle;
+
+  /// CTA subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'recipes · swaps · tips'**
+  String get aiCtaSubtitle;
+
+  /// chat sheet title
+  ///
+  /// In en, this message translates to:
+  /// **'PORA'**
+  String get chatSheetTitle;
+
+  /// chat sheet subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'ask about food, groceries, substitutions'**
+  String get chatSheetSubtitle;
+
+  /// chat empty state title
+  ///
+  /// In en, this message translates to:
+  /// **'Start a conversation'**
+  String get chatEmptyTitle;
+
+  /// chat empty state examples label
+  ///
+  /// In en, this message translates to:
+  /// **'Example questions:'**
+  String get chatEmptyExamplesLabel;
+
+  /// sample question
+  ///
+  /// In en, this message translates to:
+  /// **'What can I cook with chicken and rice?'**
+  String get chatSample1;
+
+  /// sample question
+  ///
+  /// In en, this message translates to:
+  /// **'What can substitute sour cream in dough?'**
+  String get chatSample2;
+
+  /// sample question
+  ///
+  /// In en, this message translates to:
+  /// **'How do I store herbs so they don\'t wilt?'**
+  String get chatSample3;
+
+  /// sample question
+  ///
+  /// In en, this message translates to:
+  /// **'Quick 20-minute dinner recipe'**
+  String get chatSample4;
+
+  /// typing indicator
+  ///
+  /// In en, this message translates to:
+  /// **'PORA is typing…'**
+  String get chatTyping;
+
+  /// chat input placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'Ask anything…'**
+  String get chatInputHint;
+
+  /// model badge
+  ///
+  /// In en, this message translates to:
+  /// **'Powered by OpenRouter · ling-3.0-flash'**
+  String get aiModelBadge;
+
+  /// see all link
+  ///
+  /// In en, this message translates to:
+  /// **'See all'**
+  String get seeAll;
+
+  /// predefined tip topic
+  ///
+  /// In en, this message translates to:
+  /// **'herbs'**
+  String get tipTopicHerbs;
+
+  /// predefined tip topic
+  ///
+  /// In en, this message translates to:
+  /// **'baking'**
+  String get tipTopicBaking;
+
+  /// predefined tip topic
+  ///
+  /// In en, this message translates to:
+  /// **'soups'**
+  String get tipTopicSoups;
+
+  /// predefined tip topic
+  ///
+  /// In en, this message translates to:
+  /// **'meat'**
+  String get tipTopicMeat;
+
+  /// predefined tip topic
+  ///
+  /// In en, this message translates to:
+  /// **'fish'**
+  String get tipTopicFish;
+
+  /// predefined tip topic
+  ///
+  /// In en, this message translates to:
+  /// **'vegetables'**
+  String get tipTopicVegetables;
+
+  /// predefined tip topic
+  ///
+  /// In en, this message translates to:
+  /// **'food storage'**
+  String get tipTopicStorage;
+
+  /// predefined tip topic
+  ///
+  /// In en, this message translates to:
+  /// **'kitchen hacks'**
+  String get tipTopicKitchenHacks;
+
+  /// predefined tip topic
+  ///
+  /// In en, this message translates to:
+  /// **'spices'**
+  String get tipTopicSpices;
+
+  /// predefined tip topic
+  ///
+  /// In en, this message translates to:
+  /// **'dough'**
+  String get tipTopicDough;
+
+  /// predefined tip topic
+  ///
+  /// In en, this message translates to:
+  /// **'breakfasts'**
+  String get tipTopicBreakfast;
+
+  /// predefined tip topic
+  ///
+  /// In en, this message translates to:
+  /// **'dinners'**
+  String get tipTopicDinner;
+
+  /// settings section title
+  ///
+  /// In en, this message translates to:
+  /// **'Tip topics'**
+  String get tipTopicsSectionTitle;
+
+  /// settings section description
+  ///
+  /// In en, this message translates to:
+  /// **'Pick which topics the tip is drawn from'**
+  String get tipTopicsSectionDescription;
+
+  /// add custom topic hint
+  ///
+  /// In en, this message translates to:
+  /// **'Add your own topic'**
+  String get tipTopicsAddCustom;
+
+  /// custom topics label
+  ///
+  /// In en, this message translates to:
+  /// **'Custom'**
+  String get tipTopicsCustomLabel;
+
+  /// predefined topics label
+  ///
+  /// In en, this message translates to:
+  /// **'Predefined'**
+  String get tipTopicsPredefinedLabel;
+
+  /// warning when no topics selected
+  ///
+  /// In en, this message translates to:
+  /// **'No topics selected — tip will be generic'**
+  String get tipTopicsEmpty;
 }
 
 class _AppLocalizationsDelegate

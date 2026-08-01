@@ -1028,4 +1028,174 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get supportMessageBottomSheetUnderButtonText =>
       'We will answer as soon as possible, and mail to your gmail or inapp!';
+
+  @override
+  String get allergen => 'Allergen';
+
+  @override
+  String get predictionsGreeting => 'Ваш день с PORA';
+
+  @override
+  String get predictionsGreetingSub => 'Умные подсказки на основе покупок';
+
+  @override
+  String get predictionsSectionSoon => 'Скоро закончится';
+
+  @override
+  String get predictionsSectionOften => 'Часто покупаете';
+
+  @override
+  String get predictionsAskPora => 'Спросить PORA';
+
+  @override
+  String get kpiWeek => 'продукта в неделю';
+
+  @override
+  String get kpiRecipes => 'рецептов за месяц';
+
+  @override
+  String get kpiDaysToRun => 'дней до закупки';
+
+  @override
+  String get fallbackTip1 =>
+      'Храните зелень как букет: в стакане с водой, накрыв пакетом — стоит 2 недели.';
+
+  @override
+  String get fallbackTip2 =>
+      'Соль в тесто добавляйте в конце — она замедляет работу дрожжей.';
+
+  @override
+  String get fallbackTip3 =>
+      'Чтобы лук не жёгся при резке — подержите его 15 минут в морозилке.';
+
+  @override
+  String get fallbackTip4 =>
+      'Пересоленный суп спасает сырой картофель: положите на 10 минут, вытащите.';
+
+  @override
+  String get fallbackTip5 =>
+      'Проверяйте свежесть яиц в воде: тонет — свежее, всплывает — на выброс.';
+
+  @override
+  String get fallbackTip6 =>
+      'Разогревайте пиццу на сковороде под крышкой — корочка снова хрустит.';
+
+  @override
+  String get fallbackTip7 =>
+      'Замороженное мясо режется тоньше — за 20 минут до нарезки в морозилку.';
+
+  @override
+  String get fallbackTip8 =>
+      'Лимон отдаёт больше сока если катать его ладонью по столу перед резкой.';
+
+  @override
+  String get fallbackTip9 =>
+      'Сахар в томатный соус убирает лишнюю кислоту — щепотки достаточно.';
+
+  @override
+  String get fallbackTip10 =>
+      'Хлеб в морозилке живёт месяц; тост из замороженного — как свежий.';
+
+  @override
+  String get aiTipOfDayLabel => 'СОВЕТ ДНЯ';
+
+  @override
+  String get aiTipOfDayTopic => 'сегодня';
+
+  @override
+  String get aiCtaTitle => 'Спросить PORA';
+
+  @override
+  String get aiCtaSubtitle => 'рецепты · замены · советы';
+
+  @override
+  String get chatSheetTitle => 'PORA';
+
+  @override
+  String get chatSheetSubtitle => 'спросите про еду, покупки, замены';
+
+  @override
+  String get chatEmptyTitle => 'Начните разговор';
+
+  @override
+  String get chatEmptyExamplesLabel => 'Примеры вопросов:';
+
+  @override
+  String get chatSample1 => 'Что приготовить из курицы и риса?';
+
+  @override
+  String get chatSample2 => 'Чем заменить сметану в тесте?';
+
+  @override
+  String get chatSample3 => 'Как хранить зелень чтобы не вяла?';
+
+  @override
+  String get chatSample4 => 'Рецепт быстрого ужина на 20 минут';
+
+  @override
+  String get chatTyping => 'PORA печатает…';
+
+  @override
+  String get chatInputHint => 'Спросите что-нибудь…';
+
+  @override
+  String get aiModelBadge => 'Powered by OpenRouter · ling-3.0-flash';
+
+  @override
+  String get seeAll => 'Все';
+
+  @override
+  String get tipTopicHerbs => 'зелень';
+
+  @override
+  String get tipTopicBaking => 'выпечка';
+
+  @override
+  String get tipTopicSoups => 'супы';
+
+  @override
+  String get tipTopicMeat => 'мясо';
+
+  @override
+  String get tipTopicFish => 'рыба';
+
+  @override
+  String get tipTopicVegetables => 'овощи';
+
+  @override
+  String get tipTopicStorage => 'хранение продуктов';
+
+  @override
+  String get tipTopicKitchenHacks => 'кухонные лайфхаки';
+
+  @override
+  String get tipTopicSpices => 'специи';
+
+  @override
+  String get tipTopicDough => 'тесто';
+
+  @override
+  String get tipTopicBreakfast => 'завтраки';
+
+  @override
+  String get tipTopicDinner => 'ужины';
+
+  @override
+  String get tipTopicsSectionTitle => 'Темы советов';
+
+  @override
+  String get tipTopicsSectionDescription =>
+      'Выберите какие темы совета появляются';
+
+  @override
+  String get tipTopicsAddCustom => 'Добавить свою тему';
+
+  @override
+  String get tipTopicsCustomLabel => 'Свои темы';
+
+  @override
+  String get tipTopicsPredefinedLabel => 'Предустановленные';
+
+  @override
+  String get tipTopicsEmpty => 'Ни одной темы не выбрано — совет будет общий';
 }

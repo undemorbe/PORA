@@ -1,10 +1,14 @@
+import 'dart:io';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:liquid_glass_easy/liquid_glass_easy.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/core/features/brief/domain/entity/brief_product.dart';
 import 'package:pora/core/features/brief/presentation/controller/brief_store.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
 import 'package:pora/core/internal/theme/additional_constants.dart';
+import 'package:pora/core/internal/theme/app_text_styles.dart';
 import 'package:pora/core/internal/widgets/pora_buttons.dart';
 import 'package:pora/core/internal/widgets/pora_snackbar.dart';
 
@@ -19,6 +23,7 @@ class BriefCreationDialogue extends StatefulWidget {
 class _BriefCreationDialogueState extends State<BriefCreationDialogue> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emojiLeadingController = TextEditingController();
+  bool _isAllergen = false;
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +46,12 @@ class _BriefCreationDialogueState extends State<BriefCreationDialogue> {
               child: TextField(
                 controller: emojiLeadingController,
                 maxLength: 3,
+                enabled: _isAllergen == false,
                 //  inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[emoji]'))],
                 decoration: InputDecoration(
-                  hintText: context.l10n.briefInputEmoji,
+                  hintText: _isAllergen == false
+                      ? context.l10n.briefInputEmoji
+                      : "❌❌❌",
                 ),
               ),
             ),
@@ -77,6 +85,32 @@ class _BriefCreationDialogueState extends State<BriefCreationDialogue> {
               },
               label: context.l10n.save,
             ),
+            Platform.isIOS
+                ? ListTile(
+                    title: Text(
+                      context.l10n.allergen,
+                      style: PoraText.itemTitle,
+                    ),
+                    leading: const Icon(PhosphorIconsRegular.trash),
+                    contentPadding: .only(left: 16),
+                    trailing: LiquidGlassToggle(
+                      value: _isAllergen,
+                      onChanged: (v) => _isAllergen = v,
+                    ),
+                  )
+                : SwitchListTile(
+                    title: Text(
+                      context.l10n.allergen,
+                      style: PoraText.itemTitle,
+                    ),
+                    secondary: const Icon(PhosphorIconsRegular.trash),
+                    value: _isAllergen,
+                    onChanged: (v) {
+                      _isAllergen = v;
+                      emojiLeadingController.text = _isAllergen ? "❌❌❌" : "";
+                    },
+
+                  ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: PoraOutlineButton(

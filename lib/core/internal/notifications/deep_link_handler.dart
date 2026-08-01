@@ -85,15 +85,12 @@ class DeepLinkHandler {
       case 'pora':
         await router.push(const PredictionsRoute());
         return;
-      case 'order':
-        await router.push(const OrderRoute());
-        return;
       case 'settings':
       case 'profile':
         await router.push(const SettingsRoute());
         return;
       case 'families':
-        await router.push(const FamiliesRoute());
+        await router.push(const GroupsRoute());
         return;
       case 'list':
         // Контракт backend: ключ `list-id` (hyphen).
