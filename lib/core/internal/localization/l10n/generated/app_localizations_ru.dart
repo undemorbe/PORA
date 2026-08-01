@@ -207,10 +207,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get listAdd => 'Добавить';
 
   @override
-  String get predictionsTitle => 'Пора докупить';
+  String get predictionsTitle => 'Пора поможет!';
 
   @override
   String get predictionsSubtitle => 'Скоро закончится — по вашим покупкам';
+
+  @override
+  String get predictionTip => 'Малюсенький советик';
 
   @override
   String get predictionsOrderTitle => 'Заказать всё в один тап';
@@ -1011,4 +1014,18 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get tutorialSampleInviteMessage => 'Присоединяйся к списку';
+
+  @override
+  String get supportMessage => 'Написать письмо в поддержку';
+
+  @override
+  String get supportMessageBottomSheetTopDescription =>
+      'Your message will be sent to the support team. Please provide as much detail as possible.';
+
+  @override
+  String get supportMessageBottomSheetSendButton => 'Send';
+
+  @override
+  String get supportMessageBottomSheetUnderButtonText =>
+      'We will answer as soon as possible, and mail to your gmail or inapp!';
 }

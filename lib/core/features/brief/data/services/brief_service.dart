@@ -1,6 +1,7 @@
 import 'package:pora/core/features/brief/data/datasource/brief_remote.dart';
 import 'package:pora/core/features/brief/domain/entity/brief_product_list.dart';
 import 'package:pora/core/features/brief/domain/repository/brief_repository.dart';
+import 'package:pora/core/internal/di/export.dart';
 
 class BriefService implements BriefRepository {
   final BriefRemote briefRemote;
@@ -14,7 +15,8 @@ class BriefService implements BriefRepository {
       return await briefRemote.getBriefData();
     } catch (e) {
       // TODO: handle error
-      rethrow;
+      Logger.talker.error(e.toString());
+      return BriefProductListEntity(products: []);
     }
   }
 

@@ -29,7 +29,6 @@ class _UserCreateProfilePageState extends State<UserCreateProfilePage> {
 
   Future<void> _finish() async {
     await userStore.pushUserInformation(name: nameController.text);
-    // Учётка теперь существует на бэке → авторизуем и шлём FCM токен.
     GetIt.I<AuthState>().setAuthenticated();
     await syncDeviceToken();
   }

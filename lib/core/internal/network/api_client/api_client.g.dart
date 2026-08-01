@@ -253,7 +253,7 @@ class _ApiClient implements ApiClient {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'user/statistics/brief',
+            '/user/statistics/brief',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -272,7 +272,7 @@ class _ApiClient implements ApiClient {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'user/statistics/get-brief',
+            '/user/statistics/get-brief',
             queryParameters: queryParameters,
             data: _data,
           )

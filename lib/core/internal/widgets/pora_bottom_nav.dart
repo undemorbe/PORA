@@ -53,10 +53,6 @@ class PoraBottomNav extends StatelessWidget {
     final barWidth = w > 400 ? 360.0 : w - 32.0;
 
     if (Platform.isIOS) {
-      // Чистое стекло — без подложки. Читаемость достигается через:
-      //  1. Сильную мягкую тень снизу (отделяет от фона).
-      //  2. Двойной hairline: outer тёмный + inner светлый — как у
-      //     Apple system tab bar. Работает и на light, и на dark.
       return SafeArea(
         top: false,
         child: Padding(
@@ -82,6 +78,11 @@ class PoraBottomNav extends StatelessWidget {
                 SizedBox(
                   width: barWidth,
                   child: LiquidGlassBottomNavBar(
+                    pillStyle: LiquidGlassNavPillStyle(
+                      animated: true,
+                      jelly: LiquidGlassJellyConfig(),
+                    ),
+
                     selectedIndex: _selectedIndex,
                     onChanged: (i) => onTap?.call(_order[i]),
                     width: barWidth,

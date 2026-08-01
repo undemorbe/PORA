@@ -65,4 +65,9 @@ abstract class _SettingsStoreBase with Store {
     await tokensStore.clearTokens();
     GetIt.I<AuthState>().setUnauthenticated();
   }
+
+  @action
+  Future<void> sendSupportMessage({required String text}) async {
+    Logger.talker.debug('send msg $text');
+  }
 }

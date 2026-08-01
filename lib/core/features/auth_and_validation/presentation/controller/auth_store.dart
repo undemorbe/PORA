@@ -1,5 +1,7 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
+import 'package:pora/core/features/auth_and_validation/data/models/jwt_models/tokens_model.dart';
 import 'package:pora/core/features/auth_and_validation/domain/usecase/save_tokens.dart';
 import 'package:pora/core/features/auth_and_validation/domain/usecase/send_otp.dart';
 import 'package:pora/core/features/auth_and_validation/domain/usecase/verify_otp.dart';
@@ -71,10 +73,23 @@ abstract class _AuthStoreBase with Store {
       // перехода в защищённую зону — иначе reevaluateListenable срабатывает
       // прямо во время replaceAll и сбрасывает только что открытый маршрут.
     } else {
-      isLoading = false;
-      success = false;
-      //! Localize
-      scaffoldMessage = 'Invalid OTP';
+      if (dotenv.getBool("DEBUG")) {
+        isLoading = false;
+        status = 'notRegistered';
+        success = true;
+        await GetIt.I<SaveTokensUseCase>().call(
+          tokens: TokensModel(
+            accessToken: 'accessToken',
+            refreshToken: 'refreshToken',
+          ),
+        );
+        await GetIt.I<UpdateIsSawedOnboardingUseCase>().call(isSawed: true);
+      } else {
+        isLoading = false;
+        success = false;
+        //! Localize!!!!!!!
+        scaffoldMessage = 'Invalid OTP';
+      }
     }
   }
 }

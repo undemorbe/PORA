@@ -112,12 +112,13 @@ class OTPConfirmationPage extends StatelessWidget {
                         l.otpResendQuestion,
                         style: PoraText.subtitle.copyWith(fontSize: 14),
                       ),
-                      ResendOtp(onTap: () async{
+                      ResendOtp(
+                        onTap: () async {
                           await authStore.sendOtp(
                             destination: destinationController.text,
                           );
-                      },),
-                  
+                        },
+                      ),
                     ],
                   ),
                 ],

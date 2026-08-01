@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/core/features/insights/presentation/widgets/ai_tip_card.dart';
 import 'package:pora/core/features/insights/presentation/widgets/frequency_row.dart';
 import 'package:pora/core/features/insights/presentation/widgets/stat_card.dart';
@@ -39,7 +40,28 @@ class InsightsPage extends StatelessWidget {
             PoraSpacing.xxl,
           ),
           children: [
-            Text(context.l10n.insightsTitle, style: PoraText.title),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () => context.router.maybePop(),
+                  child: const PhosphorIcon(
+                    PhosphorIconsRegular.caretLeft,
+                    size: 26,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width * 0.2,
+                  ),
+                  child: Text(
+                    context.l10n.insightsTitle,
+                    style: PoraText.title,
+                  ),
+                ),
+              ],
+            ),
             const SizedBox(height: PoraSpacing.lg),
 
             Row(

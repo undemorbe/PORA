@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:pora/core/internal/di/export.dart';
 import 'package:pora/core/internal/network/websocket/model/ws_data_model.dart';
-import 'package:web_socket_channel/io.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 class AppWebsocket {
@@ -25,25 +24,24 @@ class AppWebsocket {
     if (token == null) return;
     Logger.talker.debug('token exists, starting connecting');
 
-    _channel = IOWebSocketChannel.connect(
-      wsUrl,
-      headers: {'Authorization': 'Bearer $token'},
-      pingInterval: const Duration(seconds: 30),
-    );
-    Logger.talker.debug('connceted');
+    // _channel = IOWebSocketChannel.connect(
+    //   wsUrl,
+    //   headers: {'Authorization': 'Bearer $token'},
+    //   pingInterval: const Duration(seconds: 30),
+    // );
 
-    _subscription = _channel!.stream.listen(
-      _onData,
-      onError: (e) {
-        Logger.talker.critical('Ws error: $e');
-        _scheduleReconnect(wsUrl);
-      },
-      onDone: () {
-        Logger.talker.info('ws closed');
-        _scheduleReconnect(wsUrl);
-      },
-      cancelOnError: true,
-    );
+    //   _subscription = _channel!.stream.listen(
+    //     _onData,
+    //     onError: (e) {
+    //       Logger.talker.critical('Ws error: $e');
+    //       _scheduleReconnect(wsUrl);
+    //     },
+    //     onDone: () {
+    //       Logger.talker.info('ws closed');
+    //       _scheduleReconnect(wsUrl);
+    //     },
+    //     cancelOnError: true
+    //   );
   }
 
   Future<void> _onData(dynamic raw) async {

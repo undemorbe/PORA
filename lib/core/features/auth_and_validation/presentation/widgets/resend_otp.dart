@@ -13,16 +13,14 @@ class ResendOtp extends StatefulWidget {
 }
 
 class _ResendOtpState extends State<ResendOtp> {
-
   bool _isTapped = false;
   int _secondsRemain = 30;
   Timer? _timer;
 
-  void _startTimer(){
-    _timer  = Timer.periodic(const Duration(seconds: 1,),
-    (_) {
+  void _startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (_) {
       _decrementSecond();
-    },);
+    });
   }
 
   void _decrementSecond() {
@@ -47,29 +45,22 @@ class _ResendOtpState extends State<ResendOtp> {
 
   @override
   Widget build(BuildContext context) {
-    if(_isTapped){
+    if (_isTapped) {
       return Text(
-          '${context.l10n.sendAgainAfter} $_secondsRemain' ,
-          style: PoraText. body.copyWith(
-            color: PoraColors.primaryDark
-          ),
-
+        '${context.l10n.sendAgainAfter} $_secondsRemain',
+        style: PoraText.body.copyWith(color: PoraColors.primaryDark),
       );
-    }
-    else{
-    }
+    } else {}
     return InkWell(
       hoverColor: PoraColors.primary,
       onTap: () {
         widget.onTap();
-        Future.delayed(const Duration(milliseconds: 200,)).whenComplete(() {
-        _startTimer();
-        setState(() {
-          _isTapped=true;
+        Future.delayed(const Duration(milliseconds: 200)).whenComplete(() {
+          _startTimer();
+          setState(() {
+            _isTapped = true;
+          });
         });
-          
-        },);
-        
       },
       child: Text(
         context.l10n.otpResend,
@@ -79,6 +70,5 @@ class _ResendOtpState extends State<ResendOtp> {
         ),
       ),
     );
-      
   }
 }

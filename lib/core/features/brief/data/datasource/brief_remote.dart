@@ -1,3 +1,4 @@
+import 'package:pora/core/features/brief/data/models/brief_product_model_list.dart';
 import 'package:pora/core/features/brief/domain/entity/brief_product_list.dart';
 import 'package:pora/core/internal/network/api_client/api_client.dart';
 
@@ -19,8 +20,9 @@ class BriefRemoteImpl implements BriefRemote {
 
   @override
   Future<void> setBriefData({required BriefProductListEntity products}) async {
+    final briefModelList = BriefProductModelList.fromEntityList(products);
     await apiClient.setUserBrief(
-      productsList: {'brief-items': products.products},
+      productsList: {'brief-items': briefModelList.products},
     );
   }
 }

@@ -9,6 +9,7 @@ class TutorialPrefs {
 
   Future<bool> hasSeen() async {
     final v = await _db.get(key: _seenKey, boxName: LocalDBNames.settings);
+    assert(v is bool);
     return v == true;
   }
 

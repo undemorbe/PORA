@@ -18,14 +18,10 @@ import 'package:pora/core/internal/widgets/pora_chip.dart';
 import 'package:pora/core/internal/widgets/pora_snackbar.dart';
 
 /// Онбординг-бриф — «Что у вас часто заканчивается?». Решает cold start
-/// движка предсказаний: пользователь отмечает частые продукты.
 @RoutePage()
 class BriefPage extends StatelessWidget {
   const BriefPage({super.key});
 
-  /// Завершение онбординга нового пользователя. Если tutorial ещё не
-  /// показывали — открываем его (`fromSettings: false` → он сам выдаст auth
-  /// и уведёт в MainShell). Иначе идём в главный экран напрямую.
   Future<void> _enterApp(BuildContext context) async {
     final seen = await GetIt.I<TutorialPrefs>().hasSeen();
     if (!context.mounted) return;

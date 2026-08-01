@@ -4,7 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/core/features/auth_and_validation/presentation/controller/privacy_store.dart';
 import 'package:pora/core/features/settings/presentation/store/settings_store.dart';
-import 'package:pora/core/features/settings/presentation/widgets/delivery_value.dart';
+import 'package:pora/core/features/settings/presentation/widgets/support_message_bottom_bar.dart';
 import 'package:pora/core/internal/di/export.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
 import 'package:pora/core/features/settings/presentation/widgets/profile_card.dart';
@@ -30,6 +30,9 @@ class _SettingsPageState extends State<SettingsPage> {
   late final SettingsStore settingsStore;
 
   final PrivacyStore privacyStore = PrivacyStore();
+
+  final TextEditingController supportMessageController =
+      TextEditingController();
 
   @override
   void initState() {
@@ -105,11 +108,12 @@ class _SettingsPageState extends State<SettingsPage> {
                     onTap: () =>
                         context.router.push(const NotificationsRoute()),
                   ),
-                  PoraSettingRow(
-                    icon: PhosphorIconsRegular.shoppingCart,
-                    label: context.l10n.settingsDelivery,
-                    trailing: const DeliveryValue(),
-                  ),
+                  //!Rm or change
+                  // PoraSettingRow(
+                  //   icon: PhosphorIconsRegular.shoppingCart,
+                  //   label: context.l10n.settingsDelivery,
+                  //   trailing: const DeliveryValue(),
+                  // ),
                   PoraSettingRow(
                     icon: PhosphorIconsRegular.gear,
                     label: context.l10n.advancedSettings,
@@ -125,7 +129,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                   if (dotenv.getBool('DEBUG'))
                     PoraSettingRow(
-                      icon: PhosphorIconsRegular.lock,
+                      icon: Icons.zoom_out_sharp,
                       label: 'Open debug route',
                       trailing: PoraSettingRow.chevron,
                       onTap: () => Navigator.of(context).push(
@@ -141,6 +145,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       label: 'Open especcial route',
                       onTap: () => context.router.push(BriefRoute()),
                     ),
+                  
                 ],
               ),
               const SizedBox(height: PoraSpacing.lg),
@@ -152,6 +157,18 @@ class _SettingsPageState extends State<SettingsPage> {
                     label: context.l10n.settingsAboutPora,
                     trailing: PoraSettingRow.chevron,
                     onTap: () => showAboutDialog(context: context),
+                  ),PoraSettingRow(
+                    icon: PhosphorIcons.phone,
+                    label: context.l10n.supportMessage,
+                    onTap: () => showBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        return SupportMessageBottomSheet(
+                          messageController: supportMessageController,
+                          onTap: () => settingsStore.sendSupportMessage(text: supportMessageController.text,),
+                        );
+                      },
+                    ),
                   ),
                   PoraSettingRow(
                     icon: PhosphorIconsRegular.signOut,

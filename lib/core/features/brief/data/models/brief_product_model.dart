@@ -3,7 +3,7 @@ import 'package:pora/core/features/brief/domain/entity/brief_product.dart';
 
 part 'brief_product_model.g.dart';
 
-@JsonSerializable(includeIfNull: true)
+@JsonSerializable()
 class BriefProductModel extends BriefProductEntity {
   const BriefProductModel({required super.title, super.leading});
 
@@ -11,4 +11,8 @@ class BriefProductModel extends BriefProductEntity {
       _$BriefProductModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$BriefProductModelToJson(this);
+
+  factory BriefProductModel.fromEntity(BriefProductEntity entity) {
+    return BriefProductModel(title: entity.title, leading: entity.leading);
+  }
 }

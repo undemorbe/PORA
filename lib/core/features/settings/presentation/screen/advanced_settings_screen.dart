@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
+import 'package:liquid_glass_easy/liquid_glass_easy.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/core/features/item_detail/data/datasource/local_prefs.dart';
 import 'package:pora/core/internal/router/app_router.gr.dart';
@@ -124,12 +127,28 @@ class _AdvancedSettingsPageState extends State<AdvancedSettingsPage> {
               SectionLabel(l.confirmations),
               PoraRowsCard(
                 children: [
-                  SwitchListTile.adaptive(
-                    title: Text(l.askBeforeDelete, style: PoraText.itemTitle),
-                    secondary: const Icon(PhosphorIconsRegular.trash),
-                    value: _askBeforeDelete,
-                    onChanged: _setDeletePref,
-                  ),
+                  Platform.isIOS
+                      ? ListTile(
+                          title: Text(
+                            l.askBeforeDelete,
+                            style: PoraText.itemTitle,
+                          ),
+                          leading: const Icon(PhosphorIconsRegular.trash),
+                          contentPadding: .only(left: 16),
+                          trailing: LiquidGlassToggle(
+                            value: _askBeforeDelete,
+                            onChanged: _setDeletePref,
+                          ),
+                        )
+                      : SwitchListTile(
+                          title: Text(
+                            l.askBeforeDelete,
+                            style: PoraText.itemTitle,
+                          ),
+                          secondary: const Icon(PhosphorIconsRegular.trash),
+                          value: _askBeforeDelete,
+                          onChanged: _setDeletePref,
+                        ),
                 ],
               ),
               const SizedBox(height: PoraSpacing.lg),

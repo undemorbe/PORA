@@ -23,9 +23,9 @@ class NoInternetWrapper extends StatelessWidget {
       children: [
         Positioned.fill(child: child),
         Positioned(
-          top: 0,
           left: 0,
           right: 0,
+          top: MediaQuery.of(context).size.height * 0.08,
           child: Observer(
             builder: (context) {
               return AnimatedSlide(

@@ -30,6 +30,7 @@ abstract class _UserProfileStoreBase with Store {
         : '';
     user = UserEntity(name: nameToEntity, surname: surname);
     await GetIt.I<UpdateUserUseCase>()(user: user, image: profileImage);
+    //! Add local saving of user-info
   }
 
   @action

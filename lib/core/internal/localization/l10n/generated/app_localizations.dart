@@ -479,7 +479,7 @@ abstract class AppLocalizations {
   /// predictionsTitle
   ///
   /// In en, this message translates to:
-  /// **'Пора докупить'**
+  /// **'Пора поможет!'**
   String get predictionsTitle;
 
   /// predictionsSubtitle
@@ -487,6 +487,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Скоро закончится — по вашим покупкам'**
   String get predictionsSubtitle;
+
+  /// predictionTip
+  ///
+  /// In en, this message translates to:
+  /// **'Малюсенький советик'**
+  String get predictionTip;
 
   /// predictionsOrderTitle
   ///
@@ -2029,6 +2035,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Join the list'**
   String get tutorialSampleInviteMessage;
+
+  /// Написать письмо в поддержку
+  ///
+  /// In en, this message translates to:
+  /// **'Написать письмо в поддержку'**
+  String get supportMessage;
+
+  /// Your message will be sent to the support team. Please provide as much detail as possible.
+  ///
+  /// In en, this message translates to:
+  /// **'Your message will be sent to the support team. Please provide as much detail as possible.'**
+  String get supportMessageBottomSheetTopDescription;
+
+  /// Send button text in support message bottom bar
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get supportMessageBottomSheetSendButton;
+
+  /// supportMessageBottomSheetUnderButtonText
+  ///
+  /// In en, this message translates to:
+  /// **'We will answer as soon as possible, and mail to your gmail or inapp!'**
+  String get supportMessageBottomSheetUnderButtonText;
 }
 
 class _AppLocalizationsDelegate

@@ -259,13 +259,17 @@
     "@listAdd": {
         "description": "listAdd"
     },
-    "predictionsTitle": "Пора докупить",
+    "predictionsTitle": "Пора поможет!",
     "@predictionsTitle": {
         "description": "predictionsTitle"
     },
     "predictionsSubtitle": "Скоро закончится — по вашим покупкам",
     "@predictionsSubtitle": {
         "description": "predictionsSubtitle"
+    },
+    "predictionTip": "Малюсенький советик",
+    "@predictionTip": {
+        "description": "predictionTip"
     },
     "predictionsOrderTitle": "Заказать всё в один тап",
     "@predictionsOrderTitle": {
@@ -1068,5 +1072,21 @@
     "tutorialSamplePushBody": "Need milk, urgent",
     "@tutorialSamplePushBody": { "description": "sample push body in notify animation" },
     "tutorialSampleInviteMessage": "Join the list",
-    "@tutorialSampleInviteMessage": { "description": "sample chat message text before the invite link" }
+    "@tutorialSampleInviteMessage": { "description": "sample chat message text before the invite link" },
+    "supportMessage": "Написать письмо в поддержку",
+    "@supportMessage": {
+        "description": "Написать письмо в поддержку"
+    },
+    "supportMessageBottomSheetTopDescription": "Your message will be sent to the support team. Please provide as much detail as possible.",
+    "@supportMessageBottomSheetTopDescription": {
+        "description": "Your message will be sent to the support team. Please provide as much detail as possible."
+    },
+    "supportMessageBottomSheetSendButton": "Send",
+    "@supportMessageBottomSheetSendButton": {
+        "description": "Send button text in support message bottom bar"
+    },
+    "supportMessageBottomSheetUnderButtonText" : "We will answer as soon as possible, and mail to your gmail or inapp!",
+    "@supportMessageBottomSheetUnderButtonText":{
+        "description": "supportMessageBottomSheetUnderButtonText"
+    }
 }

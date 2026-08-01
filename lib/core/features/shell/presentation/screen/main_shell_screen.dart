@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:pora/core/internal/network/connectivity/no_internet_banner.dart';
 import 'package:pora/core/internal/router/app_router.gr.dart';
 import 'package:pora/core/internal/widgets/pora_bottom_nav.dart';
 
@@ -14,25 +13,23 @@ class MainShellPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return NoInternetWrapper(
-      child: AutoTabsScaffold(
-        extendBody: true,
-        routes: [
-          const GroupsRoute(),
-          const PredictionsRoute(),
-          const SettingsRoute(),
-        ],
-        transitionBuilder: (context, child, animation) =>
-            FadeTransition(opacity: animation, child: child),
-        bottomNavigationBuilder: (context, tabsRouter) {
-          return RepaintBoundary(
-            child: PoraBottomNav(
-              current: PoraTab.values[tabsRouter.activeIndex],
-              onTap: (tab) => tabsRouter.setActiveIndex(tab.index),
-            ),
-          );
-        },
-      ),
+    return AutoTabsScaffold(
+      extendBody: true,
+      routes: [
+        const GroupsRoute(),
+        const PredictionsRoute(),
+        const SettingsRoute(),
+      ],
+      transitionBuilder: (context, child, animation) =>
+          FadeTransition(opacity: animation, child: child),
+      bottomNavigationBuilder: (context, tabsRouter) {
+        return RepaintBoundary(
+          child: PoraBottomNav(
+            current: PoraTab.values[tabsRouter.activeIndex],
+            onTap: (tab) => tabsRouter.setActiveIndex(tab.index),
+          ),
+        );
+      },
     );
   }
 }

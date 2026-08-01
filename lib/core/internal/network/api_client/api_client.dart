@@ -55,12 +55,12 @@ abstract class ApiClient {
   Future<void> updateUserDevice({@Body() required Map<String, dynamic> body});
 
   //! Brief
-  @POST('user/statistics/brief')
+  @POST('/user/statistics/brief')
   Future<void> setUserBrief({
     @Body() required Map<String, dynamic> productsList,
   });
 
-  @GET('user/statistics/get-brief')
+  @GET('/user/statistics/get-brief')
   Future<BriefProductModelList> getUserBrief();
 
   //! Families
