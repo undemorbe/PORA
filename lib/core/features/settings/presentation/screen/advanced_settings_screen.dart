@@ -163,7 +163,7 @@ class _AdvancedSettingsPageState extends State<AdvancedSettingsPage> {
                               style: PoraText.itemTitle,
                             ),
                             leading: const Icon(PhosphorIconsRegular.trash),
-                            contentPadding: .only(left: 16),
+                            contentPadding: const EdgeInsets.only(left: 16),
                             trailing: LiquidGlassToggle(
                               value: _askBeforeDelete,
                               onChanged: _setDeletePref,

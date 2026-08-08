@@ -3,25 +3,33 @@ import 'dart:convert';
 import 'package:html/dom.dart' as dom;
 import 'package:html/parser.dart' as html_parser;
 import 'package:http/http.dart' as http;
+import 'package:pora/core/features/recipe/data/datasource/ai_recipe_parser.dart';
 import 'package:pora/core/features/recipe/domain/entity/recipe.dart';
 import 'package:pora/core/features/recipe/domain/entity/recipe_ingredient.dart';
 
 /// Скачивает страницу и достаёт рецепт.
 ///
 /// Стратегия:
-///   1. `<script type="application/ld+json">` — ищем объект с `@type == "Recipe"`
-///      (schema.org). Даёт structured `recipeIngredient`, `name`, `image`,
-///      `recipeYield` — 90% сайтов еды.
-///   2. Fallback: OpenGraph `og:title` + первый `<img>` + любые `<li>` из
-///      блоков с классом/id, содержащим `ingredient`.
+///   1. JSON-LD `@type == 'Recipe'` (schema.org) — 90% сайтов.
+///   2. HTML-эвристики: контейнеры с `ingredient` в class/id + микроформатные
+///      атрибуты + `<article>` парсинг.
+///   3. AI-fallback ([AiRecipeParser]) — очищаем страницу, шлём модели.
+///
+/// AI шаг только парсит присланный контент — не «сочиняет» рецепт.
 abstract class RecipeScraper {
-  Future<RecipeEntity> scrape(String url);
+  Future<RecipeEntity> scrape(String url, {String languageCode = 'ru'});
 }
 
 class HttpRecipeScraper implements RecipeScraper {
-  HttpRecipeScraper({http.Client? client}) : _client = client ?? http.Client();
+  HttpRecipeScraper({
+    http.Client? client,
+    this.aiParser,
+  }) : _client = client ?? http.Client();
 
   final http.Client _client;
+
+  /// Опциональный fallback — если null, AI-парсинг пропускается.
+  final AiRecipeParser? aiParser;
 
   static const _ua =
       'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) '
@@ -29,38 +37,70 @@ class HttpRecipeScraper implements RecipeScraper {
       'Mobile/15E148 Safari/604.1 (compatible; PoraBot/1.0)';
 
   @override
-  Future<RecipeEntity> scrape(String url) async {
+  Future<RecipeEntity> scrape(String url, {String languageCode = 'ru'}) async {
     final uri = _normalizeUrl(url);
-    final response = await _client
-        .get(uri, headers: {'User-Agent': _ua, 'Accept-Language': 'ru,en'})
-        .timeout(const Duration(seconds: 15));
+    final response = await _fetchWithRedirects(uri);
 
-    if (response.statusCode != 200) {
+    if (response.statusCode < 200 || response.statusCode >= 400) {
       throw RecipeScrapeException('HTTP ${response.statusCode} for $uri');
     }
 
-    // Кодировку HTTP-заголовок не всегда даёт правильно — берём bodyBytes+utf8.
     final body = _decodeBody(response);
     final document = html_parser.parse(body);
+    final finalUrl = response.request?.url.toString() ?? uri.toString();
 
-    final jsonLd = _tryJsonLd(document, uri.toString());
+    // 1. JSON-LD.
+    final jsonLd = _tryJsonLd(document, finalUrl);
     if (jsonLd != null && jsonLd.ingredients.isNotEmpty) return jsonLd;
 
-    final fallback = _fromHtmlHeuristics(document, uri.toString());
-    if (fallback.ingredients.isEmpty) {
-      throw const RecipeScrapeException(
-        'Не удалось найти ингредиенты на странице',
+    // 2. HTML эвристики.
+    final heur = _fromHtmlHeuristics(document, finalUrl);
+    if (heur.ingredients.length >= 2) return heur;
+
+    // 3. AI-парсинг очищенного текста.
+    if (aiParser != null) {
+      final text = _extractReadableText(document);
+      final aiRecipe = await aiParser!.parse(
+        pageText: text,
+        sourceUrl: finalUrl,
+        languageCode: languageCode,
       );
+      if (aiRecipe != null && aiRecipe.ingredients.isNotEmpty) {
+        return aiRecipe;
+      }
     }
-    return fallback;
+
+    // Если даже эвристики что-то нашли — вернём (пусть 1 элемент).
+    if (heur.ingredients.isNotEmpty) return heur;
+
+    throw const RecipeScrapeException(
+      'Не удалось найти ингредиенты на странице',
+    );
   }
 
   Uri _normalizeUrl(String raw) {
     final trimmed = raw.trim();
-    final withScheme = trimmed.startsWith('http')
-        ? trimmed
-        : 'https://$trimmed';
+    final withScheme =
+        trimmed.startsWith('http') ? trimmed : 'https://$trimmed';
     return Uri.parse(withScheme);
+  }
+
+  Future<http.Response> _fetchWithRedirects(Uri uri) async {
+    // http.Client уже follows redirects по умолчанию, но некоторые сайты
+    // отдают 403 без правильных заголовков. Даём Accept, Accept-Language,
+    // Accept-Encoding.
+    return _client
+        .get(
+          uri,
+          headers: {
+            'User-Agent': _ua,
+            'Accept':
+                'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+            'Accept-Language': 'ru,en;q=0.9',
+            'Accept-Encoding': 'gzip, deflate',
+          },
+        )
+        .timeout(const Duration(seconds: 20));
   }
 
   String _decodeBody(http.Response r) {
@@ -99,8 +139,6 @@ class HttpRecipeScraper implements RecipeScraper {
     return null;
   }
 
-  /// Обходит структуру JSON-LD (может быть object / array / @graph)
-  /// и находит первый узел с `@type == 'Recipe'`.
   Map<String, dynamic>? _findRecipeNode(dynamic node) {
     if (node is List) {
       for (final e in node) {
@@ -144,32 +182,47 @@ class HttpRecipeScraper implements RecipeScraper {
   // ---------- HTML fallback ----------
 
   RecipeEntity _fromHtmlHeuristics(dom.Document doc, String sourceUrl) {
-    final title =
-        _metaContent(doc, 'og:title') ??
+    final title = _metaContent(doc, 'og:title') ??
         doc.querySelector('title')?.text.trim() ??
         'Рецепт';
     final image = _metaContent(doc, 'og:image');
 
-    // Ищем контейнеры с "ingredient" в class/id. package:html не
-    // поддерживает `[attr*="v" i]` — обходим все узлы вручную.
-    final candidates = <dom.Element>[];
+    // Ищем контейнеры по class/id + hrecipe / itemprop=recipeIngredient.
+    final items = <RecipeIngredient>[];
+
+    // 1) Microformat / microdata.
+    for (final el
+        in doc.querySelectorAll('[itemprop="recipeIngredient"], .ingredient')) {
+      final text = el.text.trim();
+      if (text.isEmpty) continue;
+      items.add(_parseIngredientLine(text));
+    }
+    if (items.length >= 2) {
+      return RecipeEntity(
+        title: title,
+        imageUrl: image,
+        sourceUrl: sourceUrl,
+        ingredients: items,
+      );
+    }
+
+    // 2) Контейнеры с "ingredient" в class/id → все `<li>` внутри.
+    final containers = <dom.Element>[];
     for (final el in doc.querySelectorAll('*')) {
       final cls = (el.attributes['class'] ?? '').toLowerCase();
       final id = (el.attributes['id'] ?? '').toLowerCase();
       if (cls.contains('ingredient') || id.contains('ingredient')) {
-        candidates.add(el);
+        containers.add(el);
       }
     }
-
-    final items = <RecipeIngredient>[];
-    for (final c in candidates) {
+    for (final c in containers) {
       final lis = c.querySelectorAll('li');
       for (final li in lis) {
         final text = li.text.trim();
         if (text.isEmpty) continue;
         items.add(_parseIngredientLine(text));
       }
-      if (items.isNotEmpty) break;
+      if (items.length >= 2) break;
     }
 
     return RecipeEntity(
@@ -181,16 +234,47 @@ class HttpRecipeScraper implements RecipeScraper {
   }
 
   String? _metaContent(dom.Document doc, String property) {
-    final el =
-        doc.querySelector('meta[property="$property"]') ??
+    final el = doc.querySelector('meta[property="$property"]') ??
         doc.querySelector('meta[name="$property"]');
     return el?.attributes['content']?.trim();
+  }
+
+  // ---------- Readable text for AI ----------
+
+  /// Выкидывает script/style/nav/footer/aside — остаётся читаемый контент.
+  /// Схлопывает пробелы. Ограничитель размера — на стороне AI-парсера.
+  String _extractReadableText(dom.Document doc) {
+    // Убираем шум.
+    const dropSelectors = [
+      'script',
+      'style',
+      'noscript',
+      'nav',
+      'header',
+      'footer',
+      'aside',
+      'form',
+      'button',
+      'iframe',
+      'svg',
+    ];
+    for (final sel in dropSelectors) {
+      for (final el in doc.querySelectorAll(sel)) {
+        el.remove();
+      }
+    }
+    // Приоритет: <article> > <main> > <body>.
+    final root = doc.querySelector('article') ??
+        doc.querySelector('main') ??
+        doc.body ??
+        doc.documentElement!;
+    final text = root.text;
+    return text.replaceAll(RegExp(r'\s+'), ' ').trim();
   }
 
   // ---------- Ingredient line parsing ----------
 
   /// "400 г спагетти" → {quantity: '400', unit: 'г', name: 'спагетти'}.
-  /// "2 шт яйца" / "Чёрный перец по вкусу" — best-effort.
   static final _qtyUnitPattern = RegExp(
     r'^\s*(\d+[.,]?\d*(?:[-–—]\d+[.,]?\d*)?)\s*'
     r'([а-яa-z]+\.?)?\s+(.+)$',
@@ -218,28 +302,9 @@ class HttpRecipeScraper implements RecipeScraper {
   bool _isKnownUnit(String? u) {
     if (u == null) return false;
     const units = {
-      'г',
-      'кг',
-      'мг',
-      'мл',
-      'л',
-      'шт',
-      'ч',
-      'ст',
-      'ложка',
-      'ложек',
-      'стакан',
-      'стаканов',
-      'g',
-      'kg',
-      'ml',
-      'l',
-      'oz',
-      'lb',
-      'cup',
-      'cups',
-      'tsp',
-      'tbsp',
+      'г', 'кг', 'мг', 'мл', 'л', 'шт', 'ч', 'ст',
+      'ложка', 'ложек', 'стакан', 'стаканов',
+      'g', 'kg', 'ml', 'l', 'oz', 'lb', 'cup', 'cups', 'tsp', 'tbsp',
     };
     return units.contains(u.toLowerCase().replaceAll('.', ''));
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
+import 'package:pora/core/internal/extensions/l10n_extension.dart';
 import 'package:pora/core/internal/theme/additional_constants.dart';
 import 'package:pora/core/internal/theme/app_text_styles.dart';
 import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
@@ -11,6 +12,7 @@ class StreakCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = context.l10n;
     return Container(
       padding: const EdgeInsets.all(PoraSpacing.lg),
       decoration: BoxDecoration(
@@ -31,7 +33,7 @@ class StreakCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '$days дней подряд',
+                  l.insightsStreakDays(days),
                   style: PoraText.title.copyWith(
                     color: Colors.white,
                     fontSize: 22,
@@ -40,7 +42,7 @@ class StreakCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  'ведёте список — не сбавляйте',
+                  l.insightsStreakSubtitle,
                   style: PoraText.small.copyWith(
                     color: Colors.white.withValues(alpha: 0.85),
                   ),

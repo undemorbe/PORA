@@ -1198,4 +1198,90 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get tipTopicsEmpty => 'Ни одной темы не выбрано — совет будет общий';
+
+  @override
+  String get insightsChampionKicker => 'ЧЕМПИОН МЕСЯЦА';
+
+  @override
+  String insightsChampionSubtitle(int count) {
+    return 'куплено $count раз за месяц';
+  }
+
+  @override
+  String insightsStreakDays(int days) {
+    return '$days дней подряд';
+  }
+
+  @override
+  String get insightsStreakSubtitle => 'ведёте список — не сбавляйте';
+
+  @override
+  String insightsFreqEvery(int days) {
+    return '~раз в $days дн.';
+  }
+
+  @override
+  String get insightsPopular => 'Часто покупаете';
+
+  @override
+  String get insightsStatsProducts => 'продуктов';
+
+  @override
+  String get insightsStatsLoginsWeek => 'входов за неделю';
+
+  @override
+  String get insightsEmpty => 'Пока нет данных — начните добавлять продукты';
+
+  @override
+  String get notificationsFilterAll => 'Все';
+
+  @override
+  String get notificationsFilterUrgent => 'Срочные';
+
+  @override
+  String get notificationsFilterPrediction => 'Предсказания';
+
+  @override
+  String get notificationsFilterPromo => 'Промо';
+
+  @override
+  String get notificationsFilterOther => 'Прочее';
+
+  @override
+  String get notificationsClearAll => 'Очистить все';
+
+  @override
+  String get notificationsDelete => 'Удалить';
+
+  @override
+  String get notificationsGroupToday => 'Сегодня';
+
+  @override
+  String get notificationsGroupYesterday => 'Вчера';
+
+  @override
+  String get notificationsEmptyTitle => 'Тишина';
+
+  @override
+  String get notificationsEmptyBody => 'Новые уведомления появятся здесь';
+
+  @override
+  String get recipeCreateListCta => 'Куда добавить рецепт?';
+
+  @override
+  String get recipeDupForceMark => 'добавим ещё';
+
+  @override
+  String recipeDedupBannerMany(int n) {
+    return '$n дубликатов будут пропущены — снимите галочки чтобы добавить принудительно';
+  }
+
+  @override
+  String get offlineWriteBlocked => 'Нет интернета — изменение не сохранится';
+
+  @override
+  String get offlineReadBanner => 'Работаете офлайн — данные из кэша';
+
+  @override
+  String get chatImportRecipeCta => 'Импортировать рецепт';
 }

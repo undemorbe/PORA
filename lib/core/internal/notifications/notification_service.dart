@@ -238,6 +238,12 @@ class NotificationService {
     await box.clear();
   }
 
+  /// Удаление одного уведомления по [id].
+  Future<void> deleteById(String id) async {
+    final box = await _openBox();
+    await box.delete(id);
+  }
+
   Future<void> deleteToken() async {
     await _fcm.deleteToken();
     _fcmToken = null;

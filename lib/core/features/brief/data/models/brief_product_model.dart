@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pora/core/features/brief/domain/entity/brief_product.dart';
 

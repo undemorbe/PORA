@@ -10,6 +10,9 @@ import 'package:pora/core/features/lists/data/models/lists/list_model.dart';
 import 'package:pora/core/features/lists/data/models/lists/lists_array_model.dart';
 import 'package:pora/core/features/lists/data/models/products/product_model.dart';
 import 'package:pora/core/features/settings/data/models/message_model.dart';
+import 'package:pora/core/features/insights/data/models/login_times_model.dart';
+import 'package:pora/core/features/insights/data/models/popular_product_model.dart';
+import 'package:pora/core/features/insights/data/models/user_products_model.dart';
 import 'package:pora/core/features/user/data/models/user/user_model.dart';
 import 'package:pora/core/features/user/data/models/user/user_update_model.dart';
 import 'package:retrofit/error_logger.dart';
@@ -61,8 +64,18 @@ abstract class ApiClient {
     @Body() required Map<String, dynamic> productsList,
   });
 
-  @GET('/user/statistics/get-brief')
+  @GET('/user/statistics/get_brief')
   Future<BriefProductModelList> getUserBrief();
+
+  //! Insights / Statistics
+  @GET('/user/statistics/login_times')
+  Future<LoginTimesModel> getUserLoginTimes();
+
+  @GET('/user/statistics/products')
+  Future<UserProductsModel> getUserAllProducts();
+
+  @GET('/user/statistics/popular-products')
+  Future<PopularProductsModel> getUserPopularProducts();
 
   //! Families
   @POST('/families/create-family')

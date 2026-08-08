@@ -15,35 +15,20 @@ class CategoryBar {
   final double share; // 0..1
 }
 
-/// Разбивка покупок по категориям — 5 горизонтальных баров.
+/// Категории — плоский типографический layout: имя + процент справа + hairline
+/// разделитель. Убран outer card-container (был card-in-card в insights),
+/// emoji-avatar (OS-blob) и heading `Покупки по категориям` (дублировал
+/// секцию `_SectionTitle` на insights screen).
 class CategoryBars extends StatelessWidget {
   const CategoryBars({super.key, required this.items});
   final List<CategoryBar> items;
 
   @override
   Widget build(BuildContext context) {
-    final c = context.colors;
-    return Container(
-      padding: const EdgeInsets.all(PoraSpacing.lg),
-      decoration: BoxDecoration(
-        color: c.surface,
-        borderRadius: PoraRadii.card,
-        border: Border.all(color: c.border, width: 1),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Покупки по категориям',
-            style: PoraText.itemTitle.copyWith(fontWeight: FontWeight.w700),
-          ),
-          const SizedBox(height: PoraSpacing.md),
-          for (var i = 0; i < items.length; i++) ...[
-            if (i > 0) const SizedBox(height: PoraSpacing.md),
-            _Row(item: items[i]),
-          ],
-        ],
-      ),
+    return Column(
+      children: [
+        for (final item in items) _Row(item: item),
+      ],
     );
   }
 }
@@ -55,39 +40,46 @@ class _Row extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Text(item.emoji, style: const TextStyle(fontSize: 16)),
-            const SizedBox(width: 6),
-            Expanded(child: Text(item.name, style: PoraText.small)),
-            Text(
-              '${(item.share * 100).round()}%',
-              style: PoraText.small.copyWith(
-                color: c.textSubtle,
-                fontWeight: FontWeight.w700,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  item.name,
+                  style: PoraText.itemTitle,
+                ),
+              ),
+              Text(
+                '${(item.share * 100).round()}%',
+                style: PoraText.small.copyWith(
+                  color: c.textSubtle,
+                  fontWeight: FontWeight.w800,
+                  fontFeatures: const [FontFeature.tabularFigures()],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(2),
+            child: TweenAnimationBuilder<double>(
+              duration: const Duration(milliseconds: 900),
+              curve: Curves.easeOutCubic,
+              tween: Tween(begin: 0, end: item.share.clamp(0, 1)),
+              builder: (_, v, _) => LinearProgressIndicator(
+                value: v,
+                minHeight: 4,
+                backgroundColor: c.surfaceAlt,
+                color: PoraColors.primary,
               ),
             ),
-          ],
-        ),
-        const SizedBox(height: 6),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(4),
-          child: TweenAnimationBuilder<double>(
-            duration: const Duration(milliseconds: 900),
-            curve: Curves.easeOutCubic,
-            tween: Tween(begin: 0, end: item.share.clamp(0, 1)),
-            builder: (_, v, _) => LinearProgressIndicator(
-              value: v,
-              minHeight: 8,
-              backgroundColor: c.surfaceAlt,
-              color: PoraColors.primary,
-            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

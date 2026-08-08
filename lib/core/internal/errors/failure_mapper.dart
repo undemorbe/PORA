@@ -48,7 +48,7 @@ class FailureMapper {
     if (body is Map<String, dynamic>) {
       final err = body['error'];
       if (err is Map<String, dynamic>) {
-        codeRaw = (err['code'] as String?) ?? '';
+        codeRaw = (err['code'].toString() as String?) ?? '';
         message = (err['message'] as String?) ?? message;
       } else if (err is String) {
         message = err;

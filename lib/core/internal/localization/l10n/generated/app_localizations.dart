@@ -2377,6 +2377,162 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No topics selected — tip will be generic'**
   String get tipTopicsEmpty;
+
+  /// champion card kicker
+  ///
+  /// In en, this message translates to:
+  /// **'CHAMPION OF THE MONTH'**
+  String get insightsChampionKicker;
+
+  /// champion card subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'bought {count} times this month'**
+  String insightsChampionSubtitle(int count);
+
+  /// streak headline
+  ///
+  /// In en, this message translates to:
+  /// **'{days} days in a row'**
+  String insightsStreakDays(int days);
+
+  /// streak card subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'you\'re on it — keep going'**
+  String get insightsStreakSubtitle;
+
+  /// frequency subtitle
+  ///
+  /// In en, this message translates to:
+  /// **'~every {days}d'**
+  String insightsFreqEvery(int days);
+
+  /// popular section title
+  ///
+  /// In en, this message translates to:
+  /// **'You buy often'**
+  String get insightsPopular;
+
+  /// kpi label
+  ///
+  /// In en, this message translates to:
+  /// **'products'**
+  String get insightsStatsProducts;
+
+  /// kpi label
+  ///
+  /// In en, this message translates to:
+  /// **'logins this week'**
+  String get insightsStatsLoginsWeek;
+
+  /// empty state on insights
+  ///
+  /// In en, this message translates to:
+  /// **'No data yet — start adding products'**
+  String get insightsEmpty;
+
+  /// filter chip
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get notificationsFilterAll;
+
+  /// filter chip
+  ///
+  /// In en, this message translates to:
+  /// **'Urgent'**
+  String get notificationsFilterUrgent;
+
+  /// filter chip
+  ///
+  /// In en, this message translates to:
+  /// **'Predictions'**
+  String get notificationsFilterPrediction;
+
+  /// filter chip
+  ///
+  /// In en, this message translates to:
+  /// **'Promo'**
+  String get notificationsFilterPromo;
+
+  /// filter chip
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get notificationsFilterOther;
+
+  /// menu action
+  ///
+  /// In en, this message translates to:
+  /// **'Clear all'**
+  String get notificationsClearAll;
+
+  /// slidable action
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get notificationsDelete;
+
+  /// group header
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get notificationsGroupToday;
+
+  /// group header
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday'**
+  String get notificationsGroupYesterday;
+
+  /// empty state title
+  ///
+  /// In en, this message translates to:
+  /// **'All quiet'**
+  String get notificationsEmptyTitle;
+
+  /// empty state body
+  ///
+  /// In en, this message translates to:
+  /// **'New notifications will appear here'**
+  String get notificationsEmptyBody;
+
+  /// recipe cta
+  ///
+  /// In en, this message translates to:
+  /// **'Where to add this recipe?'**
+  String get recipeCreateListCta;
+
+  /// dup pill when user unchecks flag
+  ///
+  /// In en, this message translates to:
+  /// **'will add anyway'**
+  String get recipeDupForceMark;
+
+  /// dedup banner
+  ///
+  /// In en, this message translates to:
+  /// **'{n} duplicates will be skipped — uncheck to force-add'**
+  String recipeDedupBannerMany(int n);
+
+  /// snackbar when write attempted offline
+  ///
+  /// In en, this message translates to:
+  /// **'No internet — change won\'t be saved'**
+  String get offlineWriteBlocked;
+
+  /// top banner when cached data shown
+  ///
+  /// In en, this message translates to:
+  /// **'Offline — showing cached data'**
+  String get offlineReadBanner;
+
+  /// chat bubble cta
+  ///
+  /// In en, this message translates to:
+  /// **'Import recipe'**
+  String get chatImportRecipeCta;
 }
 
 class _AppLocalizationsDelegate

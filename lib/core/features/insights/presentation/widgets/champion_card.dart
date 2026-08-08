@@ -1,26 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
+import 'package:pora/core/internal/extensions/l10n_extension.dart';
 import 'package:pora/core/internal/theme/additional_constants.dart';
 import 'package:pora/core/internal/theme/app_text_styles.dart';
 import 'package:pora/core/internal/theme/context_colors.dart';
 import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
 
-/// Продукт-«чемпион» месяца: эмодзи + название + сколько раз куплено.
+/// Продукт-«чемпион» месяца: (опциональный emoji) + название + счётчик.
 class ChampionCard extends StatelessWidget {
   const ChampionCard({
     super.key,
-    required this.emoji,
     required this.name,
     required this.count,
+    this.emoji,
   });
 
-  final String emoji;
+  final String? emoji;
   final String name;
   final int count;
 
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
+    final l = context.l10n;
     return Container(
       padding: const EdgeInsets.all(PoraSpacing.lg),
       decoration: BoxDecoration(
@@ -40,7 +42,7 @@ class ChampionCard extends StatelessWidget {
               ),
               const SizedBox(width: 6),
               Text(
-                'ЧЕМПИОН МЕСЯЦА',
+                l.insightsChampionKicker,
                 style: PoraText.small.copyWith(
                   color: PoraColors.primary,
                   fontWeight: FontWeight.w800,
@@ -60,17 +62,27 @@ class ChampionCard extends StatelessWidget {
                   color: PoraColors.primary.withValues(alpha: 0.1),
                   shape: BoxShape.circle,
                 ),
-                child: Text(emoji, style: const TextStyle(fontSize: 32)),
+                child: emoji != null
+                    ? Text(emoji!, style: const TextStyle(fontSize: 32))
+                    : const Icon(
+                        PhosphorIconsFill.package,
+                        size: 30,
+                        color: PoraColors.primary,
+                      ),
               ),
               const SizedBox(width: PoraSpacing.md),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(name, style: PoraText.title.copyWith(fontSize: 20)),
+                    Text(
+                      name,
+                      style: PoraText.title.copyWith(fontSize: 20),
+                      overflow: TextOverflow.ellipsis,
+                    ),
                     const SizedBox(height: 2),
                     Text(
-                      'куплено $count раз за месяц',
+                      l.insightsChampionSubtitle(count),
                       style: PoraText.small.copyWith(color: c.textSubtle),
                     ),
                   ],

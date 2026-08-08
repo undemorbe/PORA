@@ -84,6 +84,34 @@ class InjectionContainer {
       () => TipTopicsStore(prefs: _getIt<TipTopicsPrefs>()),
     );
 
+    //! Statistics (insights)
+    _getIt.registerLazySingleton<StatisticsRemote>(
+      () => StatisticsRemoteImpl(apiClient: _getIt<ApiClient>()),
+    );
+    _getIt.registerLazySingleton<StatisticsRepository>(
+      () => StatisticsService(remote: _getIt<StatisticsRemote>()),
+    );
+    _getIt.registerFactory<GetLoginTimesUseCase>(
+      () => GetLoginTimesUseCase(repository: _getIt<StatisticsRepository>()),
+    );
+    _getIt.registerFactory<GetAllUserProductsUseCase>(
+      () => GetAllUserProductsUseCase(
+        repository: _getIt<StatisticsRepository>(),
+      ),
+    );
+    _getIt.registerFactory<GetPopularProductsUseCase>(
+      () => GetPopularProductsUseCase(
+        repository: _getIt<StatisticsRepository>(),
+      ),
+    );
+    _getIt.registerLazySingleton<StatisticsStore>(
+      () => StatisticsStore(
+        loginTimesUseCase: _getIt<GetLoginTimesUseCase>(),
+        allProductsUseCase: _getIt<GetAllUserProductsUseCase>(),
+        popularProductsUseCase: _getIt<GetPopularProductsUseCase>(),
+      ),
+    );
+
     //! STORAGE
     _getIt.registerSingletonAsync<ILocalDB<dynamic>>(
       () async => HiveLocalDB<dynamic>()..init(),
@@ -298,7 +326,12 @@ class InjectionContainer {
     );
 
     //! Recipe
-    _getIt.registerLazySingleton<RecipeScraper>(() => HttpRecipeScraper());
+    _getIt.registerLazySingleton<AiRecipeParser>(
+      () => AiRecipeParser(ai: _getIt<AiRepository>()),
+    );
+    _getIt.registerLazySingleton<RecipeScraper>(
+      () => HttpRecipeScraper(aiParser: _getIt<AiRecipeParser>()),
+    );
     _getIt.registerLazySingleton<RecipeRepository>(
       () => RecipeService(scraper: _getIt<RecipeScraper>()),
     );
@@ -316,6 +349,16 @@ class InjectionContainer {
     _getIt.registerLazySingleton<TutorialPrefs>(
       () => TutorialPrefs(_getIt<ILocalDB<dynamic>>()),
     );
+
+    //! Notifications store — singleton, чтобы bell на groups и NotificationsPage
+    //! видели один и тот же live-стейт unreadCount.
+    _getIt.registerLazySingleton<NotificationsStore>(
+      () => NotificationsStore()..load(),
+    );
+
+    //! Groups store — singleton чтобы recipe-import и другие фичи могли
+    //! читать список групп/личных списков без пересоздания store'а.
+    _getIt.registerLazySingleton<GroupsStore>(() => GroupsStore()..load());
 
     //! Support messaging
     _getIt.registerLazySingleton<SupportRemote>(

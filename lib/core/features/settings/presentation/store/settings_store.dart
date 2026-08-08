@@ -4,6 +4,7 @@ import 'package:mobx/mobx.dart';
 import 'package:pora/core/features/settings/domain/entity/message_entity.dart';
 import 'package:pora/core/features/settings/domain/usecase/send_support_msg.dart';
 import 'package:pora/core/features/user/domain/entity/user/user_entity.dart';
+import 'package:pora/core/internal/cache/hive_json_cache.dart';
 import 'package:pora/core/internal/di/export.dart';
 part 'settings_store.g.dart';
 
@@ -65,6 +66,8 @@ abstract class _SettingsStoreBase with Store {
     await GetIt.I<LogoutUseCase>().call();
     final tokensStore = GetIt.I<TokensSecureStore>();
     await tokensStore.clearTokens();
+    // Чистим весь offline-cache — новый юзер не должен видеть чужие снапшоты.
+    await HiveJsonCache.clear();
     GetIt.I<AuthState>().setUnauthenticated();
   }
 

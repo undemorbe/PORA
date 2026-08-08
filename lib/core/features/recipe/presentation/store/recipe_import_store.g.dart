@@ -141,8 +141,10 @@ mixin _$RecipeImportStore on _RecipeImportStoreBase, Store {
   );
 
   @override
-  Future<void> parse() {
-    return _$parseAsyncAction.run(() => super.parse());
+  Future<void> parse({String languageCode = 'ru'}) {
+    return _$parseAsyncAction.run(
+      () => super.parse(languageCode: languageCode),
+    );
   }
 
   late final _$addSelectedAsyncAction = AsyncAction(

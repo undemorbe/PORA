@@ -1,10 +1,16 @@
+import 'dart:convert';
+
 import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
+import 'package:pora/core/features/families/domain/usecase/create_family.dart';
+import 'package:pora/core/features/groups/presentation/store/groups_store.dart';
 import 'package:pora/core/features/item_detail/domain/usecase/add_item.dart';
 import 'package:pora/core/features/item_detail/domain/usecase/update_item.dart';
 import 'package:pora/core/features/lists/domain/entity/lists/lists.dart';
 import 'package:pora/core/features/lists/domain/entity/products/product.dart';
+import 'package:pora/core/features/lists/domain/usecase/create_list.dart';
 import 'package:pora/core/features/lists/domain/usecase/get_list_data.dart';
+import 'package:pora/core/features/user/domain/usecase/user/get_user.dart';
 import 'package:pora/core/features/recipe/data/datasource/boyer_moore.dart';
 import 'package:pora/core/features/recipe/domain/entity/recipe.dart';
 import 'package:pora/core/features/recipe/domain/entity/recipe_ingredient.dart';
@@ -59,6 +65,27 @@ abstract class _RecipeImportStoreBase with Store {
   @computed
   int get selectedCount => selected.length;
 
+  /// Кол-во dup-строк которые всё ещё «checked» (=будут пропущены).
+  /// Если 0 — dedup banner можно скрывать.
+  @computed
+  int get dupSkipCount {
+    var n = 0;
+    for (var i = 0; i < rows.length; i++) {
+      if (rows[i].hasDuplicate && selected.contains(i)) n++;
+    }
+    return n;
+  }
+
+  /// Кол-во dup-строк которые unchecked (=будут добавлены принудительно).
+  @computed
+  int get dupForceCount {
+    var n = 0;
+    for (var i = 0; i < rows.length; i++) {
+      if (rows[i].hasDuplicate && !selected.contains(i)) n++;
+    }
+    return n;
+  }
+
   @action
   void setUrl(String value) => url = value;
 
@@ -78,14 +105,16 @@ abstract class _RecipeImportStoreBase with Store {
   }
 
   @action
-  Future<void> parse() async {
+  Future<void> parse({String languageCode = 'ru'}) async {
     if (url.trim().isEmpty) return;
     isLoading = true;
     errorMessage = null;
-    // Гарантируем что список актуален для dedup.
     if (_existingList == null) await loadExisting();
 
-    final result = await GetIt.I<ParseRecipeFromUrlUseCase>().call(url: url);
+    final result = await GetIt.I<ParseRecipeFromUrlUseCase>().call(
+      url: url,
+      languageCode: languageCode,
+    );
     isLoading = false;
     if (result.isLeft) {
       recipe = null;
@@ -97,10 +126,9 @@ abstract class _RecipeImportStoreBase with Store {
 
     recipe = result.right;
     rows = ObservableList<RecipeRow>.of(_buildRows(result.right.ingredients));
-    // Дефолт selected:
-    //  - non-dup checked (добавить),
-    //  - dup checked (пропустить — user сам снимет чтобы форсить).
-    selected = ObservableSet<int>.of(List<int>.generate(rows.length, (i) => i));
+    selected = ObservableSet<int>.of(
+      List<int>.generate(rows.length, (i) => i),
+    );
   }
 
   List<RecipeRow> _buildRows(List<RecipeIngredient> ings) {
@@ -211,5 +239,150 @@ abstract class _RecipeImportStoreBase with Store {
     selected = ObservableSet<int>();
     errorMessage = null;
     url = '';
+  }
+
+  /// Заливает все ингредиенты рецепта в готовый список [targetLid].
+  /// Используется когда пользователь выбрал существующий список (не создаёт новый).
+  /// Возвращает список ошибок (пустой = OK).
+  @action
+  Future<List<String>> addRecipeToExistingList(String targetLid) async {
+    final r = recipe;
+    if (r == null || r.ingredients.isEmpty) return const [];
+    isLoading = true;
+    final errs = <String>[];
+    final addUC = GetIt.I<AddItemUseCase>();
+    for (final ing in r.ingredients) {
+      final res = await addUC.call(
+        listId: targetLid,
+        name: ing.name,
+        section: 'Разное',
+        quantity: _parseQty(ing.quantity),
+        unit: ing.unit ?? '',
+        priority: 0,
+        urgent: false,
+        remindEveryDays: null,
+      );
+      if (res.isLeft) errs.add(res.left.message);
+    }
+    isLoading = false;
+    return errs;
+  }
+
+  /// Создаёт общую группу (family+list) с именем рецепта и заливает
+  /// в лист все ингредиенты. Возвращает `lid` или `null`.
+  @action
+  Future<String?> createSharedGroupFromRecipe() async {
+    final r = recipe;
+    if (r == null || r.ingredients.isEmpty) return null;
+    isLoading = true;
+    errorMessage = null;
+
+    // 1. createFamily.
+    final famRes = await GetIt.I<CreateFamilyUseCase>().call(name: r.title);
+    if (famRes.isLeft) {
+      isLoading = false;
+      errorMessage = famRes.left.message;
+      return null;
+    }
+    String? fid;
+    try {
+      final decoded = jsonDecode(famRes.right) as Map<String, dynamic>;
+      fid = decoded['id'] as String?;
+    } catch (_) {}
+    if (fid == null) {
+      isLoading = false;
+      errorMessage = 'Family id missing';
+      return null;
+    }
+
+    // 2. createList(name, fid).
+    final listRes =
+        await GetIt.I<CreateListUseCase>().call(name: r.title, fid: fid);
+    if (listRes.isLeft) {
+      isLoading = false;
+      errorMessage = listRes.left.message;
+      return null;
+    }
+
+    // 3. Refresh groups + найти созданный лист.
+    final groupsStore = GetIt.I<GroupsStore>();
+    await groupsStore.load();
+    String? newLid;
+    for (final g in groupsStore.groups) {
+      if (g.familyId == fid && g.list.name == r.title) {
+        newLid = g.list.id;
+        break;
+      }
+    }
+    if (newLid == null) {
+      isLoading = false;
+      errorMessage = 'List id lookup failed';
+      return null;
+    }
+
+    // 4. Добавляем ингредиенты.
+    final errs = await addRecipeToExistingList(newLid);
+    if (errs.isNotEmpty) {
+      errorMessage = errs.first;
+    }
+    isLoading = false;
+    return newLid;
+  }
+
+  /// Создаёт новый персональный список с именем рецепта и заливает в него
+  /// все ингредиенты (без dedup — новый пустой лист).
+  /// Возвращает `lid` нового списка или `null` если что-то пошло не так.
+  @action
+  Future<String?> createListFromRecipe() async {
+    final r = recipe;
+    if (r == null || r.ingredients.isEmpty) return null;
+    isLoading = true;
+    errorMessage = null;
+
+    final createRes =
+        await GetIt.I<CreateListUseCase>().call(name: r.title);
+    if (createRes.isLeft) {
+      isLoading = false;
+      errorMessage = createRes.left.message;
+      return null;
+    }
+
+    // Backend не возвращает lid — берём из /user/me новейший список
+    // с матчащимся именем.
+    final userRes = await GetIt.I<GetUserUseCase>().call();
+    String? newLid;
+    if (userRes.isRight) {
+      final lists = userRes.right.selfLists ?? const [];
+      final matches = lists.where((l) => l.name == r.title).toList();
+      if (matches.isNotEmpty) {
+        // Берём последний в списке (обычно новый в конце). Если id ISO-like
+        // — можно сортировать; для простоты — последний.
+        newLid = matches.last.id;
+      }
+    }
+
+    if (newLid == null) {
+      isLoading = false;
+      errorMessage = 'List created, but id lookup failed';
+      return null;
+    }
+
+    // Добавляем все ингредиенты.
+    final addUC = GetIt.I<AddItemUseCase>();
+    for (final ing in r.ingredients) {
+      await addUC.call(
+        listId: newLid,
+        name: ing.name,
+        section: 'Разное',
+        quantity: _parseQty(ing.quantity),
+        unit: ing.unit ?? '',
+        priority: 0,
+        urgent: false,
+        remindEveryDays: null,
+      );
+    }
+
+    isLoading = false;
+    return newLid;
   }
 }

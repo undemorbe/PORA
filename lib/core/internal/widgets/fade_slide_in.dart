@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:pora/core/internal/widgets/motion_gate.dart';
 
 /// Мягкое появление: opacity 0→1 + translateY [dy]→0 через easeOutCubic.
 /// [delay] позволяет каскадировать (например, `delay: 60 * index`).
+///
+/// При включённом `MediaQuery.disableAnimations` анимация схлопывается —
+/// дочерний виджет рендерится сразу без opacity/сдвига.
 class FadeSlideIn extends StatefulWidget {
   const FadeSlideIn({
     super.key,
@@ -43,6 +47,7 @@ class _FadeSlideInState extends State<FadeSlideIn>
 
   @override
   Widget build(BuildContext context) {
+    if (MotionGate.reduced(context)) return widget.child;
     final curve = CurvedAnimation(parent: _c, curve: Curves.easeOutCubic);
     return AnimatedBuilder(
       animation: curve,

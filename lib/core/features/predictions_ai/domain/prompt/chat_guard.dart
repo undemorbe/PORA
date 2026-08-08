@@ -26,6 +26,15 @@ Strict rules:
 4. If a question is out of scope (food/home/groceries), briefly redirect:
    "I'm about food and groceries. Try asking about a recipe or a product."
 5. Answer compactly (up to ~350 words), no markdown headings, no emojis.
+
+Recipe policy:
+- If the answer contains a recipe (dish name + ingredients list), append at the
+  END of your message a machine-readable block WITHOUT any surrounding markdown:
+  <recipe>{"title":"...","servings":"...","ingredients":[{"name":"...","quantity":"...","unit":"..."}]}</recipe>
+- The <recipe> block is IN ADDITION to human-readable text — do not remove text.
+- Field "ingredients" values must be the actual items from your recipe. `quantity`/`unit` may be empty strings if unknown.
+- All fields — in language "$languageCode" (or the user's language if it differs).
+- If your answer is NOT a recipe, DO NOT include <recipe> tags.
 ''';
 
 /// Возвращает список сообщений с system-prompt'ом впереди для отправки в chat-completions.

@@ -16,6 +16,7 @@ import 'package:pora/core/internal/widgets/pora_buttons.dart';
 import 'package:pora/core/internal/widgets/pora_icon_tile.dart';
 import 'package:pora/core/internal/widgets/pora_rows_card.dart';
 import 'package:pora/core/internal/widgets/pora_setting_row.dart';
+import 'package:pora/core/internal/network/connectivity/connectivity_guard.dart';
 import 'package:pora/core/internal/widgets/pora_snackbar.dart';
 import 'package:pora/core/internal/widgets/pora_toggle.dart';
 import 'package:pora/core/internal/widgets/screen_back_header.dart';
@@ -47,12 +48,14 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
   }
 
   Future<void> _toggleUrgent() async {
+    if (!await ConnectivityGuard.checkWrite(context)) return;
     final it = store.item;
     if (it == null) return;
     await store.save(urgent: !it.urgent);
   }
 
   Future<void> _notify() async {
+    if (!await ConnectivityGuard.checkWrite(context)) return;
     final it = store.item;
     if (it == null) return;
     final added = it.addedBy;
@@ -71,6 +74,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
   }
 
   Future<void> _delete() async {
+    if (!await ConnectivityGuard.checkWrite(context)) return;
     final ok = await confirmDeleteItem(context);
     if (!ok || !mounted) return;
     final res = await store.delete().whenComplete(
@@ -210,7 +214,10 @@ class _Body extends StatelessWidget {
           label: item.checked
               ? context.l10n.returnToList
               : context.l10n.itemDetailMarkBought,
-          onPressed: () => store.toggleBought(),
+          onPressed: () async {
+            if (!await ConnectivityGuard.checkWrite(context)) return;
+            store.toggleBought();
+          },
         ),
         const SizedBox(height: PoraSpacing.lg),
         Center(

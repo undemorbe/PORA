@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/core/features/add_item/presentation/store/add_item_store.dart';
+import 'package:pora/core/internal/network/connectivity/connectivity_guard.dart';
 import 'package:pora/core/features/add_item/presentation/widgets/add_item_header.dart';
 import 'package:pora/core/features/add_item/presentation/widgets/priority_selector.dart';
 import 'package:pora/core/features/add_item/presentation/widgets/quantity_stepper.dart';
@@ -41,6 +42,7 @@ class _AddItemPageState extends State<AddItemPage> {
   }
 
   Future<void> _submit() async {
+    if (!await ConnectivityGuard.checkWrite(context)) return;
     final ok = await store.submit();
     if (!mounted) return;
     if (ok) {

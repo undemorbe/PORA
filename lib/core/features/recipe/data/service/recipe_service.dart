@@ -2,6 +2,7 @@ import 'package:pora/core/features/recipe/data/datasource/recipe_scraper.dart';
 import 'package:pora/core/features/recipe/domain/entity/recipe.dart';
 import 'package:pora/core/features/recipe/domain/repository/recipe_repository.dart';
 import 'package:pora/core/internal/errors/failure.dart';
+import 'package:pora/core/internal/errors/failure_mapper.dart';
 import 'package:pora/core/internal/extensions/either.dart';
 
 class RecipeService implements RecipeRepository {
@@ -10,17 +11,20 @@ class RecipeService implements RecipeRepository {
   const RecipeService({required this.scraper});
 
   @override
-  Future<Either<Failure, RecipeEntity>> parseFromUrl(String url) async {
+  Future<Either<Failure, RecipeEntity>> parseFromUrl(
+    String url, {
+    String languageCode = 'ru',
+  }) async {
     if (url.trim().isEmpty) {
       return Left(const ValidationFailure('URL is empty'));
     }
     try {
-      final recipe = await scraper.scrape(url);
+      final recipe = await scraper.scrape(url, languageCode: languageCode);
       return Right(recipe);
     } on RecipeScrapeException catch (e) {
       return Left(ServerFailure(e.message));
-    } catch (e) {
-      return Left(NetworkFailure(e.toString()));
+    } catch (e, s) {
+      return Left(FailureMapper.map(e, s));
     }
   }
 }

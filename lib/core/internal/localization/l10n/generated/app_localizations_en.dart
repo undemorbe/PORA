@@ -1197,4 +1197,90 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tipTopicsEmpty => 'No topics selected — tip will be generic';
+
+  @override
+  String get insightsChampionKicker => 'CHAMPION OF THE MONTH';
+
+  @override
+  String insightsChampionSubtitle(int count) {
+    return 'bought $count times this month';
+  }
+
+  @override
+  String insightsStreakDays(int days) {
+    return '$days days in a row';
+  }
+
+  @override
+  String get insightsStreakSubtitle => 'you\'re on it — keep going';
+
+  @override
+  String insightsFreqEvery(int days) {
+    return '~every ${days}d';
+  }
+
+  @override
+  String get insightsPopular => 'You buy often';
+
+  @override
+  String get insightsStatsProducts => 'products';
+
+  @override
+  String get insightsStatsLoginsWeek => 'logins this week';
+
+  @override
+  String get insightsEmpty => 'No data yet — start adding products';
+
+  @override
+  String get notificationsFilterAll => 'All';
+
+  @override
+  String get notificationsFilterUrgent => 'Urgent';
+
+  @override
+  String get notificationsFilterPrediction => 'Predictions';
+
+  @override
+  String get notificationsFilterPromo => 'Promo';
+
+  @override
+  String get notificationsFilterOther => 'Other';
+
+  @override
+  String get notificationsClearAll => 'Clear all';
+
+  @override
+  String get notificationsDelete => 'Delete';
+
+  @override
+  String get notificationsGroupToday => 'Today';
+
+  @override
+  String get notificationsGroupYesterday => 'Yesterday';
+
+  @override
+  String get notificationsEmptyTitle => 'All quiet';
+
+  @override
+  String get notificationsEmptyBody => 'New notifications will appear here';
+
+  @override
+  String get recipeCreateListCta => 'Where to add this recipe?';
+
+  @override
+  String get recipeDupForceMark => 'will add anyway';
+
+  @override
+  String recipeDedupBannerMany(int n) {
+    return '$n duplicates will be skipped — uncheck to force-add';
+  }
+
+  @override
+  String get offlineWriteBlocked => 'No internet — change won\'t be saved';
+
+  @override
+  String get offlineReadBanner => 'Offline — showing cached data';
+
+  @override
+  String get chatImportRecipeCta => 'Import recipe';
 }

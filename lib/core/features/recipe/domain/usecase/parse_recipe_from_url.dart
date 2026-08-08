@@ -8,7 +8,10 @@ class ParseRecipeFromUrlUseCase {
 
   const ParseRecipeFromUrlUseCase({required this.repository});
 
-  Future<Either<Failure, RecipeEntity>> call({required String url}) {
-    return repository.parseFromUrl(url);
+  Future<Either<Failure, RecipeEntity>> call({
+    required String url,
+    required String languageCode,
+  }) {
+    return repository.parseFromUrl(url, languageCode: languageCode);
   }
 }

@@ -16,6 +16,14 @@ mixin _$NotificationsStore on _NotificationsStoreBase, Store {
     () => super.unreadCount,
     name: '_NotificationsStoreBase.unreadCount',
   )).value;
+  Computed<List<NotificationEntity>>? _$filteredComputed;
+
+  @override
+  List<NotificationEntity> get filtered =>
+      (_$filteredComputed ??= Computed<List<NotificationEntity>>(
+        () => super.filtered,
+        name: '_NotificationsStoreBase.filtered',
+      )).value;
 
   late final _$itemsAtom = Atom(
     name: '_NotificationsStoreBase.items',
@@ -53,6 +61,24 @@ mixin _$NotificationsStore on _NotificationsStoreBase, Store {
     });
   }
 
+  late final _$filterAtom = Atom(
+    name: '_NotificationsStoreBase.filter',
+    context: context,
+  );
+
+  @override
+  NotificationFilter get filter {
+    _$filterAtom.reportRead();
+    return super.filter;
+  }
+
+  @override
+  set filter(NotificationFilter value) {
+    _$filterAtom.reportWrite(value, super.filter, () {
+      super.filter = value;
+    });
+  }
+
   late final _$loadAsyncAction = AsyncAction(
     '_NotificationsStoreBase.load',
     context: context,
@@ -83,6 +109,26 @@ mixin _$NotificationsStore on _NotificationsStoreBase, Store {
     return _$markReadAsyncAction.run(() => super.markRead(id));
   }
 
+  late final _$deleteAsyncAction = AsyncAction(
+    '_NotificationsStoreBase.delete',
+    context: context,
+  );
+
+  @override
+  Future<void> delete(String id) {
+    return _$deleteAsyncAction.run(() => super.delete(id));
+  }
+
+  late final _$clearAllAsyncAction = AsyncAction(
+    '_NotificationsStoreBase.clearAll',
+    context: context,
+  );
+
+  @override
+  Future<void> clearAll() {
+    return _$clearAllAsyncAction.run(() => super.clearAll());
+  }
+
   late final _$_NotificationsStoreBaseActionController = ActionController(
     name: '_NotificationsStoreBase',
     context: context,
@@ -101,11 +147,25 @@ mixin _$NotificationsStore on _NotificationsStoreBase, Store {
   }
 
   @override
+  void setFilter(NotificationFilter f) {
+    final _$actionInfo = _$_NotificationsStoreBaseActionController.startAction(
+      name: '_NotificationsStoreBase.setFilter',
+    );
+    try {
+      return super.setFilter(f);
+    } finally {
+      _$_NotificationsStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 items: ${items},
 isLoading: ${isLoading},
-unreadCount: ${unreadCount}
+filter: ${filter},
+unreadCount: ${unreadCount},
+filtered: ${filtered}
     ''';
   }
 }

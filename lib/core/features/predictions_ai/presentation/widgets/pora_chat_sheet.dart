@@ -4,6 +4,11 @@ import 'package:get_it/get_it.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/core/features/predictions_ai/domain/usecase/chat_with_pora.dart';
 import 'package:pora/core/features/predictions_ai/presentation/store/ai_chat_store.dart';
+import 'package:pora/core/features/recipe/domain/entity/recipe.dart';
+import 'package:pora/core/features/recipe/domain/recipe_creator.dart';
+import 'package:pora/core/features/recipe/presentation/widgets/recipe_target_sheet.dart';
+import 'package:pora/core/internal/network/connectivity/connectivity_guard.dart';
+import 'package:pora/core/internal/widgets/pora_snackbar.dart';
 import 'package:pora/core/features/predictions_ai/presentation/widgets/chat_message_bubble.dart';
 import 'package:pora/core/features/predictions_ai/presentation/widgets/pora_hero_tags.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
@@ -50,6 +55,37 @@ class _PoraChatSheetState extends State<PoraChatSheet> {
     final locale = Localizations.localeOf(context).languageCode;
     await _store.send(text: text, languageCode: locale);
     _scrollToBottom();
+  }
+
+  /// Импорт рецепта из assistant-сообщения: показывает target sheet,
+  /// dispatch по выбору. Все callsites закрыты `ConnectivityGuard`.
+  Future<void> _importRecipe(RecipeEntity recipe) async {
+    if (!await ConnectivityGuard.checkWrite(context)) return;
+    if (!mounted) return;
+    final choice =
+        await showRecipeTargetSheet(context, recipeTitle: recipe.title);
+    if (choice == null || !mounted) return;
+    String? outcome;
+    switch (choice.kind) {
+      case RecipeTargetKind.createShared:
+        outcome = await RecipeCreator.createShared(recipe);
+        break;
+      case RecipeTargetKind.createPersonal:
+        outcome = await RecipeCreator.createPersonal(recipe);
+        break;
+      case RecipeTargetKind.existing:
+        final errs =
+            await RecipeCreator.addToExisting(recipe, choice.existingLid!);
+        outcome = errs.isEmpty ? choice.existingLid : null;
+        break;
+    }
+    if (!mounted) return;
+    PoraSnackbar.show(
+      context,
+      message: outcome != null
+          ? context.l10n.done
+          : context.l10n.commonError,
+    );
   }
 
   void _scrollToBottom() {
@@ -100,6 +136,7 @@ class _PoraChatSheetState extends State<PoraChatSheet> {
                             return ChatMessageBubble(
                               text: m.content,
                               fromUser: m.role == 'user',
+                              onImportRecipe: _importRecipe,
                             );
                           },
                         ),

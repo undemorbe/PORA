@@ -1,6 +1,8 @@
 import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 import 'package:pora/core/features/families/domain/entity/member.dart';
+import 'package:pora/core/features/lists/data/models/lists/list_model.dart';
+import 'package:pora/core/features/lists/data/models/lists/lists_array_model.dart';
 import 'package:pora/core/features/lists/domain/entity/lists/list_section.dart';
 import 'package:pora/core/features/lists/domain/entity/lists/lists.dart';
 import 'package:pora/core/features/lists/domain/entity/lists/lists_array.dart';
@@ -12,6 +14,7 @@ import 'package:pora/core/features/lists/domain/usecase/get_list_data.dart';
 import 'package:pora/core/features/item_detail/domain/usecase/delete_item.dart';
 import 'package:pora/core/features/item_detail/domain/usecase/mark_item_bought.dart';
 import 'package:pora/core/features/user/domain/usecase/user/get_user.dart';
+import 'package:pora/core/internal/cache/hive_json_cache.dart';
 part 'lists_store.g.dart';
 
 class ListStore = _ListStoreBase with _$ListStore;
@@ -30,6 +33,10 @@ abstract class _ListStoreBase with Store {
 
   @observable
   String? errorMessage;
+
+  /// True когда contract показывает данные из cache (offline read).
+  @observable
+  bool usingCache = false;
 
   @observable
   ListsArrayEntity? listsWithPreview;
@@ -98,10 +105,35 @@ abstract class _ListStoreBase with Store {
     if (response.isRight) {
       isSuccess = true;
       list = response.right;
+      usingCache = false;
+      // Write-through cache — открытый список доступен offline.
+      final asModel = _asListModel(response.right);
+      if (asModel != null) {
+        await HiveJsonCache.put(_listCacheKey(lid), asModel.toJson());
+      }
     } else {
+      // Пробуем восстановить из кэша.
+      final cached = await HiveJsonCache.read(_listCacheKey(lid));
+      if (cached is Map<String, dynamic>) {
+        try {
+          list = ListModel.fromJson(cached);
+          isSuccess = true;
+          usingCache = true;
+          return;
+        } catch (_) {}
+      }
       isSuccess = false;
       errorMessage = response.left.message;
     }
+  }
+
+  String _listCacheKey(String lid) => 'list-content-v1-$lid';
+  String _famListsCacheKey(String fid) => 'fam-lists-v1-$fid';
+
+  ListModel? _asListModel(ListEntity e) {
+    if (e is ListModel) return e;
+    // Fallback — ручное построение из entity полей (sections могут быть entity).
+    return null;
   }
 
   @action
@@ -114,7 +146,23 @@ abstract class _ListStoreBase with Store {
     if (response.isRight) {
       isSuccess = true;
       listsWithPreview = response.right;
+      usingCache = false;
+      if (response.right is ListsArrayModel) {
+        await HiveJsonCache.put(
+          _famListsCacheKey(fid),
+          (response.right as ListsArrayModel).toJson(),
+        );
+      }
     } else {
+      final cached = await HiveJsonCache.read(_famListsCacheKey(fid));
+      if (cached is Map<String, dynamic>) {
+        try {
+          listsWithPreview = ListsArrayModel.fromJson(cached);
+          isSuccess = true;
+          usingCache = true;
+          return;
+        } catch (_) {}
+      }
       isSuccess = false;
       errorMessage = response.left.message;
     }

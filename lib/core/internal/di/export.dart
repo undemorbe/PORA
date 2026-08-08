@@ -67,12 +67,18 @@ export 'package:pora/core/features/lists/domain/usecase/get_list_data.dart';
 export 'package:pora/core/features/recipe/data/datasource/recipe_scraper.dart';
 export 'package:pora/core/features/recipe/data/service/recipe_service.dart';
 export 'package:pora/core/features/recipe/domain/repository/recipe_repository.dart';
+export 'package:pora/core/features/recipe/data/datasource/ai_recipe_parser.dart';
+export 'package:pora/core/features/recipe/data/datasource/recipe_scraper.dart';
+export 'package:pora/core/features/recipe/data/service/recipe_service.dart';
+export 'package:pora/core/features/recipe/domain/repository/recipe_repository.dart';
 export 'package:pora/core/features/recipe/domain/usecase/parse_recipe_from_url.dart';
 export 'package:pora/core/features/user/domain/usecase/user/logout.dart';
 export 'package:pora/core/features/user/domain/usecase/user/update_device_token.dart';
 export 'package:pora/core/internal/formatters/image_formatter.dart';
 export 'package:pora/core/internal/notifications/notification_service.dart';
 export 'package:pora/core/internal/links/share_conf.dart';
+export 'package:pora/core/features/notifications/presentation/store/notifications_store.dart';
+export 'package:pora/core/features/groups/presentation/store/groups_store.dart';
 // AI (OpenRouter clean-arch)
 export 'package:pora/core/features/predictions_ai/data/datasource/ai_remote.dart';
 export 'package:pora/core/features/predictions_ai/data/datasource/ai_remote_impl.dart';
@@ -85,3 +91,12 @@ export 'package:pora/core/features/predictions_ai/data/prefs/tip_topics_prefs.da
 export 'package:pora/core/features/predictions_ai/presentation/store/ai_chat_store.dart';
 export 'package:pora/core/features/predictions_ai/presentation/store/ai_tip_store.dart';
 export 'package:pora/core/features/predictions_ai/presentation/store/tip_topics_store.dart';
+// Statistics (insights)
+export 'package:pora/core/features/insights/data/datasource/statistics_remote.dart';
+export 'package:pora/core/features/insights/data/datasource/statistics_remote_impl.dart';
+export 'package:pora/core/features/insights/data/service/statistics_service.dart';
+export 'package:pora/core/features/insights/domain/repository/statistics_repository.dart';
+export 'package:pora/core/features/insights/domain/usecase/get_all_user_products.dart';
+export 'package:pora/core/features/insights/domain/usecase/get_login_times.dart';
+export 'package:pora/core/features/insights/domain/usecase/get_popular_products.dart';
+export 'package:pora/core/features/insights/presentation/store/statistics_store.dart';
