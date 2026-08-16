@@ -1,0 +1,15 @@
+import 'package:pora/core/features/auth_and_validation/domain/entity/tokens_entity.dart';
+import 'package:pora/core/internal/network/api_client/api_client.dart';
+
+abstract class TokensRemoteDataSource {
+  Future<TokensEntity> refreshTokens({required String? refreshToken});
+}
+
+class TokensRemoteDataSourceImpl implements TokensRemoteDataSource {
+  const TokensRemoteDataSourceImpl({required this.apiClient});
+  final ApiClient apiClient;
+
+  @override
+  Future<TokensEntity> refreshTokens({required String? refreshToken}) =>
+      apiClient.refreshTokens(refreshToken: refreshToken ?? '');
+}
