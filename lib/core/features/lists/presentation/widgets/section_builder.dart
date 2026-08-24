@@ -40,13 +40,7 @@ class SectionBuilder extends StatelessWidget {
     return Observer(
       builder: (context) {
         final Widget child;
-        if (listStore.isLoading) {
-          child = const Padding(
-            key: ValueKey('loading'),
-            padding: EdgeInsets.symmetric(vertical: PoraSpacing.xl),
-            child: Center(child: CircularProgressIndicator.adaptive()),
-          );
-        } else if (listStore.errorMessage != null) {
+         if (listStore.errorMessage != null) {
           child = Center(
             key: const ValueKey('error'),
             child: Padding(
@@ -64,22 +58,7 @@ class SectionBuilder extends StatelessWidget {
             child: isPreview ? _buildPreview(context) : _buildConcrete(context),
           );
         }
-        return AnimatedSwitcher(
-          duration: const Duration(milliseconds: 240),
-          switchInCurve: Curves.easeOutCubic,
-          switchOutCurve: Curves.easeInCubic,
-          transitionBuilder: (child, anim) => FadeTransition(
-            opacity: anim,
-            child: SlideTransition(
-              position: Tween<Offset>(
-                begin: const Offset(0, 0.02),
-                end: Offset.zero,
-              ).animate(anim),
-              child: child,
-            ),
-          ),
-          child: child,
-        );
+        return child;
       },
     );
   }

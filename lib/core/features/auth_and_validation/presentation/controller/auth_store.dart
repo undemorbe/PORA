@@ -73,18 +73,6 @@ abstract class _AuthStoreBase with Store {
       // перехода в защищённую зону — иначе reevaluateListenable срабатывает
       // прямо во время replaceAll и сбрасывает только что открытый маршрут.
     } else {
-      if (dotenv.getBool("DEBUG")) {
-        isLoading = false;
-        status = 'notRegistered';
-        success = true;
-        await GetIt.I<SaveTokensUseCase>().call(
-          tokens: TokensModel(
-            accessToken: 'accessToken',
-            refreshToken: 'refreshToken',
-          ),
-        );
-        await GetIt.I<UpdateIsSawedOnboardingUseCase>().call(isSawed: true);
-      } else {
         isLoading = false;
         success = false;
         //! Localize!!!!!!!
@@ -92,4 +80,4 @@ abstract class _AuthStoreBase with Store {
       }
     }
   }
-}
+

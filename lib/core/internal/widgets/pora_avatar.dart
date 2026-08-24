@@ -80,7 +80,7 @@ class PoraAvatar extends StatelessWidget {
             if (progress == null) return child;
             // Плавное появление: fade fallback → image.
             return AnimatedSwitcher(
-              duration: const Duration(milliseconds: 180),
+              duration: const Duration(milliseconds: 90),
               child: fallback,
             );
           },

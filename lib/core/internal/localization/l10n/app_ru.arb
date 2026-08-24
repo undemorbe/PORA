@@ -19,6 +19,10 @@
     "@authSubtitle2": {
         "description": "authSubtitle2"
     },
+    "onlyYou": "Только Вы",
+    "@onlyYou": {
+        "description": "onlyYou"
+    },
     "authSignInExpansibleExpand": "Войти иным способом",
     "@authSignInExpansibleExpand": {
         "description": "The sign in with other methods title"

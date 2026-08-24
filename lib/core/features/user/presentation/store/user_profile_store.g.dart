@@ -85,23 +85,6 @@ mixin _$UserProfileStore on _UserProfileStoreBase, Store {
     return _$setProfileImageAsyncAction.run(() => super.setProfileImage());
   }
 
-  late final _$_UserProfileStoreBaseActionController = ActionController(
-    name: '_UserProfileStoreBase',
-    context: context,
-  );
-
-  @override
-  UserEntity? getUserFromInternet() {
-    final _$actionInfo = _$_UserProfileStoreBaseActionController.startAction(
-      name: '_UserProfileStoreBase.getUserFromInternet',
-    );
-    try {
-      return super.getUserFromInternet();
-    } finally {
-      _$_UserProfileStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
   @override
   String toString() {
     return '''

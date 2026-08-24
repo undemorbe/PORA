@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:pora/core/internal/di/export.dart';
 import 'package:pora/core/internal/network/websocket/model/ws_data_model.dart';
+import 'package:web_socket_channel/io.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 class AppWebsocket {
@@ -14,6 +15,7 @@ class AppWebsocket {
   StreamSubscription? _subscription;
   Timer? _reconnectTimer;
   bool _shouldRun = false;
+  int retryAttempts = 0;
 
   final _events = StreamController<WsDataModel>.broadcast();
   Stream<WsDataModel> get events => _events.stream;
@@ -24,24 +26,24 @@ class AppWebsocket {
     if (token == null) return;
     Logger.talker.debug('token exists, starting connecting');
 
-    // _channel = IOWebSocketChannel.connect(
-    //   wsUrl,
-    //   headers: {'Authorization': 'Bearer $token'},
-    //   pingInterval: const Duration(seconds: 30),
-    // );
+    _channel = IOWebSocketChannel.connect(
+      wsUrl,
+      headers: {'Authorization': 'Bearer $token'},
+      pingInterval: const Duration(seconds: 30),
+    );
 
-    //   _subscription = _channel!.stream.listen(
-    //     _onData,
-    //     onError: (e) {
-    //       Logger.talker.critical('Ws error: $e');
-    //       _scheduleReconnect(wsUrl);
-    //     },
-    //     onDone: () {
-    //       Logger.talker.info('ws closed');
-    //       _scheduleReconnect(wsUrl);
-    //     },
-    //     cancelOnError: true
-    //   );
+      _subscription = _channel!.stream.listen(
+        _onData,
+        onError: (e) {
+          Logger.talker.critical('Ws error: $e');
+          _scheduleReconnect(wsUrl);
+        },
+        onDone: () {
+          Logger.talker.info('ws closed');
+          _scheduleReconnect(wsUrl);
+        },
+        cancelOnError: true
+      );
   }
 
   Future<void> _onData(dynamic raw) async {
@@ -58,8 +60,10 @@ class AppWebsocket {
 
   void _scheduleReconnect(Uri url) async {
     if (!_shouldRun) return;
+    if(retryAttempts == 10) return;
     _reconnectTimer?.cancel();
     _reconnectTimer = Timer(const Duration(seconds: 3), () => connect(url));
+    retryAttempts++;
   }
 
   Future<void> disconnect() async {

@@ -16,6 +16,20 @@ mixin _$RecipeImportStore on _RecipeImportStoreBase, Store {
     () => super.selectedCount,
     name: '_RecipeImportStoreBase.selectedCount',
   )).value;
+  Computed<int>? _$dupSkipCountComputed;
+
+  @override
+  int get dupSkipCount => (_$dupSkipCountComputed ??= Computed<int>(
+    () => super.dupSkipCount,
+    name: '_RecipeImportStoreBase.dupSkipCount',
+  )).value;
+  Computed<int>? _$dupForceCountComputed;
+
+  @override
+  int get dupForceCount => (_$dupForceCountComputed ??= Computed<int>(
+    () => super.dupForceCount,
+    name: '_RecipeImportStoreBase.dupForceCount',
+  )).value;
 
   late final _$urlAtom = Atom(
     name: '_RecipeImportStoreBase.url',
@@ -157,6 +171,42 @@ mixin _$RecipeImportStore on _RecipeImportStoreBase, Store {
     return _$addSelectedAsyncAction.run(() => super.addSelected());
   }
 
+  late final _$addRecipeToExistingListAsyncAction = AsyncAction(
+    '_RecipeImportStoreBase.addRecipeToExistingList',
+    context: context,
+  );
+
+  @override
+  Future<List<String>> addRecipeToExistingList(String targetLid) {
+    return _$addRecipeToExistingListAsyncAction.run(
+      () => super.addRecipeToExistingList(targetLid),
+    );
+  }
+
+  late final _$createSharedGroupFromRecipeAsyncAction = AsyncAction(
+    '_RecipeImportStoreBase.createSharedGroupFromRecipe',
+    context: context,
+  );
+
+  @override
+  Future<String?> createSharedGroupFromRecipe() {
+    return _$createSharedGroupFromRecipeAsyncAction.run(
+      () => super.createSharedGroupFromRecipe(),
+    );
+  }
+
+  late final _$createListFromRecipeAsyncAction = AsyncAction(
+    '_RecipeImportStoreBase.createListFromRecipe',
+    context: context,
+  );
+
+  @override
+  Future<String?> createListFromRecipe() {
+    return _$createListFromRecipeAsyncAction.run(
+      () => super.createListFromRecipe(),
+    );
+  }
+
   late final _$_RecipeImportStoreBaseActionController = ActionController(
     name: '_RecipeImportStoreBase',
     context: context,
@@ -207,7 +257,9 @@ isLoading: ${isLoading},
 errorMessage: ${errorMessage},
 rows: ${rows},
 selected: ${selected},
-selectedCount: ${selectedCount}
+selectedCount: ${selectedCount},
+dupSkipCount: ${dupSkipCount},
+dupForceCount: ${dupForceCount}
     ''';
   }
 }

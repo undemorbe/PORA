@@ -63,6 +63,24 @@ mixin _$GroupsStore on _GroupsStoreBase, Store {
     });
   }
 
+  late final _$usingCacheAtom = Atom(
+    name: '_GroupsStoreBase.usingCache',
+    context: context,
+  );
+
+  @override
+  bool get usingCache {
+    _$usingCacheAtom.reportRead();
+    return super.usingCache;
+  }
+
+  @override
+  set usingCache(bool value) {
+    _$usingCacheAtom.reportWrite(value, super.usingCache, () {
+      super.usingCache = value;
+    });
+  }
+
   late final _$loadAsyncAction = AsyncAction(
     '_GroupsStoreBase.load',
     context: context,
@@ -100,7 +118,8 @@ mixin _$GroupsStore on _GroupsStoreBase, Store {
     return '''
 groups: ${groups},
 isLoading: ${isLoading},
-errorMessage: ${errorMessage}
+errorMessage: ${errorMessage},
+usingCache: ${usingCache}
     ''';
   }
 }

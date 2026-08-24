@@ -9,7 +9,7 @@ import 'package:pora/core/internal/theme/app_text_styles.dart';
 import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
 
 /// Режим ввода: телефон или почта.
-enum AuthFieldMode { phone, email }
+enum AuthFieldMode { email, phone }
 
 /// Умный форматтер: определяет режим по вводу (если не зафиксирован
 /// вручную), применяет нужный форматтер и сообщает режим наверх.

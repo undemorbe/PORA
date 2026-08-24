@@ -102,6 +102,24 @@ mixin _$ListStore on _ListStoreBase, Store {
     });
   }
 
+  late final _$usingCacheAtom = Atom(
+    name: '_ListStoreBase.usingCache',
+    context: context,
+  );
+
+  @override
+  bool get usingCache {
+    _$usingCacheAtom.reportRead();
+    return super.usingCache;
+  }
+
+  @override
+  set usingCache(bool value) {
+    _$usingCacheAtom.reportWrite(value, super.usingCache, () {
+      super.usingCache = value;
+    });
+  }
+
   late final _$listsWithPreviewAtom = Atom(
     name: '_ListStoreBase.listsWithPreview',
     context: context,
@@ -249,6 +267,7 @@ list: ${list},
 isLoading: ${isLoading},
 isSuccess: ${isSuccess},
 errorMessage: ${errorMessage},
+usingCache: ${usingCache},
 listsWithPreview: ${listsWithPreview},
 query: ${query},
 productsAmount: ${productsAmount},

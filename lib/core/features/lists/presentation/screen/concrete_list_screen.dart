@@ -33,12 +33,13 @@ class ListPage extends StatefulWidget {
     super.key,
     required this.listId,
     this.listName,
-    this.members,
+    this.members, this.ownerId,
   });
 
   final String listId;
   final String? listName;
   final List<MemberEntity>? members;
+  final String? ownerId;
 
   @override
   State<ListPage> createState() => _ListPageState();
@@ -56,7 +57,7 @@ class _ListPageState extends State<ListPage> {
     super.initState();
     listStore = ListStore()..getConcreteList(lid: widget.listId);
     _wsSub = AppWebsocket.instance.events.listen((event) {
-      if (event.lid != widget.listId) return;
+      if (event.lid != widget.listId && listStore.isSelfUpdated == false) return;
       _debouncer.call(_refresh);
     });
   }
@@ -110,7 +111,10 @@ class _ListPageState extends State<ListPage> {
                       : listStore.derivedMembers;
                   return ListHeader(
                     title: title,
-                    subtitle:
+                    subtitle: members.length == 1 ? 
+                    
+                        "${context.l10n.onlyYou} · ${listStore.productsAmount} ${context.l10n.products}"
+                    :
                         "${members.length} ${context.l10n.human} · ${listStore.productsAmount} ${context.l10n.products}",
                     members: members,
                     onBack: () => context.router.maybePop(),
@@ -125,10 +129,7 @@ class _ListPageState extends State<ListPage> {
                         : () => context.router.push(
                             MembersRoute(
                               members: members,
-                              ownerId: GetIt.I<SelectedFamilyStore>()
-                                  .current
-                                  ?.owner
-                                  .id,
+                              ownerId: widget.ownerId,
                             ),
                           ),
                   );

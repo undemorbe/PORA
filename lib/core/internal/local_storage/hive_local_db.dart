@@ -19,10 +19,12 @@ class HiveLocalDB<T> implements ILocalDB<T> {
 
   @override
   Future<T?> get({required String key, required LocalDBNames boxName}) async {
-    final box = await Hive.openBox<T>(boxName.name);
+    try{
+      final box = await Hive.openBox<T>(boxName.name);
     final value = box.get(key);
     await box.close();
     return value;
+    } catch(e){}
   }
 
   @override

@@ -21,6 +21,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get authUnderAppName2 => 'Рецепты, дом и доставка — в одном месте';
 
   @override
+  String get onlyYou => 'Только Вы';
+
+  @override
   String get authSignInExpansibleExpand => 'Войти иным способом';
 
   @override

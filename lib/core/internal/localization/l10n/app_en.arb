@@ -15,6 +15,10 @@
     "@authUnderAppName2": {
         "description": "The second line under the app name"
     },
+    "onlyYou": "Только Вы",
+    "@onlyYou": {
+        "description": "onlyYou"
+    },
     "authSignInExpansibleExpand": "Войти иным способом",
     "@authSignInExpansibleExpand": {
         "description": "The sign in with other methods title"

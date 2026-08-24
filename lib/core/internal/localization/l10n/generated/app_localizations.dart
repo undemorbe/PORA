@@ -122,6 +122,12 @@ abstract class AppLocalizations {
   /// **'Рецепты, дом и доставка — в одном месте'**
   String get authUnderAppName2;
 
+  /// onlyYou
+  ///
+  /// In en, this message translates to:
+  /// **'Только Вы'**
+  String get onlyYou;
+
   /// The sign in with other methods title
   ///
   /// In en, this message translates to:

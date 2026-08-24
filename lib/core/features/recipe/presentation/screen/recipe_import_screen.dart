@@ -151,10 +151,12 @@ class _RecipeImportPageState extends State<RecipeImportPage> {
                         found: '${store.selectedCount}/${store.rows.length}',
                       ),
                       const SizedBox(height: PoraSpacing.md),
-                      _CreateListCta(
-                        title: store.recipe!.title,
-                        onTap: _pickTargetAndCreate,
-                      ),
+                      //! Rethink
+                      // _CreateListCta(
+                      //   title: store.recipe!.title,
+                      //   onTap: _pickTargetAndCreate,
+                      // ),
+
                       // Dedup banner — только пока хотя бы один dup помечен «пропустить».
                       AnimatedSize(
                         duration: const Duration(milliseconds: 240),
