@@ -15,7 +15,7 @@ import 'package:pora/core/features/lists/presentation/widgets/section_builder.da
 import 'package:pora/core/features/families/presentation/store/selected_family_store.dart';
 import 'package:pora/core/internal/router/app_router.gr.dart';
 import 'package:get_it/get_it.dart';
-import 'package:pora/core/internal/theme/additional_constants.dart';
+import 'package:pora/core/internal/theme/constant/additional_constants.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
 
 /// Превью списков.

@@ -16,14 +16,16 @@ class AddItemUseCase {
     required int priority,
     required bool urgent,
     required int? remindEveryDays,
-  }) => repository.addItem(
-    listId: listId,
-    name: name,
-    section: section,
-    quantity: quantity,
-    unit: unit,
-    priority: priority,
-    urgent: urgent,
-    remindEveryDays: remindEveryDays,
-  );
+  }) async {
+    return await repository.addItem(
+      listId: listId,
+      name: name,
+      section: section,
+      quantity: quantity,
+      unit: unit,
+      priority: priority,
+      urgent: urgent,
+      remindEveryDays: remindEveryDays,
+    );
+  }
 }

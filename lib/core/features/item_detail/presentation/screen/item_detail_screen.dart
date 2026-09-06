@@ -8,10 +8,10 @@ import 'package:pora/core/features/item_detail/presentation/widgets/delete_confi
 import 'package:pora/core/features/item_detail/presentation/widgets/info_row.dart';
 import 'package:pora/core/features/item_detail/presentation/widgets/notify_sheet.dart';
 import 'package:pora/core/features/lists/domain/entity/products/product.dart';
-import 'package:pora/core/internal/theme/additional_constants.dart';
-import 'package:pora/core/internal/theme/app_text_styles.dart';
+import 'package:pora/core/internal/theme/constant/additional_constants.dart';
+import 'package:pora/core/internal/theme/text/app_text_styles.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
-import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
+import 'package:pora/core/internal/theme/themes_colors/light_colors/app_colors.dart';
 import 'package:pora/core/internal/widgets/pora_buttons.dart';
 import 'package:pora/core/internal/widgets/pora_icon_tile.dart';
 import 'package:pora/core/internal/widgets/pora_rows_card.dart';
@@ -157,12 +157,15 @@ class _Body extends StatelessWidget {
         Center(
           child: Column(
             children: [
-              PoraIconTile.emoji(
-                '🥛',
+              PoraIconTile(
                 color: PoraColors.sand,
                 size: 80,
-                emojiSize: 40,
                 borderRadius: const BorderRadius.all(Radius.circular(24)),
+                child: PhosphorIcon(
+                  PhosphorIconsRegular.shoppingCart,
+                  color: PoraColors.danger,
+                  size: 40,
+                ),
               ),
               const SizedBox(height: 14),
               Text(item.name, style: PoraText.title),
@@ -185,6 +188,13 @@ class _Body extends StatelessWidget {
               label: context.l10n.priorityLabel,
               value: item.priority.toString(),
             ),
+            if (item.remindEveryDay != null)
+              InfoRow(
+                label: context.l10n.itemDetailRemind,
+                value: item.remindEveryDay != null && item.remindEveryDay! > 0
+                    ? "${context.l10n.everyDay} ${item.remindEveryDay.toString()}"
+                    : context.l10n.errorGeneric,
+              ),
           ],
         ),
         const SizedBox(height: PoraSpacing.lg),
@@ -198,11 +208,12 @@ class _Body extends StatelessWidget {
                 child: PoraToggle(value: item.urgent),
               ),
             ),
-            if (item.remindEveryDay != null)
+            if (item.remindEveryDay != null && item.remindEveryDay! > 0)
               PoraSettingRow(
                 icon: PhosphorIconsRegular.arrowsClockwise,
                 label: context.l10n.itemDetailRemind,
-                subtitle: context.l10n.everyDay,
+                subtitle:
+                    "${context.l10n.everyDay} ${item.remindEveryDay?.toString()}",
                 trailing: const PoraToggle(value: true),
               ),
           ],

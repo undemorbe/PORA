@@ -77,9 +77,19 @@ mixin _$AiChatStore on _AiChatStoreBase, Store {
   );
 
   @override
-  Future<void> send({required String text, required String languageCode}) {
+  Future<void> send({
+    required String text,
+    required String languageCode,
+    String? contextSummary,
+    AiContext context = const AiContext(),
+  }) {
     return _$sendAsyncAction.run(
-      () => super.send(text: text, languageCode: languageCode),
+      () => super.send(
+        text: text,
+        languageCode: languageCode,
+        contextSummary: contextSummary,
+        context: context,
+      ),
     );
   }
 

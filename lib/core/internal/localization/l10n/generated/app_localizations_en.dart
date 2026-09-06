@@ -15,623 +15,650 @@ class AppLocalizationsEn extends AppLocalizations {
   String get language => 'Language';
 
   @override
-  String get authUnderAppName1 => 'Общий список для пар и семей';
+  String get authUnderAppName1 => 'Shared list for couples and families';
 
   @override
-  String get authUnderAppName2 => 'Рецепты, дом и доставка — в одном месте';
+  String get authUnderAppName2 =>
+      'Recipes, home, and delivery — all in one place';
 
   @override
-  String get authSignInExpansibleExpand => 'Войти иным способом';
+  String get onlyYou => 'Only you';
 
   @override
-  String get authSignInExpansibleCollapse => 'Свернуть';
+  String get authSignInExpansibleExpand => 'Sign in another way';
 
   @override
-  String get sendAgainAfter => 'Отправить еще раз через...';
+  String get authSignInExpansibleCollapse => 'Collapse';
 
   @override
-  String get authSignInWithEmail => 'Войти через email';
+  String get sendAgainAfter => 'Send again in...';
 
   @override
-  String get authSignInWithGoogle => 'Войти через Google';
+  String get authSignInWithEmail => 'Sign in with email';
 
   @override
-  String get authSignInWithApple => 'Войти через Apple';
+  String get authSignInWithGoogle => 'Sign in with Google';
 
   @override
-  String get authSignInWithPhone => 'Войти через телефон';
+  String get authSignInWithApple => 'Sign in with Apple';
+
+  @override
+  String get authSignInWithPhone => 'Sign in with phone';
 
   @override
   String get authPrivatePolicy =>
-      'Продолжая, вы соглашаетесь с\nУсловиями и Политикой конфиденциальности';
+      'By continuing, you agree to the\\nTerms and Privacy Policy';
 
   @override
-  String get authTitle => 'Почти с нами';
+  String get authTitle => 'Almost there';
 
   @override
   String get authSubtitle =>
-      'Введите номер телефона или почту — пришлём код для входа.';
+      'Enter your phone number or email — we\'ll send you a sign-in code.';
 
   @override
   String get authSubtitle2 =>
-      'Начните вводить, сами определим, телефон это или почта.';
+      'Start typing — we\'ll detect whether it\'s a phone number or email.';
 
   @override
-  String get authJoinButton => 'Присоединиться';
+  String get authJoinButton => 'Join';
 
   @override
-  String get userCreateProfileNameRequired => 'Может все-же скажете имя?';
+  String get userCreateProfileNameRequired => 'How about telling us your name?';
 
   @override
-  String get commonError => 'Ошибка';
+  String get commonError => 'Error';
 
   @override
-  String get otpTitle => 'Осталось немного!';
+  String get authErrorInvalidPhone => 'Invalid phone / email!';
 
   @override
-  String get otpEnterCodeSentTo => 'Введите код отправленный на ';
+  String authPhoneSendOtp(String isPhone) {
+    String _temp0 = intl.Intl.selectLogic(isPhone, {
+      'true': 'Telegram!',
+      'false': 'email!',
+      'other': 'destination you wrote',
+    });
+    return 'We\'ll send code onto $_temp0';
+  }
 
   @override
-  String get otpResendQuestion => 'Не получили код?';
+  String get otpTitle => 'Almost there!';
 
   @override
-  String get otpResend => 'Отправить еще раз';
+  String get otpEnterCodeSentTo => 'Enter the code sent to ';
 
   @override
-  String get otpVerifyButton => 'Проверить код';
+  String get otpResendQuestion => 'Didn\'t receive the code?';
 
   @override
-  String get otpValidationLength => 'Введите 6-значный код';
+  String get otpResend => 'Send again';
 
   @override
-  String get otpValidationDigits => 'Код состоит только из цифр';
+  String get otpVerifyButton => 'Verify code';
 
   @override
-  String get authSwitchToEmail => 'Войти по почте';
+  String get otpValidationLength => 'Enter the 6-digit code';
 
   @override
-  String get authSwitchToPhone => 'Войти по телефону';
+  String get otpValidationDigits => 'The code contains digits only';
+
+  @override
+  String get authSwitchToEmail => 'Sign in with email';
+
+  @override
+  String get authSwitchToPhone => 'Sign in with phone';
 
   @override
   String onboardingStep(int step, int total) {
-    return 'Шаг $step из $total';
+    return 'Step $step of $total';
   }
 
   @override
-  String get onboardingSlide1Title => 'Рецепт → список\nза секунды';
+  String get onboardingSlide1Title => 'Recipe → list\\nin seconds';
 
   @override
   String get onboardingSlide1Body =>
-      'Киньте ссылку на рецепт — Pora соберёт ингредиенты и уберёт то, что уже есть.';
+      'Drop a recipe link — Pora collects the ingredients and removes what you already have.';
 
   @override
-  String get onboardingSlide2Title => 'Один список\nна двоих';
+  String get onboardingSlide2Title => 'One list\\nfor two';
 
   @override
   String get onboardingSlide2Body =>
-      'Добавляйте вместе — видно, кто что внёс. Партнёр захватит нужное по дороге домой.';
+      'Add things together — you can see who added what. Your partner can pick up what you need on the way home.';
 
   @override
-  String get onboardingSlide3Title => 'Pora знает,\nкогда пора';
+  String get onboardingSlide3Title => 'Pora knows\\nwhen it\'s time';
 
   @override
   String get onboardingSlide3Body =>
-      'По вашим покупкам подскажет, что скоро закончится, и закажет в один тап.';
+      'Based on your purchases, Pora predicts what will run out soon and lets you order it with one tap.';
 
   @override
-  String get onboardingSkip => 'Пропустить';
+  String get onboardingSkip => 'Skip';
 
   @override
-  String get onboardingStart => 'Начать';
+  String get onboardingStart => 'Start';
 
   @override
-  String get onboardingNext => 'Далее';
+  String get onboardingNext => 'Next';
 
   @override
-  String get splashTagline => 'Список, который помнит за вас';
+  String get splashTagline => 'The list that remembers for you';
 
   @override
-  String get briefTitle => 'Что у вас часто заканчивается?';
+  String get briefTitle => 'What do you often run out of?';
 
   @override
-  String get briefDeletionTitle => 'Вы уверены что хотите удалить продукт?';
+  String get briefDeletionTitle =>
+      'Are you sure you want to delete this product?';
 
   @override
-  String get briefAddYourOwn => 'Добавить';
+  String get briefAddYourOwn => 'Add';
 
   @override
-  String get briefInputProduct => 'Введите продукт или вид';
+  String get briefInputProduct => 'Enter a product or category';
 
   @override
-  String get briefInputEmoji => 'Введите эмодзи/обозначение для продукта';
+  String get briefInputEmoji => 'Enter an emoji/icon for the product';
 
   @override
-  String get briefAlreadyContains => 'Данный продукт уже выбран';
+  String get briefAlreadyContains => 'This product is already selected';
 
   @override
   String get briefSubtitle =>
-      'Отметьте продукты — Pora напомнит вовремя. Это можно пропустить.';
+      'Select products — Pora will remind you at the right time. You can skip this.';
 
   @override
-  String get briefSkip => 'Пропустить';
+  String get briefSkip => 'Skip';
 
   @override
-  String get briefNext => 'Далее';
+  String get briefNext => 'Next';
 
   @override
-  String get briefItemMilk => 'Молоко';
+  String get briefItemMilk => 'Milk';
 
   @override
-  String get briefItemBread => 'Хлеб';
+  String get briefItemBread => 'Bread';
 
   @override
-  String get briefItemEggs => 'Яйца';
+  String get briefItemEggs => 'Eggs';
 
   @override
-  String get briefItemCoffee => 'Кофе';
+  String get briefItemCoffee => 'Coffee';
 
   @override
-  String get briefItemCheese => 'Сыр';
+  String get briefItemCheese => 'Cheese';
 
   @override
-  String get briefItemBananas => 'Бананы';
+  String get briefItemBananas => 'Bananas';
 
   @override
-  String get briefItemButter => 'Масло';
+  String get briefItemButter => 'Butter';
 
   @override
-  String get briefItemWater => 'Вода';
+  String get briefItemWater => 'Water';
 
   @override
-  String get briefItemVegetables => 'Овощи';
+  String get briefItemVegetables => 'Vegetables';
 
   @override
-  String get briefItemTomatoes => 'Помидоры';
+  String get briefItemTomatoes => 'Tomatoes';
 
   @override
-  String get briefItemPasta => 'Паста';
+  String get briefItemPasta => 'Pasta';
 
   @override
-  String get briefItemChicken => 'Курица';
+  String get briefItemChicken => 'Chicken';
 
   @override
-  String get listTitle => 'Наш список';
+  String get listTitle => 'Our list';
 
   @override
-  String get listMembersCount => '2 человека · 8 продуктов';
+  String get listMembersCount => '2 people · 8 products';
 
   @override
-  String get listUrgent => 'Срочно';
+  String get listUrgent => 'Urgent';
 
   @override
-  String get listAdd => 'Добавить';
+  String get listAdd => 'Add';
 
   @override
-  String get predictionsTitle => 'Пора поможет!';
+  String get predictionsTitle => 'Pora can help!';
 
   @override
-  String get predictionsSubtitle => 'Скоро закончится — по вашим покупкам';
+  String get predictionsSubtitle =>
+      'Running out soon — based on your purchases';
 
   @override
-  String get predictionTip => 'Малюсенький советик';
+  String get predictionTip => 'A tiny tip';
 
   @override
-  String get predictionsOrderTitle => 'Заказать всё в один тап';
+  String get predictionsOrderTitle => 'Order everything with one tap';
 
   @override
-  String get predictionsOrderSubtitle => 'Самокат · доставка за 15 минут';
+  String get predictionsOrderSubtitle => 'Samokat · delivery in 15 minutes';
 
   @override
-  String get predictionsOrderDiscount => '−15% на первый заказ';
+  String get predictionsOrderDiscount => '15% off your first order';
 
   @override
-  String get predictionsAddToList => 'В список';
+  String get predictionsAddToList => 'Add to list';
 
   @override
-  String get predictionsDismiss => 'Не надо';
+  String get predictionsDismiss => 'No thanks';
 
   @override
-  String get itemDetailName => 'Молоко';
+  String get itemDetailName => 'Milk';
 
   @override
-  String get itemDetailSubtitle => '2 л · Молочное';
+  String get itemDetailSubtitle => '2 L · Dairy';
 
   @override
-  String get itemDetailAddedBy => 'Добавил(а)';
+  String get itemDetailAddedBy => 'Added by';
 
   @override
-  String get itemDetailSection => 'Раздел';
+  String get itemDetailSection => 'Section';
 
   @override
-  String get itemDetailSectionValue => 'Молочное';
+  String get itemDetailSectionValue => 'Dairy';
 
   @override
-  String get itemDetailQuantity => 'Количество';
+  String get itemDetailQuantity => 'Quantity';
 
   @override
-  String get itemDetailQuantityValue => '2 л';
+  String get itemDetailQuantityValue => '2 L';
 
   @override
-  String get itemDetailUrgent => 'Срочно';
+  String get itemDetailUrgent => 'Urgent';
 
   @override
-  String get itemDetailRemind => 'Напоминать';
+  String get itemDetailRemind => 'Remind me';
 
   @override
-  String get itemDetailRemindEvery => 'Каждые 7 дней';
+  String get itemDetailRemindEvery => 'Every 7 days';
 
   @override
   String get itemDetailInsight =>
-      'Покупаете ~раз в 7 дней · последний раз 6 дней назад. Скоро предложу докупить.';
+      'You buy it about every 7 days · last bought 6 days ago. I\'ll suggest restocking soon.';
 
   @override
-  String get itemDetailMarkBought => 'Отметить купленным';
+  String get itemDetailMarkBought => 'Mark as bought';
 
   @override
-  String get itemDetailDelete => 'Удалить из списка';
+  String get itemDetailDelete => 'Remove from list';
 
   @override
-  String get addItemTitle => 'Добавить продукт';
+  String get addItemTitle => 'Add product';
 
   @override
-  String get addItemExampleValue => 'Авокадо';
+  String get addItemExampleValue => 'Avocado';
 
   @override
-  String get addItemNameHint => 'Название продукта';
+  String get addItemNameHint => 'Product name';
 
   @override
-  String get addItemQuantity => 'Количество';
+  String get addItemQuantity => 'Quantity';
 
   @override
-  String get addItemSection => 'Раздел';
+  String get addItemSection => 'Section';
 
   @override
-  String get addItemUrgent => 'Срочно';
+  String get addItemUrgent => 'Urgent';
 
   @override
-  String get addItemUrgentSubtitle => 'Нужно купить сегодня';
+  String get addItemUrgentSubtitle => 'Need to buy today';
 
   @override
-  String get addItemRemind => 'Напоминать регулярно';
+  String get addItemRemind => 'Remind regularly';
 
   @override
-  String get addItemRemindEvery => 'Каждые 7 дней';
+  String get addItemRemindEvery => 'Every 7 days';
 
   @override
-  String get addItemSubmit => 'Добавить в список';
+  String get addItemSubmit => 'Add to list';
 
   @override
-  String get settingsTitle => 'Настройки';
+  String get settingsTitle => 'Settings';
 
   @override
-  String get settingsHouseholdSection => 'Хозяйство';
+  String get settingsHouseholdSection => 'Household';
 
   @override
-  String get settingsAppSection => 'Приложение';
+  String get settingsAppSection => 'App';
 
   @override
-  String get settingsNotifications => 'Уведомления';
+  String get settingsNotifications => 'Notifications';
 
   @override
-  String get settingsDelivery => 'Доставка';
+  String get settingsDelivery => 'Delivery';
 
   @override
-  String get settingsProAd => 'Pora+ · без рекламы';
+  String get settingsProAd => 'Pora+ · ad-free';
 
   @override
-  String get settingsTryPill => 'Попробовать';
+  String get settingsTryPill => 'Try it';
 
   @override
-  String get settingsPrivacy => 'Приватность и данные';
+  String get settingsPrivacy => 'Privacy and data';
 
   @override
-  String get settingsAboutPora => 'О Pora';
+  String get settingsAboutPora => 'About Pora';
 
   @override
-  String get settingsLogout => 'Выйти';
+  String get settingsLogout => 'Sign out';
 
   @override
-  String get settingsMembersNames => 'Борис и Анна';
+  String get settingsMembersNames => 'Boris and Anna';
 
   @override
-  String get settingsInvitePill => 'Пригласить';
+  String get settingsInvitePill => 'Invite';
 
   @override
-  String get householdInviteTitle => 'Пригласить партнёра';
+  String get householdInviteTitle => 'Invite your partner';
 
   @override
-  String get householdCookTogether => 'Готовьте вместе';
+  String get householdCookTogether => 'Cook together';
 
   @override
   String get householdInviteDescription =>
-      'Pora работает лучше вдвоём. Пригласите партнёра — список и напоминания станут общими.';
+      'Pora works better for two. Invite your partner — your list and reminders will be shared.';
 
   @override
-  String get householdShareLink => 'Поделиться ссылкой';
+  String get householdShareLink => 'Share link';
 
   @override
-  String get householdShowQr => 'Показать QR-код';
+  String get householdShowQr => 'Show QR code';
 
   @override
-  String get householdConnectToFamily => 'Подключиться к семье';
+  String get householdConnectToFamily => 'Join a family';
 
   @override
   String get householdInviteDescriptionWhenConnecting =>
-      'Определили код приглашения, но вы и сами можете его ввести, если мы ошиблись';
+      'We detected an invite code, but you can enter it yourself if we got it wrong';
 
   @override
-  String get householdGotInvited => 'Вас пригласили в семью';
+  String get householdGotInvited => 'You\'ve been invited to a family';
 
   @override
-  String get householdWriteCode => 'Введите код приглашения';
+  String get householdWriteCode => 'Enter invite code';
 
   @override
-  String get householdDoLater => 'Сделаю позже';
+  String get householdDoLater => 'I\'ll do it later';
 
   @override
-  String get householdCopyCode => 'Скопировали в буфер обмена!';
+  String get householdCopyCode => 'Copied to clipboard!';
 
   @override
-  String get householdInviteCodeLabel => 'Код приглашения';
+  String get householdInviteCodeLabel => 'Invite code';
 
   @override
-  String get householdCopyPill => 'Копировать';
+  String get householdCopyPill => 'Copy';
 
   @override
-  String get notificationsTitle => 'Уведомления';
+  String get notificationsTitle => 'Notifications';
 
   @override
-  String get notificationsReadAll => 'Прочитать все';
+  String get notificationsReadAll => 'Read all';
 
   @override
-  String get notificationsMilkTitle => 'По дороге домой захвати молоко';
+  String get notificationsMilkTitle => 'Grab milk on your way home';
 
   @override
   String get notificationsMilkBody =>
-      'Оно кончилось — Анна отметила 10 минут назад.';
+      'It\'s run out — Anna marked it 10 minutes ago.';
 
   @override
-  String get notificationsMilkTime => '5 минут назад';
+  String get notificationsMilkTime => '5 minutes ago';
 
   @override
-  String get notificationsCoffeeTitle => 'Скоро закончится кофе';
+  String get notificationsCoffeeTitle => 'Coffee is running out soon';
 
   @override
-  String get notificationsCoffeeBody => 'Покупаете ~раз в 14 дней, прошло 12.';
+  String get notificationsCoffeeBody =>
+      'You buy it about every 14 days, 12 have passed.';
 
   @override
-  String get notificationsPartnerAddedTitle => 'Анна добавила 2 продукта';
+  String get notificationsPartnerAddedTitle => 'Anna added 2 products';
 
   @override
-  String get notificationsPartnerAddedBody => 'Бананы и Хлеб — в общем списке.';
+  String get notificationsPartnerAddedBody =>
+      'Bananas and bread are in the shared list.';
 
   @override
-  String get notificationsPartnerAddedTime => 'Сегодня, 9:12';
+  String get notificationsPartnerAddedTime => 'Today, 9:12';
 
   @override
-  String get notificationsPromoTitle => '−15% на первый заказ в Самокате';
+  String get notificationsPromoTitle => '15% off your first Samokat order';
 
   @override
-  String get notificationsPromoBody => 'Промо активно ещё 6 дней.';
+  String get notificationsPromoBody => 'The promo is active for 6 more days.';
 
   @override
-  String get notificationsPromoTime => 'Вчера';
+  String get notificationsPromoTime => 'Yesterday';
 
   @override
-  String get notificationsOrderDeliveredTitle => 'Заказ доставлен';
+  String get notificationsOrderDeliveredTitle => 'Order delivered';
 
   @override
-  String get notificationsOrderDeliveredBody =>
-      '8 продуктов · Самокат · ₽1 054.';
+  String get notificationsOrderDeliveredBody => '8 products · Samokat · ₽1,054';
 
   @override
-  String get notificationsAddToListPill => '＋ В список';
+  String get notificationsAddToListPill => '＋ Add to list';
 
   @override
-  String get userCreateProfileTitle => 'Как вас зовут?';
+  String get userCreateProfileTitle => 'What\'s your name?';
 
   @override
   String get userCreateProfileSubtitle =>
-      'Добавьте имя и фото — их увидит партнёр в общем списке.';
+      'Add a name and photo — your partner will see them in the shared list.';
 
   @override
-  String get userCreateProfileNameHint => 'Ваше имя';
+  String get userCreateProfileNameHint => 'Your name';
 
   @override
-  String get userCreateProfileSkip => 'Пропустить';
+  String get userCreateProfileSkip => 'Skip';
 
   @override
-  String get userCreateProfileNext => 'Далее';
+  String get userCreateProfileNext => 'Next';
 
   @override
-  String get searchTitle => 'Поиск';
+  String get searchTitle => 'Search';
 
   @override
-  String get searchHint => 'Продукт или рецепт…';
+  String get searchHint => 'Product or recipe…';
 
   @override
-  String get searchFilterAll => 'Всё';
+  String get searchFilterAll => 'All';
 
   @override
-  String get searchFilterVegetables => 'Овощи';
+  String get searchFilterVegetables => 'Vegetables';
 
   @override
-  String get searchFilterDairy => 'Молочное';
+  String get searchFilterDairy => 'Dairy';
 
   @override
-  String get searchFilterGrocery => 'Бакалея';
+  String get searchFilterGrocery => 'Groceries';
 
   @override
-  String get searchFilterRecipes => 'Рецепты';
+  String get searchFilterRecipes => 'Recipes';
 
   @override
-  String get searchResults => 'Результаты';
+  String get searchResults => 'Results';
 
   @override
-  String get searchNothingFound => 'Ничего не найдено';
+  String get searchNothingFound => 'Nothing found';
 
   @override
-  String get insightsTitle => 'Инсайты';
+  String get insightsTitle => 'Insights';
 
   @override
-  String get insightsTipKicker => '✨ СОВЕТ PORA';
+  String get insightsTipKicker => '✨ PORA TIP';
 
   @override
-  String get insightsTipTitle => 'Вы любите карбонару!';
+  String get insightsTipTitle => 'You love carbonara!';
 
   @override
   String get insightsTipBody =>
-      'Похожий профиль вкуса — попробуйте мак-н-чиз. 4 из 6 ингредиентов у вас уже бывают регулярно.';
+      'Similar flavor profile — try mac and cheese. You already regularly have 4 of 6 ingredients.';
 
   @override
-  String get insightsTipAction => 'Открыть рецепт →';
+  String get insightsTipAction => 'Open recipe →';
 
   @override
-  String get insightsRunsOutMost => 'Чаще всего заканчивается';
+  String get insightsRunsOutMost => 'Runs out most often';
 
   @override
-  String get insightsFavoriteCuisines => 'Любимые кухни';
+  String get insightsFavoriteCuisines => 'Favorite cuisines';
 
   @override
-  String get insightsCuisineItalian => 'Итальянская';
+  String get insightsCuisineItalian => 'Italian';
 
   @override
-  String get insightsCuisinePasta => 'Паста';
+  String get insightsCuisinePasta => 'Pasta';
 
   @override
-  String get insightsCuisineBreakfasts => 'Завтраки';
+  String get insightsCuisineBreakfasts => 'Breakfasts';
 
   @override
-  String get insightsCuisineLight => 'Лёгкое';
+  String get insightsCuisineLight => 'Light';
 
   @override
-  String get orderTitle => 'Заказ';
+  String get orderTitle => 'Order';
 
   @override
-  String get orderCart => 'Корзина';
+  String get orderCart => 'Cart';
 
   @override
-  String get orderWhenToDeliver => 'Когда доставить';
+  String get orderWhenToDeliver => 'When to deliver';
 
   @override
   String orderCheckoutCta(String total) {
-    return 'Заказать в Самокате · $total';
+    return 'Order from Samokat · $total';
   }
 
   @override
-  String get orderSummaryGoods => 'Товары';
+  String get orderSummaryGoods => 'Items';
 
   @override
-  String get orderSummaryDiscount => 'Скидка −15%';
+  String get orderSummaryDiscount => '15% off';
 
   @override
-  String get orderSummaryDelivery => 'Доставка';
+  String get orderSummaryDelivery => 'Delivery';
 
   @override
-  String get orderSummaryFree => 'Бесплатно';
+  String get orderSummaryFree => 'Free';
 
   @override
-  String get orderSummaryTotal => 'Итого';
+  String get orderSummaryTotal => 'Total';
 
   @override
-  String get recipeImportTitle => 'Рецепт по ссылке';
+  String get recipeImportTitle => 'Recipe from a link';
 
   @override
-  String get recipePreviewTitle => 'Паста Карбонара';
+  String get recipePreviewTitle => 'Pasta Carbonara';
 
   @override
-  String get recipePreviewMeta => 'eda.ru · 25 мин · 2 порции';
+  String get recipePreviewMeta => 'eda.ru · 25 min · 2 servings';
 
   @override
-  String get recipePreviewFound => '6 ингредиентов найдено';
+  String get recipePreviewFound => '6 ingredients found';
 
   @override
   String get recipeDedupBanner =>
-      '2 совпадения убрали, чтобы не дублировать с вашим списком';
+      'Removed 2 duplicates to avoid duplicating items already on your list';
 
   @override
-  String get recipeIngredients => 'Ингредиенты';
+  String get recipeIngredients => 'Ingredients';
 
   @override
-  String get recipeAddToListCta => 'Добавить 4 продукта в список';
+  String recipeAddToListCta(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.compact(
+      locale: localeName,
+    );
+    final String countString = countNumberFormat.format(count);
+
+    return 'Add $countString product to list';
+  }
 
   @override
-  String get recipeParseButton => 'Разобрать';
+  String get recipeParseButton => 'Parse';
 
   @override
-  String get navList => 'Список';
+  String get navList => 'List';
 
   @override
-  String get navPora => 'Пора';
+  String get navPora => 'Pora';
 
   @override
-  String get navOrder => 'Заказ';
+  String get navOrder => 'Order';
 
   @override
-  String get navProfile => 'Профиль';
+  String get navProfile => 'Profile';
 
   @override
-  String get familiesTitle => 'Семьи';
+  String get familiesTitle => 'Families';
 
   @override
-  String get familiesSubtitle => 'Выберите семью, чтобы открыть её список';
+  String get familiesSubtitle => 'Choose a family to open its list';
 
   @override
-  String get familiesCurrent => 'Текущая';
+  String get familiesCurrent => 'Current';
 
   @override
-  String get familiesCreateOrJoin => '＋ Создать или присоединиться';
+  String get familiesCreateOrJoin => '＋ Create or join';
 
   @override
-  String get familiesCreateDialog => 'Как назовем семью?';
+  String get familiesCreateDialog => 'What should we call the family?';
 
   @override
-  String get tryToUpdate => 'Попробуйте обновить';
+  String get tryToUpdate => 'Try refreshing';
 
   @override
-  String get checkOut => 'Проверить';
+  String get checkOut => 'Check';
 
   @override
-  String get settingsMore => 'Углубленные';
+  String get settingsMore => 'Advanced';
 
   @override
-  String get listsYour => 'Ваш личный список';
+  String get listsYour => 'Your personal list';
 
   @override
-  String get human => 'человека';
+  String get human => 'people';
 
   @override
-  String get products => 'продуктов';
+  String get products => 'products';
 
   @override
-  String get lists => 'списков';
+  String get lists => 'lists';
 
   @override
-  String get update => 'Обновить';
+  String get update => 'Refresh';
 
   @override
-  String get connectionSuccess => 'Присоединились';
+  String get connectionSuccess => 'Joined';
 
   @override
-  String get familiesNoUrgent => 'Нет срочного';
+  String get familiesNoUrgent => 'Nothing urgent';
 
   @override
-  String get welcomeBackTitle => 'Вспомнили вас!';
+  String get welcomeBackTitle => 'Welcome back!';
 
   @override
-  String get welcomeBackSubtitle => 'Секунду, открываем ваш список…';
+  String get welcomeBackSubtitle => 'One second, opening your list…';
 
   @override
-  String get errorDuringLoading => 'Ошибка при загрузке';
+  String get errorDuringLoading => 'Error while loading';
 
   @override
-  String get familyName => 'Имя семьи';
+  String get familyName => 'Family name';
 
   @override
-  String get familiesCreate => 'Создать';
+  String get familiesCreate => 'Create';
 
   @override
-  String get familiesConnect => 'Присоединиться';
+  String get familiesConnect => 'Join';
 
   @override
   String get showAll => 'Show all';
@@ -1015,7 +1042,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tutorialSampleInviteMessage => 'Join the list';
 
   @override
-  String get supportMessage => 'Написать письмо в поддержку';
+  String get supportMessage => 'Email support';
 
   @override
   String get supportMessageBottomSheetTopDescription =>
@@ -1042,6 +1069,21 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get predictionsSectionOften => 'You buy often';
+
+  @override
+  String get predictionsSectionAiSuggests => 'AI suggests';
+
+  @override
+  String get predictionsAiSuggestionsTitle => 'Products and recipes for you';
+
+  @override
+  String get predictionsAiSuggestionsTopic => 'your preferences and purchases';
+
+  @override
+  String get refresh => 'Refresh';
+
+  @override
+  String get predictionsOftenEmpty => 'Not enough data yet';
 
   @override
   String get predictionsAskPora => 'Ask PORA';
@@ -1130,6 +1172,36 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chatSample4 => 'Quick 20-minute dinner recipe';
+
+  @override
+  String get chatSample5 => 'How can I use up vegetables before they spoil?';
+
+  @override
+  String get chatSample6 => 'Make a shopping list for 3 easy breakfasts';
+
+  @override
+  String get chatSample7 => 'What should I cook for two with a small budget?';
+
+  @override
+  String get chatSample8 => 'How long can I keep cooked rice in the fridge?';
+
+  @override
+  String get chatSample9 => 'Give me a high-protein vegetarian dinner';
+
+  @override
+  String get chatSample10 => 'What can replace butter in this recipe?';
+
+  @override
+  String get chatSample11 => 'Plan three dinners from what I already have';
+
+  @override
+  String get chatSample12 => 'What can I cook with leftovers in 15 minutes?';
+
+  @override
+  String get chatSample13 => 'Suggest an allergy-safe recipe from my list';
+
+  @override
+  String get chatSample14 => 'How can I make this meal cheaper?';
 
   @override
   String get chatTyping => 'PORA is typing…';
@@ -1283,4 +1355,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chatImportRecipeCta => 'Import recipe';
+
+  @override
+  String get listsEmptyTitle => 'You don\'t have any lists yet';
+
+  @override
+  String get listsEmptySubtitle => 'Maybe you should create a new one?';
 }

@@ -9,6 +9,7 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'package:auto_route/auto_route.dart' as _i25;
 import 'package:collection/collection.dart' as _i28;
 import 'package:flutter/material.dart' as _i26;
@@ -383,6 +384,7 @@ class ListRoute extends _i25.PageRouteInfo<ListRouteArgs> {
     required String listId,
     String? listName,
     List<_i27.MemberEntity>? members,
+    String? ownerId,
     List<_i25.PageRouteInfo>? children,
   }) : super(
          ListRoute.name,
@@ -391,6 +393,7 @@ class ListRoute extends _i25.PageRouteInfo<ListRouteArgs> {
            listId: listId,
            listName: listName,
            members: members,
+           ownerId: ownerId,
          ),
          initialChildren: children,
        );
@@ -406,6 +409,7 @@ class ListRoute extends _i25.PageRouteInfo<ListRouteArgs> {
         listId: args.listId,
         listName: args.listName,
         members: args.members,
+        ownerId: args.ownerId,
       );
     },
   );
@@ -417,6 +421,7 @@ class ListRouteArgs {
     required this.listId,
     this.listName,
     this.members,
+    this.ownerId,
   });
 
   final _i26.Key? key;
@@ -427,9 +432,11 @@ class ListRouteArgs {
 
   final List<_i27.MemberEntity>? members;
 
+  final String? ownerId;
+
   @override
   String toString() {
-    return 'ListRouteArgs{key: $key, listId: $listId, listName: $listName, members: $members}';
+    return 'ListRouteArgs{key: $key, listId: $listId, listName: $listName, members: $members, ownerId: $ownerId}';
   }
 
   @override
@@ -442,7 +449,8 @@ class ListRouteArgs {
         const _i28.ListEquality<_i27.MemberEntity>().equals(
           members,
           other.members,
-        );
+        ) &&
+        ownerId == other.ownerId;
   }
 
   @override
@@ -450,7 +458,8 @@ class ListRouteArgs {
       key.hashCode ^
       listId.hashCode ^
       listName.hashCode ^
-      const _i28.ListEquality<_i27.MemberEntity>().hash(members);
+      const _i28.ListEquality<_i27.MemberEntity>().hash(members) ^
+      ownerId.hashCode;
 }
 
 /// generated route for

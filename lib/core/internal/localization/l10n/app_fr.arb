@@ -1,0 +1,1755 @@
+{
+    "appName": "Pora",
+    "@appName": {
+        "description": "The name of the application"
+    },
+    "language": "Langue",
+    "@language": {
+        "description": "language"
+    },
+    "authUnderAppName1": "Liste partagée pour les couples et les familles",
+    "@authUnderAppName1": {
+        "description": "The first line under the app name"
+    },
+    "authUnderAppName2": "Recettes, maison et livraison — tout au même endroit",
+    "@authUnderAppName2": {
+        "description": "The second line under the app name"
+    },
+    "onlyYou": "Vous seulement",
+    "@onlyYou": {
+        "description": "onlyYou"
+    },
+    "authSignInExpansibleExpand": "Se connecter autrement",
+    "@authSignInExpansibleExpand": {
+        "description": "The sign in with other methods title"
+    },
+    "authSignInExpansibleCollapse": "Réduire",
+    "@authSignInExpansibleCollapse": {
+        "description": "The sign in with other methods title"
+    },
+    "sendAgainAfter": "Renvoyer dans...",
+    "@sendAgainAfter": {
+        "description": "The sign in with other methods title"
+    },
+    "authSignInWithEmail": "Se connecter avec un e-mail",
+    "@authSignInWithEmail": {
+        "description": "The sign in with email button text"
+    },
+    "authSignInWithGoogle": "Se connecter avec Google",
+    "@authSignInWithGoogle": {
+        "description": "The sign in with Google button text"
+    },
+    "authSignInWithApple": "Se connecter avec Apple",
+    "@authSignInWithApple": {
+        "description": "The sign in with Apple button text"
+    },
+    "authSignInWithPhone": "Se connecter avec un numéro de téléphone",
+    "@authSignInWithPhone": {
+        "description": "The sign in with Phone button text"
+    },
+    "authPrivatePolicy": "By continuing, vous agree à le\\nTerms et Privacy Policy",
+    "@authPrivatePolicy": {
+        "description": "The private policy link text"
+    },
+    "authTitle": "Presque terminé",
+    "@authTitle": {
+        "description": "authTitle"
+    },
+    "authSubtitle": "Saisissez votre téléphone number ou e-mail — we'll send vous a sign-dans code.",
+    "@authSubtitle": {
+        "description": "authSubtitle"
+    },
+    "authSubtitle2": "Start typing — we'll detect whether it's a téléphone number ou e-mail.",
+    "@authSubtitle2": {
+        "description": "authSubtitle2"
+    },
+    "authJoinButton": "Rejoindre",
+    "@authJoinButton": {
+        "description": "authJoinButton"
+    },
+    "userCreateProfileNameRequired": "How about telling us votre nom?",
+    "@userCreateProfileNameRequired": {
+        "description": "userCreateProfileNameRequired"
+    },
+    "commonError": "Erreur",
+    "@commonError": {
+        "description": "commonError"
+    },
+    "authErrorInvalidPhone": "Invalid téléphone / e-mail!",
+    "@authErrorInvalidPhone": {
+        "description": "Invalid phone on auth screen"
+    },
+    "authPhoneSendOtp": "We'll send code onto {isPhone, select, true{Telegram!} false{email!} other{destination you wrote}}",
+    "@authPhoneSendOtp": {
+        "description": "Invalid phone on auth screen",
+        "placeholders": {
+            "isPhone": {
+                "type": "String",
+                "example": "true"
+            }
+        }
+    },
+    "listsEmptyTitle": "Vous n’avez encore aucune liste",
+    "listsEmptySubtitle": "Vous devriez peut-être en créer une nouvelle ?",
+    "otpTitle": "Presque terminé !",
+    "@otpTitle": {
+        "description": "otpTitle"
+    },
+    "otpEnterCodeSentTo": "Saisissez le code envoyé à ",
+    "@otpEnterCodeSentTo": {
+        "description": "otpEnterCodeSentTo"
+    },
+    "otpResendQuestion": "Didn't receive le code?",
+    "@otpResendQuestion": {
+        "description": "otpResendQuestion"
+    },
+    "otpResend": "Renvoyer",
+    "@otpResend": {
+        "description": "otpResend"
+    },
+    "otpVerifyButton": "Vérifier le code",
+    "@otpVerifyButton": {
+        "description": "otpVerifyButton"
+    },
+    "otpValidationLength": "Saisissez le 6-digit code",
+    "@otpValidationLength": {
+        "description": "otpValidationLength"
+    },
+    "otpValidationDigits": "le code contains digits only",
+    "@otpValidationDigits": {
+        "description": "otpValidationDigits"
+    },
+    "authSwitchToEmail": "Se connecter avec un e-mail",
+    "@authSwitchToEmail": {
+        "description": "authSwitchToEmail"
+    },
+    "authSwitchToPhone": "Se connecter avec un numéro de téléphone",
+    "@authSwitchToPhone": {
+        "description": "authSwitchToPhone"
+    },
+    "onboardingStep": "Étape {step} sur {total}",
+    "@onboardingStep": {
+        "placeholders": {
+            "step": {
+                "type": "int"
+            },
+            "total": {
+                "type": "int"
+            }
+        }
+    },
+    "onboardingSlide1Title": "recette → liste\\nin seconds",
+    "@onboardingSlide1Title": {
+        "description": "onboardingSlide1Title"
+    },
+    "onboardingSlide1Body": "Drop a recette link — Pora collects le ingrédients et removes what vous déjà avez.",
+    "@onboardingSlide1Body": {
+        "description": "onboardingSlide1Body"
+    },
+    "onboardingSlide2Title": "un liste\\nfor deux",
+    "@onboardingSlide2Title": {
+        "description": "onboardingSlide2Title"
+    },
+    "onboardingSlide2Body": "Add things together — vous peut see who ajouté what. Votre partner peut pick up what vous need sur le way home.",
+    "@onboardingSlide2Body": {
+        "description": "onboardingSlide2Body"
+    },
+    "onboardingSlide3Title": "Pora sait\nquand c’est le moment",
+    "@onboardingSlide3Title": {
+        "description": "onboardingSlide3Title"
+    },
+    "onboardingSlide3Body": "Based sur votre purchases, Pora predicts what sera run out bientôt et lets vous commande it avec un appuyez.",
+    "@onboardingSlide3Body": {
+        "description": "onboardingSlide3Body"
+    },
+    "onboardingSkip": "Ignorer",
+    "@onboardingSkip": {
+        "description": "onboardingSkip"
+    },
+    "onboardingStart": "Commencer",
+    "@onboardingStart": {
+        "description": "onboardingStart"
+    },
+    "onboardingNext": "Suivant",
+    "@onboardingNext": {
+        "description": "onboardingNext"
+    },
+    "splashTagline": "le liste that remembers pour vous",
+    "@splashTagline": {
+        "description": "splashTagline"
+    },
+    "briefTitle": "What do vous often run out of?",
+    "@briefTitle": {
+        "description": "briefTitle"
+    },
+    "briefDeletionTitle": "sont vous sure vous want à supprimer ce produit?",
+    "@briefDeletionTitle": {
+        "description": "briefDeletionTitle"
+    },
+    "briefAddYourOwn": "Ajouter",
+    "@briefAddYourOwn": {
+        "description": "briefAddYourOwn"
+    },
+    "briefInputProduct": "Saisissez a produit ou category",
+    "@briefInputProduct": {
+        "description": "briefInputProduct"
+    },
+    "briefInputEmoji": "Saisissez an emoji/icon pour le produit",
+    "@briefInputEmoji": {
+        "description": "briefInputEmoji"
+    },
+    "briefAlreadyContains": "ce produit est déjà sélectionné",
+    "@briefAlreadyContains": {
+        "description": "briefAlreadyContains"
+    },
+    "briefSubtitle": "sélectionner produits — Pora sera remind vous at le right time. Vous peut skip ce.",
+    "@briefSubtitle": {
+        "description": "briefSubtitle"
+    },
+    "briefSkip": "Ignorer",
+    "@briefSkip": {
+        "description": "briefSkip"
+    },
+    "briefNext": "Suivant",
+    "@briefNext": {
+        "description": "briefNext"
+    },
+    "briefItemMilk": "Lait",
+    "@briefItemMilk": {
+        "description": "briefItemMilk"
+    },
+    "briefItemBread": "Pain",
+    "@briefItemBread": {
+        "description": "briefItemBread"
+    },
+    "briefItemEggs": "Œufs",
+    "@briefItemEggs": {
+        "description": "briefItemEggs"
+    },
+    "briefItemCoffee": "Café",
+    "@briefItemCoffee": {
+        "description": "briefItemCoffee"
+    },
+    "briefItemCheese": "fromage",
+    "@briefItemCheese": {
+        "description": "briefItemCheese"
+    },
+    "briefItemBananas": "bananes",
+    "@briefItemBananas": {
+        "description": "briefItemBananas"
+    },
+    "briefItemButter": "beurre",
+    "@briefItemButter": {
+        "description": "briefItemButter"
+    },
+    "briefItemWater": "eau",
+    "@briefItemWater": {
+        "description": "briefItemWater"
+    },
+    "briefItemVegetables": "légumes",
+    "@briefItemVegetables": {
+        "description": "briefItemVegetables"
+    },
+    "briefItemTomatoes": "tomates",
+    "@briefItemTomatoes": {
+        "description": "briefItemTomatoes"
+    },
+    "briefItemPasta": "Pâtes",
+    "@briefItemPasta": {
+        "description": "briefItemPasta"
+    },
+    "briefItemChicken": "poulet",
+    "@briefItemChicken": {
+        "description": "briefItemChicken"
+    },
+    "listTitle": "Notre liste",
+    "@listTitle": {
+        "description": "listTitle"
+    },
+    "listMembersCount": "2 personnes · 8 produits",
+    "@listMembersCount": {
+        "description": "listMembersCount"
+    },
+    "listUrgent": "Urgent",
+    "@listUrgent": {
+        "description": "listUrgent"
+    },
+    "listAdd": "Ajouter",
+    "@listAdd": {
+        "description": "listAdd"
+    },
+    "predictionsTitle": "Pora peut help!",
+    "@predictionsTitle": {
+        "description": "predictionsTitle"
+    },
+    "predictionsSubtitle": "Running out bientôt — based sur votre purchases",
+    "@predictionsSubtitle": {
+        "description": "predictionsSubtitle"
+    },
+    "predictionTip": "Une petite astuce",
+    "@predictionTip": {
+        "description": "predictionTip"
+    },
+    "predictionsOrderTitle": "commande everything avec un appuyez",
+    "@predictionsOrderTitle": {
+        "description": "predictionsOrderTitle"
+    },
+    "predictionsOrderSubtitle": "Samokat · livraison dans 15 minutes",
+    "@predictionsOrderSubtitle": {
+        "description": "predictionsOrderSubtitle"
+    },
+    "predictionsOrderDiscount": "15% off votre first commande",
+    "@predictionsOrderDiscount": {
+        "description": "predictionsOrderDiscount"
+    },
+    "predictionsAddToList": "Add à liste",
+    "@predictionsAddToList": {
+        "description": "predictionsAddToList"
+    },
+    "predictionsDismiss": "non thanks",
+    "@predictionsDismiss": {
+        "description": "predictionsDismiss"
+    },
+    "itemDetailName": "Lait",
+    "@itemDetailName": {
+        "description": "itemDetailName"
+    },
+    "itemDetailSubtitle": "2 L · Produits laitiers",
+    "@itemDetailSubtitle": {
+        "description": "itemDetailSubtitle"
+    },
+    "itemDetailAddedBy": "ajouté by",
+    "@itemDetailAddedBy": {
+        "description": "itemDetailAddedBy"
+    },
+    "itemDetailSection": "Section",
+    "@itemDetailSection": {
+        "description": "itemDetailSection"
+    },
+    "itemDetailSectionValue": "Produits laitiers",
+    "@itemDetailSectionValue": {
+        "description": "itemDetailSectionValue"
+    },
+    "itemDetailQuantity": "quantité",
+    "@itemDetailQuantity": {
+        "description": "itemDetailQuantity"
+    },
+    "itemDetailQuantityValue": "2 L",
+    "@itemDetailQuantityValue": {
+        "description": "itemDetailQuantityValue"
+    },
+    "itemDetailUrgent": "Urgent",
+    "@itemDetailUrgent": {
+        "description": "itemDetailUrgent"
+    },
+    "itemDetailRemind": "Me rappeler",
+    "@itemDetailRemind": {
+        "description": "itemDetailRemind"
+    },
+    "itemDetailRemindEvery": "Every 7 jours",
+    "@itemDetailRemindEvery": {
+        "description": "itemDetailRemindEvery"
+    },
+    "itemDetailInsight": "Vous buy it about every 7 jours · last bought 6 jours ago. I'll suggest restocking bientôt.",
+    "@itemDetailInsight": {
+        "description": "itemDetailInsight"
+    },
+    "itemDetailMarkBought": "Marquer comme acheté",
+    "@itemDetailMarkBought": {
+        "description": "itemDetailMarkBought"
+    },
+    "itemDetailDelete": "retirer de liste",
+    "@itemDetailDelete": {
+        "description": "itemDetailDelete"
+    },
+    "addItemTitle": "Add produit",
+    "@addItemTitle": {
+        "description": "addItemTitle"
+    },
+    "addItemExampleValue": "Avocat",
+    "@addItemExampleValue": {
+        "description": "addItemExampleValue"
+    },
+    "addItemNameHint": "produit nom",
+    "@addItemNameHint": {
+        "description": "addItemNameHint"
+    },
+    "addItemQuantity": "quantité",
+    "@addItemQuantity": {
+        "description": "addItemQuantity"
+    },
+    "addItemSection": "Section",
+    "@addItemSection": {
+        "description": "addItemSection"
+    },
+    "addItemUrgent": "Urgent",
+    "@addItemUrgent": {
+        "description": "addItemUrgent"
+    },
+    "addItemUrgentSubtitle": "Need à buy aujourd’hui",
+    "@addItemUrgentSubtitle": {
+        "description": "addItemUrgentSubtitle"
+    },
+    "addItemRemind": "Rappeler régulièrement",
+    "@addItemRemind": {
+        "description": "addItemRemind"
+    },
+    "addItemRemindEvery": "Every 7 jours",
+    "@addItemRemindEvery": {
+        "description": "addItemRemindEvery"
+    },
+    "addItemSubmit": "Add à liste",
+    "@addItemSubmit": {
+        "description": "addItemSubmit"
+    },
+    "settingsTitle": "Paramètres",
+    "@settingsTitle": {
+        "description": "settingsTitle"
+    },
+    "settingsHouseholdSection": "Foyer",
+    "@settingsHouseholdSection": {
+        "description": "settingsHouseholdSection"
+    },
+    "settingsAppSection": "Application",
+    "@settingsAppSection": {
+        "description": "settingsAppSection"
+    },
+    "settingsNotifications": "Notifications",
+    "@settingsNotifications": {
+        "description": "settingsNotifications"
+    },
+    "settingsDelivery": "Livraison",
+    "@settingsDelivery": {
+        "description": "settingsDelivery"
+    },
+    "settingsProAd": "Pora+ · ad-gratuit",
+    "@settingsProAd": {
+        "description": "settingsProAd"
+    },
+    "settingsTryPill": "Essayer",
+    "@settingsTryPill": {
+        "description": "settingsTryPill"
+    },
+    "settingsPrivacy": "Confidentialité et données",
+    "@settingsPrivacy": {
+        "description": "settingsPrivacy"
+    },
+    "settingsAboutPora": "À propos de Pora",
+    "@settingsAboutPora": {
+        "description": "settingsAboutPora"
+    },
+    "settingsLogout": "Se déconnecter",
+    "@settingsLogout": {
+        "description": "settingsLogout"
+    },
+    "settingsMembersNames": "Boris et Anna",
+    "@settingsMembersNames": {
+        "description": "settingsMembersNames"
+    },
+    "settingsInvitePill": "Inviter",
+    "@settingsInvitePill": {
+        "description": "settingsInvitePill"
+    },
+    "householdInviteTitle": "Invite votre partner",
+    "@householdInviteTitle": {
+        "description": "householdInviteTitle"
+    },
+    "householdCookTogether": "Cuisiner ensemble",
+    "@householdCookTogether": {
+        "description": "householdCookTogether"
+    },
+    "householdInviteDescription": "Pora works better pour deux. Invite votre partner — votre liste et reminders sera be partagé.",
+    "@householdInviteDescription": {
+        "description": "householdInviteDescription"
+    },
+    "householdShareLink": "Partager le lien",
+    "@householdShareLink": {
+        "description": "householdShareLink"
+    },
+    "householdShowQr": "Afficher le code QR",
+    "@householdShowQr": {
+        "description": "householdShowQr"
+    },
+    "householdConnectToFamily": "Rejoindre une famille",
+    "@householdConnectToFamily": {
+        "description": "householdConnectToFamily"
+    },
+    "householdInviteDescriptionWhenConnecting": "We detected an invite code, but vous peut enter it yourself if we got it wrong",
+    "@householdInviteDescriptionWhenConnecting": {
+        "description": "householdInviteDescriptionWhenConnecting"
+    },
+    "householdGotInvited": "Vous've been invited à a famille",
+    "@householdGotInvited": {
+        "description": "householdGotInvited"
+    },
+    "householdWriteCode": "Saisissez invite code",
+    "@householdWriteCode": {
+        "description": "householdWriteCode"
+    },
+    "householdDoLater": "Je le ferai plus tard",
+    "@householdDoLater": {
+        "description": "householdDoLater"
+    },
+    "householdCopyCode": "Copié dans le presse-papiers !",
+    "@householdCopyCode": {
+        "description": "householdCopyCode"
+    },
+    "householdInviteCodeLabel": "Code d’invitation",
+    "@householdInviteCodeLabel": {
+        "description": "householdInviteCodeLabel"
+    },
+    "householdCopyPill": "Copier",
+    "@householdCopyPill": {
+        "description": "householdCopyPill"
+    },
+    "notificationsTitle": "Notifications",
+    "@notificationsTitle": {
+        "description": "notificationsTitle"
+    },
+    "notificationsReadAll": "Tout lire",
+    "@notificationsReadAll": {
+        "description": "notificationsReadAll"
+    },
+    "notificationsMilkTitle": "Grab lait sur votre way home",
+    "@notificationsMilkTitle": {
+        "description": "notificationsMilkTitle"
+    },
+    "notificationsMilkBody": "C’est épuisé — Anna l’a indiqué il y a 10 minutes.",
+    "@notificationsMilkBody": {
+        "description": "notificationsMilkBody"
+    },
+    "notificationsMilkTime": "Il y a 5 minutes",
+    "@notificationsMilkTime": {
+        "description": "notificationsMilkTime"
+    },
+    "notificationsCoffeeTitle": "café est running out bientôt",
+    "@notificationsCoffeeTitle": {
+        "description": "notificationsCoffeeTitle"
+    },
+    "notificationsCoffeeBody": "Vous buy it about every 14 jours, 12 avez passed.",
+    "@notificationsCoffeeBody": {
+        "description": "notificationsCoffeeBody"
+    },
+    "notificationsPartnerAddedTitle": "Anna ajouté 2 produits",
+    "@notificationsPartnerAddedTitle": {
+        "description": "notificationsPartnerAddedTitle"
+    },
+    "notificationsPartnerAddedBody": "bananes et pain sont dans le partagé liste.",
+    "@notificationsPartnerAddedBody": {
+        "description": "notificationsPartnerAddedBody"
+    },
+    "notificationsPartnerAddedTime": "aujourd’hui, 9:12",
+    "@notificationsPartnerAddedTime": {
+        "description": "notificationsPartnerAddedTime"
+    },
+    "notificationsPromoTitle": "15% off votre first Samokat commande",
+    "@notificationsPromoTitle": {
+        "description": "notificationsPromoTitle"
+    },
+    "notificationsPromoBody": "le promo est active pour 6 more jours.",
+    "@notificationsPromoBody": {
+        "description": "notificationsPromoBody"
+    },
+    "notificationsPromoTime": "Hier",
+    "@notificationsPromoTime": {
+        "description": "notificationsPromoTime"
+    },
+    "notificationsOrderDeliveredTitle": "commande delivered",
+    "@notificationsOrderDeliveredTitle": {
+        "description": "notificationsOrderDeliveredTitle"
+    },
+    "notificationsOrderDeliveredBody": "8 produits · Samokat · ₽1,054",
+    "@notificationsOrderDeliveredBody": {
+        "description": "notificationsOrderDeliveredBody"
+    },
+    "notificationsAddToListPill": "＋ Add à liste",
+    "@notificationsAddToListPill": {
+        "description": "notificationsAddToListPill"
+    },
+    "userCreateProfileTitle": "What's votre nom?",
+    "@userCreateProfileTitle": {
+        "description": "userCreateProfileTitle"
+    },
+    "userCreateProfileSubtitle": "Add a nom et photo — votre partner sera see them dans le partagé liste.",
+    "@userCreateProfileSubtitle": {
+        "description": "userCreateProfileSubtitle"
+    },
+    "userCreateProfileNameHint": "Votre nom",
+    "@userCreateProfileNameHint": {
+        "description": "userCreateProfileNameHint"
+    },
+    "userCreateProfileSkip": "Ignorer",
+    "@userCreateProfileSkip": {
+        "description": "userCreateProfileSkip"
+    },
+    "userCreateProfileNext": "Suivant",
+    "@userCreateProfileNext": {
+        "description": "userCreateProfileNext"
+    },
+    "searchTitle": "Rechercher",
+    "@searchTitle": {
+        "description": "searchTitle"
+    },
+    "searchHint": "produit ou recette…",
+    "@searchHint": {
+        "description": "searchHint"
+    },
+    "searchFilterAll": "Tous",
+    "@searchFilterAll": {
+        "description": "searchFilterAll"
+    },
+    "searchFilterVegetables": "légumes",
+    "@searchFilterVegetables": {
+        "description": "searchFilterVegetables"
+    },
+    "searchFilterDairy": "Produits laitiers",
+    "@searchFilterDairy": {
+        "description": "searchFilterDairy"
+    },
+    "searchFilterGrocery": "Courses",
+    "@searchFilterGrocery": {
+        "description": "searchFilterGrocery"
+    },
+    "searchFilterRecipes": "Recettes",
+    "@searchFilterRecipes": {
+        "description": "searchFilterRecipes"
+    },
+    "searchResults": "Résultats",
+    "@searchResults": {
+        "description": "searchResults"
+    },
+    "searchNothingFound": "Aucun résultat",
+    "@searchNothingFound": {
+        "description": "searchNothingFound"
+    },
+    "insightsTitle": "Analyses",
+    "@insightsTitle": {
+        "description": "insightsTitle"
+    },
+    "insightsTipKicker": "✨ ASTUCE PORA",
+    "@insightsTipKicker": {
+        "description": "insightsTipKicker"
+    },
+    "insightsTipTitle": "Vous love carbonara!",
+    "@insightsTipTitle": {
+        "description": "insightsTipTitle"
+    },
+    "insightsTipBody": "Similar flavor profile — try mac et fromage. Vous déjà regularly avez 4 of 6 ingrédients.",
+    "@insightsTipBody": {
+        "description": "insightsTipBody"
+    },
+    "insightsTipAction": "ouvrir recette →",
+    "@insightsTipAction": {
+        "description": "insightsTipAction"
+    },
+    "insightsRunsOutMost": "Épuisé le plus souvent",
+    "@insightsRunsOutMost": {
+        "description": "insightsRunsOutMost"
+    },
+    "insightsFavoriteCuisines": "Cuisines préférées",
+    "@insightsFavoriteCuisines": {
+        "description": "insightsFavoriteCuisines"
+    },
+    "insightsCuisineItalian": "Italienne",
+    "@insightsCuisineItalian": {
+        "description": "insightsCuisineItalian"
+    },
+    "insightsCuisinePasta": "Pâtes",
+    "@insightsCuisinePasta": {
+        "description": "insightsCuisinePasta"
+    },
+    "insightsCuisineBreakfasts": "Petits-déjeuners",
+    "@insightsCuisineBreakfasts": {
+        "description": "insightsCuisineBreakfasts"
+    },
+    "insightsCuisineLight": "Clair",
+    "@insightsCuisineLight": {
+        "description": "insightsCuisineLight"
+    },
+    "orderTitle": "Commande",
+    "@orderTitle": {
+        "description": "orderTitle"
+    },
+    "orderCart": "Panier",
+    "@orderCart": {
+        "description": "orderCart"
+    },
+    "orderWhenToDeliver": "Quand livrer",
+    "@orderWhenToDeliver": {
+        "description": "orderWhenToDeliver"
+    },
+    "orderCheckoutCta": "commande de Samokat · {total}",
+    "@orderCheckoutCta": {
+        "placeholders": {
+            "total": {
+                "type": "String"
+            }
+        }
+    },
+    "orderSummaryGoods": "Articles",
+    "@orderSummaryGoods": {
+        "description": "orderSummaryGoods"
+    },
+    "orderSummaryDiscount": "15 % de réduction",
+    "@orderSummaryDiscount": {
+        "description": "orderSummaryDiscount"
+    },
+    "orderSummaryDelivery": "Livraison",
+    "@orderSummaryDelivery": {
+        "description": "orderSummaryDelivery"
+    },
+    "orderSummaryFree": "Gratuit",
+    "@orderSummaryFree": {
+        "description": "orderSummaryFree"
+    },
+    "orderSummaryTotal": "Total",
+    "@orderSummaryTotal": {
+        "description": "orderSummaryTotal"
+    },
+    "recipeImportTitle": "recette de a link",
+    "@recipeImportTitle": {
+        "description": "recipeImportTitle"
+    },
+    "recipePreviewTitle": "Pasta Carbonara",
+    "@recipePreviewTitle": {
+        "description": "recipePreviewTitle"
+    },
+    "recipePreviewMeta": "eda.ru · 25 min · 2 portions",
+    "@recipePreviewMeta": {
+        "description": "recipePreviewMeta"
+    },
+    "recipePreviewFound": "6 ingrédients found",
+    "@recipePreviewFound": {
+        "description": "recipePreviewFound"
+    },
+    "recipeDedupBanner": "Removed 2 duplicates à avoid duplicating items déjà sur votre liste",
+    "@recipeDedupBanner": {
+        "description": "recipeDedupBanner"
+    },
+    "recipeIngredients": "Ingrédients",
+    "@recipeIngredients": {
+        "description": "recipeIngredients"
+    },
+    "recipeAddToListCta": "Ajouter {count} produit à la liste",
+    "@recipeAddToListCta": {
+        "description": "Add the selected recipe products to the list",
+        "placeholders": {
+            "count": {"type": "int", "format":"compact"}
+        }
+    },
+    "recipeParseButton": "Analyser",
+    "@recipeParseButton": {
+        "description": "recipeParseButton"
+    },
+    "navList": "Liste",
+    "@navList": {
+        "description": "navList"
+    },
+    "navPora": "Pora",
+    "@navPora": {
+        "description": "navPora"
+    },
+    "navOrder": "Commande",
+    "@navOrder": {
+        "description": "navOrder"
+    },
+    "navProfile": "Profil",
+    "@navProfile": {
+        "description": "navProfile"
+    },
+    "familiesTitle": "Familles",
+    "@familiesTitle": {
+        "description": "familiesTitle"
+    },
+    "familiesSubtitle": "choisir a famille à ouvrir its liste",
+    "@familiesSubtitle": {
+        "description": "familiesSubtitle"
+    },
+    "familiesCurrent": "Actuelle",
+    "@familiesCurrent": {
+        "description": "familiesCurrent"
+    },
+    "familiesCreateOrJoin": "＋ Create ou join",
+    "@familiesCreateOrJoin": {
+        "description": "familiesCreateOrJoin"
+    },
+    "familiesCreateDialog": "What should we call le famille?",
+    "@familiesCreateDialog": {
+        "description": "familiesCreateDialog"
+    },
+    "tryToUpdate": "Réessayer",
+    "@tryToUpdate": {
+        "description": "tryToUpdate"
+    },
+    "checkOut": "Vérifier",
+    "@checkOut": {
+        "description": "checkOut"
+    },
+    "settingsMore": "Avancé",
+    "@settingsMore": {
+        "description": "settingsMore"
+    },
+    "listsYour": "Votre liste personnelle",
+    "@listsYour": {
+        "description": "listsYour"
+    },
+    "human": "personnes",
+    "@human": {
+        "description": "human"
+    },
+    "products": "produits",
+    "@products": {
+        "description": "products"
+    },
+    "lists": "listes",
+    "@lists": {
+        "description": "lists"
+    },
+    "update": "Actualiser",
+    "@update": {
+        "description": "update"
+    },
+    "connectionSuccess": "Rejoint",
+    "@connectionSuccess": {
+        "description": "connectionSuccess"
+    },
+    "familiesNoUrgent": "Rien d’urgent",
+    "@familiesNoUrgent": {
+        "description": "familiesNoUrgent"
+    },
+    "welcomeBackTitle": "Bon retour !",
+    "@welcomeBackTitle": {
+        "description": "welcomeBackTitle"
+    },
+    "welcomeBackSubtitle": "un second, opening votre liste…",
+    "@welcomeBackSubtitle": {
+        "description": "welcomeBackSubtitle"
+    },
+    "errorDuringLoading": "Erreur lors du chargement",
+    "@errorDuringLoading": {
+        "description": "errorDuringLoading"
+    },
+    "familyName": "Nom de la famille",
+    "@familyName": {
+        "description": "nameOfFamily"
+    },
+    "familiesCreate": "Créer",
+    "@familiesCreate": {
+        "description": "createButton"
+    },
+    "familiesConnect": "Rejoindre",
+    "@familiesConnect": {
+        "description": "connectButton"
+    },
+    "showAll": "Tout afficher",
+    "@showAll": {
+        "description": "showAll"
+    },
+    "priorityLabel": "Priorité",
+    "@priorityLabel": {
+        "description": "priorityLabel"
+    },
+    "everyDay": "Tous les jours",
+    "@everyDay": {
+        "description": "everyDay"
+    },
+    "newList": "Nouvelle liste",
+    "@newList": {
+        "description": "newList"
+    },
+    "listNamePlaceholder": "Nom de la liste",
+    "@listNamePlaceholder": {
+        "description": "listNamePlaceholder"
+    },
+    "cancel": "Annuler",
+    "@cancel": {
+        "description": "cancel"
+    },
+    "quantityLabel": "Qté",
+    "@quantityLabel": {
+        "description": "quantityLabel"
+    },
+    "personal": "Personnel",
+    "@personal": {
+        "description": "personal"
+    },
+    "notify": "Notifier",
+    "@notify": {
+        "description": "notify"
+    },
+    "notifyEveryone": "Tout le monde",
+    "@notifyEveryone": {
+        "description": "notifyEveryone"
+    },
+    "notifyRecipients": "À",
+    "@notifyRecipients": {
+        "description": "notifyRecipients"
+    },
+    "notifyAddCustom": "Ajouter un nom",
+    "@notifyAddCustom": {
+        "description": "notifyAddCustom"
+    },
+    "notifyMessageLabel": "Message",
+    "@notifyMessageLabel": {
+        "description": "notifyMessageLabel"
+    },
+    "notifyHint": "Prendre {itemName} en urgence",
+    "@notifyHint": {
+        "description": "notifyHint placeholder",
+        "placeholders": {
+            "itemName": {
+                "type": "String"
+            }
+        }
+    },
+    "notifySend": "Envoyer",
+    "@notifySend": {
+        "description": "notifySend"
+    },
+    "notifySent": "Notification envoyée",
+    "@notifySent": {
+        "description": "notifySent"
+    },
+    "advancedSettings": "Paramètres avancés",
+    "@advancedSettings": {
+        "description": "advancedSettings"
+    },
+    "appearance": "Apparence",
+    "@appearance": {
+        "description": "appearance"
+    },
+    "themeSection": "Thème",
+    "@themeSection": {
+        "description": "themeSection"
+    },
+    "themeLight": "Clair",
+    "@themeLight": {
+        "description": "themeLight"
+    },
+    "themeDark": "Sombre",
+    "@themeDark": {
+        "description": "themeDark"
+    },
+    "themeSystem": "Système",
+    "@themeSystem": {
+        "description": "themeSystem"
+    },
+    "notificationsPermission": "notifications permission",
+    "@notificationsPermission": {
+        "description": "notificationsPermission"
+    },
+    "granted": "Autorisé",
+    "@granted": {
+        "description": "granted"
+    },
+    "denied": "Refusé",
+    "@denied": {
+        "description": "denied"
+    },
+    "notDetermined": "Non demandé",
+    "@notDetermined": {
+        "description": "notDetermined"
+    },
+    "requestPermission": "Demander",
+    "@requestPermission": {
+        "description": "requestPermission"
+    },
+    "confirmations": "Confirmations",
+    "@confirmations": {
+        "description": "confirmations"
+    },
+    "askBeforeDelete": "Demander avant suppression",
+    "@askBeforeDelete": {
+        "description": "askBeforeDelete"
+    },
+    "about": "À propos",
+    "@about": {
+        "description": "about"
+    },
+    "version": "Version",
+    "@version": {
+        "description": "version"
+    },
+    "deleteItemTitle": "supprimer item?",
+    "@deleteItemTitle": {
+        "description": "deleteItemTitle"
+    },
+    "deleteItemBody": "ce cannot be undone.",
+    "@deleteItemBody": {
+        "description": "deleteItemBody"
+    },
+    "dontAskAgain": "Ne plus demander",
+    "@dontAskAgain": {
+        "description": "dontAskAgain"
+    },
+    "delete": "Supprimer",
+    "@delete": {
+        "description": "delete"
+    },
+    "returnToList": "Return à liste",
+    "@returnToList": {
+        "description": "returnToList"
+    },
+    "nooneToNotify": "non un à notify",
+    "@nooneToNotify": {
+        "description": "nooneToNotify"
+    },
+    "notFound": "ne found",
+    "@notFound": {
+        "description": "notFound"
+    },
+    "recipeEmptyHint": "Paste a recette URL et appuyez “Parse”",
+    "@recipeEmptyHint": {
+        "description": "recipeEmptyHint"
+    },
+    "recipeDupMark": "déjà dans liste",
+    "@recipeDupMark": {
+        "description": "recipeDupMark"
+    },
+    "done": "Terminé",
+    "@done": {
+        "description": "done"
+    },
+    "errorGeneric": "Erreur",
+    "@errorGeneric": {
+        "description": "errorGeneric"
+    },
+    "pushToken": "Jeton push",
+    "@pushToken": {
+        "description": "pushToken"
+    },
+    "resync": "Synchroniser",
+    "@resync": {
+        "description": "resync"
+    },
+    "tokenSynced": "Jeton synchronisé",
+    "@tokenSynced": {
+        "description": "tokenSynced"
+    },
+    "deleteListTitle": "supprimer liste?",
+    "@deleteListTitle": {
+        "description": "deleteListTitle"
+    },
+    "deleteListBody": "liste “{listName}” et all its items sera be deleted. ce cannot be undone.",
+    "@deleteListBody": {
+        "description": "deleteListBody placeholder",
+        "placeholders": {
+            "listName": {
+                "type": "String"
+            }
+        }
+    },
+    "membersScreenTitle": "Membres",
+    "@membersScreenTitle": {
+        "description": "membersScreenTitle"
+    },
+    "owner": "Propriétaire",
+    "@owner": {
+        "description": "owner"
+    },
+    "member": "Membre",
+    "@member": {
+        "description": "member"
+    },
+    "addProduct": "Add produit",
+    "@addProduct": {
+        "description": "addProduct"
+    },
+    "productName": "Nom",
+    "@productName": {
+        "description": "productName"
+    },
+    "section": "Section",
+    "@section": {
+        "description": "section"
+    },
+    "unit": "Unité",
+    "@unit": {
+        "description": "unit"
+    },
+    "priorityHigh": "Élevée",
+    "@priorityHigh": {
+        "description": "priorityHigh"
+    },
+    "priorityMed": "Moyenne",
+    "@priorityMed": {
+        "description": "priorityMed"
+    },
+    "priorityLow": "Faible",
+    "@priorityLow": {
+        "description": "priorityLow"
+    },
+    "urgent": "Urgent",
+    "@urgent": {
+        "description": "urgent"
+    },
+    "remindEvery": "Rappeler tous les",
+    "@remindEvery": {
+        "description": "remindEvery"
+    },
+    "days": "j",
+    "@days": {
+        "description": "days"
+    },
+    "customValue": "Personnalisé…",
+    "@customValue": {
+        "description": "customValue"
+    },
+    "save": "Enregistrer",
+    "@save": {
+        "description": "save"
+    },
+    "addedByName": "ajouté by: {name}",
+    "@addedByName": {
+        "description": "addedByName placeholder",
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "splashLoadingSlow": "Presque terminé…",
+    "@splashLoadingSlow": {
+        "description": "splashLoadingSlow"
+    },
+    "splashLoadingVerySlow": "Chargement en cours… vérification de la connexion",
+    "@splashLoadingVerySlow": {
+        "description": "splashLoadingVerySlow"
+    },
+    "profileNameUpdate": "Mise à jour du profil",
+    "@profileNameUpdate": {
+        "description": "profileNameUpdate"
+    },
+    "briefSnackBar": "Maybe vous forgot à sélectionner any produits?",
+    "@briefSnackBar": {
+        "description": "briefSnackBar"
+    },
+    "noInternet": "non internet connection",
+    "@noInternet": {
+        "description": "noInternet"
+    },
+    "noInternetButLoadYouLocally": "non internet connection, but we sera load vous locally",
+    "@groupDeletionTitle": {
+        "description": "groupDeletionTitle"
+    },
+    "groupDeletionTitle": "sont vous sure want à supprimer groupe?",
+    "@noInternetButLoadYouLocally": {
+        "description": "noInternetButLoadYouLocally"
+    },
+    "retry": "Réessayer",
+    "@retry": {
+        "description": "retry"
+    },
+    "groupsTitle": "Vos groupes",
+    "@groupsTitle": {
+        "description": "groupsTitle"
+    },
+    "groupsSubtitle": "A liste est a groupe. Invite personnes — they'll see le liste.",
+    "@groupsSubtitle": {
+        "description": "groupsSubtitle"
+    },
+    "groupCreate": "Créer un groupe",
+    "@groupCreate": {
+        "description": "groupCreate"
+    },
+    "groupConnect": "Rejoindre",
+    "@groupConnect": {
+        "description": "groupConnect"
+    },
+    "groupNameHint": "Nom du groupe",
+    "@groupNameHint": {
+        "description": "groupNameHint"
+    },
+    "groupPersonal": "Personnel",
+    "@groupPersonal": {
+        "description": "groupPersonal"
+    },
+    "groupShared": "Partagé",
+    "@groupShared": {
+        "description": "groupShared"
+    },
+    "noGroups": "Aucun groupe pour le moment",
+    "@noGroups": {
+        "description": "noGroups"
+    },
+    "settingsChangeThemeIOSEasterEgg": "* à change votre thème, go à paramètres > PORA > thème\n* sélectionner a new thème de le paramètres menu\n* appuyez sur 'thème' dans le app's paramètres à switch between clair et sombre modes",
+    "@settingsChangeThemeIOSEasterEgg": {
+        "description": "ios easter egg on advanced settings when tapped few times"
+    },
+    "tutorialTitle": "Comment ça marche",
+    "@tutorialTitle": {
+        "description": "tutorialTitle"
+    },
+    "tutorialSkip": "Ignorer",
+    "@tutorialSkip": {
+        "description": "tutorialSkip"
+    },
+    "tutorialNext": "Suivant",
+    "@tutorialNext": {
+        "description": "tutorialNext"
+    },
+    "tutorialDone": "Commencer",
+    "@tutorialDone": {
+        "description": "tutorialDone"
+    },
+    "tutorialInviteTitle": "Invite votre personnes",
+    "@tutorialInviteTitle": {
+        "description": "tutorialInviteTitle"
+    },
+    "tutorialInviteBody": "faites glisser a groupe right → Invite. Votre partner sees le same liste.",
+    "@tutorialInviteBody": {
+        "description": "tutorialInviteBody"
+    },
+    "tutorialAddTitle": "Add a produit",
+    "@tutorialAddTitle": {
+        "description": "tutorialAddTitle"
+    },
+    "tutorialAddBody": "appuyez + at le bottom of le liste. nom, qty, section, priority — done.",
+    "@tutorialAddBody": {
+        "description": "tutorialAddBody"
+    },
+    "tutorialEditTitle": "Edit et check off",
+    "@tutorialEditTitle": {
+        "description": "tutorialEditTitle"
+    },
+    "tutorialEditBody": "appuyez le checkbox — bought. appuyez le row — details et edits.",
+    "@tutorialEditBody": {
+        "description": "tutorialEditBody"
+    },
+    "tutorialDeleteTitle": "Supprimer",
+    "@tutorialDeleteTitle": {
+        "description": "tutorialDeleteTitle"
+    },
+    "tutorialDeleteBody": "faites glisser a produit left → supprimer. Confirmation peut be turned off.",
+    "@tutorialDeleteBody": {
+        "description": "tutorialDeleteBody"
+    },
+    "tutorialAiTitle": "Import a recette",
+    "@tutorialAiTitle": {
+        "description": "tutorialAiTitle"
+    },
+    "tutorialAiBody": "Paste a recette URL, appuyez Parse. ingrédients drop into le liste, duplicates marked.",
+    "@tutorialAiBody": {
+        "description": "tutorialAiBody"
+    },
+    "tutorialSettingsTitle": "Everything dans reach",
+    "@tutorialSettingsTitle": {
+        "description": "tutorialSettingsTitle"
+    },
+    "tutorialSettingsBody": "thème, language, notifications, confirmations — Profile → Advanced paramètres.",
+    "@tutorialSettingsBody": {
+        "description": "tutorialSettingsBody"
+    },
+    "showTutorial": "Afficher le tutoriel",
+    "@showTutorial": {
+        "description": "showTutorial"
+    },
+    "tutorialSampleGroupFamily": "Famille",
+    "@tutorialSampleGroupFamily": {
+        "description": "sample group name in invite animation"
+    },
+    "tutorialSampleMilk": "Lait",
+    "@tutorialSampleMilk": {
+        "description": "sample product"
+    },
+    "tutorialSampleBread": "Pain",
+    "@tutorialSampleBread": {
+        "description": "sample product"
+    },
+    "tutorialSampleAvocado": "Avocat",
+    "@tutorialSampleAvocado": {
+        "description": "sample product added in add animation"
+    },
+    "tutorialSampleMilkQty": "lait 2×1L",
+    "@tutorialSampleMilkQty": {
+        "description": "sample product with qty"
+    },
+    "tutorialSampleCoffee": "Café",
+    "@tutorialSampleCoffee": {
+        "description": "sample product"
+    },
+    "tutorialSampleCola": "Cola",
+    "@tutorialSampleCola": {
+        "description": "sample product deleted"
+    },
+    "tutorialSampleRecipeUrl": "recipe.example/pasta",
+    "@tutorialSampleRecipeUrl": {
+        "description": "sample recipe url shown in AI import animation"
+    },
+    "tutorialSampleIngredient1": "Spaghetti 400 g",
+    "@tutorialSampleIngredient1": {
+        "description": "sample recipe ingredient"
+    },
+    "tutorialSampleIngredient2": "tomates 500 g",
+    "@tutorialSampleIngredient2": {
+        "description": "sample recipe ingredient"
+    },
+    "tutorialSampleIngredient3": "Garlic 3 cloves",
+    "@tutorialSampleIngredient3": {
+        "description": "sample recipe ingredient"
+    },
+    "tutorialSampleToggleTheme": "Thème",
+    "@tutorialSampleToggleTheme": {
+        "description": "toggle label in settings animation"
+    },
+    "tutorialSampleToggleNotif": "Notifications",
+    "@tutorialSampleToggleNotif": {
+        "description": "toggle label in settings animation"
+    },
+    "tutorialSampleToggleConfirm": "Confirmation",
+    "@tutorialSampleToggleConfirm": {
+        "description": "toggle label in settings animation"
+    },
+    "tutorialConnectTitle": "Rejoindre avec un code",
+    "@tutorialConnectTitle": {
+        "description": "tutorialConnectTitle"
+    },
+    "tutorialConnectBody": "Partner sends a link ou code. Paste it — vous're dans le partagé liste.",
+    "@tutorialConnectBody": {
+        "description": "tutorialConnectBody"
+    },
+    "tutorialNotifyTitle": "Ping «need it now»",
+    "@tutorialNotifyTitle": {
+        "description": "tutorialNotifyTitle"
+    },
+    "tutorialNotifyBody": "appuyez «!» sur a produit — votre partner gets a push «buy it now». non calls needed.",
+    "@tutorialNotifyBody": {
+        "description": "tutorialNotifyBody"
+    },
+    "tutorialOutroTitle": "Vous'll figure out le rest",
+    "@tutorialOutroTitle": {
+        "description": "tutorialOutroTitle"
+    },
+    "tutorialOutroBody": "appuyez, faites glisser, mess up — le app forgives almost anything.",
+    "@tutorialOutroBody": {
+        "description": "tutorialOutroBody"
+    },
+    "tutorialSampleInviteCode": "PORA-4F72",
+    "@tutorialSampleInviteCode": {
+        "description": "sample invite code in connect animation"
+    },
+    "tutorialSamplePushSender": "Anna",
+    "@tutorialSamplePushSender": {
+        "description": "sample partner name in notify push preview"
+    },
+    "tutorialSamplePushBody": "Need lait, urgent",
+    "@tutorialSamplePushBody": {
+        "description": "sample push body in notify animation"
+    },
+    "tutorialSampleInviteMessage": "Join le liste",
+    "@tutorialSampleInviteMessage": {
+        "description": "sample chat message text before the invite link"
+    },
+    "supportMessage": "e-mail assistance",
+    "@supportMessage": {
+        "description": "Email support"
+    },
+    "supportMessageBottomSheetTopDescription": "Votre message sera be envoyé à le assistance team. Please provide as much detail as possible.",
+    "@supportMessageBottomSheetTopDescription": {
+        "description": "Your message will be sent to the support team. Please provide as much detail as possible."
+    },
+    "supportMessageBottomSheetSendButton": "Envoyer",
+    "@supportMessageBottomSheetSendButton": {
+        "description": "Send button text in support message bottom bar"
+    },
+    "supportMessageBottomSheetUnderButtonText": "We sera answer as bientôt as possible, et mail à votre gmail ou inapp!",
+    "@supportMessageBottomSheetUnderButtonText": {
+        "description": "supportMessageBottomSheetUnderButtonText"
+    },
+    "allergen": "Allergène",
+    "@allergen": {
+        "description": "Allergen toggle label"
+    },
+    "predictionsGreeting": "Votre jour avec PORA",
+    "@predictionsGreeting": {
+        "description": "predictions main greeting"
+    },
+    "predictionsGreetingSub": "Smart hints de votre purchases",
+    "@predictionsGreetingSub": {
+        "description": "predictions greeting subtitle"
+    },
+    "predictionsSectionSoon": "Running out bientôt",
+    "@predictionsSectionSoon": {
+        "description": "section title"
+    },
+    "predictionsSectionOften": "Vous buy often",
+    "@predictionsSectionOften": {
+        "description": "section title"
+    },
+    "predictionsSectionAiSuggests": "L’IA suggère",
+    "@predictionsSectionAiSuggests": {
+        "description": "section title"
+    },
+    "predictionsAiSuggestionsTitle": "produits et recettes pour vous",
+    "@predictionsAiSuggestionsTitle": {
+        "description": "AI suggestions card title"
+    },
+    "predictionsAiSuggestionsTopic": "votre preferences et purchases",
+    "@predictionsAiSuggestionsTopic": {
+        "description": "AI suggestions topic"
+    },
+    "refresh": "Actualiser",
+    "@refresh": {
+        "description": "refresh action"
+    },
+    "predictionsOftenEmpty": "ne enough data yet",
+    "@predictionsOftenEmpty": {
+        "description": "empty frequent products"
+    },
+    "predictionsAskPora": "Demander à PORA",
+    "@predictionsAskPora": {
+        "description": "FAB label"
+    },
+    "kpiWeek": "items per semaine",
+    "@kpiWeek": {
+        "description": "kpi label"
+    },
+    "kpiRecipes": "recettes ce mois",
+    "@kpiRecipes": {
+        "description": "kpi label"
+    },
+    "kpiDaysToRun": "jours until restock",
+    "@kpiDaysToRun": {
+        "description": "kpi label"
+    },
+    "fallbackTip1": "conserver herbs like a bouquet: dans a glass of eau covered avec a bag — lasts 2 weeks.",
+    "@fallbackTip1": {
+        "description": "fallback tip"
+    },
+    "fallbackTip2": "Add sel à dough at le end — it slows down yeast.",
+    "@fallbackTip2": {
+        "description": "fallback tip"
+    },
+    "fallbackTip3": "à stop onions stinging, chill them pour 15 minutes dans le freezer avant cutting.",
+    "@fallbackTip3": {
+        "description": "fallback tip"
+    },
+    "fallbackTip4": "Oversalted soup? A raw potato pour 10 minutes soaks up le extra sel.",
+    "@fallbackTip4": {
+        "description": "fallback tip"
+    },
+    "fallbackTip5": "Check egg freshness dans eau: sinks — frais, floats — discard.",
+    "@fallbackTip5": {
+        "description": "fallback tip"
+    },
+    "fallbackTip6": "Reheat pizza dans a covered skillet — le crust crisps back up.",
+    "@fallbackTip6": {
+        "description": "fallback tip"
+    },
+    "fallbackTip7": "congelé meat slices thinner — 20 minutes dans le freezer avant cutting.",
+    "@fallbackTip7": {
+        "description": "fallback tip"
+    },
+    "fallbackTip8": "Roll a lemon sur le counter avant cutting — vous'll get more juice.",
+    "@fallbackTip8": {
+        "description": "fallback tip"
+    },
+    "fallbackTip9": "A pinch of sucre dans tomato sauce cuts le acidity.",
+    "@fallbackTip9": {
+        "description": "fallback tip"
+    },
+    "fallbackTip10": "pain keeps a mois dans le freezer; toasting it goes straight de congelé.",
+    "@fallbackTip10": {
+        "description": "fallback tip"
+    },
+    "aiTipOfDayLabel": "TIP OF le jour",
+    "@aiTipOfDayLabel": {
+        "description": "kicker"
+    },
+    "aiTipOfDayTopic": "aujourd’hui",
+    "@aiTipOfDayTopic": {
+        "description": "default topic passed to tip prompt"
+    },
+    "aiCtaTitle": "Demander à PORA",
+    "@aiCtaTitle": {
+        "description": "CTA title"
+    },
+    "aiCtaSubtitle": "recettes · swaps · tips",
+    "@aiCtaSubtitle": {
+        "description": "CTA subtitle"
+    },
+    "chatSheetTitle": "PORA",
+    "@chatSheetTitle": {
+        "description": "chat sheet title"
+    },
+    "chatSheetSubtitle": "poser des questions sur la cuisine, les courses et les substitutions",
+    "@chatSheetSubtitle": {
+        "description": "chat sheet subtitle"
+    },
+    "chatEmptyTitle": "Commencer une conversation",
+    "@chatEmptyTitle": {
+        "description": "chat empty state title"
+    },
+    "chatEmptyExamplesLabel": "Exemples de questions :",
+    "@chatEmptyExamplesLabel": {
+        "description": "chat empty state examples label"
+    },
+    "chatSample1": "Que puis-je cook avec poulet et riz?",
+    "@chatSample1": {
+        "description": "sample question"
+    },
+    "chatSample2": "What peut remplacer sour cream dans dough?",
+    "@chatSample2": {
+        "description": "sample question"
+    },
+    "chatSample3": "Comment conserver herbs so they don't wilt?",
+    "@chatSample3": {
+        "description": "sample question"
+    },
+    "chatSample4": "rapide 20-minute dîner recette",
+    "@chatSample4": {
+        "description": "sample question"
+    },
+    "chatSample5": "Comment puis-je use up légumes avant they spoil?",
+    "@chatSample5": {
+        "description": "sample question"
+    },
+    "chatSample6": "Créez une shopping liste pour 3 facile breakfasts",
+    "@chatSample6": {
+        "description": "sample question"
+    },
+    "chatSample7": "Que dois-je cook pour deux avec a petit budget?",
+    "@chatSample7": {
+        "description": "sample question"
+    },
+    "chatSample8": "How long peut I garder cuit riz dans le fridge?",
+    "@chatSample8": {
+        "description": "sample question"
+    },
+    "chatSample9": "Donnez-moi a élevé-protein végétarien dîner",
+    "@chatSample9": {
+        "description": "sample question"
+    },
+    "chatSample10": "What peut remplacer beurre dans ce recette?",
+    "@chatSample10": {
+        "description": "sample question"
+    },
+    "chatSample11": "Planifiez trois dinners de what I déjà avez",
+    "@chatSample11": {
+        "description": "sample question"
+    },
+    "chatSample12": "Que puis-je cook avec restes dans 15 minutes?",
+    "@chatSample12": {
+        "description": "sample question"
+    },
+    "chatSample13": "Suggérez une adaptée aux allergies recette de my liste",
+    "@chatSample13": {
+        "description": "sample question"
+    },
+    "chatSample14": "Comment puis-je make ce meal moins cher?",
+    "@chatSample14": {
+        "description": "sample question"
+    },
+    "chatTyping": "PORA est typing…",
+    "@chatTyping": {
+        "description": "typing indicator"
+    },
+    "chatInputHint": "Demandez n’importe quoi…",
+    "@chatInputHint": {
+        "description": "chat input placeholder"
+    },
+    "aiModelBadge": "Powered by OpenRouter · ling-3.0-flash",
+    "@aiModelBadge": {
+        "description": "model badge"
+    },
+    "seeAll": "Tout voir",
+    "@seeAll": {
+        "description": "see all link"
+    },
+    "tipTopicHerbs": "herbes",
+    "@tipTopicHerbs": {
+        "description": "predefined tip topic"
+    },
+    "tipTopicBaking": "pâtisserie",
+    "@tipTopicBaking": {
+        "description": "predefined tip topic"
+    },
+    "tipTopicSoups": "soupes",
+    "@tipTopicSoups": {
+        "description": "predefined tip topic"
+    },
+    "tipTopicMeat": "viande",
+    "@tipTopicMeat": {
+        "description": "predefined tip topic"
+    },
+    "tipTopicFish": "poisson",
+    "@tipTopicFish": {
+        "description": "predefined tip topic"
+    },
+    "tipTopicVegetables": "légumes",
+    "@tipTopicVegetables": {
+        "description": "predefined tip topic"
+    },
+    "tipTopicStorage": "conservation des aliments",
+    "@tipTopicStorage": {
+        "description": "predefined tip topic"
+    },
+    "tipTopicKitchenHacks": "astuces de cuisine",
+    "@tipTopicKitchenHacks": {
+        "description": "predefined tip topic"
+    },
+    "tipTopicSpices": "épices",
+    "@tipTopicSpices": {
+        "description": "predefined tip topic"
+    },
+    "tipTopicDough": "pâte",
+    "@tipTopicDough": {
+        "description": "predefined tip topic"
+    },
+    "tipTopicBreakfast": "petits-déjeuners",
+    "@tipTopicBreakfast": {
+        "description": "predefined tip topic"
+    },
+    "tipTopicDinner": "dîners",
+    "@tipTopicDinner": {
+        "description": "predefined tip topic"
+    },
+    "tipTopicsSectionTitle": "Thèmes des astuces",
+    "@tipTopicsSectionTitle": {
+        "description": "settings section title"
+    },
+    "tipTopicsSectionDescription": "Pick which topics le tip est drawn de",
+    "@tipTopicsSectionDescription": {
+        "description": "settings section description"
+    },
+    "tipTopicsAddCustom": "Add votre own topic",
+    "@tipTopicsAddCustom": {
+        "description": "add custom topic hint"
+    },
+    "tipTopicsCustomLabel": "Personnalisé",
+    "@tipTopicsCustomLabel": {
+        "description": "custom topics label"
+    },
+    "tipTopicsPredefinedLabel": "Prédéfini",
+    "@tipTopicsPredefinedLabel": {
+        "description": "predefined topics label"
+    },
+    "tipTopicsEmpty": "non topics sélectionné — tip sera be generic",
+    "@tipTopicsEmpty": {
+        "description": "warning when no topics selected"
+    },
+    "insightsChampionKicker": "CHAMPION OF le mois",
+    "@insightsChampionKicker": {
+        "description": "champion card kicker"
+    },
+    "insightsChampionSubtitle": "bought {count} fois ce mois",
+    "@insightsChampionSubtitle": {
+        "description": "champion card subtitle",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "insightsStreakDays": "{days} jours dans a row",
+    "@insightsStreakDays": {
+        "description": "streak headline",
+        "placeholders": {
+            "days": {
+                "type": "int"
+            }
+        }
+    },
+    "insightsStreakSubtitle": "vous're sur it — garder going",
+    "@insightsStreakSubtitle": {
+        "description": "streak card subtitle"
+    },
+    "insightsFreqEvery": "~tous les {days} j",
+    "@insightsFreqEvery": {
+        "description": "frequency subtitle",
+        "placeholders": {
+            "days": {
+                "type": "int"
+            }
+        }
+    },
+    "insightsPopular": "Vous buy often",
+    "@insightsPopular": {
+        "description": "popular section title"
+    },
+    "insightsStatsProducts": "produits",
+    "@insightsStatsProducts": {
+        "description": "kpi label"
+    },
+    "insightsStatsLoginsWeek": "logins ce semaine",
+    "@insightsStatsLoginsWeek": {
+        "description": "kpi label"
+    },
+    "insightsEmpty": "non data yet — start adding produits",
+    "@insightsEmpty": {
+        "description": "empty state on insights"
+    },
+    "notificationsFilterAll": "Tous",
+    "@notificationsFilterAll": {
+        "description": "filter chip"
+    },
+    "notificationsFilterUrgent": "Urgent",
+    "@notificationsFilterUrgent": {
+        "description": "filter chip"
+    },
+    "notificationsFilterPrediction": "Prévisions",
+    "@notificationsFilterPrediction": {
+        "description": "filter chip"
+    },
+    "notificationsFilterPromo": "Promotion",
+    "@notificationsFilterPromo": {
+        "description": "filter chip"
+    },
+    "notificationsFilterOther": "Autre",
+    "@notificationsFilterOther": {
+        "description": "filter chip"
+    },
+    "notificationsClearAll": "Tout effacer",
+    "@notificationsClearAll": {
+        "description": "menu action"
+    },
+    "notificationsDelete": "Supprimer",
+    "@notificationsDelete": {
+        "description": "slidable action"
+    },
+    "notificationsGroupToday": "Aujourd’hui",
+    "@notificationsGroupToday": {
+        "description": "group header"
+    },
+    "notificationsGroupYesterday": "Hier",
+    "@notificationsGroupYesterday": {
+        "description": "group header"
+    },
+    "notificationsEmptyTitle": "Tout est calme",
+    "@notificationsEmptyTitle": {
+        "description": "empty state title"
+    },
+    "notificationsEmptyBody": "New notifications sera appear here",
+    "@notificationsEmptyBody": {
+        "description": "empty state body"
+    },
+    "recipeCreateListCta": "Où ajouter cette recette ?",
+    "@recipeCreateListCta": {
+        "description": "recipe cta"
+    },
+    "recipeDupForceMark": "sera quand même ajouté",
+    "@recipeDupForceMark": {
+        "description": "dup pill when user unchecks flag"
+    },
+    "recipeDedupBannerMany": "{n} duplicates sera be skipped — uncheck à force-add",
+    "@recipeDedupBannerMany": {
+        "description": "dedup banner",
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "offlineWriteBlocked": "non internet — change won't be saved",
+    "@offlineWriteBlocked": {
+        "description": "snackbar when write attempted offline"
+    },
+    "offlineReadBanner": "Hors ligne — affichage des données en cache",
+    "@offlineReadBanner": {
+        "description": "top banner when cached data shown"
+    },
+    "chatImportRecipeCta": "Importer une recette",
+    "@chatImportRecipeCta": {
+        "description": "chat bubble cta"
+    }
+}

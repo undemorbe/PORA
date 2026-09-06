@@ -65,14 +65,33 @@ class InjectionContainer {
     _getIt.registerLazySingleton<AiRemote>(
       () => AiRemoteImpl(
         client: _getIt<OpenRouterApiClient>(),
-        model: dotenv.maybeGet('AI_MODEL') ?? '',
+        model:
+            dotenv.maybeGet('AI_CHAT_MODEL') ??
+            dotenv.maybeGet('AI_MODEL') ??
+            '',
       ),
+    );
+    _getIt.registerLazySingleton<AiRemote>(
+      () => AiRemoteImpl(
+        client: _getIt<OpenRouterApiClient>(),
+        model:
+            dotenv.maybeGet('AI_TIP_MODEL') ??
+            dotenv.maybeGet('AI_MODEL') ??
+            '',
+      ),
+      instanceName: 'tips',
     );
     _getIt.registerLazySingleton<AiRepository>(
       () => AiService(remote: _getIt<AiRemote>()),
     );
+    _getIt.registerLazySingleton<AiRepository>(
+      () => AiService(remote: _getIt<AiRemote>(instanceName: 'tips')),
+      instanceName: 'tips',
+    );
     _getIt.registerFactory<GenerateTipUseCase>(
-      () => GenerateTipUseCase(repository: _getIt<AiRepository>()),
+      () => GenerateTipUseCase(
+        repository: _getIt<AiRepository>(instanceName: 'tips'),
+      ),
     );
     _getIt.registerFactory<ChatWithPoraUseCase>(
       () => ChatWithPoraUseCase(repository: _getIt<AiRepository>()),
@@ -95,14 +114,12 @@ class InjectionContainer {
       () => GetLoginTimesUseCase(repository: _getIt<StatisticsRepository>()),
     );
     _getIt.registerFactory<GetAllUserProductsUseCase>(
-      () => GetAllUserProductsUseCase(
-        repository: _getIt<StatisticsRepository>(),
-      ),
+      () =>
+          GetAllUserProductsUseCase(repository: _getIt<StatisticsRepository>()),
     );
     _getIt.registerFactory<GetPopularProductsUseCase>(
-      () => GetPopularProductsUseCase(
-        repository: _getIt<StatisticsRepository>(),
-      ),
+      () =>
+          GetPopularProductsUseCase(repository: _getIt<StatisticsRepository>()),
     );
     _getIt.registerLazySingleton<StatisticsStore>(
       () => StatisticsStore(
@@ -113,9 +130,11 @@ class InjectionContainer {
     );
 
     //! STORAGE
-    _getIt.registerSingletonAsync<ILocalDB<dynamic>>(
-      () async => HiveLocalDB<dynamic>()..init(),
-    );
+    _getIt.registerSingletonAsync<ILocalDB<dynamic>>(() async {
+      final localDb = HiveLocalDB<dynamic>();
+      await localDb.init();
+      return localDb;
+    });
 
     //! Notifications
     _getIt.registerSingleton<NotificationService>(NotificationService.instance);

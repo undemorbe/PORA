@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/core/features/predictions_ai/presentation/widgets/pora_hero_tags.dart';
 import 'package:pora/core/internal/widgets/press_scale.dart';
-import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
+import 'package:pora/core/internal/theme/themes_colors/light_colors/app_colors.dart';
 
 /// FAB «Спросить PORA». Sparkle-иконка + мягкий пульс тени + press-scale.
 /// Обёрнут в Hero(`poraAvatar`) для морфа в header чат-листа.

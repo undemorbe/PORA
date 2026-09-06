@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:pora/core/features/item_detail/data/datasource/local_prefs.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
-import 'package:pora/core/internal/theme/additional_constants.dart';
-import 'package:pora/core/internal/theme/app_text_styles.dart';
+import 'package:pora/core/internal/theme/constant/additional_constants.dart';
+import 'package:pora/core/internal/theme/text/app_text_styles.dart';
 import 'package:pora/core/internal/theme/context_colors.dart';
-import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
+import 'package:pora/core/internal/theme/themes_colors/light_colors/app_colors.dart';
 
 /// Показывает подтверждение удаления с тумблером «Не спрашивать снова».
 /// Если пользователь ранее выключил подтверждение — сразу возвращает `true`.

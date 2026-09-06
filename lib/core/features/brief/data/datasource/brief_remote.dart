@@ -4,7 +4,7 @@ import 'package:pora/core/internal/network/api_client/api_client.dart';
 
 abstract class BriefRemote {
   Future<void> setBriefData({required BriefProductListEntity products});
-  Future<BriefProductListEntity> getBriefData();
+  Future<BriefProductListEntity?> getBriefData();
 }
 
 class BriefRemoteImpl implements BriefRemote {
@@ -13,8 +13,7 @@ class BriefRemoteImpl implements BriefRemote {
   BriefRemoteImpl({required this.apiClient});
 
   @override
-  Future<BriefProductListEntity> getBriefData() async {
-    // await + explicit unwrap — иначе типовые ошибки прячутся Future-flattening'ом.
+  Future<BriefProductListEntity?> getBriefData() async {
     final response = await apiClient.getUserBrief();
     return response;
   }

@@ -9,8 +9,8 @@ import 'package:pora/core/features/auth_and_validation/presentation/controller/p
 import 'package:pora/core/features/auth_and_validation/presentation/widgets/pinput.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
 import 'package:pora/core/internal/router/app_router.gr.dart';
-import 'package:pora/core/internal/theme/additional_constants.dart';
-import 'package:pora/core/internal/theme/app_text_styles.dart';
+import 'package:pora/core/internal/theme/constant/additional_constants.dart';
+import 'package:pora/core/internal/theme/text/app_text_styles.dart';
 import 'package:pora/core/internal/widgets/pora_buttons.dart';
 import 'package:pora/core/features/onboarding/presentation/widgets/onboarding_progress_header.dart';
 import 'package:pora/core/internal/widgets/pora_snackbar.dart';

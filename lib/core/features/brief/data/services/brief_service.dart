@@ -10,7 +10,7 @@ class BriefService implements BriefRepository {
 
   //! Impl failure, success
   @override
-  Future<BriefProductListEntity> getBriefData() async {
+  Future<BriefProductListEntity?> getBriefData() async {
     try {
       return await briefRemote.getBriefData();
     } catch (e) {

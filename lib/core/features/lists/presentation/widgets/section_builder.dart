@@ -14,9 +14,9 @@ import 'package:pora/core/features/lists/presentation/widgets/delete_list_dialog
 import 'package:pora/core/features/lists/presentation/widgets/section_group.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
 import 'package:pora/core/internal/router/app_router.gr.dart';
-import 'package:pora/core/internal/theme/additional_constants.dart';
-import 'package:pora/core/internal/theme/app_text_styles.dart';
-import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
+import 'package:pora/core/internal/theme/constant/additional_constants.dart';
+import 'package:pora/core/internal/theme/text/app_text_styles.dart';
+import 'package:pora/core/internal/theme/themes_colors/light_colors/app_colors.dart';
 import 'package:pora/core/internal/widgets/pora_card.dart';
 
 const int _kPreviewProductsLimit = 3;
@@ -40,13 +40,7 @@ class SectionBuilder extends StatelessWidget {
     return Observer(
       builder: (context) {
         final Widget child;
-        if (listStore.isLoading) {
-          child = const Padding(
-            key: ValueKey('loading'),
-            padding: EdgeInsets.symmetric(vertical: PoraSpacing.xl),
-            child: Center(child: CircularProgressIndicator.adaptive()),
-          );
-        } else if (listStore.errorMessage != null) {
+        if (listStore.errorMessage != null) {
           child = Center(
             key: const ValueKey('error'),
             child: Padding(
@@ -64,22 +58,7 @@ class SectionBuilder extends StatelessWidget {
             child: isPreview ? _buildPreview(context) : _buildConcrete(context),
           );
         }
-        return AnimatedSwitcher(
-          duration: const Duration(milliseconds: 240),
-          switchInCurve: Curves.easeOutCubic,
-          switchOutCurve: Curves.easeInCubic,
-          transitionBuilder: (child, anim) => FadeTransition(
-            opacity: anim,
-            child: SlideTransition(
-              position: Tween<Offset>(
-                begin: const Offset(0, 0.02),
-                end: Offset.zero,
-              ).animate(anim),
-              child: child,
-            ),
-          ),
-          child: child,
-        );
+        return child;
       },
     );
   }

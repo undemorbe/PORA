@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pora/core/features/auth_and_validation/presentation/controller/auth_store.dart';
 import 'package:pora/core/features/auth_and_validation/presentation/widgets/auth_destination_field.dart';
@@ -8,8 +9,8 @@ import 'package:pora/core/features/auth_and_validation/presentation/controller/p
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
 import 'package:pora/core/internal/extensions/string_extension.dart';
 import 'package:pora/core/internal/router/app_router.gr.dart';
-import 'package:pora/core/internal/theme/additional_constants.dart';
-import 'package:pora/core/internal/theme/app_text_styles.dart';
+import 'package:pora/core/internal/theme/constant/additional_constants.dart';
+import 'package:pora/core/internal/theme/text/app_text_styles.dart';
 import 'package:pora/core/internal/widgets/pora_buttons.dart';
 import 'package:pora/core/features/onboarding/presentation/widgets/onboarding_progress_header.dart';
 import 'package:pora/core/internal/widgets/pora_snackbar.dart';
@@ -61,7 +62,11 @@ class _AuthPageState extends State<AuthPage> {
                   const SizedBox(height: PoraSpacing.xxl),
                   AuthDestinationField(controller: destinationController),
                   const SizedBox(height: PoraSpacing.xxl),
-                  Text(l.authSubtitle2, style: PoraText.subtitle),
+                  Text(
+                    l.authSubtitle2,
+                    style: PoraText.subtitle,
+                    textAlign: .center,
+                  ),
                 ],
               ),
             ),
@@ -93,21 +98,27 @@ class _AuthPageState extends State<AuthPage> {
                       isLoading: authStore.isLoading,
                       label: l.authJoinButton,
                       onPressed: () async {
+                        if (!authStore.isValid(
+                          text: destinationController.text,
+                        )) {
+                          PoraSnackbar.show(
+                            context,
+                            message: l.authErrorInvalidPhone,
+                            type: .failure,
+                          );
+                          return;
+                        }
                         await authStore
                             .sendOtp(destination: destinationController.text)
                             .whenComplete(() {
                               //! UPD WHEN authStore.success is not null
                               if ((authStore.success == true &&
-                                      context.mounted) ||
-                                  (dotenv.getBool('DEBUG') &&
-                                      context.mounted)) {
+                                  context.mounted)) {
                                 context.router.navigate(
                                   OTPConfirmationRoute(
                                     authStore: authStore,
                                     isPhone: destinationController.text
-                                        .isValidPhone(
-                                          destinationController.text,
-                                        ),
+                                        .isValidPhone(),
                                     privacyStore: privacyStore,
                                     OTPController: otpController,
                                     destinationController:
@@ -123,8 +134,7 @@ class _AuthPageState extends State<AuthPage> {
                                       authStore.scaffoldMessage ??
                                       l.commonError,
                                 );
-                                // ignore: unnecessary_statements
-                                authStore.success == null;
+                                authStore.success = null;
                               }
                             });
                       },

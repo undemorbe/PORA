@@ -5,11 +5,13 @@ import 'package:pora/core/internal/extensions/l10n_extension.dart';
 import 'package:pora/core/internal/extensions/string_extension.dart';
 import 'package:pora/core/internal/formatters/email_input_formatter.dart';
 import 'package:pora/core/internal/formatters/phone_input_formatter.dart';
-import 'package:pora/core/internal/theme/app_text_styles.dart';
-import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
+import 'package:pora/core/internal/theme/text/app_text_styles.dart';
+import 'package:pora/core/internal/theme/context_colors.dart';
+import 'package:pora/core/internal/theme/themes_colors/light_colors/additional_constants.dart';
+import 'package:pora/core/internal/theme/themes_colors/light_colors/app_colors.dart';
 
 /// Режим ввода: телефон или почта.
-enum AuthFieldMode { phone, email }
+enum AuthFieldMode { email, phone }
 
 /// Умный форматтер: определяет режим по вводу (если не зафиксирован
 /// вручную), применяет нужный форматтер и сообщает режим наверх.
@@ -115,13 +117,12 @@ class _AuthDestinationFieldState extends State<AuthDestinationField> {
   bool get _isValid {
     final t = widget.controller.text;
     if (t.isEmpty) return false;
-    return _isPhone ? t.isValidPhone(t) : t.isValidEmail(t);
+    return _isPhone ? t.isValidPhone() : t.isValidEmail();
   }
 
   @override
   Widget build(BuildContext context) {
     final accent = _isValid ? PoraColors.success : PoraColors.primary;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -134,12 +135,38 @@ class _AuthDestinationFieldState extends State<AuthDestinationField> {
           style: PoraText.bodyLarge.copyWith(fontSize: 18),
           inputFormatters: [_formatter],
           decoration: InputDecoration(
+            helper: Row(
+              mainAxisSize: .min,
+              children: [
+                Text(
+                  context.l10n.authPhoneSendOtp(_isPhone.toString()),
+                  style: PoraText.small.copyWith(
+                    color: context.colors.textSubtle,
+                  ),
+                ),
+                SizedBox(width: 6),
+                _isPhone
+                    ? const Icon(
+                        Icons.telegram,
+                        size: 18,
+                        color: Colors.lightBlue,
+                      )
+                    : const PhosphorIcon(
+                        PhosphorIcons.mailboxDuotone,
+                        size: 18,
+                        color: Colors.orange,
+                      ),
+              ],
+            ),
             hintText: _isPhone ? '+7 900 000-00-00' : 'you@example.com',
             prefixIcon: _ModeToggleButton(
               isPhone: _isPhone,
               onTap: _toggleMode,
               iconColor: accent,
             ),
+            suffixIcon: _isValid
+                ? PhosphorIcon(PhosphorIconsRegular.checkCircle, color: accent)
+                : const SizedBox(width: 24),
           ),
         ),
       ],

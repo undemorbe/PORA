@@ -6,8 +6,8 @@ import 'package:pora/core/features/lists/domain/entity/lists/list_section.dart';
 import 'package:pora/core/features/lists/domain/entity/products/product.dart';
 import 'package:pora/core/features/lists/presentation/widgets/list_item_tile.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
-import 'package:pora/core/internal/theme/additional_constants.dart';
-import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
+import 'package:pora/core/internal/theme/constant/additional_constants.dart';
+import 'package:pora/core/internal/theme/themes_colors/light_colors/app_colors.dart';
 import 'package:pora/core/internal/widgets/pora_card.dart';
 import 'package:pora/core/internal/widgets/section_label.dart';
 

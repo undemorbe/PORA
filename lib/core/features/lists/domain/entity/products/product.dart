@@ -14,7 +14,7 @@ abstract class ProductEntity extends Equatable {
   final int priority;
   final bool urgent;
   final bool checked;
-  final bool? remindEveryDay;
+  final int? remindEveryDay;
 
   /// Для личных списков поле отсутствует — null.
   final MemberEntity? addedBy;

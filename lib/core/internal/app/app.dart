@@ -10,7 +10,7 @@ import 'package:pora/core/internal/logging/logger.dart';
 import 'package:pora/core/internal/router/app_router.dart';
 import 'package:pora/core/internal/router/app_router.gr.dart';
 import 'package:pora/core/internal/router/guard/auth_state.dart';
-import 'package:pora/core/internal/theme/app_themes.dart';
+import 'package:pora/core/internal/theme/themes_colors/app_themes.dart';
 import 'package:pora/core/internal/theme/store/theme_store.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 

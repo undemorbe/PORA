@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pora/core/internal/theme/additional_constants.dart';
-import 'package:pora/core/internal/theme/app_text_styles.dart';
+import 'package:pora/core/internal/theme/constant/additional_constants.dart';
+import 'package:pora/core/internal/theme/text/app_text_styles.dart';
 
 /// Панель-действие, выезжающая из-под tile при свайпе (invite/delete).
 ///

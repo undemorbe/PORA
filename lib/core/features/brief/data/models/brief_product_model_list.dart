@@ -8,6 +8,7 @@ part 'brief_product_model_list.g.dart';
 class BriefProductModelList extends BriefProductListEntity {
   @JsonKey(name: 'brief-items')
   final List<BriefProductModel> items;
+
   const BriefProductModelList({required this.items}) : super(products: items);
 
   factory BriefProductModelList.fromJson(Map<String, dynamic> json) =>

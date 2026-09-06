@@ -34,6 +34,9 @@ abstract class _ListStoreBase with Store {
   @observable
   String? errorMessage;
 
+  @observable
+  bool? isSelfUpdated;
+
   /// True когда contract показывает данные из cache (offline read).
   @observable
   bool usingCache = false;
@@ -58,16 +61,22 @@ abstract class _ListStoreBase with Store {
   List<ListSectionEntity> get filteredSections {
     final sections = list?.sections ?? const <ListSectionEntity>[];
     final q = query.trim().toLowerCase();
-    if (q.isEmpty) return sections;
-    final result = <ListSectionEntity>[];
-    for (final s in sections) {
-      final items = s.items
-          .where((p) => p.name.toLowerCase().contains(q))
-          .toList();
-      if (items.isEmpty) continue;
-      result.add(_FilteredSection(name: s.name, items: items));
+
+    if (q.isEmpty) {
+      return sections;
     }
-    return result;
+
+    return [
+      for (final section in sections)
+        if (section.items.any((item) => item.name.toLowerCase().contains(q)))
+          _FilteredSection(
+            name: section.name,
+            items: [
+              for (final item in section.items)
+                if (item.name.toLowerCase().contains(q)) item,
+            ],
+          ),
+    ];
   }
 
   /// Уникальные участники, засветившиеся в текущем list (сборка из
@@ -170,6 +179,10 @@ abstract class _ListStoreBase with Store {
 
   @action
   Future<bool> toggleItemBought({required String itemId}) async {
+    isSelfUpdated = true;
+    Future.delayed(Duration(seconds: 2)).whenComplete(() {
+      isSelfUpdated = false;
+    });
     final cur = list;
     if (cur == null) return false;
     ProductEntity? found;

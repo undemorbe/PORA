@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pora/core/features/auth_and_validation/presentation/controller/privacy_store.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
-import 'package:pora/core/internal/theme/app_text_styles.dart';
+import 'package:pora/core/internal/theme/text/app_text_styles.dart';
 
 /// Единая privacy-ссылка для auth-flow. Убирает копипасту `InkWell + Text
 /// underlined` в двух местах (auth_screen + auth_otp_confirm).

@@ -14,7 +14,7 @@ class AiService implements AiRepository {
   @override
   Future<Either<Failure, AiCompletionEntity>> chat({
     required List<AiMessage> messages,
-    int maxTokens = 400,
+    int maxTokens = 2048,
     double temperature = 0.6,
   }) async {
     final dtos = messages.map(AiMessageModel.fromEntity).toList();

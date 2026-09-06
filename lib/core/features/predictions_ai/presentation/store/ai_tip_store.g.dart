@@ -70,12 +70,16 @@ mixin _$AiTipStore on _AiTipStoreBase, Store {
     required String topic,
     required String languageCode,
     required List<String> fallbackList,
+    AiContext context = const AiContext(),
+    AiPromptKind promptKind = AiPromptKind.tip,
   }) {
     return _$loadAsyncAction.run(
       () => super.load(
         topic: topic,
         languageCode: languageCode,
         fallbackList: fallbackList,
+        context: context,
+        promptKind: promptKind,
       ),
     );
   }

@@ -18,10 +18,10 @@ import 'package:pora/core/internal/localization/l10n/locales.dart';
 import 'package:pora/core/internal/localization/store/localization_store.dart';
 import 'package:pora/core/internal/notifications/device_token_sync.dart';
 import 'package:pora/core/internal/notifications/notification_service.dart';
-import 'package:pora/core/internal/theme/additional_constants.dart';
-import 'package:pora/core/internal/theme/app_text_styles.dart';
+import 'package:pora/core/internal/theme/constant/additional_constants.dart';
+import 'package:pora/core/internal/theme/text/app_text_styles.dart';
 import 'package:pora/core/internal/theme/context_colors.dart';
-import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
+import 'package:pora/core/internal/theme/themes_colors/light_colors/app_colors.dart';
 import 'package:pora/core/internal/theme/store/theme_store.dart';
 import 'package:pora/core/internal/widgets/pora_rows_card.dart';
 import 'package:pora/core/internal/widgets/pora_snackbar.dart';
@@ -285,7 +285,7 @@ class _LanguagePicker extends StatelessWidget {
     'en': 'English',
     'fr': 'Français',
     'de': 'Deutsch',
-    'es': 'Español',
+    'zh': '中文',
   };
 
   @override

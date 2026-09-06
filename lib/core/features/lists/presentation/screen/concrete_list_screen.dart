@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:get_it/get_it.dart';
-import 'package:pora/core/features/families/presentation/store/selected_family_store.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/core/features/families/domain/entity/member.dart';
 import 'package:pora/core/features/lists/presentation/store/lists_store.dart';
@@ -15,10 +13,10 @@ import 'package:pora/core/features/lists/presentation/widgets/add_list_button.da
 import 'package:pora/core/features/lists/presentation/widgets/list_header.dart';
 import 'package:pora/core/features/lists/presentation/widgets/section_builder.dart';
 import 'package:pora/core/internal/router/app_router.gr.dart';
-import 'package:pora/core/internal/theme/additional_constants.dart';
-import 'package:pora/core/internal/theme/app_text_styles.dart';
+import 'package:pora/core/internal/theme/constant/additional_constants.dart';
+import 'package:pora/core/internal/theme/text/app_text_styles.dart';
 import 'package:pora/core/internal/theme/context_colors.dart';
-import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
+import 'package:pora/core/internal/theme/themes_colors/light_colors/app_colors.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
 
 /// Concrete list screen.
@@ -34,11 +32,13 @@ class ListPage extends StatefulWidget {
     required this.listId,
     this.listName,
     this.members,
+    this.ownerId,
   });
 
   final String listId;
   final String? listName;
   final List<MemberEntity>? members;
+  final String? ownerId;
 
   @override
   State<ListPage> createState() => _ListPageState();
@@ -56,7 +56,9 @@ class _ListPageState extends State<ListPage> {
     super.initState();
     listStore = ListStore()..getConcreteList(lid: widget.listId);
     _wsSub = AppWebsocket.instance.events.listen((event) {
-      if (event.lid != widget.listId) return;
+      if (event.lid != widget.listId && listStore.isSelfUpdated == false) {
+        return;
+      }
       _debouncer.call(_refresh);
     });
   }
@@ -110,8 +112,9 @@ class _ListPageState extends State<ListPage> {
                       : listStore.derivedMembers;
                   return ListHeader(
                     title: title,
-                    subtitle:
-                        "${members.length} ${context.l10n.human} · ${listStore.productsAmount} ${context.l10n.products}",
+                    subtitle: members.length == 1
+                        ? "${context.l10n.onlyYou} · ${listStore.productsAmount} ${context.l10n.products}"
+                        : "${members.length} ${context.l10n.human} · ${listStore.productsAmount} ${context.l10n.products}",
                     members: members,
                     onBack: () => context.router.maybePop(),
                     onSearch: _toggleSearch,
@@ -125,10 +128,7 @@ class _ListPageState extends State<ListPage> {
                         : () => context.router.push(
                             MembersRoute(
                               members: members,
-                              ownerId: GetIt.I<SelectedFamilyStore>()
-                                  .current
-                                  ?.owner
-                                  .id,
+                              ownerId: widget.ownerId,
                             ),
                           ),
                   );

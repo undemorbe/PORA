@@ -23,9 +23,6 @@ class MainShellPage extends StatelessWidget {
       transitionBuilder: (context, child, animation) =>
           FadeTransition(opacity: animation, child: child),
       bottomNavigationBuilder: (context, tabsRouter) {
-        if(context.mounted){
-          context.maybePop();
-        }
         return RepaintBoundary(
           child: PoraBottomNav(
             current: PoraTab.values[tabsRouter.activeIndex],

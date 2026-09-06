@@ -10,5 +10,7 @@ class MarkItemBoughtUseCase {
   Future<Either<Failure, Success>> call({
     required String itemId,
     required bool checked,
-  }) => repository.markBought(itemId: itemId, checked: checked);
+  }) async {
+    return await repository.markBought(itemId: itemId, checked: checked);
+  }
 }

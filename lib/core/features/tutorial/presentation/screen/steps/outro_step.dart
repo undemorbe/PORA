@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/core/features/tutorial/presentation/widgets/tutorial_frame.dart';
 import 'package:pora/core/features/tutorial/presentation/widgets/tutorial_ticker.dart';
-import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
+import 'package:pora/core/internal/theme/themes_colors/light_colors/app_colors.dart';
 
 /// Финальный шаг — «дальше сами». Никаких новых жестов: приветственная
 /// рука, галочка и лёгкие «искры» для настроения. Иллюстрация не учит,

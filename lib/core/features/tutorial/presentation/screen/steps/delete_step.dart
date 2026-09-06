@@ -6,7 +6,7 @@ import 'package:pora/core/features/tutorial/presentation/widgets/tutorial_row_ti
 import 'package:pora/core/features/tutorial/presentation/widgets/tutorial_slidable_panel.dart';
 import 'package:pora/core/features/tutorial/presentation/widgets/tutorial_ticker.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
-import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
+import 'package:pora/core/internal/theme/themes_colors/light_colors/app_colors.dart';
 
 /// Шаг 6. Удаление: свайп tile влево → панель Trash → tile улетает за экран.
 class DeleteStep extends StatelessWidget {

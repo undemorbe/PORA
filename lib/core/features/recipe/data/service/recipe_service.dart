@@ -13,7 +13,7 @@ class RecipeService implements RecipeRepository {
   @override
   Future<Either<Failure, RecipeEntity>> parseFromUrl(
     String url, {
-    String languageCode = 'ru',
+    String languageCode = 'en',
   }) async {
     if (url.trim().isEmpty) {
       return Left(const ValidationFailure('URL is empty'));

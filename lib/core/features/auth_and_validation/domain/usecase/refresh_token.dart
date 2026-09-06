@@ -9,15 +9,14 @@ class RefreshTokenUseCase {
 
   Future<Either<Failure, TokensEntity>?> call() async {
     final tokens = await tokensRepository.getTokens();
-    if (tokens.isRight) {
-      return await tokensRepository
-          .refreshTokens(refreshToken: tokens.right.refreshToken)
-          .then((value) {
-            if (value.isRight) {
-              tokensRepository.saveTokens(tokens: value.right);
-            }
-            return value;
-          });
+    if (tokens.isRight && tokens.right.refreshToken.isNotEmpty) {
+      final refreshed = await tokensRepository.refreshTokens(
+        refreshToken: tokens.right.refreshToken,
+      );
+      if (refreshed.isRight) {
+        await tokensRepository.saveTokens(tokens: refreshed.right);
+      }
+      return refreshed;
     }
     return Left(const UnexpectedFailure('Unexpected'));
   }

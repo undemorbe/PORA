@@ -5,10 +5,10 @@ import 'package:pora/core/features/lists/domain/entity/products/product.dart';
 import 'package:pora/core/features/lists/presentation/widgets/strike_through_text.dart';
 import 'package:pora/core/internal/extensions/color_parser.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
-import 'package:pora/core/internal/theme/additional_constants.dart';
-import 'package:pora/core/internal/theme/app_text_styles.dart';
+import 'package:pora/core/internal/theme/constant/additional_constants.dart';
+import 'package:pora/core/internal/theme/text/app_text_styles.dart';
 import 'package:pora/core/internal/theme/context_colors.dart';
-import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
+import 'package:pora/core/internal/theme/themes_colors/light_colors/app_colors.dart';
 import 'package:pora/core/internal/widgets/pora_avatar.dart';
 import 'package:pora/core/internal/widgets/pora_checkbox.dart';
 import 'package:pora/core/internal/widgets/pora_pill.dart';
@@ -102,21 +102,37 @@ class ListItemTile extends StatelessWidget {
                 ],
               ),
             ),
-            if (item.urgent) ...[
-              PoraPill(
-                label: context.l10n.listUrgent,
-                icon: PhosphorIconsRegular.clock,
-                background: PoraColors.primaryTintStrong,
-              ),
-              const SizedBox(width: PoraSpacing.sm),
-            ],
-            if (!isCompact && (item.remindEveryDay ?? false)) ...[
-              PoraPill(
-                label: context.l10n.everyDay,
-                icon: PhosphorIconsRegular.bell,
-              ),
-              const SizedBox(width: PoraSpacing.sm),
-            ],
+            Column(
+              mainAxisSize: .min,
+              children: [
+                if (item.urgent)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: PoraSpacing.xs,
+                      vertical: PoraSpacing.xs,
+                    ),
+                    child: PoraPill(
+                      label: context.l10n.listUrgent,
+                      icon: PhosphorIconsRegular.clock,
+                      background: PoraColors.primaryTintStrong,
+                    ),
+                  ),
+
+                if (!isCompact &&
+                    (item.remindEveryDay != null && item.remindEveryDay! > 0))
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: PoraSpacing.xs,
+                      vertical: PoraSpacing.xs,
+                    ),
+                    child: PoraPill(
+                      label: context.l10n.everyDay,
+                      icon: PhosphorIconsRegular.bell,
+                      background: PoraColors.primaryTintStrong,
+                    ),
+                  ),
+              ],
+            ),
             if (addedBy != null)
               PoraAvatar(
                 initial: addedBy!.name.isEmpty ? '?' : addedBy!.name[0],

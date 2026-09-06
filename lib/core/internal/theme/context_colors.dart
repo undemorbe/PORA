@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pora/core/internal/theme/dark_colors/app_colors_dark.dart';
-import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
+import 'package:pora/core/internal/theme/themes_colors/dark_colors/app_colors_dark.dart';
+import 'package:pora/core/internal/theme/themes_colors/light_colors/app_colors.dart';
 
-/// Контекстно-корректные neutral цвета для UI.
-///
-/// Brand цвета (primary/danger/success) одинаковы в обеих темах — читай
-/// напрямую из [PoraColors]. Здесь только те что различаются: `ink`,
-/// `textMuted`, `textSubtle`, `surface`, `surfaceAlt`, `border`, `divider`,
-/// `bg`, `inkInverse`.
 extension AppColorsX on BuildContext {
   AppColors get colors {
     final dark = Theme.of(this).brightness == Brightness.dark;

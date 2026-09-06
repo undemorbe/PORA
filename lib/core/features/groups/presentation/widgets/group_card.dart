@@ -10,10 +10,10 @@ import 'package:pora/core/internal/extensions/color_parser.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
 import 'package:pora/core/internal/extensions/string_extension.dart';
 import 'package:pora/core/internal/router/app_router.gr.dart';
-import 'package:pora/core/internal/theme/additional_constants.dart';
-import 'package:pora/core/internal/theme/app_text_styles.dart';
+import 'package:pora/core/internal/theme/constant/additional_constants.dart';
+import 'package:pora/core/internal/theme/text/app_text_styles.dart';
 import 'package:pora/core/internal/theme/context_colors.dart';
-import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
+import 'package:pora/core/internal/theme/themes_colors/light_colors/app_colors.dart';
 import 'package:pora/core/internal/widgets/pora_avatar.dart';
 import 'package:pora/core/internal/widgets/pora_card.dart';
 
@@ -26,6 +26,7 @@ class GroupCard extends StatelessWidget {
 
   final GroupEntity group;
   final Future<void> Function() onDelete;
+
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
@@ -35,9 +36,16 @@ class GroupCard extends StatelessWidget {
     final hidden = items.length - visible.length;
     final ring = c.surface;
 
-    void open() => context.router.push(
-      ListRoute(listId: list.id, listName: list.name, members: group.members),
-    );
+    void open() {
+      context.router.push(
+        ListRoute(
+          listId: list.id,
+          listName: list.name,
+          members: group.members,
+          ownerId: group.ownerId,
+        ),
+      );
+    }
 
     final body = GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -55,6 +63,7 @@ class GroupCard extends StatelessWidget {
                 PoraSpacing.sm,
               ),
               child: Row(
+                mainAxisAlignment: .spaceBetween,
                 children: [
                   Expanded(child: Text(list.name, style: PoraText.heading)),
                   if (group.members.isNotEmpty)
@@ -171,10 +180,6 @@ class GroupCard extends StatelessWidget {
   }
 }
 
-extension _CtxL on BuildContext {
-  // helper — оба callback'а внутри Slidable получают собственный ctx.
-}
-
 class _AvatarStack extends StatelessWidget {
   const _AvatarStack({required this.members, required this.ring});
 
@@ -182,8 +187,8 @@ class _AvatarStack extends StatelessWidget {
   final Color ring;
 
   static const double _avatar = 28;
-  static const double _overlap = 18;
   static const int _maxShown = 3;
+  static const double _overlap = 18;
 
   @override
   Widget build(BuildContext context) {

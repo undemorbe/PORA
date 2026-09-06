@@ -21,6 +21,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get authUnderAppName2 => 'Рецепты, дом и доставка — в одном месте';
 
   @override
+  String get onlyYou => 'Только Вы';
+
+  @override
   String get authSignInExpansibleExpand => 'Войти иным способом';
 
   @override
@@ -30,7 +33,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get sendAgainAfter => 'Отправить еще раз через...';
 
   @override
-  String get authSignInWithEmail => 'Войти через email';
+  String get authSignInWithEmail => 'Войти по электронной почте';
 
   @override
   String get authSignInWithGoogle => 'Войти через Google';
@@ -64,6 +67,19 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get commonError => 'Ошибка';
+
+  @override
+  String get authErrorInvalidPhone => 'Неверный телефон или email!';
+
+  @override
+  String authPhoneSendOtp(String isPhone) {
+    String _temp0 = intl.Intl.selectLogic(isPhone, {
+      'true': 'в Telegram!',
+      'false': 'на почту!',
+      'other': 'куда-то',
+    });
+    return 'Отправим код $_temp0';
+  }
 
   @override
   String get otpTitle => 'Осталось немного!';
@@ -553,7 +569,14 @@ class AppLocalizationsRu extends AppLocalizations {
   String get recipeIngredients => 'Ингредиенты';
 
   @override
-  String get recipeAddToListCta => 'Добавить 4 продукта в список';
+  String recipeAddToListCta(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.compact(
+      locale: localeName,
+    );
+    final String countString = countNumberFormat.format(count);
+
+    return 'Добавить $countString продукта в список';
+  }
 
   @override
   String get recipeParseButton => 'Разобрать';
@@ -763,7 +786,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get errorGeneric => 'Ошибка';
 
   @override
-  String get pushToken => 'Push-токен';
+  String get pushToken => 'Токен push-уведомлений';
 
   @override
   String get resync => 'Синхронизировать';
@@ -849,7 +872,7 @@ class AppLocalizationsRu extends AppLocalizations {
       'Нет интернета, но впустим вас и так!';
 
   @override
-  String get groupDeletionTitle => 'Are you sure want to delete group?';
+  String get groupDeletionTitle => 'Вы уверены, что хотите удалить группу?';
 
   @override
   String get retry => 'Обновить';
@@ -881,7 +904,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get settingsChangeThemeIOSEasterEgg =>
-      '* To change your theme, go to Settings > PORA > Theme\n* Select a new theme from the settings menu\n* Tap on \'Theme\' in the app\'s settings to switch between light and dark modes';
+      '* Чтобы изменить тему, откройте Настройки > PORA > Тема\n* Выберите новую тему в меню настроек\n* Нажмите «Тема» в настройках приложения, чтобы переключаться между светлой и тёмной темой';
 
   @override
   String get tutorialTitle => 'Как это работает';
@@ -1020,17 +1043,17 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get supportMessageBottomSheetTopDescription =>
-      'Your message will be sent to the support team. Please provide as much detail as possible.';
+      'Ваше сообщение будет отправлено в службу поддержки. Пожалуйста, укажите как можно больше подробностей.';
 
   @override
-  String get supportMessageBottomSheetSendButton => 'Send';
+  String get supportMessageBottomSheetSendButton => 'Отправить';
 
   @override
   String get supportMessageBottomSheetUnderButtonText =>
-      'We will answer as soon as possible, and mail to your gmail or inapp!';
+      'Мы ответим как можно скорее на вашу почту Gmail или прямо в приложении!';
 
   @override
-  String get allergen => 'Allergen';
+  String get allergen => 'Аллерген';
 
   @override
   String get predictionsGreeting => 'Ваш день с PORA';
@@ -1043,6 +1066,21 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get predictionsSectionOften => 'Часто покупаете';
+
+  @override
+  String get predictionsSectionAiSuggests => 'ИИ предлагает';
+
+  @override
+  String get predictionsAiSuggestionsTitle => 'Продукты и рецепты для вас';
+
+  @override
+  String get predictionsAiSuggestionsTopic => 'ваши предпочтения и покупки';
+
+  @override
+  String get refresh => 'Обновить';
+
+  @override
+  String get predictionsOftenEmpty => 'Пока недостаточно данных';
 
   @override
   String get predictionsAskPora => 'Спросить PORA';
@@ -1133,13 +1171,43 @@ class AppLocalizationsRu extends AppLocalizations {
   String get chatSample4 => 'Рецепт быстрого ужина на 20 минут';
 
   @override
+  String get chatSample5 => 'Как использовать овощи, пока они не испортились?';
+
+  @override
+  String get chatSample6 => 'Составь список для 3 простых завтраков';
+
+  @override
+  String get chatSample7 => 'Что приготовить на двоих при небольшом бюджете?';
+
+  @override
+  String get chatSample8 => 'Сколько хранится готовый рис в холодильнике?';
+
+  @override
+  String get chatSample9 => 'Посоветуй вегетарианский ужин с белком';
+
+  @override
+  String get chatSample10 => 'Чем заменить сливочное масло в этом рецепте?';
+
+  @override
+  String get chatSample11 => 'Составь три ужина из того, что уже есть';
+
+  @override
+  String get chatSample12 => 'Что приготовить из остатков за 15 минут?';
+
+  @override
+  String get chatSample13 => 'Предложи рецепт без продуктов-аллергенов';
+
+  @override
+  String get chatSample14 => 'Как сделать это блюдо дешевле?';
+
+  @override
   String get chatTyping => 'PORA печатает…';
 
   @override
   String get chatInputHint => 'Спросите что-нибудь…';
 
   @override
-  String get aiModelBadge => 'Powered by OpenRouter · ling-3.0-flash';
+  String get aiModelBadge => 'Работает на OpenRouter · ling-3.0-flash';
 
   @override
   String get seeAll => 'Все';
@@ -1284,4 +1352,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get chatImportRecipeCta => 'Импортировать рецепт';
+
+  @override
+  String get listsEmptyTitle => 'Списков у вас пока нет';
+
+  @override
+  String get listsEmptySubtitle => 'Может стоит создать новый?';
 }

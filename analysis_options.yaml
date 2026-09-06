@@ -6,6 +6,8 @@ analyzer:
     - "**/generated/**"
     - "android/build/**"
     - "build/**"
+    - android/**
+    - ios/**
   errors:
     missing_required_param: error
     missing_return: error

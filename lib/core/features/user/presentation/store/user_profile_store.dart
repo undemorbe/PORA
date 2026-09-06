@@ -34,11 +34,6 @@ abstract class _UserProfileStoreBase with Store {
   }
 
   @action
-  UserEntity? getUserFromInternet() {
-    return user;
-  }
-
-  @action
   Future<void> setProfileImage() async {
     final imagePicker = GetIt.I<ImagePicker>();
     final XFile? pickedFile = await imagePicker.pickImage(

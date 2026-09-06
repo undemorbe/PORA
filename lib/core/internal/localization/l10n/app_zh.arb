@@ -1,0 +1,1755 @@
+{
+    "appName": "Pora",
+    "@appName": {
+        "description": "The name of the application"
+    },
+    "language": "语言",
+    "@language": {
+        "description": "language"
+    },
+    "authUnderAppName1": "情侣和家庭共享清单",
+    "@authUnderAppName1": {
+        "description": "The first line under the app name"
+    },
+    "authUnderAppName2": "食谱、家庭采购和配送，一站搞定",
+    "@authUnderAppName2": {
+        "description": "The second line under the app name"
+    },
+    "onlyYou": "仅你",
+    "@onlyYou": {
+        "description": "onlyYou"
+    },
+    "authSignInExpansibleExpand": "使用其他方式登录",
+    "@authSignInExpansibleExpand": {
+        "description": "The sign in with other methods title"
+    },
+    "listsEmptyTitle": "您还没有任何列表",
+    "listsEmptySubtitle": "要不要创建一个新的？",
+    "authSignInExpansibleCollapse": "收起",
+    "@authSignInExpansibleCollapse": {
+        "description": "The sign in with other methods title"
+    },
+    "sendAgainAfter": "重新发送，倒计时…",
+    "@sendAgainAfter": {
+        "description": "The sign in with other methods title"
+    },
+    "authSignInWithEmail": "使用邮箱登录",
+    "@authSignInWithEmail": {
+        "description": "The sign in with email button text"
+    },
+    "authSignInWithGoogle": "使用 Google 登录",
+    "@authSignInWithGoogle": {
+        "description": "The sign in with Google button text"
+    },
+    "authSignInWithApple": "使用 Apple 登录",
+    "@authSignInWithApple": {
+        "description": "The sign in with Apple button text"
+    },
+    "authSignInWithPhone": "使用手机号登录",
+    "@authSignInWithPhone": {
+        "description": "The sign in with Phone button text"
+    },
+    "authPrivatePolicy": "By continuing, 你 agree 到 \\nTerms 和 Privacy Policy",
+    "@authPrivatePolicy": {
+        "description": "The private policy link text"
+    },
+    "authTitle": "快完成了",
+    "@authTitle": {
+        "description": "authTitle"
+    },
+    "authSubtitle": "输入 你的 电话 number 或 邮箱 — we'll send 你 a sign-在 代码.",
+    "@authSubtitle": {
+        "description": "authSubtitle"
+    },
+    "authSubtitle2": "Start typing — we'll detect whether it's a 电话 number 或 邮箱.",
+    "@authSubtitle2": {
+        "description": "authSubtitle2"
+    },
+    "authJoinButton": "加入",
+    "@authJoinButton": {
+        "description": "authJoinButton"
+    },
+    "userCreateProfileNameRequired": "How about telling us 你的 名称?",
+    "@userCreateProfileNameRequired": {
+        "description": "userCreateProfileNameRequired"
+    },
+    "commonError": "错误",
+    "@commonError": {
+        "description": "commonError"
+    },
+    "authErrorInvalidPhone": "Invalid 电话 / 邮箱!",
+    "@authErrorInvalidPhone": {
+        "description": "Invalid phone on auth screen"
+    },
+    "authPhoneSendOtp": "We'll send 代码 onto {isPhone, select, true{Telegram!} false{email!} other{destination you wrote}}",
+    "@authPhoneSendOtp": {
+        "description": "Invalid phone on auth screen",
+        "placeholders": {
+            "isPhone": {
+                "type": "String",
+                "example": "true"
+            }
+        }
+    },
+    "otpTitle": "快完成了！",
+    "@otpTitle": {
+        "description": "otpTitle"
+    },
+    "otpEnterCodeSentTo": "输入  代码 已发送 到 ",
+    "@otpEnterCodeSentTo": {
+        "description": "otpEnterCodeSentTo"
+    },
+    "otpResendQuestion": "Didn't receive  代码?",
+    "@otpResendQuestion": {
+        "description": "otpResendQuestion"
+    },
+    "otpResend": "重新发送",
+    "@otpResend": {
+        "description": "otpResend"
+    },
+    "otpVerifyButton": "Verify 代码",
+    "@otpVerifyButton": {
+        "description": "otpVerifyButton"
+    },
+    "otpValidationLength": "输入  6-digit 代码",
+    "@otpValidationLength": {
+        "description": "otpValidationLength"
+    },
+    "otpValidationDigits": " 代码 contains digits only",
+    "@otpValidationDigits": {
+        "description": "otpValidationDigits"
+    },
+    "authSwitchToEmail": "使用邮箱登录",
+    "@authSwitchToEmail": {
+        "description": "authSwitchToEmail"
+    },
+    "authSwitchToPhone": "使用手机号登录",
+    "@authSwitchToPhone": {
+        "description": "authSwitchToPhone"
+    },
+    "onboardingStep": "第 {step} 步，共 {total} 步",
+    "@onboardingStep": {
+        "placeholders": {
+            "step": {
+                "type": "int"
+            },
+            "total": {
+                "type": "int"
+            }
+        }
+    },
+    "onboardingSlide1Title": "食谱 → 清单\\nin seconds",
+    "@onboardingSlide1Title": {
+        "description": "onboardingSlide1Title"
+    },
+    "onboardingSlide1Body": "Drop a 食谱 link — Pora collects  食材 和 removes what 你 已经 有.",
+    "@onboardingSlide1Body": {
+        "description": "onboardingSlide1Body"
+    },
+    "onboardingSlide2Title": "一 清单\\nfor 二",
+    "@onboardingSlide2Title": {
+        "description": "onboardingSlide2Title"
+    },
+    "onboardingSlide2Body": "Add things together — 你 可以 see who 已添加 what. 你的 partner 可以 pick up what 你 need 在  way home.",
+    "@onboardingSlide2Body": {
+        "description": "onboardingSlide2Body"
+    },
+    "onboardingSlide3Title": "Pora 知道\n什么时候该买",
+    "@onboardingSlide3Title": {
+        "description": "onboardingSlide3Title"
+    },
+    "onboardingSlide3Body": "Based 在 你的 purchases, Pora predicts what 将 run out 很快 和 lets 你 订单 it 和 一 点击.",
+    "@onboardingSlide3Body": {
+        "description": "onboardingSlide3Body"
+    },
+    "onboardingSkip": "跳过",
+    "@onboardingSkip": {
+        "description": "onboardingSkip"
+    },
+    "onboardingStart": "开始",
+    "@onboardingStart": {
+        "description": "onboardingStart"
+    },
+    "onboardingNext": "下一步",
+    "@onboardingNext": {
+        "description": "onboardingNext"
+    },
+    "splashTagline": " 清单 that remembers 用于 你",
+    "@splashTagline": {
+        "description": "splashTagline"
+    },
+    "briefTitle": "What do 你 often run out of?",
+    "@briefTitle": {
+        "description": "briefTitle"
+    },
+    "briefDeletionTitle": "是 你 sure 你 want 到 删除 这个 商品?",
+    "@briefDeletionTitle": {
+        "description": "briefDeletionTitle"
+    },
+    "briefAddYourOwn": "添加",
+    "@briefAddYourOwn": {
+        "description": "briefAddYourOwn"
+    },
+    "briefInputProduct": "输入 a 商品 或 category",
+    "@briefInputProduct": {
+        "description": "briefInputProduct"
+    },
+    "briefInputEmoji": "输入 an emoji/icon 用于  商品",
+    "@briefInputEmoji": {
+        "description": "briefInputEmoji"
+    },
+    "briefAlreadyContains": "这个 商品 是 已经 已选择",
+    "@briefAlreadyContains": {
+        "description": "briefAlreadyContains"
+    },
+    "briefSubtitle": "选择 商品 — Pora 将 remind 你 at  right time. 你 可以 skip 这个.",
+    "@briefSubtitle": {
+        "description": "briefSubtitle"
+    },
+    "briefSkip": "跳过",
+    "@briefSkip": {
+        "description": "briefSkip"
+    },
+    "briefNext": "下一步",
+    "@briefNext": {
+        "description": "briefNext"
+    },
+    "briefItemMilk": "牛奶",
+    "@briefItemMilk": {
+        "description": "briefItemMilk"
+    },
+    "briefItemBread": "面包",
+    "@briefItemBread": {
+        "description": "briefItemBread"
+    },
+    "briefItemEggs": "鸡蛋",
+    "@briefItemEggs": {
+        "description": "briefItemEggs"
+    },
+    "briefItemCoffee": "咖啡",
+    "@briefItemCoffee": {
+        "description": "briefItemCoffee"
+    },
+    "briefItemCheese": "奶酪",
+    "@briefItemCheese": {
+        "description": "briefItemCheese"
+    },
+    "briefItemBananas": "香蕉",
+    "@briefItemBananas": {
+        "description": "briefItemBananas"
+    },
+    "briefItemButter": "黄油",
+    "@briefItemButter": {
+        "description": "briefItemButter"
+    },
+    "briefItemWater": "水",
+    "@briefItemWater": {
+        "description": "briefItemWater"
+    },
+    "briefItemVegetables": "蔬菜",
+    "@briefItemVegetables": {
+        "description": "briefItemVegetables"
+    },
+    "briefItemTomatoes": "番茄",
+    "@briefItemTomatoes": {
+        "description": "briefItemTomatoes"
+    },
+    "briefItemPasta": "意面",
+    "@briefItemPasta": {
+        "description": "briefItemPasta"
+    },
+    "briefItemChicken": "鸡肉",
+    "@briefItemChicken": {
+        "description": "briefItemChicken"
+    },
+    "listTitle": "我们的清单",
+    "@listTitle": {
+        "description": "listTitle"
+    },
+    "listMembersCount": "2 人 · 8 商品",
+    "@listMembersCount": {
+        "description": "listMembersCount"
+    },
+    "listUrgent": "紧急",
+    "@listUrgent": {
+        "description": "listUrgent"
+    },
+    "listAdd": "添加",
+    "@listAdd": {
+        "description": "listAdd"
+    },
+    "predictionsTitle": "Pora 可以 help!",
+    "@predictionsTitle": {
+        "description": "predictionsTitle"
+    },
+    "predictionsSubtitle": "Running out 很快 — based 在 你的 purchases",
+    "@predictionsSubtitle": {
+        "description": "predictionsSubtitle"
+    },
+    "predictionTip": "小提示",
+    "@predictionTip": {
+        "description": "predictionTip"
+    },
+    "predictionsOrderTitle": "订单 everything 和 一 点击",
+    "@predictionsOrderTitle": {
+        "description": "predictionsOrderTitle"
+    },
+    "predictionsOrderSubtitle": "Samokat · 配送 在 15 分钟",
+    "@predictionsOrderSubtitle": {
+        "description": "predictionsOrderSubtitle"
+    },
+    "predictionsOrderDiscount": "15% off 你的 first 订单",
+    "@predictionsOrderDiscount": {
+        "description": "predictionsOrderDiscount"
+    },
+    "predictionsAddToList": "Add 到 清单",
+    "@predictionsAddToList": {
+        "description": "predictionsAddToList"
+    },
+    "predictionsDismiss": "没有 thanks",
+    "@predictionsDismiss": {
+        "description": "predictionsDismiss"
+    },
+    "itemDetailName": "牛奶",
+    "@itemDetailName": {
+        "description": "itemDetailName"
+    },
+    "itemDetailSubtitle": "2 L · 乳制品",
+    "@itemDetailSubtitle": {
+        "description": "itemDetailSubtitle"
+    },
+    "itemDetailAddedBy": "已添加 by",
+    "@itemDetailAddedBy": {
+        "description": "itemDetailAddedBy"
+    },
+    "itemDetailSection": "分类",
+    "@itemDetailSection": {
+        "description": "itemDetailSection"
+    },
+    "itemDetailSectionValue": "乳制品",
+    "@itemDetailSectionValue": {
+        "description": "itemDetailSectionValue"
+    },
+    "itemDetailQuantity": "数量",
+    "@itemDetailQuantity": {
+        "description": "itemDetailQuantity"
+    },
+    "itemDetailQuantityValue": "2 L",
+    "@itemDetailQuantityValue": {
+        "description": "itemDetailQuantityValue"
+    },
+    "itemDetailUrgent": "紧急",
+    "@itemDetailUrgent": {
+        "description": "itemDetailUrgent"
+    },
+    "itemDetailRemind": "提醒我",
+    "@itemDetailRemind": {
+        "description": "itemDetailRemind"
+    },
+    "itemDetailRemindEvery": "Every 7 天",
+    "@itemDetailRemindEvery": {
+        "description": "itemDetailRemindEvery"
+    },
+    "itemDetailInsight": "你 buy it about every 7 天 · last bought 6 天 ago. I'll suggest restocking 很快.",
+    "@itemDetailInsight": {
+        "description": "itemDetailInsight"
+    },
+    "itemDetailMarkBought": "标记为已购买",
+    "@itemDetailMarkBought": {
+        "description": "itemDetailMarkBought"
+    },
+    "itemDetailDelete": "移除 来自 清单",
+    "@itemDetailDelete": {
+        "description": "itemDetailDelete"
+    },
+    "addItemTitle": "Add 商品",
+    "@addItemTitle": {
+        "description": "addItemTitle"
+    },
+    "addItemExampleValue": "牛油果",
+    "@addItemExampleValue": {
+        "description": "addItemExampleValue"
+    },
+    "addItemNameHint": "商品 名称",
+    "@addItemNameHint": {
+        "description": "addItemNameHint"
+    },
+    "addItemQuantity": "数量",
+    "@addItemQuantity": {
+        "description": "addItemQuantity"
+    },
+    "addItemSection": "分类",
+    "@addItemSection": {
+        "description": "addItemSection"
+    },
+    "addItemUrgent": "紧急",
+    "@addItemUrgent": {
+        "description": "addItemUrgent"
+    },
+    "addItemUrgentSubtitle": "Need 到 buy 今天",
+    "@addItemUrgentSubtitle": {
+        "description": "addItemUrgentSubtitle"
+    },
+    "addItemRemind": "定期提醒",
+    "@addItemRemind": {
+        "description": "addItemRemind"
+    },
+    "addItemRemindEvery": "Every 7 天",
+    "@addItemRemindEvery": {
+        "description": "addItemRemindEvery"
+    },
+    "addItemSubmit": "Add 到 清单",
+    "@addItemSubmit": {
+        "description": "addItemSubmit"
+    },
+    "settingsTitle": "设置",
+    "@settingsTitle": {
+        "description": "settingsTitle"
+    },
+    "settingsHouseholdSection": "家庭",
+    "@settingsHouseholdSection": {
+        "description": "settingsHouseholdSection"
+    },
+    "settingsAppSection": "应用",
+    "@settingsAppSection": {
+        "description": "settingsAppSection"
+    },
+    "settingsNotifications": "通知",
+    "@settingsNotifications": {
+        "description": "settingsNotifications"
+    },
+    "settingsDelivery": "配送",
+    "@settingsDelivery": {
+        "description": "settingsDelivery"
+    },
+    "settingsProAd": "Pora+ · ad-免费",
+    "@settingsProAd": {
+        "description": "settingsProAd"
+    },
+    "settingsTryPill": "试用",
+    "@settingsTryPill": {
+        "description": "settingsTryPill"
+    },
+    "settingsPrivacy": "隐私与数据",
+    "@settingsPrivacy": {
+        "description": "settingsPrivacy"
+    },
+    "settingsAboutPora": "关于 Pora",
+    "@settingsAboutPora": {
+        "description": "settingsAboutPora"
+    },
+    "settingsLogout": "退出登录",
+    "@settingsLogout": {
+        "description": "settingsLogout"
+    },
+    "settingsMembersNames": "Boris 和 Anna",
+    "@settingsMembersNames": {
+        "description": "settingsMembersNames"
+    },
+    "settingsInvitePill": "邀请",
+    "@settingsInvitePill": {
+        "description": "settingsInvitePill"
+    },
+    "householdInviteTitle": "Invite 你的 partner",
+    "@householdInviteTitle": {
+        "description": "householdInviteTitle"
+    },
+    "householdCookTogether": "一起做饭",
+    "@householdCookTogether": {
+        "description": "householdCookTogether"
+    },
+    "householdInviteDescription": "Pora works better 用于 二. Invite 你的 partner — 你的 清单 和 reminders 将 be 共享.",
+    "@householdInviteDescription": {
+        "description": "householdInviteDescription"
+    },
+    "householdShareLink": "分享链接",
+    "@householdShareLink": {
+        "description": "householdShareLink"
+    },
+    "householdShowQr": "显示二维码",
+    "@householdShowQr": {
+        "description": "householdShowQr"
+    },
+    "householdConnectToFamily": "加入家庭",
+    "@householdConnectToFamily": {
+        "description": "householdConnectToFamily"
+    },
+    "householdInviteDescriptionWhenConnecting": "We detected an invite 代码, but 你 可以 enter it yourself if we got it wrong",
+    "@householdInviteDescriptionWhenConnecting": {
+        "description": "householdInviteDescriptionWhenConnecting"
+    },
+    "householdGotInvited": "你've been invited 到 a 家庭",
+    "@householdGotInvited": {
+        "description": "householdGotInvited"
+    },
+    "householdWriteCode": "输入 invite 代码",
+    "@householdWriteCode": {
+        "description": "householdWriteCode"
+    },
+    "householdDoLater": "我稍后再做",
+    "@householdDoLater": {
+        "description": "householdDoLater"
+    },
+    "householdCopyCode": "已复制到剪贴板！",
+    "@householdCopyCode": {
+        "description": "householdCopyCode"
+    },
+    "householdInviteCodeLabel": "邀请码",
+    "@householdInviteCodeLabel": {
+        "description": "householdInviteCodeLabel"
+    },
+    "householdCopyPill": "复制",
+    "@householdCopyPill": {
+        "description": "householdCopyPill"
+    },
+    "notificationsTitle": "通知",
+    "@notificationsTitle": {
+        "description": "notificationsTitle"
+    },
+    "notificationsReadAll": "全部已读",
+    "@notificationsReadAll": {
+        "description": "notificationsReadAll"
+    },
+    "notificationsMilkTitle": "Grab 牛奶 在 你的 way home",
+    "@notificationsMilkTitle": {
+        "description": "notificationsMilkTitle"
+    },
+    "notificationsMilkBody": "It's run out — Anna marked it 10 分钟 ago.",
+    "@notificationsMilkBody": {
+        "description": "notificationsMilkBody"
+    },
+    "notificationsMilkTime": "5 分钟 ago",
+    "@notificationsMilkTime": {
+        "description": "notificationsMilkTime"
+    },
+    "notificationsCoffeeTitle": "咖啡 是 running out 很快",
+    "@notificationsCoffeeTitle": {
+        "description": "notificationsCoffeeTitle"
+    },
+    "notificationsCoffeeBody": "你 buy it about every 14 天, 12 有 passed.",
+    "@notificationsCoffeeBody": {
+        "description": "notificationsCoffeeBody"
+    },
+    "notificationsPartnerAddedTitle": "Anna 已添加 2 商品",
+    "@notificationsPartnerAddedTitle": {
+        "description": "notificationsPartnerAddedTitle"
+    },
+    "notificationsPartnerAddedBody": "香蕉 和 面包 是 在  共享 清单.",
+    "@notificationsPartnerAddedBody": {
+        "description": "notificationsPartnerAddedBody"
+    },
+    "notificationsPartnerAddedTime": "今天, 9:12",
+    "@notificationsPartnerAddedTime": {
+        "description": "notificationsPartnerAddedTime"
+    },
+    "notificationsPromoTitle": "15% off 你的 first Samokat 订单",
+    "@notificationsPromoTitle": {
+        "description": "notificationsPromoTitle"
+    },
+    "notificationsPromoBody": " promo 是 active 用于 6 more 天.",
+    "@notificationsPromoBody": {
+        "description": "notificationsPromoBody"
+    },
+    "notificationsPromoTime": "昨天",
+    "@notificationsPromoTime": {
+        "description": "notificationsPromoTime"
+    },
+    "notificationsOrderDeliveredTitle": "订单 delivered",
+    "@notificationsOrderDeliveredTitle": {
+        "description": "notificationsOrderDeliveredTitle"
+    },
+    "notificationsOrderDeliveredBody": "8 商品 · Samokat · ₽1,054",
+    "@notificationsOrderDeliveredBody": {
+        "description": "notificationsOrderDeliveredBody"
+    },
+    "notificationsAddToListPill": "＋ Add 到 清单",
+    "@notificationsAddToListPill": {
+        "description": "notificationsAddToListPill"
+    },
+    "userCreateProfileTitle": "What's 你的 名称?",
+    "@userCreateProfileTitle": {
+        "description": "userCreateProfileTitle"
+    },
+    "userCreateProfileSubtitle": "Add a 名称 和 照片 — 你的 partner 将 see them 在  共享 清单.",
+    "@userCreateProfileSubtitle": {
+        "description": "userCreateProfileSubtitle"
+    },
+    "userCreateProfileNameHint": "你的 名称",
+    "@userCreateProfileNameHint": {
+        "description": "userCreateProfileNameHint"
+    },
+    "userCreateProfileSkip": "跳过",
+    "@userCreateProfileSkip": {
+        "description": "userCreateProfileSkip"
+    },
+    "userCreateProfileNext": "下一步",
+    "@userCreateProfileNext": {
+        "description": "userCreateProfileNext"
+    },
+    "searchTitle": "搜索",
+    "@searchTitle": {
+        "description": "searchTitle"
+    },
+    "searchHint": "商品 或 食谱…",
+    "@searchHint": {
+        "description": "searchHint"
+    },
+    "searchFilterAll": "全部",
+    "@searchFilterAll": {
+        "description": "searchFilterAll"
+    },
+    "searchFilterVegetables": "蔬菜",
+    "@searchFilterVegetables": {
+        "description": "searchFilterVegetables"
+    },
+    "searchFilterDairy": "乳制品",
+    "@searchFilterDairy": {
+        "description": "searchFilterDairy"
+    },
+    "searchFilterGrocery": "杂货",
+    "@searchFilterGrocery": {
+        "description": "searchFilterGrocery"
+    },
+    "searchFilterRecipes": "食谱",
+    "@searchFilterRecipes": {
+        "description": "searchFilterRecipes"
+    },
+    "searchResults": "结果",
+    "@searchResults": {
+        "description": "searchResults"
+    },
+    "searchNothingFound": "未找到内容",
+    "@searchNothingFound": {
+        "description": "searchNothingFound"
+    },
+    "insightsTitle": "洞察",
+    "@insightsTitle": {
+        "description": "insightsTitle"
+    },
+    "insightsTipKicker": "✨ PORA 提示",
+    "@insightsTipKicker": {
+        "description": "insightsTipKicker"
+    },
+    "insightsTipTitle": "你 love carbonara!",
+    "@insightsTipTitle": {
+        "description": "insightsTipTitle"
+    },
+    "insightsTipBody": "Similar flavor profile — try mac 和 奶酪. 你 已经 regularly 有 4 of 6 食材.",
+    "@insightsTipBody": {
+        "description": "insightsTipBody"
+    },
+    "insightsTipAction": "打开 食谱 →",
+    "@insightsTipAction": {
+        "description": "insightsTipAction"
+    },
+    "insightsRunsOutMost": "最常用完",
+    "@insightsRunsOutMost": {
+        "description": "insightsRunsOutMost"
+    },
+    "insightsFavoriteCuisines": "常吃的菜系",
+    "@insightsFavoriteCuisines": {
+        "description": "insightsFavoriteCuisines"
+    },
+    "insightsCuisineItalian": "意大利菜",
+    "@insightsCuisineItalian": {
+        "description": "insightsCuisineItalian"
+    },
+    "insightsCuisinePasta": "意面",
+    "@insightsCuisinePasta": {
+        "description": "insightsCuisinePasta"
+    },
+    "insightsCuisineBreakfasts": "早餐",
+    "@insightsCuisineBreakfasts": {
+        "description": "insightsCuisineBreakfasts"
+    },
+    "insightsCuisineLight": "浅色",
+    "@insightsCuisineLight": {
+        "description": "insightsCuisineLight"
+    },
+    "orderTitle": "订单",
+    "@orderTitle": {
+        "description": "orderTitle"
+    },
+    "orderCart": "购物车",
+    "@orderCart": {
+        "description": "orderCart"
+    },
+    "orderWhenToDeliver": "配送时间",
+    "@orderWhenToDeliver": {
+        "description": "orderWhenToDeliver"
+    },
+    "orderCheckoutCta": "订单 来自 Samokat · {total}",
+    "@orderCheckoutCta": {
+        "placeholders": {
+            "total": {
+                "type": "String"
+            }
+        }
+    },
+    "orderSummaryGoods": "商品",
+    "@orderSummaryGoods": {
+        "description": "orderSummaryGoods"
+    },
+    "orderSummaryDiscount": "立减 15%",
+    "@orderSummaryDiscount": {
+        "description": "orderSummaryDiscount"
+    },
+    "orderSummaryDelivery": "配送",
+    "@orderSummaryDelivery": {
+        "description": "orderSummaryDelivery"
+    },
+    "orderSummaryFree": "免费",
+    "@orderSummaryFree": {
+        "description": "orderSummaryFree"
+    },
+    "orderSummaryTotal": "合计",
+    "@orderSummaryTotal": {
+        "description": "orderSummaryTotal"
+    },
+    "recipeImportTitle": "食谱 来自 a link",
+    "@recipeImportTitle": {
+        "description": "recipeImportTitle"
+    },
+    "recipePreviewTitle": "Pasta Carbonara",
+    "@recipePreviewTitle": {
+        "description": "recipePreviewTitle"
+    },
+    "recipePreviewMeta": "eda.ru · 25 分钟 · 2 份",
+    "@recipePreviewMeta": {
+        "description": "recipePreviewMeta"
+    },
+    "recipePreviewFound": "6 食材 found",
+    "@recipePreviewFound": {
+        "description": "recipePreviewFound"
+    },
+    "recipeDedupBanner": "Removed 2 duplicates 到 avoid duplicating items 已经 在 你的 清单",
+    "@recipeDedupBanner": {
+        "description": "recipeDedupBanner"
+    },
+    "recipeIngredients": "食材",
+    "@recipeIngredients": {
+        "description": "recipeIngredients"
+    },
+    "recipeAddToListCta": "添加 {count} 个商品到清单",
+    "@recipeAddToListCta": {
+        "description": "Add the selected recipe products to the list",
+        "placeholders": {
+            "count": {"type": "int", "format":"compact"}
+        }
+    },
+    "recipeParseButton": "解析",
+    "@recipeParseButton": {
+        "description": "recipeParseButton"
+    },
+    "navList": "清单",
+    "@navList": {
+        "description": "navList"
+    },
+    "navPora": "Pora",
+    "@navPora": {
+        "description": "navPora"
+    },
+    "navOrder": "订单",
+    "@navOrder": {
+        "description": "navOrder"
+    },
+    "navProfile": "个人资料",
+    "@navProfile": {
+        "description": "navProfile"
+    },
+    "familiesTitle": "家庭",
+    "@familiesTitle": {
+        "description": "familiesTitle"
+    },
+    "familiesSubtitle": "选择 a 家庭 到 打开 its 清单",
+    "@familiesSubtitle": {
+        "description": "familiesSubtitle"
+    },
+    "familiesCurrent": "当前",
+    "@familiesCurrent": {
+        "description": "familiesCurrent"
+    },
+    "familiesCreateOrJoin": "＋ Create 或 join",
+    "@familiesCreateOrJoin": {
+        "description": "familiesCreateOrJoin"
+    },
+    "familiesCreateDialog": "What should we call  家庭?",
+    "@familiesCreateDialog": {
+        "description": "familiesCreateDialog"
+    },
+    "tryToUpdate": "尝试刷新",
+    "@tryToUpdate": {
+        "description": "tryToUpdate"
+    },
+    "checkOut": "检查",
+    "@checkOut": {
+        "description": "checkOut"
+    },
+    "settingsMore": "高级",
+    "@settingsMore": {
+        "description": "settingsMore"
+    },
+    "listsYour": "你的个人清单",
+    "@listsYour": {
+        "description": "listsYour"
+    },
+    "human": "人",
+    "@human": {
+        "description": "human"
+    },
+    "products": "件商品",
+    "@products": {
+        "description": "products"
+    },
+    "lists": "个清单",
+    "@lists": {
+        "description": "lists"
+    },
+    "update": "刷新",
+    "@update": {
+        "description": "update"
+    },
+    "connectionSuccess": "已加入",
+    "@connectionSuccess": {
+        "description": "connectionSuccess"
+    },
+    "familiesNoUrgent": "暂无紧急事项",
+    "@familiesNoUrgent": {
+        "description": "familiesNoUrgent"
+    },
+    "welcomeBackTitle": "欢迎回来！",
+    "@welcomeBackTitle": {
+        "description": "welcomeBackTitle"
+    },
+    "welcomeBackSubtitle": "一 second, opening 你的 清单…",
+    "@welcomeBackSubtitle": {
+        "description": "welcomeBackSubtitle"
+    },
+    "errorDuringLoading": "加载时出错",
+    "@errorDuringLoading": {
+        "description": "errorDuringLoading"
+    },
+    "familyName": "家庭名称",
+    "@familyName": {
+        "description": "nameOfFamily"
+    },
+    "familiesCreate": "创建",
+    "@familiesCreate": {
+        "description": "createButton"
+    },
+    "familiesConnect": "加入",
+    "@familiesConnect": {
+        "description": "connectButton"
+    },
+    "showAll": "查看全部",
+    "@showAll": {
+        "description": "showAll"
+    },
+    "priorityLabel": "优先级",
+    "@priorityLabel": {
+        "description": "priorityLabel"
+    },
+    "everyDay": "每天",
+    "@everyDay": {
+        "description": "everyDay"
+    },
+    "newList": "新清单",
+    "@newList": {
+        "description": "newList"
+    },
+    "listNamePlaceholder": "清单名称",
+    "@listNamePlaceholder": {
+        "description": "listNamePlaceholder"
+    },
+    "cancel": "取消",
+    "@cancel": {
+        "description": "cancel"
+    },
+    "quantityLabel": "数量",
+    "@quantityLabel": {
+        "description": "quantityLabel"
+    },
+    "personal": "个人",
+    "@personal": {
+        "description": "personal"
+    },
+    "notify": "通知",
+    "@notify": {
+        "description": "notify"
+    },
+    "notifyEveryone": "所有人",
+    "@notifyEveryone": {
+        "description": "notifyEveryone"
+    },
+    "notifyRecipients": "发送给",
+    "@notifyRecipients": {
+        "description": "notifyRecipients"
+    },
+    "notifyAddCustom": "添加姓名",
+    "@notifyAddCustom": {
+        "description": "notifyAddCustom"
+    },
+    "notifyMessageLabel": "消息",
+    "@notifyMessageLabel": {
+        "description": "notifyMessageLabel"
+    },
+    "notifyHint": "紧急购买 {itemName}",
+    "@notifyHint": {
+        "description": "notifyHint placeholder",
+        "placeholders": {
+            "itemName": {
+                "type": "String"
+            }
+        }
+    },
+    "notifySend": "发送",
+    "@notifySend": {
+        "description": "notifySend"
+    },
+    "notifySent": "通知已发送",
+    "@notifySent": {
+        "description": "notifySent"
+    },
+    "advancedSettings": "高级设置",
+    "@advancedSettings": {
+        "description": "advancedSettings"
+    },
+    "appearance": "外观",
+    "@appearance": {
+        "description": "appearance"
+    },
+    "themeSection": "主题",
+    "@themeSection": {
+        "description": "themeSection"
+    },
+    "themeLight": "浅色",
+    "@themeLight": {
+        "description": "themeLight"
+    },
+    "themeDark": "深色",
+    "@themeDark": {
+        "description": "themeDark"
+    },
+    "themeSystem": "跟随系统",
+    "@themeSystem": {
+        "description": "themeSystem"
+    },
+    "notificationsPermission": "通知 permission",
+    "@notificationsPermission": {
+        "description": "notificationsPermission"
+    },
+    "granted": "已允许",
+    "@granted": {
+        "description": "granted"
+    },
+    "denied": "已拒绝",
+    "@denied": {
+        "description": "denied"
+    },
+    "notDetermined": "未请求",
+    "@notDetermined": {
+        "description": "notDetermined"
+    },
+    "requestPermission": "请求权限",
+    "@requestPermission": {
+        "description": "requestPermission"
+    },
+    "confirmations": "确认",
+    "@confirmations": {
+        "description": "confirmations"
+    },
+    "askBeforeDelete": "删除前询问",
+    "@askBeforeDelete": {
+        "description": "askBeforeDelete"
+    },
+    "about": "关于",
+    "@about": {
+        "description": "about"
+    },
+    "version": "版本",
+    "@version": {
+        "description": "version"
+    },
+    "deleteItemTitle": "删除 item?",
+    "@deleteItemTitle": {
+        "description": "deleteItemTitle"
+    },
+    "deleteItemBody": "这个 cannot be undone.",
+    "@deleteItemBody": {
+        "description": "deleteItemBody"
+    },
+    "dontAskAgain": "不再询问",
+    "@dontAskAgain": {
+        "description": "dontAskAgain"
+    },
+    "delete": "删除",
+    "@delete": {
+        "description": "delete"
+    },
+    "returnToList": "Return 到 清单",
+    "@returnToList": {
+        "description": "returnToList"
+    },
+    "nooneToNotify": "没有 一 到 notify",
+    "@nooneToNotify": {
+        "description": "nooneToNotify"
+    },
+    "notFound": "不 found",
+    "@notFound": {
+        "description": "notFound"
+    },
+    "recipeEmptyHint": "Paste a 食谱 URL 和 点击 “Parse”",
+    "@recipeEmptyHint": {
+        "description": "recipeEmptyHint"
+    },
+    "recipeDupMark": "已经 在 清单",
+    "@recipeDupMark": {
+        "description": "recipeDupMark"
+    },
+    "done": "完成",
+    "@done": {
+        "description": "done"
+    },
+    "errorGeneric": "错误",
+    "@errorGeneric": {
+        "description": "errorGeneric"
+    },
+    "pushToken": "推送令牌",
+    "@pushToken": {
+        "description": "pushToken"
+    },
+    "resync": "同步",
+    "@resync": {
+        "description": "resync"
+    },
+    "tokenSynced": "令牌已同步",
+    "@tokenSynced": {
+        "description": "tokenSynced"
+    },
+    "deleteListTitle": "删除 清单?",
+    "@deleteListTitle": {
+        "description": "deleteListTitle"
+    },
+    "deleteListBody": "清单 “{listName}” 和 all its items 将 be deleted. 这个 cannot be undone.",
+    "@deleteListBody": {
+        "description": "deleteListBody placeholder",
+        "placeholders": {
+            "listName": {
+                "type": "String"
+            }
+        }
+    },
+    "membersScreenTitle": "成员",
+    "@membersScreenTitle": {
+        "description": "membersScreenTitle"
+    },
+    "owner": "所有者",
+    "@owner": {
+        "description": "owner"
+    },
+    "member": "成员",
+    "@member": {
+        "description": "member"
+    },
+    "addProduct": "Add 商品",
+    "@addProduct": {
+        "description": "addProduct"
+    },
+    "productName": "名称",
+    "@productName": {
+        "description": "productName"
+    },
+    "section": "分类",
+    "@section": {
+        "description": "section"
+    },
+    "unit": "单位",
+    "@unit": {
+        "description": "unit"
+    },
+    "priorityHigh": "高",
+    "@priorityHigh": {
+        "description": "priorityHigh"
+    },
+    "priorityMed": "中",
+    "@priorityMed": {
+        "description": "priorityMed"
+    },
+    "priorityLow": "低",
+    "@priorityLow": {
+        "description": "priorityLow"
+    },
+    "urgent": "紧急",
+    "@urgent": {
+        "description": "urgent"
+    },
+    "remindEvery": "提醒周期",
+    "@remindEvery": {
+        "description": "remindEvery"
+    },
+    "days": "天",
+    "@days": {
+        "description": "days"
+    },
+    "customValue": "自定义…",
+    "@customValue": {
+        "description": "customValue"
+    },
+    "save": "保存",
+    "@save": {
+        "description": "save"
+    },
+    "addedByName": "已添加 by: {name}",
+    "@addedByName": {
+        "description": "addedByName placeholder",
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "splashLoadingSlow": "快完成了…",
+    "@splashLoadingSlow": {
+        "description": "splashLoadingSlow"
+    },
+    "splashLoadingVerySlow": "仍在加载…正在检查连接",
+    "@splashLoadingVerySlow": {
+        "description": "splashLoadingVerySlow"
+    },
+    "profileNameUpdate": "正在更新资料",
+    "@profileNameUpdate": {
+        "description": "profileNameUpdate"
+    },
+    "briefSnackBar": "Maybe 你 forgot 到 选择 any 商品?",
+    "@briefSnackBar": {
+        "description": "briefSnackBar"
+    },
+    "noInternet": "没有 internet connection",
+    "@noInternet": {
+        "description": "noInternet"
+    },
+    "noInternetButLoadYouLocally": "没有 internet connection, but we 将 load 你 locally",
+    "@groupDeletionTitle": {
+        "description": "groupDeletionTitle"
+    },
+    "groupDeletionTitle": "是 你 sure want 到 删除 群组?",
+    "@noInternetButLoadYouLocally": {
+        "description": "noInternetButLoadYouLocally"
+    },
+    "retry": "重试",
+    "@retry": {
+        "description": "retry"
+    },
+    "groupsTitle": "你的群组",
+    "@groupsTitle": {
+        "description": "groupsTitle"
+    },
+    "groupsSubtitle": "A 清单 是 a 群组. Invite 人 — they'll see  清单.",
+    "@groupsSubtitle": {
+        "description": "groupsSubtitle"
+    },
+    "groupCreate": "创建群组",
+    "@groupCreate": {
+        "description": "groupCreate"
+    },
+    "groupConnect": "加入",
+    "@groupConnect": {
+        "description": "groupConnect"
+    },
+    "groupNameHint": "群组名称",
+    "@groupNameHint": {
+        "description": "groupNameHint"
+    },
+    "groupPersonal": "个人",
+    "@groupPersonal": {
+        "description": "groupPersonal"
+    },
+    "groupShared": "共享",
+    "@groupShared": {
+        "description": "groupShared"
+    },
+    "noGroups": "还没有群组",
+    "@noGroups": {
+        "description": "noGroups"
+    },
+    "settingsChangeThemeIOSEasterEgg": "* 到 change 你的 主题, go 到 设置 > PORA > 主题\n* 选择 a new 主题 来自  设置 menu\n* 点击 在 '主题' 在  app's 设置 到 switch between 浅色 和 深色 modes",
+    "@settingsChangeThemeIOSEasterEgg": {
+        "description": "ios easter egg on advanced settings when tapped few times"
+    },
+    "tutorialTitle": "使用方法",
+    "@tutorialTitle": {
+        "description": "tutorialTitle"
+    },
+    "tutorialSkip": "跳过",
+    "@tutorialSkip": {
+        "description": "tutorialSkip"
+    },
+    "tutorialNext": "下一步",
+    "@tutorialNext": {
+        "description": "tutorialNext"
+    },
+    "tutorialDone": "开始",
+    "@tutorialDone": {
+        "description": "tutorialDone"
+    },
+    "tutorialInviteTitle": "Invite 你的 人",
+    "@tutorialInviteTitle": {
+        "description": "tutorialInviteTitle"
+    },
+    "tutorialInviteBody": "滑动 a 群组 right → Invite. 你的 partner sees  same 清单.",
+    "@tutorialInviteBody": {
+        "description": "tutorialInviteBody"
+    },
+    "tutorialAddTitle": "Add a 商品",
+    "@tutorialAddTitle": {
+        "description": "tutorialAddTitle"
+    },
+    "tutorialAddBody": "点击 + at  bottom of  清单. 名称, qty, 分类, priority — done.",
+    "@tutorialAddBody": {
+        "description": "tutorialAddBody"
+    },
+    "tutorialEditTitle": "Edit 和 check off",
+    "@tutorialEditTitle": {
+        "description": "tutorialEditTitle"
+    },
+    "tutorialEditBody": "点击  checkbox — bought. 点击  row — details 和 edits.",
+    "@tutorialEditBody": {
+        "description": "tutorialEditBody"
+    },
+    "tutorialDeleteTitle": "删除",
+    "@tutorialDeleteTitle": {
+        "description": "tutorialDeleteTitle"
+    },
+    "tutorialDeleteBody": "滑动 a 商品 left → 删除. Confirmation 可以 be turned off.",
+    "@tutorialDeleteBody": {
+        "description": "tutorialDeleteBody"
+    },
+    "tutorialAiTitle": "Import a 食谱",
+    "@tutorialAiTitle": {
+        "description": "tutorialAiTitle"
+    },
+    "tutorialAiBody": "Paste a 食谱 URL, 点击 Parse. 食材 drop into  清单, duplicates marked.",
+    "@tutorialAiBody": {
+        "description": "tutorialAiBody"
+    },
+    "tutorialSettingsTitle": "Everything 在 reach",
+    "@tutorialSettingsTitle": {
+        "description": "tutorialSettingsTitle"
+    },
+    "tutorialSettingsBody": "主题, language, 通知, confirmations — Profile → Advanced 设置.",
+    "@tutorialSettingsBody": {
+        "description": "tutorialSettingsBody"
+    },
+    "showTutorial": "查看教程",
+    "@showTutorial": {
+        "description": "showTutorial"
+    },
+    "tutorialSampleGroupFamily": "家庭",
+    "@tutorialSampleGroupFamily": {
+        "description": "sample group name in invite animation"
+    },
+    "tutorialSampleMilk": "牛奶",
+    "@tutorialSampleMilk": {
+        "description": "sample product"
+    },
+    "tutorialSampleBread": "面包",
+    "@tutorialSampleBread": {
+        "description": "sample product"
+    },
+    "tutorialSampleAvocado": "牛油果",
+    "@tutorialSampleAvocado": {
+        "description": "sample product added in add animation"
+    },
+    "tutorialSampleMilkQty": "牛奶 2×1L",
+    "@tutorialSampleMilkQty": {
+        "description": "sample product with qty"
+    },
+    "tutorialSampleCoffee": "咖啡",
+    "@tutorialSampleCoffee": {
+        "description": "sample product"
+    },
+    "tutorialSampleCola": "可乐",
+    "@tutorialSampleCola": {
+        "description": "sample product deleted"
+    },
+    "tutorialSampleRecipeUrl": "recipe.example/pasta",
+    "@tutorialSampleRecipeUrl": {
+        "description": "sample recipe url shown in AI import animation"
+    },
+    "tutorialSampleIngredient1": "Spaghetti 400 g",
+    "@tutorialSampleIngredient1": {
+        "description": "sample recipe ingredient"
+    },
+    "tutorialSampleIngredient2": "番茄 500 g",
+    "@tutorialSampleIngredient2": {
+        "description": "sample recipe ingredient"
+    },
+    "tutorialSampleIngredient3": "Garlic 3 cloves",
+    "@tutorialSampleIngredient3": {
+        "description": "sample recipe ingredient"
+    },
+    "tutorialSampleToggleTheme": "主题",
+    "@tutorialSampleToggleTheme": {
+        "description": "toggle label in settings animation"
+    },
+    "tutorialSampleToggleNotif": "通知",
+    "@tutorialSampleToggleNotif": {
+        "description": "toggle label in settings animation"
+    },
+    "tutorialSampleToggleConfirm": "确认",
+    "@tutorialSampleToggleConfirm": {
+        "description": "toggle label in settings animation"
+    },
+    "tutorialConnectTitle": "Join by 代码",
+    "@tutorialConnectTitle": {
+        "description": "tutorialConnectTitle"
+    },
+    "tutorialConnectBody": "Partner sends a link 或 代码. Paste it — 你're 在  共享 清单.",
+    "@tutorialConnectBody": {
+        "description": "tutorialConnectBody"
+    },
+    "tutorialNotifyTitle": "提醒「现在需要」",
+    "@tutorialNotifyTitle": {
+        "description": "tutorialNotifyTitle"
+    },
+    "tutorialNotifyBody": "点击 «!» 在 a 商品 — 你的 partner gets a push «buy it now». 没有 calls needed.",
+    "@tutorialNotifyBody": {
+        "description": "tutorialNotifyBody"
+    },
+    "tutorialOutroTitle": "你'll figure out  rest",
+    "@tutorialOutroTitle": {
+        "description": "tutorialOutroTitle"
+    },
+    "tutorialOutroBody": "点击, 滑动, mess up —  app forgives almost anything.",
+    "@tutorialOutroBody": {
+        "description": "tutorialOutroBody"
+    },
+    "tutorialSampleInviteCode": "PORA-4F72",
+    "@tutorialSampleInviteCode": {
+        "description": "sample invite code in connect animation"
+    },
+    "tutorialSamplePushSender": "Anna",
+    "@tutorialSamplePushSender": {
+        "description": "sample partner name in notify push preview"
+    },
+    "tutorialSamplePushBody": "Need 牛奶, 紧急",
+    "@tutorialSamplePushBody": {
+        "description": "sample push body in notify animation"
+    },
+    "tutorialSampleInviteMessage": "Join  清单",
+    "@tutorialSampleInviteMessage": {
+        "description": "sample chat message text before the invite link"
+    },
+    "supportMessage": "邮箱 支持",
+    "@supportMessage": {
+        "description": "Email support"
+    },
+    "supportMessageBottomSheetTopDescription": "你的 消息 将 be 已发送 到  支持 team. Please provide as much detail as possible.",
+    "@supportMessageBottomSheetTopDescription": {
+        "description": "Your message will be sent to the support team. Please provide as much detail as possible."
+    },
+    "supportMessageBottomSheetSendButton": "发送",
+    "@supportMessageBottomSheetSendButton": {
+        "description": "Send button text in support message bottom bar"
+    },
+    "supportMessageBottomSheetUnderButtonText": "We 将 answer as 很快 as possible, 和 mail 到 你的 gmail 或 inapp!",
+    "@supportMessageBottomSheetUnderButtonText": {
+        "description": "supportMessageBottomSheetUnderButtonText"
+    },
+    "allergen": "过敏原",
+    "@allergen": {
+        "description": "Allergen toggle label"
+    },
+    "predictionsGreeting": "你的 天 和 PORA",
+    "@predictionsGreeting": {
+        "description": "predictions main greeting"
+    },
+    "predictionsGreetingSub": "Smart hints 来自 你的 purchases",
+    "@predictionsGreetingSub": {
+        "description": "predictions greeting subtitle"
+    },
+    "predictionsSectionSoon": "Running out 很快",
+    "@predictionsSectionSoon": {
+        "description": "section title"
+    },
+    "predictionsSectionOften": "你 buy often",
+    "@predictionsSectionOften": {
+        "description": "section title"
+    },
+    "predictionsSectionAiSuggests": "AI 推荐",
+    "@predictionsSectionAiSuggests": {
+        "description": "section title"
+    },
+    "predictionsAiSuggestionsTitle": "商品 和 食谱 用于 你",
+    "@predictionsAiSuggestionsTitle": {
+        "description": "AI suggestions card title"
+    },
+    "predictionsAiSuggestionsTopic": "你的 preferences 和 purchases",
+    "@predictionsAiSuggestionsTopic": {
+        "description": "AI suggestions topic"
+    },
+    "refresh": "刷新",
+    "@refresh": {
+        "description": "refresh action"
+    },
+    "predictionsOftenEmpty": "不 enough data yet",
+    "@predictionsOftenEmpty": {
+        "description": "empty frequent products"
+    },
+    "predictionsAskPora": "询问 PORA",
+    "@predictionsAskPora": {
+        "description": "FAB label"
+    },
+    "kpiWeek": "items per 周",
+    "@kpiWeek": {
+        "description": "kpi label"
+    },
+    "kpiRecipes": "食谱 这个 月",
+    "@kpiRecipes": {
+        "description": "kpi label"
+    },
+    "kpiDaysToRun": "天 until restock",
+    "@kpiDaysToRun": {
+        "description": "kpi label"
+    },
+    "fallbackTip1": "保存 herbs like a bouquet: 在 a glass of 水 covered 和 a bag — lasts 2 weeks.",
+    "@fallbackTip1": {
+        "description": "fallback tip"
+    },
+    "fallbackTip2": "Add 盐 到 dough at  end — it slows down yeast.",
+    "@fallbackTip2": {
+        "description": "fallback tip"
+    },
+    "fallbackTip3": "到 stop onions stinging, chill them 用于 15 分钟 在  freezer 之前 cutting.",
+    "@fallbackTip3": {
+        "description": "fallback tip"
+    },
+    "fallbackTip4": "Oversalted soup? A raw potato 用于 10 分钟 soaks up  extra 盐.",
+    "@fallbackTip4": {
+        "description": "fallback tip"
+    },
+    "fallbackTip5": "Check egg freshness 在 水: sinks — 新鲜, floats — discard.",
+    "@fallbackTip5": {
+        "description": "fallback tip"
+    },
+    "fallbackTip6": "Reheat pizza 在 a covered skillet —  crust crisps back up.",
+    "@fallbackTip6": {
+        "description": "fallback tip"
+    },
+    "fallbackTip7": "冷冻 meat slices thinner — 20 分钟 在  freezer 之前 cutting.",
+    "@fallbackTip7": {
+        "description": "fallback tip"
+    },
+    "fallbackTip8": "Roll a lemon 在  counter 之前 cutting — 你'll get more juice.",
+    "@fallbackTip8": {
+        "description": "fallback tip"
+    },
+    "fallbackTip9": "A pinch of 糖 在 tomato sauce cuts  acidity.",
+    "@fallbackTip9": {
+        "description": "fallback tip"
+    },
+    "fallbackTip10": "面包 keeps a 月 在  freezer; toasting it goes straight 来自 冷冻.",
+    "@fallbackTip10": {
+        "description": "fallback tip"
+    },
+    "aiTipOfDayLabel": "TIP OF  天",
+    "@aiTipOfDayLabel": {
+        "description": "kicker"
+    },
+    "aiTipOfDayTopic": "今天",
+    "@aiTipOfDayTopic": {
+        "description": "default topic passed to tip prompt"
+    },
+    "aiCtaTitle": "询问 PORA",
+    "@aiCtaTitle": {
+        "description": "CTA title"
+    },
+    "aiCtaSubtitle": "食谱 · swaps · tips",
+    "@aiCtaSubtitle": {
+        "description": "CTA subtitle"
+    },
+    "chatSheetTitle": "PORA",
+    "@chatSheetTitle": {
+        "description": "chat sheet title"
+    },
+    "chatSheetSubtitle": "询问食物、采购和替代方案",
+    "@chatSheetSubtitle": {
+        "description": "chat sheet subtitle"
+    },
+    "chatEmptyTitle": "开始对话",
+    "@chatEmptyTitle": {
+        "description": "chat empty state title"
+    },
+    "chatEmptyExamplesLabel": "示例问题：",
+    "@chatEmptyExamplesLabel": {
+        "description": "chat empty state examples label"
+    },
+    "chatSample1": "我可以做什么 cook 和 鸡肉 和 米饭?",
+    "@chatSample1": {
+        "description": "sample question"
+    },
+    "chatSample2": "What 可以 替代 sour cream 在 dough?",
+    "@chatSample2": {
+        "description": "sample question"
+    },
+    "chatSample3": "如何 保存 herbs so they don't wilt?",
+    "@chatSample3": {
+        "description": "sample question"
+    },
+    "chatSample4": "快速 20-分钟 晚餐 食谱",
+    "@chatSample4": {
+        "description": "sample question"
+    },
+    "chatSample5": "我怎样才能 use up 蔬菜 之前 they spoil?",
+    "@chatSample5": {
+        "description": "sample question"
+    },
+    "chatSample6": "制作一个 shopping 清单 用于 3 简单 breakfasts",
+    "@chatSample6": {
+        "description": "sample question"
+    },
+    "chatSample7": "我应该 cook 用于 二 和 a 小 budget?",
+    "@chatSample7": {
+        "description": "sample question"
+    },
+    "chatSample8": "How long 可以 I 保存 熟的 米饭 在  fridge?",
+    "@chatSample8": {
+        "description": "sample question"
+    },
+    "chatSample9": "给我 a 高-protein 素食 晚餐",
+    "@chatSample9": {
+        "description": "sample question"
+    },
+    "chatSample10": "What 可以 替代 黄油 在 这个 食谱?",
+    "@chatSample10": {
+        "description": "sample question"
+    },
+    "chatSample11": "规划三个 dinners 来自 what I 已经 有",
+    "@chatSample11": {
+        "description": "sample question"
+    },
+    "chatSample12": "我可以做什么 cook 和 剩菜 在 15 分钟?",
+    "@chatSample12": {
+        "description": "sample question"
+    },
+    "chatSample13": "推荐一个 适合过敏者 食谱 来自 my 清单",
+    "@chatSample13": {
+        "description": "sample question"
+    },
+    "chatSample14": "我怎样才能 make 这个 meal 更便宜?",
+    "@chatSample14": {
+        "description": "sample question"
+    },
+    "chatTyping": "PORA 是 typing…",
+    "@chatTyping": {
+        "description": "typing indicator"
+    },
+    "chatInputHint": "随便问…",
+    "@chatInputHint": {
+        "description": "chat input placeholder"
+    },
+    "aiModelBadge": "Powered by OpenRouter · ling-3.0-flash",
+    "@aiModelBadge": {
+        "description": "model badge"
+    },
+    "seeAll": "查看全部",
+    "@seeAll": {
+        "description": "see all link"
+    },
+    "tipTopicHerbs": "香草",
+    "@tipTopicHerbs": {
+        "description": "predefined tip topic"
+    },
+    "tipTopicBaking": "烘焙",
+    "@tipTopicBaking": {
+        "description": "predefined tip topic"
+    },
+    "tipTopicSoups": "汤",
+    "@tipTopicSoups": {
+        "description": "predefined tip topic"
+    },
+    "tipTopicMeat": "肉类",
+    "@tipTopicMeat": {
+        "description": "predefined tip topic"
+    },
+    "tipTopicFish": "鱼类",
+    "@tipTopicFish": {
+        "description": "predefined tip topic"
+    },
+    "tipTopicVegetables": "蔬菜",
+    "@tipTopicVegetables": {
+        "description": "predefined tip topic"
+    },
+    "tipTopicStorage": "食物保存",
+    "@tipTopicStorage": {
+        "description": "predefined tip topic"
+    },
+    "tipTopicKitchenHacks": "厨房技巧",
+    "@tipTopicKitchenHacks": {
+        "description": "predefined tip topic"
+    },
+    "tipTopicSpices": "香料",
+    "@tipTopicSpices": {
+        "description": "predefined tip topic"
+    },
+    "tipTopicDough": "面团",
+    "@tipTopicDough": {
+        "description": "predefined tip topic"
+    },
+    "tipTopicBreakfast": "早餐",
+    "@tipTopicBreakfast": {
+        "description": "predefined tip topic"
+    },
+    "tipTopicDinner": "晚餐",
+    "@tipTopicDinner": {
+        "description": "predefined tip topic"
+    },
+    "tipTopicsSectionTitle": "提示主题",
+    "@tipTopicsSectionTitle": {
+        "description": "settings section title"
+    },
+    "tipTopicsSectionDescription": "Pick which topics  tip 是 drawn 来自",
+    "@tipTopicsSectionDescription": {
+        "description": "settings section description"
+    },
+    "tipTopicsAddCustom": "Add 你的 own topic",
+    "@tipTopicsAddCustom": {
+        "description": "add custom topic hint"
+    },
+    "tipTopicsCustomLabel": "自定义",
+    "@tipTopicsCustomLabel": {
+        "description": "custom topics label"
+    },
+    "tipTopicsPredefinedLabel": "预设",
+    "@tipTopicsPredefinedLabel": {
+        "description": "predefined topics label"
+    },
+    "tipTopicsEmpty": "没有 topics 已选择 — tip 将 be generic",
+    "@tipTopicsEmpty": {
+        "description": "warning when no topics selected"
+    },
+    "insightsChampionKicker": "CHAMPION OF  月",
+    "@insightsChampionKicker": {
+        "description": "champion card kicker"
+    },
+    "insightsChampionSubtitle": "bought {count} 次 这个 月",
+    "@insightsChampionSubtitle": {
+        "description": "champion card subtitle",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "insightsStreakDays": "{days} 天 在 a row",
+    "@insightsStreakDays": {
+        "description": "streak headline",
+        "placeholders": {
+            "days": {
+                "type": "int"
+            }
+        }
+    },
+    "insightsStreakSubtitle": "你're 在 it — 保存 going",
+    "@insightsStreakSubtitle": {
+        "description": "streak card subtitle"
+    },
+    "insightsFreqEvery": "~每 {days} 天",
+    "@insightsFreqEvery": {
+        "description": "frequency subtitle",
+        "placeholders": {
+            "days": {
+                "type": "int"
+            }
+        }
+    },
+    "insightsPopular": "你 buy often",
+    "@insightsPopular": {
+        "description": "popular section title"
+    },
+    "insightsStatsProducts": "件商品",
+    "@insightsStatsProducts": {
+        "description": "kpi label"
+    },
+    "insightsStatsLoginsWeek": "logins 这个 周",
+    "@insightsStatsLoginsWeek": {
+        "description": "kpi label"
+    },
+    "insightsEmpty": "没有 data yet — start adding 商品",
+    "@insightsEmpty": {
+        "description": "empty state on insights"
+    },
+    "notificationsFilterAll": "全部",
+    "@notificationsFilterAll": {
+        "description": "filter chip"
+    },
+    "notificationsFilterUrgent": "紧急",
+    "@notificationsFilterUrgent": {
+        "description": "filter chip"
+    },
+    "notificationsFilterPrediction": "预测",
+    "@notificationsFilterPrediction": {
+        "description": "filter chip"
+    },
+    "notificationsFilterPromo": "促销",
+    "@notificationsFilterPromo": {
+        "description": "filter chip"
+    },
+    "notificationsFilterOther": "其他",
+    "@notificationsFilterOther": {
+        "description": "filter chip"
+    },
+    "notificationsClearAll": "全部清除",
+    "@notificationsClearAll": {
+        "description": "menu action"
+    },
+    "notificationsDelete": "删除",
+    "@notificationsDelete": {
+        "description": "slidable action"
+    },
+    "notificationsGroupToday": "今天",
+    "@notificationsGroupToday": {
+        "description": "group header"
+    },
+    "notificationsGroupYesterday": "昨天",
+    "@notificationsGroupYesterday": {
+        "description": "group header"
+    },
+    "notificationsEmptyTitle": "一切安静",
+    "@notificationsEmptyTitle": {
+        "description": "empty state title"
+    },
+    "notificationsEmptyBody": "New 通知 将 appear here",
+    "@notificationsEmptyBody": {
+        "description": "empty state body"
+    },
+    "recipeCreateListCta": "要把这个食谱添加到哪里？",
+    "@recipeCreateListCta": {
+        "description": "recipe cta"
+    },
+    "recipeDupForceMark": "仍会添加",
+    "@recipeDupForceMark": {
+        "description": "dup pill when user unchecks flag"
+    },
+    "recipeDedupBannerMany": "{n} duplicates 将 be skipped — uncheck 到 force-add",
+    "@recipeDedupBannerMany": {
+        "description": "dedup banner",
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "offlineWriteBlocked": "没有 internet — change won't be saved",
+    "@offlineWriteBlocked": {
+        "description": "snackbar when write attempted offline"
+    },
+    "offlineReadBanner": "离线 — 正在显示缓存数据",
+    "@offlineReadBanner": {
+        "description": "top banner when cached data shown"
+    },
+    "chatImportRecipeCta": "导入食谱",
+    "@chatImportRecipeCta": {
+        "description": "chat bubble cta"
+    }
+}

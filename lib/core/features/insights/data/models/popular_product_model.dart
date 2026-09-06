@@ -25,11 +25,11 @@ class PopularProductModel {
   }
 
   PopularProductEntity toEntity() => PopularProductEntity(
-        name: name,
-        quantity: quantity,
-        howOftenEnds: howOftenEnds,
-        currentDay: currentDay,
-      );
+    name: name,
+    quantity: quantity,
+    howOftenEnds: howOftenEnds,
+    currentDay: currentDay,
+  );
 }
 
 /// Wrapper `{ "items": [...] }`.

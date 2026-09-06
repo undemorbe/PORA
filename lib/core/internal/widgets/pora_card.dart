@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pora/core/internal/theme/additional_constants.dart';
-import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
+import 'package:pora/core/internal/theme/constant/additional_constants.dart';
+import 'package:pora/core/internal/theme/themes_colors/light_colors/app_colors.dart';
 
 /// Скруглённая карточка-поверхность с мягкой тенью.
 /// [onTap] — если задан, оборачивается в `Material + InkWell` (ripple).

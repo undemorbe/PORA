@@ -6,6 +6,5 @@ class GetLoginTimesUseCase {
   const GetLoginTimesUseCase({required this.repository});
   final StatisticsRepository repository;
 
-  Future<Either<Failure, List<DateTime>>> call() =>
-      repository.getLoginTimes();
+  Future<Either<Failure, List<DateTime>>> call() => repository.getLoginTimes();
 }

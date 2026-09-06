@@ -25,10 +25,7 @@ class ConnectivityGuard {
     await store.recheck();
     if (store.online) return true;
     if (context.mounted) {
-      PoraSnackbar.show(
-        context,
-        message: context.l10n.offlineWriteBlocked,
-      );
+      PoraSnackbar.show(context, message: context.l10n.offlineWriteBlocked);
     }
     return false;
   }

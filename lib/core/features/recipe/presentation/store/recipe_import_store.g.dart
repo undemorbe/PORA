@@ -125,16 +125,6 @@ mixin _$RecipeImportStore on _RecipeImportStoreBase, Store {
     });
   }
 
-  late final _$loadExistingAsyncAction = AsyncAction(
-    '_RecipeImportStoreBase.loadExisting',
-    context: context,
-  );
-
-  @override
-  Future<void> loadExisting() {
-    return _$loadExistingAsyncAction.run(() => super.loadExisting());
-  }
-
   late final _$parseAsyncAction = AsyncAction(
     '_RecipeImportStoreBase.parse',
     context: context,
@@ -155,6 +145,42 @@ mixin _$RecipeImportStore on _RecipeImportStoreBase, Store {
   @override
   Future<List<String>> addSelected() {
     return _$addSelectedAsyncAction.run(() => super.addSelected());
+  }
+
+  late final _$addRecipeToExistingListAsyncAction = AsyncAction(
+    '_RecipeImportStoreBase.addRecipeToExistingList',
+    context: context,
+  );
+
+  @override
+  Future<List<String>> addRecipeToExistingList(String targetLid) {
+    return _$addRecipeToExistingListAsyncAction.run(
+      () => super.addRecipeToExistingList(targetLid),
+    );
+  }
+
+  late final _$createSharedGroupFromRecipeAsyncAction = AsyncAction(
+    '_RecipeImportStoreBase.createSharedGroupFromRecipe',
+    context: context,
+  );
+
+  @override
+  Future<String?> createSharedGroupFromRecipe() {
+    return _$createSharedGroupFromRecipeAsyncAction.run(
+      () => super.createSharedGroupFromRecipe(),
+    );
+  }
+
+  late final _$createListFromRecipeAsyncAction = AsyncAction(
+    '_RecipeImportStoreBase.createListFromRecipe',
+    context: context,
+  );
+
+  @override
+  Future<String?> createListFromRecipe() {
+    return _$createListFromRecipeAsyncAction.run(
+      () => super.createListFromRecipe(),
+    );
   }
 
   late final _$_RecipeImportStoreBaseActionController = ActionController(

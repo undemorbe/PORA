@@ -9,10 +9,10 @@ import 'package:get_it/get_it.dart';
 import 'package:pora/core/features/notifications/presentation/store/notifications_store.dart';
 import 'package:pora/core/features/notifications/presentation/widgets/notification_tile.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
-import 'package:pora/core/internal/theme/additional_constants.dart';
-import 'package:pora/core/internal/theme/app_text_styles.dart';
+import 'package:pora/core/internal/theme/constant/additional_constants.dart';
+import 'package:pora/core/internal/theme/text/app_text_styles.dart';
 import 'package:pora/core/internal/theme/context_colors.dart';
-import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
+import 'package:pora/core/internal/theme/themes_colors/light_colors/app_colors.dart';
 import 'package:pora/core/internal/widgets/fade_slide_in.dart';
 import 'package:pora/core/internal/widgets/pora_rows_card.dart';
 import 'package:pora/core/internal/widgets/press_scale.dart';
@@ -86,10 +86,12 @@ class _NotificationsPageState extends State<NotificationsPage> {
                         title: l.notificationsTitle,
                         unreadCount: store.unreadCount,
                         onBack: () => context.router.maybePop(),
-                        onReadAll:
-                            store.unreadCount == 0 ? null : store.markAllRead,
-                        onClearAll:
-                            store.items.isEmpty ? null : _confirmClearAll,
+                        onReadAll: store.unreadCount == 0
+                            ? null
+                            : store.markAllRead,
+                        onClearAll: store.items.isEmpty
+                            ? null
+                            : _confirmClearAll,
                       ),
                     ),
                   ),
@@ -145,10 +147,7 @@ class _Header extends StatelessWidget {
         GestureDetector(
           behavior: HitTestBehavior.opaque,
           onTap: onBack,
-          child: const PhosphorIcon(
-            PhosphorIconsRegular.caretLeft,
-            size: 26,
-          ),
+          child: const PhosphorIcon(PhosphorIconsRegular.caretLeft, size: 26),
         ),
         const SizedBox(width: PoraSpacing.md),
         Expanded(
@@ -158,8 +157,10 @@ class _Header extends StatelessWidget {
               if (unreadCount > 0) ...[
                 const SizedBox(width: 6),
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 2,
+                  ),
                   decoration: const BoxDecoration(
                     color: PoraColors.primary,
                     borderRadius: BorderRadius.all(Radius.circular(999)),
@@ -251,11 +252,7 @@ class _FilterChips extends StatelessWidget {
 }
 
 class _Chip extends StatelessWidget {
-  const _Chip({
-    required this.label,
-    required this.active,
-    required this.onTap,
-  });
+  const _Chip({required this.label, required this.active, required this.onTap});
   final String label;
   final bool active;
   final VoidCallback onTap;

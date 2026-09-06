@@ -3,7 +3,7 @@ import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/core/features/families/domain/entity/member.dart';
 import 'package:pora/core/internal/extensions/color_parser.dart';
 import 'package:pora/core/internal/extensions/string_extension.dart';
-import 'package:pora/core/internal/theme/app_text_styles.dart';
+import 'package:pora/core/internal/theme/text/app_text_styles.dart';
 import 'package:pora/core/internal/theme/context_colors.dart';
 import 'package:pora/core/internal/widgets/pora_avatar.dart';
 

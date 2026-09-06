@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
 import 'package:pora/core/internal/extensions/string_extension.dart';
-import 'package:pora/core/internal/theme/additional_constants.dart';
-import 'package:pora/core/internal/theme/app_text_styles.dart';
+import 'package:pora/core/internal/theme/constant/additional_constants.dart';
+import 'package:pora/core/internal/theme/text/app_text_styles.dart';
 import 'package:pora/core/internal/theme/context_colors.dart';
-import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
+import 'package:pora/core/internal/theme/themes_colors/light_colors/app_colors.dart';
 
 /// 6-значный OTP-ввод в фирменном стиле Pora.
 class PinputRoundedWithCustomCursor extends StatefulWidget {
@@ -45,7 +45,7 @@ class _PinputRoundedWithCustomCursorState
       textStyle: PoraText.code.copyWith(
         fontSize: 22,
         fontWeight: FontWeight.w700,
-        color: c.ink,
+        color: PoraColors.primary,
       ),
       decoration: BoxDecoration(
         // surfaceAlt в dark ярче bg — на тёмном фоне ячейки видны.
@@ -59,6 +59,7 @@ class _PinputRoundedWithCustomCursorState
     final focusedPinTheme = defaultPinTheme.copyDecorationWith(
       color: PoraColors.primaryTint,
       borderRadius: PoraRadii.input,
+
       border: Border.all(color: PoraColors.primary, width: 1.6),
     );
 

@@ -1,9 +1,13 @@
 import 'package:pora/core/features/item_detail/data/datasource/items_remote.dart';
+import 'package:pora/core/features/lists/data/models/products/product_model.dart';
 import 'package:pora/core/features/item_detail/domain/repository/items_repository.dart';
 import 'package:pora/core/features/lists/domain/entity/products/product.dart';
 import 'package:pora/core/internal/errors/failure.dart';
 import 'package:pora/core/internal/errors/success.dart';
 import 'package:pora/core/internal/extensions/either.dart';
+import 'package:pora/core/internal/cache/hive_json_cache.dart';
+
+String _itemCacheKey(String itemId) => 'items:item:$itemId:v1';
 
 /// Оборачивает `ItemsRemote` в `Either<Failure, T>`.
 class ItemsService implements ItemsRepository {
@@ -16,8 +20,19 @@ class ItemsService implements ItemsRepository {
   }) async {
     try {
       final model = await remote.getItem(itemId: itemId);
+      await HiveJsonCache.put(_itemCacheKey(itemId), model.toJson());
       return Right(model);
     } on Exception catch (e) {
+      final cached = await HiveJsonCache.read(_itemCacheKey(itemId));
+      if (cached is Map) {
+        try {
+          return Right(
+            ProductModel.fromJson(Map<String, dynamic>.from(cached)),
+          );
+        } catch (_) {
+          // Broken cache is treated as a cache miss.
+        }
+      }
       return Left(NetworkFailure(e.toString()));
     }
   }
@@ -76,6 +91,18 @@ class ItemsService implements ItemsRepository {
           remindEveryDays: remindEveryDays,
         ),
       );
+      await _patchCachedItem(
+        itemId,
+        _body(
+          name: name,
+          section: section,
+          quantity: quantity,
+          unit: unit,
+          priority: priority,
+          urgent: urgent,
+          remindEveryDays: remindEveryDays,
+        ),
+      );
       return Right(const ServerSuccess());
     } on Exception catch (e) {
       return Left(NetworkFailure(e.toString()));
@@ -86,6 +113,7 @@ class ItemsService implements ItemsRepository {
   Future<Either<Failure, Success>> deleteItem({required String itemId}) async {
     try {
       await remote.deleteItem(itemId: itemId);
+      await HiveJsonCache.invalidate(_itemCacheKey(itemId));
       return Right(const ServerSuccess());
     } on Exception catch (e) {
       return Left(NetworkFailure(e.toString()));
@@ -113,6 +141,7 @@ class ItemsService implements ItemsRepository {
   }) async {
     try {
       await remote.markBought(itemId: itemId, checked: checked);
+      await _patchCachedItem(itemId, {'checked': checked});
       return Right(const ServerSuccess());
     } on Exception catch (e) {
       return Left(NetworkFailure(e.toString()));
@@ -136,4 +165,14 @@ class ItemsService implements ItemsRepository {
     'urgent': urgent,
     'remind-every-days': remindEveryDays,
   };
+
+  Future<void> _patchCachedItem(
+    String itemId,
+    Map<String, dynamic> patch,
+  ) async {
+    final raw = await HiveJsonCache.read(_itemCacheKey(itemId));
+    if (raw is! Map) return;
+    final updated = Map<String, dynamic>.from(raw)..addAll(patch);
+    await HiveJsonCache.put(_itemCacheKey(itemId), updated);
+  }
 }

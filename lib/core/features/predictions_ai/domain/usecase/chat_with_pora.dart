@@ -1,5 +1,6 @@
 import 'package:pora/core/features/predictions_ai/domain/entity/ai_message.dart';
 import 'package:pora/core/features/predictions_ai/domain/prompt/chat_guard.dart';
+import 'package:pora/core/features/predictions_ai/domain/prompt/ai_context.dart';
 import 'package:pora/core/features/predictions_ai/domain/entity/ai_completion.dart';
 import 'package:pora/core/features/predictions_ai/domain/repository/ai_repository.dart';
 import 'package:pora/core/internal/errors/failure.dart';
@@ -14,8 +15,20 @@ class ChatWithPoraUseCase {
   Future<Either<Failure, AiCompletionEntity>> call({
     required List<AiMessage> history,
     required String languageCode,
+    String? contextSummary,
+    AiContext context = const AiContext(),
   }) {
-    final guarded = guardedMessages(history, languageCode: languageCode);
-    return repository.chat(messages: guarded, maxTokens: 500);
+    final recentHistory = history.length <= 12
+        ? history
+        : history.sublist(history.length - 12);
+    final guarded = guardedMessages(
+      recentHistory,
+      languageCode: languageCode,
+      contextSummary: [
+        contextSummary,
+        context.summary,
+      ].whereType<String>().where((value) => value.trim().isNotEmpty).join(' '),
+    );
+    return repository.chat(messages: guarded, maxTokens: 3500);
   }
 }

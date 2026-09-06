@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/core/features/recipe/domain/chat_recipe_extractor.dart';
 import 'package:pora/core/features/recipe/domain/entity/recipe.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
-import 'package:pora/core/internal/theme/additional_constants.dart';
-import 'package:pora/core/internal/theme/app_text_styles.dart';
+import 'package:pora/core/internal/theme/constant/additional_constants.dart';
+import 'package:pora/core/internal/theme/text/app_text_styles.dart';
 import 'package:pora/core/internal/theme/context_colors.dart';
-import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
+import 'package:pora/core/internal/theme/themes_colors/light_colors/app_colors.dart';
 import 'package:pora/core/internal/widgets/press_scale.dart';
 
-/// Пузырь сообщения в чате. Юзер — справа, primary bg; ассистент — слева, surface bg.
-/// Для ассистента детектит `<recipe>...</recipe>` — прячет тег из отображения
-/// и добавляет CTA «Импортировать рецепт» под пузырём.
 class ChatMessageBubble extends StatelessWidget {
   const ChatMessageBubble({
     super.key,
@@ -23,16 +21,12 @@ class ChatMessageBubble extends StatelessWidget {
   final String text;
   final bool fromUser;
 
-  /// Вызывается когда пользователь тапает «Импортировать рецепт».
-  /// Приходит уже распарсенный `RecipeEntity`.
   final void Function(RecipeEntity)? onImportRecipe;
 
   @override
   Widget build(BuildContext context) {
-    // Для юзерского сообщения — ничего не парсим.
-    final extraction =
-        fromUser ? null : ChatRecipeExtractor.extract(text);
-    final display = extraction?.cleanText ?? text;
+    final extraction = fromUser ? null : ChatRecipeExtractor.extract(text);
+    final display = normalizeChatMarkdown(extraction?.cleanText ?? text);
     final recipe = extraction?.recipe;
     final c = context.colors;
 
@@ -54,8 +48,9 @@ class ChatMessageBubble extends StatelessWidget {
             maxWidth: MediaQuery.of(context).size.width * 0.82,
           ),
           child: Column(
-            crossAxisAlignment:
-                fromUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+            crossAxisAlignment: fromUser
+                ? CrossAxisAlignment.end
+                : CrossAxisAlignment.start,
             children: [
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 4),
@@ -71,14 +66,18 @@ class ChatMessageBubble extends StatelessWidget {
                     bottomLeft: Radius.circular(fromUser ? 16 : 4),
                     bottomRight: Radius.circular(fromUser ? 4 : 16),
                   ),
-                  border:
-                      fromUser ? null : Border.all(color: c.border, width: 1),
+                  border: fromUser
+                      ? null
+                      : Border.all(color: c.border, width: 1),
                 ),
-                child: SelectableText(
-                  display,
-                  style: PoraText.bodyLarge.copyWith(
-                    color: fromUser ? Colors.white : c.ink,
-                    height: 1.35,
+                child: MarkdownBody(
+                  data: display,
+                  selectable: true,
+                  styleSheet: MarkdownStyleSheet(
+                    a: TextStyle(
+                      color: fromUser ? Colors.white : c.ink,
+                      height: 1.35,
+                    ),
                   ),
                 ),
               ),
@@ -93,6 +92,55 @@ class ChatMessageBubble extends StatelessWidget {
       ),
     );
   }
+}
+
+/// Converts GitHub-style markdown tables to compact bullet lists because the
+/// chat markdown renderer does not lay out table columns reliably on mobile.
+String normalizeChatMarkdown(String markdown) {
+  final lines = markdown.split('\n');
+  final output = <String>[];
+  var index = 0;
+
+  while (index < lines.length) {
+    if (index + 1 < lines.length &&
+        _isTableRow(lines[index]) &&
+        _isTableDivider(lines[index + 1])) {
+      final headers = _tableCells(lines[index]);
+      index += 2;
+      while (index < lines.length && _isTableRow(lines[index])) {
+        final values = _tableCells(lines[index]);
+        output.addAll(_tableRowAsList(headers, values));
+        index++;
+      }
+      continue;
+    }
+    output.add(lines[index]);
+    index++;
+  }
+  return output.join('\n');
+}
+
+bool _isTableRow(String line) =>
+    line.contains('|') && _tableCells(line).length >= 2;
+
+bool _isTableDivider(String line) {
+  final cells = _tableCells(line);
+  return cells.length >= 2 &&
+      cells.every((cell) => RegExp(r'^:?-{3,}:?$').hasMatch(cell));
+}
+
+List<String> _tableCells(String line) {
+  var value = line.trim();
+  if (value.startsWith('|')) value = value.substring(1);
+  if (value.endsWith('|')) value = value.substring(0, value.length - 1);
+  return value.split('|').map((cell) => cell.trim()).toList();
+}
+
+List<String> _tableRowAsList(List<String> headers, List<String> values) {
+  return [
+    for (var i = 0; i < values.length; i++)
+      '- **${i < headers.length ? headers[i] : 'Item'}:** ${values[i]}',
+  ];
 }
 
 /// Плашка «Импортировать рецепт: TITLE · N ингредиентов» под пузырём.
