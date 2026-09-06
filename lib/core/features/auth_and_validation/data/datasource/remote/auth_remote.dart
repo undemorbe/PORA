@@ -26,14 +26,14 @@ class AuthRemoteImpl implements AuthRemote {
     required String destination,
   }) async {
     try {
-      if (destination.isValidEmail(destination)) {
+      if (destination.isValidEmail()) {
         final val = await apiClient
             .sendOtp(destination: {'email': destination})
             .then((_) {
               return const ServerSuccess();
             });
         return Right(val);
-      } else if (destination.isValidPhone(destination)) {
+      } else if (destination.isValidPhone()) {
         final val = await apiClient
             .sendOtp(destination: {'phone': destination})
             .then((_) {
@@ -62,12 +62,12 @@ class AuthRemoteImpl implements AuthRemote {
       'device-type': deviceType,
     };
     try {
-      if (destination.isValidEmail(destination)) {
+      if (destination.isValidEmail()) {
         final value = await apiClient.verifyOtp(
           body: {...baseBody(), 'email': destination},
         );
         return Right(value);
-      } else if (destination.isValidPhone(destination)) {
+      } else if (destination.isValidPhone()) {
         final value = await apiClient.verifyOtp(
           body: {...baseBody(), 'phone': destination},
         );

@@ -99,11 +99,14 @@ class _GroupsPageState extends State<GroupsPage> {
                                 vertical: 8,
                               ),
                               decoration: BoxDecoration(
-                                color: PoraColors.primary.withValues(alpha: 0.1),
+                                color: PoraColors.primary.withValues(
+                                  alpha: 0.1,
+                                ),
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all(
-                                  color: PoraColors.primary
-                                      .withValues(alpha: 0.4),
+                                  color: PoraColors.primary.withValues(
+                                    alpha: 0.4,
+                                  ),
                                   width: 1,
                                 ),
                               ),

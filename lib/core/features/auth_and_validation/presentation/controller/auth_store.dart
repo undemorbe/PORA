@@ -6,6 +6,7 @@ import 'package:pora/core/features/auth_and_validation/domain/usecase/save_token
 import 'package:pora/core/features/auth_and_validation/domain/usecase/send_otp.dart';
 import 'package:pora/core/features/auth_and_validation/domain/usecase/verify_otp.dart';
 import 'package:pora/core/features/onboarding/domain/usecase/update_sawed_onboarding.dart';
+import 'package:pora/core/internal/extensions/string_extension.dart';
 import 'package:pora/core/internal/logging/logger.dart';
 import 'package:pora/core/internal/notifications/notification_service.dart';
 part 'auth_store.g.dart';
@@ -22,14 +23,18 @@ abstract class _AuthStoreBase with Store {
   @observable
   bool? isLoading;
 
-  /// Статус из verify-otp: `notRegistered` — новый пользователь.
   @observable
   String? status;
 
-  /// true — нужен экран создания профиля (новый пользователь).
-  /// Только точное `notRegistered` ведёт на создание профиля; всё
-  /// остальное (включая null/registered) — «Вспомнили вас» → главный экран.
   bool get needsProfile => status?.trim() == 'notRegistered';
+
+  @action
+  bool isValid({required String text}) {
+    if (text.isValidEmail() || text.isValidPhone()) {
+      return true;
+    }
+    return false;
+  }
 
   @action
   Future<void> sendOtp({required String destination}) async {
@@ -73,11 +78,10 @@ abstract class _AuthStoreBase with Store {
       // перехода в защищённую зону — иначе reevaluateListenable срабатывает
       // прямо во время replaceAll и сбрасывает только что открытый маршрут.
     } else {
-        isLoading = false;
-        success = false;
-        //! Localize!!!!!!!
-        scaffoldMessage = 'Invalid OTP';
-      }
+      isLoading = false;
+      success = false;
+      //! Localize!!!!!!!
+      scaffoldMessage = 'Invalid OTP';
     }
   }
-
+}

@@ -151,14 +151,18 @@ abstract class _GroupsStoreBase with Store {
       list: ListModel.fromJson(listJson),
       members: (j['members'] as List? ?? const [])
           .whereType<Map>()
-          .map((m) => MemberModel(
-                id: (m['id'] as String?) ?? '',
-                name: (m['name'] as String?) ?? '',
-                surname: m['surname'] as String?,
-                imageUrl: m['image-url'] as String?,
-                joinedAt: (m['joined-at'] as String?) ?? '',
-                colorCode: (m['color'] as String?) ?? '',
-              ) as MemberEntity)
+          .map(
+            (m) =>
+                MemberModel(
+                      id: (m['id'] as String?) ?? '',
+                      name: (m['name'] as String?) ?? '',
+                      surname: m['surname'] as String?,
+                      imageUrl: m['image-url'] as String?,
+                      joinedAt: (m['joined-at'] as String?) ?? '',
+                      colorCode: (m['color'] as String?) ?? '',
+                    )
+                    as MemberEntity,
+          )
           .toList(),
       ownerId: j['ownerId'] as String?,
       familyId: j['familyId'] as String?,

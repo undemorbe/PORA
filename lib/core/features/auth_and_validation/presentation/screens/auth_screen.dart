@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pora/core/features/auth_and_validation/presentation/controller/auth_store.dart';
 import 'package:pora/core/features/auth_and_validation/presentation/widgets/auth_destination_field.dart';
@@ -61,7 +62,7 @@ class _AuthPageState extends State<AuthPage> {
                   const SizedBox(height: PoraSpacing.xxl),
                   AuthDestinationField(controller: destinationController),
                   const SizedBox(height: PoraSpacing.xxl),
-                  Text(l.authSubtitle2, style: PoraText.subtitle),
+                  Text(l.authSubtitle2, style: PoraText.subtitle,textAlign: .center,),
                 ],
               ),
             ),
@@ -93,21 +94,27 @@ class _AuthPageState extends State<AuthPage> {
                       isLoading: authStore.isLoading,
                       label: l.authJoinButton,
                       onPressed: () async {
+                        if (!authStore.isValid(
+                          text: destinationController.text,
+                        )) {
+                          PoraSnackbar.show(
+                            context,
+                            message: l.authErrorInvalidPhone,
+                            type: .failure,
+                          );
+                          return;
+                        }
                         await authStore
                             .sendOtp(destination: destinationController.text)
                             .whenComplete(() {
                               //! UPD WHEN authStore.success is not null
                               if ((authStore.success == true &&
-                                      context.mounted) ||
-                                  (dotenv.getBool('DEBUG') &&
-                                      context.mounted)) {
+                                  context.mounted)) {
                                 context.router.navigate(
                                   OTPConfirmationRoute(
                                     authStore: authStore,
                                     isPhone: destinationController.text
-                                        .isValidPhone(
-                                          destinationController.text,
-                                        ),
+                                        .isValidPhone(),
                                     privacyStore: privacyStore,
                                     OTPController: otpController,
                                     destinationController:
@@ -123,8 +130,7 @@ class _AuthPageState extends State<AuthPage> {
                                       authStore.scaffoldMessage ??
                                       l.commonError,
                                 );
-                                // ignore: unnecessary_statements
-                                authStore.success == null;
+                                authStore.success = null;
                               }
                             });
                       },

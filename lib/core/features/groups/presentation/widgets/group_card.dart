@@ -36,11 +36,16 @@ class GroupCard extends StatelessWidget {
     final hidden = items.length - visible.length;
     final ring = c.surface;
 
-    void open() { 
-
+    void open() {
       context.router.push(
-      ListRoute(listId: list.id, listName: list.name, members: group.members, ownerId: group.ownerId),
-    );}
+        ListRoute(
+          listId: list.id,
+          listName: list.name,
+          members: group.members,
+          ownerId: group.ownerId,
+        ),
+      );
+    }
 
     final body = GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -80,9 +85,6 @@ class GroupCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                  
-
-                  
                 ],
               ),
             ),
