@@ -5,13 +5,8 @@ import 'package:mobx/mobx.dart';
 import 'package:pora/core/features/families/domain/usecase/create_family.dart';
 import 'package:pora/core/features/groups/presentation/store/groups_store.dart';
 import 'package:pora/core/features/item_detail/domain/usecase/add_item.dart';
-import 'package:pora/core/features/item_detail/domain/usecase/update_item.dart';
-import 'package:pora/core/features/lists/domain/entity/lists/lists.dart';
-import 'package:pora/core/features/lists/domain/entity/products/product.dart';
 import 'package:pora/core/features/lists/domain/usecase/create_list.dart';
-import 'package:pora/core/features/lists/domain/usecase/get_list_data.dart';
 import 'package:pora/core/features/user/domain/usecase/user/get_user.dart';
-import 'package:pora/core/features/recipe/data/datasource/boyer_moore.dart';
 import 'package:pora/core/features/recipe/domain/entity/recipe.dart';
 import 'package:pora/core/features/recipe/domain/entity/recipe_ingredient.dart';
 import 'package:pora/core/features/recipe/domain/usecase/parse_recipe_from_url.dart';
@@ -23,12 +18,7 @@ class RecipeImportStore = _RecipeImportStoreBase with _$RecipeImportStore;
 class RecipeRow {
   final RecipeIngredient ingredient;
 
-  /// Совпадение из существующего списка (null — новый продукт).
-  final ProductEntity? duplicate;
-
-  RecipeRow({required this.ingredient, this.duplicate});
-
-  bool get hasDuplicate => duplicate != null;
+  RecipeRow({required this.ingredient});
 }
 
 abstract class _RecipeImportStoreBase with Store {
@@ -52,39 +42,11 @@ abstract class _RecipeImportStoreBase with Store {
   @observable
   ObservableList<RecipeRow> rows = ObservableList<RecipeRow>();
 
-  /// Selected indexes.
-  /// Смысл:
-  ///  - non-dup строка: checked → добавить в список; unchecked → пропустить.
-  ///  - dup строка: checked (default) → пропустить (уже есть);
-  ///    unchecked → добавить/увеличить quantity (см. `addSelected`).
   @observable
   ObservableSet<int> selected = ObservableSet<int>();
 
-  ListEntity? _existingList;
-
   @computed
   int get selectedCount => selected.length;
-
-  /// Кол-во dup-строк которые всё ещё «checked» (=будут пропущены).
-  /// Если 0 — dedup banner можно скрывать.
-  @computed
-  int get dupSkipCount {
-    var n = 0;
-    for (var i = 0; i < rows.length; i++) {
-      if (rows[i].hasDuplicate && selected.contains(i)) n++;
-    }
-    return n;
-  }
-
-  /// Кол-во dup-строк которые unchecked (=будут добавлены принудительно).
-  @computed
-  int get dupForceCount {
-    var n = 0;
-    for (var i = 0; i < rows.length; i++) {
-      if (rows[i].hasDuplicate && !selected.contains(i)) n++;
-    }
-    return n;
-  }
 
   @action
   void setUrl(String value) => url = value;
@@ -99,18 +61,10 @@ abstract class _RecipeImportStoreBase with Store {
   }
 
   @action
-  Future<void> loadExisting() async {
-    final resp = await GetIt.I<GetConcreteListUseCase>().call(lid: lid);
-    if (resp.isRight) _existingList = resp.right;
-  }
-
-  @action
   Future<void> parse({String languageCode = 'ru'}) async {
     if (url.trim().isEmpty) return;
     isLoading = true;
     errorMessage = null;
-    if (_existingList == null) await loadExisting();
-
     final result = await GetIt.I<ParseRecipeFromUrlUseCase>().call(
       url: url,
       languageCode: languageCode,
@@ -125,103 +79,36 @@ abstract class _RecipeImportStoreBase with Store {
     }
 
     recipe = result.right;
-    rows = ObservableList<RecipeRow>.of(_buildRows(result.right.ingredients));
+    rows = ObservableList<RecipeRow>.of(
+      result.right.ingredients.map(
+        (ingredient) => RecipeRow(ingredient: ingredient),
+      ),
+    );
     selected = ObservableSet<int>.of(List<int>.generate(rows.length, (i) => i));
   }
-
-  List<RecipeRow> _buildRows(List<RecipeIngredient> ings) {
-    final existing =
-        _existingList?.sections
-            .expand<ProductEntity>((s) => s.items)
-            .toList() ??
-        const <ProductEntity>[];
-    return ings.map((ing) {
-      final dup = _findDuplicate(ing, existing);
-      return RecipeRow(ingredient: ing, duplicate: dup);
-    }).toList();
-  }
-
-  ProductEntity? _findDuplicate(
-    RecipeIngredient ing,
-    List<ProductEntity> existing,
-  ) {
-    final needle = _normalize(ing.name);
-    if (needle.isEmpty) return null;
-    for (final p in existing) {
-      final hay = _normalize(p.name);
-      // Boyer-Moore либо substring в обе стороны.
-      if (boyerMooreContains(hay, needle) || boyerMooreContains(needle, hay)) {
-        return p;
-      }
-    }
-    return null;
-  }
-
-  String _normalize(String s) => s
-      .toLowerCase()
-      .replaceAll(RegExp(r'[^\p{L}\p{N}\s]', unicode: true), ' ')
-      .replaceAll(RegExp(r'\s+'), ' ')
-      .trim();
 
   /// Возвращает список ошибок (может быть пустым).
   @action
   Future<List<String>> addSelected() async {
     final errs = <String>[];
     final addUC = GetIt.I<AddItemUseCase>();
-    final updateUC = GetIt.I<UpdateItemUseCase>();
 
     for (var i = 0; i < rows.length; i++) {
-      final row = rows[i];
-      final isChecked = selected.contains(i);
-
-      if (row.hasDuplicate) {
-        // dup + checked → пропустить (уже в списке).
-        if (isChecked) continue;
-        // dup + unchecked → добавить количество к существующему через
-        // PUT /items/{iid}.
-        final dup = row.duplicate!;
-        final section = dup.section.isNotEmpty
-            ? dup.section
-            : (_sectionForItem(dup) ?? 'Разное');
-        final addQty = _parseQty(row.ingredient.quantity);
-        final res = await updateUC.call(
-          itemId: dup.id,
-          name: dup.name,
-          section: section,
-          quantity: dup.quantity + addQty,
-          unit: dup.unit,
-          priority: dup.priority,
-          urgent: dup.urgent,
-          remindEveryDays: null,
-        );
-        if (res.isLeft) errs.add(res.left.message);
-      } else {
-        // non-dup: checked → добавить, unchecked → пропустить.
-        if (!isChecked) continue;
-        final ing = row.ingredient;
-        final res = await addUC.call(
-          listId: lid,
-          name: ing.name,
-          section: 'Разное',
-          quantity: _parseQty(ing.quantity),
-          unit: ing.unit ?? '',
-          priority: 0,
-          urgent: false,
-          remindEveryDays: null,
-        );
-        if (res.isLeft) errs.add(res.left.message);
-      }
+      if (!selected.contains(i)) continue;
+      final ing = rows[i].ingredient;
+      final res = await addUC.call(
+        listId: lid,
+        name: ing.name,
+        section: 'Разное',
+        quantity: _parseQty(ing.quantity),
+        unit: ing.unit ?? '',
+        priority: 0,
+        urgent: false,
+        remindEveryDays: null,
+      );
+      if (res.isLeft) errs.add(res.left.message);
     }
     return errs;
-  }
-
-  String? _sectionForItem(ProductEntity item) {
-    final sections = _existingList?.sections;
-    if (sections == null) return null;
-    for (final s in sections) {
-      if (s.items.any((p) => p.id == item.id)) return s.name;
-    }
-    return null;
   }
 
   int _parseQty(String? raw) {

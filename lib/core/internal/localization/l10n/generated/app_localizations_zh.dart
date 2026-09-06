@@ -569,7 +569,14 @@ class AppLocalizationsZh extends AppLocalizations {
   String get recipeIngredients => '食材';
 
   @override
-  String get recipeAddToListCta => 'Add 4 商品 到 清单';
+  String recipeAddToListCta(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.compact(
+      locale: localeName,
+    );
+    final String countString = countNumberFormat.format(count);
+
+    return '添加 $countString 个商品到清单';
+  }
 
   @override
   String get recipeParseButton => '解析';

@@ -190,7 +190,7 @@ class _Body extends StatelessWidget {
             ),
             if (item.remindEveryDay != null)
               InfoRow(
-                label: context.l10n.itemDetailRemind ,
+                label: context.l10n.itemDetailRemind,
                 value: item.remindEveryDay != null && item.remindEveryDay! > 0
                     ? "${context.l10n.everyDay} ${item.remindEveryDay.toString()}"
                     : context.l10n.errorGeneric,
@@ -212,7 +212,8 @@ class _Body extends StatelessWidget {
               PoraSettingRow(
                 icon: PhosphorIconsRegular.arrowsClockwise,
                 label: context.l10n.itemDetailRemind,
-                subtitle: "${context.l10n.everyDay} ${item.remindEveryDay?.toString()}",
+                subtitle:
+                    "${context.l10n.everyDay} ${item.remindEveryDay?.toString()}",
                 trailing: const PoraToggle(value: true),
               ),
           ],

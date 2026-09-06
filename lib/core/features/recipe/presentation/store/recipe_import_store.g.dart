@@ -16,20 +16,6 @@ mixin _$RecipeImportStore on _RecipeImportStoreBase, Store {
     () => super.selectedCount,
     name: '_RecipeImportStoreBase.selectedCount',
   )).value;
-  Computed<int>? _$dupSkipCountComputed;
-
-  @override
-  int get dupSkipCount => (_$dupSkipCountComputed ??= Computed<int>(
-    () => super.dupSkipCount,
-    name: '_RecipeImportStoreBase.dupSkipCount',
-  )).value;
-  Computed<int>? _$dupForceCountComputed;
-
-  @override
-  int get dupForceCount => (_$dupForceCountComputed ??= Computed<int>(
-    () => super.dupForceCount,
-    name: '_RecipeImportStoreBase.dupForceCount',
-  )).value;
 
   late final _$urlAtom = Atom(
     name: '_RecipeImportStoreBase.url',
@@ -137,16 +123,6 @@ mixin _$RecipeImportStore on _RecipeImportStoreBase, Store {
     _$selectedAtom.reportWrite(value, super.selected, () {
       super.selected = value;
     });
-  }
-
-  late final _$loadExistingAsyncAction = AsyncAction(
-    '_RecipeImportStoreBase.loadExisting',
-    context: context,
-  );
-
-  @override
-  Future<void> loadExisting() {
-    return _$loadExistingAsyncAction.run(() => super.loadExisting());
   }
 
   late final _$parseAsyncAction = AsyncAction(
@@ -257,9 +233,7 @@ isLoading: ${isLoading},
 errorMessage: ${errorMessage},
 rows: ${rows},
 selected: ${selected},
-selectedCount: ${selectedCount},
-dupSkipCount: ${dupSkipCount},
-dupForceCount: ${dupForceCount}
+selectedCount: ${selectedCount}
     ''';
   }
 }

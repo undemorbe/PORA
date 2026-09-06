@@ -63,11 +63,16 @@ class YouTubeUrl {
 }
 
 class YouTubeRecipeParser {
-  YouTubeRecipeParser({http.Client? client, this.aiParser})
-    : _client = client ?? http.Client();
+  YouTubeRecipeParser({
+    http.Client? client,
+    this.aiParser,
+    this.transcriptFetcher,
+  }) : _client = client ?? http.Client();
 
   final http.Client _client;
   final AiRecipeParser? aiParser;
+  final Future<String> Function(String baseUrl, String languageCode)?
+  transcriptFetcher;
 
   static const _userAgent =
       'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) '
@@ -113,22 +118,13 @@ class YouTubeRecipeParser {
 
     final transcript = await _fetchTranscript(playerResponse, languageCode);
 
-    // Сначала пробуем дешёвый deterministic parser.
+    // Candidates are evidence for AI, not the final recipe. Transcript text
+    // often contains preparation steps that look like ingredients.
     final candidates = _extractIngredientCandidates(
       description: description,
       transcript: transcript,
     );
 
-    if (candidates.length >= 2) {
-      return RecipeEntity(
-        title: title ?? 'YouTube рецепт',
-        imageUrl: image,
-        sourceUrl: uri.toString(),
-        ingredients: candidates as List<RecipeIngredient>,
-      );
-    }
-
-    // Главный путь для свободной речи.
     if (aiParser != null) {
       final input = _buildAiText(
         title: title,
@@ -146,13 +142,19 @@ class YouTubeRecipeParser {
 
         if (aiResult != null && aiResult.ingredients.isNotEmpty) {
           return RecipeEntity(
-            title: aiResult.title.isNotEmpty
-                ? aiResult.title
-                : (title ?? 'YouTube рецепт'),
+            title: _safeTitle(
+              aiResult.title.isNotEmpty
+                  ? aiResult.title
+                  : (title ?? 'YouTube рецепт'),
+              fallback: title,
+            ),
             imageUrl: aiResult.imageUrl ?? image,
             servings: aiResult.servings,
+            foodEmoji: aiResult.foodEmoji ?? _fallbackFoodEmoji(title),
             sourceUrl: uri.toString(),
-            ingredients: aiResult.ingredients,
+            ingredients: aiResult.ingredients
+                .map(_capitalizeIngredient)
+                .toList(growable: false),
           );
         }
       }
@@ -162,12 +164,48 @@ class YouTubeRecipeParser {
       return RecipeEntity(
         title: title ?? 'YouTube рецепт',
         imageUrl: image,
+        foodEmoji: _fallbackFoodEmoji(title),
         sourceUrl: uri.toString(),
-        ingredients: candidates as List<RecipeIngredient>,
+        ingredients: candidates
+            .map(_capitalizeIngredient)
+            .toList(growable: false),
       );
     }
 
     return null;
+  }
+
+  String _fallbackFoodEmoji(String? title) {
+    final text = (title ?? '').toLowerCase();
+    if (text.contains('pasta') || text.contains('паст')) return '🍝';
+    if (text.contains('soup') || text.contains('суп')) return '🍲';
+    if (text.contains('pizza') || text.contains('пицц')) return '🍕';
+    if (text.contains('cake') || text.contains('торт')) return '🍰';
+    const fallback = ['🍲', '🍝', '🥗', '🍳', '🥘', '🍚'];
+    return fallback[(title ?? '').hashCode.abs() % fallback.length];
+  }
+
+  String _safeTitle(String value, {String? fallback}) {
+    final hasAmount = RegExp(
+      r'\d+(?:[.,]\d+)?\s*(?:г|кг|мл|л|шт\.?|g|kg|ml|l|pcs?|tsp|tbsp|cup)\b',
+      caseSensitive: false,
+    ).hasMatch(value);
+    return hasAmount && fallback != null && fallback.trim().isNotEmpty
+        ? fallback.trim()
+        : value.trim();
+  }
+
+  RecipeIngredient _capitalizeIngredient(RecipeIngredient ingredient) {
+    final name = ingredient.name.trim();
+    if (name.isEmpty) return ingredient;
+    final first = String.fromCharCode(name.runes.first);
+    return RecipeIngredient(
+      name: '${first.toUpperCase()}${name.substring(first.length)}',
+      quantity: ingredient.quantity,
+      unit: ingredient.unit,
+      note: ingredient.note,
+      raw: ingredient.raw,
+    );
   }
 
   Map<String, dynamic>? _extractPlayerResponse(String html) {
@@ -308,6 +346,23 @@ class YouTubeRecipeParser {
     Map<String, dynamic>? player,
     String languageCode,
   ) async {
+    if (transcriptFetcher != null) {
+      try {
+        final tracks =
+            player?['captions']?['playerCaptionsTracklistRenderer']?['captionTracks'];
+        final firstTrack = tracks is List && tracks.isNotEmpty
+            ? tracks.first
+            : null;
+        final baseUrl = firstTrack is Map ? firstTrack['baseUrl'] : null;
+        return await transcriptFetcher!(
+          baseUrl is String ? baseUrl : '',
+          languageCode,
+        );
+      } catch (_) {
+        return '';
+      }
+    }
+
     final tracks =
         player?['captions']?['playerCaptionsTracklistRenderer']?['captionTracks'];
 
@@ -438,7 +493,7 @@ class YouTubeRecipeParser {
         .trim();
   }
 
-  List<dynamic> _extractIngredientCandidates({
+  List<RecipeIngredient> _extractIngredientCandidates({
     required String description,
     required String transcript,
   }) {
@@ -458,7 +513,8 @@ class YouTubeRecipeParser {
         r'(г|кг|мл|л|шт\.?|'
         r'ст\.?\s*л\.?|ч\.?\s*л\.?|g|kg|ml|l|'
         r'tsp|tbsp|cup|cups)\s+'
-        r'[^.!?]{2,100}',
+        r'[^.!?]{2,100}?'
+        r'(?=\s+\d+(?:[.,]\d+)?\s*(?:г|кг|мл|л|шт\.?|ст\.?\s*л\.?|ч\.?\s*л\.?|g|kg|ml|l|tsp|tbsp|cup|cups)\b|[.!?]|$)',
         caseSensitive: false,
         unicode: true,
       ).allMatches(transcript);
@@ -504,6 +560,16 @@ class YouTubeRecipeParser {
       return false;
     }
 
+    if (RegExp(r'^\s*\d{1,2}:\d{2}(?::\d{2})?\b').hasMatch(text)) {
+      return false;
+    }
+
+    if (RegExp(
+      r'\b(?:intro|introduction|вступление|приготовление|готовим)\b',
+    ).hasMatch(text)) {
+      return false;
+    }
+
     return RegExp(r'\d', unicode: true).hasMatch(text);
   }
 
@@ -525,8 +591,12 @@ class YouTubeRecipeParser {
       return RecipeIngredient(name: raw, raw: raw);
     }
 
+    final name = match.namedGroup('name')?.trim() ?? raw;
     return RecipeIngredient(
-      name: match.namedGroup('name')?.trim() ?? raw,
+      name: name.replaceFirst(
+        RegExp(r'\s+(?:and|и)$', caseSensitive: false),
+        '',
+      ),
       quantity: match.namedGroup('quantity'),
       unit: _normalizeUnit(match.namedGroup('unit')),
       raw: raw,

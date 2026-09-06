@@ -105,29 +105,33 @@ class ListItemTile extends StatelessWidget {
             Column(
               mainAxisSize: .min,
               children: [
-
-                if (item.urgent) 
+                if (item.urgent)
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: PoraSpacing.xs, vertical: PoraSpacing.xs),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: PoraSpacing.xs,
+                      vertical: PoraSpacing.xs,
+                    ),
                     child: PoraPill(
                       label: context.l10n.listUrgent,
                       icon: PhosphorIconsRegular.clock,
                       background: PoraColors.primaryTintStrong,
                     ),
                   ),
-                  
-                
-                if (!isCompact && (item.remindEveryDay != null && item.remindEveryDay! > 0 )) 
+
+                if (!isCompact &&
+                    (item.remindEveryDay != null && item.remindEveryDay! > 0))
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: PoraSpacing.xs, vertical: PoraSpacing.xs),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: PoraSpacing.xs,
+                      vertical: PoraSpacing.xs,
+                    ),
                     child: PoraPill(
                       label: context.l10n.everyDay,
                       icon: PhosphorIconsRegular.bell,
                       background: PoraColors.primaryTintStrong,
                     ),
                   ),
-                ],
-              
+              ],
             ),
             if (addedBy != null)
               PoraAvatar(

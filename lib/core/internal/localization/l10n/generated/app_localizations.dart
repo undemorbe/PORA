@@ -1172,11 +1172,11 @@ abstract class AppLocalizations {
   /// **'Ingredients'**
   String get recipeIngredients;
 
-  /// recipeAddToListCta
+  /// Add the selected recipe products to the list
   ///
   /// In en, this message translates to:
-  /// **'Add 4 products to list'**
-  String get recipeAddToListCta;
+  /// **'Add {count} product to list'**
+  String recipeAddToListCta(int count);
 
   /// recipeParseButton
   ///

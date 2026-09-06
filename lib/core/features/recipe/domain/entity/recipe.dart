@@ -6,6 +6,7 @@ class RecipeEntity extends Equatable {
   final String title;
   final String? imageUrl;
   final String? servings;
+  final String? foodEmoji;
   final String sourceUrl;
   final List<RecipeIngredient> ingredients;
 
@@ -15,6 +16,7 @@ class RecipeEntity extends Equatable {
     required this.ingredients,
     this.imageUrl,
     this.servings,
+    this.foodEmoji,
   });
 
   @override
@@ -22,6 +24,7 @@ class RecipeEntity extends Equatable {
     title,
     imageUrl,
     servings,
+    foodEmoji,
     sourceUrl,
     ingredients,
   ];

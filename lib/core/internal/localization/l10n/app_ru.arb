@@ -736,9 +736,12 @@
     "@recipeIngredients": {
         "description": "recipeIngredients"
     },
-    "recipeAddToListCta": "Добавить 4 продукта в список",
+    "recipeAddToListCta": "Добавить {count} продукта в список",
     "@recipeAddToListCta": {
-        "description": "recipeAddToListCta"
+        "description": "Add the selected recipe products to the list",
+        "placeholders": {
+            "count": {"type": "int", "format":"compact"}
+        }
     },
     "recipeParseButton": "Разобрать",
     "@recipeParseButton": {

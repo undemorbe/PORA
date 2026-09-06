@@ -730,9 +730,12 @@
     "@recipeIngredients": {
         "description": "recipeIngredients"
     },
-    "recipeAddToListCta": "Add 4 produits à liste",
+    "recipeAddToListCta": "Ajouter {count} produit à la liste",
     "@recipeAddToListCta": {
-        "description": "recipeAddToListCta"
+        "description": "Add the selected recipe products to the list",
+        "placeholders": {
+            "count": {"type": "int", "format":"compact"}
+        }
     },
     "recipeParseButton": "Analyser",
     "@recipeParseButton": {

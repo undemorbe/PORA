@@ -730,9 +730,12 @@
     "@recipeIngredients": {
         "description": "recipeIngredients"
     },
-    "recipeAddToListCta": "Add 4 商品 到 清单",
+    "recipeAddToListCta": "添加 {count} 个商品到清单",
     "@recipeAddToListCta": {
-        "description": "recipeAddToListCta"
+        "description": "Add the selected recipe products to the list",
+        "placeholders": {
+            "count": {"type": "int", "format":"compact"}
+        }
     },
     "recipeParseButton": "解析",
     "@recipeParseButton": {

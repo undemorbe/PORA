@@ -578,7 +578,14 @@ class AppLocalizationsDe extends AppLocalizations {
   String get recipeIngredients => 'Zutaten';
 
   @override
-  String get recipeAddToListCta => '4 Produkte zur Liste hinzufügen';
+  String recipeAddToListCta(int count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.compact(
+      locale: localeName,
+    );
+    final String countString = countNumberFormat.format(count);
+
+    return '$countString Produkt zur Liste hinzufügen';
+  }
 
   @override
   String get recipeParseButton => 'Analysieren';
