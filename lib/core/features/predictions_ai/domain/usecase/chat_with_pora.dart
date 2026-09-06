@@ -1,5 +1,6 @@
 import 'package:pora/core/features/predictions_ai/domain/entity/ai_message.dart';
 import 'package:pora/core/features/predictions_ai/domain/prompt/chat_guard.dart';
+import 'package:pora/core/features/predictions_ai/domain/prompt/ai_context.dart';
 import 'package:pora/core/features/predictions_ai/domain/entity/ai_completion.dart';
 import 'package:pora/core/features/predictions_ai/domain/repository/ai_repository.dart';
 import 'package:pora/core/internal/errors/failure.dart';
@@ -15,6 +16,7 @@ class ChatWithPoraUseCase {
     required List<AiMessage> history,
     required String languageCode,
     String? contextSummary,
+    AiContext context = const AiContext(),
   }) {
     final recentHistory = history.length <= 12
         ? history
@@ -22,8 +24,11 @@ class ChatWithPoraUseCase {
     final guarded = guardedMessages(
       recentHistory,
       languageCode: languageCode,
-      contextSummary: contextSummary,
+      contextSummary: [
+        contextSummary,
+        context.summary,
+      ].whereType<String>().where((value) => value.trim().isNotEmpty).join(' '),
     );
-    return repository.chat(messages: guarded, maxTokens: 900);
+    return repository.chat(messages: guarded, maxTokens: 3500);
   }
 }

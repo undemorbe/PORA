@@ -65,7 +65,7 @@ abstract class ApiClient {
   });
 
   @GET('/user/statistics/get_brief')
-  Future<BriefProductModelList> getUserBrief();
+  Future<BriefProductModelList?> getUserBrief();
 
   //! Insights / Statistics
   @GET('/user/statistics/login_times')

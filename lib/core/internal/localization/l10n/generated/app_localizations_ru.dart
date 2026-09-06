@@ -1061,6 +1061,21 @@ class AppLocalizationsRu extends AppLocalizations {
   String get predictionsSectionOften => 'Часто покупаете';
 
   @override
+  String get predictionsSectionAiSuggests => 'ИИ предлагает';
+
+  @override
+  String get predictionsAiSuggestionsTitle => 'Продукты и рецепты для вас';
+
+  @override
+  String get predictionsAiSuggestionsTopic => 'ваши предпочтения и покупки';
+
+  @override
+  String get refresh => 'Обновить';
+
+  @override
+  String get predictionsOftenEmpty => 'Пока недостаточно данных';
+
+  @override
   String get predictionsAskPora => 'Спросить PORA';
 
   @override
@@ -1165,6 +1180,18 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get chatSample10 => 'Чем заменить сливочное масло в этом рецепте?';
+
+  @override
+  String get chatSample11 => 'Составь три ужина из того, что уже есть';
+
+  @override
+  String get chatSample12 => 'Что приготовить из остатков за 15 минут?';
+
+  @override
+  String get chatSample13 => 'Предложи рецепт без продуктов-аллергенов';
+
+  @override
+  String get chatSample14 => 'Как сделать это блюдо дешевле?';
 
   @override
   String get chatTyping => 'PORA печатает…';

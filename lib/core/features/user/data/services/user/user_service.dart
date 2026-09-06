@@ -8,6 +8,9 @@ import 'package:pora/core/features/user/domain/repository/user/user_repository.d
 import 'package:pora/core/internal/errors/failure.dart';
 import 'package:pora/core/internal/errors/success.dart';
 import 'package:pora/core/internal/extensions/either.dart';
+import 'package:pora/core/internal/cache/hive_json_cache.dart';
+
+const _profileCacheKey = 'profile:user-me-v1';
 
 class UserService implements UserRepository {
   const UserService(this.remoteDataSource);
@@ -17,12 +20,27 @@ class UserService implements UserRepository {
   Future<Either<Failure, UserEntity>> getUser() async {
     try {
       final model = await remoteDataSource.getUser();
+      await HiveJsonCache.put(_profileCacheKey, model.toJson());
       return Right(model.toEntity());
     } on DioException catch (e) {
-      return Left(_mapDioError(e));
+      return _cachedUserOr(_mapDioError(e));
     } catch (_) {
-      return Left(const ServerFailure('Unknown error'));
+      return _cachedUserOr(const ServerFailure('Unknown error'));
     }
+  }
+
+  Future<Either<Failure, UserEntity>> _cachedUserOr(Failure failure) async {
+    final raw = await HiveJsonCache.read(_profileCacheKey);
+    if (raw is Map) {
+      try {
+        return Right(
+          UserModel.fromJson(Map<String, dynamic>.from(raw)).toEntity(),
+        );
+      } catch (_) {
+        // Broken cache is treated as a cache miss.
+      }
+    }
+    return Left(failure);
   }
 
   @override

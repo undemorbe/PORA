@@ -2108,6 +2108,36 @@ abstract class AppLocalizations {
   /// **'You buy often'**
   String get predictionsSectionOften;
 
+  /// section title
+  ///
+  /// In en, this message translates to:
+  /// **'AI suggests'**
+  String get predictionsSectionAiSuggests;
+
+  /// AI suggestions card title
+  ///
+  /// In en, this message translates to:
+  /// **'Products and recipes for you'**
+  String get predictionsAiSuggestionsTitle;
+
+  /// AI suggestions topic
+  ///
+  /// In en, this message translates to:
+  /// **'your preferences and purchases'**
+  String get predictionsAiSuggestionsTopic;
+
+  /// refresh action
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh'**
+  String get refresh;
+
+  /// empty frequent products
+  ///
+  /// In en, this message translates to:
+  /// **'Not enough data yet'**
+  String get predictionsOftenEmpty;
+
   /// FAB label
   ///
   /// In en, this message translates to:
@@ -2299,6 +2329,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'What can replace butter in this recipe?'**
   String get chatSample10;
+
+  /// sample question
+  ///
+  /// In en, this message translates to:
+  /// **'Plan three dinners from what I already have'**
+  String get chatSample11;
+
+  /// sample question
+  ///
+  /// In en, this message translates to:
+  /// **'What can I cook with leftovers in 15 minutes?'**
+  String get chatSample12;
+
+  /// sample question
+  ///
+  /// In en, this message translates to:
+  /// **'Suggest an allergy-safe recipe from my list'**
+  String get chatSample13;
+
+  /// sample question
+  ///
+  /// In en, this message translates to:
+  /// **'How can I make this meal cheaper?'**
+  String get chatSample14;
 
   /// typing indicator
   ///

@@ -3,9 +3,9 @@ import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/core/features/predictions_ai/domain/entity/prediction.dart';
 import 'package:pora/core/internal/widgets/press_scale.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
-import 'package:pora/core/internal/theme/additional_constants.dart';
-import 'package:pora/core/internal/theme/app_text_styles.dart';
-import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
+import 'package:pora/core/internal/theme/constant/additional_constants.dart';
+import 'package:pora/core/internal/theme/text/app_text_styles.dart';
+import 'package:pora/core/internal/theme/themes_colors/light_colors/app_colors.dart';
 import 'package:pora/core/internal/widgets/pora_card.dart';
 
 /// Карточка предсказания: плитка-эмодзи · название/мета · «＋ В список» / «Не надо».

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
+import 'package:pora/core/internal/theme/themes_colors/light_colors/app_colors.dart';
 
 /// Виртуальный «палец пользователя» — кружок с брендовой каймой.
 /// Позиционируется внутри `Stack` через [Positioned] (Left/top от [position]).

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pora/core/internal/theme/app_text_styles.dart';
+import 'package:pora/core/internal/theme/text/app_text_styles.dart';
 import 'package:pora/core/internal/theme/context_colors.dart';
 
 /// Крошечный тег «demo» рядом с моковыми числами. Честнее чем

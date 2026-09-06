@@ -6,9 +6,9 @@ import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/core/features/splash/presentation/store/splash_store.dart';
 import 'package:pora/core/internal/bootstrap/app_bootstrap.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
-import 'package:pora/core/internal/theme/app_text_styles.dart';
+import 'package:pora/core/internal/theme/text/app_text_styles.dart';
 import 'package:pora/core/internal/theme/context_colors.dart';
-import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
+import 'package:pora/core/internal/theme/themes_colors/light_colors/app_colors.dart';
 
 /// Splash: тележка въезжает слева → буквы «Pora» появляются → продукты
 /// падают с bounce в тележку → тележка уезжает вправо → навигация.

@@ -81,12 +81,14 @@ mixin _$AiChatStore on _AiChatStoreBase, Store {
     required String text,
     required String languageCode,
     String? contextSummary,
+    AiContext context = const AiContext(),
   }) {
     return _$sendAsyncAction.run(
       () => super.send(
         text: text,
         languageCode: languageCode,
         contextSummary: contextSummary,
+        context: context,
       ),
     );
   }

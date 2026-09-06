@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pora/core/internal/theme/additional_constants.dart';
+import 'package:pora/core/internal/theme/constant/additional_constants.dart';
 import 'package:pora/core/internal/widgets/pora_card.dart';
 
 /// Карточка со строками, разделёнными тонкими линиями (настройки, детали товара).

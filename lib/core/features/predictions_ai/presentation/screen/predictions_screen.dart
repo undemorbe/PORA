@@ -5,7 +5,6 @@ import 'package:get_it/get_it.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/core/features/insights/domain/entity/popular_product.dart';
 import 'package:pora/core/features/insights/presentation/store/statistics_store.dart';
-import 'package:pora/core/features/insights/presentation/widgets/frequency_row.dart';
 import 'package:pora/core/features/predictions_ai/domain/entity/prediction.dart';
 import 'package:pora/core/features/predictions_ai/presentation/widgets/ai_tip_of_day_card.dart';
 import 'package:pora/core/internal/widgets/fade_slide_in.dart';
@@ -16,11 +15,10 @@ import 'package:pora/core/features/predictions_ai/presentation/widgets/predictio
 import 'package:pora/core/features/predictions_ai/presentation/widgets/section_header.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
 import 'package:pora/core/internal/router/app_router.gr.dart';
-import 'package:pora/core/internal/theme/additional_constants.dart';
-import 'package:pora/core/internal/theme/app_text_styles.dart';
+import 'package:pora/core/internal/theme/constant/additional_constants.dart';
+import 'package:pora/core/internal/theme/text/app_text_styles.dart';
 import 'package:pora/core/internal/theme/context_colors.dart';
-import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
-import 'package:pora/core/internal/widgets/pora_rows_card.dart';
+import 'package:pora/core/internal/theme/themes_colors/light_colors/app_colors.dart';
 
 @RoutePage()
 class PredictionsPage extends StatefulWidget {
@@ -111,32 +109,16 @@ class _PredictionsPageState extends State<PredictionsPage> {
                   errorMessage: _store.popularError,
                   onDismiss: _dismiss,
                 ),
-                const SizedBox(height: PoraSpacing.lg),
-                FadeSlideIn(
-                  delay: const Duration(milliseconds: 520),
-                  child: SectionHeader(
-                    title: l.predictionsSectionOften,
-                    trailing: _InsightsLink(
-                      onTap: () => context.router.push(const InsightsRoute()),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: PoraSpacing.md),
-                FadeSlideIn(
-                  delay: const Duration(milliseconds: 580),
-                  child: PoraRowsCard(
-                    children: _store.popularProducts
-                        .take(3)
-                        .map(
-                          (product) => FrequencyRow(
-                            name: product.name,
-                            sub: _frequencyLabel(context, product),
-                            pct: _relativeQuantity(product),
-                          ),
-                        )
-                        .toList(),
-                  ),
-                ),
+                // const SizedBox(height: PoraSpacing.xl),
+                // FadeSlideIn(
+                //   delay: const Duration(milliseconds: 520),
+                //   child: SectionHeader(title: l.predictionsSectionAiSuggests),
+                // ),
+                // const SizedBox(height: PoraSpacing.md),
+                // const FadeSlideIn(
+                //   delay: Duration(milliseconds: 580),
+                //   child: AiSuggestionsCard(),
+                // ),
               ],
             ),
           ),
@@ -163,19 +145,6 @@ class _PredictionsPageState extends State<PredictionsPage> {
 
   void _dismiss(String name) {
     setState(() => _dismissed.add(name));
-  }
-
-  String _frequencyLabel(BuildContext context, PopularProductEntity product) {
-    final days = product.howOftenEnds;
-    if (days > 0) return context.l10n.insightsFreqEvery(days);
-    return '×${product.quantity}';
-  }
-
-  double _relativeQuantity(PopularProductEntity product) {
-    final top = _store.popularProducts.isEmpty
-        ? 0
-        : _store.popularProducts.first.quantity;
-    return top == 0 ? 0 : product.quantity / top;
   }
 }
 
@@ -328,36 +297,3 @@ class _InsightsIconBtn extends StatelessWidget {
   }
 }
 
-class _InsightsLink extends StatelessWidget {
-  const _InsightsLink({required this.onTap});
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      behavior: HitTestBehavior.opaque,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 6),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              context.l10n.seeAll,
-              style: PoraText.small.copyWith(
-                color: PoraColors.primary,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            const SizedBox(width: 2),
-            const Icon(
-              PhosphorIconsRegular.caretRight,
-              size: 14,
-              color: PoraColors.primary,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}

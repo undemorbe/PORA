@@ -5,10 +5,10 @@ import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/core/features/predictions_ai/presentation/store/tip_topics_store.dart';
 import 'package:pora/core/features/predictions_ai/presentation/topic_resolver.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
-import 'package:pora/core/internal/theme/additional_constants.dart';
-import 'package:pora/core/internal/theme/app_text_styles.dart';
+import 'package:pora/core/internal/theme/constant/additional_constants.dart';
+import 'package:pora/core/internal/theme/text/app_text_styles.dart';
 import 'package:pora/core/internal/theme/context_colors.dart';
-import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
+import 'package:pora/core/internal/theme/themes_colors/light_colors/app_colors.dart';
 import 'package:pora/core/internal/widgets/press_scale.dart';
 
 /// Полный редактор списка тем совета — для встраивания в advanced settings.

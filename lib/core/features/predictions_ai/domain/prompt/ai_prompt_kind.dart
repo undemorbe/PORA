@@ -4,18 +4,33 @@ import 'package:pora/core/features/predictions_ai/domain/entity/ai_message.dart'
 /// system-prompt + шаблон user-prompt.
 ///
 /// UI-строки (label/hint) — в `AiPromptPresentation` (presentation-слой).
-enum AiPromptKind { recipe, tip, cookFromIngredients, substitute, shoppingList }
+enum AiPromptKind {
+  recipe,
+  tip,
+  suggestions,
+  cookFromIngredients,
+  substitute,
+  shoppingList,
+}
 
 extension AiPromptKindMessages on AiPromptKind {
   /// Собирает список сообщений под запрос пользователя.
   /// [languageCode] — ISO 639-1 код (`ru`/`en`/…) для явного указания
   /// языка ответа модели.
-  List<AiMessage> messagesFor(String query, {required String languageCode}) {
+  List<AiMessage> messagesFor(
+    String query, {
+    required String languageCode,
+    String? contextSummary,
+  }) {
     final systemBase =
         'You are PORA — a warm, practical cooking and grocery assistant. '
         'Always answer in the language identified by ISO code "$languageCode". '
         'Infer the user intent, state assumptions briefly, and avoid generic filler. '
-        'Write compactly, no markdown headings, no emojis. Max ~250 words.';
+        'Write compactly, no markdown headings, no emojis. Max ~120 words. '
+        'Never suggest ingredients listed as forbidden in the context.';
+    final context = contextSummary?.trim().isNotEmpty == true
+        ? '\nUser context: $contextSummary'
+        : '';
     return switch (this) {
       AiPromptKind.recipe => [
         AiMessage.system(
@@ -27,11 +42,20 @@ extension AiPromptKindMessages on AiPromptKind {
       ],
       AiPromptKind.tip => [
         AiMessage.system(
-          '$systemBase Give one concrete, non-obvious tip in 1-3 sentences. '
+          '$systemBase Give one concrete, non-obvious tip in 1-2 sentences. '
           'Choose a different angle when the topic is broad: preparation, '
-          'heat, seasoning, storage, texture, or saving time. No intro.',
+          'heat, seasoning, storage, texture, or saving time. No intro.$context',
         ),
         AiMessage.user('Tip about: $query'),
+      ],
+      AiPromptKind.suggestions => [
+        AiMessage.system(
+          '$systemBase Suggest 2-3 personalized options using the user context: '
+          'a product to buy or use, and a recipe idea. Format each as one short '
+          'line with type, name, and reason. Do not recommend forbidden ingredients.'
+          '$context',
+        ),
+        AiMessage.user('Suggest products or recipes for: $query'),
       ],
       AiPromptKind.cookFromIngredients => [
         AiMessage.system(

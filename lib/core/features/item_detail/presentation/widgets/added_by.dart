@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pora/core/features/families/domain/entity/member.dart';
 import 'package:pora/core/internal/extensions/color_parser.dart';
-import 'package:pora/core/internal/theme/additional_constants.dart';
-import 'package:pora/core/internal/theme/app_text_styles.dart';
+import 'package:pora/core/internal/theme/constant/additional_constants.dart';
+import 'package:pora/core/internal/theme/text/app_text_styles.dart';
 import 'package:pora/core/internal/widgets/pora_avatar.dart';
 
 /// Аватар + имя добавившего.

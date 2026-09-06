@@ -8,7 +8,7 @@ import 'package:pora/core/features/families/presentation/widgets/family_card.dar
 import 'package:get_it/get_it.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
 import 'package:pora/core/internal/router/app_router.gr.dart';
-import 'package:pora/core/internal/theme/additional_constants.dart';
+import 'package:pora/core/internal/theme/constant/additional_constants.dart';
 import 'package:pora/core/internal/widgets/pora_circle_progress.dart';
 import 'package:pora/core/internal/widgets/pora_snackbar.dart';
 

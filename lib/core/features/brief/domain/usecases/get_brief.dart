@@ -5,7 +5,7 @@ class GetBriefUseCase {
   final BriefRepository briefRepository;
 
   const GetBriefUseCase({required this.briefRepository});
-  Future<BriefProductListEntity> call() async {
+  Future<BriefProductListEntity?> call() async {
     return await briefRepository.getBriefData();
   }
 }

@@ -94,6 +94,16 @@ abstract class _StatisticsStoreBase with Store {
   Future<void> loadLoginTimes() async {
     isLoginsLoading = true;
     loginsError = null;
+    final cached = await HiveJsonCache.read(_loginsCacheKey);
+    if (cached is List) {
+      logins = ObservableList.of(
+        cached
+            .whereType<String>()
+            .map(DateTime.tryParse)
+            .whereType<DateTime>()
+            .toList(),
+      );
+    }
     final res = await loginTimesUseCase();
     if (res.isRight) {
       logins = ObservableList.of(res.right);
@@ -102,17 +112,7 @@ abstract class _StatisticsStoreBase with Store {
         res.right.map((d) => d.toIso8601String()).toList(),
       );
     } else {
-      // Fallback — читаем cache.
-      final cached = await HiveJsonCache.read(_loginsCacheKey);
-      if (cached is List) {
-        logins = ObservableList.of(
-          cached
-              .whereType<String>()
-              .map(DateTime.tryParse)
-              .whereType<DateTime>()
-              .toList(),
-        );
-      } else {
+      if (logins.isEmpty) {
         loginsError = res.left.message;
       }
     }
@@ -123,6 +123,12 @@ abstract class _StatisticsStoreBase with Store {
   Future<void> loadAllProducts() async {
     isProductsLoading = true;
     productsError = null;
+    final cached = await HiveJsonCache.read(_productsCacheKey);
+    if (cached is List) {
+      allProducts = ObservableList.of(
+        cached.whereType<Map>().map(_productFromJson).whereType<ProductModel>(),
+      );
+    }
     final res = await allProductsUseCase();
     if (res.isRight) {
       allProducts = ObservableList.of(res.right);
@@ -131,15 +137,6 @@ abstract class _StatisticsStoreBase with Store {
         res.right.map(_productToJson).toList(),
       );
     } else {
-      final cached = await HiveJsonCache.read(_productsCacheKey);
-      if (cached is List) {
-        allProducts = ObservableList.of(
-          cached
-              .whereType<Map>()
-              .map(_productFromJson)
-              .whereType<ProductModel>(),
-        );
-      }
       if (allProducts.isEmpty) productsError = res.left.message;
     }
     isProductsLoading = false;
@@ -149,6 +146,12 @@ abstract class _StatisticsStoreBase with Store {
   Future<void> loadPopularProducts() async {
     isPopularLoading = true;
     popularError = null;
+    final cached = await HiveJsonCache.read(_popularCacheKey);
+    if (cached is List) {
+      popularProducts = ObservableList.of(
+        cached.whereType<Map>().map(_popularFromJson).toList(),
+      );
+    }
     if (_popularEndpointGone) {
       popularProducts = ObservableList.of(_popularFromProducts(allProducts));
       isPopularLoading = false;
@@ -172,19 +175,6 @@ abstract class _StatisticsStoreBase with Store {
             .toList(),
       );
     } else {
-      final cached = await HiveJsonCache.read(_popularCacheKey);
-      if (cached is List) {
-        popularProducts = ObservableList.of(
-          cached.whereType<Map>().map((m) {
-            return PopularProductEntity(
-              name: (m['name'] as String?) ?? '',
-              quantity: (m['quantity'] as num?)?.toInt() ?? 0,
-              howOftenEnds: (m['how-often-ends'] as num?)?.toInt() ?? 0,
-              currentDay: (m['current-day'] as num?)?.toDouble() ?? 0,
-            );
-          }).toList(),
-        );
-      }
       if (popularProducts.isEmpty && allProducts.isNotEmpty) {
         popularProducts = ObservableList.of(_popularFromProducts(allProducts));
       }
@@ -219,6 +209,15 @@ abstract class _StatisticsStoreBase with Store {
     } catch (_) {
       return null;
     }
+  }
+
+  PopularProductEntity _popularFromJson(Map<dynamic, dynamic> json) {
+    return PopularProductEntity(
+      name: (json['name'] as String?) ?? '',
+      quantity: (json['quantity'] as num?)?.toInt() ?? 0,
+      howOftenEnds: (json['how-often-ends'] as num?)?.toInt() ?? 0,
+      currentDay: (json['current-day'] as num?)?.toDouble() ?? 0,
+    );
   }
 
   List<PopularProductEntity> _popularFromProducts(

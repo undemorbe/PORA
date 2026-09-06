@@ -65,14 +65,33 @@ class InjectionContainer {
     _getIt.registerLazySingleton<AiRemote>(
       () => AiRemoteImpl(
         client: _getIt<OpenRouterApiClient>(),
-        model: dotenv.maybeGet('AI_MODEL') ?? '',
+        model:
+            dotenv.maybeGet('AI_CHAT_MODEL') ??
+            dotenv.maybeGet('AI_MODEL') ??
+            '',
       ),
+    );
+    _getIt.registerLazySingleton<AiRemote>(
+      () => AiRemoteImpl(
+        client: _getIt<OpenRouterApiClient>(),
+        model:
+            dotenv.maybeGet('AI_TIP_MODEL') ??
+            dotenv.maybeGet('AI_MODEL') ??
+            '',
+      ),
+      instanceName: 'tips',
     );
     _getIt.registerLazySingleton<AiRepository>(
       () => AiService(remote: _getIt<AiRemote>()),
     );
+    _getIt.registerLazySingleton<AiRepository>(
+      () => AiService(remote: _getIt<AiRemote>(instanceName: 'tips')),
+      instanceName: 'tips',
+    );
     _getIt.registerFactory<GenerateTipUseCase>(
-      () => GenerateTipUseCase(repository: _getIt<AiRepository>()),
+      () => GenerateTipUseCase(
+        repository: _getIt<AiRepository>(instanceName: 'tips'),
+      ),
     );
     _getIt.registerFactory<ChatWithPoraUseCase>(
       () => ChatWithPoraUseCase(repository: _getIt<AiRepository>()),

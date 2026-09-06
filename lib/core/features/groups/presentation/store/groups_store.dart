@@ -41,6 +41,13 @@ abstract class _GroupsStoreBase with Store {
     isLoading = true;
     errorMessage = null;
 
+    // Render the last known state immediately, then refresh it from network.
+    final cachedAtStart = await _readSnapshot();
+    if (cachedAtStart.isNotEmpty) {
+      groups = ObservableList<GroupEntity>.of(cachedAtStart);
+      usingCache = true;
+    }
+
     final aggregated = <GroupEntity>[];
     var anyLive = false;
 

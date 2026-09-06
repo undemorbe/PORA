@@ -3,10 +3,10 @@ import 'package:pora/core/features/families/domain/entity/member.dart';
 import 'package:pora/core/features/item_detail/presentation/store/item_details_store.dart';
 import 'package:pora/core/internal/extensions/color_parser.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
-import 'package:pora/core/internal/theme/additional_constants.dart';
-import 'package:pora/core/internal/theme/app_text_styles.dart';
+import 'package:pora/core/internal/theme/constant/additional_constants.dart';
+import 'package:pora/core/internal/theme/text/app_text_styles.dart';
 import 'package:pora/core/internal/theme/context_colors.dart';
-import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
+import 'package:pora/core/internal/theme/themes_colors/light_colors/app_colors.dart';
 import 'package:pora/core/internal/widgets/pora_avatar.dart';
 
 /// Bottom-sheet отправки уведомления о товаре.

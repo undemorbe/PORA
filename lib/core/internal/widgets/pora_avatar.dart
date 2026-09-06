@@ -1,11 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:pora/core/internal/logging/logger.dart';
-import 'package:pora/core/internal/theme/additional_constants.dart';
-import 'package:pora/core/internal/theme/app_text_styles.dart';
-import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
+import 'package:pora/core/internal/theme/constant/additional_constants.dart';
+import 'package:pora/core/internal/theme/text/app_text_styles.dart';
+import 'package:pora/core/internal/theme/themes_colors/light_colors/app_colors.dart';
 
-/// Круглый аватар: сетевое фото → fallback инициал на цветном фоне.
-class PoraAvatar extends StatelessWidget {
+class PoraAvatar extends StatefulWidget {
   const PoraAvatar({
     super.key,
     required this.initial,
@@ -20,72 +20,111 @@ class PoraAvatar extends StatelessWidget {
   final double size;
   final String? imageUrl;
 
-  /// Обводка (для перекрывающихся аватаров — цвет фона).
   final Color? ring;
 
   @override
+  State<PoraAvatar> createState() => _PoraAvatarState();
+}
+
+class _PoraAvatarState extends State<PoraAvatar> {
+  String? _parsedImageUrl;
+  Future<bool>? _imageValidation;
+
+  @override
+  void initState() {
+    super.initState();
+    _validateImageUrl();
+  }
+
+  @override
+  void didUpdateWidget(covariant PoraAvatar oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.imageUrl != widget.imageUrl) {
+      _validateImageUrl();
+    }
+  }
+
+  void _validateImageUrl() {
+    final imageUrl = widget.imageUrl;
+    _parsedImageUrl = imageUrl;
+    _imageValidation = imageUrl == null || imageUrl.isEmpty
+        ? Future.value(false)
+        : compute(_hasAbsoluteImagePath, imageUrl);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final hasImage =
-        imageUrl != null &&
-        imageUrl!.isNotEmpty &&
-        Uri.tryParse(imageUrl!)?.hasAbsolutePath == true;
+    final imageUrl = widget.imageUrl;
 
     final fallback = Container(
-      width: size,
-      height: size,
+      width: widget.size,
+      height: widget.size,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: color ?? PoraColors.primary,
+        color: widget.color ?? PoraColors.primary,
         shape: BoxShape.circle,
       ),
       child: Text(
-        initial,
+        widget.initial,
         style: TextStyle(
           fontFamily: kPoraFontFamily,
           fontWeight: FontWeight.w700,
-          fontSize: size * 0.42,
+          fontSize: widget.size * 0.42,
           color: PoraColors.inkInverse,
         ),
       ),
     );
 
-    // Border живёт снаружи ClipOval — иначе обрезается.
     Widget wrap(Widget child) {
-      if (ring == null) return child;
+      if (widget.ring == null) return child;
       return Container(
-        width: size,
-        height: size,
+        width: widget.size,
+        height: widget.size,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          border: Border.all(color: ring!, width: 2),
+          border: Border.all(color: widget.ring!, width: 2),
         ),
         child: Padding(padding: const EdgeInsets.all(2), child: child),
       );
     }
 
-    if (!hasImage) return wrap(fallback);
+    return FutureBuilder<bool>(
+      future: _imageValidation,
+      builder: (context, snapshot) {
+        final hasImage =
+            snapshot.connectionState == ConnectionState.done &&
+            snapshot.data == true &&
+            _parsedImageUrl == imageUrl;
+        if (!hasImage) return wrap(fallback);
 
-    return wrap(
-      ClipOval(
-        child: Image.network(
-          imageUrl!,
-          width: size,
-          height: size,
-          fit: BoxFit.cover,
-          errorBuilder: (context, error, stack) {
-            Logger.talker.warning('Avatar image failed: $imageUrl → $error');
-            return fallback;
-          },
-          loadingBuilder: (context, child, progress) {
-            if (progress == null) return child;
-            // Плавное появление: fade fallback → image.
-            return AnimatedSwitcher(
-              duration: const Duration(milliseconds: 90),
-              child: fallback,
-            );
-          },
-        ),
-      ),
+        return wrap(
+          ClipOval(
+            child: Image.network(
+              imageUrl!,
+              width: widget.size,
+              height: widget.size,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stack) {
+                Logger.talker.warning(
+                  'Avatar image failed: $imageUrl → $error',
+                );
+                return fallback;
+              },
+              loadingBuilder: (context, child, progress) {
+                if (progress == null) return child;
+                return AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 90),
+                  child: fallback,
+                );
+              },
+            ),
+          ),
+        );
+      },
     );
   }
+}
+
+bool _hasAbsoluteImagePath(String imageUrl) {
+  return Uri.tryParse(imageUrl)?.hasAbsolutePath == true;
 }

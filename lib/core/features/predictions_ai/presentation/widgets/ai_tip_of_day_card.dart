@@ -7,13 +7,16 @@ import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/core/features/predictions_ai/domain/tip/fallback_tips.dart';
 import 'package:pora/core/features/predictions_ai/domain/tip/tip_topic.dart';
 import 'package:pora/core/features/predictions_ai/domain/usecase/generate_tip.dart';
+import 'package:pora/core/features/predictions_ai/domain/prompt/ai_context.dart';
+import 'package:pora/core/features/brief/domain/usecases/get_brief.dart';
+import 'package:pora/core/features/insights/presentation/store/statistics_store.dart';
 import 'package:pora/core/features/predictions_ai/presentation/store/ai_tip_store.dart';
 import 'package:pora/core/features/predictions_ai/presentation/store/tip_topics_store.dart';
 import 'package:pora/core/features/predictions_ai/presentation/topic_resolver.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
-import 'package:pora/core/internal/theme/additional_constants.dart';
-import 'package:pora/core/internal/theme/app_text_styles.dart';
-import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
+import 'package:pora/core/internal/theme/constant/additional_constants.dart';
+import 'package:pora/core/internal/theme/text/app_text_styles.dart';
+import 'package:pora/core/internal/theme/themes_colors/light_colors/app_colors.dart';
 
 class AiTipOfDayCard extends StatefulWidget {
   const AiTipOfDayCard({super.key, this.topicKey});
@@ -27,6 +30,7 @@ class AiTipOfDayCard extends StatefulWidget {
 class _AiTipOfDayCardState extends State<AiTipOfDayCard> {
   final AiTipStore _store = AiTipStore(useCase: GetIt.I<GenerateTipUseCase>());
   final TipTopicsStore _topics = GetIt.I<TipTopicsStore>();
+  final StatisticsStore _statistics = GetIt.I<StatisticsStore>();
   final math.Random _rng = math.Random();
 
   bool _bootstrapped = false;
@@ -61,6 +65,15 @@ class _AiTipOfDayCardState extends State<AiTipOfDayCard> {
       topic: _currentTopicText!,
       languageCode: locale,
       fallbackList: FallbackTips.all(l),
+      context: await _loadAiContext(),
+    );
+  }
+
+  Future<AiContext> _loadAiContext() async {
+    final brief = await GetIt.I<GetBriefUseCase>().call();
+    return AiContext(
+      allProducts: _statistics.allProducts.toList(),
+      briefProducts: brief?.products ?? const [],
     );
   }
 

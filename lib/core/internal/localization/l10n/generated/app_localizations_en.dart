@@ -1060,6 +1060,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get predictionsSectionOften => 'You buy often';
 
   @override
+  String get predictionsSectionAiSuggests => 'AI suggests';
+
+  @override
+  String get predictionsAiSuggestionsTitle => 'Products and recipes for you';
+
+  @override
+  String get predictionsAiSuggestionsTopic => 'your preferences and purchases';
+
+  @override
+  String get refresh => 'Refresh';
+
+  @override
+  String get predictionsOftenEmpty => 'Not enough data yet';
+
+  @override
   String get predictionsAskPora => 'Ask PORA';
 
   @override
@@ -1164,6 +1179,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chatSample10 => 'What can replace butter in this recipe?';
+
+  @override
+  String get chatSample11 => 'Plan three dinners from what I already have';
+
+  @override
+  String get chatSample12 => 'What can I cook with leftovers in 15 minutes?';
+
+  @override
+  String get chatSample13 => 'Suggest an allergy-safe recipe from my list';
+
+  @override
+  String get chatSample14 => 'How can I make this meal cheaper?';
 
   @override
   String get chatTyping => 'PORA is typing…';

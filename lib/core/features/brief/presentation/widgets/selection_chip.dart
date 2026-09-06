@@ -3,10 +3,10 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pora/core/features/brief/domain/entity/brief_product.dart';
 import 'package:pora/core/features/brief/presentation/controller/brief_store.dart';
 import 'package:pora/core/internal/widgets/deletion_dialogue.dart';
-import 'package:pora/core/internal/theme/additional_constants.dart';
-import 'package:pora/core/internal/theme/app_text_styles.dart';
+import 'package:pora/core/internal/theme/constant/additional_constants.dart';
+import 'package:pora/core/internal/theme/text/app_text_styles.dart';
 import 'package:pora/core/internal/theme/context_colors.dart';
-import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
+import 'package:pora/core/internal/theme/themes_colors/light_colors/app_colors.dart';
 
 class PoraSelectionChip extends StatefulWidget {
   const PoraSelectionChip({

@@ -105,6 +105,23 @@ mixin _$AuthStore on _AuthStoreBase, Store {
     );
   }
 
+  late final _$_AuthStoreBaseActionController = ActionController(
+    name: '_AuthStoreBase',
+    context: context,
+  );
+
+  @override
+  bool isValid({required String text}) {
+    final _$actionInfo = _$_AuthStoreBaseActionController.startAction(
+      name: '_AuthStoreBase.isValid',
+    );
+    try {
+      return super.isValid(text: text);
+    } finally {
+      _$_AuthStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''

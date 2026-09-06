@@ -264,12 +264,12 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<BriefProductModelList> getUserBrief() async {
+  Future<BriefProductModelList?> getUserBrief() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<BriefProductModelList>(
+    final _options = _setStreamType<BriefProductModelList?>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -279,10 +279,12 @@ class _ApiClient implements ApiClient {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late BriefProductModelList _value;
+    final _result = await _dio.fetch<Map<String, dynamic>?>(_options);
+    late BriefProductModelList? _value;
     try {
-      _value = BriefProductModelList.fromJson(_result.data!);
+      _value = _result.data == null
+          ? null
+          : BriefProductModelList.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
       rethrow;

@@ -57,8 +57,10 @@ abstract class _BriefStoreBase with Store {
   }
 
   Future<void> getBrief() async {
+  
     final repo = GetIt.I<GetBriefUseCase>();
     final briefList = await repo.call();
-    _selectedProducts.addAll(briefList.products);
+    _selectedProducts.addAll(briefList?.products ?? []);
+  
   }
 }

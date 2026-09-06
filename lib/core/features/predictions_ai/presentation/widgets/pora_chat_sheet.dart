@@ -5,6 +5,9 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/core/features/predictions_ai/domain/usecase/chat_with_pora.dart';
+import 'package:pora/core/features/predictions_ai/domain/prompt/ai_context.dart';
+import 'package:pora/core/features/brief/domain/entity/brief_product.dart';
+import 'package:pora/core/features/brief/domain/usecases/get_brief.dart';
 import 'package:pora/core/features/predictions_ai/presentation/store/ai_chat_store.dart';
 import 'package:pora/core/features/recipe/domain/entity/recipe.dart';
 import 'package:pora/core/features/recipe/domain/recipe_creator.dart';
@@ -15,10 +18,10 @@ import 'package:pora/core/features/predictions_ai/presentation/widgets/chat_mess
 import 'package:pora/core/features/predictions_ai/presentation/widgets/pora_hero_tags.dart';
 import 'package:pora/core/features/insights/presentation/store/statistics_store.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
-import 'package:pora/core/internal/theme/additional_constants.dart';
-import 'package:pora/core/internal/theme/app_text_styles.dart';
+import 'package:pora/core/internal/theme/constant/additional_constants.dart';
+import 'package:pora/core/internal/theme/text/app_text_styles.dart';
 import 'package:pora/core/internal/theme/context_colors.dart';
-import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
+import 'package:pora/core/internal/theme/themes_colors/light_colors/app_colors.dart';
 
 /// Модальный чат с PORA. Никакой persist-памяти — история живёт только пока
 /// открыт лист. Каждый запрос идёт с system-prompt'ом из `chat_guard`.
@@ -44,6 +47,7 @@ class _PoraChatSheetState extends State<PoraChatSheet> {
   final _input = TextEditingController();
   final _scroll = ScrollController();
   List<String> _sampleQuestions = const [];
+  List<BriefProductEntity> _briefProducts = const [];
 
   @override
   void didChangeDependencies() {
@@ -62,10 +66,20 @@ class _PoraChatSheetState extends State<PoraChatSheet> {
             l.chatSample8,
             l.chatSample9,
             l.chatSample10,
+            l.chatSample11,
+            l.chatSample12,
+            l.chatSample13,
+            l.chatSample14,
           ]
           ..shuffle(math.Random())
           ..removeRange(4, 10);
     _statistics.loadAll();
+    _loadBrief();
+  }
+
+  Future<void> _loadBrief() async {
+    final brief = await GetIt.I<GetBriefUseCase>().call();
+    if (mounted) setState(() => _briefProducts = brief?.products ?? const []);
   }
 
   @override
@@ -85,6 +99,10 @@ class _PoraChatSheetState extends State<PoraChatSheet> {
       text: text,
       languageCode: locale,
       contextSummary: _shoppingContext,
+      context: AiContext(
+        allProducts: _statistics.allProducts.toList(),
+        briefProducts: _briefProducts,
+      ),
     );
     _scrollToBottom();
   }
@@ -294,13 +312,6 @@ class _SheetHeader extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: PoraColors.primary,
                   shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: PoraColors.primary.withValues(alpha: 0.3),
-                      blurRadius: 12,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
                 ),
                 child: const Icon(
                   PhosphorIconsFill.sparkle,

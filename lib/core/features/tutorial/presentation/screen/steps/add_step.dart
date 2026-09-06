@@ -5,8 +5,8 @@ import 'package:pora/core/features/tutorial/presentation/widgets/tutorial_frame.
 import 'package:pora/core/features/tutorial/presentation/widgets/tutorial_row_tile.dart';
 import 'package:pora/core/features/tutorial/presentation/widgets/tutorial_ticker.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
-import 'package:pora/core/internal/theme/additional_constants.dart';
-import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
+import 'package:pora/core/internal/theme/constant/additional_constants.dart';
+import 'package:pora/core/internal/theme/themes_colors/light_colors/app_colors.dart';
 
 /// Шаг 3. Добавление продукта: тап FAB → новая строка проявляется снизу.
 class AddStep extends StatelessWidget {
