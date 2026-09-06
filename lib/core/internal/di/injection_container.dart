@@ -111,9 +111,11 @@ class InjectionContainer {
     );
 
     //! STORAGE
-    _getIt.registerSingletonAsync<ILocalDB<dynamic>>(
-      () async => HiveLocalDB<dynamic>()..init(),
-    );
+    _getIt.registerSingletonAsync<ILocalDB<dynamic>>(() async {
+      final localDb = HiveLocalDB<dynamic>();
+      await localDb.init();
+      return localDb;
+    });
 
     //! Notifications
     _getIt.registerSingleton<NotificationService>(NotificationService.instance);

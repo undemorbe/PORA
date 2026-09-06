@@ -21,7 +21,6 @@ class AppBootstrap {
     return f;
   }
 
-  /// Запуск. Не await'ится в main — крутится параллельно splash.
   void start(InjectionContainer container) {
     _future ??= _run(container);
   }
@@ -29,42 +28,35 @@ class AppBootstrap {
   Future<void> _run(InjectionContainer container) async {
     final sw = Stopwatch()..start();
     try {
-      // Hive нужен и notifications, и refresh (secure_store), и локализации.
-      final localDB = container.getIt<ILocalDB<dynamic>>();
-      await localDB.init();
-
-      // Connectivity — быстрый init, синхронно.
       unawaited(container.getIt<ConnectivityStore>().init());
 
-      // Локальная инициализация не должна зависеть от доступности API.
       await Future.wait<void>([
         _initLocalization(container),
         _refreshAndAuth(container),
       ]);
-      if (!Platform.isIOS) {
-        //!!!!! Add ios compatibility
-        _initFirebaseAndPush();
-      }
 
-      // Депендс от secure store (запись в кэш) — после refresh.
-      final tokensStore = container.getIt<TokensSecureStore>();
-      tokensStore.updateCache(await tokensStore.getAccessToken());
+      Logger.talker.info('AppBootstrap ready in ${sw.elapsedMilliseconds}ms');
 
-      // Auth готов + FCM token готов → регистрируем устройство.
-      // No-op если не authed либо fcmToken пустой.
+      unawaited(_startBackgroundServices());
+    } catch (e, s) {
+      Logger.talker.error('AppBootstrap failed', e, s);
+    }
+  }
+
+  Future<void> _startBackgroundServices() async {
+    try {
+      await _initFirebaseAndPush();
       await _openAppWebsocket();
       bindDeviceTokenSyncToAuth();
       unawaited(syncDeviceToken());
-
-      Logger.talker.info('AppBootstrap ready in ${sw.elapsedMilliseconds}ms');
     } catch (e, s) {
-      Logger.talker.error('AppBootstrap failed', e, s);
-      // Не rethrow — splash всё равно должен перейти дальше;
-      // guards/screens сами обработают missing state.
+      Logger.talker.warning('Background services failed to start', e, s);
     }
   }
 
   Future<void> _initFirebaseAndPush() async {
+    //Todo add ios dev sub apns
+    if (Platform.isIOS) return;
     await Firebase.initializeApp();
     await NotificationService.instance.init();
     DeepLinkHandler.instance.bindToAuth();
@@ -88,9 +80,6 @@ class AppBootstrap {
       auth.setUnauthenticated();
     }
 
-    // Refresh is best-effort. A slow or unavailable API must not keep the
-    // splash screen open; AuthInterceptor will use the updated cache once it
-    // completes.
     if (refreshToken != null && refreshToken.isNotEmpty) {
       unawaited(_refreshInBackground(container));
     }
