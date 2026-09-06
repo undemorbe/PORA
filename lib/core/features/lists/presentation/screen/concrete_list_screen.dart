@@ -56,8 +56,9 @@ class _ListPageState extends State<ListPage> {
     super.initState();
     listStore = ListStore()..getConcreteList(lid: widget.listId);
     _wsSub = AppWebsocket.instance.events.listen((event) {
-      if (event.lid != widget.listId && listStore.isSelfUpdated == false)
-        {return;}
+      if (event.lid != widget.listId && listStore.isSelfUpdated == false) {
+        return;
+      }
       _debouncer.call(_refresh);
     });
   }

@@ -296,4 +296,3 @@ class _InsightsIconBtn extends StatelessWidget {
     );
   }
 }
-

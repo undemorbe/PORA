@@ -63,6 +63,7 @@ class GroupCard extends StatelessWidget {
                 PoraSpacing.sm,
               ),
               child: Row(
+                mainAxisAlignment: .spaceBetween,
                 children: [
                   Expanded(child: Text(list.name, style: PoraText.heading)),
                   if (group.members.isNotEmpty)

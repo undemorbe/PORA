@@ -5,8 +5,11 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
+import 'app_localizations_de.dart';
 import 'app_localizations_en.dart';
+import 'app_localizations_fr.dart';
 import 'app_localizations_ru.dart';
+import 'app_localizations_zh.dart';
 
 // ignore_for_file: type=lint
 
@@ -94,8 +97,11 @@ abstract class AppLocalizations {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
+    Locale('de'),
     Locale('en'),
+    Locale('fr'),
     Locale('ru'),
+    Locale('zh'),
   ];
 
   /// The name of the application
@@ -113,103 +119,103 @@ abstract class AppLocalizations {
   /// The first line under the app name
   ///
   /// In en, this message translates to:
-  /// **'Общий список для пар и семей'**
+  /// **'Shared list for couples and families'**
   String get authUnderAppName1;
 
   /// The second line under the app name
   ///
   /// In en, this message translates to:
-  /// **'Рецепты, дом и доставка — в одном месте'**
+  /// **'Recipes, home, and delivery — all in one place'**
   String get authUnderAppName2;
 
   /// onlyYou
   ///
   /// In en, this message translates to:
-  /// **'Только Вы'**
+  /// **'Only you'**
   String get onlyYou;
 
   /// The sign in with other methods title
   ///
   /// In en, this message translates to:
-  /// **'Войти иным способом'**
+  /// **'Sign in another way'**
   String get authSignInExpansibleExpand;
 
   /// The sign in with other methods title
   ///
   /// In en, this message translates to:
-  /// **'Свернуть'**
+  /// **'Collapse'**
   String get authSignInExpansibleCollapse;
 
   /// The sign in with other methods title
   ///
   /// In en, this message translates to:
-  /// **'Отправить еще раз через...'**
+  /// **'Send again in...'**
   String get sendAgainAfter;
 
   /// The sign in with email button text
   ///
   /// In en, this message translates to:
-  /// **'Войти через email'**
+  /// **'Sign in with email'**
   String get authSignInWithEmail;
 
   /// The sign in with Google button text
   ///
   /// In en, this message translates to:
-  /// **'Войти через Google'**
+  /// **'Sign in with Google'**
   String get authSignInWithGoogle;
 
   /// The sign in with Apple button text
   ///
   /// In en, this message translates to:
-  /// **'Войти через Apple'**
+  /// **'Sign in with Apple'**
   String get authSignInWithApple;
 
   /// The sign in with Phone button text
   ///
   /// In en, this message translates to:
-  /// **'Войти через телефон'**
+  /// **'Sign in with phone'**
   String get authSignInWithPhone;
 
   /// The private policy link text
   ///
   /// In en, this message translates to:
-  /// **'Продолжая, вы соглашаетесь с\nУсловиями и Политикой конфиденциальности'**
+  /// **'By continuing, you agree to the\\nTerms and Privacy Policy'**
   String get authPrivatePolicy;
 
   /// authTitle
   ///
   /// In en, this message translates to:
-  /// **'Почти с нами'**
+  /// **'Almost there'**
   String get authTitle;
 
   /// authSubtitle
   ///
   /// In en, this message translates to:
-  /// **'Введите номер телефона или почту — пришлём код для входа.'**
+  /// **'Enter your phone number or email — we\'ll send you a sign-in code.'**
   String get authSubtitle;
 
   /// authSubtitle2
   ///
   /// In en, this message translates to:
-  /// **'Начните вводить, сами определим, телефон это или почта.'**
+  /// **'Start typing — we\'ll detect whether it\'s a phone number or email.'**
   String get authSubtitle2;
 
   /// authJoinButton
   ///
   /// In en, this message translates to:
-  /// **'Присоединиться'**
+  /// **'Join'**
   String get authJoinButton;
 
   /// userCreateProfileNameRequired
   ///
   /// In en, this message translates to:
-  /// **'Может все-же скажете имя?'**
+  /// **'How about telling us your name?'**
   String get userCreateProfileNameRequired;
 
   /// commonError
   ///
   /// In en, this message translates to:
-  /// **'Ошибка'**
+  /// **'Error'**
   String get commonError;
 
   /// Invalid phone on auth screen
@@ -227,1105 +233,1105 @@ abstract class AppLocalizations {
   /// otpTitle
   ///
   /// In en, this message translates to:
-  /// **'Осталось немного!'**
+  /// **'Almost there!'**
   String get otpTitle;
 
   /// otpEnterCodeSentTo
   ///
   /// In en, this message translates to:
-  /// **'Введите код отправленный на '**
+  /// **'Enter the code sent to '**
   String get otpEnterCodeSentTo;
 
   /// otpResendQuestion
   ///
   /// In en, this message translates to:
-  /// **'Не получили код?'**
+  /// **'Didn\'t receive the code?'**
   String get otpResendQuestion;
 
   /// otpResend
   ///
   /// In en, this message translates to:
-  /// **'Отправить еще раз'**
+  /// **'Send again'**
   String get otpResend;
 
   /// otpVerifyButton
   ///
   /// In en, this message translates to:
-  /// **'Проверить код'**
+  /// **'Verify code'**
   String get otpVerifyButton;
 
   /// otpValidationLength
   ///
   /// In en, this message translates to:
-  /// **'Введите 6-значный код'**
+  /// **'Enter the 6-digit code'**
   String get otpValidationLength;
 
   /// otpValidationDigits
   ///
   /// In en, this message translates to:
-  /// **'Код состоит только из цифр'**
+  /// **'The code contains digits only'**
   String get otpValidationDigits;
 
   /// authSwitchToEmail
   ///
   /// In en, this message translates to:
-  /// **'Войти по почте'**
+  /// **'Sign in with email'**
   String get authSwitchToEmail;
 
   /// authSwitchToPhone
   ///
   /// In en, this message translates to:
-  /// **'Войти по телефону'**
+  /// **'Sign in with phone'**
   String get authSwitchToPhone;
 
   /// No description provided for @onboardingStep.
   ///
   /// In en, this message translates to:
-  /// **'Шаг {step} из {total}'**
+  /// **'Step {step} of {total}'**
   String onboardingStep(int step, int total);
 
   /// onboardingSlide1Title
   ///
   /// In en, this message translates to:
-  /// **'Рецепт → список\nза секунды'**
+  /// **'Recipe → list\\nin seconds'**
   String get onboardingSlide1Title;
 
   /// onboardingSlide1Body
   ///
   /// In en, this message translates to:
-  /// **'Киньте ссылку на рецепт — Pora соберёт ингредиенты и уберёт то, что уже есть.'**
+  /// **'Drop a recipe link — Pora collects the ingredients and removes what you already have.'**
   String get onboardingSlide1Body;
 
   /// onboardingSlide2Title
   ///
   /// In en, this message translates to:
-  /// **'Один список\nна двоих'**
+  /// **'One list\\nfor two'**
   String get onboardingSlide2Title;
 
   /// onboardingSlide2Body
   ///
   /// In en, this message translates to:
-  /// **'Добавляйте вместе — видно, кто что внёс. Партнёр захватит нужное по дороге домой.'**
+  /// **'Add things together — you can see who added what. Your partner can pick up what you need on the way home.'**
   String get onboardingSlide2Body;
 
   /// onboardingSlide3Title
   ///
   /// In en, this message translates to:
-  /// **'Pora знает,\nкогда пора'**
+  /// **'Pora knows\\nwhen it\'s time'**
   String get onboardingSlide3Title;
 
   /// onboardingSlide3Body
   ///
   /// In en, this message translates to:
-  /// **'По вашим покупкам подскажет, что скоро закончится, и закажет в один тап.'**
+  /// **'Based on your purchases, Pora predicts what will run out soon and lets you order it with one tap.'**
   String get onboardingSlide3Body;
 
   /// onboardingSkip
   ///
   /// In en, this message translates to:
-  /// **'Пропустить'**
+  /// **'Skip'**
   String get onboardingSkip;
 
   /// onboardingStart
   ///
   /// In en, this message translates to:
-  /// **'Начать'**
+  /// **'Start'**
   String get onboardingStart;
 
   /// onboardingNext
   ///
   /// In en, this message translates to:
-  /// **'Далее'**
+  /// **'Next'**
   String get onboardingNext;
 
   /// splashTagline
   ///
   /// In en, this message translates to:
-  /// **'Список, который помнит за вас'**
+  /// **'The list that remembers for you'**
   String get splashTagline;
 
   /// briefTitle
   ///
   /// In en, this message translates to:
-  /// **'Что у вас часто заканчивается?'**
+  /// **'What do you often run out of?'**
   String get briefTitle;
 
   /// briefDeletionTitle
   ///
   /// In en, this message translates to:
-  /// **'Вы уверены что хотите удалить продукт?'**
+  /// **'Are you sure you want to delete this product?'**
   String get briefDeletionTitle;
 
   /// briefAddYourOwn
   ///
   /// In en, this message translates to:
-  /// **'Добавить'**
+  /// **'Add'**
   String get briefAddYourOwn;
 
   /// briefInputProduct
   ///
   /// In en, this message translates to:
-  /// **'Введите продукт или вид'**
+  /// **'Enter a product or category'**
   String get briefInputProduct;
 
   /// briefInputEmoji
   ///
   /// In en, this message translates to:
-  /// **'Введите эмодзи/обозначение для продукта'**
+  /// **'Enter an emoji/icon for the product'**
   String get briefInputEmoji;
 
   /// briefAlreadyContains
   ///
   /// In en, this message translates to:
-  /// **'Данный продукт уже выбран'**
+  /// **'This product is already selected'**
   String get briefAlreadyContains;
 
   /// briefSubtitle
   ///
   /// In en, this message translates to:
-  /// **'Отметьте продукты — Pora напомнит вовремя. Это можно пропустить.'**
+  /// **'Select products — Pora will remind you at the right time. You can skip this.'**
   String get briefSubtitle;
 
   /// briefSkip
   ///
   /// In en, this message translates to:
-  /// **'Пропустить'**
+  /// **'Skip'**
   String get briefSkip;
 
   /// briefNext
   ///
   /// In en, this message translates to:
-  /// **'Далее'**
+  /// **'Next'**
   String get briefNext;
 
   /// briefItemMilk
   ///
   /// In en, this message translates to:
-  /// **'Молоко'**
+  /// **'Milk'**
   String get briefItemMilk;
 
   /// briefItemBread
   ///
   /// In en, this message translates to:
-  /// **'Хлеб'**
+  /// **'Bread'**
   String get briefItemBread;
 
   /// briefItemEggs
   ///
   /// In en, this message translates to:
-  /// **'Яйца'**
+  /// **'Eggs'**
   String get briefItemEggs;
 
   /// briefItemCoffee
   ///
   /// In en, this message translates to:
-  /// **'Кофе'**
+  /// **'Coffee'**
   String get briefItemCoffee;
 
   /// briefItemCheese
   ///
   /// In en, this message translates to:
-  /// **'Сыр'**
+  /// **'Cheese'**
   String get briefItemCheese;
 
   /// briefItemBananas
   ///
   /// In en, this message translates to:
-  /// **'Бананы'**
+  /// **'Bananas'**
   String get briefItemBananas;
 
   /// briefItemButter
   ///
   /// In en, this message translates to:
-  /// **'Масло'**
+  /// **'Butter'**
   String get briefItemButter;
 
   /// briefItemWater
   ///
   /// In en, this message translates to:
-  /// **'Вода'**
+  /// **'Water'**
   String get briefItemWater;
 
   /// briefItemVegetables
   ///
   /// In en, this message translates to:
-  /// **'Овощи'**
+  /// **'Vegetables'**
   String get briefItemVegetables;
 
   /// briefItemTomatoes
   ///
   /// In en, this message translates to:
-  /// **'Помидоры'**
+  /// **'Tomatoes'**
   String get briefItemTomatoes;
 
   /// briefItemPasta
   ///
   /// In en, this message translates to:
-  /// **'Паста'**
+  /// **'Pasta'**
   String get briefItemPasta;
 
   /// briefItemChicken
   ///
   /// In en, this message translates to:
-  /// **'Курица'**
+  /// **'Chicken'**
   String get briefItemChicken;
 
   /// listTitle
   ///
   /// In en, this message translates to:
-  /// **'Наш список'**
+  /// **'Our list'**
   String get listTitle;
 
   /// listMembersCount
   ///
   /// In en, this message translates to:
-  /// **'2 человека · 8 продуктов'**
+  /// **'2 people · 8 products'**
   String get listMembersCount;
 
   /// listUrgent
   ///
   /// In en, this message translates to:
-  /// **'Срочно'**
+  /// **'Urgent'**
   String get listUrgent;
 
   /// listAdd
   ///
   /// In en, this message translates to:
-  /// **'Добавить'**
+  /// **'Add'**
   String get listAdd;
 
   /// predictionsTitle
   ///
   /// In en, this message translates to:
-  /// **'Пора поможет!'**
+  /// **'Pora can help!'**
   String get predictionsTitle;
 
   /// predictionsSubtitle
   ///
   /// In en, this message translates to:
-  /// **'Скоро закончится — по вашим покупкам'**
+  /// **'Running out soon — based on your purchases'**
   String get predictionsSubtitle;
 
   /// predictionTip
   ///
   /// In en, this message translates to:
-  /// **'Малюсенький советик'**
+  /// **'A tiny tip'**
   String get predictionTip;
 
   /// predictionsOrderTitle
   ///
   /// In en, this message translates to:
-  /// **'Заказать всё в один тап'**
+  /// **'Order everything with one tap'**
   String get predictionsOrderTitle;
 
   /// predictionsOrderSubtitle
   ///
   /// In en, this message translates to:
-  /// **'Самокат · доставка за 15 минут'**
+  /// **'Samokat · delivery in 15 minutes'**
   String get predictionsOrderSubtitle;
 
   /// predictionsOrderDiscount
   ///
   /// In en, this message translates to:
-  /// **'−15% на первый заказ'**
+  /// **'15% off your first order'**
   String get predictionsOrderDiscount;
 
   /// predictionsAddToList
   ///
   /// In en, this message translates to:
-  /// **'В список'**
+  /// **'Add to list'**
   String get predictionsAddToList;
 
   /// predictionsDismiss
   ///
   /// In en, this message translates to:
-  /// **'Не надо'**
+  /// **'No thanks'**
   String get predictionsDismiss;
 
   /// itemDetailName
   ///
   /// In en, this message translates to:
-  /// **'Молоко'**
+  /// **'Milk'**
   String get itemDetailName;
 
   /// itemDetailSubtitle
   ///
   /// In en, this message translates to:
-  /// **'2 л · Молочное'**
+  /// **'2 L · Dairy'**
   String get itemDetailSubtitle;
 
   /// itemDetailAddedBy
   ///
   /// In en, this message translates to:
-  /// **'Добавил(а)'**
+  /// **'Added by'**
   String get itemDetailAddedBy;
 
   /// itemDetailSection
   ///
   /// In en, this message translates to:
-  /// **'Раздел'**
+  /// **'Section'**
   String get itemDetailSection;
 
   /// itemDetailSectionValue
   ///
   /// In en, this message translates to:
-  /// **'Молочное'**
+  /// **'Dairy'**
   String get itemDetailSectionValue;
 
   /// itemDetailQuantity
   ///
   /// In en, this message translates to:
-  /// **'Количество'**
+  /// **'Quantity'**
   String get itemDetailQuantity;
 
   /// itemDetailQuantityValue
   ///
   /// In en, this message translates to:
-  /// **'2 л'**
+  /// **'2 L'**
   String get itemDetailQuantityValue;
 
   /// itemDetailUrgent
   ///
   /// In en, this message translates to:
-  /// **'Срочно'**
+  /// **'Urgent'**
   String get itemDetailUrgent;
 
   /// itemDetailRemind
   ///
   /// In en, this message translates to:
-  /// **'Напоминать'**
+  /// **'Remind me'**
   String get itemDetailRemind;
 
   /// itemDetailRemindEvery
   ///
   /// In en, this message translates to:
-  /// **'Каждые 7 дней'**
+  /// **'Every 7 days'**
   String get itemDetailRemindEvery;
 
   /// itemDetailInsight
   ///
   /// In en, this message translates to:
-  /// **'Покупаете ~раз в 7 дней · последний раз 6 дней назад. Скоро предложу докупить.'**
+  /// **'You buy it about every 7 days · last bought 6 days ago. I\'ll suggest restocking soon.'**
   String get itemDetailInsight;
 
   /// itemDetailMarkBought
   ///
   /// In en, this message translates to:
-  /// **'Отметить купленным'**
+  /// **'Mark as bought'**
   String get itemDetailMarkBought;
 
   /// itemDetailDelete
   ///
   /// In en, this message translates to:
-  /// **'Удалить из списка'**
+  /// **'Remove from list'**
   String get itemDetailDelete;
 
   /// addItemTitle
   ///
   /// In en, this message translates to:
-  /// **'Добавить продукт'**
+  /// **'Add product'**
   String get addItemTitle;
 
   /// addItemExampleValue
   ///
   /// In en, this message translates to:
-  /// **'Авокадо'**
+  /// **'Avocado'**
   String get addItemExampleValue;
 
   /// addItemNameHint
   ///
   /// In en, this message translates to:
-  /// **'Название продукта'**
+  /// **'Product name'**
   String get addItemNameHint;
 
   /// addItemQuantity
   ///
   /// In en, this message translates to:
-  /// **'Количество'**
+  /// **'Quantity'**
   String get addItemQuantity;
 
   /// addItemSection
   ///
   /// In en, this message translates to:
-  /// **'Раздел'**
+  /// **'Section'**
   String get addItemSection;
 
   /// addItemUrgent
   ///
   /// In en, this message translates to:
-  /// **'Срочно'**
+  /// **'Urgent'**
   String get addItemUrgent;
 
   /// addItemUrgentSubtitle
   ///
   /// In en, this message translates to:
-  /// **'Нужно купить сегодня'**
+  /// **'Need to buy today'**
   String get addItemUrgentSubtitle;
 
   /// addItemRemind
   ///
   /// In en, this message translates to:
-  /// **'Напоминать регулярно'**
+  /// **'Remind regularly'**
   String get addItemRemind;
 
   /// addItemRemindEvery
   ///
   /// In en, this message translates to:
-  /// **'Каждые 7 дней'**
+  /// **'Every 7 days'**
   String get addItemRemindEvery;
 
   /// addItemSubmit
   ///
   /// In en, this message translates to:
-  /// **'Добавить в список'**
+  /// **'Add to list'**
   String get addItemSubmit;
 
   /// settingsTitle
   ///
   /// In en, this message translates to:
-  /// **'Настройки'**
+  /// **'Settings'**
   String get settingsTitle;
 
   /// settingsHouseholdSection
   ///
   /// In en, this message translates to:
-  /// **'Хозяйство'**
+  /// **'Household'**
   String get settingsHouseholdSection;
 
   /// settingsAppSection
   ///
   /// In en, this message translates to:
-  /// **'Приложение'**
+  /// **'App'**
   String get settingsAppSection;
 
   /// settingsNotifications
   ///
   /// In en, this message translates to:
-  /// **'Уведомления'**
+  /// **'Notifications'**
   String get settingsNotifications;
 
   /// settingsDelivery
   ///
   /// In en, this message translates to:
-  /// **'Доставка'**
+  /// **'Delivery'**
   String get settingsDelivery;
 
   /// settingsProAd
   ///
   /// In en, this message translates to:
-  /// **'Pora+ · без рекламы'**
+  /// **'Pora+ · ad-free'**
   String get settingsProAd;
 
   /// settingsTryPill
   ///
   /// In en, this message translates to:
-  /// **'Попробовать'**
+  /// **'Try it'**
   String get settingsTryPill;
 
   /// settingsPrivacy
   ///
   /// In en, this message translates to:
-  /// **'Приватность и данные'**
+  /// **'Privacy and data'**
   String get settingsPrivacy;
 
   /// settingsAboutPora
   ///
   /// In en, this message translates to:
-  /// **'О Pora'**
+  /// **'About Pora'**
   String get settingsAboutPora;
 
   /// settingsLogout
   ///
   /// In en, this message translates to:
-  /// **'Выйти'**
+  /// **'Sign out'**
   String get settingsLogout;
 
   /// settingsMembersNames
   ///
   /// In en, this message translates to:
-  /// **'Борис и Анна'**
+  /// **'Boris and Anna'**
   String get settingsMembersNames;
 
   /// settingsInvitePill
   ///
   /// In en, this message translates to:
-  /// **'Пригласить'**
+  /// **'Invite'**
   String get settingsInvitePill;
 
   /// householdInviteTitle
   ///
   /// In en, this message translates to:
-  /// **'Пригласить партнёра'**
+  /// **'Invite your partner'**
   String get householdInviteTitle;
 
   /// householdCookTogether
   ///
   /// In en, this message translates to:
-  /// **'Готовьте вместе'**
+  /// **'Cook together'**
   String get householdCookTogether;
 
   /// householdInviteDescription
   ///
   /// In en, this message translates to:
-  /// **'Pora работает лучше вдвоём. Пригласите партнёра — список и напоминания станут общими.'**
+  /// **'Pora works better for two. Invite your partner — your list and reminders will be shared.'**
   String get householdInviteDescription;
 
   /// householdShareLink
   ///
   /// In en, this message translates to:
-  /// **'Поделиться ссылкой'**
+  /// **'Share link'**
   String get householdShareLink;
 
   /// householdShowQr
   ///
   /// In en, this message translates to:
-  /// **'Показать QR-код'**
+  /// **'Show QR code'**
   String get householdShowQr;
 
   /// householdConnectToFamily
   ///
   /// In en, this message translates to:
-  /// **'Подключиться к семье'**
+  /// **'Join a family'**
   String get householdConnectToFamily;
 
   /// householdInviteDescriptionWhenConnecting
   ///
   /// In en, this message translates to:
-  /// **'Определили код приглашения, но вы и сами можете его ввести, если мы ошиблись'**
+  /// **'We detected an invite code, but you can enter it yourself if we got it wrong'**
   String get householdInviteDescriptionWhenConnecting;
 
   /// householdGotInvited
   ///
   /// In en, this message translates to:
-  /// **'Вас пригласили в семью'**
+  /// **'You\'ve been invited to a family'**
   String get householdGotInvited;
 
   /// householdWriteCode
   ///
   /// In en, this message translates to:
-  /// **'Введите код приглашения'**
+  /// **'Enter invite code'**
   String get householdWriteCode;
 
   /// householdDoLater
   ///
   /// In en, this message translates to:
-  /// **'Сделаю позже'**
+  /// **'I\'ll do it later'**
   String get householdDoLater;
 
   /// householdCopyCode
   ///
   /// In en, this message translates to:
-  /// **'Скопировали в буфер обмена!'**
+  /// **'Copied to clipboard!'**
   String get householdCopyCode;
 
   /// householdInviteCodeLabel
   ///
   /// In en, this message translates to:
-  /// **'Код приглашения'**
+  /// **'Invite code'**
   String get householdInviteCodeLabel;
 
   /// householdCopyPill
   ///
   /// In en, this message translates to:
-  /// **'Копировать'**
+  /// **'Copy'**
   String get householdCopyPill;
 
   /// notificationsTitle
   ///
   /// In en, this message translates to:
-  /// **'Уведомления'**
+  /// **'Notifications'**
   String get notificationsTitle;
 
   /// notificationsReadAll
   ///
   /// In en, this message translates to:
-  /// **'Прочитать все'**
+  /// **'Read all'**
   String get notificationsReadAll;
 
   /// notificationsMilkTitle
   ///
   /// In en, this message translates to:
-  /// **'По дороге домой захвати молоко'**
+  /// **'Grab milk on your way home'**
   String get notificationsMilkTitle;
 
   /// notificationsMilkBody
   ///
   /// In en, this message translates to:
-  /// **'Оно кончилось — Анна отметила 10 минут назад.'**
+  /// **'It\'s run out — Anna marked it 10 minutes ago.'**
   String get notificationsMilkBody;
 
   /// notificationsMilkTime
   ///
   /// In en, this message translates to:
-  /// **'5 минут назад'**
+  /// **'5 minutes ago'**
   String get notificationsMilkTime;
 
   /// notificationsCoffeeTitle
   ///
   /// In en, this message translates to:
-  /// **'Скоро закончится кофе'**
+  /// **'Coffee is running out soon'**
   String get notificationsCoffeeTitle;
 
   /// notificationsCoffeeBody
   ///
   /// In en, this message translates to:
-  /// **'Покупаете ~раз в 14 дней, прошло 12.'**
+  /// **'You buy it about every 14 days, 12 have passed.'**
   String get notificationsCoffeeBody;
 
   /// notificationsPartnerAddedTitle
   ///
   /// In en, this message translates to:
-  /// **'Анна добавила 2 продукта'**
+  /// **'Anna added 2 products'**
   String get notificationsPartnerAddedTitle;
 
   /// notificationsPartnerAddedBody
   ///
   /// In en, this message translates to:
-  /// **'Бананы и Хлеб — в общем списке.'**
+  /// **'Bananas and bread are in the shared list.'**
   String get notificationsPartnerAddedBody;
 
   /// notificationsPartnerAddedTime
   ///
   /// In en, this message translates to:
-  /// **'Сегодня, 9:12'**
+  /// **'Today, 9:12'**
   String get notificationsPartnerAddedTime;
 
   /// notificationsPromoTitle
   ///
   /// In en, this message translates to:
-  /// **'−15% на первый заказ в Самокате'**
+  /// **'15% off your first Samokat order'**
   String get notificationsPromoTitle;
 
   /// notificationsPromoBody
   ///
   /// In en, this message translates to:
-  /// **'Промо активно ещё 6 дней.'**
+  /// **'The promo is active for 6 more days.'**
   String get notificationsPromoBody;
 
   /// notificationsPromoTime
   ///
   /// In en, this message translates to:
-  /// **'Вчера'**
+  /// **'Yesterday'**
   String get notificationsPromoTime;
 
   /// notificationsOrderDeliveredTitle
   ///
   /// In en, this message translates to:
-  /// **'Заказ доставлен'**
+  /// **'Order delivered'**
   String get notificationsOrderDeliveredTitle;
 
   /// notificationsOrderDeliveredBody
   ///
   /// In en, this message translates to:
-  /// **'8 продуктов · Самокат · ₽1 054.'**
+  /// **'8 products · Samokat · ₽1,054'**
   String get notificationsOrderDeliveredBody;
 
   /// notificationsAddToListPill
   ///
   /// In en, this message translates to:
-  /// **'＋ В список'**
+  /// **'＋ Add to list'**
   String get notificationsAddToListPill;
 
   /// userCreateProfileTitle
   ///
   /// In en, this message translates to:
-  /// **'Как вас зовут?'**
+  /// **'What\'s your name?'**
   String get userCreateProfileTitle;
 
   /// userCreateProfileSubtitle
   ///
   /// In en, this message translates to:
-  /// **'Добавьте имя и фото — их увидит партнёр в общем списке.'**
+  /// **'Add a name and photo — your partner will see them in the shared list.'**
   String get userCreateProfileSubtitle;
 
   /// userCreateProfileNameHint
   ///
   /// In en, this message translates to:
-  /// **'Ваше имя'**
+  /// **'Your name'**
   String get userCreateProfileNameHint;
 
   /// userCreateProfileSkip
   ///
   /// In en, this message translates to:
-  /// **'Пропустить'**
+  /// **'Skip'**
   String get userCreateProfileSkip;
 
   /// userCreateProfileNext
   ///
   /// In en, this message translates to:
-  /// **'Далее'**
+  /// **'Next'**
   String get userCreateProfileNext;
 
   /// searchTitle
   ///
   /// In en, this message translates to:
-  /// **'Поиск'**
+  /// **'Search'**
   String get searchTitle;
 
   /// searchHint
   ///
   /// In en, this message translates to:
-  /// **'Продукт или рецепт…'**
+  /// **'Product or recipe…'**
   String get searchHint;
 
   /// searchFilterAll
   ///
   /// In en, this message translates to:
-  /// **'Всё'**
+  /// **'All'**
   String get searchFilterAll;
 
   /// searchFilterVegetables
   ///
   /// In en, this message translates to:
-  /// **'Овощи'**
+  /// **'Vegetables'**
   String get searchFilterVegetables;
 
   /// searchFilterDairy
   ///
   /// In en, this message translates to:
-  /// **'Молочное'**
+  /// **'Dairy'**
   String get searchFilterDairy;
 
   /// searchFilterGrocery
   ///
   /// In en, this message translates to:
-  /// **'Бакалея'**
+  /// **'Groceries'**
   String get searchFilterGrocery;
 
   /// searchFilterRecipes
   ///
   /// In en, this message translates to:
-  /// **'Рецепты'**
+  /// **'Recipes'**
   String get searchFilterRecipes;
 
   /// searchResults
   ///
   /// In en, this message translates to:
-  /// **'Результаты'**
+  /// **'Results'**
   String get searchResults;
 
   /// searchNothingFound
   ///
   /// In en, this message translates to:
-  /// **'Ничего не найдено'**
+  /// **'Nothing found'**
   String get searchNothingFound;
 
   /// insightsTitle
   ///
   /// In en, this message translates to:
-  /// **'Инсайты'**
+  /// **'Insights'**
   String get insightsTitle;
 
   /// insightsTipKicker
   ///
   /// In en, this message translates to:
-  /// **'✨ СОВЕТ PORA'**
+  /// **'✨ PORA TIP'**
   String get insightsTipKicker;
 
   /// insightsTipTitle
   ///
   /// In en, this message translates to:
-  /// **'Вы любите карбонару!'**
+  /// **'You love carbonara!'**
   String get insightsTipTitle;
 
   /// insightsTipBody
   ///
   /// In en, this message translates to:
-  /// **'Похожий профиль вкуса — попробуйте мак-н-чиз. 4 из 6 ингредиентов у вас уже бывают регулярно.'**
+  /// **'Similar flavor profile — try mac and cheese. You already regularly have 4 of 6 ingredients.'**
   String get insightsTipBody;
 
   /// insightsTipAction
   ///
   /// In en, this message translates to:
-  /// **'Открыть рецепт →'**
+  /// **'Open recipe →'**
   String get insightsTipAction;
 
   /// insightsRunsOutMost
   ///
   /// In en, this message translates to:
-  /// **'Чаще всего заканчивается'**
+  /// **'Runs out most often'**
   String get insightsRunsOutMost;
 
   /// insightsFavoriteCuisines
   ///
   /// In en, this message translates to:
-  /// **'Любимые кухни'**
+  /// **'Favorite cuisines'**
   String get insightsFavoriteCuisines;
 
   /// insightsCuisineItalian
   ///
   /// In en, this message translates to:
-  /// **'Итальянская'**
+  /// **'Italian'**
   String get insightsCuisineItalian;
 
   /// insightsCuisinePasta
   ///
   /// In en, this message translates to:
-  /// **'Паста'**
+  /// **'Pasta'**
   String get insightsCuisinePasta;
 
   /// insightsCuisineBreakfasts
   ///
   /// In en, this message translates to:
-  /// **'Завтраки'**
+  /// **'Breakfasts'**
   String get insightsCuisineBreakfasts;
 
   /// insightsCuisineLight
   ///
   /// In en, this message translates to:
-  /// **'Лёгкое'**
+  /// **'Light'**
   String get insightsCuisineLight;
 
   /// orderTitle
   ///
   /// In en, this message translates to:
-  /// **'Заказ'**
+  /// **'Order'**
   String get orderTitle;
 
   /// orderCart
   ///
   /// In en, this message translates to:
-  /// **'Корзина'**
+  /// **'Cart'**
   String get orderCart;
 
   /// orderWhenToDeliver
   ///
   /// In en, this message translates to:
-  /// **'Когда доставить'**
+  /// **'When to deliver'**
   String get orderWhenToDeliver;
 
   /// No description provided for @orderCheckoutCta.
   ///
   /// In en, this message translates to:
-  /// **'Заказать в Самокате · {total}'**
+  /// **'Order from Samokat · {total}'**
   String orderCheckoutCta(String total);
 
   /// orderSummaryGoods
   ///
   /// In en, this message translates to:
-  /// **'Товары'**
+  /// **'Items'**
   String get orderSummaryGoods;
 
   /// orderSummaryDiscount
   ///
   /// In en, this message translates to:
-  /// **'Скидка −15%'**
+  /// **'15% off'**
   String get orderSummaryDiscount;
 
   /// orderSummaryDelivery
   ///
   /// In en, this message translates to:
-  /// **'Доставка'**
+  /// **'Delivery'**
   String get orderSummaryDelivery;
 
   /// orderSummaryFree
   ///
   /// In en, this message translates to:
-  /// **'Бесплатно'**
+  /// **'Free'**
   String get orderSummaryFree;
 
   /// orderSummaryTotal
   ///
   /// In en, this message translates to:
-  /// **'Итого'**
+  /// **'Total'**
   String get orderSummaryTotal;
 
   /// recipeImportTitle
   ///
   /// In en, this message translates to:
-  /// **'Рецепт по ссылке'**
+  /// **'Recipe from a link'**
   String get recipeImportTitle;
 
   /// recipePreviewTitle
   ///
   /// In en, this message translates to:
-  /// **'Паста Карбонара'**
+  /// **'Pasta Carbonara'**
   String get recipePreviewTitle;
 
   /// recipePreviewMeta
   ///
   /// In en, this message translates to:
-  /// **'eda.ru · 25 мин · 2 порции'**
+  /// **'eda.ru · 25 min · 2 servings'**
   String get recipePreviewMeta;
 
   /// recipePreviewFound
   ///
   /// In en, this message translates to:
-  /// **'6 ингредиентов найдено'**
+  /// **'6 ingredients found'**
   String get recipePreviewFound;
 
   /// recipeDedupBanner
   ///
   /// In en, this message translates to:
-  /// **'2 совпадения убрали, чтобы не дублировать с вашим списком'**
+  /// **'Removed 2 duplicates to avoid duplicating items already on your list'**
   String get recipeDedupBanner;
 
   /// recipeIngredients
   ///
   /// In en, this message translates to:
-  /// **'Ингредиенты'**
+  /// **'Ingredients'**
   String get recipeIngredients;
 
   /// recipeAddToListCta
   ///
   /// In en, this message translates to:
-  /// **'Добавить 4 продукта в список'**
+  /// **'Add 4 products to list'**
   String get recipeAddToListCta;
 
   /// recipeParseButton
   ///
   /// In en, this message translates to:
-  /// **'Разобрать'**
+  /// **'Parse'**
   String get recipeParseButton;
 
   /// navList
   ///
   /// In en, this message translates to:
-  /// **'Список'**
+  /// **'List'**
   String get navList;
 
   /// navPora
   ///
   /// In en, this message translates to:
-  /// **'Пора'**
+  /// **'Pora'**
   String get navPora;
 
   /// navOrder
   ///
   /// In en, this message translates to:
-  /// **'Заказ'**
+  /// **'Order'**
   String get navOrder;
 
   /// navProfile
   ///
   /// In en, this message translates to:
-  /// **'Профиль'**
+  /// **'Profile'**
   String get navProfile;
 
   /// familiesTitle
   ///
   /// In en, this message translates to:
-  /// **'Семьи'**
+  /// **'Families'**
   String get familiesTitle;
 
   /// familiesSubtitle
   ///
   /// In en, this message translates to:
-  /// **'Выберите семью, чтобы открыть её список'**
+  /// **'Choose a family to open its list'**
   String get familiesSubtitle;
 
   /// familiesCurrent
   ///
   /// In en, this message translates to:
-  /// **'Текущая'**
+  /// **'Current'**
   String get familiesCurrent;
 
   /// familiesCreateOrJoin
   ///
   /// In en, this message translates to:
-  /// **'＋ Создать или присоединиться'**
+  /// **'＋ Create or join'**
   String get familiesCreateOrJoin;
 
   /// familiesCreateDialog
   ///
   /// In en, this message translates to:
-  /// **'Как назовем семью?'**
+  /// **'What should we call the family?'**
   String get familiesCreateDialog;
 
   /// tryToUpdate
   ///
   /// In en, this message translates to:
-  /// **'Попробуйте обновить'**
+  /// **'Try refreshing'**
   String get tryToUpdate;
 
   /// checkOut
   ///
   /// In en, this message translates to:
-  /// **'Проверить'**
+  /// **'Check'**
   String get checkOut;
 
   /// settingsMore
   ///
   /// In en, this message translates to:
-  /// **'Углубленные'**
+  /// **'Advanced'**
   String get settingsMore;
 
   /// listsYour
   ///
   /// In en, this message translates to:
-  /// **'Ваш личный список'**
+  /// **'Your personal list'**
   String get listsYour;
 
   /// human
   ///
   /// In en, this message translates to:
-  /// **'человека'**
+  /// **'people'**
   String get human;
 
   /// products
   ///
   /// In en, this message translates to:
-  /// **'продуктов'**
+  /// **'products'**
   String get products;
 
   /// lists
   ///
   /// In en, this message translates to:
-  /// **'списков'**
+  /// **'lists'**
   String get lists;
 
   /// update
   ///
   /// In en, this message translates to:
-  /// **'Обновить'**
+  /// **'Refresh'**
   String get update;
 
   /// connectionSuccess
   ///
   /// In en, this message translates to:
-  /// **'Присоединились'**
+  /// **'Joined'**
   String get connectionSuccess;
 
   /// familiesNoUrgent
   ///
   /// In en, this message translates to:
-  /// **'Нет срочного'**
+  /// **'Nothing urgent'**
   String get familiesNoUrgent;
 
   /// welcomeBackTitle
   ///
   /// In en, this message translates to:
-  /// **'Вспомнили вас!'**
+  /// **'Welcome back!'**
   String get welcomeBackTitle;
 
   /// welcomeBackSubtitle
   ///
   /// In en, this message translates to:
-  /// **'Секунду, открываем ваш список…'**
+  /// **'One second, opening your list…'**
   String get welcomeBackSubtitle;
 
   /// errorDuringLoading
   ///
   /// In en, this message translates to:
-  /// **'Ошибка при загрузке'**
+  /// **'Error while loading'**
   String get errorDuringLoading;
 
   /// nameOfFamily
   ///
   /// In en, this message translates to:
-  /// **'Имя семьи'**
+  /// **'Family name'**
   String get familyName;
 
   /// createButton
   ///
   /// In en, this message translates to:
-  /// **'Создать'**
+  /// **'Create'**
   String get familiesCreate;
 
   /// connectButton
   ///
   /// In en, this message translates to:
-  /// **'Присоединиться'**
+  /// **'Join'**
   String get familiesConnect;
 
   /// showAll
@@ -2054,10 +2060,10 @@ abstract class AppLocalizations {
   /// **'Join the list'**
   String get tutorialSampleInviteMessage;
 
-  /// Написать письмо в поддержку
+  /// Email support
   ///
   /// In en, this message translates to:
-  /// **'Написать письмо в поддержку'**
+  /// **'Email support'**
   String get supportMessage;
 
   /// Your message will be sent to the support team. Please provide as much detail as possible.
@@ -2641,6 +2647,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Import recipe'**
   String get chatImportRecipeCta;
+
+  /// You don't have any lists yet
+  ///
+  /// In en, this message translates to:
+  /// **'You don\'t have any lists yet'**
+  String get listsEmptyTitle;
+
+  /// Maybe you should create a new one?
+  ///
+  /// In en, this message translates to:
+  /// **'Maybe you should create a new one?'**
+  String get listsEmptySubtitle;
 }
 
 class _AppLocalizationsDelegate
@@ -2654,7 +2672,7 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) =>
-      <String>['en', 'ru'].contains(locale.languageCode);
+      <String>['de', 'en', 'fr', 'ru', 'zh'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -2663,10 +2681,16 @@ class _AppLocalizationsDelegate
 AppLocalizations lookupAppLocalizations(Locale locale) {
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
+    case 'de':
+      return AppLocalizationsDe();
     case 'en':
       return AppLocalizationsEn();
+    case 'fr':
+      return AppLocalizationsFr();
     case 'ru':
       return AppLocalizationsRu();
+    case 'zh':
+      return AppLocalizationsZh();
   }
 
   throw FlutterError(

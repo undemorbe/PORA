@@ -119,7 +119,7 @@ class _CreateGroupSheetState extends State<_CreateGroupSheet> {
                               color: PoraColors.inkInverse,
                             ),
                           )
-                        : Text(l.groupCreate, textAlign: .center,),
+                        : Text(l.groupCreate, textAlign: .center),
                   ),
                 ),
               ],

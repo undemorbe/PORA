@@ -1,85 +1,87 @@
 {
-    "appName": "ПОРА",
+    "appName": "Zeit",
     "@appName": {
         "description": "The name of the application"
     },
-    "language": "Язык",
+    "language": "Sprache",
     "@language": {
         "description": "language"
     },
-    "authUnderAppName1": "Общий список для пар и семей",
+    "authUnderAppName1": "Gemeinsame Liste für Paare und Familien",
     "@authUnderAppName1": {
         "description": "The first line under the app name"
     },
-    "authUnderAppName2": "Рецепты, дом и доставка — в одном месте",
+    "authUnderAppName2": "Rezepte, Haushalt und Lieferung — alles an einem Ort",
     "@authUnderAppName2": {
         "description": "The second line under the app name"
     },
-    "authSubtitle2": "Начните вводить, сами определим, телефон это или почта.",
-    "@authSubtitle2": {
-        "description": "authSubtitle2"
-    },
-    "onlyYou": "Только Вы",
+    "onlyYou": "Nur du",
     "@onlyYou": {
         "description": "onlyYou"
     },
-    "authSignInExpansibleExpand": "Войти иным способом",
+    "listsEmptyTitle": "Sie haben noch keine Listen",
+    "listsEmptySubtitle": "Vielleicht sollten Sie eine neue erstellen?",
+    "authSignInExpansibleExpand": "Auf andere Weise anmelden",
     "@authSignInExpansibleExpand": {
         "description": "The sign in with other methods title"
     },
-    "sendAgainAfter": "Отправить еще раз через...",
-    "@sendAgainAfter": {
-        "description": "The sign in with other methods title"
-    },
-    "userCreateProfileNameRequired": "Может все-же скажете имя?",
-    "@userCreateProfileNameRequired": {
-        "description": "userCreateProfileNameRequired"
-    },
-    "authSignInExpansibleCollapse": "Свернуть",
+    "authSignInExpansibleCollapse": "Einklappen",
     "@authSignInExpansibleCollapse": {
         "description": "The sign in with other methods title"
     },
-    "authSignInWithEmail": "Войти по электронной почте",
+    "sendAgainAfter": "Erneut senden in ...",
+    "@sendAgainAfter": {
+        "description": "The sign in with other methods title"
+    },
+    "authSignInWithEmail": "Mit E-Mail anmelden",
     "@authSignInWithEmail": {
         "description": "The sign in with email button text"
     },
-    "authSignInWithGoogle": "Войти через Google",
+    "authSignInWithGoogle": "Mit Google anmelden",
     "@authSignInWithGoogle": {
         "description": "The sign in with Google button text"
     },
-    "authSignInWithApple": "Войти через Apple",
+    "authSignInWithApple": "Mit Apple anmelden",
     "@authSignInWithApple": {
         "description": "The sign in with Apple button text"
     },
-    "authSignInWithPhone": "Войти через телефон",
+    "authSignInWithPhone": "Mit Telefonnummer anmelden",
     "@authSignInWithPhone": {
         "description": "The sign in with Phone button text"
     },
-    "authPrivatePolicy": "Продолжая, вы соглашаетесь с\nУсловиями и Политикой конфиденциальности",
+    "authPrivatePolicy": "Wenn du fortfährst, stimmst du den\\nNutzungsbedingungen und der Datenschutzerklärung zu",
     "@authPrivatePolicy": {
         "description": "The private policy link text"
     },
-    "authTitle": "Почти с нами",
+    "authTitle": "Fast geschafft",
     "@authTitle": {
         "description": "authTitle"
     },
-    "authSubtitle": "Введите номер телефона или почту — пришлём код для входа.",
+    "authSubtitle": "Gib deine Telefonnummer oder E-Mail-Adresse ein — wir senden dir einen Anmeldecode.",
     "@authSubtitle": {
         "description": "authSubtitle"
     },
-    "authJoinButton": "Присоединиться",
+    "authSubtitle2": "Beginne zu tippen — wir erkennen, ob es eine Telefonnummer oder E-Mail-Adresse ist.",
+    "@authSubtitle2": {
+        "description": "authSubtitle2"
+    },
+    "authJoinButton": "Beitreten",
     "@authJoinButton": {
         "description": "authJoinButton"
     },
-    "commonError": "Ошибка",
+    "userCreateProfileNameRequired": "Wie wäre es, wenn du uns deinen Namen verrätst?",
+    "@userCreateProfileNameRequired": {
+        "description": "userCreateProfileNameRequired"
+    },
+    "commonError": "Fehler",
     "@commonError": {
         "description": "commonError"
     },
-    "authErrorInvalidPhone": "Неверный телефон или email!",
+    "authErrorInvalidPhone": "Ungültige Telefonnummer / E-Mail-Adresse!",
     "@authErrorInvalidPhone": {
         "description": "Invalid phone on auth screen"
     },
-    "authPhoneSendOtp": "Отправим код {isPhone, select, true{в Telegram!} false{на почту!} other{куда-то}}",
+    "authPhoneSendOtp": "Wir senden den Code an {isPhone, select, true{Telegram!} false{deine E-Mail!} other{das von dir angegebene Ziel}}",
     "@authPhoneSendOtp": {
         "description": "Invalid phone on auth screen",
         "placeholders": {
@@ -89,43 +91,43 @@
             }
         }
     },
-    "otpTitle": "Осталось немного!",
+    "otpTitle": "Fast geschafft!",
     "@otpTitle": {
         "description": "otpTitle"
     },
-    "otpEnterCodeSentTo": "Введите код отправленный на ",
+    "otpEnterCodeSentTo": "Gib den gesendeten Code ein: ",
     "@otpEnterCodeSentTo": {
         "description": "otpEnterCodeSentTo"
     },
-    "otpResendQuestion": "Не получили код?",
+    "otpResendQuestion": "Code nicht erhalten?",
     "@otpResendQuestion": {
         "description": "otpResendQuestion"
     },
-    "otpResend": "Отправить еще раз",
+    "otpResend": "Erneut senden",
     "@otpResend": {
         "description": "otpResend"
     },
-    "otpVerifyButton": "Проверить код",
+    "otpVerifyButton": "Code bestätigen",
     "@otpVerifyButton": {
         "description": "otpVerifyButton"
     },
-    "otpValidationLength": "Введите 6-значный код",
+    "otpValidationLength": "Gib den 6-stelligen Code ein",
     "@otpValidationLength": {
         "description": "otpValidationLength"
     },
-    "otpValidationDigits": "Код состоит только из цифр",
+    "otpValidationDigits": "Der Code darf nur Ziffern enthalten",
     "@otpValidationDigits": {
         "description": "otpValidationDigits"
     },
-    "authSwitchToEmail": "Войти по почте",
+    "authSwitchToEmail": "Mit E-Mail anmelden",
     "@authSwitchToEmail": {
         "description": "authSwitchToEmail"
     },
-    "authSwitchToPhone": "Войти по телефону",
+    "authSwitchToPhone": "Mit Telefonnummer anmelden",
     "@authSwitchToPhone": {
         "description": "authSwitchToPhone"
     },
-    "onboardingStep": "Шаг {step} из {total}",
+    "onboardingStep": "Schritt {step} von {total}",
     "@onboardingStep": {
         "placeholders": {
             "step": {
@@ -136,555 +138,547 @@
             }
         }
     },
-    "onboardingSlide1Title": "Рецепт → список\nза секунды",
+    "onboardingSlide1Title": "Rezept → Liste\\nin Sekunden",
     "@onboardingSlide1Title": {
         "description": "onboardingSlide1Title"
     },
-    "onboardingSlide1Body": "Киньте ссылку на рецепт — Pora соберёт ингредиенты и уберёт то, что уже есть.",
+    "onboardingSlide1Body": "Füge einen Rezeptlink ein — Pora sammelt die Zutaten und entfernt, was du bereits hast.",
     "@onboardingSlide1Body": {
         "description": "onboardingSlide1Body"
     },
-    "onboardingSlide2Title": "Один список\nна двоих",
+    "onboardingSlide2Title": "Eine Liste\\nfür zwei",
     "@onboardingSlide2Title": {
         "description": "onboardingSlide2Title"
     },
-    "onboardingSlide2Body": "Добавляйте вместе — видно, кто что внёс. Партнёр захватит нужное по дороге домой.",
+    "onboardingSlide2Body": "Fügt Dinge gemeinsam hinzu — du siehst, wer was hinzugefügt hat. Dein Partner kann auf dem Heimweg mitbringen, was ihr braucht.",
     "@onboardingSlide2Body": {
         "description": "onboardingSlide2Body"
     },
-    "onboardingSlide3Title": "Pora знает,\nкогда пора",
+    "onboardingSlide3Title": "Pora weiß,\\nwann es Zeit ist",
     "@onboardingSlide3Title": {
         "description": "onboardingSlide3Title"
     },
-    "onboardingSlide3Body": "По вашим покупкам подскажет, что скоро закончится, и закажет в один тап.",
+    "onboardingSlide3Body": "Auf Basis deiner Einkäufe sagt Pora voraus, was bald ausgeht, und du kannst es mit einem Tippen nachbestellen.",
     "@onboardingSlide3Body": {
         "description": "onboardingSlide3Body"
     },
-    "onboardingSkip": "Пропустить",
+    "onboardingSkip": "Überspringen",
     "@onboardingSkip": {
         "description": "onboardingSkip"
     },
-    "onboardingStart": "Начать",
+    "onboardingStart": "Starten",
     "@onboardingStart": {
         "description": "onboardingStart"
     },
-    "onboardingNext": "Далее",
+    "onboardingNext": "Weiter",
     "@onboardingNext": {
         "description": "onboardingNext"
     },
-    "splashTagline": "Список, который помнит за вас",
+    "splashTagline": "Die Liste, die für dich mitdenkt",
     "@splashTagline": {
         "description": "splashTagline"
     },
-    "briefTitle": "Что у вас часто заканчивается?",
+    "briefTitle": "Was geht dir häufig aus?",
     "@briefTitle": {
         "description": "briefTitle"
     },
-    "briefAddYourOwn": "Добавить",
-    "@briefAddYourOwn": {
-        "description": "briefAddYourOwn"
-    },
-    "briefInputProduct": "Введите продукт или вид",
-    "@briefInputProduct": {
-        "description": "briefInputProduct"
-    },
-    "briefAlreadyContains": "Данный продукт уже выбран",
-    "@briefAlreadyContains": {
-        "description": "briefAlreadyContains"
-    },
-    "briefDeletionTitle": "Вы уверены что хотите удалить продукт?",
+    "briefDeletionTitle": "Möchtest du dieses Produkt wirklich löschen?",
     "@briefDeletionTitle": {
         "description": "briefDeletionTitle"
     },
-    "briefInputEmoji": "Введите эмодзи/обозначение для продукта",
+    "briefAddYourOwn": "Hinzufügen",
+    "@briefAddYourOwn": {
+        "description": "briefAddYourOwn"
+    },
+    "briefInputProduct": "Produkt oder Kategorie eingeben",
+    "@briefInputProduct": {
+        "description": "briefInputProduct"
+    },
+    "briefInputEmoji": "Emoji/Symbol für das Produkt eingeben",
     "@briefInputEmoji": {
         "description": "briefInputEmoji"
     },
-    "briefSubtitle": "Отметьте продукты — Pora напомнит вовремя. Это можно пропустить.",
+    "briefAlreadyContains": "Dieses Produkt ist bereits ausgewählt",
+    "@briefAlreadyContains": {
+        "description": "briefAlreadyContains"
+    },
+    "briefSubtitle": "Wähle Produkte aus — Pora erinnert dich zum richtigen Zeitpunkt. Du kannst diesen Schritt überspringen.",
     "@briefSubtitle": {
         "description": "briefSubtitle"
     },
-    "briefSkip": "Пропустить",
+    "briefSkip": "Überspringen",
     "@briefSkip": {
         "description": "briefSkip"
     },
-    "briefNext": "Далее",
+    "briefNext": "Weiter",
     "@briefNext": {
         "description": "briefNext"
     },
-    "briefItemMilk": "Молоко",
+    "briefItemMilk": "Milch",
     "@briefItemMilk": {
         "description": "briefItemMilk"
     },
-    "briefItemBread": "Хлеб",
+    "briefItemBread": "Brot",
     "@briefItemBread": {
         "description": "briefItemBread"
     },
-    "briefItemEggs": "Яйца",
+    "briefItemEggs": "Eier",
     "@briefItemEggs": {
         "description": "briefItemEggs"
     },
-    "briefItemCoffee": "Кофе",
+    "briefItemCoffee": "Kaffee",
     "@briefItemCoffee": {
         "description": "briefItemCoffee"
     },
-    "briefItemCheese": "Сыр",
+    "briefItemCheese": "Käse",
     "@briefItemCheese": {
         "description": "briefItemCheese"
     },
-    "briefItemBananas": "Бананы",
+    "briefItemBananas": "Bananen",
     "@briefItemBananas": {
         "description": "briefItemBananas"
     },
-    "briefItemButter": "Масло",
+    "briefItemButter": "Butter",
     "@briefItemButter": {
         "description": "briefItemButter"
     },
-    "briefItemWater": "Вода",
+    "briefItemWater": "Wasser",
     "@briefItemWater": {
         "description": "briefItemWater"
     },
-    "briefItemVegetables": "Овощи",
+    "briefItemVegetables": "Gemüse",
     "@briefItemVegetables": {
         "description": "briefItemVegetables"
     },
-    "briefItemTomatoes": "Помидоры",
+    "briefItemTomatoes": "Tomaten",
     "@briefItemTomatoes": {
         "description": "briefItemTomatoes"
     },
-    "briefItemPasta": "Паста",
+    "briefItemPasta": "Pasta",
     "@briefItemPasta": {
         "description": "briefItemPasta"
     },
-    "briefItemChicken": "Курица",
+    "briefItemChicken": "Hähnchen",
     "@briefItemChicken": {
         "description": "briefItemChicken"
     },
-    "listTitle": "Наш список",
+    "listTitle": "Unsere Liste",
     "@listTitle": {
         "description": "listTitle"
     },
-    "listMembersCount": "2 человека · 8 продуктов",
+    "listMembersCount": "2 Personen · 8 Produkte",
     "@listMembersCount": {
         "description": "listMembersCount"
     },
-    "listUrgent": "Срочно",
+    "listUrgent": "Dringend",
     "@listUrgent": {
         "description": "listUrgent"
     },
-    "listAdd": "Добавить",
+    "listAdd": "Hinzufügen",
     "@listAdd": {
         "description": "listAdd"
     },
-    "predictionsTitle": "Пора поможет!",
+    "predictionsTitle": "Pora kann helfen!",
     "@predictionsTitle": {
         "description": "predictionsTitle"
     },
-    "predictionTip": "Малюсенький советик",
-    "@predictionTip": {
-        "description": "predictionTip"
-    },
-    "supportMessage": "Написать письмо в поддержку",
-    "@supportMessage": {
-        "description": "Написать письмо в поддержку"
-    },
-    "predictionsSubtitle": "Скоро закончится — по вашим покупкам",
+    "predictionsSubtitle": "Geht bald aus — basierend auf deinen Einkäufen",
     "@predictionsSubtitle": {
         "description": "predictionsSubtitle"
     },
-    "predictionsOrderTitle": "Заказать всё в один тап",
+    "predictionTip": "Ein kleiner Tipp",
+    "@predictionTip": {
+        "description": "predictionTip"
+    },
+    "predictionsOrderTitle": "Alles mit einem Tippen bestellen",
     "@predictionsOrderTitle": {
         "description": "predictionsOrderTitle"
     },
-    "predictionsOrderSubtitle": "Самокат · доставка за 15 минут",
+    "predictionsOrderSubtitle": "Samokat · Lieferung in 15 Minuten",
     "@predictionsOrderSubtitle": {
         "description": "predictionsOrderSubtitle"
     },
-    "predictionsOrderDiscount": "−15% на первый заказ",
+    "predictionsOrderDiscount": "15 % Rabatt auf deine erste Bestellung",
     "@predictionsOrderDiscount": {
         "description": "predictionsOrderDiscount"
     },
-    "predictionsAddToList": "В список",
+    "predictionsAddToList": "Füge hinzu zu Liste",
     "@predictionsAddToList": {
         "description": "predictionsAddToList"
     },
-    "predictionsDismiss": "Не надо",
+    "predictionsDismiss": "Nein, danke",
     "@predictionsDismiss": {
         "description": "predictionsDismiss"
     },
-    "itemDetailName": "Молоко",
+    "itemDetailName": "Milch",
     "@itemDetailName": {
         "description": "itemDetailName"
     },
-    "itemDetailSubtitle": "2 л · Молочное",
+    "itemDetailSubtitle": "2 l · Milchprodukte",
     "@itemDetailSubtitle": {
         "description": "itemDetailSubtitle"
     },
-    "itemDetailAddedBy": "Добавил(а)",
+    "itemDetailAddedBy": "Hinzugefügt von",
     "@itemDetailAddedBy": {
         "description": "itemDetailAddedBy"
     },
-    "itemDetailSection": "Раздел",
+    "itemDetailSection": "Bereich",
     "@itemDetailSection": {
         "description": "itemDetailSection"
     },
-    "itemDetailSectionValue": "Молочное",
+    "itemDetailSectionValue": "Milchprodukte",
     "@itemDetailSectionValue": {
         "description": "itemDetailSectionValue"
     },
-    "itemDetailQuantity": "Количество",
+    "itemDetailQuantity": "Menge",
     "@itemDetailQuantity": {
         "description": "itemDetailQuantity"
     },
-    "itemDetailQuantityValue": "2 л",
+    "itemDetailQuantityValue": "2 L",
     "@itemDetailQuantityValue": {
         "description": "itemDetailQuantityValue"
     },
-    "itemDetailUrgent": "Срочно",
+    "itemDetailUrgent": "Dringend",
     "@itemDetailUrgent": {
         "description": "itemDetailUrgent"
     },
-    "itemDetailRemind": "Напоминать",
+    "itemDetailRemind": "Mich erinnern",
     "@itemDetailRemind": {
         "description": "itemDetailRemind"
     },
-    "itemDetailRemindEvery": "Каждые 7 дней",
+    "itemDetailRemindEvery": "Alle 7 Tage",
     "@itemDetailRemindEvery": {
         "description": "itemDetailRemindEvery"
     },
-    "itemDetailInsight": "Покупаете ~раз в 7 дней · последний раз 6 дней назад. Скоро предложу докупить.",
+    "itemDetailInsight": "Du kaufst es etwa alle 7 Tage · zuletzt vor 6 Tagen gekauft. Ich schlage bald einen Nachkauf vor.",
     "@itemDetailInsight": {
         "description": "itemDetailInsight"
     },
-    "itemDetailMarkBought": "Отметить купленным",
+    "itemDetailMarkBought": "Als gekauft markieren",
     "@itemDetailMarkBought": {
         "description": "itemDetailMarkBought"
     },
-    "itemDetailDelete": "Удалить из списка",
+    "itemDetailDelete": "Aus Liste entfernen",
     "@itemDetailDelete": {
         "description": "itemDetailDelete"
     },
-    "addItemTitle": "Добавить продукт",
+    "addItemTitle": "Produkt hinzufügen",
     "@addItemTitle": {
         "description": "addItemTitle"
     },
-    "addItemExampleValue": "Авокадо",
+    "addItemExampleValue": "Avocado",
     "@addItemExampleValue": {
         "description": "addItemExampleValue"
     },
-    "addItemNameHint": "Название продукта",
+    "addItemNameHint": "Produktname",
     "@addItemNameHint": {
         "description": "addItemNameHint"
     },
-    "addItemQuantity": "Количество",
+    "addItemQuantity": "Menge",
     "@addItemQuantity": {
         "description": "addItemQuantity"
     },
-    "addItemSection": "Раздел",
+    "addItemSection": "Bereich",
     "@addItemSection": {
         "description": "addItemSection"
     },
-    "addItemUrgent": "Срочно",
+    "addItemUrgent": "Dringend",
     "@addItemUrgent": {
         "description": "addItemUrgent"
     },
-    "addItemUrgentSubtitle": "Нужно купить сегодня",
+    "addItemUrgentSubtitle": "Heute kaufen",
     "@addItemUrgentSubtitle": {
         "description": "addItemUrgentSubtitle"
     },
-    "addItemRemind": "Напоминать регулярно",
+    "addItemRemind": "Regelmäßig erinnern",
     "@addItemRemind": {
         "description": "addItemRemind"
     },
-    "addItemRemindEvery": "Каждые 7 дней",
+    "addItemRemindEvery": "Alle 7 Tage",
     "@addItemRemindEvery": {
         "description": "addItemRemindEvery"
     },
-    "addItemSubmit": "Добавить в список",
+    "addItemSubmit": "Füge hinzu zu Liste",
     "@addItemSubmit": {
         "description": "addItemSubmit"
     },
-    "settingsTitle": "Настройки",
+    "settingsTitle": "Einstellungen",
     "@settingsTitle": {
         "description": "settingsTitle"
     },
-    "settingsHouseholdSection": "Хозяйство",
+    "settingsHouseholdSection": "Haushalt",
     "@settingsHouseholdSection": {
         "description": "settingsHouseholdSection"
     },
-    "settingsAppSection": "Приложение",
+    "settingsAppSection": "App",
     "@settingsAppSection": {
         "description": "settingsAppSection"
     },
-    "settingsNotifications": "Уведомления",
+    "settingsNotifications": "Benachrichtigungen",
     "@settingsNotifications": {
         "description": "settingsNotifications"
     },
-    "settingsDelivery": "Доставка",
+    "settingsDelivery": "Lieferung",
     "@settingsDelivery": {
         "description": "settingsDelivery"
     },
-    "settingsProAd": "Pora+ · без рекламы",
+    "settingsProAd": "Pora+ · ad-kostenlos",
     "@settingsProAd": {
         "description": "settingsProAd"
     },
-    "settingsTryPill": "Попробовать",
+    "settingsTryPill": "Ausprobieren",
     "@settingsTryPill": {
         "description": "settingsTryPill"
     },
-    "settingsPrivacy": "Приватность и данные",
+    "settingsPrivacy": "Datenschutz und Daten",
     "@settingsPrivacy": {
         "description": "settingsPrivacy"
     },
-    "settingsAboutPora": "О Pora",
+    "settingsAboutPora": "Über Pora",
     "@settingsAboutPora": {
         "description": "settingsAboutPora"
     },
-    "settingsLogout": "Выйти",
+    "settingsLogout": "Abmelden",
     "@settingsLogout": {
         "description": "settingsLogout"
     },
-    "settingsMembersNames": "Борис и Анна",
+    "settingsMembersNames": "Boris und Anna",
     "@settingsMembersNames": {
         "description": "settingsMembersNames"
     },
-    "settingsInvitePill": "Пригласить",
+    "settingsInvitePill": "Einladen",
     "@settingsInvitePill": {
         "description": "settingsInvitePill"
     },
-    "householdInviteTitle": "Пригласить партнёра",
+    "householdInviteTitle": "Invite deine partner",
     "@householdInviteTitle": {
         "description": "householdInviteTitle"
     },
-    "householdCookTogether": "Готовьте вместе",
+    "householdCookTogether": "Gemeinsam kochen",
     "@householdCookTogether": {
         "description": "householdCookTogether"
     },
-    "householdInviteDescription": "Pora работает лучше вдвоём. Пригласите партнёра — список и напоминания станут общими.",
+    "householdInviteDescription": "Pora funktioniert zu zweit besser. Lade deinen Partner ein — eure Liste und Erinnerungen werden geteilt.",
     "@householdInviteDescription": {
         "description": "householdInviteDescription"
     },
-    "householdCopyCode": "Скопировали в буфер обмена!",
-    "@householdCopyCode": {
-        "description": "householdCopyCode"
-    },
-    "householdShareLink": "Поделиться ссылкой",
+    "householdShareLink": "Link teilen",
     "@householdShareLink": {
         "description": "householdShareLink"
     },
-    "householdShowQr": "Показать QR-код",
+    "householdShowQr": "QR-Code anzeigen",
     "@householdShowQr": {
         "description": "householdShowQr"
     },
-    "householdDoLater": "Сделаю позже",
-    "@householdDoLater": {
-        "description": "householdDoLater"
-    },
-    "householdInviteCodeLabel": "Код приглашения",
-    "@householdInviteCodeLabel": {
-        "description": "householdInviteCodeLabel"
-    },
-    "householdConnectToFamily": "Подключиться к семье",
+    "householdConnectToFamily": "Familie beitreten",
     "@householdConnectToFamily": {
         "description": "householdConnectToFamily"
     },
-    "householdWriteCode": "Введите код приглашения",
-    "@householdWriteCode": {
-        "description": "householdWriteCode"
-    },
-    "householdInviteDescriptionWhenConnecting": "Определили код приглашения, но вы и сами можете его ввести, если мы ошиблись",
+    "householdInviteDescriptionWhenConnecting": "Wir haben einen Einladungscode erkannt, aber du kannst ihn selbst eingeben, falls wir uns geirrt haben.",
     "@householdInviteDescriptionWhenConnecting": {
         "description": "householdInviteDescriptionWhenConnecting"
     },
-    "householdGotInvited": "Вас пригласили в семью",
+    "householdGotInvited": "Du wurdest zu einer Familie eingeladen",
     "@householdGotInvited": {
         "description": "householdGotInvited"
     },
-    "householdCopyPill": "Копировать",
+    "householdWriteCode": "Gib ein invite Code",
+    "@householdWriteCode": {
+        "description": "householdWriteCode"
+    },
+    "householdDoLater": "Ich mache es später",
+    "@householdDoLater": {
+        "description": "householdDoLater"
+    },
+    "householdCopyCode": "In die Zwischenablage kopiert!",
+    "@householdCopyCode": {
+        "description": "householdCopyCode"
+    },
+    "householdInviteCodeLabel": "Einladungscode",
+    "@householdInviteCodeLabel": {
+        "description": "householdInviteCodeLabel"
+    },
+    "householdCopyPill": "Kopieren",
     "@householdCopyPill": {
         "description": "householdCopyPill"
     },
-    "notificationsTitle": "Уведомления",
+    "notificationsTitle": "Benachrichtigungen",
     "@notificationsTitle": {
         "description": "notificationsTitle"
     },
-    "notificationsReadAll": "Прочитать все",
+    "notificationsReadAll": "Alle lesen",
     "@notificationsReadAll": {
         "description": "notificationsReadAll"
     },
-    "notificationsMilkTitle": "По дороге домой захвати молоко",
+    "notificationsMilkTitle": "Bring auf dem Heimweg Milch mit",
     "@notificationsMilkTitle": {
         "description": "notificationsMilkTitle"
     },
-    "notificationsMilkBody": "Оно кончилось — Анна отметила 10 минут назад.",
+    "notificationsMilkBody": "Sie ist ausgegangen — Anna hat es vor 10 Minuten markiert.",
     "@notificationsMilkBody": {
         "description": "notificationsMilkBody"
     },
-    "notificationsMilkTime": "5 минут назад",
+    "notificationsMilkTime": "5 Minuten ago",
     "@notificationsMilkTime": {
         "description": "notificationsMilkTime"
     },
-    "notificationsCoffeeTitle": "Скоро закончится кофе",
+    "notificationsCoffeeTitle": "Der Kaffee geht bald aus",
     "@notificationsCoffeeTitle": {
         "description": "notificationsCoffeeTitle"
     },
-    "notificationsCoffeeBody": "Покупаете ~раз в 14 дней, прошло 12.",
+    "notificationsCoffeeBody": "Du kaufst ihn etwa alle 14 Tage, 12 sind bereits vergangen.",
     "@notificationsCoffeeBody": {
         "description": "notificationsCoffeeBody"
     },
-    "notificationsPartnerAddedTitle": "Анна добавила 2 продукта",
+    "notificationsPartnerAddedTitle": "Anna hat 2 Produkte hinzugefügt",
     "@notificationsPartnerAddedTitle": {
         "description": "notificationsPartnerAddedTitle"
     },
-    "notificationsPartnerAddedBody": "Бананы и Хлеб — в общем списке.",
+    "notificationsPartnerAddedBody": "Bananen und Brot stehen auf der gemeinsamen Liste.",
     "@notificationsPartnerAddedBody": {
         "description": "notificationsPartnerAddedBody"
     },
-    "notificationsPartnerAddedTime": "Сегодня, 9:12",
+    "notificationsPartnerAddedTime": "heute, 9:12",
     "@notificationsPartnerAddedTime": {
         "description": "notificationsPartnerAddedTime"
     },
-    "notificationsPromoTitle": "−15% на первый заказ в Самокате",
+    "notificationsPromoTitle": "15 % Rabatt auf deine erste Samokat-Bestellung",
     "@notificationsPromoTitle": {
         "description": "notificationsPromoTitle"
     },
-    "notificationsPromoBody": "Промо активно ещё 6 дней.",
+    "notificationsPromoBody": "Die Aktion ist noch 6 Tage aktiv.",
     "@notificationsPromoBody": {
         "description": "notificationsPromoBody"
     },
-    "notificationsPromoTime": "Вчера",
+    "notificationsPromoTime": "Gestern",
     "@notificationsPromoTime": {
         "description": "notificationsPromoTime"
     },
-    "notificationsOrderDeliveredTitle": "Заказ доставлен",
+    "notificationsOrderDeliveredTitle": "Bestellung geliefert",
     "@notificationsOrderDeliveredTitle": {
         "description": "notificationsOrderDeliveredTitle"
     },
-    "notificationsOrderDeliveredBody": "8 продуктов · Самокат · ₽1 054.",
+    "notificationsOrderDeliveredBody": "8 Produkte · Samokat · ₽1.054",
     "@notificationsOrderDeliveredBody": {
         "description": "notificationsOrderDeliveredBody"
     },
-    "notificationsAddToListPill": "＋ В список",
+    "notificationsAddToListPill": "＋ Füge hinzu zu Liste",
     "@notificationsAddToListPill": {
         "description": "notificationsAddToListPill"
     },
-    "userCreateProfileTitle": "Как вас зовут?",
+    "userCreateProfileTitle": "What's deine Name?",
     "@userCreateProfileTitle": {
         "description": "userCreateProfileTitle"
     },
-    "userCreateProfileSubtitle": "Добавьте имя и фото — их увидит партнёр в общем списке.",
+    "userCreateProfileSubtitle": "Füge einen Namen und ein Foto hinzu — dein Partner sieht beides in der gemeinsamen Liste.",
     "@userCreateProfileSubtitle": {
         "description": "userCreateProfileSubtitle"
     },
-    "userCreateProfileNameHint": "Ваше имя",
+    "userCreateProfileNameHint": "Deine Name",
     "@userCreateProfileNameHint": {
         "description": "userCreateProfileNameHint"
     },
-    "userCreateProfileSkip": "Пропустить",
+    "userCreateProfileSkip": "Überspringen",
     "@userCreateProfileSkip": {
         "description": "userCreateProfileSkip"
     },
-    "userCreateProfileNext": "Далее",
+    "userCreateProfileNext": "Weiter",
     "@userCreateProfileNext": {
         "description": "userCreateProfileNext"
     },
-    "searchTitle": "Поиск",
+    "searchTitle": "Suchen",
     "@searchTitle": {
         "description": "searchTitle"
     },
-    "searchHint": "Название продукта…",
+    "searchHint": "Produkt oder Rezept …",
     "@searchHint": {
         "description": "searchHint"
     },
-    "searchFilterAll": "Всё",
+    "searchFilterAll": "Alle",
     "@searchFilterAll": {
         "description": "searchFilterAll"
     },
-    "searchFilterVegetables": "Овощи",
+    "searchFilterVegetables": "Gemüse",
     "@searchFilterVegetables": {
         "description": "searchFilterVegetables"
     },
-    "update": "Обновить",
-    "@update": {
-        "description": "update"
-    },
-    "searchFilterDairy": "Молочное",
+    "searchFilterDairy": "Milchprodukte",
     "@searchFilterDairy": {
         "description": "searchFilterDairy"
     },
-    "searchFilterGrocery": "Бакалея",
+    "searchFilterGrocery": "Lebensmittel",
     "@searchFilterGrocery": {
         "description": "searchFilterGrocery"
     },
-    "searchFilterRecipes": "Рецепты",
+    "searchFilterRecipes": "Rezepte",
     "@searchFilterRecipes": {
         "description": "searchFilterRecipes"
     },
-    "searchResults": "Результаты",
+    "searchResults": "Ergebnisse",
     "@searchResults": {
         "description": "searchResults"
     },
-    "searchNothingFound": "Ничего не найдено",
+    "searchNothingFound": "Nichts gefunden",
     "@searchNothingFound": {
         "description": "searchNothingFound"
     },
-    "insightsTitle": "Инсайты",
+    "insightsTitle": "Einblicke",
     "@insightsTitle": {
         "description": "insightsTitle"
     },
-    "insightsTipKicker": "✨ СОВЕТ PORA",
+    "insightsTipKicker": "✨ PORA-TIPP",
     "@insightsTipKicker": {
         "description": "insightsTipKicker"
     },
-    "insightsTipTitle": "Вы любите карбонару!",
+    "insightsTipTitle": "Du liebst Carbonara!",
     "@insightsTipTitle": {
         "description": "insightsTipTitle"
     },
-    "insightsTipBody": "Похожий профиль вкуса — попробуйте мак-н-чиз. 4 из 6 ингредиентов у вас уже бывают регулярно.",
+    "insightsTipBody": "Ähnliches Geschmacksprofil — probiere Mac and Cheese. 4 von 6 Zutaten hast du bereits regelmäßig zu Hause.",
     "@insightsTipBody": {
         "description": "insightsTipBody"
     },
-    "insightsTipAction": "Открыть рецепт →",
+    "insightsTipAction": "Rezept öffnen →",
     "@insightsTipAction": {
         "description": "insightsTipAction"
     },
-    "insightsRunsOutMost": "Чаще всего заканчивается",
+    "insightsRunsOutMost": "Geht am häufigsten aus",
     "@insightsRunsOutMost": {
         "description": "insightsRunsOutMost"
     },
-    "insightsFavoriteCuisines": "Любимые кухни",
+    "insightsFavoriteCuisines": "Lieblingsküchen",
     "@insightsFavoriteCuisines": {
         "description": "insightsFavoriteCuisines"
     },
-    "insightsCuisineItalian": "Итальянская",
+    "insightsCuisineItalian": "Italienisch",
     "@insightsCuisineItalian": {
         "description": "insightsCuisineItalian"
     },
-    "insightsCuisinePasta": "Паста",
+    "insightsCuisinePasta": "Pasta",
     "@insightsCuisinePasta": {
         "description": "insightsCuisinePasta"
     },
-    "insightsCuisineBreakfasts": "Завтраки",
+    "insightsCuisineBreakfasts": "Frühstücke",
     "@insightsCuisineBreakfasts": {
         "description": "insightsCuisineBreakfasts"
     },
-    "insightsCuisineLight": "Лёгкое",
+    "insightsCuisineLight": "Hell",
     "@insightsCuisineLight": {
         "description": "insightsCuisineLight"
     },
-    "orderTitle": "Заказ",
+    "orderTitle": "Bestellung",
     "@orderTitle": {
         "description": "orderTitle"
     },
-    "orderCart": "Корзина",
+    "orderCart": "Warenkorb",
     "@orderCart": {
         "description": "orderCart"
     },
-    "orderWhenToDeliver": "Когда доставить",
+    "orderWhenToDeliver": "Wann liefern?",
     "@orderWhenToDeliver": {
         "description": "orderWhenToDeliver"
     },
-    "orderCheckoutCta": "Заказать в Самокате · {total}",
+    "orderCheckoutCta": "Bei Samokat bestellen · {total}",
     "@orderCheckoutCta": {
         "placeholders": {
             "total": {
@@ -692,207 +686,211 @@
             }
         }
     },
-    "orderSummaryGoods": "Товары",
+    "orderSummaryGoods": "Artikel",
     "@orderSummaryGoods": {
         "description": "orderSummaryGoods"
     },
-    "orderSummaryDiscount": "Скидка −15%",
+    "orderSummaryDiscount": "15 % Rabatt",
     "@orderSummaryDiscount": {
         "description": "orderSummaryDiscount"
     },
-    "orderSummaryDelivery": "Доставка",
+    "orderSummaryDelivery": "Lieferung",
     "@orderSummaryDelivery": {
         "description": "orderSummaryDelivery"
     },
-    "orderSummaryFree": "Бесплатно",
+    "orderSummaryFree": "Kostenlos",
     "@orderSummaryFree": {
         "description": "orderSummaryFree"
     },
-    "orderSummaryTotal": "Итого",
+    "orderSummaryTotal": "Gesamt",
     "@orderSummaryTotal": {
         "description": "orderSummaryTotal"
     },
-    "recipeImportTitle": "Рецепт по ссылке",
+    "recipeImportTitle": "Rezept von a link",
     "@recipeImportTitle": {
         "description": "recipeImportTitle"
     },
-    "recipePreviewTitle": "Паста Карбонара",
+    "recipePreviewTitle": "Pasta Carbonara",
     "@recipePreviewTitle": {
         "description": "recipePreviewTitle"
     },
-    "recipePreviewMeta": "eda.ru · 25 мин · 2 порции",
+    "recipePreviewMeta": "eda.ru · 25 Min. · 2 Portionen",
     "@recipePreviewMeta": {
         "description": "recipePreviewMeta"
     },
-    "recipePreviewFound": "6 ингредиентов найдено",
+    "recipePreviewFound": "6 Zutaten gefunden",
     "@recipePreviewFound": {
         "description": "recipePreviewFound"
     },
-    "recipeDedupBanner": "2 совпадения убрали, чтобы не дублировать с вашим списком",
+    "recipeDedupBanner": "2 Duplikate entfernt, damit bereits gelistete Artikel nicht doppelt hinzugefügt werden",
     "@recipeDedupBanner": {
         "description": "recipeDedupBanner"
     },
-    "recipeIngredients": "Ингредиенты",
+    "recipeIngredients": "Zutaten",
     "@recipeIngredients": {
         "description": "recipeIngredients"
     },
-    "recipeAddToListCta": "Добавить 4 продукта в список",
+    "recipeAddToListCta": "4 Produkte zur Liste hinzufügen",
     "@recipeAddToListCta": {
         "description": "recipeAddToListCta"
     },
-    "recipeParseButton": "Разобрать",
+    "recipeParseButton": "Analysieren",
     "@recipeParseButton": {
         "description": "recipeParseButton"
     },
-    "navList": "Список",
+    "navList": "Liste",
     "@navList": {
         "description": "navList"
     },
-    "navPora": "Пора",
+    "navPora": "Pora",
     "@navPora": {
         "description": "navPora"
     },
-    "navOrder": "Заказ",
+    "navOrder": "Bestellung",
     "@navOrder": {
         "description": "navOrder"
     },
-    "navProfile": "Профиль",
+    "navProfile": "Profil",
     "@navProfile": {
         "description": "navProfile"
     },
-    "familiesTitle": "Семьи",
+    "familiesTitle": "Familien",
     "@familiesTitle": {
         "description": "familiesTitle"
     },
-    "familiesSubtitle": "Выберите семью, чтобы открыть её список",
+    "familiesSubtitle": "Wähle eine Familie, um ihre Liste zu öffnen",
     "@familiesSubtitle": {
         "description": "familiesSubtitle"
     },
-    "familiesCurrent": "Текущая",
+    "familiesCurrent": "Aktuell",
     "@familiesCurrent": {
         "description": "familiesCurrent"
     },
-    "familiesCreateDialog": "Как назовем семью?",
-    "@familiesCreateDialog": {
-        "description": "familiesCreateDialog"
-    },
-    "tryToUpdate": "Попробуйте обновить",
-    "@tryToUpdate": {
-        "description": "tryToUpdate"
-    },
-    "checkOut": "Проверить",
-    "@checkOut": {
-        "description": "checkOut"
-    },
-    "settingsMore": "Углубленные",
-    "@settingsMore": {
-        "description": "settingsMore"
-    },
-    "listsYour": "Ваш личный список",
-    "@listsYour": {
-        "description": "listsYour"
-    },
-    "human": "человека",
-    "@human": {
-        "description": "human"
-    },
-    "connectionSuccess": "Присоединились",
-    "@connectionSuccess": {
-        "description": "connectionSuccess"
-    },
-    "products": "продуктов",
-    "@products": {
-        "description": "products"
-    },
-    "lists": "списков",
-    "@lists": {
-        "description": "lists"
-    },
-    "familiesCreateOrJoin": "＋ Создать или присоединиться",
+    "familiesCreateOrJoin": "＋ Create oder join",
     "@familiesCreateOrJoin": {
         "description": "familiesCreateOrJoin"
     },
-    "familiesNoUrgent": "Нет срочного",
+    "familiesCreateDialog": "What should we call der Familie?",
+    "@familiesCreateDialog": {
+        "description": "familiesCreateDialog"
+    },
+    "tryToUpdate": "Erneut versuchen",
+    "@tryToUpdate": {
+        "description": "tryToUpdate"
+    },
+    "checkOut": "Prüfen",
+    "@checkOut": {
+        "description": "checkOut"
+    },
+    "settingsMore": "Erweitert",
+    "@settingsMore": {
+        "description": "settingsMore"
+    },
+    "listsYour": "Deine persönliche Liste",
+    "@listsYour": {
+        "description": "listsYour"
+    },
+    "human": "Personen",
+    "@human": {
+        "description": "human"
+    },
+    "products": "Produkte",
+    "@products": {
+        "description": "products"
+    },
+    "lists": "Listen",
+    "@lists": {
+        "description": "lists"
+    },
+    "update": "Aktualisieren",
+    "@update": {
+        "description": "update"
+    },
+    "connectionSuccess": "Beigetreten",
+    "@connectionSuccess": {
+        "description": "connectionSuccess"
+    },
+    "familiesNoUrgent": "Nichts Dringendes",
     "@familiesNoUrgent": {
         "description": "familiesNoUrgent"
     },
-    "welcomeBackTitle": "Вспомнили вас!",
+    "welcomeBackTitle": "Willkommen zurück!",
     "@welcomeBackTitle": {
         "description": "welcomeBackTitle"
     },
-    "welcomeBackSubtitle": "Секунду, открываем ваш список…",
+    "welcomeBackSubtitle": "Einen Moment, deine Liste wird geöffnet …",
     "@welcomeBackSubtitle": {
         "description": "welcomeBackSubtitle"
     },
-    "errorDuringLoading": "Ошибка при загрузке",
+    "errorDuringLoading": "Fehler beim Laden",
     "@errorDuringLoading": {
         "description": "errorDuringLoading"
     },
-    "familyName": "Имя семьи",
+    "familyName": "Familienname",
     "@familyName": {
         "description": "nameOfFamily"
     },
-    "familiesCreate": "Создать",
+    "familiesCreate": "Erstellen",
     "@familiesCreate": {
         "description": "createButton"
     },
-    "familiesConnect": "Присоединиться",
+    "familiesConnect": "Beitreten",
     "@familiesConnect": {
         "description": "connectButton"
     },
-    "showAll": "Показать все",
+    "showAll": "Alle anzeigen",
     "@showAll": {
         "description": "showAll"
     },
-    "priorityLabel": "Приоритет",
+    "priorityLabel": "Priorität",
     "@priorityLabel": {
         "description": "priorityLabel"
     },
-    "everyDay": "Каждый день",
+    "everyDay": "Jeden Tag",
     "@everyDay": {
         "description": "everyDay"
     },
-    "newList": "Новый список",
+    "newList": "Neue Liste",
     "@newList": {
         "description": "newList"
     },
-    "listNamePlaceholder": "Название списка",
+    "listNamePlaceholder": "Listenname",
     "@listNamePlaceholder": {
         "description": "listNamePlaceholder"
     },
-    "cancel": "Отмена",
+    "cancel": "Abbrechen",
     "@cancel": {
         "description": "cancel"
     },
-    "quantityLabel": "Кол-во",
+    "quantityLabel": "Menge",
     "@quantityLabel": {
         "description": "quantityLabel"
     },
-    "personal": "Личное",
+    "personal": "Persönlich",
     "@personal": {
         "description": "personal"
     },
-    "notify": "Уведомить",
+    "notify": "Benachrichtigen",
     "@notify": {
         "description": "notify"
     },
-    "notifyEveryone": "Всем",
+    "notifyEveryone": "Alle",
     "@notifyEveryone": {
         "description": "notifyEveryone"
     },
-    "notifyRecipients": "Кому",
+    "notifyRecipients": "An",
     "@notifyRecipients": {
         "description": "notifyRecipients"
     },
-    "notifyAddCustom": "Добавить имя",
+    "notifyAddCustom": "Namen hinzufügen",
     "@notifyAddCustom": {
         "description": "notifyAddCustom"
     },
-    "notifyMessageLabel": "Сообщение",
+    "notifyMessageLabel": "Nachricht",
     "@notifyMessageLabel": {
         "description": "notifyMessageLabel"
     },
-    "notifyHint": "Срочно купи {itemName}",
+    "notifyHint": "{itemName} dringend besorgen",
     "@notifyHint": {
         "description": "notifyHint placeholder",
         "placeholders": {
@@ -901,151 +899,135 @@
             }
         }
     },
-    "notifySend": "Отправить",
+    "notifySend": "Senden",
     "@notifySend": {
         "description": "notifySend"
     },
-    "notifySent": "Уведомление отправлено",
+    "notifySent": "Benachrichtigung gesendet",
     "@notifySent": {
         "description": "notifySent"
     },
-    "advancedSettings": "Расширенные настройки",
+    "advancedSettings": "Erweiterte Einstellungen",
     "@advancedSettings": {
         "description": "advancedSettings"
     },
-    "appearance": "Внешний вид",
+    "appearance": "Darstellung",
     "@appearance": {
         "description": "appearance"
     },
-    "themeSection": "Тема",
+    "themeSection": "Theme",
     "@themeSection": {
         "description": "themeSection"
     },
-    "themeLight": "Светлая",
+    "themeLight": "Hell",
     "@themeLight": {
         "description": "themeLight"
     },
-    "themeDark": "Тёмная",
+    "themeDark": "Dunkel",
     "@themeDark": {
         "description": "themeDark"
     },
-    "themeSystem": "Как в системе",
+    "themeSystem": "System",
     "@themeSystem": {
         "description": "themeSystem"
     },
-    "notificationsPermission": "Разрешения на уведомления",
+    "notificationsPermission": "Benachrichtigungen permission",
     "@notificationsPermission": {
         "description": "notificationsPermission"
     },
-    "granted": "Разрешено",
+    "granted": "Erlaubt",
     "@granted": {
         "description": "granted"
     },
-    "denied": "Запрещено",
+    "denied": "Abgelehnt",
     "@denied": {
         "description": "denied"
     },
-    "notDetermined": "Не запрошено",
+    "notDetermined": "Nicht angefragt",
     "@notDetermined": {
         "description": "notDetermined"
     },
-    "requestPermission": "Запросить",
+    "requestPermission": "Anfragen",
     "@requestPermission": {
         "description": "requestPermission"
     },
-    "confirmations": "Подтверждения",
+    "confirmations": "Bestätigungen",
     "@confirmations": {
         "description": "confirmations"
     },
-    "askBeforeDelete": "Спрашивать перед удалением",
+    "askBeforeDelete": "Vor dem Löschen fragen",
     "@askBeforeDelete": {
         "description": "askBeforeDelete"
     },
-    "about": "О приложении",
+    "about": "Über",
     "@about": {
         "description": "about"
     },
-    "version": "Версия",
+    "version": "Version",
     "@version": {
         "description": "version"
     },
-    "deleteItemTitle": "Удалить продукт?",
+    "deleteItemTitle": "Artikel löschen?",
     "@deleteItemTitle": {
         "description": "deleteItemTitle"
     },
-    "deleteItemBody": "Действие нельзя отменить.",
+    "deleteItemBody": "Dies kann nicht rückgängig gemacht werden.",
     "@deleteItemBody": {
         "description": "deleteItemBody"
     },
-    "dontAskAgain": "Не спрашивать снова",
+    "dontAskAgain": "Nicht erneut fragen",
     "@dontAskAgain": {
         "description": "dontAskAgain"
     },
-    "delete": "Удалить",
+    "delete": "Löschen",
     "@delete": {
         "description": "delete"
     },
-    "returnToList": "Вернуть в список",
+    "returnToList": "Zurück zur Liste",
     "@returnToList": {
         "description": "returnToList"
     },
-    "nooneToNotify": "Некого уведомлять",
+    "nooneToNotify": "Niemand zu benachrichtigen",
     "@nooneToNotify": {
         "description": "nooneToNotify"
     },
-    "notFound": "Не найдено",
+    "notFound": "nicht found",
     "@notFound": {
         "description": "notFound"
     },
-    "profileNameUpdate": "Обновление профиля",
-    "@profileNameUpdate": {
-        "description": "profileNameUpdate"
-    },
-    "briefSnackBar": "Может все-же добавим \nчто-нибудь?",
-    "@briefSnackBar": {
-        "description": "briefSnackBar"
-    },
-    "@groupDeletionTitle": {
-        "description": "groupDeletionTitle"
-    },
-    "groupDeletionTitle": "Вы уверены, что хотите удалить группу?",
-    "@noInternet": {
-        "description": "noInternet"
-    },
-    "noInternetButLoadYouLocally": "Нет интернета, но впустим вас и так!",
-    "recipeEmptyHint": "Вставьте ссылку на рецепт и нажмите «Разобрать»",
+    "recipeEmptyHint": "Füge eine Rezept-URL ein und tippe auf „Analysieren“",
     "@recipeEmptyHint": {
         "description": "recipeEmptyHint"
     },
-    "recipeDupMark": "уже в списке",
+    "recipeDupMark": "bereits in der Liste",
     "@recipeDupMark": {
         "description": "recipeDupMark"
     },
-    "done": "Готово",
+    "done": "Fertig",
     "@done": {
         "description": "done"
     },
-    "errorGeneric": "Ошибка",
+    "errorGeneric": "Fehler",
     "@errorGeneric": {
         "description": "errorGeneric"
     },
-    "pushToken": "Токен push-уведомлений",
+    "pushToken": "Push-Token",
     "@pushToken": {
         "description": "pushToken"
     },
-    "resync": "Синхронизировать",
+    "resync": "Synchronisieren",
     "@resync": {
         "description": "resync"
     },
-    "tokenSynced": "Токен отправлен",
+    "tokenSynced": "Token synchronisiert",
     "@tokenSynced": {
         "description": "tokenSynced"
     },
-    "deleteListTitle": "Удалить список?",
+    "deleteListTitle": "löschen Liste?",
     "@deleteListTitle": {
         "description": "deleteListTitle"
     },
-    "deleteListBody": "Список «{listName}» и все продукты в нём будут удалены. Действие нельзя отменить.",
+    "deleteListBody": "Die Liste „{listName}“ und alle darin enthaltenen Artikel werden gelöscht. Dies kann nicht rückgängig gemacht werden.",
     "@deleteListBody": {
         "description": "deleteListBody placeholder",
         "placeholders": {
@@ -1054,67 +1036,67 @@
             }
         }
     },
-    "membersScreenTitle": "Участники",
+    "membersScreenTitle": "Mitglieder",
     "@membersScreenTitle": {
         "description": "membersScreenTitle"
     },
-    "owner": "Владелец",
+    "owner": "Besitzer",
     "@owner": {
         "description": "owner"
     },
-    "member": "Участник",
+    "member": "Mitglied",
     "@member": {
         "description": "member"
     },
-    "addProduct": "Добавить продукт",
+    "addProduct": "Produkt hinzufügen",
     "@addProduct": {
         "description": "addProduct"
     },
-    "productName": "Название",
+    "productName": "Name",
     "@productName": {
         "description": "productName"
     },
-    "section": "Раздел",
+    "section": "Bereich",
     "@section": {
         "description": "section"
     },
-    "unit": "Единица",
+    "unit": "Einheit",
     "@unit": {
         "description": "unit"
     },
-    "priorityHigh": "Высокий",
+    "priorityHigh": "Hoch",
     "@priorityHigh": {
         "description": "priorityHigh"
     },
-    "priorityMed": "Средний",
+    "priorityMed": "Mittel",
     "@priorityMed": {
         "description": "priorityMed"
     },
-    "priorityLow": "Низкий",
+    "priorityLow": "Niedrig",
     "@priorityLow": {
         "description": "priorityLow"
     },
-    "urgent": "Срочно",
+    "urgent": "Dringend",
     "@urgent": {
         "description": "urgent"
     },
-    "remindEvery": "Напоминать каждые",
+    "remindEvery": "Erinnern alle",
     "@remindEvery": {
         "description": "remindEvery"
     },
-    "days": "дн.",
+    "days": "d",
     "@days": {
         "description": "days"
     },
-    "customValue": "Своё…",
+    "customValue": "Benutzerdefiniert …",
     "@customValue": {
         "description": "customValue"
     },
-    "save": "Сохранить",
+    "save": "Speichern",
     "@save": {
         "description": "save"
     },
-    "addedByName": "Добавил(а): {name}",
+    "addedByName": "Hinzugefügt von: {name}",
     "@addedByName": {
         "description": "addedByName placeholder",
         "placeholders": {
@@ -1123,148 +1105,167 @@
             }
         }
     },
-    "splashLoadingSlow": "Уже почти загрузились…",
+    "splashLoadingSlow": "Fast geschafft …",
     "@splashLoadingSlow": {
         "description": "splashLoadingSlow"
     },
-    "splashLoadingVerySlow": "Всё ещё грузимся… проверяем связь",
+    "splashLoadingVerySlow": "Wird noch geladen … Verbindung wird geprüft",
     "@splashLoadingVerySlow": {
         "description": "splashLoadingVerySlow"
     },
-    "noInternet": "Нет подключения к интернету",
-    "retry": "Обновить",
+    "profileNameUpdate": "Profil wird aktualisiert",
+    "@profileNameUpdate": {
+        "description": "profileNameUpdate"
+    },
+    "briefSnackBar": "Vielleicht hast du vergessen, Produkte auszuwählen?",
+    "@briefSnackBar": {
+        "description": "briefSnackBar"
+    },
+    "noInternet": "Keine Internetverbindung",
+    "@noInternet": {
+        "description": "noInternet"
+    },
+    "noInternetButLoadYouLocally": "Keine Internetverbindung, aber wir laden deine Daten lokal.",
+    "@groupDeletionTitle": {
+        "description": "groupDeletionTitle"
+    },
+    "groupDeletionTitle": "Möchtest du die Gruppe wirklich löschen?",
+    "@noInternetButLoadYouLocally": {
+        "description": "noInternetButLoadYouLocally"
+    },
+    "retry": "Erneut versuchen",
     "@retry": {
         "description": "retry"
     },
-    "groupsTitle": "Ваши группы",
+    "groupsTitle": "Deine Gruppen",
     "@groupsTitle": {
         "description": "groupsTitle"
     },
-    "groupsSubtitle": "Список равен группе. Пригласите людей — они увидят список.",
+    "groupsSubtitle": "Eine Liste ist eine Gruppe. Lade Personen ein — sie sehen die Liste.",
     "@groupsSubtitle": {
         "description": "groupsSubtitle"
     },
-    "groupCreate": "Создать группу",
+    "groupCreate": "Gruppe erstellen",
     "@groupCreate": {
         "description": "groupCreate"
     },
-    "groupConnect": "Присоединиться",
+    "groupConnect": "Beitreten",
     "@groupConnect": {
         "description": "groupConnect"
     },
-    "groupNameHint": "Название группы",
+    "groupNameHint": "Gruppenname",
     "@groupNameHint": {
         "description": "groupNameHint"
     },
-    "groupPersonal": "Личная",
+    "groupPersonal": "Persönlich",
     "@groupPersonal": {
         "description": "groupPersonal"
     },
-    "groupShared": "Общая",
+    "groupShared": "Geteilt",
     "@groupShared": {
         "description": "groupShared"
     },
-    "noGroups": "Пока нет ни одной группы",
+    "noGroups": "Noch keine Gruppen",
     "@noGroups": {
         "description": "noGroups"
     },
-    "settingsChangeThemeIOSEasterEgg": "* Чтобы изменить тему, откройте Настройки > PORA > Тема\n* Выберите новую тему в меню настроек\n* Нажмите «Тема» в настройках приложения, чтобы переключаться между светлой и тёмной темой",
+    "settingsChangeThemeIOSEasterEgg": "* Um das Theme zu ändern, gehe zu Einstellungen > PORA > Theme\n* Wähle ein neues Theme im Einstellungsmenü\n* Tippe in den App-Einstellungen auf „Theme“, um zwischen hellem und dunklem Modus zu wechseln",
     "@settingsChangeThemeIOSEasterEgg": {
         "description": "ios easter egg on advanced settings when tapped few times"
     },
-    "tutorialTitle": "Как это работает",
+    "tutorialTitle": "So funktioniert es",
     "@tutorialTitle": {
         "description": "tutorialTitle"
     },
-    "tutorialSkip": "Пропустить",
+    "tutorialSkip": "Überspringen",
     "@tutorialSkip": {
         "description": "tutorialSkip"
     },
-    "tutorialNext": "Далее",
+    "tutorialNext": "Weiter",
     "@tutorialNext": {
         "description": "tutorialNext"
     },
-    "tutorialDone": "Начать",
+    "tutorialDone": "Starten",
     "@tutorialDone": {
         "description": "tutorialDone"
     },
-    "tutorialInviteTitle": "Пригласите близких",
+    "tutorialInviteTitle": "Lade deine Leute ein",
     "@tutorialInviteTitle": {
         "description": "tutorialInviteTitle"
     },
-    "tutorialInviteBody": "Свайп группы вправо → «Пригласить». Партнёр видит тот же список.",
+    "tutorialInviteBody": "Wische eine Gruppe nach rechts → Einladen. Dein Partner sieht dieselbe Liste.",
     "@tutorialInviteBody": {
         "description": "tutorialInviteBody"
     },
-    "tutorialAddTitle": "Добавить продукт",
+    "tutorialAddTitle": "Füge hinzu a Produkt",
     "@tutorialAddTitle": {
         "description": "tutorialAddTitle"
     },
-    "tutorialAddBody": "Кнопка «+» внизу списка. Название, количество, раздел, приоритет — и готово.",
+    "tutorialAddBody": "Tippe unten in der Liste auf +. Name, Menge, Bereich, Priorität — fertig.",
     "@tutorialAddBody": {
         "description": "tutorialAddBody"
     },
-    "tutorialEditTitle": "Изменить и отметить",
+    "tutorialEditTitle": "Edit und check off",
     "@tutorialEditTitle": {
         "description": "tutorialEditTitle"
     },
-    "tutorialEditBody": "Тап по чекбоксу — куплено. Тап по строке — детали и правки.",
+    "tutorialEditBody": "Tippe auf das Kontrollkästchen — gekauft. Tippe auf die Zeile — Details und Bearbeiten.",
     "@tutorialEditBody": {
         "description": "tutorialEditBody"
     },
-    "tutorialDeleteTitle": "Удалить",
+    "tutorialDeleteTitle": "Löschen",
     "@tutorialDeleteTitle": {
         "description": "tutorialDeleteTitle"
     },
-    "tutorialDeleteBody": "Свайп продукта влево → «Удалить». Диалог подтверждения — можно отключить.",
+    "tutorialDeleteBody": "Wische ein Produkt nach links → Löschen. Die Bestätigung kann deaktiviert werden.",
     "@tutorialDeleteBody": {
         "description": "tutorialDeleteBody"
     },
-    "tutorialAiTitle": "Импорт рецепта",
+    "tutorialAiTitle": "Import a Rezept",
     "@tutorialAiTitle": {
         "description": "tutorialAiTitle"
     },
-    "tutorialAiBody": "Ссылку на рецепт — в поле, «Разобрать». Ингредиенты падают в список, дубли отмечаются.",
+    "tutorialAiBody": "Füge eine Rezept-URL ein und tippe auf Analysieren. Die Zutaten landen in der Liste, Duplikate werden markiert.",
     "@tutorialAiBody": {
         "description": "tutorialAiBody"
     },
-    "tutorialSettingsTitle": "Всё под рукой",
+    "tutorialSettingsTitle": "Alles griffbereit",
     "@tutorialSettingsTitle": {
         "description": "tutorialSettingsTitle"
     },
-    "tutorialSettingsBody": "Тема, язык, уведомления и подтверждения — в «Профиль → Расширенные настройки».",
+    "tutorialSettingsBody": "Theme, Sprache, Benachrichtigungen, Bestätigungen — Profil → Erweiterte Einstellungen.",
     "@tutorialSettingsBody": {
         "description": "tutorialSettingsBody"
     },
-    "showTutorial": "Показать туториал",
+    "showTutorial": "Tutorial anzeigen",
     "@showTutorial": {
         "description": "showTutorial"
     },
-    "tutorialSampleGroupFamily": "Семья",
+    "tutorialSampleGroupFamily": "Familie",
     "@tutorialSampleGroupFamily": {
         "description": "sample group name in invite animation"
     },
-    "tutorialSampleMilk": "Молоко",
+    "tutorialSampleMilk": "Milch",
     "@tutorialSampleMilk": {
         "description": "sample product"
     },
-    "tutorialSampleBread": "Хлеб",
+    "tutorialSampleBread": "Brot",
     "@tutorialSampleBread": {
         "description": "sample product"
     },
-    "tutorialSampleAvocado": "Авокадо",
+    "tutorialSampleAvocado": "Avocado",
     "@tutorialSampleAvocado": {
         "description": "sample product added in add animation"
     },
-    "tutorialSampleMilkQty": "Молоко 2×1л",
+    "tutorialSampleMilkQty": "Milch 2×1L",
     "@tutorialSampleMilkQty": {
         "description": "sample product with qty"
     },
-    "tutorialSampleCoffee": "Кофе",
+    "tutorialSampleCoffee": "Kaffee",
     "@tutorialSampleCoffee": {
         "description": "sample product"
     },
-    "tutorialSampleCola": "Кола",
+    "tutorialSampleCola": "Cola",
     "@tutorialSampleCola": {
         "description": "sample product deleted"
     },
@@ -1272,51 +1273,51 @@
     "@tutorialSampleRecipeUrl": {
         "description": "sample recipe url shown in AI import animation"
     },
-    "tutorialSampleIngredient1": "Спагетти 400 г",
+    "tutorialSampleIngredient1": "Spaghetti 400 g",
     "@tutorialSampleIngredient1": {
         "description": "sample recipe ingredient"
     },
-    "tutorialSampleIngredient2": "Помидоры 500 г",
+    "tutorialSampleIngredient2": "Tomaten 500 g",
     "@tutorialSampleIngredient2": {
         "description": "sample recipe ingredient"
     },
-    "tutorialSampleIngredient3": "Чеснок 3 зубчика",
+    "tutorialSampleIngredient3": "Garlic 3 cloves",
     "@tutorialSampleIngredient3": {
         "description": "sample recipe ingredient"
     },
-    "tutorialSampleToggleTheme": "Тема",
+    "tutorialSampleToggleTheme": "Theme",
     "@tutorialSampleToggleTheme": {
         "description": "toggle label in settings animation"
     },
-    "tutorialSampleToggleNotif": "Уведомления",
+    "tutorialSampleToggleNotif": "Benachrichtigungen",
     "@tutorialSampleToggleNotif": {
         "description": "toggle label in settings animation"
     },
-    "tutorialSampleToggleConfirm": "Подтверждение",
+    "tutorialSampleToggleConfirm": "Bestätigung",
     "@tutorialSampleToggleConfirm": {
         "description": "toggle label in settings animation"
     },
-    "tutorialConnectTitle": "Присоединиться по коду",
+    "tutorialConnectTitle": "Join by Code",
     "@tutorialConnectTitle": {
         "description": "tutorialConnectTitle"
     },
-    "tutorialConnectBody": "Партнёр даёт ссылку или код. Вставьте — попадаете в общий список.",
+    "tutorialConnectBody": "Dein Partner sendet einen Link oder Code. Füge ihn ein — du bist in der gemeinsamen Liste.",
     "@tutorialConnectBody": {
         "description": "tutorialConnectBody"
     },
-    "tutorialNotifyTitle": "Пинг «срочно нужно»",
+    "tutorialNotifyTitle": "Ping «need it now»",
     "@tutorialNotifyTitle": {
         "description": "tutorialNotifyTitle"
     },
-    "tutorialNotifyBody": "Тап «!» на продукте — партнёру прилетит push «срочно купи». Без звонков.",
+    "tutorialNotifyBody": "Tippe bei einem Produkt auf „!“ — dein Partner erhält eine Push-Nachricht „jetzt kaufen“. Keine Anrufe nötig.",
     "@tutorialNotifyBody": {
         "description": "tutorialNotifyBody"
     },
-    "tutorialOutroTitle": "А с остальным разберётесь сами",
+    "tutorialOutroTitle": "Den Rest findest du selbst heraus",
     "@tutorialOutroTitle": {
         "description": "tutorialOutroTitle"
     },
-    "tutorialOutroBody": "Тыкайте, свайпайте, ошибайтесь — приложение прощает почти всё.",
+    "tutorialOutroBody": "Tippen, wischen, etwas falsch machen — die App verzeiht fast alles.",
     "@tutorialOutroBody": {
         "description": "tutorialOutroBody"
     },
@@ -1324,139 +1325,143 @@
     "@tutorialSampleInviteCode": {
         "description": "sample invite code in connect animation"
     },
-    "tutorialSamplePushSender": "Аня",
+    "tutorialSamplePushSender": "Anna",
     "@tutorialSamplePushSender": {
         "description": "sample partner name in notify push preview"
     },
-    "tutorialSamplePushBody": "Срочно нужно молоко",
+    "tutorialSamplePushBody": "Milch nötig, dringend",
     "@tutorialSamplePushBody": {
         "description": "sample push body in notify animation"
     },
-    "tutorialSampleInviteMessage": "Присоединяйся к списку",
+    "tutorialSampleInviteMessage": "Der Liste beitreten",
     "@tutorialSampleInviteMessage": {
         "description": "sample chat message text before the invite link"
     },
-    "supportMessageBottomSheetTopDescription": "Ваше сообщение будет отправлено в службу поддержки. Пожалуйста, укажите как можно больше подробностей.",
+    "supportMessage": "E-Mail-Support",
+    "@supportMessage": {
+        "description": "Email support"
+    },
+    "supportMessageBottomSheetTopDescription": "Deine Nachricht wird an das Support-Team gesendet. Bitte gib so viele Details wie möglich an.",
     "@supportMessageBottomSheetTopDescription": {
         "description": "Your message will be sent to the support team. Please provide as much detail as possible."
     },
-    "supportMessageBottomSheetSendButton": "Отправить",
+    "supportMessageBottomSheetSendButton": "Senden",
     "@supportMessageBottomSheetSendButton": {
         "description": "Send button text in support message bottom bar"
     },
-    "supportMessageBottomSheetUnderButtonText": "Мы ответим как можно скорее на вашу почту Gmail или прямо в приложении!",
+    "supportMessageBottomSheetUnderButtonText": "Wir antworten so schnell wie möglich per Gmail oder direkt in der App!",
     "@supportMessageBottomSheetUnderButtonText": {
         "description": "supportMessageBottomSheetUnderButtonText"
     },
-    "allergen": "Аллерген",
+    "allergen": "Allergen",
     "@allergen": {
         "description": "Allergen toggle label"
     },
-    "predictionsGreeting": "Ваш день с PORA",
+    "predictionsGreeting": "Dein Tag mit PORA",
     "@predictionsGreeting": {
         "description": "predictions main greeting"
     },
-    "predictionsGreetingSub": "Умные подсказки на основе покупок",
+    "predictionsGreetingSub": "Intelligente Hinweise aus deinen Einkäufen",
     "@predictionsGreetingSub": {
         "description": "predictions greeting subtitle"
     },
-    "predictionsSectionSoon": "Скоро закончится",
+    "predictionsSectionSoon": "Running out bald",
     "@predictionsSectionSoon": {
         "description": "section title"
     },
-    "predictionsSectionOften": "Часто покупаете",
+    "predictionsSectionOften": "Du kaufst häufig",
     "@predictionsSectionOften": {
         "description": "section title"
     },
-    "predictionsSectionAiSuggests": "ИИ предлагает",
+    "predictionsSectionAiSuggests": "KI schlägt vor",
     "@predictionsSectionAiSuggests": {
         "description": "section title"
     },
-    "predictionsAiSuggestionsTitle": "Продукты и рецепты для вас",
+    "predictionsAiSuggestionsTitle": "Produkte und Rezepte für dich",
     "@predictionsAiSuggestionsTitle": {
         "description": "AI suggestions card title"
     },
-    "predictionsAiSuggestionsTopic": "ваши предпочтения и покупки",
+    "predictionsAiSuggestionsTopic": "deine Vorlieben und Einkäufe",
     "@predictionsAiSuggestionsTopic": {
         "description": "AI suggestions topic"
     },
-    "refresh": "Обновить",
+    "refresh": "Aktualisieren",
     "@refresh": {
         "description": "refresh action"
     },
-    "predictionsOftenEmpty": "Пока недостаточно данных",
+    "predictionsOftenEmpty": "Noch nicht genug Daten",
     "@predictionsOftenEmpty": {
         "description": "empty frequent products"
     },
-    "predictionsAskPora": "Спросить PORA",
+    "predictionsAskPora": "PORA fragen",
     "@predictionsAskPora": {
         "description": "FAB label"
     },
-    "kpiWeek": "продукта в неделю",
+    "kpiWeek": "Artikel pro Woche",
     "@kpiWeek": {
         "description": "kpi label"
     },
-    "kpiRecipes": "рецептов за месяц",
+    "kpiRecipes": "Rezepte diesen Monat",
     "@kpiRecipes": {
         "description": "kpi label"
     },
-    "kpiDaysToRun": "дней до закупки",
+    "kpiDaysToRun": "Tage bis zum Nachkauf",
     "@kpiDaysToRun": {
         "description": "kpi label"
     },
-    "fallbackTip1": "Храните зелень как букет: в стакане с водой, накрыв пакетом — стоит 2 недели.",
+    "fallbackTip1": "Bewahre Kräuter wie einen Blumenstrauß auf: in einem Glas Wasser und mit einem Beutel abgedeckt — hält 2 Wochen.",
     "@fallbackTip1": {
         "description": "fallback tip"
     },
-    "fallbackTip2": "Соль в тесто добавляйте в конце — она замедляет работу дрожжей.",
+    "fallbackTip2": "Gib Salz erst am Ende zum Teig — das verlangsamt die Hefe.",
     "@fallbackTip2": {
         "description": "fallback tip"
     },
-    "fallbackTip3": "Чтобы лук не жёгся при резке — подержите его 15 минут в морозилке.",
+    "fallbackTip3": "Damit Zwiebeln nicht in den Augen brennen, kühle sie vor dem Schneiden 15 Minuten im Gefrierfach.",
     "@fallbackTip3": {
         "description": "fallback tip"
     },
-    "fallbackTip4": "Пересоленный суп спасает сырой картофель: положите на 10 минут, вытащите.",
+    "fallbackTip4": "Suppe zu salzig? Eine rohe Kartoffel nimmt in 10 Minuten überschüssiges Salz auf.",
     "@fallbackTip4": {
         "description": "fallback tip"
     },
-    "fallbackTip5": "Проверяйте свежесть яиц в воде: тонет — свежее, всплывает — на выброс.",
+    "fallbackTip5": "Prüfe die Frische eines Eis im Wasser: sinkt es, ist es frisch; schwimmt es, wegwerfen.",
     "@fallbackTip5": {
         "description": "fallback tip"
     },
-    "fallbackTip6": "Разогревайте пиццу на сковороде под крышкой — корочка снова хрустит.",
+    "fallbackTip6": "Erwärme Pizza in einer abgedeckten Pfanne — der Boden wird wieder knusprig.",
     "@fallbackTip6": {
         "description": "fallback tip"
     },
-    "fallbackTip7": "Замороженное мясо режется тоньше — за 20 минут до нарезки в морозилку.",
+    "fallbackTip7": "Gefrorenes Fleisch lässt sich dünner schneiden — 20 Minuten vor dem Schneiden ins Gefrierfach.",
     "@fallbackTip7": {
         "description": "fallback tip"
     },
-    "fallbackTip8": "Лимон отдаёт больше сока если катать его ладонью по столу перед резкой.",
+    "fallbackTip8": "Rolle eine Zitrone vor dem Schneiden über die Arbeitsfläche — so bekommst du mehr Saft.",
     "@fallbackTip8": {
         "description": "fallback tip"
     },
-    "fallbackTip9": "Сахар в томатный соус убирает лишнюю кислоту — щепотки достаточно.",
+    "fallbackTip9": "Eine Prise Zucker in Tomatensauce mildert die Säure.",
     "@fallbackTip9": {
         "description": "fallback tip"
     },
-    "fallbackTip10": "Хлеб в морозилке живёт месяц; тост из замороженного — как свежий.",
+    "fallbackTip10": "Brot hält sich einen Monat im Gefrierfach; zum Toasten kann es direkt gefroren verwendet werden.",
     "@fallbackTip10": {
         "description": "fallback tip"
     },
-    "aiTipOfDayLabel": "СОВЕТ ДНЯ",
+    "aiTipOfDayLabel": "TIPP DES TAGES",
     "@aiTipOfDayLabel": {
         "description": "kicker"
     },
-    "aiTipOfDayTopic": "сегодня",
+    "aiTipOfDayTopic": "heute",
     "@aiTipOfDayTopic": {
         "description": "default topic passed to tip prompt"
     },
-    "aiCtaTitle": "Спросить PORA",
+    "aiCtaTitle": "PORA fragen",
     "@aiCtaTitle": {
         "description": "CTA title"
     },
-    "aiCtaSubtitle": "рецепты · замены · советы",
+    "aiCtaSubtitle": "Rezepte · Alternativen · Tipps",
     "@aiCtaSubtitle": {
         "description": "CTA subtitle"
     },
@@ -1464,167 +1469,167 @@
     "@chatSheetTitle": {
         "description": "chat sheet title"
     },
-    "chatSheetSubtitle": "спросите про еду, покупки, замены",
+    "chatSheetSubtitle": "Fragen zu Essen, Einkäufen und Ersatzprodukten",
     "@chatSheetSubtitle": {
         "description": "chat sheet subtitle"
     },
-    "chatEmptyTitle": "Начните разговор",
+    "chatEmptyTitle": "Gespräch starten",
     "@chatEmptyTitle": {
         "description": "chat empty state title"
     },
-    "chatEmptyExamplesLabel": "Примеры вопросов:",
+    "chatEmptyExamplesLabel": "Beispielfragen:",
     "@chatEmptyExamplesLabel": {
         "description": "chat empty state examples label"
     },
-    "chatSample1": "Что приготовить из курицы и риса?",
+    "chatSample1": "Was kann ich mit Hähnchen und Reis kochen?",
     "@chatSample1": {
         "description": "sample question"
     },
-    "chatSample2": "Чем заменить сметану в тесте?",
+    "chatSample2": "Was kann saure Sahne im Teig ersetzen?",
     "@chatSample2": {
         "description": "sample question"
     },
-    "chatSample3": "Как хранить зелень чтобы не вяла?",
+    "chatSample3": "Wie bewahre ich Kräuter auf, damit sie nicht welken?",
     "@chatSample3": {
         "description": "sample question"
     },
-    "chatSample4": "Рецепт быстрого ужина на 20 минут",
+    "chatSample4": "Schnelles 20-Minuten-Abendessen",
     "@chatSample4": {
         "description": "sample question"
     },
-    "chatSample5": "Как использовать овощи, пока они не испортились?",
+    "chatSample5": "Wie kann ich Gemüse aufbrauchen, bevor es verdirbt?",
     "@chatSample5": {
         "description": "sample question"
     },
-    "chatSample6": "Составь список для 3 простых завтраков",
+    "chatSample6": "Erstelle eine Einkaufsliste für 3 einfache Frühstücke",
     "@chatSample6": {
         "description": "sample question"
     },
-    "chatSample7": "Что приготовить на двоих при небольшом бюджете?",
+    "chatSample7": "Was soll ich für zwei Personen mit kleinem Budget kochen?",
     "@chatSample7": {
         "description": "sample question"
     },
-    "chatSample8": "Сколько хранится готовый рис в холодильнике?",
+    "chatSample8": "Wie lange kann ich gekochten Reis im Kühlschrank aufbewahren?",
     "@chatSample8": {
         "description": "sample question"
     },
-    "chatSample9": "Посоветуй вегетарианский ужин с белком",
+    "chatSample9": "Gib mir ein vegetarisches Abendessen mit viel Protein",
     "@chatSample9": {
         "description": "sample question"
     },
-    "chatSample10": "Чем заменить сливочное масло в этом рецепте?",
+    "chatSample10": "Was kann Butter in diesem Rezept ersetzen?",
     "@chatSample10": {
         "description": "sample question"
     },
-    "chatSample11": "Составь три ужина из того, что уже есть",
+    "chatSample11": "Plane drei Abendessen aus dem, was ich bereits habe",
     "@chatSample11": {
         "description": "sample question"
     },
-    "chatSample12": "Что приготовить из остатков за 15 минут?",
+    "chatSample12": "Was kann ich in 15 Minuten aus Resten kochen?",
     "@chatSample12": {
         "description": "sample question"
     },
-    "chatSample13": "Предложи рецепт без продуктов-аллергенов",
+    "chatSample13": "Schlage ein allergikerfreundliches Rezept aus meiner Liste vor",
     "@chatSample13": {
         "description": "sample question"
     },
-    "chatSample14": "Как сделать это блюдо дешевле?",
+    "chatSample14": "Wie kann ich dieses Gericht günstiger machen?",
     "@chatSample14": {
         "description": "sample question"
     },
-    "chatTyping": "PORA печатает…",
+    "chatTyping": "PORA schreibt …",
     "@chatTyping": {
         "description": "typing indicator"
     },
-    "chatInputHint": "Спросите что-нибудь…",
+    "chatInputHint": "Frag alles …",
     "@chatInputHint": {
         "description": "chat input placeholder"
     },
-    "aiModelBadge": "Работает на OpenRouter · ling-3.0-flash",
+    "aiModelBadge": "Powered by OpenRouter · ling-3.0-flash",
     "@aiModelBadge": {
         "description": "model badge"
     },
-    "seeAll": "Все",
+    "seeAll": "Alle anzeigen",
     "@seeAll": {
         "description": "see all link"
     },
-    "tipTopicHerbs": "зелень",
+    "tipTopicHerbs": "Kräuter",
     "@tipTopicHerbs": {
         "description": "predefined tip topic"
     },
-    "tipTopicBaking": "выпечка",
+    "tipTopicBaking": "Backen",
     "@tipTopicBaking": {
         "description": "predefined tip topic"
     },
-    "tipTopicSoups": "супы",
+    "tipTopicSoups": "Suppen",
     "@tipTopicSoups": {
         "description": "predefined tip topic"
     },
-    "tipTopicMeat": "мясо",
+    "tipTopicMeat": "Fleisch",
     "@tipTopicMeat": {
         "description": "predefined tip topic"
     },
-    "tipTopicFish": "рыба",
+    "tipTopicFish": "Fisch",
     "@tipTopicFish": {
         "description": "predefined tip topic"
     },
-    "tipTopicVegetables": "овощи",
+    "tipTopicVegetables": "Gemüse",
     "@tipTopicVegetables": {
         "description": "predefined tip topic"
     },
-    "tipTopicStorage": "хранение продуктов",
+    "tipTopicStorage": "Lebensmittelaufbewahrung",
     "@tipTopicStorage": {
         "description": "predefined tip topic"
     },
-    "tipTopicKitchenHacks": "кухонные лайфхаки",
+    "tipTopicKitchenHacks": "Küchentricks",
     "@tipTopicKitchenHacks": {
         "description": "predefined tip topic"
     },
-    "tipTopicSpices": "специи",
+    "tipTopicSpices": "Gewürze",
     "@tipTopicSpices": {
         "description": "predefined tip topic"
     },
-    "tipTopicDough": "тесто",
+    "tipTopicDough": "Teig",
     "@tipTopicDough": {
         "description": "predefined tip topic"
     },
-    "tipTopicBreakfast": "завтраки",
+    "tipTopicBreakfast": "Frühstücke",
     "@tipTopicBreakfast": {
         "description": "predefined tip topic"
     },
-    "tipTopicDinner": "ужины",
+    "tipTopicDinner": "Abendessen",
     "@tipTopicDinner": {
         "description": "predefined tip topic"
     },
-    "tipTopicsSectionTitle": "Темы советов",
+    "tipTopicsSectionTitle": "Tipp-Themen",
     "@tipTopicsSectionTitle": {
         "description": "settings section title"
     },
-    "tipTopicsSectionDescription": "Выберите какие темы совета появляются",
+    "tipTopicsSectionDescription": "Wähle die Themen aus, aus denen der Tipp stammt",
     "@tipTopicsSectionDescription": {
         "description": "settings section description"
     },
-    "tipTopicsAddCustom": "Добавить свою тему",
+    "tipTopicsAddCustom": "Eigenes Thema hinzufügen",
     "@tipTopicsAddCustom": {
         "description": "add custom topic hint"
     },
-    "tipTopicsCustomLabel": "Свои темы",
+    "tipTopicsCustomLabel": "Benutzerdefiniert",
     "@tipTopicsCustomLabel": {
         "description": "custom topics label"
     },
-    "tipTopicsPredefinedLabel": "Предустановленные",
+    "tipTopicsPredefinedLabel": "Vordefiniert",
     "@tipTopicsPredefinedLabel": {
         "description": "predefined topics label"
     },
-    "tipTopicsEmpty": "Ни одной темы не выбрано — совет будет общий",
+    "tipTopicsEmpty": "Keine Themen ausgewählt — der Tipp wird allgemein sein",
     "@tipTopicsEmpty": {
         "description": "warning when no topics selected"
     },
-    "insightsChampionKicker": "ЧЕМПИОН МЕСЯЦА",
+    "insightsChampionKicker": "CHAMPION DES MONATS",
     "@insightsChampionKicker": {
         "description": "champion card kicker"
     },
-    "insightsChampionSubtitle": "куплено {count} раз за месяц",
+    "insightsChampionSubtitle": "diesen Monat {count}-mal gekauft",
     "@insightsChampionSubtitle": {
         "description": "champion card subtitle",
         "placeholders": {
@@ -1633,7 +1638,7 @@
             }
         }
     },
-    "insightsStreakDays": "{days} дней подряд",
+    "insightsStreakDays": "{days} Tage in Folge",
     "@insightsStreakDays": {
         "description": "streak headline",
         "placeholders": {
@@ -1642,11 +1647,11 @@
             }
         }
     },
-    "insightsStreakSubtitle": "ведёте список — не сбавляйте",
+    "insightsStreakSubtitle": "Du bist dran — weiter so",
     "@insightsStreakSubtitle": {
         "description": "streak card subtitle"
     },
-    "insightsFreqEvery": "~раз в {days} дн.",
+    "insightsFreqEvery": "~alle {days} Tage",
     "@insightsFreqEvery": {
         "description": "frequency subtitle",
         "placeholders": {
@@ -1655,75 +1660,75 @@
             }
         }
     },
-    "insightsPopular": "Часто покупаете",
+    "insightsPopular": "Du kaufst häufig",
     "@insightsPopular": {
         "description": "popular section title"
     },
-    "insightsStatsProducts": "продуктов",
+    "insightsStatsProducts": "Produkte",
     "@insightsStatsProducts": {
         "description": "kpi label"
     },
-    "insightsStatsLoginsWeek": "входов за неделю",
+    "insightsStatsLoginsWeek": "Anmeldungen diese Woche",
     "@insightsStatsLoginsWeek": {
         "description": "kpi label"
     },
-    "insightsEmpty": "Пока нет данных — начните добавлять продукты",
+    "insightsEmpty": "Noch keine Daten — füge Produkte hinzu",
     "@insightsEmpty": {
         "description": "empty state on insights"
     },
-    "notificationsFilterAll": "Все",
+    "notificationsFilterAll": "Alle",
     "@notificationsFilterAll": {
         "description": "filter chip"
     },
-    "notificationsFilterUrgent": "Срочные",
+    "notificationsFilterUrgent": "Dringend",
     "@notificationsFilterUrgent": {
         "description": "filter chip"
     },
-    "notificationsFilterPrediction": "Предсказания",
+    "notificationsFilterPrediction": "Prognosen",
     "@notificationsFilterPrediction": {
         "description": "filter chip"
     },
-    "notificationsFilterPromo": "Промо",
+    "notificationsFilterPromo": "Werbung",
     "@notificationsFilterPromo": {
         "description": "filter chip"
     },
-    "notificationsFilterOther": "Прочее",
+    "notificationsFilterOther": "Andere",
     "@notificationsFilterOther": {
         "description": "filter chip"
     },
-    "notificationsClearAll": "Очистить все",
+    "notificationsClearAll": "Alle löschen",
     "@notificationsClearAll": {
         "description": "menu action"
     },
-    "notificationsDelete": "Удалить",
+    "notificationsDelete": "Löschen",
     "@notificationsDelete": {
         "description": "slidable action"
     },
-    "notificationsGroupToday": "Сегодня",
+    "notificationsGroupToday": "Heute",
     "@notificationsGroupToday": {
         "description": "group header"
     },
-    "notificationsGroupYesterday": "Вчера",
+    "notificationsGroupYesterday": "Gestern",
     "@notificationsGroupYesterday": {
         "description": "group header"
     },
-    "notificationsEmptyTitle": "Тишина",
+    "notificationsEmptyTitle": "Alles ruhig",
     "@notificationsEmptyTitle": {
         "description": "empty state title"
     },
-    "notificationsEmptyBody": "Новые уведомления появятся здесь",
+    "notificationsEmptyBody": "New Benachrichtigungen wird appear here",
     "@notificationsEmptyBody": {
         "description": "empty state body"
     },
-    "recipeCreateListCta": "Куда добавить рецепт?",
+    "recipeCreateListCta": "Wo soll dieses Rezept hinzugefügt werden?",
     "@recipeCreateListCta": {
         "description": "recipe cta"
     },
-    "recipeDupForceMark": "добавим ещё",
+    "recipeDupForceMark": "wird trotzdem hinzugefügt",
     "@recipeDupForceMark": {
         "description": "dup pill when user unchecks flag"
     },
-    "recipeDedupBannerMany": "{n} дубликатов будут пропущены — снимите галочки чтобы добавить принудительно",
+    "recipeDedupBannerMany": "{n} Duplikate werden übersprungen — deaktiviere die Auswahl, um sie trotzdem hinzuzufügen",
     "@recipeDedupBannerMany": {
         "description": "dedup banner",
         "placeholders": {
@@ -1732,18 +1737,16 @@
             }
         }
     },
-    "offlineWriteBlocked": "Нет интернета — изменение не сохранится",
+    "offlineWriteBlocked": "Kein Internet — die Änderung wird nicht gespeichert",
     "@offlineWriteBlocked": {
         "description": "snackbar when write attempted offline"
     },
-    "offlineReadBanner": "Работаете офлайн — данные из кэша",
+    "offlineReadBanner": "Offline — zwischengespeicherte Daten werden angezeigt",
     "@offlineReadBanner": {
         "description": "top banner when cached data shown"
     },
-    "chatImportRecipeCta": "Импортировать рецепт",
+    "chatImportRecipeCta": "Rezept importieren",
     "@chatImportRecipeCta": {
         "description": "chat bubble cta"
-    },
-    "listsEmptyTitle": "Списков у вас пока нет",
-    "listsEmptySubtitle": "Может стоит создать новый?"
+    }
 }

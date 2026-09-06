@@ -1,85 +1,87 @@
 {
-    "appName": "ПОРА",
+    "appName": "Pora",
     "@appName": {
         "description": "The name of the application"
     },
-    "language": "Язык",
+    "language": "语言",
     "@language": {
         "description": "language"
     },
-    "authUnderAppName1": "Общий список для пар и семей",
+    "authUnderAppName1": "情侣和家庭共享清单",
     "@authUnderAppName1": {
         "description": "The first line under the app name"
     },
-    "authUnderAppName2": "Рецепты, дом и доставка — в одном месте",
+    "authUnderAppName2": "食谱、家庭采购和配送，一站搞定",
     "@authUnderAppName2": {
         "description": "The second line under the app name"
     },
-    "authSubtitle2": "Начните вводить, сами определим, телефон это или почта.",
-    "@authSubtitle2": {
-        "description": "authSubtitle2"
-    },
-    "onlyYou": "Только Вы",
+    "onlyYou": "仅你",
     "@onlyYou": {
         "description": "onlyYou"
     },
-    "authSignInExpansibleExpand": "Войти иным способом",
+    "authSignInExpansibleExpand": "使用其他方式登录",
     "@authSignInExpansibleExpand": {
         "description": "The sign in with other methods title"
     },
-    "sendAgainAfter": "Отправить еще раз через...",
-    "@sendAgainAfter": {
-        "description": "The sign in with other methods title"
-    },
-    "userCreateProfileNameRequired": "Может все-же скажете имя?",
-    "@userCreateProfileNameRequired": {
-        "description": "userCreateProfileNameRequired"
-    },
-    "authSignInExpansibleCollapse": "Свернуть",
+    "listsEmptyTitle": "您还没有任何列表",
+    "listsEmptySubtitle": "要不要创建一个新的？",
+    "authSignInExpansibleCollapse": "收起",
     "@authSignInExpansibleCollapse": {
         "description": "The sign in with other methods title"
     },
-    "authSignInWithEmail": "Войти по электронной почте",
+    "sendAgainAfter": "重新发送，倒计时…",
+    "@sendAgainAfter": {
+        "description": "The sign in with other methods title"
+    },
+    "authSignInWithEmail": "使用邮箱登录",
     "@authSignInWithEmail": {
         "description": "The sign in with email button text"
     },
-    "authSignInWithGoogle": "Войти через Google",
+    "authSignInWithGoogle": "使用 Google 登录",
     "@authSignInWithGoogle": {
         "description": "The sign in with Google button text"
     },
-    "authSignInWithApple": "Войти через Apple",
+    "authSignInWithApple": "使用 Apple 登录",
     "@authSignInWithApple": {
         "description": "The sign in with Apple button text"
     },
-    "authSignInWithPhone": "Войти через телефон",
+    "authSignInWithPhone": "使用手机号登录",
     "@authSignInWithPhone": {
         "description": "The sign in with Phone button text"
     },
-    "authPrivatePolicy": "Продолжая, вы соглашаетесь с\nУсловиями и Политикой конфиденциальности",
+    "authPrivatePolicy": "By continuing, 你 agree 到 \\nTerms 和 Privacy Policy",
     "@authPrivatePolicy": {
         "description": "The private policy link text"
     },
-    "authTitle": "Почти с нами",
+    "authTitle": "快完成了",
     "@authTitle": {
         "description": "authTitle"
     },
-    "authSubtitle": "Введите номер телефона или почту — пришлём код для входа.",
+    "authSubtitle": "输入 你的 电话 number 或 邮箱 — we'll send 你 a sign-在 代码.",
     "@authSubtitle": {
         "description": "authSubtitle"
     },
-    "authJoinButton": "Присоединиться",
+    "authSubtitle2": "Start typing — we'll detect whether it's a 电话 number 或 邮箱.",
+    "@authSubtitle2": {
+        "description": "authSubtitle2"
+    },
+    "authJoinButton": "加入",
     "@authJoinButton": {
         "description": "authJoinButton"
     },
-    "commonError": "Ошибка",
+    "userCreateProfileNameRequired": "How about telling us 你的 名称?",
+    "@userCreateProfileNameRequired": {
+        "description": "userCreateProfileNameRequired"
+    },
+    "commonError": "错误",
     "@commonError": {
         "description": "commonError"
     },
-    "authErrorInvalidPhone": "Неверный телефон или email!",
+    "authErrorInvalidPhone": "Invalid 电话 / 邮箱!",
     "@authErrorInvalidPhone": {
         "description": "Invalid phone on auth screen"
     },
-    "authPhoneSendOtp": "Отправим код {isPhone, select, true{в Telegram!} false{на почту!} other{куда-то}}",
+    "authPhoneSendOtp": "We'll send 代码 onto {isPhone, select, true{Telegram!} false{email!} other{destination you wrote}}",
     "@authPhoneSendOtp": {
         "description": "Invalid phone on auth screen",
         "placeholders": {
@@ -89,43 +91,43 @@
             }
         }
     },
-    "otpTitle": "Осталось немного!",
+    "otpTitle": "快完成了！",
     "@otpTitle": {
         "description": "otpTitle"
     },
-    "otpEnterCodeSentTo": "Введите код отправленный на ",
+    "otpEnterCodeSentTo": "输入  代码 已发送 到 ",
     "@otpEnterCodeSentTo": {
         "description": "otpEnterCodeSentTo"
     },
-    "otpResendQuestion": "Не получили код?",
+    "otpResendQuestion": "Didn't receive  代码?",
     "@otpResendQuestion": {
         "description": "otpResendQuestion"
     },
-    "otpResend": "Отправить еще раз",
+    "otpResend": "重新发送",
     "@otpResend": {
         "description": "otpResend"
     },
-    "otpVerifyButton": "Проверить код",
+    "otpVerifyButton": "Verify 代码",
     "@otpVerifyButton": {
         "description": "otpVerifyButton"
     },
-    "otpValidationLength": "Введите 6-значный код",
+    "otpValidationLength": "输入  6-digit 代码",
     "@otpValidationLength": {
         "description": "otpValidationLength"
     },
-    "otpValidationDigits": "Код состоит только из цифр",
+    "otpValidationDigits": " 代码 contains digits only",
     "@otpValidationDigits": {
         "description": "otpValidationDigits"
     },
-    "authSwitchToEmail": "Войти по почте",
+    "authSwitchToEmail": "使用邮箱登录",
     "@authSwitchToEmail": {
         "description": "authSwitchToEmail"
     },
-    "authSwitchToPhone": "Войти по телефону",
+    "authSwitchToPhone": "使用手机号登录",
     "@authSwitchToPhone": {
         "description": "authSwitchToPhone"
     },
-    "onboardingStep": "Шаг {step} из {total}",
+    "onboardingStep": "第 {step} 步，共 {total} 步",
     "@onboardingStep": {
         "placeholders": {
             "step": {
@@ -136,555 +138,547 @@
             }
         }
     },
-    "onboardingSlide1Title": "Рецепт → список\nза секунды",
+    "onboardingSlide1Title": "食谱 → 清单\\nin seconds",
     "@onboardingSlide1Title": {
         "description": "onboardingSlide1Title"
     },
-    "onboardingSlide1Body": "Киньте ссылку на рецепт — Pora соберёт ингредиенты и уберёт то, что уже есть.",
+    "onboardingSlide1Body": "Drop a 食谱 link — Pora collects  食材 和 removes what 你 已经 有.",
     "@onboardingSlide1Body": {
         "description": "onboardingSlide1Body"
     },
-    "onboardingSlide2Title": "Один список\nна двоих",
+    "onboardingSlide2Title": "一 清单\\nfor 二",
     "@onboardingSlide2Title": {
         "description": "onboardingSlide2Title"
     },
-    "onboardingSlide2Body": "Добавляйте вместе — видно, кто что внёс. Партнёр захватит нужное по дороге домой.",
+    "onboardingSlide2Body": "Add things together — 你 可以 see who 已添加 what. 你的 partner 可以 pick up what 你 need 在  way home.",
     "@onboardingSlide2Body": {
         "description": "onboardingSlide2Body"
     },
-    "onboardingSlide3Title": "Pora знает,\nкогда пора",
+    "onboardingSlide3Title": "Pora 知道\n什么时候该买",
     "@onboardingSlide3Title": {
         "description": "onboardingSlide3Title"
     },
-    "onboardingSlide3Body": "По вашим покупкам подскажет, что скоро закончится, и закажет в один тап.",
+    "onboardingSlide3Body": "Based 在 你的 purchases, Pora predicts what 将 run out 很快 和 lets 你 订单 it 和 一 点击.",
     "@onboardingSlide3Body": {
         "description": "onboardingSlide3Body"
     },
-    "onboardingSkip": "Пропустить",
+    "onboardingSkip": "跳过",
     "@onboardingSkip": {
         "description": "onboardingSkip"
     },
-    "onboardingStart": "Начать",
+    "onboardingStart": "开始",
     "@onboardingStart": {
         "description": "onboardingStart"
     },
-    "onboardingNext": "Далее",
+    "onboardingNext": "下一步",
     "@onboardingNext": {
         "description": "onboardingNext"
     },
-    "splashTagline": "Список, который помнит за вас",
+    "splashTagline": " 清单 that remembers 用于 你",
     "@splashTagline": {
         "description": "splashTagline"
     },
-    "briefTitle": "Что у вас часто заканчивается?",
+    "briefTitle": "What do 你 often run out of?",
     "@briefTitle": {
         "description": "briefTitle"
     },
-    "briefAddYourOwn": "Добавить",
-    "@briefAddYourOwn": {
-        "description": "briefAddYourOwn"
-    },
-    "briefInputProduct": "Введите продукт или вид",
-    "@briefInputProduct": {
-        "description": "briefInputProduct"
-    },
-    "briefAlreadyContains": "Данный продукт уже выбран",
-    "@briefAlreadyContains": {
-        "description": "briefAlreadyContains"
-    },
-    "briefDeletionTitle": "Вы уверены что хотите удалить продукт?",
+    "briefDeletionTitle": "是 你 sure 你 want 到 删除 这个 商品?",
     "@briefDeletionTitle": {
         "description": "briefDeletionTitle"
     },
-    "briefInputEmoji": "Введите эмодзи/обозначение для продукта",
+    "briefAddYourOwn": "添加",
+    "@briefAddYourOwn": {
+        "description": "briefAddYourOwn"
+    },
+    "briefInputProduct": "输入 a 商品 或 category",
+    "@briefInputProduct": {
+        "description": "briefInputProduct"
+    },
+    "briefInputEmoji": "输入 an emoji/icon 用于  商品",
     "@briefInputEmoji": {
         "description": "briefInputEmoji"
     },
-    "briefSubtitle": "Отметьте продукты — Pora напомнит вовремя. Это можно пропустить.",
+    "briefAlreadyContains": "这个 商品 是 已经 已选择",
+    "@briefAlreadyContains": {
+        "description": "briefAlreadyContains"
+    },
+    "briefSubtitle": "选择 商品 — Pora 将 remind 你 at  right time. 你 可以 skip 这个.",
     "@briefSubtitle": {
         "description": "briefSubtitle"
     },
-    "briefSkip": "Пропустить",
+    "briefSkip": "跳过",
     "@briefSkip": {
         "description": "briefSkip"
     },
-    "briefNext": "Далее",
+    "briefNext": "下一步",
     "@briefNext": {
         "description": "briefNext"
     },
-    "briefItemMilk": "Молоко",
+    "briefItemMilk": "牛奶",
     "@briefItemMilk": {
         "description": "briefItemMilk"
     },
-    "briefItemBread": "Хлеб",
+    "briefItemBread": "面包",
     "@briefItemBread": {
         "description": "briefItemBread"
     },
-    "briefItemEggs": "Яйца",
+    "briefItemEggs": "鸡蛋",
     "@briefItemEggs": {
         "description": "briefItemEggs"
     },
-    "briefItemCoffee": "Кофе",
+    "briefItemCoffee": "咖啡",
     "@briefItemCoffee": {
         "description": "briefItemCoffee"
     },
-    "briefItemCheese": "Сыр",
+    "briefItemCheese": "奶酪",
     "@briefItemCheese": {
         "description": "briefItemCheese"
     },
-    "briefItemBananas": "Бананы",
+    "briefItemBananas": "香蕉",
     "@briefItemBananas": {
         "description": "briefItemBananas"
     },
-    "briefItemButter": "Масло",
+    "briefItemButter": "黄油",
     "@briefItemButter": {
         "description": "briefItemButter"
     },
-    "briefItemWater": "Вода",
+    "briefItemWater": "水",
     "@briefItemWater": {
         "description": "briefItemWater"
     },
-    "briefItemVegetables": "Овощи",
+    "briefItemVegetables": "蔬菜",
     "@briefItemVegetables": {
         "description": "briefItemVegetables"
     },
-    "briefItemTomatoes": "Помидоры",
+    "briefItemTomatoes": "番茄",
     "@briefItemTomatoes": {
         "description": "briefItemTomatoes"
     },
-    "briefItemPasta": "Паста",
+    "briefItemPasta": "意面",
     "@briefItemPasta": {
         "description": "briefItemPasta"
     },
-    "briefItemChicken": "Курица",
+    "briefItemChicken": "鸡肉",
     "@briefItemChicken": {
         "description": "briefItemChicken"
     },
-    "listTitle": "Наш список",
+    "listTitle": "我们的清单",
     "@listTitle": {
         "description": "listTitle"
     },
-    "listMembersCount": "2 человека · 8 продуктов",
+    "listMembersCount": "2 人 · 8 商品",
     "@listMembersCount": {
         "description": "listMembersCount"
     },
-    "listUrgent": "Срочно",
+    "listUrgent": "紧急",
     "@listUrgent": {
         "description": "listUrgent"
     },
-    "listAdd": "Добавить",
+    "listAdd": "添加",
     "@listAdd": {
         "description": "listAdd"
     },
-    "predictionsTitle": "Пора поможет!",
+    "predictionsTitle": "Pora 可以 help!",
     "@predictionsTitle": {
         "description": "predictionsTitle"
     },
-    "predictionTip": "Малюсенький советик",
-    "@predictionTip": {
-        "description": "predictionTip"
-    },
-    "supportMessage": "Написать письмо в поддержку",
-    "@supportMessage": {
-        "description": "Написать письмо в поддержку"
-    },
-    "predictionsSubtitle": "Скоро закончится — по вашим покупкам",
+    "predictionsSubtitle": "Running out 很快 — based 在 你的 purchases",
     "@predictionsSubtitle": {
         "description": "predictionsSubtitle"
     },
-    "predictionsOrderTitle": "Заказать всё в один тап",
+    "predictionTip": "小提示",
+    "@predictionTip": {
+        "description": "predictionTip"
+    },
+    "predictionsOrderTitle": "订单 everything 和 一 点击",
     "@predictionsOrderTitle": {
         "description": "predictionsOrderTitle"
     },
-    "predictionsOrderSubtitle": "Самокат · доставка за 15 минут",
+    "predictionsOrderSubtitle": "Samokat · 配送 在 15 分钟",
     "@predictionsOrderSubtitle": {
         "description": "predictionsOrderSubtitle"
     },
-    "predictionsOrderDiscount": "−15% на первый заказ",
+    "predictionsOrderDiscount": "15% off 你的 first 订单",
     "@predictionsOrderDiscount": {
         "description": "predictionsOrderDiscount"
     },
-    "predictionsAddToList": "В список",
+    "predictionsAddToList": "Add 到 清单",
     "@predictionsAddToList": {
         "description": "predictionsAddToList"
     },
-    "predictionsDismiss": "Не надо",
+    "predictionsDismiss": "没有 thanks",
     "@predictionsDismiss": {
         "description": "predictionsDismiss"
     },
-    "itemDetailName": "Молоко",
+    "itemDetailName": "牛奶",
     "@itemDetailName": {
         "description": "itemDetailName"
     },
-    "itemDetailSubtitle": "2 л · Молочное",
+    "itemDetailSubtitle": "2 L · 乳制品",
     "@itemDetailSubtitle": {
         "description": "itemDetailSubtitle"
     },
-    "itemDetailAddedBy": "Добавил(а)",
+    "itemDetailAddedBy": "已添加 by",
     "@itemDetailAddedBy": {
         "description": "itemDetailAddedBy"
     },
-    "itemDetailSection": "Раздел",
+    "itemDetailSection": "分类",
     "@itemDetailSection": {
         "description": "itemDetailSection"
     },
-    "itemDetailSectionValue": "Молочное",
+    "itemDetailSectionValue": "乳制品",
     "@itemDetailSectionValue": {
         "description": "itemDetailSectionValue"
     },
-    "itemDetailQuantity": "Количество",
+    "itemDetailQuantity": "数量",
     "@itemDetailQuantity": {
         "description": "itemDetailQuantity"
     },
-    "itemDetailQuantityValue": "2 л",
+    "itemDetailQuantityValue": "2 L",
     "@itemDetailQuantityValue": {
         "description": "itemDetailQuantityValue"
     },
-    "itemDetailUrgent": "Срочно",
+    "itemDetailUrgent": "紧急",
     "@itemDetailUrgent": {
         "description": "itemDetailUrgent"
     },
-    "itemDetailRemind": "Напоминать",
+    "itemDetailRemind": "提醒我",
     "@itemDetailRemind": {
         "description": "itemDetailRemind"
     },
-    "itemDetailRemindEvery": "Каждые 7 дней",
+    "itemDetailRemindEvery": "Every 7 天",
     "@itemDetailRemindEvery": {
         "description": "itemDetailRemindEvery"
     },
-    "itemDetailInsight": "Покупаете ~раз в 7 дней · последний раз 6 дней назад. Скоро предложу докупить.",
+    "itemDetailInsight": "你 buy it about every 7 天 · last bought 6 天 ago. I'll suggest restocking 很快.",
     "@itemDetailInsight": {
         "description": "itemDetailInsight"
     },
-    "itemDetailMarkBought": "Отметить купленным",
+    "itemDetailMarkBought": "标记为已购买",
     "@itemDetailMarkBought": {
         "description": "itemDetailMarkBought"
     },
-    "itemDetailDelete": "Удалить из списка",
+    "itemDetailDelete": "移除 来自 清单",
     "@itemDetailDelete": {
         "description": "itemDetailDelete"
     },
-    "addItemTitle": "Добавить продукт",
+    "addItemTitle": "Add 商品",
     "@addItemTitle": {
         "description": "addItemTitle"
     },
-    "addItemExampleValue": "Авокадо",
+    "addItemExampleValue": "牛油果",
     "@addItemExampleValue": {
         "description": "addItemExampleValue"
     },
-    "addItemNameHint": "Название продукта",
+    "addItemNameHint": "商品 名称",
     "@addItemNameHint": {
         "description": "addItemNameHint"
     },
-    "addItemQuantity": "Количество",
+    "addItemQuantity": "数量",
     "@addItemQuantity": {
         "description": "addItemQuantity"
     },
-    "addItemSection": "Раздел",
+    "addItemSection": "分类",
     "@addItemSection": {
         "description": "addItemSection"
     },
-    "addItemUrgent": "Срочно",
+    "addItemUrgent": "紧急",
     "@addItemUrgent": {
         "description": "addItemUrgent"
     },
-    "addItemUrgentSubtitle": "Нужно купить сегодня",
+    "addItemUrgentSubtitle": "Need 到 buy 今天",
     "@addItemUrgentSubtitle": {
         "description": "addItemUrgentSubtitle"
     },
-    "addItemRemind": "Напоминать регулярно",
+    "addItemRemind": "定期提醒",
     "@addItemRemind": {
         "description": "addItemRemind"
     },
-    "addItemRemindEvery": "Каждые 7 дней",
+    "addItemRemindEvery": "Every 7 天",
     "@addItemRemindEvery": {
         "description": "addItemRemindEvery"
     },
-    "addItemSubmit": "Добавить в список",
+    "addItemSubmit": "Add 到 清单",
     "@addItemSubmit": {
         "description": "addItemSubmit"
     },
-    "settingsTitle": "Настройки",
+    "settingsTitle": "设置",
     "@settingsTitle": {
         "description": "settingsTitle"
     },
-    "settingsHouseholdSection": "Хозяйство",
+    "settingsHouseholdSection": "家庭",
     "@settingsHouseholdSection": {
         "description": "settingsHouseholdSection"
     },
-    "settingsAppSection": "Приложение",
+    "settingsAppSection": "应用",
     "@settingsAppSection": {
         "description": "settingsAppSection"
     },
-    "settingsNotifications": "Уведомления",
+    "settingsNotifications": "通知",
     "@settingsNotifications": {
         "description": "settingsNotifications"
     },
-    "settingsDelivery": "Доставка",
+    "settingsDelivery": "配送",
     "@settingsDelivery": {
         "description": "settingsDelivery"
     },
-    "settingsProAd": "Pora+ · без рекламы",
+    "settingsProAd": "Pora+ · ad-免费",
     "@settingsProAd": {
         "description": "settingsProAd"
     },
-    "settingsTryPill": "Попробовать",
+    "settingsTryPill": "试用",
     "@settingsTryPill": {
         "description": "settingsTryPill"
     },
-    "settingsPrivacy": "Приватность и данные",
+    "settingsPrivacy": "隐私与数据",
     "@settingsPrivacy": {
         "description": "settingsPrivacy"
     },
-    "settingsAboutPora": "О Pora",
+    "settingsAboutPora": "关于 Pora",
     "@settingsAboutPora": {
         "description": "settingsAboutPora"
     },
-    "settingsLogout": "Выйти",
+    "settingsLogout": "退出登录",
     "@settingsLogout": {
         "description": "settingsLogout"
     },
-    "settingsMembersNames": "Борис и Анна",
+    "settingsMembersNames": "Boris 和 Anna",
     "@settingsMembersNames": {
         "description": "settingsMembersNames"
     },
-    "settingsInvitePill": "Пригласить",
+    "settingsInvitePill": "邀请",
     "@settingsInvitePill": {
         "description": "settingsInvitePill"
     },
-    "householdInviteTitle": "Пригласить партнёра",
+    "householdInviteTitle": "Invite 你的 partner",
     "@householdInviteTitle": {
         "description": "householdInviteTitle"
     },
-    "householdCookTogether": "Готовьте вместе",
+    "householdCookTogether": "一起做饭",
     "@householdCookTogether": {
         "description": "householdCookTogether"
     },
-    "householdInviteDescription": "Pora работает лучше вдвоём. Пригласите партнёра — список и напоминания станут общими.",
+    "householdInviteDescription": "Pora works better 用于 二. Invite 你的 partner — 你的 清单 和 reminders 将 be 共享.",
     "@householdInviteDescription": {
         "description": "householdInviteDescription"
     },
-    "householdCopyCode": "Скопировали в буфер обмена!",
-    "@householdCopyCode": {
-        "description": "householdCopyCode"
-    },
-    "householdShareLink": "Поделиться ссылкой",
+    "householdShareLink": "分享链接",
     "@householdShareLink": {
         "description": "householdShareLink"
     },
-    "householdShowQr": "Показать QR-код",
+    "householdShowQr": "显示二维码",
     "@householdShowQr": {
         "description": "householdShowQr"
     },
-    "householdDoLater": "Сделаю позже",
-    "@householdDoLater": {
-        "description": "householdDoLater"
-    },
-    "householdInviteCodeLabel": "Код приглашения",
-    "@householdInviteCodeLabel": {
-        "description": "householdInviteCodeLabel"
-    },
-    "householdConnectToFamily": "Подключиться к семье",
+    "householdConnectToFamily": "加入家庭",
     "@householdConnectToFamily": {
         "description": "householdConnectToFamily"
     },
-    "householdWriteCode": "Введите код приглашения",
-    "@householdWriteCode": {
-        "description": "householdWriteCode"
-    },
-    "householdInviteDescriptionWhenConnecting": "Определили код приглашения, но вы и сами можете его ввести, если мы ошиблись",
+    "householdInviteDescriptionWhenConnecting": "We detected an invite 代码, but 你 可以 enter it yourself if we got it wrong",
     "@householdInviteDescriptionWhenConnecting": {
         "description": "householdInviteDescriptionWhenConnecting"
     },
-    "householdGotInvited": "Вас пригласили в семью",
+    "householdGotInvited": "你've been invited 到 a 家庭",
     "@householdGotInvited": {
         "description": "householdGotInvited"
     },
-    "householdCopyPill": "Копировать",
+    "householdWriteCode": "输入 invite 代码",
+    "@householdWriteCode": {
+        "description": "householdWriteCode"
+    },
+    "householdDoLater": "我稍后再做",
+    "@householdDoLater": {
+        "description": "householdDoLater"
+    },
+    "householdCopyCode": "已复制到剪贴板！",
+    "@householdCopyCode": {
+        "description": "householdCopyCode"
+    },
+    "householdInviteCodeLabel": "邀请码",
+    "@householdInviteCodeLabel": {
+        "description": "householdInviteCodeLabel"
+    },
+    "householdCopyPill": "复制",
     "@householdCopyPill": {
         "description": "householdCopyPill"
     },
-    "notificationsTitle": "Уведомления",
+    "notificationsTitle": "通知",
     "@notificationsTitle": {
         "description": "notificationsTitle"
     },
-    "notificationsReadAll": "Прочитать все",
+    "notificationsReadAll": "全部已读",
     "@notificationsReadAll": {
         "description": "notificationsReadAll"
     },
-    "notificationsMilkTitle": "По дороге домой захвати молоко",
+    "notificationsMilkTitle": "Grab 牛奶 在 你的 way home",
     "@notificationsMilkTitle": {
         "description": "notificationsMilkTitle"
     },
-    "notificationsMilkBody": "Оно кончилось — Анна отметила 10 минут назад.",
+    "notificationsMilkBody": "It's run out — Anna marked it 10 分钟 ago.",
     "@notificationsMilkBody": {
         "description": "notificationsMilkBody"
     },
-    "notificationsMilkTime": "5 минут назад",
+    "notificationsMilkTime": "5 分钟 ago",
     "@notificationsMilkTime": {
         "description": "notificationsMilkTime"
     },
-    "notificationsCoffeeTitle": "Скоро закончится кофе",
+    "notificationsCoffeeTitle": "咖啡 是 running out 很快",
     "@notificationsCoffeeTitle": {
         "description": "notificationsCoffeeTitle"
     },
-    "notificationsCoffeeBody": "Покупаете ~раз в 14 дней, прошло 12.",
+    "notificationsCoffeeBody": "你 buy it about every 14 天, 12 有 passed.",
     "@notificationsCoffeeBody": {
         "description": "notificationsCoffeeBody"
     },
-    "notificationsPartnerAddedTitle": "Анна добавила 2 продукта",
+    "notificationsPartnerAddedTitle": "Anna 已添加 2 商品",
     "@notificationsPartnerAddedTitle": {
         "description": "notificationsPartnerAddedTitle"
     },
-    "notificationsPartnerAddedBody": "Бананы и Хлеб — в общем списке.",
+    "notificationsPartnerAddedBody": "香蕉 和 面包 是 在  共享 清单.",
     "@notificationsPartnerAddedBody": {
         "description": "notificationsPartnerAddedBody"
     },
-    "notificationsPartnerAddedTime": "Сегодня, 9:12",
+    "notificationsPartnerAddedTime": "今天, 9:12",
     "@notificationsPartnerAddedTime": {
         "description": "notificationsPartnerAddedTime"
     },
-    "notificationsPromoTitle": "−15% на первый заказ в Самокате",
+    "notificationsPromoTitle": "15% off 你的 first Samokat 订单",
     "@notificationsPromoTitle": {
         "description": "notificationsPromoTitle"
     },
-    "notificationsPromoBody": "Промо активно ещё 6 дней.",
+    "notificationsPromoBody": " promo 是 active 用于 6 more 天.",
     "@notificationsPromoBody": {
         "description": "notificationsPromoBody"
     },
-    "notificationsPromoTime": "Вчера",
+    "notificationsPromoTime": "昨天",
     "@notificationsPromoTime": {
         "description": "notificationsPromoTime"
     },
-    "notificationsOrderDeliveredTitle": "Заказ доставлен",
+    "notificationsOrderDeliveredTitle": "订单 delivered",
     "@notificationsOrderDeliveredTitle": {
         "description": "notificationsOrderDeliveredTitle"
     },
-    "notificationsOrderDeliveredBody": "8 продуктов · Самокат · ₽1 054.",
+    "notificationsOrderDeliveredBody": "8 商品 · Samokat · ₽1,054",
     "@notificationsOrderDeliveredBody": {
         "description": "notificationsOrderDeliveredBody"
     },
-    "notificationsAddToListPill": "＋ В список",
+    "notificationsAddToListPill": "＋ Add 到 清单",
     "@notificationsAddToListPill": {
         "description": "notificationsAddToListPill"
     },
-    "userCreateProfileTitle": "Как вас зовут?",
+    "userCreateProfileTitle": "What's 你的 名称?",
     "@userCreateProfileTitle": {
         "description": "userCreateProfileTitle"
     },
-    "userCreateProfileSubtitle": "Добавьте имя и фото — их увидит партнёр в общем списке.",
+    "userCreateProfileSubtitle": "Add a 名称 和 照片 — 你的 partner 将 see them 在  共享 清单.",
     "@userCreateProfileSubtitle": {
         "description": "userCreateProfileSubtitle"
     },
-    "userCreateProfileNameHint": "Ваше имя",
+    "userCreateProfileNameHint": "你的 名称",
     "@userCreateProfileNameHint": {
         "description": "userCreateProfileNameHint"
     },
-    "userCreateProfileSkip": "Пропустить",
+    "userCreateProfileSkip": "跳过",
     "@userCreateProfileSkip": {
         "description": "userCreateProfileSkip"
     },
-    "userCreateProfileNext": "Далее",
+    "userCreateProfileNext": "下一步",
     "@userCreateProfileNext": {
         "description": "userCreateProfileNext"
     },
-    "searchTitle": "Поиск",
+    "searchTitle": "搜索",
     "@searchTitle": {
         "description": "searchTitle"
     },
-    "searchHint": "Название продукта…",
+    "searchHint": "商品 或 食谱…",
     "@searchHint": {
         "description": "searchHint"
     },
-    "searchFilterAll": "Всё",
+    "searchFilterAll": "全部",
     "@searchFilterAll": {
         "description": "searchFilterAll"
     },
-    "searchFilterVegetables": "Овощи",
+    "searchFilterVegetables": "蔬菜",
     "@searchFilterVegetables": {
         "description": "searchFilterVegetables"
     },
-    "update": "Обновить",
-    "@update": {
-        "description": "update"
-    },
-    "searchFilterDairy": "Молочное",
+    "searchFilterDairy": "乳制品",
     "@searchFilterDairy": {
         "description": "searchFilterDairy"
     },
-    "searchFilterGrocery": "Бакалея",
+    "searchFilterGrocery": "杂货",
     "@searchFilterGrocery": {
         "description": "searchFilterGrocery"
     },
-    "searchFilterRecipes": "Рецепты",
+    "searchFilterRecipes": "食谱",
     "@searchFilterRecipes": {
         "description": "searchFilterRecipes"
     },
-    "searchResults": "Результаты",
+    "searchResults": "结果",
     "@searchResults": {
         "description": "searchResults"
     },
-    "searchNothingFound": "Ничего не найдено",
+    "searchNothingFound": "未找到内容",
     "@searchNothingFound": {
         "description": "searchNothingFound"
     },
-    "insightsTitle": "Инсайты",
+    "insightsTitle": "洞察",
     "@insightsTitle": {
         "description": "insightsTitle"
     },
-    "insightsTipKicker": "✨ СОВЕТ PORA",
+    "insightsTipKicker": "✨ PORA 提示",
     "@insightsTipKicker": {
         "description": "insightsTipKicker"
     },
-    "insightsTipTitle": "Вы любите карбонару!",
+    "insightsTipTitle": "你 love carbonara!",
     "@insightsTipTitle": {
         "description": "insightsTipTitle"
     },
-    "insightsTipBody": "Похожий профиль вкуса — попробуйте мак-н-чиз. 4 из 6 ингредиентов у вас уже бывают регулярно.",
+    "insightsTipBody": "Similar flavor profile — try mac 和 奶酪. 你 已经 regularly 有 4 of 6 食材.",
     "@insightsTipBody": {
         "description": "insightsTipBody"
     },
-    "insightsTipAction": "Открыть рецепт →",
+    "insightsTipAction": "打开 食谱 →",
     "@insightsTipAction": {
         "description": "insightsTipAction"
     },
-    "insightsRunsOutMost": "Чаще всего заканчивается",
+    "insightsRunsOutMost": "最常用完",
     "@insightsRunsOutMost": {
         "description": "insightsRunsOutMost"
     },
-    "insightsFavoriteCuisines": "Любимые кухни",
+    "insightsFavoriteCuisines": "常吃的菜系",
     "@insightsFavoriteCuisines": {
         "description": "insightsFavoriteCuisines"
     },
-    "insightsCuisineItalian": "Итальянская",
+    "insightsCuisineItalian": "意大利菜",
     "@insightsCuisineItalian": {
         "description": "insightsCuisineItalian"
     },
-    "insightsCuisinePasta": "Паста",
+    "insightsCuisinePasta": "意面",
     "@insightsCuisinePasta": {
         "description": "insightsCuisinePasta"
     },
-    "insightsCuisineBreakfasts": "Завтраки",
+    "insightsCuisineBreakfasts": "早餐",
     "@insightsCuisineBreakfasts": {
         "description": "insightsCuisineBreakfasts"
     },
-    "insightsCuisineLight": "Лёгкое",
+    "insightsCuisineLight": "浅色",
     "@insightsCuisineLight": {
         "description": "insightsCuisineLight"
     },
-    "orderTitle": "Заказ",
+    "orderTitle": "订单",
     "@orderTitle": {
         "description": "orderTitle"
     },
-    "orderCart": "Корзина",
+    "orderCart": "购物车",
     "@orderCart": {
         "description": "orderCart"
     },
-    "orderWhenToDeliver": "Когда доставить",
+    "orderWhenToDeliver": "配送时间",
     "@orderWhenToDeliver": {
         "description": "orderWhenToDeliver"
     },
-    "orderCheckoutCta": "Заказать в Самокате · {total}",
+    "orderCheckoutCta": "订单 来自 Samokat · {total}",
     "@orderCheckoutCta": {
         "placeholders": {
             "total": {
@@ -692,207 +686,211 @@
             }
         }
     },
-    "orderSummaryGoods": "Товары",
+    "orderSummaryGoods": "商品",
     "@orderSummaryGoods": {
         "description": "orderSummaryGoods"
     },
-    "orderSummaryDiscount": "Скидка −15%",
+    "orderSummaryDiscount": "立减 15%",
     "@orderSummaryDiscount": {
         "description": "orderSummaryDiscount"
     },
-    "orderSummaryDelivery": "Доставка",
+    "orderSummaryDelivery": "配送",
     "@orderSummaryDelivery": {
         "description": "orderSummaryDelivery"
     },
-    "orderSummaryFree": "Бесплатно",
+    "orderSummaryFree": "免费",
     "@orderSummaryFree": {
         "description": "orderSummaryFree"
     },
-    "orderSummaryTotal": "Итого",
+    "orderSummaryTotal": "合计",
     "@orderSummaryTotal": {
         "description": "orderSummaryTotal"
     },
-    "recipeImportTitle": "Рецепт по ссылке",
+    "recipeImportTitle": "食谱 来自 a link",
     "@recipeImportTitle": {
         "description": "recipeImportTitle"
     },
-    "recipePreviewTitle": "Паста Карбонара",
+    "recipePreviewTitle": "Pasta Carbonara",
     "@recipePreviewTitle": {
         "description": "recipePreviewTitle"
     },
-    "recipePreviewMeta": "eda.ru · 25 мин · 2 порции",
+    "recipePreviewMeta": "eda.ru · 25 分钟 · 2 份",
     "@recipePreviewMeta": {
         "description": "recipePreviewMeta"
     },
-    "recipePreviewFound": "6 ингредиентов найдено",
+    "recipePreviewFound": "6 食材 found",
     "@recipePreviewFound": {
         "description": "recipePreviewFound"
     },
-    "recipeDedupBanner": "2 совпадения убрали, чтобы не дублировать с вашим списком",
+    "recipeDedupBanner": "Removed 2 duplicates 到 avoid duplicating items 已经 在 你的 清单",
     "@recipeDedupBanner": {
         "description": "recipeDedupBanner"
     },
-    "recipeIngredients": "Ингредиенты",
+    "recipeIngredients": "食材",
     "@recipeIngredients": {
         "description": "recipeIngredients"
     },
-    "recipeAddToListCta": "Добавить 4 продукта в список",
+    "recipeAddToListCta": "Add 4 商品 到 清单",
     "@recipeAddToListCta": {
         "description": "recipeAddToListCta"
     },
-    "recipeParseButton": "Разобрать",
+    "recipeParseButton": "解析",
     "@recipeParseButton": {
         "description": "recipeParseButton"
     },
-    "navList": "Список",
+    "navList": "清单",
     "@navList": {
         "description": "navList"
     },
-    "navPora": "Пора",
+    "navPora": "Pora",
     "@navPora": {
         "description": "navPora"
     },
-    "navOrder": "Заказ",
+    "navOrder": "订单",
     "@navOrder": {
         "description": "navOrder"
     },
-    "navProfile": "Профиль",
+    "navProfile": "个人资料",
     "@navProfile": {
         "description": "navProfile"
     },
-    "familiesTitle": "Семьи",
+    "familiesTitle": "家庭",
     "@familiesTitle": {
         "description": "familiesTitle"
     },
-    "familiesSubtitle": "Выберите семью, чтобы открыть её список",
+    "familiesSubtitle": "选择 a 家庭 到 打开 its 清单",
     "@familiesSubtitle": {
         "description": "familiesSubtitle"
     },
-    "familiesCurrent": "Текущая",
+    "familiesCurrent": "当前",
     "@familiesCurrent": {
         "description": "familiesCurrent"
     },
-    "familiesCreateDialog": "Как назовем семью?",
-    "@familiesCreateDialog": {
-        "description": "familiesCreateDialog"
-    },
-    "tryToUpdate": "Попробуйте обновить",
-    "@tryToUpdate": {
-        "description": "tryToUpdate"
-    },
-    "checkOut": "Проверить",
-    "@checkOut": {
-        "description": "checkOut"
-    },
-    "settingsMore": "Углубленные",
-    "@settingsMore": {
-        "description": "settingsMore"
-    },
-    "listsYour": "Ваш личный список",
-    "@listsYour": {
-        "description": "listsYour"
-    },
-    "human": "человека",
-    "@human": {
-        "description": "human"
-    },
-    "connectionSuccess": "Присоединились",
-    "@connectionSuccess": {
-        "description": "connectionSuccess"
-    },
-    "products": "продуктов",
-    "@products": {
-        "description": "products"
-    },
-    "lists": "списков",
-    "@lists": {
-        "description": "lists"
-    },
-    "familiesCreateOrJoin": "＋ Создать или присоединиться",
+    "familiesCreateOrJoin": "＋ Create 或 join",
     "@familiesCreateOrJoin": {
         "description": "familiesCreateOrJoin"
     },
-    "familiesNoUrgent": "Нет срочного",
+    "familiesCreateDialog": "What should we call  家庭?",
+    "@familiesCreateDialog": {
+        "description": "familiesCreateDialog"
+    },
+    "tryToUpdate": "尝试刷新",
+    "@tryToUpdate": {
+        "description": "tryToUpdate"
+    },
+    "checkOut": "检查",
+    "@checkOut": {
+        "description": "checkOut"
+    },
+    "settingsMore": "高级",
+    "@settingsMore": {
+        "description": "settingsMore"
+    },
+    "listsYour": "你的个人清单",
+    "@listsYour": {
+        "description": "listsYour"
+    },
+    "human": "人",
+    "@human": {
+        "description": "human"
+    },
+    "products": "件商品",
+    "@products": {
+        "description": "products"
+    },
+    "lists": "个清单",
+    "@lists": {
+        "description": "lists"
+    },
+    "update": "刷新",
+    "@update": {
+        "description": "update"
+    },
+    "connectionSuccess": "已加入",
+    "@connectionSuccess": {
+        "description": "connectionSuccess"
+    },
+    "familiesNoUrgent": "暂无紧急事项",
     "@familiesNoUrgent": {
         "description": "familiesNoUrgent"
     },
-    "welcomeBackTitle": "Вспомнили вас!",
+    "welcomeBackTitle": "欢迎回来！",
     "@welcomeBackTitle": {
         "description": "welcomeBackTitle"
     },
-    "welcomeBackSubtitle": "Секунду, открываем ваш список…",
+    "welcomeBackSubtitle": "一 second, opening 你的 清单…",
     "@welcomeBackSubtitle": {
         "description": "welcomeBackSubtitle"
     },
-    "errorDuringLoading": "Ошибка при загрузке",
+    "errorDuringLoading": "加载时出错",
     "@errorDuringLoading": {
         "description": "errorDuringLoading"
     },
-    "familyName": "Имя семьи",
+    "familyName": "家庭名称",
     "@familyName": {
         "description": "nameOfFamily"
     },
-    "familiesCreate": "Создать",
+    "familiesCreate": "创建",
     "@familiesCreate": {
         "description": "createButton"
     },
-    "familiesConnect": "Присоединиться",
+    "familiesConnect": "加入",
     "@familiesConnect": {
         "description": "connectButton"
     },
-    "showAll": "Показать все",
+    "showAll": "查看全部",
     "@showAll": {
         "description": "showAll"
     },
-    "priorityLabel": "Приоритет",
+    "priorityLabel": "优先级",
     "@priorityLabel": {
         "description": "priorityLabel"
     },
-    "everyDay": "Каждый день",
+    "everyDay": "每天",
     "@everyDay": {
         "description": "everyDay"
     },
-    "newList": "Новый список",
+    "newList": "新清单",
     "@newList": {
         "description": "newList"
     },
-    "listNamePlaceholder": "Название списка",
+    "listNamePlaceholder": "清单名称",
     "@listNamePlaceholder": {
         "description": "listNamePlaceholder"
     },
-    "cancel": "Отмена",
+    "cancel": "取消",
     "@cancel": {
         "description": "cancel"
     },
-    "quantityLabel": "Кол-во",
+    "quantityLabel": "数量",
     "@quantityLabel": {
         "description": "quantityLabel"
     },
-    "personal": "Личное",
+    "personal": "个人",
     "@personal": {
         "description": "personal"
     },
-    "notify": "Уведомить",
+    "notify": "通知",
     "@notify": {
         "description": "notify"
     },
-    "notifyEveryone": "Всем",
+    "notifyEveryone": "所有人",
     "@notifyEveryone": {
         "description": "notifyEveryone"
     },
-    "notifyRecipients": "Кому",
+    "notifyRecipients": "发送给",
     "@notifyRecipients": {
         "description": "notifyRecipients"
     },
-    "notifyAddCustom": "Добавить имя",
+    "notifyAddCustom": "添加姓名",
     "@notifyAddCustom": {
         "description": "notifyAddCustom"
     },
-    "notifyMessageLabel": "Сообщение",
+    "notifyMessageLabel": "消息",
     "@notifyMessageLabel": {
         "description": "notifyMessageLabel"
     },
-    "notifyHint": "Срочно купи {itemName}",
+    "notifyHint": "紧急购买 {itemName}",
     "@notifyHint": {
         "description": "notifyHint placeholder",
         "placeholders": {
@@ -901,151 +899,135 @@
             }
         }
     },
-    "notifySend": "Отправить",
+    "notifySend": "发送",
     "@notifySend": {
         "description": "notifySend"
     },
-    "notifySent": "Уведомление отправлено",
+    "notifySent": "通知已发送",
     "@notifySent": {
         "description": "notifySent"
     },
-    "advancedSettings": "Расширенные настройки",
+    "advancedSettings": "高级设置",
     "@advancedSettings": {
         "description": "advancedSettings"
     },
-    "appearance": "Внешний вид",
+    "appearance": "外观",
     "@appearance": {
         "description": "appearance"
     },
-    "themeSection": "Тема",
+    "themeSection": "主题",
     "@themeSection": {
         "description": "themeSection"
     },
-    "themeLight": "Светлая",
+    "themeLight": "浅色",
     "@themeLight": {
         "description": "themeLight"
     },
-    "themeDark": "Тёмная",
+    "themeDark": "深色",
     "@themeDark": {
         "description": "themeDark"
     },
-    "themeSystem": "Как в системе",
+    "themeSystem": "跟随系统",
     "@themeSystem": {
         "description": "themeSystem"
     },
-    "notificationsPermission": "Разрешения на уведомления",
+    "notificationsPermission": "通知 permission",
     "@notificationsPermission": {
         "description": "notificationsPermission"
     },
-    "granted": "Разрешено",
+    "granted": "已允许",
     "@granted": {
         "description": "granted"
     },
-    "denied": "Запрещено",
+    "denied": "已拒绝",
     "@denied": {
         "description": "denied"
     },
-    "notDetermined": "Не запрошено",
+    "notDetermined": "未请求",
     "@notDetermined": {
         "description": "notDetermined"
     },
-    "requestPermission": "Запросить",
+    "requestPermission": "请求权限",
     "@requestPermission": {
         "description": "requestPermission"
     },
-    "confirmations": "Подтверждения",
+    "confirmations": "确认",
     "@confirmations": {
         "description": "confirmations"
     },
-    "askBeforeDelete": "Спрашивать перед удалением",
+    "askBeforeDelete": "删除前询问",
     "@askBeforeDelete": {
         "description": "askBeforeDelete"
     },
-    "about": "О приложении",
+    "about": "关于",
     "@about": {
         "description": "about"
     },
-    "version": "Версия",
+    "version": "版本",
     "@version": {
         "description": "version"
     },
-    "deleteItemTitle": "Удалить продукт?",
+    "deleteItemTitle": "删除 item?",
     "@deleteItemTitle": {
         "description": "deleteItemTitle"
     },
-    "deleteItemBody": "Действие нельзя отменить.",
+    "deleteItemBody": "这个 cannot be undone.",
     "@deleteItemBody": {
         "description": "deleteItemBody"
     },
-    "dontAskAgain": "Не спрашивать снова",
+    "dontAskAgain": "不再询问",
     "@dontAskAgain": {
         "description": "dontAskAgain"
     },
-    "delete": "Удалить",
+    "delete": "删除",
     "@delete": {
         "description": "delete"
     },
-    "returnToList": "Вернуть в список",
+    "returnToList": "Return 到 清单",
     "@returnToList": {
         "description": "returnToList"
     },
-    "nooneToNotify": "Некого уведомлять",
+    "nooneToNotify": "没有 一 到 notify",
     "@nooneToNotify": {
         "description": "nooneToNotify"
     },
-    "notFound": "Не найдено",
+    "notFound": "不 found",
     "@notFound": {
         "description": "notFound"
     },
-    "profileNameUpdate": "Обновление профиля",
-    "@profileNameUpdate": {
-        "description": "profileNameUpdate"
-    },
-    "briefSnackBar": "Может все-же добавим \nчто-нибудь?",
-    "@briefSnackBar": {
-        "description": "briefSnackBar"
-    },
-    "@groupDeletionTitle": {
-        "description": "groupDeletionTitle"
-    },
-    "groupDeletionTitle": "Вы уверены, что хотите удалить группу?",
-    "@noInternet": {
-        "description": "noInternet"
-    },
-    "noInternetButLoadYouLocally": "Нет интернета, но впустим вас и так!",
-    "recipeEmptyHint": "Вставьте ссылку на рецепт и нажмите «Разобрать»",
+    "recipeEmptyHint": "Paste a 食谱 URL 和 点击 “Parse”",
     "@recipeEmptyHint": {
         "description": "recipeEmptyHint"
     },
-    "recipeDupMark": "уже в списке",
+    "recipeDupMark": "已经 在 清单",
     "@recipeDupMark": {
         "description": "recipeDupMark"
     },
-    "done": "Готово",
+    "done": "完成",
     "@done": {
         "description": "done"
     },
-    "errorGeneric": "Ошибка",
+    "errorGeneric": "错误",
     "@errorGeneric": {
         "description": "errorGeneric"
     },
-    "pushToken": "Токен push-уведомлений",
+    "pushToken": "推送令牌",
     "@pushToken": {
         "description": "pushToken"
     },
-    "resync": "Синхронизировать",
+    "resync": "同步",
     "@resync": {
         "description": "resync"
     },
-    "tokenSynced": "Токен отправлен",
+    "tokenSynced": "令牌已同步",
     "@tokenSynced": {
         "description": "tokenSynced"
     },
-    "deleteListTitle": "Удалить список?",
+    "deleteListTitle": "删除 清单?",
     "@deleteListTitle": {
         "description": "deleteListTitle"
     },
-    "deleteListBody": "Список «{listName}» и все продукты в нём будут удалены. Действие нельзя отменить.",
+    "deleteListBody": "清单 “{listName}” 和 all its items 将 be deleted. 这个 cannot be undone.",
     "@deleteListBody": {
         "description": "deleteListBody placeholder",
         "placeholders": {
@@ -1054,67 +1036,67 @@
             }
         }
     },
-    "membersScreenTitle": "Участники",
+    "membersScreenTitle": "成员",
     "@membersScreenTitle": {
         "description": "membersScreenTitle"
     },
-    "owner": "Владелец",
+    "owner": "所有者",
     "@owner": {
         "description": "owner"
     },
-    "member": "Участник",
+    "member": "成员",
     "@member": {
         "description": "member"
     },
-    "addProduct": "Добавить продукт",
+    "addProduct": "Add 商品",
     "@addProduct": {
         "description": "addProduct"
     },
-    "productName": "Название",
+    "productName": "名称",
     "@productName": {
         "description": "productName"
     },
-    "section": "Раздел",
+    "section": "分类",
     "@section": {
         "description": "section"
     },
-    "unit": "Единица",
+    "unit": "单位",
     "@unit": {
         "description": "unit"
     },
-    "priorityHigh": "Высокий",
+    "priorityHigh": "高",
     "@priorityHigh": {
         "description": "priorityHigh"
     },
-    "priorityMed": "Средний",
+    "priorityMed": "中",
     "@priorityMed": {
         "description": "priorityMed"
     },
-    "priorityLow": "Низкий",
+    "priorityLow": "低",
     "@priorityLow": {
         "description": "priorityLow"
     },
-    "urgent": "Срочно",
+    "urgent": "紧急",
     "@urgent": {
         "description": "urgent"
     },
-    "remindEvery": "Напоминать каждые",
+    "remindEvery": "提醒周期",
     "@remindEvery": {
         "description": "remindEvery"
     },
-    "days": "дн.",
+    "days": "天",
     "@days": {
         "description": "days"
     },
-    "customValue": "Своё…",
+    "customValue": "自定义…",
     "@customValue": {
         "description": "customValue"
     },
-    "save": "Сохранить",
+    "save": "保存",
     "@save": {
         "description": "save"
     },
-    "addedByName": "Добавил(а): {name}",
+    "addedByName": "已添加 by: {name}",
     "@addedByName": {
         "description": "addedByName placeholder",
         "placeholders": {
@@ -1123,148 +1105,167 @@
             }
         }
     },
-    "splashLoadingSlow": "Уже почти загрузились…",
+    "splashLoadingSlow": "快完成了…",
     "@splashLoadingSlow": {
         "description": "splashLoadingSlow"
     },
-    "splashLoadingVerySlow": "Всё ещё грузимся… проверяем связь",
+    "splashLoadingVerySlow": "仍在加载…正在检查连接",
     "@splashLoadingVerySlow": {
         "description": "splashLoadingVerySlow"
     },
-    "noInternet": "Нет подключения к интернету",
-    "retry": "Обновить",
+    "profileNameUpdate": "正在更新资料",
+    "@profileNameUpdate": {
+        "description": "profileNameUpdate"
+    },
+    "briefSnackBar": "Maybe 你 forgot 到 选择 any 商品?",
+    "@briefSnackBar": {
+        "description": "briefSnackBar"
+    },
+    "noInternet": "没有 internet connection",
+    "@noInternet": {
+        "description": "noInternet"
+    },
+    "noInternetButLoadYouLocally": "没有 internet connection, but we 将 load 你 locally",
+    "@groupDeletionTitle": {
+        "description": "groupDeletionTitle"
+    },
+    "groupDeletionTitle": "是 你 sure want 到 删除 群组?",
+    "@noInternetButLoadYouLocally": {
+        "description": "noInternetButLoadYouLocally"
+    },
+    "retry": "重试",
     "@retry": {
         "description": "retry"
     },
-    "groupsTitle": "Ваши группы",
+    "groupsTitle": "你的群组",
     "@groupsTitle": {
         "description": "groupsTitle"
     },
-    "groupsSubtitle": "Список равен группе. Пригласите людей — они увидят список.",
+    "groupsSubtitle": "A 清单 是 a 群组. Invite 人 — they'll see  清单.",
     "@groupsSubtitle": {
         "description": "groupsSubtitle"
     },
-    "groupCreate": "Создать группу",
+    "groupCreate": "创建群组",
     "@groupCreate": {
         "description": "groupCreate"
     },
-    "groupConnect": "Присоединиться",
+    "groupConnect": "加入",
     "@groupConnect": {
         "description": "groupConnect"
     },
-    "groupNameHint": "Название группы",
+    "groupNameHint": "群组名称",
     "@groupNameHint": {
         "description": "groupNameHint"
     },
-    "groupPersonal": "Личная",
+    "groupPersonal": "个人",
     "@groupPersonal": {
         "description": "groupPersonal"
     },
-    "groupShared": "Общая",
+    "groupShared": "共享",
     "@groupShared": {
         "description": "groupShared"
     },
-    "noGroups": "Пока нет ни одной группы",
+    "noGroups": "还没有群组",
     "@noGroups": {
         "description": "noGroups"
     },
-    "settingsChangeThemeIOSEasterEgg": "* Чтобы изменить тему, откройте Настройки > PORA > Тема\n* Выберите новую тему в меню настроек\n* Нажмите «Тема» в настройках приложения, чтобы переключаться между светлой и тёмной темой",
+    "settingsChangeThemeIOSEasterEgg": "* 到 change 你的 主题, go 到 设置 > PORA > 主题\n* 选择 a new 主题 来自  设置 menu\n* 点击 在 '主题' 在  app's 设置 到 switch between 浅色 和 深色 modes",
     "@settingsChangeThemeIOSEasterEgg": {
         "description": "ios easter egg on advanced settings when tapped few times"
     },
-    "tutorialTitle": "Как это работает",
+    "tutorialTitle": "使用方法",
     "@tutorialTitle": {
         "description": "tutorialTitle"
     },
-    "tutorialSkip": "Пропустить",
+    "tutorialSkip": "跳过",
     "@tutorialSkip": {
         "description": "tutorialSkip"
     },
-    "tutorialNext": "Далее",
+    "tutorialNext": "下一步",
     "@tutorialNext": {
         "description": "tutorialNext"
     },
-    "tutorialDone": "Начать",
+    "tutorialDone": "开始",
     "@tutorialDone": {
         "description": "tutorialDone"
     },
-    "tutorialInviteTitle": "Пригласите близких",
+    "tutorialInviteTitle": "Invite 你的 人",
     "@tutorialInviteTitle": {
         "description": "tutorialInviteTitle"
     },
-    "tutorialInviteBody": "Свайп группы вправо → «Пригласить». Партнёр видит тот же список.",
+    "tutorialInviteBody": "滑动 a 群组 right → Invite. 你的 partner sees  same 清单.",
     "@tutorialInviteBody": {
         "description": "tutorialInviteBody"
     },
-    "tutorialAddTitle": "Добавить продукт",
+    "tutorialAddTitle": "Add a 商品",
     "@tutorialAddTitle": {
         "description": "tutorialAddTitle"
     },
-    "tutorialAddBody": "Кнопка «+» внизу списка. Название, количество, раздел, приоритет — и готово.",
+    "tutorialAddBody": "点击 + at  bottom of  清单. 名称, qty, 分类, priority — done.",
     "@tutorialAddBody": {
         "description": "tutorialAddBody"
     },
-    "tutorialEditTitle": "Изменить и отметить",
+    "tutorialEditTitle": "Edit 和 check off",
     "@tutorialEditTitle": {
         "description": "tutorialEditTitle"
     },
-    "tutorialEditBody": "Тап по чекбоксу — куплено. Тап по строке — детали и правки.",
+    "tutorialEditBody": "点击  checkbox — bought. 点击  row — details 和 edits.",
     "@tutorialEditBody": {
         "description": "tutorialEditBody"
     },
-    "tutorialDeleteTitle": "Удалить",
+    "tutorialDeleteTitle": "删除",
     "@tutorialDeleteTitle": {
         "description": "tutorialDeleteTitle"
     },
-    "tutorialDeleteBody": "Свайп продукта влево → «Удалить». Диалог подтверждения — можно отключить.",
+    "tutorialDeleteBody": "滑动 a 商品 left → 删除. Confirmation 可以 be turned off.",
     "@tutorialDeleteBody": {
         "description": "tutorialDeleteBody"
     },
-    "tutorialAiTitle": "Импорт рецепта",
+    "tutorialAiTitle": "Import a 食谱",
     "@tutorialAiTitle": {
         "description": "tutorialAiTitle"
     },
-    "tutorialAiBody": "Ссылку на рецепт — в поле, «Разобрать». Ингредиенты падают в список, дубли отмечаются.",
+    "tutorialAiBody": "Paste a 食谱 URL, 点击 Parse. 食材 drop into  清单, duplicates marked.",
     "@tutorialAiBody": {
         "description": "tutorialAiBody"
     },
-    "tutorialSettingsTitle": "Всё под рукой",
+    "tutorialSettingsTitle": "Everything 在 reach",
     "@tutorialSettingsTitle": {
         "description": "tutorialSettingsTitle"
     },
-    "tutorialSettingsBody": "Тема, язык, уведомления и подтверждения — в «Профиль → Расширенные настройки».",
+    "tutorialSettingsBody": "主题, language, 通知, confirmations — Profile → Advanced 设置.",
     "@tutorialSettingsBody": {
         "description": "tutorialSettingsBody"
     },
-    "showTutorial": "Показать туториал",
+    "showTutorial": "查看教程",
     "@showTutorial": {
         "description": "showTutorial"
     },
-    "tutorialSampleGroupFamily": "Семья",
+    "tutorialSampleGroupFamily": "家庭",
     "@tutorialSampleGroupFamily": {
         "description": "sample group name in invite animation"
     },
-    "tutorialSampleMilk": "Молоко",
+    "tutorialSampleMilk": "牛奶",
     "@tutorialSampleMilk": {
         "description": "sample product"
     },
-    "tutorialSampleBread": "Хлеб",
+    "tutorialSampleBread": "面包",
     "@tutorialSampleBread": {
         "description": "sample product"
     },
-    "tutorialSampleAvocado": "Авокадо",
+    "tutorialSampleAvocado": "牛油果",
     "@tutorialSampleAvocado": {
         "description": "sample product added in add animation"
     },
-    "tutorialSampleMilkQty": "Молоко 2×1л",
+    "tutorialSampleMilkQty": "牛奶 2×1L",
     "@tutorialSampleMilkQty": {
         "description": "sample product with qty"
     },
-    "tutorialSampleCoffee": "Кофе",
+    "tutorialSampleCoffee": "咖啡",
     "@tutorialSampleCoffee": {
         "description": "sample product"
     },
-    "tutorialSampleCola": "Кола",
+    "tutorialSampleCola": "可乐",
     "@tutorialSampleCola": {
         "description": "sample product deleted"
     },
@@ -1272,51 +1273,51 @@
     "@tutorialSampleRecipeUrl": {
         "description": "sample recipe url shown in AI import animation"
     },
-    "tutorialSampleIngredient1": "Спагетти 400 г",
+    "tutorialSampleIngredient1": "Spaghetti 400 g",
     "@tutorialSampleIngredient1": {
         "description": "sample recipe ingredient"
     },
-    "tutorialSampleIngredient2": "Помидоры 500 г",
+    "tutorialSampleIngredient2": "番茄 500 g",
     "@tutorialSampleIngredient2": {
         "description": "sample recipe ingredient"
     },
-    "tutorialSampleIngredient3": "Чеснок 3 зубчика",
+    "tutorialSampleIngredient3": "Garlic 3 cloves",
     "@tutorialSampleIngredient3": {
         "description": "sample recipe ingredient"
     },
-    "tutorialSampleToggleTheme": "Тема",
+    "tutorialSampleToggleTheme": "主题",
     "@tutorialSampleToggleTheme": {
         "description": "toggle label in settings animation"
     },
-    "tutorialSampleToggleNotif": "Уведомления",
+    "tutorialSampleToggleNotif": "通知",
     "@tutorialSampleToggleNotif": {
         "description": "toggle label in settings animation"
     },
-    "tutorialSampleToggleConfirm": "Подтверждение",
+    "tutorialSampleToggleConfirm": "确认",
     "@tutorialSampleToggleConfirm": {
         "description": "toggle label in settings animation"
     },
-    "tutorialConnectTitle": "Присоединиться по коду",
+    "tutorialConnectTitle": "Join by 代码",
     "@tutorialConnectTitle": {
         "description": "tutorialConnectTitle"
     },
-    "tutorialConnectBody": "Партнёр даёт ссылку или код. Вставьте — попадаете в общий список.",
+    "tutorialConnectBody": "Partner sends a link 或 代码. Paste it — 你're 在  共享 清单.",
     "@tutorialConnectBody": {
         "description": "tutorialConnectBody"
     },
-    "tutorialNotifyTitle": "Пинг «срочно нужно»",
+    "tutorialNotifyTitle": "提醒「现在需要」",
     "@tutorialNotifyTitle": {
         "description": "tutorialNotifyTitle"
     },
-    "tutorialNotifyBody": "Тап «!» на продукте — партнёру прилетит push «срочно купи». Без звонков.",
+    "tutorialNotifyBody": "点击 «!» 在 a 商品 — 你的 partner gets a push «buy it now». 没有 calls needed.",
     "@tutorialNotifyBody": {
         "description": "tutorialNotifyBody"
     },
-    "tutorialOutroTitle": "А с остальным разберётесь сами",
+    "tutorialOutroTitle": "你'll figure out  rest",
     "@tutorialOutroTitle": {
         "description": "tutorialOutroTitle"
     },
-    "tutorialOutroBody": "Тыкайте, свайпайте, ошибайтесь — приложение прощает почти всё.",
+    "tutorialOutroBody": "点击, 滑动, mess up —  app forgives almost anything.",
     "@tutorialOutroBody": {
         "description": "tutorialOutroBody"
     },
@@ -1324,139 +1325,143 @@
     "@tutorialSampleInviteCode": {
         "description": "sample invite code in connect animation"
     },
-    "tutorialSamplePushSender": "Аня",
+    "tutorialSamplePushSender": "Anna",
     "@tutorialSamplePushSender": {
         "description": "sample partner name in notify push preview"
     },
-    "tutorialSamplePushBody": "Срочно нужно молоко",
+    "tutorialSamplePushBody": "Need 牛奶, 紧急",
     "@tutorialSamplePushBody": {
         "description": "sample push body in notify animation"
     },
-    "tutorialSampleInviteMessage": "Присоединяйся к списку",
+    "tutorialSampleInviteMessage": "Join  清单",
     "@tutorialSampleInviteMessage": {
         "description": "sample chat message text before the invite link"
     },
-    "supportMessageBottomSheetTopDescription": "Ваше сообщение будет отправлено в службу поддержки. Пожалуйста, укажите как можно больше подробностей.",
+    "supportMessage": "邮箱 支持",
+    "@supportMessage": {
+        "description": "Email support"
+    },
+    "supportMessageBottomSheetTopDescription": "你的 消息 将 be 已发送 到  支持 team. Please provide as much detail as possible.",
     "@supportMessageBottomSheetTopDescription": {
         "description": "Your message will be sent to the support team. Please provide as much detail as possible."
     },
-    "supportMessageBottomSheetSendButton": "Отправить",
+    "supportMessageBottomSheetSendButton": "发送",
     "@supportMessageBottomSheetSendButton": {
         "description": "Send button text in support message bottom bar"
     },
-    "supportMessageBottomSheetUnderButtonText": "Мы ответим как можно скорее на вашу почту Gmail или прямо в приложении!",
+    "supportMessageBottomSheetUnderButtonText": "We 将 answer as 很快 as possible, 和 mail 到 你的 gmail 或 inapp!",
     "@supportMessageBottomSheetUnderButtonText": {
         "description": "supportMessageBottomSheetUnderButtonText"
     },
-    "allergen": "Аллерген",
+    "allergen": "过敏原",
     "@allergen": {
         "description": "Allergen toggle label"
     },
-    "predictionsGreeting": "Ваш день с PORA",
+    "predictionsGreeting": "你的 天 和 PORA",
     "@predictionsGreeting": {
         "description": "predictions main greeting"
     },
-    "predictionsGreetingSub": "Умные подсказки на основе покупок",
+    "predictionsGreetingSub": "Smart hints 来自 你的 purchases",
     "@predictionsGreetingSub": {
         "description": "predictions greeting subtitle"
     },
-    "predictionsSectionSoon": "Скоро закончится",
+    "predictionsSectionSoon": "Running out 很快",
     "@predictionsSectionSoon": {
         "description": "section title"
     },
-    "predictionsSectionOften": "Часто покупаете",
+    "predictionsSectionOften": "你 buy often",
     "@predictionsSectionOften": {
         "description": "section title"
     },
-    "predictionsSectionAiSuggests": "ИИ предлагает",
+    "predictionsSectionAiSuggests": "AI 推荐",
     "@predictionsSectionAiSuggests": {
         "description": "section title"
     },
-    "predictionsAiSuggestionsTitle": "Продукты и рецепты для вас",
+    "predictionsAiSuggestionsTitle": "商品 和 食谱 用于 你",
     "@predictionsAiSuggestionsTitle": {
         "description": "AI suggestions card title"
     },
-    "predictionsAiSuggestionsTopic": "ваши предпочтения и покупки",
+    "predictionsAiSuggestionsTopic": "你的 preferences 和 purchases",
     "@predictionsAiSuggestionsTopic": {
         "description": "AI suggestions topic"
     },
-    "refresh": "Обновить",
+    "refresh": "刷新",
     "@refresh": {
         "description": "refresh action"
     },
-    "predictionsOftenEmpty": "Пока недостаточно данных",
+    "predictionsOftenEmpty": "不 enough data yet",
     "@predictionsOftenEmpty": {
         "description": "empty frequent products"
     },
-    "predictionsAskPora": "Спросить PORA",
+    "predictionsAskPora": "询问 PORA",
     "@predictionsAskPora": {
         "description": "FAB label"
     },
-    "kpiWeek": "продукта в неделю",
+    "kpiWeek": "items per 周",
     "@kpiWeek": {
         "description": "kpi label"
     },
-    "kpiRecipes": "рецептов за месяц",
+    "kpiRecipes": "食谱 这个 月",
     "@kpiRecipes": {
         "description": "kpi label"
     },
-    "kpiDaysToRun": "дней до закупки",
+    "kpiDaysToRun": "天 until restock",
     "@kpiDaysToRun": {
         "description": "kpi label"
     },
-    "fallbackTip1": "Храните зелень как букет: в стакане с водой, накрыв пакетом — стоит 2 недели.",
+    "fallbackTip1": "保存 herbs like a bouquet: 在 a glass of 水 covered 和 a bag — lasts 2 weeks.",
     "@fallbackTip1": {
         "description": "fallback tip"
     },
-    "fallbackTip2": "Соль в тесто добавляйте в конце — она замедляет работу дрожжей.",
+    "fallbackTip2": "Add 盐 到 dough at  end — it slows down yeast.",
     "@fallbackTip2": {
         "description": "fallback tip"
     },
-    "fallbackTip3": "Чтобы лук не жёгся при резке — подержите его 15 минут в морозилке.",
+    "fallbackTip3": "到 stop onions stinging, chill them 用于 15 分钟 在  freezer 之前 cutting.",
     "@fallbackTip3": {
         "description": "fallback tip"
     },
-    "fallbackTip4": "Пересоленный суп спасает сырой картофель: положите на 10 минут, вытащите.",
+    "fallbackTip4": "Oversalted soup? A raw potato 用于 10 分钟 soaks up  extra 盐.",
     "@fallbackTip4": {
         "description": "fallback tip"
     },
-    "fallbackTip5": "Проверяйте свежесть яиц в воде: тонет — свежее, всплывает — на выброс.",
+    "fallbackTip5": "Check egg freshness 在 水: sinks — 新鲜, floats — discard.",
     "@fallbackTip5": {
         "description": "fallback tip"
     },
-    "fallbackTip6": "Разогревайте пиццу на сковороде под крышкой — корочка снова хрустит.",
+    "fallbackTip6": "Reheat pizza 在 a covered skillet —  crust crisps back up.",
     "@fallbackTip6": {
         "description": "fallback tip"
     },
-    "fallbackTip7": "Замороженное мясо режется тоньше — за 20 минут до нарезки в морозилку.",
+    "fallbackTip7": "冷冻 meat slices thinner — 20 分钟 在  freezer 之前 cutting.",
     "@fallbackTip7": {
         "description": "fallback tip"
     },
-    "fallbackTip8": "Лимон отдаёт больше сока если катать его ладонью по столу перед резкой.",
+    "fallbackTip8": "Roll a lemon 在  counter 之前 cutting — 你'll get more juice.",
     "@fallbackTip8": {
         "description": "fallback tip"
     },
-    "fallbackTip9": "Сахар в томатный соус убирает лишнюю кислоту — щепотки достаточно.",
+    "fallbackTip9": "A pinch of 糖 在 tomato sauce cuts  acidity.",
     "@fallbackTip9": {
         "description": "fallback tip"
     },
-    "fallbackTip10": "Хлеб в морозилке живёт месяц; тост из замороженного — как свежий.",
+    "fallbackTip10": "面包 keeps a 月 在  freezer; toasting it goes straight 来自 冷冻.",
     "@fallbackTip10": {
         "description": "fallback tip"
     },
-    "aiTipOfDayLabel": "СОВЕТ ДНЯ",
+    "aiTipOfDayLabel": "TIP OF  天",
     "@aiTipOfDayLabel": {
         "description": "kicker"
     },
-    "aiTipOfDayTopic": "сегодня",
+    "aiTipOfDayTopic": "今天",
     "@aiTipOfDayTopic": {
         "description": "default topic passed to tip prompt"
     },
-    "aiCtaTitle": "Спросить PORA",
+    "aiCtaTitle": "询问 PORA",
     "@aiCtaTitle": {
         "description": "CTA title"
     },
-    "aiCtaSubtitle": "рецепты · замены · советы",
+    "aiCtaSubtitle": "食谱 · swaps · tips",
     "@aiCtaSubtitle": {
         "description": "CTA subtitle"
     },
@@ -1464,167 +1469,167 @@
     "@chatSheetTitle": {
         "description": "chat sheet title"
     },
-    "chatSheetSubtitle": "спросите про еду, покупки, замены",
+    "chatSheetSubtitle": "询问食物、采购和替代方案",
     "@chatSheetSubtitle": {
         "description": "chat sheet subtitle"
     },
-    "chatEmptyTitle": "Начните разговор",
+    "chatEmptyTitle": "开始对话",
     "@chatEmptyTitle": {
         "description": "chat empty state title"
     },
-    "chatEmptyExamplesLabel": "Примеры вопросов:",
+    "chatEmptyExamplesLabel": "示例问题：",
     "@chatEmptyExamplesLabel": {
         "description": "chat empty state examples label"
     },
-    "chatSample1": "Что приготовить из курицы и риса?",
+    "chatSample1": "我可以做什么 cook 和 鸡肉 和 米饭?",
     "@chatSample1": {
         "description": "sample question"
     },
-    "chatSample2": "Чем заменить сметану в тесте?",
+    "chatSample2": "What 可以 替代 sour cream 在 dough?",
     "@chatSample2": {
         "description": "sample question"
     },
-    "chatSample3": "Как хранить зелень чтобы не вяла?",
+    "chatSample3": "如何 保存 herbs so they don't wilt?",
     "@chatSample3": {
         "description": "sample question"
     },
-    "chatSample4": "Рецепт быстрого ужина на 20 минут",
+    "chatSample4": "快速 20-分钟 晚餐 食谱",
     "@chatSample4": {
         "description": "sample question"
     },
-    "chatSample5": "Как использовать овощи, пока они не испортились?",
+    "chatSample5": "我怎样才能 use up 蔬菜 之前 they spoil?",
     "@chatSample5": {
         "description": "sample question"
     },
-    "chatSample6": "Составь список для 3 простых завтраков",
+    "chatSample6": "制作一个 shopping 清单 用于 3 简单 breakfasts",
     "@chatSample6": {
         "description": "sample question"
     },
-    "chatSample7": "Что приготовить на двоих при небольшом бюджете?",
+    "chatSample7": "我应该 cook 用于 二 和 a 小 budget?",
     "@chatSample7": {
         "description": "sample question"
     },
-    "chatSample8": "Сколько хранится готовый рис в холодильнике?",
+    "chatSample8": "How long 可以 I 保存 熟的 米饭 在  fridge?",
     "@chatSample8": {
         "description": "sample question"
     },
-    "chatSample9": "Посоветуй вегетарианский ужин с белком",
+    "chatSample9": "给我 a 高-protein 素食 晚餐",
     "@chatSample9": {
         "description": "sample question"
     },
-    "chatSample10": "Чем заменить сливочное масло в этом рецепте?",
+    "chatSample10": "What 可以 替代 黄油 在 这个 食谱?",
     "@chatSample10": {
         "description": "sample question"
     },
-    "chatSample11": "Составь три ужина из того, что уже есть",
+    "chatSample11": "规划三个 dinners 来自 what I 已经 有",
     "@chatSample11": {
         "description": "sample question"
     },
-    "chatSample12": "Что приготовить из остатков за 15 минут?",
+    "chatSample12": "我可以做什么 cook 和 剩菜 在 15 分钟?",
     "@chatSample12": {
         "description": "sample question"
     },
-    "chatSample13": "Предложи рецепт без продуктов-аллергенов",
+    "chatSample13": "推荐一个 适合过敏者 食谱 来自 my 清单",
     "@chatSample13": {
         "description": "sample question"
     },
-    "chatSample14": "Как сделать это блюдо дешевле?",
+    "chatSample14": "我怎样才能 make 这个 meal 更便宜?",
     "@chatSample14": {
         "description": "sample question"
     },
-    "chatTyping": "PORA печатает…",
+    "chatTyping": "PORA 是 typing…",
     "@chatTyping": {
         "description": "typing indicator"
     },
-    "chatInputHint": "Спросите что-нибудь…",
+    "chatInputHint": "随便问…",
     "@chatInputHint": {
         "description": "chat input placeholder"
     },
-    "aiModelBadge": "Работает на OpenRouter · ling-3.0-flash",
+    "aiModelBadge": "Powered by OpenRouter · ling-3.0-flash",
     "@aiModelBadge": {
         "description": "model badge"
     },
-    "seeAll": "Все",
+    "seeAll": "查看全部",
     "@seeAll": {
         "description": "see all link"
     },
-    "tipTopicHerbs": "зелень",
+    "tipTopicHerbs": "香草",
     "@tipTopicHerbs": {
         "description": "predefined tip topic"
     },
-    "tipTopicBaking": "выпечка",
+    "tipTopicBaking": "烘焙",
     "@tipTopicBaking": {
         "description": "predefined tip topic"
     },
-    "tipTopicSoups": "супы",
+    "tipTopicSoups": "汤",
     "@tipTopicSoups": {
         "description": "predefined tip topic"
     },
-    "tipTopicMeat": "мясо",
+    "tipTopicMeat": "肉类",
     "@tipTopicMeat": {
         "description": "predefined tip topic"
     },
-    "tipTopicFish": "рыба",
+    "tipTopicFish": "鱼类",
     "@tipTopicFish": {
         "description": "predefined tip topic"
     },
-    "tipTopicVegetables": "овощи",
+    "tipTopicVegetables": "蔬菜",
     "@tipTopicVegetables": {
         "description": "predefined tip topic"
     },
-    "tipTopicStorage": "хранение продуктов",
+    "tipTopicStorage": "食物保存",
     "@tipTopicStorage": {
         "description": "predefined tip topic"
     },
-    "tipTopicKitchenHacks": "кухонные лайфхаки",
+    "tipTopicKitchenHacks": "厨房技巧",
     "@tipTopicKitchenHacks": {
         "description": "predefined tip topic"
     },
-    "tipTopicSpices": "специи",
+    "tipTopicSpices": "香料",
     "@tipTopicSpices": {
         "description": "predefined tip topic"
     },
-    "tipTopicDough": "тесто",
+    "tipTopicDough": "面团",
     "@tipTopicDough": {
         "description": "predefined tip topic"
     },
-    "tipTopicBreakfast": "завтраки",
+    "tipTopicBreakfast": "早餐",
     "@tipTopicBreakfast": {
         "description": "predefined tip topic"
     },
-    "tipTopicDinner": "ужины",
+    "tipTopicDinner": "晚餐",
     "@tipTopicDinner": {
         "description": "predefined tip topic"
     },
-    "tipTopicsSectionTitle": "Темы советов",
+    "tipTopicsSectionTitle": "提示主题",
     "@tipTopicsSectionTitle": {
         "description": "settings section title"
     },
-    "tipTopicsSectionDescription": "Выберите какие темы совета появляются",
+    "tipTopicsSectionDescription": "Pick which topics  tip 是 drawn 来自",
     "@tipTopicsSectionDescription": {
         "description": "settings section description"
     },
-    "tipTopicsAddCustom": "Добавить свою тему",
+    "tipTopicsAddCustom": "Add 你的 own topic",
     "@tipTopicsAddCustom": {
         "description": "add custom topic hint"
     },
-    "tipTopicsCustomLabel": "Свои темы",
+    "tipTopicsCustomLabel": "自定义",
     "@tipTopicsCustomLabel": {
         "description": "custom topics label"
     },
-    "tipTopicsPredefinedLabel": "Предустановленные",
+    "tipTopicsPredefinedLabel": "预设",
     "@tipTopicsPredefinedLabel": {
         "description": "predefined topics label"
     },
-    "tipTopicsEmpty": "Ни одной темы не выбрано — совет будет общий",
+    "tipTopicsEmpty": "没有 topics 已选择 — tip 将 be generic",
     "@tipTopicsEmpty": {
         "description": "warning when no topics selected"
     },
-    "insightsChampionKicker": "ЧЕМПИОН МЕСЯЦА",
+    "insightsChampionKicker": "CHAMPION OF  月",
     "@insightsChampionKicker": {
         "description": "champion card kicker"
     },
-    "insightsChampionSubtitle": "куплено {count} раз за месяц",
+    "insightsChampionSubtitle": "bought {count} 次 这个 月",
     "@insightsChampionSubtitle": {
         "description": "champion card subtitle",
         "placeholders": {
@@ -1633,7 +1638,7 @@
             }
         }
     },
-    "insightsStreakDays": "{days} дней подряд",
+    "insightsStreakDays": "{days} 天 在 a row",
     "@insightsStreakDays": {
         "description": "streak headline",
         "placeholders": {
@@ -1642,11 +1647,11 @@
             }
         }
     },
-    "insightsStreakSubtitle": "ведёте список — не сбавляйте",
+    "insightsStreakSubtitle": "你're 在 it — 保存 going",
     "@insightsStreakSubtitle": {
         "description": "streak card subtitle"
     },
-    "insightsFreqEvery": "~раз в {days} дн.",
+    "insightsFreqEvery": "~每 {days} 天",
     "@insightsFreqEvery": {
         "description": "frequency subtitle",
         "placeholders": {
@@ -1655,75 +1660,75 @@
             }
         }
     },
-    "insightsPopular": "Часто покупаете",
+    "insightsPopular": "你 buy often",
     "@insightsPopular": {
         "description": "popular section title"
     },
-    "insightsStatsProducts": "продуктов",
+    "insightsStatsProducts": "件商品",
     "@insightsStatsProducts": {
         "description": "kpi label"
     },
-    "insightsStatsLoginsWeek": "входов за неделю",
+    "insightsStatsLoginsWeek": "logins 这个 周",
     "@insightsStatsLoginsWeek": {
         "description": "kpi label"
     },
-    "insightsEmpty": "Пока нет данных — начните добавлять продукты",
+    "insightsEmpty": "没有 data yet — start adding 商品",
     "@insightsEmpty": {
         "description": "empty state on insights"
     },
-    "notificationsFilterAll": "Все",
+    "notificationsFilterAll": "全部",
     "@notificationsFilterAll": {
         "description": "filter chip"
     },
-    "notificationsFilterUrgent": "Срочные",
+    "notificationsFilterUrgent": "紧急",
     "@notificationsFilterUrgent": {
         "description": "filter chip"
     },
-    "notificationsFilterPrediction": "Предсказания",
+    "notificationsFilterPrediction": "预测",
     "@notificationsFilterPrediction": {
         "description": "filter chip"
     },
-    "notificationsFilterPromo": "Промо",
+    "notificationsFilterPromo": "促销",
     "@notificationsFilterPromo": {
         "description": "filter chip"
     },
-    "notificationsFilterOther": "Прочее",
+    "notificationsFilterOther": "其他",
     "@notificationsFilterOther": {
         "description": "filter chip"
     },
-    "notificationsClearAll": "Очистить все",
+    "notificationsClearAll": "全部清除",
     "@notificationsClearAll": {
         "description": "menu action"
     },
-    "notificationsDelete": "Удалить",
+    "notificationsDelete": "删除",
     "@notificationsDelete": {
         "description": "slidable action"
     },
-    "notificationsGroupToday": "Сегодня",
+    "notificationsGroupToday": "今天",
     "@notificationsGroupToday": {
         "description": "group header"
     },
-    "notificationsGroupYesterday": "Вчера",
+    "notificationsGroupYesterday": "昨天",
     "@notificationsGroupYesterday": {
         "description": "group header"
     },
-    "notificationsEmptyTitle": "Тишина",
+    "notificationsEmptyTitle": "一切安静",
     "@notificationsEmptyTitle": {
         "description": "empty state title"
     },
-    "notificationsEmptyBody": "Новые уведомления появятся здесь",
+    "notificationsEmptyBody": "New 通知 将 appear here",
     "@notificationsEmptyBody": {
         "description": "empty state body"
     },
-    "recipeCreateListCta": "Куда добавить рецепт?",
+    "recipeCreateListCta": "要把这个食谱添加到哪里？",
     "@recipeCreateListCta": {
         "description": "recipe cta"
     },
-    "recipeDupForceMark": "добавим ещё",
+    "recipeDupForceMark": "仍会添加",
     "@recipeDupForceMark": {
         "description": "dup pill when user unchecks flag"
     },
-    "recipeDedupBannerMany": "{n} дубликатов будут пропущены — снимите галочки чтобы добавить принудительно",
+    "recipeDedupBannerMany": "{n} duplicates 将 be skipped — uncheck 到 force-add",
     "@recipeDedupBannerMany": {
         "description": "dedup banner",
         "placeholders": {
@@ -1732,18 +1737,16 @@
             }
         }
     },
-    "offlineWriteBlocked": "Нет интернета — изменение не сохранится",
+    "offlineWriteBlocked": "没有 internet — change won't be saved",
     "@offlineWriteBlocked": {
         "description": "snackbar when write attempted offline"
     },
-    "offlineReadBanner": "Работаете офлайн — данные из кэша",
+    "offlineReadBanner": "离线 — 正在显示缓存数据",
     "@offlineReadBanner": {
         "description": "top banner when cached data shown"
     },
-    "chatImportRecipeCta": "Импортировать рецепт",
+    "chatImportRecipeCta": "导入食谱",
     "@chatImportRecipeCta": {
         "description": "chat bubble cta"
-    },
-    "listsEmptyTitle": "Списков у вас пока нет",
-    "listsEmptySubtitle": "Может стоит создать новый?"
+    }
 }

@@ -33,7 +33,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get sendAgainAfter => 'Отправить еще раз через...';
 
   @override
-  String get authSignInWithEmail => 'Войти через email';
+  String get authSignInWithEmail => 'Войти по электронной почте';
 
   @override
   String get authSignInWithGoogle => 'Войти через Google';
@@ -69,7 +69,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get commonError => 'Ошибка';
 
   @override
-  String get authErrorInvalidPhone => 'Invalid phone / email!';
+  String get authErrorInvalidPhone => 'Неверный телефон или email!';
 
   @override
   String authPhoneSendOtp(String isPhone) {
@@ -779,7 +779,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get errorGeneric => 'Ошибка';
 
   @override
-  String get pushToken => 'Push-токен';
+  String get pushToken => 'Токен push-уведомлений';
 
   @override
   String get resync => 'Синхронизировать';
@@ -865,7 +865,7 @@ class AppLocalizationsRu extends AppLocalizations {
       'Нет интернета, но впустим вас и так!';
 
   @override
-  String get groupDeletionTitle => 'Are you sure want to delete group?';
+  String get groupDeletionTitle => 'Вы уверены, что хотите удалить группу?';
 
   @override
   String get retry => 'Обновить';
@@ -897,7 +897,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get settingsChangeThemeIOSEasterEgg =>
-      '* To change your theme, go to Settings > PORA > Theme\n* Select a new theme from the settings menu\n* Tap on \'Theme\' in the app\'s settings to switch between light and dark modes';
+      '* Чтобы изменить тему, откройте Настройки > PORA > Тема\n* Выберите новую тему в меню настроек\n* Нажмите «Тема» в настройках приложения, чтобы переключаться между светлой и тёмной темой';
 
   @override
   String get tutorialTitle => 'Как это работает';
@@ -1036,17 +1036,17 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get supportMessageBottomSheetTopDescription =>
-      'Your message will be sent to the support team. Please provide as much detail as possible.';
+      'Ваше сообщение будет отправлено в службу поддержки. Пожалуйста, укажите как можно больше подробностей.';
 
   @override
-  String get supportMessageBottomSheetSendButton => 'Send';
+  String get supportMessageBottomSheetSendButton => 'Отправить';
 
   @override
   String get supportMessageBottomSheetUnderButtonText =>
-      'We will answer as soon as possible, and mail to your gmail or inapp!';
+      'Мы ответим как можно скорее на вашу почту Gmail или прямо в приложении!';
 
   @override
-  String get allergen => 'Allergen';
+  String get allergen => 'Аллерген';
 
   @override
   String get predictionsGreeting => 'Ваш день с PORA';
@@ -1200,7 +1200,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get chatInputHint => 'Спросите что-нибудь…';
 
   @override
-  String get aiModelBadge => 'Powered by OpenRouter · ling-3.0-flash';
+  String get aiModelBadge => 'Работает на OpenRouter · ling-3.0-flash';
 
   @override
   String get seeAll => 'Все';
@@ -1345,4 +1345,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get chatImportRecipeCta => 'Импортировать рецепт';
+
+  @override
+  String get listsEmptyTitle => 'Списков у вас пока нет';
+
+  @override
+  String get listsEmptySubtitle => 'Может стоит создать новый?';
 }

@@ -26,7 +26,7 @@ class ProductModel extends ProductEntity {
       priority: (json['priority'] as num?)?.toInt() ?? 0,
       urgent: (json['urgent'] as bool?) ?? false,
       checked: (json['checked'] as bool?) ?? false,
-      remindEveryDay: json['remind-every-day'] as bool?,
+      remindEveryDay: json['remind-every-days'] as int?,
       addedBy: added is Map<String, dynamic>
           ? MemberModel.fromJson(added)
           : null,
@@ -44,7 +44,7 @@ class ProductModel extends ProductEntity {
       'priority': priority,
       'urgent': urgent,
       'checked': checked,
-      'remind-every-day': remindEveryDay,
+      'remind-every-days': remindEveryDay,
       if (by is MemberModel) 'added-by': by.toJson(),
     };
   }

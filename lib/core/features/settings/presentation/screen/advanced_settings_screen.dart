@@ -285,7 +285,7 @@ class _LanguagePicker extends StatelessWidget {
     'en': 'English',
     'fr': 'Français',
     'de': 'Deutsch',
-    'es': 'Español',
+    'zh': '中文',
   };
 
   @override
