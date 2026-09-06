@@ -22,13 +22,6 @@ import 'package:pora/core/internal/theme/context_colors.dart';
 import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
 import 'package:pora/core/internal/widgets/pora_rows_card.dart';
 
-/// Главный экран AI-предсказаний. Layout сверху вниз:
-///   1. Header (greeting + insights icon).
-///   2. KPI mini-row (3 плитки — из insights).
-///   3. AI «Совет дня» — auto-loaded карточка.
-///   4. Секция «Скоро закончится» — карточки предсказаний.
-///   5. Секция «Часто покупаете» — 3 частотных строки из insights.
-///   6. FAB «Спросить PORA» — открывает `PoraChatSheet`.
 @RoutePage()
 class PredictionsPage extends StatefulWidget {
   const PredictionsPage({super.key});
