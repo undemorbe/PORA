@@ -9,9 +9,9 @@ class TipTopic extends Equatable {
     this.l10nKey,
     this.rawText,
   }) : assert(
-          (isCustom && rawText != null) || (!isCustom && l10nKey != null),
-          'custom → rawText; predefined → l10nKey',
-        );
+         (isCustom && rawText != null) || (!isCustom && l10nKey != null),
+         'custom → rawText; predefined → l10nKey',
+       );
 
   /// Стабильный идентификатор — для (де)активации/удаления.
   /// Predefined: тот же что `l10nKey` (например `tipTopicHerbs`).
@@ -21,11 +21,8 @@ class TipTopic extends Equatable {
   final String? l10nKey;
   final String? rawText;
 
-  factory TipTopic.predefined(String l10nKey) => TipTopic(
-        id: l10nKey,
-        isCustom: false,
-        l10nKey: l10nKey,
-      );
+  factory TipTopic.predefined(String l10nKey) =>
+      TipTopic(id: l10nKey, isCustom: false, l10nKey: l10nKey);
 
   factory TipTopic.custom(String text) {
     final trimmed = text.trim();

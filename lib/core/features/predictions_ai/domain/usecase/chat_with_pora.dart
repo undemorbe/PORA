@@ -14,8 +14,16 @@ class ChatWithPoraUseCase {
   Future<Either<Failure, AiCompletionEntity>> call({
     required List<AiMessage> history,
     required String languageCode,
+    String? contextSummary,
   }) {
-    final guarded = guardedMessages(history, languageCode: languageCode);
-    return repository.chat(messages: guarded, maxTokens: 500);
+    final recentHistory = history.length <= 12
+        ? history
+        : history.sublist(history.length - 12);
+    final guarded = guardedMessages(
+      recentHistory,
+      languageCode: languageCode,
+      contextSummary: contextSummary,
+    );
+    return repository.chat(messages: guarded, maxTokens: 900);
   }
 }

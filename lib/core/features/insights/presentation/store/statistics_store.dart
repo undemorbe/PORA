@@ -4,16 +4,19 @@ import 'package:pora/core/internal/cache/hive_json_cache.dart';
 import 'package:pora/core/features/insights/domain/usecase/get_all_user_products.dart';
 import 'package:pora/core/features/insights/domain/usecase/get_login_times.dart';
 import 'package:pora/core/features/insights/domain/usecase/get_popular_products.dart';
+import 'package:pora/core/features/lists/data/models/products/product_model.dart';
 import 'package:pora/core/features/lists/domain/entity/products/product.dart';
+import 'package:pora/core/internal/errors/failure.dart';
 
 part 'statistics_store.g.dart';
 
 class StatisticsStore = _StatisticsStoreBase with _$StatisticsStore;
 
-/// Store инсайтов. Три независимых источника, каждый со своим loading/error
-/// стейтом — UI'у важно показать секцию как только её данные пришли, не ждать
-/// всё разом.
 abstract class _StatisticsStoreBase with Store {
+  static const _loginsCacheKey = 'stats-logins-v1';
+  static const _productsCacheKey = 'stats-products-v1';
+  static const _popularCacheKey = 'stats-popular-v1';
+
   _StatisticsStoreBase({
     required this.loginTimesUseCase,
     required this.allProductsUseCase,
@@ -23,6 +26,7 @@ abstract class _StatisticsStoreBase with Store {
   final GetLoginTimesUseCase loginTimesUseCase;
   final GetAllUserProductsUseCase allProductsUseCase;
   final GetPopularProductsUseCase popularProductsUseCase;
+  bool _popularEndpointGone = false;
 
   // --- login times ---
   @observable
@@ -82,11 +86,8 @@ abstract class _StatisticsStoreBase with Store {
   /// Всё сразу — вызывается на входе в insights экран.
   @action
   Future<void> loadAll() async {
-    await Future.wait([
-      loadLoginTimes(),
-      loadAllProducts(),
-      loadPopularProducts(),
-    ]);
+    await Future.wait([loadLoginTimes(), loadAllProducts()]);
+    await loadPopularProducts();
   }
 
   @action
@@ -97,12 +98,12 @@ abstract class _StatisticsStoreBase with Store {
     if (res.isRight) {
       logins = ObservableList.of(res.right);
       await HiveJsonCache.put(
-        'stats-logins-v1',
+        _loginsCacheKey,
         res.right.map((d) => d.toIso8601String()).toList(),
       );
     } else {
       // Fallback — читаем cache.
-      final cached = await HiveJsonCache.read('stats-logins-v1');
+      final cached = await HiveJsonCache.read(_loginsCacheKey);
       if (cached is List) {
         logins = ObservableList.of(
           cached
@@ -125,8 +126,21 @@ abstract class _StatisticsStoreBase with Store {
     final res = await allProductsUseCase();
     if (res.isRight) {
       allProducts = ObservableList.of(res.right);
+      await HiveJsonCache.put(
+        _productsCacheKey,
+        res.right.map(_productToJson).toList(),
+      );
     } else {
-      productsError = res.left.message;
+      final cached = await HiveJsonCache.read(_productsCacheKey);
+      if (cached is List) {
+        allProducts = ObservableList.of(
+          cached
+              .whereType<Map>()
+              .map(_productFromJson)
+              .whereType<ProductModel>(),
+        );
+      }
+      if (allProducts.isEmpty) productsError = res.left.message;
     }
     isProductsLoading = false;
   }
@@ -135,12 +149,17 @@ abstract class _StatisticsStoreBase with Store {
   Future<void> loadPopularProducts() async {
     isPopularLoading = true;
     popularError = null;
+    if (_popularEndpointGone) {
+      popularProducts = ObservableList.of(_popularFromProducts(allProducts));
+      isPopularLoading = false;
+      return;
+    }
     final res = await popularProductsUseCase();
     if (res.isRight) {
       popularProducts = ObservableList.of(res.right);
       // Cache snapshot.
       await HiveJsonCache.put(
-        'stats-popular-v1',
+        _popularCacheKey,
         res.right
             .map(
               (p) => {
@@ -153,7 +172,7 @@ abstract class _StatisticsStoreBase with Store {
             .toList(),
       );
     } else {
-      final cached = await HiveJsonCache.read('stats-popular-v1');
+      final cached = await HiveJsonCache.read(_popularCacheKey);
       if (cached is List) {
         popularProducts = ObservableList.of(
           cached.whereType<Map>().map((m) {
@@ -165,10 +184,65 @@ abstract class _StatisticsStoreBase with Store {
             );
           }).toList(),
         );
-      } else {
+      }
+      if (popularProducts.isEmpty && allProducts.isNotEmpty) {
+        popularProducts = ObservableList.of(_popularFromProducts(allProducts));
+      }
+      final isEndpointGone =
+          res.left is ApiFailure && (res.left as ApiFailure).statusCode == 410;
+      _popularEndpointGone = isEndpointGone;
+      if (popularProducts.isEmpty && !isEndpointGone) {
         popularError = res.left.message;
       }
     }
     isPopularLoading = false;
+  }
+
+  Map<String, dynamic> _productToJson(ProductEntity product) {
+    if (product is ProductModel) return product.toJson();
+    return {
+      'name': product.name,
+      'id': product.id,
+      'section': product.section,
+      'quantity': product.quantity,
+      'unit': product.unit,
+      'priority': product.priority,
+      'urgent': product.urgent,
+      'checked': product.checked,
+      'remind-every-day': product.remindEveryDay,
+    };
+  }
+
+  ProductModel? _productFromJson(Map<dynamic, dynamic> json) {
+    try {
+      return ProductModel.fromJson(Map<String, dynamic>.from(json));
+    } catch (_) {
+      return null;
+    }
+  }
+
+  List<PopularProductEntity> _popularFromProducts(
+    Iterable<ProductEntity> products,
+  ) {
+    final counts = <String, int>{};
+    final names = <String, String>{};
+    for (final product in products) {
+      final name = product.name.trim();
+      if (name.isEmpty) continue;
+      final key = name.toLowerCase();
+      names[key] = name;
+      counts[key] = (counts[key] ?? 0) + 1;
+    }
+    final sorted = counts.entries.toList()
+      ..sort((a, b) => b.value.compareTo(a.value));
+    return [
+      for (final entry in sorted.take(20))
+        PopularProductEntity(
+          name: names[entry.key]!,
+          quantity: entry.value,
+          howOftenEnds: 0,
+          currentDay: 0,
+        ),
+    ];
   }
 }

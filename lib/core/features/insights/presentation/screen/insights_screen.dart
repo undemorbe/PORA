@@ -7,6 +7,7 @@ import 'package:pora/core/features/insights/domain/entity/popular_product.dart';
 import 'package:pora/core/features/insights/presentation/store/statistics_store.dart';
 import 'package:pora/core/features/insights/presentation/widgets/champion_card.dart';
 import 'package:pora/core/features/insights/presentation/widgets/frequency_row.dart';
+import 'package:pora/core/features/insights/presentation/widgets/stat_card.dart';
 import 'package:pora/core/features/insights/presentation/widgets/streak_card.dart';
 import 'package:pora/core/features/insights/presentation/widgets/weekly_heatmap.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
@@ -64,6 +65,14 @@ class _InsightsPageState extends State<InsightsPage> {
                   delay: const Duration(milliseconds: 120),
                   child: StreakCard(days: _store.streakDays),
                 ),
+                const SizedBox(height: PoraSpacing.md),
+                FadeSlideIn(
+                  delay: const Duration(milliseconds: 160),
+                  child: _StatsRow(
+                    products: _store.allProducts.length,
+                    loginsThisWeek: _loginsThisWeek(_store.logins),
+                  ),
+                ),
                 const SizedBox(height: PoraSpacing.lg),
                 if (_store.popularProducts.isNotEmpty)
                   FadeSlideIn(
@@ -98,10 +107,44 @@ class _InsightsPageState extends State<InsightsPage> {
       ),
     );
   }
+
+  int _loginsThisWeek(Iterable<DateTime> logins) {
+    final today = DateTime.now();
+    final start = DateTime(
+      today.year,
+      today.month,
+      today.day,
+    ).subtract(Duration(days: today.weekday - 1));
+    return logins.where((login) => !login.toLocal().isBefore(start)).length;
+  }
 }
 
-/// Список популярных продуктов. `pct` — quantity / topQuantity.
-/// `sub` — «~раз в N дн.» из `howOftenEnds`.
+class _StatsRow extends StatelessWidget {
+  const _StatsRow({required this.products, required this.loginsThisWeek});
+
+  final int products;
+  final int loginsThisWeek;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l10n;
+    return Row(
+      children: [
+        Expanded(
+          child: StatCard(number: '$products', label: l.insightsStatsProducts),
+        ),
+        const SizedBox(width: PoraSpacing.md),
+        Expanded(
+          child: StatCard(
+            number: '$loginsThisWeek',
+            label: l.insightsStatsLoginsWeek,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 class _PopularList extends StatelessWidget {
   const _PopularList({
     required this.products,

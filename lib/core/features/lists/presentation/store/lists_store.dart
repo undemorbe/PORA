@@ -57,27 +57,28 @@ abstract class _ListStoreBase with Store {
 
   /// Секции с продуктами, отфильтрованными по [query]. Пустые секции
   /// после фильтра выпадают.
-    @computed
-    List<ListSectionEntity> get filteredSections {
-      final sections = list?.sections ?? const <ListSectionEntity>[];
-      final q = query.trim().toLowerCase();
+  @computed
+  List<ListSectionEntity> get filteredSections {
+    final sections = list?.sections ?? const <ListSectionEntity>[];
+    final q = query.trim().toLowerCase();
 
-      if (q.isEmpty) {
-        return sections;
-      }
-
-      return [
-        for (final section in sections)
-          if (section.items.any((item) => item.name.toLowerCase().contains(q)))
-            _FilteredSection(
-              name: section.name,
-              items: [
-                for (final item in section.items)
-                  if (item.name.toLowerCase().contains(q)) item,
-              ],
-            ),
-      ];
+    if (q.isEmpty) {
+      return sections;
     }
+
+    return [
+      for (final section in sections)
+        if (section.items.any((item) => item.name.toLowerCase().contains(q)))
+          _FilteredSection(
+            name: section.name,
+            items: [
+              for (final item in section.items)
+                if (item.name.toLowerCase().contains(q)) item,
+            ],
+          ),
+    ];
+  }
+
   /// Уникальные участники, засветившиеся в текущем list (сборка из
   /// `product.addedBy`). Fallback для случая когда members не пришли
   /// аргументом (deeplink).
@@ -178,11 +179,10 @@ abstract class _ListStoreBase with Store {
 
   @action
   Future<bool> toggleItemBought({required String itemId}) async {
-
     isSelfUpdated = true;
     Future.delayed(Duration(seconds: 2)).whenComplete(() {
       isSelfUpdated = false;
-    },);
+    });
     final cur = list;
     if (cur == null) return false;
     ProductEntity? found;
@@ -206,10 +206,7 @@ abstract class _ListStoreBase with Store {
     _patchItem(itemId, checked: !target);
     errorMessage = res.left.message;
     return false;
-    
   }
-
-  
 
   void _patchItem(String itemId, {required bool checked}) {
     final cur = list;

@@ -86,10 +86,12 @@ class _NotificationsPageState extends State<NotificationsPage> {
                         title: l.notificationsTitle,
                         unreadCount: store.unreadCount,
                         onBack: () => context.router.maybePop(),
-                        onReadAll:
-                            store.unreadCount == 0 ? null : store.markAllRead,
-                        onClearAll:
-                            store.items.isEmpty ? null : _confirmClearAll,
+                        onReadAll: store.unreadCount == 0
+                            ? null
+                            : store.markAllRead,
+                        onClearAll: store.items.isEmpty
+                            ? null
+                            : _confirmClearAll,
                       ),
                     ),
                   ),
@@ -145,10 +147,7 @@ class _Header extends StatelessWidget {
         GestureDetector(
           behavior: HitTestBehavior.opaque,
           onTap: onBack,
-          child: const PhosphorIcon(
-            PhosphorIconsRegular.caretLeft,
-            size: 26,
-          ),
+          child: const PhosphorIcon(PhosphorIconsRegular.caretLeft, size: 26),
         ),
         const SizedBox(width: PoraSpacing.md),
         Expanded(
@@ -158,8 +157,10 @@ class _Header extends StatelessWidget {
               if (unreadCount > 0) ...[
                 const SizedBox(width: 6),
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 2,
+                  ),
                   decoration: const BoxDecoration(
                     color: PoraColors.primary,
                     borderRadius: BorderRadius.all(Radius.circular(999)),
@@ -251,11 +252,7 @@ class _FilterChips extends StatelessWidget {
 }
 
 class _Chip extends StatelessWidget {
-  const _Chip({
-    required this.label,
-    required this.active,
-    required this.onTap,
-  });
+  const _Chip({required this.label, required this.active, required this.onTap});
   final String label;
   final bool active;
   final VoidCallback onTap;

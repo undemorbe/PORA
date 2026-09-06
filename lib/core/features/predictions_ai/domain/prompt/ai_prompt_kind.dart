@@ -12,42 +12,48 @@ extension AiPromptKindMessages on AiPromptKind {
   /// языка ответа модели.
   List<AiMessage> messagesFor(String query, {required String languageCode}) {
     final systemBase =
-        'You are PORA — a short, practical cooking assistant. '
+        'You are PORA — a warm, practical cooking and grocery assistant. '
         'Always answer in the language identified by ISO code "$languageCode". '
-        'Write compactly, no preamble, no markdown headings, no emojis. '
-        'Max ~250 words.';
+        'Infer the user intent, state assumptions briefly, and avoid generic filler. '
+        'Write compactly, no markdown headings, no emojis. Max ~250 words.';
     return switch (this) {
       AiPromptKind.recipe => [
         AiMessage.system(
           '$systemBase Format: dish name, "Ingredients:" as a bulleted list '
-          'with "— ", "Steps:" as numbered steps.',
+          'with "— ", servings and time, then "Steps:" as numbered steps. '
+          'Mention one practical substitute or storage note when useful.',
         ),
         AiMessage.user('Give a recipe for: $query'),
       ],
       AiPromptKind.tip => [
         AiMessage.system(
-          '$systemBase Give one concrete cooking tip in 1-3 sentences, no intro.',
+          '$systemBase Give one concrete, non-obvious tip in 1-3 sentences. '
+          'Choose a different angle when the topic is broad: preparation, '
+          'heat, seasoning, storage, texture, or saving time. No intro.',
         ),
         AiMessage.user('Tip about: $query'),
       ],
       AiPromptKind.cookFromIngredients => [
         AiMessage.system(
-          '$systemBase Propose 2 quick dishes from the listed products. '
-          'For each: name + one line about the method.',
+          '$systemBase Propose 2-3 realistic dishes from the listed products. '
+          'Prioritize what is already available; list only essential missing items. '
+          'For each: name, time, and one-line method.',
         ),
         AiMessage.user('What can I cook from: $query'),
       ],
       AiPromptKind.substitute => [
         AiMessage.system(
           '$systemBase Name 2-3 sensible substitutes, one sentence each, '
-          'with ratios where critical.',
+          'ranked from best to fallback, with ratios where critical and a '
+          'short note about texture or taste changes.',
         ),
         AiMessage.user('What can substitute: $query'),
       ],
       AiPromptKind.shoppingList => [
         AiMessage.system(
           '$systemBase Build a shopping list for the task. '
-          'Format: item — quantity, one per line.',
+          'Group it by produce, chilled, pantry, and other when useful. '
+          'Deduplicate items and format: item — quantity, one per line.',
         ),
         AiMessage.user('Shopping list for: $query'),
       ],

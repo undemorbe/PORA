@@ -6,15 +6,11 @@ import 'package:pora/core/internal/errors/failure.dart';
 import 'package:pora/core/internal/errors/failure_mapper.dart';
 import 'package:pora/core/internal/extensions/either.dart';
 
-/// Реализация [AiRemote] поверх Retrofit/Dio (`OpenRouterApiClient`).
-/// Model берётся из dotenv, key/baseUrl вешаются на Dio через DI.
-/// Все исключения нормализует `FailureMapper` — единый Talker-логгинг.
 class AiRemoteImpl implements AiRemote {
   const AiRemoteImpl({required this.client, required this.model});
 
   final OpenRouterApiClient client;
 
-  /// Идентификатор модели (`AI_MODEL` из dotenv).
   final String model;
 
   @override

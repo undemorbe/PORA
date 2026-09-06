@@ -25,7 +25,7 @@ class StatisticsService implements StatisticsRepository {
 
   @override
   Future<Either<Failure, List<PopularProductEntity>>>
-      getPopularProducts() async {
+  getPopularProducts() async {
     final res = await remote.getPopularProducts();
     if (res.isLeft) return Left(res.left);
     return Right(res.right.items.map((m) => m.toEntity()).toList());

@@ -102,6 +102,24 @@ mixin _$ListStore on _ListStoreBase, Store {
     });
   }
 
+  late final _$isSelfUpdatedAtom = Atom(
+    name: '_ListStoreBase.isSelfUpdated',
+    context: context,
+  );
+
+  @override
+  bool? get isSelfUpdated {
+    _$isSelfUpdatedAtom.reportRead();
+    return super.isSelfUpdated;
+  }
+
+  @override
+  set isSelfUpdated(bool? value) {
+    _$isSelfUpdatedAtom.reportWrite(value, super.isSelfUpdated, () {
+      super.isSelfUpdated = value;
+    });
+  }
+
   late final _$usingCacheAtom = Atom(
     name: '_ListStoreBase.usingCache',
     context: context,
@@ -267,6 +285,7 @@ list: ${list},
 isLoading: ${isLoading},
 isSuccess: ${isSuccess},
 errorMessage: ${errorMessage},
+isSelfUpdated: ${isSelfUpdated},
 usingCache: ${usingCache},
 listsWithPreview: ${listsWithPreview},
 query: ${query},

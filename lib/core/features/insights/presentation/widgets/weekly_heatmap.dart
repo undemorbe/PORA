@@ -78,8 +78,7 @@ class WeeklyHeatmap extends StatelessWidget {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
     // Понедельник текущей недели.
-    final currentMonday =
-        today.subtract(Duration(days: today.weekday - 1));
+    final currentMonday = today.subtract(Duration(days: today.weekday - 1));
 
     // 4 недели: старейшая = currentMonday - 21 дней.
     final startDate = currentMonday.subtract(const Duration(days: 21));
@@ -104,9 +103,7 @@ class WeeklyHeatmap extends StatelessWidget {
     }
     if (max == 0) return List.generate(4, (_) => List<double>.filled(7, 0));
 
-    return counts
-        .map((row) => row.map((v) => v / max).toList())
-        .toList();
+    return counts.map((row) => row.map((v) => v / max).toList()).toList();
   }
 
   static List<String> _weekdayLabels(String locale) {

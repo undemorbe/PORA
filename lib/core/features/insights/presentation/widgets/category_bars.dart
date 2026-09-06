@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pora/core/internal/theme/additional_constants.dart';
 import 'package:pora/core/internal/theme/app_text_styles.dart';
 import 'package:pora/core/internal/theme/context_colors.dart';
 import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
@@ -25,11 +24,7 @@ class CategoryBars extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        for (final item in items) _Row(item: item),
-      ],
-    );
+    return Column(children: [for (final item in items) _Row(item: item)]);
   }
 }
 
@@ -47,12 +42,7 @@ class _Row extends StatelessWidget {
         children: [
           Row(
             children: [
-              Expanded(
-                child: Text(
-                  item.name,
-                  style: PoraText.itemTitle,
-                ),
-              ),
+              Expanded(child: Text(item.name, style: PoraText.itemTitle)),
               Text(
                 '${(item.share * 100).round()}%',
                 style: PoraText.small.copyWith(

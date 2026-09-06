@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:get_it/get_it.dart';
-import 'package:pora/core/features/families/presentation/store/selected_family_store.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/core/features/families/domain/entity/member.dart';
 import 'package:pora/core/features/lists/presentation/store/lists_store.dart';
@@ -33,7 +31,8 @@ class ListPage extends StatefulWidget {
     super.key,
     required this.listId,
     this.listName,
-    this.members, this.ownerId,
+    this.members,
+    this.ownerId,
   });
 
   final String listId;
@@ -57,7 +56,8 @@ class _ListPageState extends State<ListPage> {
     super.initState();
     listStore = ListStore()..getConcreteList(lid: widget.listId);
     _wsSub = AppWebsocket.instance.events.listen((event) {
-      if (event.lid != widget.listId && listStore.isSelfUpdated == false) return;
+      if (event.lid != widget.listId && listStore.isSelfUpdated == false)
+        return;
       _debouncer.call(_refresh);
     });
   }
@@ -111,11 +111,9 @@ class _ListPageState extends State<ListPage> {
                       : listStore.derivedMembers;
                   return ListHeader(
                     title: title,
-                    subtitle: members.length == 1 ? 
-                    
-                        "${context.l10n.onlyYou} · ${listStore.productsAmount} ${context.l10n.products}"
-                    :
-                        "${members.length} ${context.l10n.human} · ${listStore.productsAmount} ${context.l10n.products}",
+                    subtitle: members.length == 1
+                        ? "${context.l10n.onlyYou} · ${listStore.productsAmount} ${context.l10n.products}"
+                        : "${members.length} ${context.l10n.human} · ${listStore.productsAmount} ${context.l10n.products}",
                     members: members,
                     onBack: () => context.router.maybePop(),
                     onSearch: _toggleSearch,

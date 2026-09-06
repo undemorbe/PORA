@@ -17,6 +17,6 @@ class GenerateTipUseCase {
       topic,
       languageCode: languageCode,
     );
-    return repository.chat(messages: messages, maxTokens: 400);
+    return repository.chat(messages: messages, maxTokens: 600);
   }
 }

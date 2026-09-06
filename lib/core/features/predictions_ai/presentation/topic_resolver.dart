@@ -11,18 +11,18 @@ class TopicResolver {
   }
 
   static String _lookup(String key, AppLocalizations l) => switch (key) {
-        'tipTopicHerbs' => l.tipTopicHerbs,
-        'tipTopicBaking' => l.tipTopicBaking,
-        'tipTopicSoups' => l.tipTopicSoups,
-        'tipTopicMeat' => l.tipTopicMeat,
-        'tipTopicFish' => l.tipTopicFish,
-        'tipTopicVegetables' => l.tipTopicVegetables,
-        'tipTopicStorage' => l.tipTopicStorage,
-        'tipTopicKitchenHacks' => l.tipTopicKitchenHacks,
-        'tipTopicSpices' => l.tipTopicSpices,
-        'tipTopicDough' => l.tipTopicDough,
-        'tipTopicBreakfast' => l.tipTopicBreakfast,
-        'tipTopicDinner' => l.tipTopicDinner,
-        _ => l.aiTipOfDayTopic,
-      };
+    'tipTopicHerbs' => l.tipTopicHerbs,
+    'tipTopicBaking' => l.tipTopicBaking,
+    'tipTopicSoups' => l.tipTopicSoups,
+    'tipTopicMeat' => l.tipTopicMeat,
+    'tipTopicFish' => l.tipTopicFish,
+    'tipTopicVegetables' => l.tipTopicVegetables,
+    'tipTopicStorage' => l.tipTopicStorage,
+    'tipTopicKitchenHacks' => l.tipTopicKitchenHacks,
+    'tipTopicSpices' => l.tipTopicSpices,
+    'tipTopicDough' => l.tipTopicDough,
+    'tipTopicBreakfast' => l.tipTopicBreakfast,
+    'tipTopicDinner' => l.tipTopicDinner,
+    _ => l.aiTipOfDayTopic,
+  };
 }

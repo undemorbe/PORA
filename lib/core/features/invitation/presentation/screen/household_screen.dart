@@ -130,8 +130,12 @@ class _InvitePageState extends State<InvitePage> {
               PoraOutlineButton(
                 label: context.l10n.householdShowQr,
                 onPressed: () async {
-                  if(invitationsStore.linkCode == null){
-                    PoraSnackbar.show(context, message: "Error to generate QR", type: PoraSnackType.failure);
+                  if (invitationsStore.linkCode == null) {
+                    PoraSnackbar.show(
+                      context,
+                      message: "Error to generate QR",
+                      type: PoraSnackType.failure,
+                    );
                     return;
                   }
                   await showDialog(

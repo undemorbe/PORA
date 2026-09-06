@@ -40,7 +40,7 @@ class SectionBuilder extends StatelessWidget {
     return Observer(
       builder: (context) {
         final Widget child;
-         if (listStore.errorMessage != null) {
+        if (listStore.errorMessage != null) {
           child = Center(
             key: const ValueKey('error'),
             child: Padding(
