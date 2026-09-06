@@ -75,6 +75,20 @@
     "@commonError": {
         "description": "commonError"
     },
+    "authErrorInvalidPhone": "Invalid phone / email!",
+    "@authErrorInvalidPhone": {
+        "description": "Invalid phone on auth screen"
+    },
+    "authPhoneSendOtp": "We'll send code onto {isPhone, select, true{Telegram!} false{email!} other{destination you wrote}}",
+    "@authPhoneSendOtp": {
+        "description": "Invalid phone on auth screen",
+        "placeholders" : {
+            "isPhone":{
+                "type":"String",
+                "example":"true"
+            }
+        }
+    },
     "otpTitle": "Осталось немного!",
     "@otpTitle": {
         "description": "otpTitle"
@@ -1155,6 +1169,18 @@
     "@chatSample3": { "description": "sample question" },
     "chatSample4": "Quick 20-minute dinner recipe",
     "@chatSample4": { "description": "sample question" },
+    "chatSample5": "How can I use up vegetables before they spoil?",
+    "@chatSample5": { "description": "sample question" },
+    "chatSample6": "Make a shopping list for 3 easy breakfasts",
+    "@chatSample6": { "description": "sample question" },
+    "chatSample7": "What should I cook for two with a small budget?",
+    "@chatSample7": { "description": "sample question" },
+    "chatSample8": "How long can I keep cooked rice in the fridge?",
+    "@chatSample8": { "description": "sample question" },
+    "chatSample9": "Give me a high-protein vegetarian dinner",
+    "@chatSample9": { "description": "sample question" },
+    "chatSample10": "What can replace butter in this recipe?",
+    "@chatSample10": { "description": "sample question" },
     "chatTyping": "PORA is typing…",
     "@chatTyping": { "description": "typing indicator" },
     "chatInputHint": "Ask anything…",

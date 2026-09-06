@@ -6,5 +6,7 @@ import 'package:pora/core/internal/extensions/either.dart';
 class GetUserUseCase {
   const GetUserUseCase(this.repository);
   final UserRepository repository;
-  Future<Either<Failure, UserEntity>> call() async { return await repository.getUser();}
+  Future<Either<Failure, UserEntity>> call() async {
+    return await repository.getUser();
+  }
 }

@@ -15,13 +15,9 @@ import 'package:pora/core/internal/theme/additional_constants.dart';
 import 'package:pora/core/internal/theme/app_text_styles.dart';
 import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
 
-/// Карточка «Совет дня» — тонкая обёртка над `AiTipStore`.
-/// Локаль/фолбэк-текст подтягиваются в `didChangeDependencies`, а не в
-/// `initState` (иначе `_LocalizationsScope` кидает assert до готовности контекста).
 class AiTipOfDayCard extends StatefulWidget {
   const AiTipOfDayCard({super.key, this.topicKey});
 
-  /// Опциональный override темы совета (иначе — `l10n.aiTipOfDayTopic`).
   final String? topicKey;
 
   @override

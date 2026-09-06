@@ -1,6 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
+import 'package:pora/core/features/insights/domain/entity/popular_product.dart';
+import 'package:pora/core/features/insights/presentation/store/statistics_store.dart';
 import 'package:pora/core/features/insights/presentation/widgets/frequency_row.dart';
 import 'package:pora/core/features/predictions_ai/domain/entity/prediction.dart';
 import 'package:pora/core/features/predictions_ai/presentation/widgets/ai_tip_of_day_card.dart';
@@ -34,72 +38,13 @@ class PredictionsPage extends StatefulWidget {
 }
 
 class _PredictionsPageState extends State<PredictionsPage> {
-  /// Pool из которого рисуются 3 активные карточки. При dismiss'е верхняя
-  /// уходит, из хвоста подтягивается новая. Пока mock — потом заменится
-  /// репозиторием предсказаний.
-  static const _pool = <(String, PredictionEntity)>[
-    ('sandSoft', PredictionEntity(
-      emoji: '🥛',
-      name: 'Молоко',
-      meta: '~раз в 7 дней · куплено 6 дней назад',
-    )),
-    ('sandMocha', PredictionEntity(
-      emoji: '☕',
-      name: 'Кофе',
-      meta: '~раз в 14 дней · куплено 12 дней назад',
-    )),
-    ('sandWheat', PredictionEntity(
-      emoji: '🍞',
-      name: 'Хлеб',
-      meta: '~раз в 3 дня · куплено 2 дня назад',
-    )),
-    ('sandSoft', PredictionEntity(
-      emoji: '🧀',
-      name: 'Сыр',
-      meta: '~раз в 10 дней · куплено 9 дней назад',
-    )),
-    ('sandMocha', PredictionEntity(
-      emoji: '🥚',
-      name: 'Яйца',
-      meta: '~раз в 5 дней · куплено 4 дня назад',
-    )),
-    ('sandWheat', PredictionEntity(
-      emoji: '🍎',
-      name: 'Яблоки',
-      meta: '~раз в 6 дней · куплено 5 дней назад',
-    )),
-    ('sandSoft', PredictionEntity(
-      emoji: '🧈',
-      name: 'Масло',
-      meta: '~раз в 12 дней · куплено 11 дней назад',
-    )),
-  ];
+  final StatisticsStore _store = GetIt.I<StatisticsStore>();
+  final Set<String> _dismissed = <String>{};
 
-  late final List<int> _visibleIndices = [0, 1, 2];
-  int _nextPoolIndex = 3;
-
-  static const _tilesByKey = <String, Color>{
-    'sandSoft': PoraColors.sandSoft,
-    'sandMocha': PoraColors.sandMocha,
-    'sandWheat': PoraColors.sandWheat,
-  };
-
-  static const _freq = <(String, String, String, double)>[
-    ('🥛', 'Молоко', '~раз в 7 дней', 0.85),
-    ('🍞', 'Хлеб', '~раз в 3 дня', 0.95),
-    ('☕', 'Кофе', '~раз в 14 дней', 0.55),
-  ];
-
-  void _rotate(int slot) {
-    setState(() {
-      if (_nextPoolIndex < _pool.length) {
-        _visibleIndices[slot] = _nextPoolIndex;
-        _nextPoolIndex++;
-      } else {
-        // Пул исчерпан — просто снимаем карточку.
-        _visibleIndices.removeAt(slot);
-      }
-    });
+  @override
+  void initState() {
+    super.initState();
+    _store.loadAll();
   }
 
   @override
@@ -113,135 +58,214 @@ class _PredictionsPageState extends State<PredictionsPage> {
       ),
       body: SafeArea(
         bottom: false,
-        child: ListView(
-          padding: const EdgeInsets.fromLTRB(
-            PoraSpacing.screen,
-            PoraSpacing.sm,
-            PoraSpacing.screen,
-            120,
-          ),
-          children: [
-            FadeSlideIn(
-              delay: const Duration(milliseconds: 40),
-              child: _Header(
-                title: l.predictionsGreeting,
-                subtitle: l.predictionsGreetingSub,
-                onInsights: () => context.router.push(const InsightsRoute()),
+        child: RefreshIndicator.adaptive(
+          onRefresh: _store.loadAll,
+          child: Observer(
+            builder: (_) => ListView(
+              padding: const EdgeInsets.fromLTRB(
+                PoraSpacing.screen,
+                PoraSpacing.sm,
+                PoraSpacing.screen,
+                120,
               ),
-            ),
-            const SizedBox(height: PoraSpacing.lg),
-            FadeSlideIn(
-              delay: const Duration(milliseconds: 120),
-              child: KpiRow(
-                items: [
-                  KpiItem(
-                    icon: PhosphorIconsRegular.basket,
-                    number: '23',
-                    label: l.kpiWeek,
+              children: [
+                FadeSlideIn(
+                  delay: const Duration(milliseconds: 40),
+                  child: _Header(
+                    title: l.predictionsGreeting,
+                    subtitle: l.predictionsGreetingSub,
+                    onInsights: () =>
+                        context.router.push(const InsightsRoute()),
                   ),
-                  KpiItem(
-                    icon: PhosphorIconsRegular.cookingPot,
-                    number: '12',
-                    label: l.kpiRecipes,
-                  ),
-                  KpiItem(
-                    icon: PhosphorIconsRegular.calendarBlank,
-                    number: '5',
-                    label: l.kpiDaysToRun,
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: PoraSpacing.lg),
-            const FadeSlideIn(
-              delay: Duration(milliseconds: 200),
-              child: AiTipOfDayCard(),
-            ),
-            const SizedBox(height: PoraSpacing.xl),
-            FadeSlideIn(
-              delay: const Duration(milliseconds: 280),
-              child: SectionHeader(title: l.predictionsSectionSoon),
-            ),
-            const SizedBox(height: PoraSpacing.md),
-            AnimatedSize(
-              duration: const Duration(milliseconds: 260),
-              curve: Curves.easeOutCubic,
-              alignment: Alignment.topCenter,
-              child: Column(
-                children: [
-                  for (var slot = 0; slot < _visibleIndices.length; slot++)
-                    _RotatingSlot(
-                      key: ValueKey(_visibleIndices[slot]),
-                      slotIndex: slot,
-                      poolIndex: _visibleIndices[slot],
-                      pool: _pool,
-                      tilesByKey: _tilesByKey,
-                      onDismiss: () => _rotate(slot),
-                    ),
-                ],
-              ),
-            ),
-            const SizedBox(height: PoraSpacing.lg),
-            FadeSlideIn(
-              delay: const Duration(milliseconds: 520),
-              child: SectionHeader(
-                title: l.predictionsSectionOften,
-                trailing: _InsightsLink(
-                  onTap: () => context.router.push(const InsightsRoute()),
                 ),
-              ),
+                const SizedBox(height: PoraSpacing.lg),
+                FadeSlideIn(
+                  delay: const Duration(milliseconds: 120),
+                  child: KpiRow(
+                    items: [
+                      KpiItem(
+                        icon: PhosphorIconsRegular.basket,
+                        number: '${_store.allProducts.length}',
+                        label: l.kpiWeek,
+                      ),
+                      KpiItem(
+                        icon: PhosphorIconsRegular.cookingPot,
+                        number: '${_store.popularProducts.length}',
+                        label: l.kpiRecipes,
+                      ),
+                      KpiItem(
+                        icon: PhosphorIconsRegular.calendarBlank,
+                        number: '${_soonProducts.length}',
+                        label: l.kpiDaysToRun,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: PoraSpacing.lg),
+                const FadeSlideIn(
+                  delay: Duration(milliseconds: 200),
+                  child: AiTipOfDayCard(),
+                ),
+                const SizedBox(height: PoraSpacing.xl),
+                FadeSlideIn(
+                  delay: const Duration(milliseconds: 280),
+                  child: SectionHeader(title: l.predictionsSectionSoon),
+                ),
+                const SizedBox(height: PoraSpacing.md),
+                _SoonProducts(
+                  products: _soonProducts,
+                  isLoading: _store.isPopularLoading,
+                  errorMessage: _store.popularError,
+                  onDismiss: _dismiss,
+                ),
+                const SizedBox(height: PoraSpacing.lg),
+                FadeSlideIn(
+                  delay: const Duration(milliseconds: 520),
+                  child: SectionHeader(
+                    title: l.predictionsSectionOften,
+                    trailing: _InsightsLink(
+                      onTap: () => context.router.push(const InsightsRoute()),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: PoraSpacing.md),
+                FadeSlideIn(
+                  delay: const Duration(milliseconds: 580),
+                  child: PoraRowsCard(
+                    children: _store.popularProducts
+                        .take(3)
+                        .map(
+                          (product) => FrequencyRow(
+                            name: product.name,
+                            sub: _frequencyLabel(context, product),
+                            pct: _relativeQuantity(product),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: PoraSpacing.md),
-            FadeSlideIn(
-              delay: const Duration(milliseconds: 580),
-              child: PoraRowsCard(
-                children: [
-                  for (final (emoji, name, sub, pct) in _freq)
-                    FrequencyRow(emoji: emoji, name: name, sub: sub, pct: pct),
-                ],
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
   }
+
+  List<PopularProductEntity> get _soonProducts {
+    final products =
+        _store.popularProducts
+            .where((product) => !_dismissed.contains(product.name))
+            .where((product) => product.currentDay > 0)
+            .toList()
+          ..sort((a, b) => b.currentDay.compareTo(a.currentDay));
+    if (products.isEmpty) {
+      return _store.popularProducts
+          .where((product) => !_dismissed.contains(product.name))
+          .take(3)
+          .toList();
+    }
+    return products.take(3).toList();
+  }
+
+  void _dismiss(String name) {
+    setState(() => _dismissed.add(name));
+  }
+
+  String _frequencyLabel(BuildContext context, PopularProductEntity product) {
+    final days = product.howOftenEnds;
+    if (days > 0) return context.l10n.insightsFreqEvery(days);
+    return '×${product.quantity}';
+  }
+
+  double _relativeQuantity(PopularProductEntity product) {
+    final top = _store.popularProducts.isEmpty
+        ? 0
+        : _store.popularProducts.first.quantity;
+    return top == 0 ? 0 : product.quantity / top;
+  }
 }
 
-/// Один слот-контейнер с fade+slide на mount, keyed по `poolIndex` —
-/// когда родитель заменяет индекс, новая карточка проиграет свою анимацию.
-class _RotatingSlot extends StatelessWidget {
-  const _RotatingSlot({
-    super.key,
-    required this.slotIndex,
-    required this.poolIndex,
-    required this.pool,
-    required this.tilesByKey,
+class _SoonProducts extends StatelessWidget {
+  const _SoonProducts({
+    required this.products,
+    required this.isLoading,
+    required this.errorMessage,
     required this.onDismiss,
   });
 
-  final int slotIndex;
-  final int poolIndex;
-  final List<(String, PredictionEntity)> pool;
-  final Map<String, Color> tilesByKey;
-  final VoidCallback onDismiss;
+  final List<PopularProductEntity> products;
+  final bool isLoading;
+  final String? errorMessage;
+  final ValueChanged<String> onDismiss;
 
   @override
   Widget build(BuildContext context) {
-    final (colorKey, entity) = pool[poolIndex];
-    return FadeSlideIn(
-      key: ValueKey('slot-$slotIndex-pool-$poolIndex'),
-      duration: const Duration(milliseconds: 340),
-      dy: 16,
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: PoraSpacing.md),
-        child: PredictionCard(
-          prediction: entity,
-          tileColor: tilesByKey[colorKey] ?? PoraColors.sandSoft,
-          onDismiss: onDismiss,
+    if (isLoading && products.isEmpty) {
+      return const Center(child: CircularProgressIndicator.adaptive());
+    }
+    if (products.isEmpty) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: PoraSpacing.md),
+        child: Text(
+          errorMessage ?? context.l10n.insightsEmpty,
+          textAlign: TextAlign.center,
+          style: PoraText.small.copyWith(color: context.colors.textSubtle),
         ),
+      );
+    }
+    return AnimatedSize(
+      duration: const Duration(milliseconds: 260),
+      curve: Curves.easeOutCubic,
+      alignment: Alignment.topCenter,
+      child: Column(
+        children: [
+          for (var index = 0; index < products.length; index++)
+            FadeSlideIn(
+              key: ValueKey(products[index].name),
+              delay: Duration(milliseconds: index * 80),
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: PoraSpacing.md),
+                child: PredictionCard(
+                  prediction: _prediction(context, products[index]),
+                  tileColor: _tileColor(index),
+                  onDismiss: () => onDismiss(products[index].name),
+                ),
+              ),
+            ),
+        ],
       ),
     );
+  }
+
+  PredictionEntity _prediction(
+    BuildContext context,
+    PopularProductEntity product,
+  ) {
+    final locale = Localizations.localeOf(context).languageCode;
+    final every = product.howOftenEnds > 0
+        ? (locale == 'ru'
+              ? '~раз в ${product.howOftenEnds} дней'
+              : '~every ${product.howOftenEnds}d')
+        : (locale == 'ru' ? 'Покупаете регулярно' : 'Bought regularly');
+    final lastBought = product.currentDay > 0 && product.howOftenEnds > 0
+        ? (product.howOftenEnds / product.currentDay).round()
+        : 0;
+    final meta = lastBought > 0
+        ? (locale == 'ru'
+              ? '$every · куплено $lastBought дн. назад'
+              : '$every · bought ${lastBought}d ago')
+        : every;
+    return PredictionEntity(emoji: '🛒', name: product.name, meta: meta);
+  }
+
+  Color _tileColor(int index) {
+    const colors = [
+      PoraColors.sandSoft,
+      PoraColors.sandMocha,
+      PoraColors.sandWheat,
+    ];
+    return colors[index % colors.length];
   }
 }
 

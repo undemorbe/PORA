@@ -7,18 +7,12 @@ import 'package:pora/core/internal/di/injection_container.dart';
 import 'package:pora/core/internal/notifications/deep_link_handler.dart';
 import 'package:pora/core/internal/notifications/device_token_sync.dart';
 
-/// Тяжёлая инициализация, идущая параллельно со splash-анимацией.
-///
-/// main.dart запускает [start] и сразу вызывает `runApp` — экран не
-/// блокируется. SplashPage ждёт [ready] перед навигацией.
 class AppBootstrap {
   AppBootstrap._();
   static final AppBootstrap instance = AppBootstrap._();
 
   Future<void>? _future;
 
-  /// Готов ли runtime к навигации. Идемпотентно — можно `await` из
-  /// нескольких мест.
   Future<void> get ready {
     final f = _future;
     if (f == null) {
@@ -42,7 +36,7 @@ class AppBootstrap {
       // Connectivity — быстрый init, синхронно.
       unawaited(container.getIt<ConnectivityStore>().init());
 
-      // Три параллельных ветки — независимы, ускоряют cold start.
+      // Локальная инициализация не должна зависеть от доступности API.
       await Future.wait<void>([
         _initLocalization(container),
         _refreshAndAuth(container),
@@ -82,29 +76,36 @@ class AppBootstrap {
   }
 
   Future<void> _refreshAndAuth(InjectionContainer container) async {
-    final refreshed = await container.getIt<RefreshTokenUseCase>().call();
     final auth = container.getIt<AuthState>();
+    final tokensStore = container.getIt<TokensSecureStore>();
+    final accessToken = await tokensStore.getAccessToken();
+    final refreshToken = await tokensStore.getRefreshToken();
 
-    if (refreshed?.isRight ?? false) {
-      final tokensStore = container.getIt<TokensSecureStore>();
-      final accessToken = await tokensStore.getAccessToken();
-      final refreshToken = await tokensStore.getRefreshToken();
-
-      if (accessToken != null && refreshToken != null) {
-        auth.setAuthenticated();
-      } else {
-        auth.setUnauthenticated();
-      }
+    tokensStore.updateCache(accessToken);
+    if (accessToken != null && refreshToken != null) {
+      auth.setAuthenticated();
     } else {
-      final tokensStore = container.getIt<TokensSecureStore>();
-      final accessToken = await tokensStore.getAccessToken();
-      final refreshToken = await tokensStore.getRefreshToken();
+      auth.setUnauthenticated();
+    }
 
-      if (accessToken != null && refreshToken != null) {
-        auth.setAuthenticated();
-      } else {
-        auth.setUnauthenticated();
+    // Refresh is best-effort. A slow or unavailable API must not keep the
+    // splash screen open; AuthInterceptor will use the updated cache once it
+    // completes.
+    if (refreshToken != null && refreshToken.isNotEmpty) {
+      unawaited(_refreshInBackground(container));
+    }
+  }
+
+  Future<void> _refreshInBackground(InjectionContainer container) async {
+    try {
+      final refreshed = await container.getIt<RefreshTokenUseCase>().call();
+      if (refreshed?.isRight ?? false) {
+        container.getIt<TokensSecureStore>().updateCache(
+          refreshed!.right.accessToken,
+        );
       }
+    } catch (e, s) {
+      Logger.talker.warning('Background token refresh failed', e, s);
     }
   }
 

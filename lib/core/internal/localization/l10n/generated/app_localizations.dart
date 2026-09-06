@@ -212,6 +212,18 @@ abstract class AppLocalizations {
   /// **'Ошибка'**
   String get commonError;
 
+  /// Invalid phone on auth screen
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid phone / email!'**
+  String get authErrorInvalidPhone;
+
+  /// Invalid phone on auth screen
+  ///
+  /// In en, this message translates to:
+  /// **'We\'ll send code onto {isPhone, select, true{Telegram!} false{email!} other{destination you wrote}}'**
+  String authPhoneSendOtp(String isPhone);
+
   /// otpTitle
   ///
   /// In en, this message translates to:
@@ -2251,6 +2263,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Quick 20-minute dinner recipe'**
   String get chatSample4;
+
+  /// sample question
+  ///
+  /// In en, this message translates to:
+  /// **'How can I use up vegetables before they spoil?'**
+  String get chatSample5;
+
+  /// sample question
+  ///
+  /// In en, this message translates to:
+  /// **'Make a shopping list for 3 easy breakfasts'**
+  String get chatSample6;
+
+  /// sample question
+  ///
+  /// In en, this message translates to:
+  /// **'What should I cook for two with a small budget?'**
+  String get chatSample7;
+
+  /// sample question
+  ///
+  /// In en, this message translates to:
+  /// **'How long can I keep cooked rice in the fridge?'**
+  String get chatSample8;
+
+  /// sample question
+  ///
+  /// In en, this message translates to:
+  /// **'Give me a high-protein vegetarian dinner'**
+  String get chatSample9;
+
+  /// sample question
+  ///
+  /// In en, this message translates to:
+  /// **'What can replace butter in this recipe?'**
+  String get chatSample10;
 
   /// typing indicator
   ///

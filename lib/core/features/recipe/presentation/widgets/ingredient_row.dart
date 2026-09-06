@@ -67,7 +67,12 @@ class IngredientRow extends StatelessWidget {
                 ],
               ),
             ),
-            if (hasDup) _AnimatedDupPill(added: added, dupLabel: dupLabel, dupForceLabel: dupForceLabel),
+            if (hasDup)
+              _AnimatedDupPill(
+                added: added,
+                dupLabel: dupLabel,
+                dupForceLabel: dupForceLabel,
+              ),
           ],
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/core/features/recipe/domain/chat_recipe_extractor.dart';
 import 'package:pora/core/features/recipe/domain/entity/recipe.dart';
@@ -9,9 +10,6 @@ import 'package:pora/core/internal/theme/context_colors.dart';
 import 'package:pora/core/internal/theme/light_colors/app_colors.dart';
 import 'package:pora/core/internal/widgets/press_scale.dart';
 
-/// Пузырь сообщения в чате. Юзер — справа, primary bg; ассистент — слева, surface bg.
-/// Для ассистента детектит `<recipe>...</recipe>` — прячет тег из отображения
-/// и добавляет CTA «Импортировать рецепт» под пузырём.
 class ChatMessageBubble extends StatelessWidget {
   const ChatMessageBubble({
     super.key,
@@ -23,15 +21,11 @@ class ChatMessageBubble extends StatelessWidget {
   final String text;
   final bool fromUser;
 
-  /// Вызывается когда пользователь тапает «Импортировать рецепт».
-  /// Приходит уже распарсенный `RecipeEntity`.
   final void Function(RecipeEntity)? onImportRecipe;
 
   @override
   Widget build(BuildContext context) {
-    // Для юзерского сообщения — ничего не парсим.
-    final extraction =
-        fromUser ? null : ChatRecipeExtractor.extract(text);
+    final extraction = fromUser ? null : ChatRecipeExtractor.extract(text);
     final display = extraction?.cleanText ?? text;
     final recipe = extraction?.recipe;
     final c = context.colors;
@@ -54,8 +48,9 @@ class ChatMessageBubble extends StatelessWidget {
             maxWidth: MediaQuery.of(context).size.width * 0.82,
           ),
           child: Column(
-            crossAxisAlignment:
-                fromUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+            crossAxisAlignment: fromUser
+                ? CrossAxisAlignment.end
+                : CrossAxisAlignment.start,
             children: [
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 4),
@@ -71,14 +66,18 @@ class ChatMessageBubble extends StatelessWidget {
                     bottomLeft: Radius.circular(fromUser ? 16 : 4),
                     bottomRight: Radius.circular(fromUser ? 4 : 16),
                   ),
-                  border:
-                      fromUser ? null : Border.all(color: c.border, width: 1),
+                  border: fromUser
+                      ? null
+                      : Border.all(color: c.border, width: 1),
                 ),
-                child: SelectableText(
-                  display,
-                  style: PoraText.bodyLarge.copyWith(
-                    color: fromUser ? Colors.white : c.ink,
-                    height: 1.35,
+                child: MarkdownBody(
+                  data: display,
+                  selectable: true,
+                  styleSheet: MarkdownStyleSheet(
+                    a: TextStyle(
+                      color: fromUser ? Colors.white : c.ink,
+                      height: 1.35,
+                    ),
                   ),
                 ),
               ),

@@ -32,7 +32,7 @@ abstract class _UserProfileStoreBase with Store {
     await GetIt.I<UpdateUserUseCase>()(user: user, image: profileImage);
     //! Add local saving of user-info
   }
-  
+
   @action
   Future<void> setProfileImage() async {
     final imagePicker = GetIt.I<ImagePicker>();

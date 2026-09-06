@@ -32,18 +32,18 @@ class AppWebsocket {
       pingInterval: const Duration(seconds: 30),
     );
 
-      _subscription = _channel!.stream.listen(
-        _onData,
-        onError: (e) {
-          Logger.talker.critical('Ws error: $e');
-          _scheduleReconnect(wsUrl);
-        },
-        onDone: () {
-          Logger.talker.info('ws closed');
-          _scheduleReconnect(wsUrl);
-        },
-        cancelOnError: true
-      );
+    _subscription = _channel!.stream.listen(
+      _onData,
+      onError: (e) {
+        Logger.talker.critical('Ws error: $e');
+        _scheduleReconnect(wsUrl);
+      },
+      onDone: () {
+        Logger.talker.info('ws closed');
+        _scheduleReconnect(wsUrl);
+      },
+      cancelOnError: true,
+    );
   }
 
   Future<void> _onData(dynamic raw) async {
@@ -60,7 +60,7 @@ class AppWebsocket {
 
   void _scheduleReconnect(Uri url) async {
     if (!_shouldRun) return;
-    if(retryAttempts == 10) return;
+    if (retryAttempts == 10) return;
     _reconnectTimer?.cancel();
     _reconnectTimer = Timer(const Duration(seconds: 3), () => connect(url));
     retryAttempts++;

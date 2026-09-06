@@ -95,14 +95,12 @@ class InjectionContainer {
       () => GetLoginTimesUseCase(repository: _getIt<StatisticsRepository>()),
     );
     _getIt.registerFactory<GetAllUserProductsUseCase>(
-      () => GetAllUserProductsUseCase(
-        repository: _getIt<StatisticsRepository>(),
-      ),
+      () =>
+          GetAllUserProductsUseCase(repository: _getIt<StatisticsRepository>()),
     );
     _getIt.registerFactory<GetPopularProductsUseCase>(
-      () => GetPopularProductsUseCase(
-        repository: _getIt<StatisticsRepository>(),
-      ),
+      () =>
+          GetPopularProductsUseCase(repository: _getIt<StatisticsRepository>()),
     );
     _getIt.registerLazySingleton<StatisticsStore>(
       () => StatisticsStore(

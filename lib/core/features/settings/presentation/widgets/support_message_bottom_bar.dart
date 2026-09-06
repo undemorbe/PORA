@@ -55,7 +55,11 @@ class SupportMessageBottomSheet extends StatelessWidget {
               ),
             ),
             const SizedBox(height: PoraSpacing.screen),
-            PoraPrimaryButton(label: context.l10n.notifySend, onPressed: onTap, icon: PhosphorIcons.megaphoneSimple,),
+            PoraPrimaryButton(
+              label: context.l10n.notifySend,
+              onPressed: onTap,
+              icon: PhosphorIcons.megaphoneSimple,
+            ),
             const SizedBox(height: PoraSpacing.sm),
             Padding(
               padding: const EdgeInsets.all(8.0),

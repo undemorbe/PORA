@@ -67,9 +67,11 @@ class AiRecipeParser {
         if (name.isEmpty) continue;
         final qty = (r['quantity'] as String?)?.trim();
         final unit = (r['unit'] as String?)?.trim();
-        final joined = [qty, unit, name]
-            .where((e) => e != null && e.isNotEmpty)
-            .join(' ');
+        final joined = [
+          qty,
+          unit,
+          name,
+        ].where((e) => e != null && e.isNotEmpty).join(' ');
         ings.add(
           RecipeIngredient(
             name: name,

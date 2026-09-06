@@ -75,6 +75,20 @@
     "@commonError": {
         "description": "commonError"
     },
+    "authErrorInvalidPhone": "Invalid phone / email!",
+    "@authErrorInvalidPhone": {
+        "description": "Invalid phone on auth screen"
+    },
+    "authPhoneSendOtp": "Отправим код {isPhone, select, true{в Telegram!} false{на почту!} other{куда-то}}",
+    "@authPhoneSendOtp": {
+        "description": "Invalid phone on auth screen",
+        "placeholders" : {
+            "isPhone":{
+                "type":"String",
+                "example":"true"
+            }
+        }
+    },
     "otpTitle": "Осталось немного!",
     "@otpTitle": {
         "description": "otpTitle"
@@ -1148,6 +1162,18 @@
     "@chatSample3": { "description": "sample question" },
     "chatSample4": "Рецепт быстрого ужина на 20 минут",
     "@chatSample4": { "description": "sample question" },
+    "chatSample5": "Как использовать овощи, пока они не испортились?",
+    "@chatSample5": { "description": "sample question" },
+    "chatSample6": "Составь список для 3 простых завтраков",
+    "@chatSample6": { "description": "sample question" },
+    "chatSample7": "Что приготовить на двоих при небольшом бюджете?",
+    "@chatSample7": { "description": "sample question" },
+    "chatSample8": "Сколько хранится готовый рис в холодильнике?",
+    "@chatSample8": { "description": "sample question" },
+    "chatSample9": "Посоветуй вегетарианский ужин с белком",
+    "@chatSample9": { "description": "sample question" },
+    "chatSample10": "Чем заменить сливочное масло в этом рецепте?",
+    "@chatSample10": { "description": "sample question" },
     "chatTyping": "PORA печатает…",
     "@chatTyping": { "description": "typing indicator" },
     "chatInputHint": "Спросите что-нибудь…",

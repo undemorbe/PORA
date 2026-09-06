@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-
 class RecipeIngredient extends Equatable {
   const RecipeIngredient({
     required this.name,
@@ -18,5 +17,5 @@ class RecipeIngredient extends Equatable {
 
   @override
   // TODO: implement props
-  List<Object?> get props => [name,raw,quantity,unit,note];
+  List<Object?> get props => [name, raw, quantity, unit, note];
 }

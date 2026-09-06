@@ -17,18 +17,20 @@ class RecipeCreator {
   /// Возвращает lid или null.
   static Future<String?> createShared(RecipeEntity recipe) async {
     if (recipe.ingredients.isEmpty) return null;
-    final famRes =
-        await GetIt.I<CreateFamilyUseCase>().call(name: recipe.title);
+    final famRes = await GetIt.I<CreateFamilyUseCase>().call(
+      name: recipe.title,
+    );
     if (famRes.isLeft) return null;
     String? fid;
     try {
-      fid = (jsonDecode(famRes.right) as Map<String, dynamic>)['id']
-          as String?;
+      fid = (jsonDecode(famRes.right) as Map<String, dynamic>)['id'] as String?;
     } catch (_) {}
     if (fid == null) return null;
 
-    final listRes = await GetIt.I<CreateListUseCase>()
-        .call(name: recipe.title, fid: fid);
+    final listRes = await GetIt.I<CreateListUseCase>().call(
+      name: recipe.title,
+      fid: fid,
+    );
     if (listRes.isLeft) return null;
 
     final groups = GetIt.I<GroupsStore>();

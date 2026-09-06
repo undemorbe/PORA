@@ -5,7 +5,6 @@ import 'package:pora/core/features/predictions_ai/domain/tip/tip_topic.dart';
 
 part 'tip_topics_store.g.dart';
 
-/// Управляет пулом тем «Совета дня». UI на них подписывается через Observer.
 class TipTopicsStore = _TipTopicsStoreBase with _$TipTopicsStore;
 
 abstract class _TipTopicsStoreBase with Store {
@@ -24,7 +23,6 @@ abstract class _TipTopicsStoreBase with Store {
   @observable
   bool isLoading = true;
 
-  /// Все темы: predefined (за вычетом disabled) + custom. Порядок стабилен.
   @computed
   List<TipTopic> get activeTopics {
     final res = <TipTopic>[];
@@ -39,7 +37,6 @@ abstract class _TipTopicsStoreBase with Store {
     return res;
   }
 
-  /// Все predefined с их статусом (для UI-чипов в settings).
   @computed
   List<({TipTopic topic, bool enabled})> get predefinedWithState {
     return PredefinedTipTopics.keys
@@ -53,8 +50,7 @@ abstract class _TipTopicsStoreBase with Store {
   }
 
   @computed
-  List<TipTopic> get customTopics =>
-      customTexts.map(TipTopic.custom).toList();
+  List<TipTopic> get customTopics => customTexts.map(TipTopic.custom).toList();
 
   @action
   Future<void> load() async {

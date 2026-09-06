@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
@@ -11,6 +13,7 @@ import 'package:pora/core/internal/network/connectivity/connectivity_guard.dart'
 import 'package:pora/core/internal/widgets/pora_snackbar.dart';
 import 'package:pora/core/features/predictions_ai/presentation/widgets/chat_message_bubble.dart';
 import 'package:pora/core/features/predictions_ai/presentation/widgets/pora_hero_tags.dart';
+import 'package:pora/core/features/insights/presentation/store/statistics_store.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
 import 'package:pora/core/internal/theme/additional_constants.dart';
 import 'package:pora/core/internal/theme/app_text_styles.dart';
@@ -37,8 +40,33 @@ class _PoraChatSheetState extends State<PoraChatSheet> {
   late final AiChatStore _store = AiChatStore(
     useCase: GetIt.I<ChatWithPoraUseCase>(),
   );
+  final StatisticsStore _statistics = GetIt.I<StatisticsStore>();
   final _input = TextEditingController();
   final _scroll = ScrollController();
+  List<String> _sampleQuestions = const [];
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_sampleQuestions.isNotEmpty) return;
+    final l = context.l10n;
+    _sampleQuestions =
+        [
+            l.chatSample1,
+            l.chatSample2,
+            l.chatSample3,
+            l.chatSample4,
+            l.chatSample5,
+            l.chatSample6,
+            l.chatSample7,
+            l.chatSample8,
+            l.chatSample9,
+            l.chatSample10,
+          ]
+          ..shuffle(math.Random())
+          ..removeRange(4, 10);
+    _statistics.loadAll();
+  }
 
   @override
   void dispose() {
@@ -53,8 +81,27 @@ class _PoraChatSheetState extends State<PoraChatSheet> {
     if (text.isEmpty || _store.isBusy) return;
     _input.clear();
     final locale = Localizations.localeOf(context).languageCode;
-    await _store.send(text: text, languageCode: locale);
+    await _store.send(
+      text: text,
+      languageCode: locale,
+      contextSummary: _shoppingContext,
+    );
     _scrollToBottom();
+  }
+
+  String? get _shoppingContext {
+    final products = _statistics.popularProducts.take(8).toList();
+    if (products.isEmpty) return null;
+    final often = products.map((product) => product.name).join(', ');
+    final soon = products
+        .where((product) => product.currentDay >= 0.8)
+        .map((product) => product.name)
+        .take(4)
+        .join(', ');
+    return [
+      'Frequently bought: $often.',
+      if (soon.isNotEmpty) 'Likely running out soon: $soon.',
+    ].join(' ');
   }
 
   /// Импорт рецепта из assistant-сообщения: показывает target sheet,
@@ -62,8 +109,10 @@ class _PoraChatSheetState extends State<PoraChatSheet> {
   Future<void> _importRecipe(RecipeEntity recipe) async {
     if (!await ConnectivityGuard.checkWrite(context)) return;
     if (!mounted) return;
-    final choice =
-        await showRecipeTargetSheet(context, recipeTitle: recipe.title);
+    final choice = await showRecipeTargetSheet(
+      context,
+      recipeTitle: recipe.title,
+    );
     if (choice == null || !mounted) return;
     String? outcome;
     switch (choice.kind) {
@@ -74,17 +123,17 @@ class _PoraChatSheetState extends State<PoraChatSheet> {
         outcome = await RecipeCreator.createPersonal(recipe);
         break;
       case RecipeTargetKind.existing:
-        final errs =
-            await RecipeCreator.addToExisting(recipe, choice.existingLid!);
+        final errs = await RecipeCreator.addToExisting(
+          recipe,
+          choice.existingLid!,
+        );
         outcome = errs.isEmpty ? choice.existingLid : null;
         break;
     }
     if (!mounted) return;
     PoraSnackbar.show(
       context,
-      message: outcome != null
-          ? context.l10n.done
-          : context.l10n.commonError,
+      message: outcome != null ? context.l10n.done : context.l10n.commonError,
     );
   }
 
@@ -110,7 +159,7 @@ class _PoraChatSheetState extends State<PoraChatSheet> {
       builder: (context, scrollController) {
         return Container(
           decoration: BoxDecoration(
-            color: c.surfaceAlt,
+            color: c.surface,
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(24),
               topRight: Radius.circular(24),
@@ -123,7 +172,7 @@ class _PoraChatSheetState extends State<PoraChatSheet> {
               Expanded(
                 child: Observer(
                   builder: (_) => _store.isEmpty
-                      ? const _EmptyState()
+                      ? _EmptyState(samples: _sampleQuestions)
                       : ListView.builder(
                           controller: _scroll,
                           padding: const EdgeInsets.symmetric(
@@ -219,12 +268,18 @@ class _SheetHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(
+    return Container(
+      margin: const EdgeInsets.fromLTRB(
         PoraSpacing.screen,
         PoraSpacing.sm,
+        PoraSpacing.screen,
         PoraSpacing.sm,
-        PoraSpacing.sm,
+      ),
+      padding: const EdgeInsets.fromLTRB(12, 10, 6, 10),
+      decoration: BoxDecoration(
+        color: context.colors.surfaceAlt,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: context.colors.border),
       ),
       child: Row(
         children: [
@@ -286,23 +341,32 @@ class _SheetHeader extends StatelessWidget {
 }
 
 class _EmptyState extends StatelessWidget {
-  const _EmptyState();
+  const _EmptyState({required this.samples});
+
+  final List<String> samples;
 
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
     final l = context.l10n;
-    final samples = [
-      l.chatSample1,
-      l.chatSample2,
-      l.chatSample3,
-      l.chatSample4,
-    ];
     return ListView(
       padding: const EdgeInsets.all(PoraSpacing.screen),
       children: [
         const SizedBox(height: PoraSpacing.lg),
-        Icon(PhosphorIconsFill.chatCircleDots, size: 40, color: c.textSubtle),
+        Container(
+          width: 68,
+          height: 68,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: PoraColors.primary.withValues(alpha: 0.12),
+            shape: BoxShape.circle,
+          ),
+          child: const Icon(
+            PhosphorIconsFill.sparkle,
+            size: 30,
+            color: PoraColors.primary,
+          ),
+        ),
         const SizedBox(height: PoraSpacing.md),
         Text(
           l.chatEmptyTitle,
@@ -348,8 +412,15 @@ class _SampleChip extends StatelessWidget {
           padding: const EdgeInsets.all(PoraSpacing.md),
           decoration: BoxDecoration(
             color: c.surface,
-            borderRadius: PoraRadii.md,
+            borderRadius: BorderRadius.circular(16),
             border: Border.all(color: c.border, width: 1),
+            boxShadow: const [
+              BoxShadow(
+                color: Color(0x0A000000),
+                blurRadius: 10,
+                offset: Offset(0, 3),
+              ),
+            ],
           ),
           child: Row(
             children: [
@@ -465,6 +536,25 @@ class _ChatInput extends StatelessWidget {
         style: PoraText.bodyLarge,
         decoration: InputDecoration(
           hintText: context.l10n.chatInputHint,
+          filled: true,
+          fillColor: context.colors.surfaceAlt,
+          prefixIcon: const Icon(
+            PhosphorIconsRegular.sparkle,
+            size: 18,
+            color: PoraColors.primary,
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(18),
+            borderSide: BorderSide(color: context.colors.border),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(18),
+            borderSide: BorderSide(color: context.colors.border),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(18),
+            borderSide: const BorderSide(color: PoraColors.primary, width: 1.4),
+          ),
           suffixIcon: Padding(
             padding: const EdgeInsets.only(right: 6),
             child: _SendBtn(busy: busy, onTap: onSend),

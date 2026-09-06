@@ -1,10 +1,10 @@
+import 'dart:math' as math;
+
 import 'package:mobx/mobx.dart';
 import 'package:pora/core/features/predictions_ai/domain/usecase/generate_tip.dart';
 
 part 'ai_tip_store.g.dart';
 
-/// Store для карточки «Совет дня». Держит текст, состояние загрузки и флаг
-/// фолбэка. Сам не тянет l10n — fallback-текст приходит извне (из UI).
 class AiTipStore = _AiTipStoreBase with _$AiTipStore;
 
 abstract class _AiTipStoreBase with Store {
@@ -20,7 +20,8 @@ abstract class _AiTipStoreBase with Store {
   @observable
   bool fromFallback = false;
 
-  int _fallbackCounter = 0;
+  final math.Random _random = math.Random();
+  int? _lastFallbackIndex;
 
   @action
   Future<void> load({
@@ -44,7 +45,13 @@ abstract class _AiTipStoreBase with Store {
       tip = '';
       return;
     }
-    final i = (_fallbackCounter++).abs() % fallbackList.length;
+    var i = _random.nextInt(fallbackList.length);
+    if (fallbackList.length > 1 && i == _lastFallbackIndex) {
+      i =
+          (i + 1 + _random.nextInt(fallbackList.length - 1)) %
+          fallbackList.length;
+    }
+    _lastFallbackIndex = i;
     tip = fallbackList[i];
     fromFallback = true;
   }

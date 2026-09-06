@@ -69,6 +69,19 @@ class AppLocalizationsRu extends AppLocalizations {
   String get commonError => 'Ошибка';
 
   @override
+  String get authErrorInvalidPhone => 'Invalid phone / email!';
+
+  @override
+  String authPhoneSendOtp(String isPhone) {
+    String _temp0 = intl.Intl.selectLogic(isPhone, {
+      'true': 'в Telegram!',
+      'false': 'на почту!',
+      'other': 'куда-то',
+    });
+    return 'Отправим код $_temp0';
+  }
+
+  @override
   String get otpTitle => 'Осталось немного!';
 
   @override
@@ -1134,6 +1147,24 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get chatSample4 => 'Рецепт быстрого ужина на 20 минут';
+
+  @override
+  String get chatSample5 => 'Как использовать овощи, пока они не испортились?';
+
+  @override
+  String get chatSample6 => 'Составь список для 3 простых завтраков';
+
+  @override
+  String get chatSample7 => 'Что приготовить на двоих при небольшом бюджете?';
+
+  @override
+  String get chatSample8 => 'Сколько хранится готовый рис в холодильнике?';
+
+  @override
+  String get chatSample9 => 'Посоветуй вегетарианский ужин с белком';
+
+  @override
+  String get chatSample10 => 'Чем заменить сливочное масло в этом рецепте?';
 
   @override
   String get chatTyping => 'PORA печатает…';

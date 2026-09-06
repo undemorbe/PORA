@@ -133,7 +133,6 @@ class _SplashPageState extends State<SplashPage>
   }
 
   Future<void> _navigateWhenReady(SplashStore controller) async {
-    // Ждём и анимацию, и bootstrap — то, что дольше, определяет длительность.
     await Future.wait([
       _c.forward().orCancel.catchError((_) {}),
       AppBootstrap.instance.ready,

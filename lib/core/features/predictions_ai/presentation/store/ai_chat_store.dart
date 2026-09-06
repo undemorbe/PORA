@@ -4,8 +4,6 @@ import 'package:pora/core/features/predictions_ai/domain/usecase/chat_with_pora.
 
 part 'ai_chat_store.g.dart';
 
-/// Store чата с PORA. Держит историю в памяти на время открытого sheet'а.
-/// Persistence нет — при закрытии стейт очищается через `reset()`.
 class AiChatStore = _AiChatStoreBase with _$AiChatStore;
 
 abstract class _AiChatStoreBase with Store {
@@ -28,6 +26,7 @@ abstract class _AiChatStoreBase with Store {
   Future<void> send({
     required String text,
     required String languageCode,
+    String? contextSummary,
   }) async {
     final trimmed = text.trim();
     if (trimmed.isEmpty || isBusy) return;
@@ -37,6 +36,7 @@ abstract class _AiChatStoreBase with Store {
     final res = await useCase(
       history: List.of(history),
       languageCode: languageCode,
+      contextSummary: contextSummary,
     );
     if (res.isRight) {
       history.add(AiMessage.assistant(res.right.content));

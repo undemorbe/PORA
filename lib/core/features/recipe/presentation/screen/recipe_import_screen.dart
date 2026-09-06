@@ -87,8 +87,7 @@ class _RecipeImportPageState extends State<RecipeImportPage> {
         outcome = await store.createListFromRecipe();
         break;
       case RecipeTargetKind.existing:
-        final errs =
-            await store.addRecipeToExistingList(choice.existingLid!);
+        final errs = await store.addRecipeToExistingList(choice.existingLid!);
         if (errs.isNotEmpty) {
           outcome = null;
         } else {
@@ -178,8 +177,9 @@ class _RecipeImportPageState extends State<RecipeImportPage> {
                                     bottom: PoraSpacing.md,
                                   ),
                                   child: DedupBanner(
-                                    text: context.l10n
-                                        .recipeDedupBannerMany(store.dupSkipCount),
+                                    text: context.l10n.recipeDedupBannerMany(
+                                      store.dupSkipCount,
+                                    ),
                                   ),
                                 )
                               : const SizedBox.shrink(

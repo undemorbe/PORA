@@ -69,6 +69,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get commonError => 'Ошибка';
 
   @override
+  String get authErrorInvalidPhone => 'Invalid phone / email!';
+
+  @override
+  String authPhoneSendOtp(String isPhone) {
+    String _temp0 = intl.Intl.selectLogic(isPhone, {
+      'true': 'Telegram!',
+      'false': 'email!',
+      'other': 'destination you wrote',
+    });
+    return 'We\'ll send code onto $_temp0';
+  }
+
+  @override
   String get otpTitle => 'Осталось немного!';
 
   @override
@@ -1133,6 +1146,24 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chatSample4 => 'Quick 20-minute dinner recipe';
+
+  @override
+  String get chatSample5 => 'How can I use up vegetables before they spoil?';
+
+  @override
+  String get chatSample6 => 'Make a shopping list for 3 easy breakfasts';
+
+  @override
+  String get chatSample7 => 'What should I cook for two with a small budget?';
+
+  @override
+  String get chatSample8 => 'How long can I keep cooked rice in the fridge?';
+
+  @override
+  String get chatSample9 => 'Give me a high-protein vegetarian dinner';
+
+  @override
+  String get chatSample10 => 'What can replace butter in this recipe?';
 
   @override
   String get chatTyping => 'PORA is typing…';

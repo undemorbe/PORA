@@ -63,8 +63,7 @@ class _TipTopicsEditorState extends State<TipTopicsEditor> {
                 const SizedBox(height: PoraSpacing.sm),
                 Text(
                   l.tipTopicsEmpty,
-                  style:
-                      PoraText.small.copyWith(color: PoraColors.danger),
+                  style: PoraText.small.copyWith(color: PoraColors.danger),
                 ),
               ],
               const SizedBox(height: PoraSpacing.md),
@@ -105,8 +104,7 @@ class _TipTopicsEditorState extends State<TipTopicsEditor> {
                     for (final t in _store.customTopics)
                       _RemovableChip(
                         label: t.rawText ?? '',
-                        onRemove: () =>
-                            _store.removeCustom(t.rawText ?? ''),
+                        onRemove: () => _store.removeCustom(t.rawText ?? ''),
                       ),
                   ],
                 ),
@@ -167,9 +165,7 @@ class _ToggleChip extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
-              active
-                  ? PhosphorIconsBold.check
-                  : PhosphorIconsRegular.plus,
+              active ? PhosphorIconsBold.check : PhosphorIconsRegular.plus,
               size: 12,
               color: active ? Colors.white : c.textSubtle,
             ),

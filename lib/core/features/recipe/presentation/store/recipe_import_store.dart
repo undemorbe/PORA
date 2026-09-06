@@ -126,9 +126,7 @@ abstract class _RecipeImportStoreBase with Store {
 
     recipe = result.right;
     rows = ObservableList<RecipeRow>.of(_buildRows(result.right.ingredients));
-    selected = ObservableSet<int>.of(
-      List<int>.generate(rows.length, (i) => i),
-    );
+    selected = ObservableSet<int>.of(List<int>.generate(rows.length, (i) => i));
   }
 
   List<RecipeRow> _buildRows(List<RecipeIngredient> ings) {
@@ -296,8 +294,10 @@ abstract class _RecipeImportStoreBase with Store {
     }
 
     // 2. createList(name, fid).
-    final listRes =
-        await GetIt.I<CreateListUseCase>().call(name: r.title, fid: fid);
+    final listRes = await GetIt.I<CreateListUseCase>().call(
+      name: r.title,
+      fid: fid,
+    );
     if (listRes.isLeft) {
       isLoading = false;
       errorMessage = listRes.left.message;
@@ -339,8 +339,7 @@ abstract class _RecipeImportStoreBase with Store {
     isLoading = true;
     errorMessage = null;
 
-    final createRes =
-        await GetIt.I<CreateListUseCase>().call(name: r.title);
+    final createRes = await GetIt.I<CreateListUseCase>().call(name: r.title);
     if (createRes.isLeft) {
       isLoading = false;
       errorMessage = createRes.left.message;
