@@ -31,9 +31,6 @@ class _SettingsPageState extends State<SettingsPage> {
 
   final PrivacyStore privacyStore = PrivacyStore();
 
-  final TextEditingController supportMessageController =
-      TextEditingController();
-
   @override
   void initState() {
     super.initState();
@@ -153,19 +150,13 @@ class _SettingsPageState extends State<SettingsPage> {
                     onTap: () => showAboutDialog(context: context),
                   ),
                   PoraSettingRow(
-                    icon: PhosphorIcons.phone,
+                    icon: PhosphorIconsRegular.lifebuoy,
                     trailing: PoraSettingRow.chevron,
                     label: context.l10n.supportMessage,
-                    onTap: () => showBottomSheet(
-                      context: context,
-                      builder: (context) {
-                        return SupportMessageBottomSheet(
-                          messageController: supportMessageController,
-                          onTap: () => settingsStore.sendSupportMessage(
-                            text: supportMessageController.text,
-                          ),
-                        );
-                      },
+                    onTap: () => showSupportMessageSheet(
+                      context,
+                      onSend: (text) =>
+                          settingsStore.sendSupportMessage(text: text),
                     ),
                   ),
                   PoraSettingRow(

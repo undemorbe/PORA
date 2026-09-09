@@ -1,7 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pora/core/features/auth_and_validation/presentation/controller/auth_store.dart';
 import 'package:pora/core/features/auth_and_validation/presentation/widgets/auth_destination_field.dart';

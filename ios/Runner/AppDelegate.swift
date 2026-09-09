@@ -12,5 +12,9 @@ import UIKit
 
   func didInitializeImplicitFlutterEngine(_ engineBridge: FlutterImplicitEngineBridge) {
     GeneratedPluginRegistrant.register(with: engineBridge.pluginRegistry)
+    // LiveActivity: канал pora/live_activity → LiveActivityManager.
+    if let registrar = engineBridge.pluginRegistry.registrar(forPlugin: "PoraLiveActivity") {
+      LiveActivityManager.shared.register(with: registrar.messenger())
+    }
   }
 }

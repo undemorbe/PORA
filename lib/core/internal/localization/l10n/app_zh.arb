@@ -626,7 +626,7 @@
     "@insightsTitle": {
         "description": "insightsTitle"
     },
-    "insightsTipKicker": "✨ PORA 提示",
+    "insightsTipKicker": "PORA 提示",
     "@insightsTipKicker": {
         "description": "insightsTipKicker"
     },
@@ -1751,5 +1751,35 @@
     "chatImportRecipeCta": "导入食谱",
     "@chatImportRecipeCta": {
         "description": "chat bubble cta"
-    }
+    },
+    "aiModelSettingsSection": "Pora-AI 模型",
+    "aiConfigRow": "自定义 Pora-AI 模型",
+    "aiConfigRowSubtitle": "使用你自己的 OpenRouter 密钥和模型",
+    "aiConfigTitle": "Pora-AI 模型",
+    "aiConfigIntro": "连接你自己的 OpenRouter API 密钥并选择 Pora-AI 使用的模型。留空则使用应用默认值。",
+    "aiConfigApiKeyLabel": "OpenRouter API 密钥",
+    "aiConfigApiKeyHint": "sk-or-...",
+    "aiConfigModelsSection": "模型",
+    "aiConfigPoraModelLabel": "PORA-AI 模型",
+    "aiConfigPoraModelHint": "例如 openai/gpt-4o-mini",
+    "aiConfigTipsModelLabel": "提示 (Tips) 模型",
+    "aiConfigTipsModelHint": "留空 — 与应用默认相同",
+    "aiConfigNeedKeyNote": "输入 API 密钥后才能选择自定义模型",
+    "aiConfigReset": "恢复默认",
+    "aiConfigSaved": "已保存 Pora-AI 设置",
+    "aiConfigResetDone": "已恢复 Pora-AI 默认设置",
+    "aiConfigInfoTitle": "如何连接你的模型",
+    "aiConfigInfoBody": "1. 在 openrouter.ai 注册一个免费账户。\n2. 打开 Keys，创建一个新的 API 密钥并粘贴到这里。\n3. 在 openrouter.ai/models 复制一个模型 ID（例如 openai/gpt-4o-mini 或 anthropic/claude-3.5-sonnet）。\n4. 将 ID 粘贴到 PORA-AI 字段。Tips 字段可选——留空即可用你的密钥调用应用默认模型。\n\n你的密钥仅存储在本设备上，且仅用于你的 Pora-AI 请求。",
+    "aiConfigInfoClose": "知道了",
+    "supportEmptyError": "请先填写消息内容",
+    "supportSent": "消息已发送——我们会尽快回复",
+    "supportFailed": "发送失败。请检查网络后重试",
+    "supportSheetHint": "描述你的问题或反馈……",
+    "shortcutAddItem": "添加商品",
+    "importantReminderTitle": "购买 {product}",
+    "importantReminderFrom": "来自 {user}",
+    "importantReminderBody": "买到后请标记「已购买」",
+    "importantReminderMarkBought": "已购买",
+    "liveActivityTestRow": "测试 Live Activity",
+    "liveActivityTestSample": "牛奶"
 }

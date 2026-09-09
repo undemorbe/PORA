@@ -9,7 +9,6 @@ import 'package:pora/core/features/invitation/data/models/link_code_model.dart';
 import 'package:pora/core/features/lists/data/models/lists/list_model.dart';
 import 'package:pora/core/features/lists/data/models/lists/lists_array_model.dart';
 import 'package:pora/core/features/lists/data/models/products/product_model.dart';
-import 'package:pora/core/features/settings/data/models/message_model.dart';
 import 'package:pora/core/features/insights/data/models/login_times_model.dart';
 import 'package:pora/core/features/insights/data/models/popular_product_model.dart';
 import 'package:pora/core/features/insights/data/models/user_products_model.dart';

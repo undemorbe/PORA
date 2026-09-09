@@ -72,6 +72,24 @@ mixin _$SettingsStore on _SettingsStoreBase, Store {
     });
   }
 
+  late final _$isSendingSupportAtom = Atom(
+    name: '_SettingsStoreBase.isSendingSupport',
+    context: context,
+  );
+
+  @override
+  bool get isSendingSupport {
+    _$isSendingSupportAtom.reportRead();
+    return super.isSendingSupport;
+  }
+
+  @override
+  set isSendingSupport(bool value) {
+    _$isSendingSupportAtom.reportWrite(value, super.isSendingSupport, () {
+      super.isSendingSupport = value;
+    });
+  }
+
   late final _$setProfileImageAsyncAction = AsyncAction(
     '_SettingsStoreBase.setProfileImage',
     context: context,
@@ -108,7 +126,7 @@ mixin _$SettingsStore on _SettingsStoreBase, Store {
   );
 
   @override
-  Future<void> sendSupportMessage({required String text}) {
+  Future<bool> sendSupportMessage({required String text}) {
     return _$sendSupportMessageAsyncAction.run(
       () => super.sendSupportMessage(text: text),
     );
@@ -120,6 +138,7 @@ mixin _$SettingsStore on _SettingsStoreBase, Store {
 user: ${user},
 profileImageFile: ${profileImageFile},
 isLoadingImage: ${isLoadingImage},
+isSendingSupport: ${isSendingSupport},
 profileImageUrl: ${profileImageUrl}
     ''';
   }

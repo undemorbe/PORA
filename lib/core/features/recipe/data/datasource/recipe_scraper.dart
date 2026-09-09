@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:html/dom.dart' as dom;
 import 'package:html/parser.dart' as html_parser;
 import 'package:http/http.dart' as http;
-import 'package:pora/core/features/recipe/data/datasource/ai_recipe_parser.dart';
 import 'package:pora/core/features/recipe/data/datasource/youtube_recipe_parser.dart';
 import 'package:pora/core/features/recipe/domain/entity/recipe.dart';
 import 'package:pora/core/features/recipe/domain/entity/recipe_ingredient.dart';

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 ///
 /// - `struck: true` → линия «прорастает» слева направо (0 → 1) за [duration].
 /// - `struck: false` → линия схлопывается обратно.
-/// - Цвет и толщина линии — [lineColor], [lineThickness].
+/// - Цвет и толщина линии — параметры lineColor / lineThickness.
 /// - Параллельно fade text color: `activeColor` ↔ `mutedColor`.
 class StrikeThroughText extends StatelessWidget {
   const StrikeThroughText({

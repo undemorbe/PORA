@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:mobx/mobx.dart';
+import 'package:pora/core/internal/analytics/analytics_service.dart';
 import 'package:pora/core/features/settings/domain/entity/message_entity.dart';
 import 'package:pora/core/features/settings/domain/usecase/send_support_msg.dart';
 import 'package:pora/core/features/user/domain/entity/user/user_entity.dart';
@@ -71,10 +73,26 @@ abstract class _SettingsStoreBase with Store {
     GetIt.I<AuthState>().setUnauthenticated();
   }
 
+  @observable
+  bool isSendingSupport = false;
+
+  /// Отправляет сообщение в поддержку. Возвращает `true` при успехе,
+  /// `false` — пустой текст или ошибка отправки (UI покажет snackbar).
   @action
-  Future<void> sendSupportMessage({required String text}) async {
-    await GetIt.I<SendSupportMsgUseCase>().call(
-      message: MessageEntity(title: 'User complaince', message: text),
-    );
+  Future<bool> sendSupportMessage({required String text}) async {
+    final trimmed = text.trim();
+    if (trimmed.isEmpty) return false;
+    isSendingSupport = true;
+    try {
+      final res = await GetIt.I<SendSupportMsgUseCase>().call(
+        message: MessageEntity(title: 'User support request', message: trimmed),
+      );
+      if (res.isRight) {
+        unawaited(AnalyticsService.instance.logSupportMessageSent());
+      }
+      return res.isRight;
+    } finally {
+      isSendingSupport = false;
+    }
   }
 }

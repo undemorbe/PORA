@@ -1025,7 +1025,7 @@ abstract class AppLocalizations {
   /// insightsTipKicker
   ///
   /// In en, this message translates to:
-  /// **'✨ PORA TIP'**
+  /// **'PORA TIP'**
   String get insightsTipKicker;
 
   /// insightsTipTitle
@@ -2659,6 +2659,186 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Maybe you should create a new one?'**
   String get listsEmptySubtitle;
+
+  /// aiModelSettingsSection
+  ///
+  /// In en, this message translates to:
+  /// **'Pora-AI model'**
+  String get aiModelSettingsSection;
+
+  /// aiConfigRow
+  ///
+  /// In en, this message translates to:
+  /// **'Custom Pora-AI model'**
+  String get aiConfigRow;
+
+  /// aiConfigRowSubtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Use your own OpenRouter key and models'**
+  String get aiConfigRowSubtitle;
+
+  /// aiConfigTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Pora-AI model'**
+  String get aiConfigTitle;
+
+  /// aiConfigIntro
+  ///
+  /// In en, this message translates to:
+  /// **'Connect your own OpenRouter API key and pick the models that power Pora-AI. Leave a field empty to use the app default.'**
+  String get aiConfigIntro;
+
+  /// aiConfigApiKeyLabel
+  ///
+  /// In en, this message translates to:
+  /// **'OpenRouter API key'**
+  String get aiConfigApiKeyLabel;
+
+  /// aiConfigApiKeyHint
+  ///
+  /// In en, this message translates to:
+  /// **'sk-or-...'**
+  String get aiConfigApiKeyHint;
+
+  /// aiConfigModelsSection
+  ///
+  /// In en, this message translates to:
+  /// **'Models'**
+  String get aiConfigModelsSection;
+
+  /// aiConfigPoraModelLabel
+  ///
+  /// In en, this message translates to:
+  /// **'PORA-AI model'**
+  String get aiConfigPoraModelLabel;
+
+  /// aiConfigPoraModelHint
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. openai/gpt-4o-mini'**
+  String get aiConfigPoraModelHint;
+
+  /// aiConfigTipsModelLabel
+  ///
+  /// In en, this message translates to:
+  /// **'Tips model'**
+  String get aiConfigTipsModelLabel;
+
+  /// aiConfigTipsModelHint
+  ///
+  /// In en, this message translates to:
+  /// **'Empty — same as app default'**
+  String get aiConfigTipsModelHint;
+
+  /// aiConfigNeedKeyNote
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your API key to choose custom models'**
+  String get aiConfigNeedKeyNote;
+
+  /// aiConfigReset
+  ///
+  /// In en, this message translates to:
+  /// **'Reset to default'**
+  String get aiConfigReset;
+
+  /// aiConfigSaved
+  ///
+  /// In en, this message translates to:
+  /// **'Pora-AI settings saved'**
+  String get aiConfigSaved;
+
+  /// aiConfigResetDone
+  ///
+  /// In en, this message translates to:
+  /// **'Restored default Pora-AI settings'**
+  String get aiConfigResetDone;
+
+  /// aiConfigInfoTitle
+  ///
+  /// In en, this message translates to:
+  /// **'How to connect your model'**
+  String get aiConfigInfoTitle;
+
+  /// aiConfigInfoBody
+  ///
+  /// In en, this message translates to:
+  /// **'1. Create a free account at openrouter.ai.\n2. Open Keys and create a new API key, then paste it here.\n3. Browse openrouter.ai/models and copy a model id (for example openai/gpt-4o-mini or anthropic/claude-3.5-sonnet).\n4. Paste the id into the PORA-AI field. The Tips field is optional — leave it empty to reuse the app default model with your key.\n\nYour key is stored only on this device and is used solely for your Pora-AI requests.'**
+  String get aiConfigInfoBody;
+
+  /// aiConfigInfoClose
+  ///
+  /// In en, this message translates to:
+  /// **'Got it'**
+  String get aiConfigInfoClose;
+
+  /// supportEmptyError
+  ///
+  /// In en, this message translates to:
+  /// **'Please write a message first'**
+  String get supportEmptyError;
+
+  /// supportSent
+  ///
+  /// In en, this message translates to:
+  /// **'Message sent — we\'ll get back to you soon'**
+  String get supportSent;
+
+  /// supportFailed
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t send. Check your connection and try again'**
+  String get supportFailed;
+
+  /// supportSheetHint
+  ///
+  /// In en, this message translates to:
+  /// **'Describe your issue or feedback...'**
+  String get supportSheetHint;
+
+  /// App shortcut: add item
+  ///
+  /// In en, this message translates to:
+  /// **'Add item'**
+  String get shortcutAddItem;
+
+  /// No description provided for @importantReminderTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Buy {product}'**
+  String importantReminderTitle(String product);
+
+  /// No description provided for @importantReminderFrom.
+  ///
+  /// In en, this message translates to:
+  /// **'from {user}'**
+  String importantReminderFrom(String user);
+
+  /// importantReminderBody
+  ///
+  /// In en, this message translates to:
+  /// **'Mark as bought when done'**
+  String get importantReminderBody;
+
+  /// importantReminderMarkBought
+  ///
+  /// In en, this message translates to:
+  /// **'Bought'**
+  String get importantReminderMarkBought;
+
+  /// liveActivityTestRow
+  ///
+  /// In en, this message translates to:
+  /// **'Test Live Activity'**
+  String get liveActivityTestRow;
+
+  /// liveActivityTestSample
+  ///
+  /// In en, this message translates to:
+  /// **'Milk'**
+  String get liveActivityTestSample;
 }
 
 class _AppLocalizationsDelegate

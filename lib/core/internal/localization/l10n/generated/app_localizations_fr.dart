@@ -495,7 +495,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get insightsTitle => 'Analyses';
 
   @override
-  String get insightsTipKicker => '✨ ASTUCE PORA';
+  String get insightsTipKicker => 'ASTUCE PORA';
 
   @override
   String get insightsTipTitle => 'Vous love carbonara!';
@@ -1365,4 +1365,102 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get listsEmptySubtitle =>
       'Vous devriez peut-être en créer une nouvelle ?';
+
+  @override
+  String get aiModelSettingsSection => 'Modèle Pora-AI';
+
+  @override
+  String get aiConfigRow => 'Modèle Pora-AI personnalisé';
+
+  @override
+  String get aiConfigRowSubtitle => 'Votre clé OpenRouter et vos modèles';
+
+  @override
+  String get aiConfigTitle => 'Modèle Pora-AI';
+
+  @override
+  String get aiConfigIntro =>
+      'Connectez votre propre clé API OpenRouter et choisissez les modèles de Pora-AI. Laissez un champ vide pour utiliser la valeur par défaut de l\'application.';
+
+  @override
+  String get aiConfigApiKeyLabel => 'Clé API OpenRouter';
+
+  @override
+  String get aiConfigApiKeyHint => 'sk-or-...';
+
+  @override
+  String get aiConfigModelsSection => 'Modèles';
+
+  @override
+  String get aiConfigPoraModelLabel => 'Modèle PORA-AI';
+
+  @override
+  String get aiConfigPoraModelHint => 'ex. openai/gpt-4o-mini';
+
+  @override
+  String get aiConfigTipsModelLabel => 'Modèle des conseils (Tips)';
+
+  @override
+  String get aiConfigTipsModelHint => 'Vide — comme par défaut';
+
+  @override
+  String get aiConfigNeedKeyNote =>
+      'Saisissez votre clé API pour choisir des modèles';
+
+  @override
+  String get aiConfigReset => 'Réinitialiser par défaut';
+
+  @override
+  String get aiConfigSaved => 'Paramètres Pora-AI enregistrés';
+
+  @override
+  String get aiConfigResetDone => 'Paramètres Pora-AI par défaut restaurés';
+
+  @override
+  String get aiConfigInfoTitle => 'Comment connecter votre modèle';
+
+  @override
+  String get aiConfigInfoBody =>
+      '1. Créez un compte gratuit sur openrouter.ai.\n2. Ouvrez Keys, créez une nouvelle clé API et collez-la ici.\n3. Sur openrouter.ai/models, copiez un identifiant de modèle (par exemple openai/gpt-4o-mini ou anthropic/claude-3.5-sonnet).\n4. Collez l\'identifiant dans le champ PORA-AI. Le champ Tips est facultatif — laissez-le vide pour réutiliser le modèle par défaut avec votre clé.\n\nVotre clé est stockée uniquement sur cet appareil et sert uniquement à vos requêtes Pora-AI.';
+
+  @override
+  String get aiConfigInfoClose => 'Compris';
+
+  @override
+  String get supportEmptyError => 'Veuillez d\'abord écrire un message';
+
+  @override
+  String get supportSent => 'Message envoyé — nous vous répondrons bientôt';
+
+  @override
+  String get supportFailed =>
+      'Échec de l\'envoi. Vérifiez votre connexion et réessayez';
+
+  @override
+  String get supportSheetHint => 'Décrivez votre problème ou votre avis...';
+
+  @override
+  String get shortcutAddItem => 'Ajouter un article';
+
+  @override
+  String importantReminderTitle(String product) {
+    return 'Acheter $product';
+  }
+
+  @override
+  String importantReminderFrom(String user) {
+    return 'de $user';
+  }
+
+  @override
+  String get importantReminderBody => 'Marquer comme acheté une fois fait';
+
+  @override
+  String get importantReminderMarkBought => 'Acheté';
+
+  @override
+  String get liveActivityTestRow => 'Tester Live Activity';
+
+  @override
+  String get liveActivityTestSample => 'Lait';
 }

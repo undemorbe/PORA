@@ -494,7 +494,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get insightsTitle => 'Insights';
 
   @override
-  String get insightsTipKicker => '✨ PORA TIP';
+  String get insightsTipKicker => 'PORA TIP';
 
   @override
   String get insightsTipTitle => 'You love carbonara!';
@@ -1361,4 +1361,102 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get listsEmptySubtitle => 'Maybe you should create a new one?';
+
+  @override
+  String get aiModelSettingsSection => 'Pora-AI model';
+
+  @override
+  String get aiConfigRow => 'Custom Pora-AI model';
+
+  @override
+  String get aiConfigRowSubtitle => 'Use your own OpenRouter key and models';
+
+  @override
+  String get aiConfigTitle => 'Pora-AI model';
+
+  @override
+  String get aiConfigIntro =>
+      'Connect your own OpenRouter API key and pick the models that power Pora-AI. Leave a field empty to use the app default.';
+
+  @override
+  String get aiConfigApiKeyLabel => 'OpenRouter API key';
+
+  @override
+  String get aiConfigApiKeyHint => 'sk-or-...';
+
+  @override
+  String get aiConfigModelsSection => 'Models';
+
+  @override
+  String get aiConfigPoraModelLabel => 'PORA-AI model';
+
+  @override
+  String get aiConfigPoraModelHint => 'e.g. openai/gpt-4o-mini';
+
+  @override
+  String get aiConfigTipsModelLabel => 'Tips model';
+
+  @override
+  String get aiConfigTipsModelHint => 'Empty — same as app default';
+
+  @override
+  String get aiConfigNeedKeyNote =>
+      'Enter your API key to choose custom models';
+
+  @override
+  String get aiConfigReset => 'Reset to default';
+
+  @override
+  String get aiConfigSaved => 'Pora-AI settings saved';
+
+  @override
+  String get aiConfigResetDone => 'Restored default Pora-AI settings';
+
+  @override
+  String get aiConfigInfoTitle => 'How to connect your model';
+
+  @override
+  String get aiConfigInfoBody =>
+      '1. Create a free account at openrouter.ai.\n2. Open Keys and create a new API key, then paste it here.\n3. Browse openrouter.ai/models and copy a model id (for example openai/gpt-4o-mini or anthropic/claude-3.5-sonnet).\n4. Paste the id into the PORA-AI field. The Tips field is optional — leave it empty to reuse the app default model with your key.\n\nYour key is stored only on this device and is used solely for your Pora-AI requests.';
+
+  @override
+  String get aiConfigInfoClose => 'Got it';
+
+  @override
+  String get supportEmptyError => 'Please write a message first';
+
+  @override
+  String get supportSent => 'Message sent — we\'ll get back to you soon';
+
+  @override
+  String get supportFailed =>
+      'Couldn\'t send. Check your connection and try again';
+
+  @override
+  String get supportSheetHint => 'Describe your issue or feedback...';
+
+  @override
+  String get shortcutAddItem => 'Add item';
+
+  @override
+  String importantReminderTitle(String product) {
+    return 'Buy $product';
+  }
+
+  @override
+  String importantReminderFrom(String user) {
+    return 'from $user';
+  }
+
+  @override
+  String get importantReminderBody => 'Mark as bought when done';
+
+  @override
+  String get importantReminderMarkBought => 'Bought';
+
+  @override
+  String get liveActivityTestRow => 'Test Live Activity';
+
+  @override
+  String get liveActivityTestSample => 'Milk';
 }

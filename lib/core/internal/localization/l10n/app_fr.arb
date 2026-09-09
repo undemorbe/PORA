@@ -626,7 +626,7 @@
     "@insightsTitle": {
         "description": "insightsTitle"
     },
-    "insightsTipKicker": "✨ ASTUCE PORA",
+    "insightsTipKicker": "ASTUCE PORA",
     "@insightsTipKicker": {
         "description": "insightsTipKicker"
     },
@@ -1751,5 +1751,35 @@
     "chatImportRecipeCta": "Importer une recette",
     "@chatImportRecipeCta": {
         "description": "chat bubble cta"
-    }
+    },
+    "aiModelSettingsSection": "Modèle Pora-AI",
+    "aiConfigRow": "Modèle Pora-AI personnalisé",
+    "aiConfigRowSubtitle": "Votre clé OpenRouter et vos modèles",
+    "aiConfigTitle": "Modèle Pora-AI",
+    "aiConfigIntro": "Connectez votre propre clé API OpenRouter et choisissez les modèles de Pora-AI. Laissez un champ vide pour utiliser la valeur par défaut de l'application.",
+    "aiConfigApiKeyLabel": "Clé API OpenRouter",
+    "aiConfigApiKeyHint": "sk-or-...",
+    "aiConfigModelsSection": "Modèles",
+    "aiConfigPoraModelLabel": "Modèle PORA-AI",
+    "aiConfigPoraModelHint": "ex. openai/gpt-4o-mini",
+    "aiConfigTipsModelLabel": "Modèle des conseils (Tips)",
+    "aiConfigTipsModelHint": "Vide — comme par défaut",
+    "aiConfigNeedKeyNote": "Saisissez votre clé API pour choisir des modèles",
+    "aiConfigReset": "Réinitialiser par défaut",
+    "aiConfigSaved": "Paramètres Pora-AI enregistrés",
+    "aiConfigResetDone": "Paramètres Pora-AI par défaut restaurés",
+    "aiConfigInfoTitle": "Comment connecter votre modèle",
+    "aiConfigInfoBody": "1. Créez un compte gratuit sur openrouter.ai.\n2. Ouvrez Keys, créez une nouvelle clé API et collez-la ici.\n3. Sur openrouter.ai/models, copiez un identifiant de modèle (par exemple openai/gpt-4o-mini ou anthropic/claude-3.5-sonnet).\n4. Collez l'identifiant dans le champ PORA-AI. Le champ Tips est facultatif — laissez-le vide pour réutiliser le modèle par défaut avec votre clé.\n\nVotre clé est stockée uniquement sur cet appareil et sert uniquement à vos requêtes Pora-AI.",
+    "aiConfigInfoClose": "Compris",
+    "supportEmptyError": "Veuillez d'abord écrire un message",
+    "supportSent": "Message envoyé — nous vous répondrons bientôt",
+    "supportFailed": "Échec de l'envoi. Vérifiez votre connexion et réessayez",
+    "supportSheetHint": "Décrivez votre problème ou votre avis...",
+    "shortcutAddItem": "Ajouter un article",
+    "importantReminderTitle": "Acheter {product}",
+    "importantReminderFrom": "de {user}",
+    "importantReminderBody": "Marquer comme acheté une fois fait",
+    "importantReminderMarkBought": "Acheté",
+    "liveActivityTestRow": "Tester Live Activity",
+    "liveActivityTestSample": "Lait"
 }

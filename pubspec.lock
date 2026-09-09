@@ -265,6 +265,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.15"
+  device_preview:
+    dependency: "direct main"
+    description:
+      name: device_preview
+      sha256: cb2bdf7d368154106173fdd61dd15ee2e185e6130490a6b232d1d957dc4c406f
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   dio:
     dependency: "direct main"
     description:
@@ -281,6 +289,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.2"
+  dynamic_color:
+    dependency: "direct main"
+    description:
+      name: dynamic_color
+      sha256: "4aeb76de323e8eb660bab5557d826ad7ebbf1434a598f0c6aa8a11a9696a6757"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.9.0"
   equatable:
     dependency: "direct main"
     description:
@@ -353,6 +369,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.9.3+6"
+  firebase_analytics:
+    dependency: "direct main"
+    description:
+      name: firebase_analytics
+      sha256: "0bf812fe5fecf395c07b673f40d951929f631749bd7513a31b8bfafa182d9a06"
+      url: "https://pub.dev"
+    source: hosted
+    version: "12.5.0"
+  firebase_analytics_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_analytics_platform_interface
+      sha256: "5c3ab4b681c837afd71f0abf77c7485f51c7b645d4ae77b96f9ed54779ff4126"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.0.7"
+  firebase_analytics_web:
+    dependency: transitive
+    description:
+      name: firebase_analytics_web
+      sha256: "09eb4d0ce4c9a16efbc277ac709a90eb197d5512592215a73c6a302ab1ab6c3a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.6.1+13"
   firebase_core:
     dependency: "direct main"
     description:
@@ -377,6 +417,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.11.0"
+  firebase_crashlytics:
+    dependency: "direct main"
+    description:
+      name: firebase_crashlytics
+      sha256: aca14d94150d50e3f9e0f5090008fa98232d924bc780689481056521d9dc25c9
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.3.0"
+  firebase_crashlytics_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_crashlytics_platform_interface
+      sha256: "8270dcdb1800db3e5f888ce30a2d5e8f92c379c461f022297c83b2c794aa1792"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.9.0"
   firebase_messaging:
     dependency: "direct main"
     description:
@@ -543,7 +599,7 @@ packages:
     source: hosted
     version: "0.4.1"
   flutter_localizations:
-    dependency: transitive
+    dependency: "direct main"
     description: flutter
     source: sdk
     version: "0.0.0"
@@ -661,6 +717,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.0"
+  golden_toolkit:
+    dependency: "direct dev"
+    description:
+      name: golden_toolkit
+      sha256: "8f74adab33154fe7b731395782797021f97d2edc52f7bfb85ff4f1b5c4a215f0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.15.0"
   graphs:
     dependency: transitive
     description:
@@ -701,6 +765,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
+  home_widget:
+    dependency: "direct main"
+    description:
+      name: home_widget
+      sha256: "7430f7549d42cef2e729bd3c779de748b93f1eb78b1abfe6bca8fffd1cfce3e9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.7.0+1"
   hooks:
     dependency: transitive
     description:
@@ -1221,6 +1293,46 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.2"
+  quick_actions:
+    dependency: "direct main"
+    description:
+      name: quick_actions
+      sha256: "7e35dd6a21f5bbd21acf6899039eaf85001a5ac26d52cbd6a8a2814505b90798"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
+  quick_actions_android:
+    dependency: transitive
+    description:
+      name: quick_actions_android
+      sha256: "11131c1b027bcb55a10f14f8c8222cec3afad81d2b7b14bf603eeeff61768637"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.33"
+  quick_actions_ios:
+    dependency: transitive
+    description:
+      name: quick_actions_ios
+      sha256: fe090ae5b9673c7031ca307371f611061a731adda6a5c9574aed9439475218cf
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.5"
+  quick_actions_platform_interface:
+    dependency: transitive
+    description:
+      name: quick_actions_platform_interface
+      sha256: "1fec7068db5122cd019e9340d3d7be5d36eab099695ef3402c7059ee058329a4"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
+  receive_sharing_intent:
+    dependency: "direct main"
+    description:
+      name: receive_sharing_intent
+      sha256: "72f229a38f2910029c11d840770c173b27072e348ef3376130b37514bc4556f6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.9.0"
   record_use:
     dependency: transitive
     description:
@@ -1652,4 +1764,4 @@ packages:
     version: "3.1.4"
 sdks:
   dart: ">=3.12.2 <4.0.0"
-  flutter: ">=3.44.0"
+  flutter: ">=3.47.0"

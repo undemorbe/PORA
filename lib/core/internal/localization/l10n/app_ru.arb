@@ -632,7 +632,7 @@
     "@insightsTitle": {
         "description": "insightsTitle"
     },
-    "insightsTipKicker": "✨ СОВЕТ PORA",
+    "insightsTipKicker": "СОВЕТ PORA",
     "@insightsTipKicker": {
         "description": "insightsTipKicker"
     },
@@ -1748,5 +1748,35 @@
         "description": "chat bubble cta"
     },
     "listsEmptyTitle": "Списков у вас пока нет",
-    "listsEmptySubtitle": "Может стоит создать новый?"
+    "listsEmptySubtitle": "Может стоит создать новый?",
+    "aiModelSettingsSection": "Модель Pora-AI",
+    "aiConfigRow": "Своя модель Pora-AI",
+    "aiConfigRowSubtitle": "Свой ключ OpenRouter и модели",
+    "aiConfigTitle": "Модель Pora-AI",
+    "aiConfigIntro": "Подключите свой ключ OpenRouter и выберите модели для Pora-AI. Оставьте поле пустым, чтобы использовать значение по умолчанию.",
+    "aiConfigApiKeyLabel": "API-ключ OpenRouter",
+    "aiConfigApiKeyHint": "sk-or-...",
+    "aiConfigModelsSection": "Модели",
+    "aiConfigPoraModelLabel": "Модель PORA-AI",
+    "aiConfigPoraModelHint": "например, openai/gpt-4o-mini",
+    "aiConfigTipsModelLabel": "Модель подсказок (Tips)",
+    "aiConfigTipsModelHint": "Пусто — как в приложении",
+    "aiConfigNeedKeyNote": "Введите API-ключ, чтобы задать свои модели",
+    "aiConfigReset": "Сбросить к значениям по умолчанию",
+    "aiConfigSaved": "Настройки Pora-AI сохранены",
+    "aiConfigResetDone": "Восстановлены настройки Pora-AI по умолчанию",
+    "aiConfigInfoTitle": "Как подключить свою модель",
+    "aiConfigInfoBody": "1. Создайте бесплатный аккаунт на openrouter.ai.\n2. Откройте раздел Keys, создайте новый API-ключ и вставьте его сюда.\n3. На странице openrouter.ai/models скопируйте идентификатор модели (например, openai/gpt-4o-mini или anthropic/claude-3.5-sonnet).\n4. Вставьте идентификатор в поле PORA-AI. Поле Tips необязательно — оставьте пустым, чтобы использовать модель приложения по умолчанию с вашим ключом.\n\nКлюч хранится только на этом устройстве и используется только для ваших запросов к Pora-AI.",
+    "aiConfigInfoClose": "Понятно",
+    "supportEmptyError": "Сначала напишите сообщение",
+    "supportSent": "Сообщение отправлено — скоро ответим",
+    "supportFailed": "Не удалось отправить. Проверьте подключение и повторите",
+    "supportSheetHint": "Опишите проблему или пожелание...",
+    "shortcutAddItem": "Добавить товар",
+    "importantReminderTitle": "Купи {product}",
+    "importantReminderFrom": "от {user}",
+    "importantReminderBody": "Отметьте «Куплено», когда купите",
+    "importantReminderMarkBought": "Куплено",
+    "liveActivityTestRow": "Тест Live Activity",
+    "liveActivityTestSample": "Молоко"
 }

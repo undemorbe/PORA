@@ -15,6 +15,7 @@ import 'package:pora/core/features/item_detail/domain/usecase/delete_item.dart';
 import 'package:pora/core/features/item_detail/domain/usecase/mark_item_bought.dart';
 import 'package:pora/core/features/user/domain/usecase/user/get_user.dart';
 import 'package:pora/core/internal/cache/hive_json_cache.dart';
+import 'package:pora/core/internal/cache/offline_policy.dart';
 part 'lists_store.g.dart';
 
 class ListStore = _ListStoreBase with _$ListStore;
@@ -121,15 +122,17 @@ abstract class _ListStoreBase with Store {
         await HiveJsonCache.put(_listCacheKey(lid), asModel.toJson());
       }
     } else {
-      // Пробуем восстановить из кэша.
-      final cached = await HiveJsonCache.read(_listCacheKey(lid));
-      if (cached is Map<String, dynamic>) {
-        try {
-          list = ListModel.fromJson(cached);
-          isSuccess = true;
-          usingCache = true;
-          return;
-        } catch (_) {}
+      // Кэш отдаём только при проблемах с доступностью, не при 4xx.
+      if (canServeCache(response.left)) {
+        final cached = await HiveJsonCache.read(_listCacheKey(lid));
+        if (cached is Map<String, dynamic>) {
+          try {
+            list = ListModel.fromJson(cached);
+            isSuccess = true;
+            usingCache = true;
+            return;
+          } catch (_) {}
+        }
       }
       isSuccess = false;
       errorMessage = response.left.message;
@@ -163,14 +166,16 @@ abstract class _ListStoreBase with Store {
         );
       }
     } else {
-      final cached = await HiveJsonCache.read(_famListsCacheKey(fid));
-      if (cached is Map<String, dynamic>) {
-        try {
-          listsWithPreview = ListsArrayModel.fromJson(cached);
-          isSuccess = true;
-          usingCache = true;
-          return;
-        } catch (_) {}
+      if (canServeCache(response.left)) {
+        final cached = await HiveJsonCache.read(_famListsCacheKey(fid));
+        if (cached is Map<String, dynamic>) {
+          try {
+            listsWithPreview = ListsArrayModel.fromJson(cached);
+            isSuccess = true;
+            usingCache = true;
+            return;
+          } catch (_) {}
+        }
       }
       isSuccess = false;
       errorMessage = response.left.message;

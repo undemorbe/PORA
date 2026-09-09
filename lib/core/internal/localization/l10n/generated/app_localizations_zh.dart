@@ -490,7 +490,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get insightsTitle => '洞察';
 
   @override
-  String get insightsTipKicker => '✨ PORA 提示';
+  String get insightsTipKicker => 'PORA 提示';
 
   @override
   String get insightsTipTitle => '你 love carbonara!';
@@ -1353,4 +1353,100 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get listsEmptySubtitle => '要不要创建一个新的？';
+
+  @override
+  String get aiModelSettingsSection => 'Pora-AI 模型';
+
+  @override
+  String get aiConfigRow => '自定义 Pora-AI 模型';
+
+  @override
+  String get aiConfigRowSubtitle => '使用你自己的 OpenRouter 密钥和模型';
+
+  @override
+  String get aiConfigTitle => 'Pora-AI 模型';
+
+  @override
+  String get aiConfigIntro =>
+      '连接你自己的 OpenRouter API 密钥并选择 Pora-AI 使用的模型。留空则使用应用默认值。';
+
+  @override
+  String get aiConfigApiKeyLabel => 'OpenRouter API 密钥';
+
+  @override
+  String get aiConfigApiKeyHint => 'sk-or-...';
+
+  @override
+  String get aiConfigModelsSection => '模型';
+
+  @override
+  String get aiConfigPoraModelLabel => 'PORA-AI 模型';
+
+  @override
+  String get aiConfigPoraModelHint => '例如 openai/gpt-4o-mini';
+
+  @override
+  String get aiConfigTipsModelLabel => '提示 (Tips) 模型';
+
+  @override
+  String get aiConfigTipsModelHint => '留空 — 与应用默认相同';
+
+  @override
+  String get aiConfigNeedKeyNote => '输入 API 密钥后才能选择自定义模型';
+
+  @override
+  String get aiConfigReset => '恢复默认';
+
+  @override
+  String get aiConfigSaved => '已保存 Pora-AI 设置';
+
+  @override
+  String get aiConfigResetDone => '已恢复 Pora-AI 默认设置';
+
+  @override
+  String get aiConfigInfoTitle => '如何连接你的模型';
+
+  @override
+  String get aiConfigInfoBody =>
+      '1. 在 openrouter.ai 注册一个免费账户。\n2. 打开 Keys，创建一个新的 API 密钥并粘贴到这里。\n3. 在 openrouter.ai/models 复制一个模型 ID（例如 openai/gpt-4o-mini 或 anthropic/claude-3.5-sonnet）。\n4. 将 ID 粘贴到 PORA-AI 字段。Tips 字段可选——留空即可用你的密钥调用应用默认模型。\n\n你的密钥仅存储在本设备上，且仅用于你的 Pora-AI 请求。';
+
+  @override
+  String get aiConfigInfoClose => '知道了';
+
+  @override
+  String get supportEmptyError => '请先填写消息内容';
+
+  @override
+  String get supportSent => '消息已发送——我们会尽快回复';
+
+  @override
+  String get supportFailed => '发送失败。请检查网络后重试';
+
+  @override
+  String get supportSheetHint => '描述你的问题或反馈……';
+
+  @override
+  String get shortcutAddItem => '添加商品';
+
+  @override
+  String importantReminderTitle(String product) {
+    return '购买 $product';
+  }
+
+  @override
+  String importantReminderFrom(String user) {
+    return '来自 $user';
+  }
+
+  @override
+  String get importantReminderBody => '买到后请标记「已购买」';
+
+  @override
+  String get importantReminderMarkBought => '已购买';
+
+  @override
+  String get liveActivityTestRow => '测试 Live Activity';
+
+  @override
+  String get liveActivityTestSample => '牛奶';
 }

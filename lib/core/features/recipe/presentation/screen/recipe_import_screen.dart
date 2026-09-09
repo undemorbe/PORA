@@ -8,6 +8,7 @@ import 'package:pora/core/features/recipe/presentation/widgets/recipe_preview_ca
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
 import 'package:pora/core/internal/theme/constant/additional_constants.dart';
 import 'package:pora/core/internal/network/connectivity/connectivity_guard.dart';
+import 'package:pora/core/internal/platform/shared_content_holder.dart';
 import 'package:pora/core/internal/theme/text/app_text_styles.dart';
 import 'package:pora/core/internal/widgets/pora_buttons.dart';
 import 'package:pora/core/internal/widgets/pora_rows_card.dart';
@@ -36,6 +37,12 @@ class _RecipeImportPageState extends State<RecipeImportPage> {
   void initState() {
     super.initState();
     store = RecipeImportStore(lid: widget.lid);
+    // Share-to-app: если рецепт «пошарили» в PORA извне, URL ждёт в холдере —
+    // префиллим поле, чтобы пользователю осталось только импортировать.
+    final shared = SharedContentHolder.instance.consume();
+    if (shared != null && shared.isNotEmpty) {
+      urlController.text = shared;
+    }
   }
 
   @override

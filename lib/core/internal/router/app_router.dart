@@ -89,6 +89,11 @@ class AppRouter extends RootStackRouter {
       guards: [_authGuard],
     ),
     AutoRoute(
+      page: AiConfigRoute.page,
+      path: "/${AiConfigRoute.name}",
+      guards: [_authGuard],
+    ),
+    AutoRoute(
       page: MembersRoute.page,
       path: "/${MembersRoute.name}",
       guards: [_authGuard],

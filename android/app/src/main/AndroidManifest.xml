@@ -9,7 +9,8 @@
     <application
         android:label="pora"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:enableOnBackInvokedCallback="true"><!-- predictive back (Android 13+) -->
         <activity
         android:name="com.yalantis.ucrop.UCropActivity"
         android:screenOrientation="portrait"
@@ -54,7 +55,27 @@
                 <action android:name="FLUTTER_NOTIFICATION_CLICK" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <!-- Share-to-app: приём текста/URL из системного Share sheet
+                 (receive_sharing_intent) — импорт рецептов. -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/*" />
+            </intent-filter>
         </activity>
+
+        <!-- Home-screen widget (PoraWidgetProvider — Kotlin в
+             kotlin/com/boris/pora/PoraWidgetProvider.kt). -->
+        <receiver
+            android:name=".PoraWidgetProvider"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/pora_widget_info" />
+        </receiver>
 
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->

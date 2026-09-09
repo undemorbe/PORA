@@ -56,6 +56,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
 
   Future<void> _notify() async {
     if (!await ConnectivityGuard.checkWrite(context)) return;
+    if (!mounted) return;
     final it = store.item;
     if (it == null) return;
     final added = it.addedBy;
@@ -75,6 +76,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
 
   Future<void> _delete() async {
     if (!await ConnectivityGuard.checkWrite(context)) return;
+    if (!mounted) return;
     final ok = await confirmDeleteItem(context);
     if (!ok || !mounted) return;
     final res = await store.delete().whenComplete(

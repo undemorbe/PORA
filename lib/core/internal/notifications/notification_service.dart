@@ -14,6 +14,7 @@ import 'package:pora/core/internal/local_storage/abstract_local_db.dart'
 import 'package:pora/core/internal/logging/logger.dart';
 import 'package:pora/core/internal/notifications/deep_link_handler.dart';
 import 'package:pora/core/internal/notifications/device_token_sync.dart';
+import 'package:pora/core/internal/notifications/important_reminder_service.dart';
 
 /// Имя Hive-бокса для истории уведомлений.
 /// Хранится под собственным ключом (не через [ILocalDB]), т.к. background
@@ -65,8 +66,13 @@ class NotificationService {
   late final FirebaseMessaging _fcm;
   final FlutterLocalNotificationsPlugin _local =
       FlutterLocalNotificationsPlugin();
+  late final ImportantReminderService _importantReminder =
+      ImportantReminderService(_local);
   final StreamController<NotificationEntity> _stream =
       StreamController<NotificationEntity>.broadcast();
+
+  /// Кросс-платформенный LiveActivity-аналог (важные «купи X» напоминания).
+  ImportantReminderService get importantReminder => _importantReminder;
 
   String? _fcmToken;
   bool _initialized = false;
@@ -105,6 +111,7 @@ class NotificationService {
           AndroidFlutterLocalNotificationsPlugin
         >()
         ?.createNotificationChannel(_kAndroidChannel);
+    await _importantReminder.ensureChannel();
 
     final settings = await _fcm.requestPermission(
       alert: true,
@@ -151,7 +158,33 @@ class NotificationService {
 
   Future<void> _onForeground(RemoteMessage message) async {
     await _persist(message, unread: true);
+    // Срочная просьба купить (type=urgent + item-id) → важное «LiveActivity»-
+    // напоминание с действием «Куплено» вместо обычного уведомления.
+    if (_tryShowImportantReminder(message)) return;
     await _showLocal(message);
+  }
+
+  /// Возвращает `true`, если сообщение — срочное напоминание и показано как
+  /// важное (ongoing) уведомление.
+  bool _tryShowImportantReminder(RemoteMessage message) {
+    final data = message.data;
+    if (data['type']?.toString() != 'urgent') return false;
+    final itemId = data['item-id']?.toString();
+    if (itemId == null || itemId.isEmpty) return false;
+    // productName/fromUser: из data, иначе из текста уведомления.
+    final productName =
+        data['item-name']?.toString() ??
+        message.notification?.title ??
+        'товар';
+    final fromUser = data['from']?.toString() ?? data['added-by']?.toString();
+    unawaited(
+      _importantReminder.show(
+        itemId: itemId,
+        productName: productName,
+        fromUser: fromUser,
+      ),
+    );
+    return true;
   }
 
   Future<void> _onOpenedApp(RemoteMessage message) async {
@@ -254,6 +287,12 @@ class NotificationService {
     if (raw == null || raw.isEmpty) return;
     try {
       final data = jsonDecode(raw) as Map<String, dynamic>;
+      // Действие «Куплено» в важном напоминании — обрабатываем и выходим.
+      final handled = await _importantReminder.handleAction(
+        response.actionId,
+        data,
+      );
+      if (handled) return;
       await DeepLinkHandler.instance.handle(data);
     } catch (e, s) {
       Logger.talker.error('Local notification payload decode failed', e, s);

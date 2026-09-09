@@ -194,6 +194,31 @@ class _AdvancedSettingsPageState extends State<AdvancedSettingsPage> {
               const SizedBox(height: PoraSpacing.lg),
 
               FadeSlideIn(
+                delay: const Duration(milliseconds: 494),
+                child: SectionLabel(l.aiModelSettingsSection),
+              ),
+              FadeSlideIn(
+                delay: const Duration(milliseconds: 498),
+                child: PoraRowsCard(
+                  children: [
+                    ListTile(
+                      leading: const Icon(PhosphorIconsFill.robot),
+                      title: Text(l.aiConfigRow, style: PoraText.itemTitle),
+                      subtitle: Text(
+                        l.aiConfigRowSubtitle,
+                        style: PoraText.small.copyWith(
+                          color: context.colors.textSubtle,
+                        ),
+                      ),
+                      trailing: const Icon(PhosphorIconsRegular.caretRight),
+                      onTap: () => context.router.push(const AiConfigRoute()),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: PoraSpacing.lg),
+
+              FadeSlideIn(
                 delay: const Duration(milliseconds: 500),
                 child: SectionLabel(l.about),
               ),
@@ -222,6 +247,17 @@ class _AdvancedSettingsPageState extends State<AdvancedSettingsPage> {
                       ),
                     ),
                     ListTile(
+                      leading: const Icon(PhosphorIconsRegular.broadcast),
+                      title: Text(l.liveActivityTestRow, style: PoraText.itemTitle),
+                      trailing: const Icon(PhosphorIconsRegular.playCircle),
+                      onTap: () => NotificationService.instance.importantReminder
+                          .show(
+                            itemId: 'live-activity-test',
+                            productName: l.liveActivityTestSample,
+                            fromUser: 'PORA',
+                          ),
+                    ),
+                    ListTile(
                       leading: const Icon(PhosphorIconsRegular.info),
                       title: Text(l.version, style: PoraText.itemTitle),
                       trailing: Text('1.0.0', style: PoraText.small),
@@ -245,27 +281,29 @@ class _ThemePicker extends StatelessWidget {
     final store = GetIt.I<ThemeStore>();
     final l = context.l10n;
     return Observer(
-      builder: (context) => PoraRowsCard(
-        children: [
-          for (final entry in const [
-            (ThemeMode.system, PhosphorIconsRegular.deviceMobile),
-            (ThemeMode.light, PhosphorIconsRegular.sun),
-            (ThemeMode.dark, PhosphorIconsRegular.moon),
-          ])
-            RadioListTile<ThemeMode>.adaptive(
-              value: entry.$1,
-              groupValue: store.themeMode,
-              onChanged: (v) {
-                if (v != null) store.setThemeMode(v);
-              },
-              activeColor: PoraColors.primary,
-              radioBackgroundColor: WidgetStateColor.resolveWith((_) {
-                return Theme.of(context).colorScheme.onSurface;
-              }),
-              secondary: Icon(entry.$2),
-              title: Text(_label(l, entry.$1), style: PoraText.itemTitle),
-            ),
-        ],
+      builder: (context) => RadioGroup<ThemeMode>(
+        groupValue: store.themeMode,
+        onChanged: (v) {
+          if (v != null) store.setThemeMode(v);
+        },
+        child: PoraRowsCard(
+          children: [
+            for (final entry in const [
+              (ThemeMode.system, PhosphorIconsRegular.deviceMobile),
+              (ThemeMode.light, PhosphorIconsRegular.sun),
+              (ThemeMode.dark, PhosphorIconsRegular.moon),
+            ])
+              RadioListTile<ThemeMode>.adaptive(
+                value: entry.$1,
+                activeColor: PoraColors.primary,
+                radioBackgroundColor: WidgetStateColor.resolveWith((_) {
+                  return Theme.of(context).colorScheme.onSurface;
+                }),
+                secondary: Icon(entry.$2),
+                title: Text(_label(l, entry.$1), style: PoraText.itemTitle),
+              ),
+          ],
+        ),
       ),
     );
   }
@@ -292,23 +330,24 @@ class _LanguagePicker extends StatelessWidget {
   Widget build(BuildContext context) {
     final store = GetIt.I<LocalizationStore>();
     return Observer(
-      builder: (context) => PoraRowsCard(
-        children: [
-          for (final locale in Locales.supportedLocales)
-            RadioListTile<String>.adaptive(
-              value: locale.languageCode,
-
-              groupValue: store.currentLocale,
-              onChanged: (v) {
-                if (v != null) store.setCurrentLocale(newLocale: v);
-              },
-              activeColor: PoraColors.primary,
-              title: Text(
-                _labels[locale.languageCode] ?? locale.languageCode,
-                style: PoraText.itemTitle,
+      builder: (context) => RadioGroup<String>(
+        groupValue: store.currentLocale,
+        onChanged: (v) {
+          if (v != null) store.setCurrentLocale(newLocale: v);
+        },
+        child: PoraRowsCard(
+          children: [
+            for (final locale in Locales.supportedLocales)
+              RadioListTile<String>.adaptive(
+                value: locale.languageCode,
+                activeColor: PoraColors.primary,
+                title: Text(
+                  _labels[locale.languageCode] ?? locale.languageCode,
+                  style: PoraText.itemTitle,
+                ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
   }

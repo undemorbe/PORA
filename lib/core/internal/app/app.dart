@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:auto_route/auto_route.dart';
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
+import 'package:pora/core/internal/analytics/analytics_observer.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pora/core/internal/di/injection_container.dart';
@@ -23,15 +27,25 @@ class MainApp extends StatelessWidget {
     final router = injectionContainer.getIt<AppRouter>();
     final themeStore = injectionContainer.getIt<ThemeStore>();
     final localeStore = injectionContainer.getIt<LocalizationStore>();
-
-    return Observer(
-      builder: (context) => MaterialApp.router(
-        title: 'PORA',
-        debugShowCheckedModeBanner: false,
-
+    return DynamicColorBuilder(
+      builder: (lightDynamic, darkDynamic) {
+        final useDynamic = Platform.isAndroid && lightDynamic != null;
+        final lightTheme = useDynamic
+            ? PoraTheme.light.copyWith(colorScheme: lightDynamic.harmonized())
+            : PoraTheme.light;
+        final darkTheme = (useDynamic && darkDynamic != null)
+            ? PoraTheme.dark.copyWith(colorScheme: darkDynamic.harmonized())
+            : PoraTheme.dark;
+        return Observer(
+          builder: (context) => MaterialApp.router(
+            title: 'PORA',
+            debugShowCheckedModeBanner: false,
         //!Routing
         routerConfig: router.config(
-          navigatorObservers: () => [TalkerRouteObserver(Logger.talker)],
+          navigatorObservers: () => [
+            TalkerRouteObserver(Logger.talker),
+            PoraAnalyticsObserver(),
+          ],
           reevaluateListenable: ReevaluateListenable.stream(
             injectionContainer.getIt<AuthState>().stream,
           ),
@@ -49,13 +63,9 @@ class MainApp extends StatelessWidget {
             }
           },
         ),
-
-        //! Theme (Observer перерисует при смене mode).
-        theme: PoraTheme.light,
-        darkTheme: PoraTheme.dark,
+        theme: lightTheme,
+        darkTheme: darkTheme,
         themeMode: themeStore.themeMode,
-
-        //! Themed transitions — плавная смена темы.
         themeAnimationDuration: const Duration(milliseconds: 320),
         themeAnimationCurve: Curves.easeOutCubic,
 
@@ -67,8 +77,10 @@ class MainApp extends StatelessWidget {
           GlobalMaterialLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
-        ],
-      ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

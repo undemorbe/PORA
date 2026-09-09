@@ -1,7 +1,5 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
-import 'package:pora/core/features/auth_and_validation/data/models/jwt_models/tokens_model.dart';
 import 'package:pora/core/features/auth_and_validation/domain/usecase/save_tokens.dart';
 import 'package:pora/core/features/auth_and_validation/domain/usecase/send_otp.dart';
 import 'package:pora/core/features/auth_and_validation/domain/usecase/verify_otp.dart';

@@ -10,10 +10,13 @@ void main() {
     WidgetsFlutterBinding.ensureInitialized();
     final injectionContainer = InjectionContainer();
     await injectionContainer.init();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark,
+        systemNavigationBarColor: Colors.transparent,
+        systemNavigationBarContrastEnforced: false,
       ),
     );
     SystemChrome.setPreferredOrientations([

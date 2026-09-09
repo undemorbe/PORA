@@ -1,7 +1,9 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
+import 'package:pora/core/internal/platform/home_widget_service.dart';
 import 'package:pora/core/features/families/data/models/member_model.dart';
 import 'package:pora/core/features/families/domain/entity/member.dart';
 import 'package:pora/core/features/families/domain/usecase/create_family.dart';
@@ -101,6 +103,13 @@ abstract class _GroupsStoreBase with Store {
       groups = ObservableList<GroupEntity>.of(aggregated);
       usingCache = false;
       await _writeSnapshot(aggregated);
+      // Android home-screen widget: краткая сводка по спискам.
+      unawaited(
+        HomeWidgetService.instance.update(
+          count: aggregated.length,
+          items: aggregated.map((g) => g.list.name).toList(),
+        ),
+      );
     } else {
       // Ничего не пришло — пробуем поднять из cache.
       final cached = await _readSnapshot();

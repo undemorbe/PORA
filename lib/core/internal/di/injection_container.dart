@@ -4,6 +4,16 @@ import 'package:pora/core/features/brief/domain/repository/brief_repository.dart
 import 'package:pora/core/features/brief/domain/usecases/get_brief.dart';
 import 'package:pora/core/features/brief/domain/usecases/post_brief.dart';
 import 'package:pora/core/features/brief/presentation/controller/brief_store.dart';
+import 'package:pora/core/features/groups/data/home_view_prefs.dart';
+import 'package:pora/core/features/predictions_ai/data/config/ai_config.dart';
+import 'package:pora/core/features/predictions_ai/data/prefs/ai_config_prefs.dart';
+import 'package:pora/core/internal/errors/failure.dart';
+import 'package:pora/core/internal/errors/failure_mapper.dart';
+import 'package:pora/core/internal/errors/success.dart';
+import 'package:pora/core/internal/extensions/either.dart';
+import 'package:pora/core/internal/offline/outbox.dart';
+import 'package:pora/core/internal/offline/outbox_kinds.dart';
+import 'package:pora/core/internal/offline/outbox_replayer.dart';
 import 'package:pora/core/features/settings/data/datasource/support_remote.dart';
 import 'package:pora/core/features/settings/data/service/support_service.dart';
 import 'package:pora/core/features/settings/domain/repository/support_repository.dart';
@@ -21,6 +31,7 @@ class InjectionContainer {
     _registerRepositories();
     _registerUsecases();
     await _getIt.allReady();
+    await _getIt<AiConfig>().reload();
     try {
       Logger.talker.info('Dependencies initialized successfully');
     } catch (e, stackTrace) {
@@ -43,20 +54,35 @@ class InjectionContainer {
     _getIt.registerLazySingleton<ApiClient>(() => ApiClient(_getIt<Dio>()));
     _getIt.registerLazySingleton<IUriLauncher>(() => UriLauncherImpl());
 
-    //! AI (OpenRouter — отдельный Dio с Bearer из dotenv)
+    //! AI (OpenRouter — ключ и модели через AiConfig: prefs переопределяют .env)
+    _getIt.registerLazySingleton<AiConfigPrefs>(
+      () => AiConfigPrefs(db: _getIt<ILocalDB<dynamic>>()),
+    );
+    _getIt.registerLazySingleton<AiConfig>(
+      () => AiConfig(_getIt<AiConfigPrefs>()),
+    );
     _getIt.registerLazySingleton<OpenRouterApiClient>(() {
+      final config = _getIt<AiConfig>();
       final baseUrl = dotenv.maybeGet('AI_API_URL') ?? '';
-      final key = dotenv.maybeGet('AI_API_KEY') ?? '';
       final dio = Dio(
         BaseOptions(
           baseUrl: baseUrl,
           connectTimeout: const Duration(seconds: 20),
           receiveTimeout: const Duration(seconds: 30),
           headers: {
-            'Authorization': 'Bearer $key',
             'Content-Type': 'application/json',
             'HTTP-Referer': 'https://pora.app',
             'X-Title': 'PORA',
+          },
+        ),
+      );
+      // Bearer проставляется динамически на каждый запрос — смена ключа в
+      // настройках вступает в силу без рестарта и пересоздания Dio.
+      dio.interceptors.add(
+        InterceptorsWrapper(
+          onRequest: (options, handler) {
+            options.headers['Authorization'] = 'Bearer ${config.apiKey}';
+            handler.next(options);
           },
         ),
       );
@@ -65,19 +91,13 @@ class InjectionContainer {
     _getIt.registerLazySingleton<AiRemote>(
       () => AiRemoteImpl(
         client: _getIt<OpenRouterApiClient>(),
-        model:
-            dotenv.maybeGet('AI_CHAT_MODEL') ??
-            dotenv.maybeGet('AI_MODEL') ??
-            '',
+        modelResolver: () => _getIt<AiConfig>().poraModel,
       ),
     );
     _getIt.registerLazySingleton<AiRemote>(
       () => AiRemoteImpl(
         client: _getIt<OpenRouterApiClient>(),
-        model:
-            dotenv.maybeGet('AI_TIP_MODEL') ??
-            dotenv.maybeGet('AI_MODEL') ??
-            '',
+        modelResolver: () => _getIt<AiConfig>().tipsModel,
       ),
       instanceName: 'tips',
     );
@@ -355,13 +375,23 @@ class InjectionContainer {
       () => RecipeService(scraper: _getIt<RecipeScraper>()),
     );
 
+    //! Offline outbox
+    _getIt.registerLazySingleton<Outbox>(() => const Outbox());
+    _getIt.registerLazySingleton<OutboxReplayer>(
+      () => OutboxReplayer(outbox: _getIt<Outbox>()),
+    );
+
     //! Items
     _getIt.registerLazySingleton<ItemsRemote>(
       () => ItemsRemoteImpl(apiClient: _getIt<ApiClient>()),
     );
     _getIt.registerLazySingleton<ItemsRepository>(
-      () => ItemsService(remote: _getIt<ItemsRemote>()),
+      () => ItemsService(
+        remote: _getIt<ItemsRemote>(),
+        outbox: _getIt<Outbox>(),
+      ),
     );
+    _registerOutboxHandlers();
     _getIt.registerLazySingleton<ItemDetailsPrefs>(
       () => ItemDetailsPrefs(db: _getIt<ILocalDB<dynamic>>()),
     );
@@ -378,6 +408,9 @@ class InjectionContainer {
     //! Groups store — singleton чтобы recipe-import и другие фичи могли
     //! читать список групп/личных списков без пересоздания store'а.
     _getIt.registerLazySingleton<GroupsStore>(() => GroupsStore()..load());
+    _getIt.registerLazySingleton<HomeViewPrefs>(
+      () => HomeViewPrefs(_getIt<ILocalDB<dynamic>>()),
+    );
 
     //! Support messaging
     _getIt.registerLazySingleton<SupportRemote>(
@@ -385,6 +418,59 @@ class InjectionContainer {
     );
     _getIt.registerLazySingleton<SupportRepository>(
       () => SupportService(remoteDataSource: _getIt<SupportRemote>()),
+    );
+  }
+
+  /// Обработчики offline-очереди: бьют по `ItemsRemote` НАПРЯМУЮ (минуя
+  /// `ItemsService`), чтобы повторный офлайн не ставил операцию в очередь
+  /// снова. Маппинг ошибок — через [FailureMapper] (connectivity → пауза,
+  /// 4xx → дроп).
+  void _registerOutboxHandlers() {
+    final replayer = _getIt<OutboxReplayer>();
+    final remote = _getIt<ItemsRemote>();
+
+    Future<Either<Failure, Object?>> guard(Future<void> Function() op) async {
+      try {
+        await op();
+        return Right(const ServerSuccess());
+      } catch (e, s) {
+        return Left(FailureMapper.map(e, s));
+      }
+    }
+
+    replayer.register(
+      OutboxKinds.itemMarkBought,
+      (a) => guard(
+        () => remote.markBought(
+          itemId: a['item-id'] as String,
+          checked: a['checked'] as bool,
+        ),
+      ),
+    );
+    replayer.register(
+      OutboxKinds.itemDelete,
+      (a) => guard(() => remote.deleteItem(itemId: a['item-id'] as String)),
+    );
+    replayer.register(
+      OutboxKinds.itemUpdate,
+      (a) => guard(
+        () => remote.updateItem(
+          itemId: a['item-id'] as String,
+          body: Map<String, dynamic>.from(a['body'] as Map),
+        ),
+      ),
+    );
+    replayer.register(
+      OutboxKinds.itemNotify,
+      (a) => guard(
+        () => remote.notify(
+          itemId: a['item-id'] as String,
+          body: {
+            'to': (a['to'] as List?)?.cast<String>(),
+            'message': a['message'] as String,
+          },
+        ),
+      ),
     );
   }
 }

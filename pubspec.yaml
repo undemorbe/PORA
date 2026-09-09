@@ -37,6 +37,8 @@ dependencies:
   flutter_image_compress: ^2.4.0
   firebase_core: ^4.12.1
   firebase_messaging: ^16.4.3
+  firebase_crashlytics: ^5.0.3
+  firebase_analytics: ^12.1.1
   flutter_local_notifications: ^22.0.1
   http: ^1.2.0
   html: ^0.15.4
@@ -46,9 +48,17 @@ dependencies:
   path_provider: any
   collection: any
   flutter_markdown_plus: ^1.0.12
+  quick_actions: ^1.1.0
+  receive_sharing_intent: ^1.8.1
+  dynamic_color: ^1.7.0
+  home_widget: ^0.7.0
+  device_preview: ^3.0.0
+  flutter_localizations:
+    sdk: flutter
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  golden_toolkit: ^0.15.0 # loadAppFonts для golden/widget-тестов
   flutter_lints: ^6.0.0
   build_runner: ^2.15.0
   auto_route_generator: ^10.5.0
