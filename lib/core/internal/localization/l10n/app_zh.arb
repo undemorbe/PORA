@@ -7,12 +7,38 @@
     "@onlyYou": {
         "description": "onlyYou"
     },
+<<<<<<< HEAD
+=======
+    "authSignInExpansibleExpand": "使用其他方式登录",
+    "@authSignInExpansibleExpand": {
+        "description": "The sign in with other methods title"
+    },
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "listsEmptyTitle": "你还没有任何清单",
     "listsEmptySubtitle": "要不要创建一个新的？",
     "sendAgainAfter": "重新发送倒计时",
     "@sendAgainAfter": {
         "description": "The sign in with other methods title"
     },
+<<<<<<< HEAD
+=======
+    "authSignInWithEmail": "使用邮箱登录",
+    "@authSignInWithEmail": {
+        "description": "The sign in with email button text"
+    },
+    "authSignInWithGoogle": "使用 Google 登录",
+    "@authSignInWithGoogle": {
+        "description": "The sign in with Google button text"
+    },
+    "authSignInWithApple": "使用 Apple 登录",
+    "@authSignInWithApple": {
+        "description": "The sign in with Apple button text"
+    },
+    "authSignInWithPhone": "使用手机号登录",
+    "@authSignInWithPhone": {
+        "description": "The sign in with Phone button text"
+    },
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "authPrivatePolicy": "继续即表示你同意\n《服务条款》和《隐私政策》",
     "@authPrivatePolicy": {
         "description": "The private policy link text"
@@ -21,11 +47,19 @@
     "@authTitle": {
         "description": "authTitle"
     },
+<<<<<<< HEAD
     "authSubtitle": "输入你的手机号或邮箱，我们会发送登录验证码。",
     "@authSubtitle": {
         "description": "authSubtitle"
     },
     "authSubtitle2": "直接输入即可，我们会自动识别是手机号还是邮箱。",
+=======
+    "authSubtitle": "输入你的手机号或邮箱，我们会向你发送登录验证码。",
+    "@authSubtitle": {
+        "description": "authSubtitle"
+    },
+    "authSubtitle2": "直接开始输入，我们会自动识别是手机号还是邮箱。",
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@authSubtitle2": {
         "description": "authSubtitle2"
     },
@@ -33,7 +67,11 @@
     "@authJoinButton": {
         "description": "authJoinButton"
     },
+<<<<<<< HEAD
     "userCreateProfileNameRequired": "能告诉我们你的名字吗？",
+=======
+    "userCreateProfileNameRequired": "告诉我们你的名字好吗？",
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@userCreateProfileNameRequired": {
         "description": "userCreateProfileNameRequired"
     },
@@ -59,7 +97,11 @@
     "@otpTitle": {
         "description": "otpTitle"
     },
+<<<<<<< HEAD
     "otpEnterCodeSentTo": "请输入验证码，已发送至 ",
+=======
+    "otpEnterCodeSentTo": "请输入发送至以下地址的验证码 ",
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@otpEnterCodeSentTo": {
         "description": "otpEnterCodeSentTo"
     },
@@ -106,7 +148,11 @@
     "@onboardingSlide1Title": {
         "description": "onboardingSlide1Title"
     },
+<<<<<<< HEAD
     "onboardingSlide1Body": "粘贴食谱链接，Pora 会整理所需食材，并去掉你已经有的东西。",
+=======
+    "onboardingSlide1Body": "粘贴食谱链接，Pora 会汇总所需食材，并去掉你已有的。",
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@onboardingSlide1Body": {
         "description": "onboardingSlide1Body"
     },
@@ -114,7 +160,11 @@
     "@onboardingSlide2Title": {
         "description": "onboardingSlide2Title"
     },
+<<<<<<< HEAD
     "onboardingSlide2Body": "一起添加商品，谁加了什么一目了然。你的伴侣可以在回家路上顺手买齐。",
+=======
+    "onboardingSlide2Body": "一起添加物品，谁加了什么一目了然。另一半在回家路上就能顺手买齐。",
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@onboardingSlide2Body": {
         "description": "onboardingSlide2Body"
     },
@@ -122,7 +172,11 @@
     "@onboardingSlide3Title": {
         "description": "onboardingSlide3Title"
     },
+<<<<<<< HEAD
     "onboardingSlide3Body": "Pora 会根据你的购买记录预测哪些东西快用完了，并提醒你把它们加入清单。",
+=======
+    "onboardingSlide3Body": "Pora 会根据你的购买记录预测哪些东西快用完了，一键即可下单。",
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@onboardingSlide3Body": {
         "description": "onboardingSlide3Body"
     },
@@ -166,7 +220,11 @@
     "@briefAlreadyContains": {
         "description": "briefAlreadyContains"
     },
+<<<<<<< HEAD
     "briefSubtitle": "选择商品，Pora 会在合适的时候提醒你。也可以跳过这一步。",
+=======
+    "briefSubtitle": "选择商品，Pora 会在合适的时候提醒你。此步骤可以跳过。",
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@briefSubtitle": {
         "description": "briefSubtitle"
     },
@@ -178,6 +236,65 @@
     "@briefNext": {
         "description": "briefNext"
     },
+<<<<<<< HEAD
+=======
+    "briefItemMilk": "牛奶",
+    "@briefItemMilk": {
+        "description": "briefItemMilk"
+    },
+    "briefItemBread": "面包",
+    "@briefItemBread": {
+        "description": "briefItemBread"
+    },
+    "briefItemEggs": "鸡蛋",
+    "@briefItemEggs": {
+        "description": "briefItemEggs"
+    },
+    "briefItemCoffee": "咖啡",
+    "@briefItemCoffee": {
+        "description": "briefItemCoffee"
+    },
+    "briefItemCheese": "奶酪",
+    "@briefItemCheese": {
+        "description": "briefItemCheese"
+    },
+    "briefItemBananas": "香蕉",
+    "@briefItemBananas": {
+        "description": "briefItemBananas"
+    },
+    "briefItemButter": "黄油",
+    "@briefItemButter": {
+        "description": "briefItemButter"
+    },
+    "briefItemWater": "水",
+    "@briefItemWater": {
+        "description": "briefItemWater"
+    },
+    "briefItemVegetables": "蔬菜",
+    "@briefItemVegetables": {
+        "description": "briefItemVegetables"
+    },
+    "briefItemTomatoes": "番茄",
+    "@briefItemTomatoes": {
+        "description": "briefItemTomatoes"
+    },
+    "briefItemPasta": "意面",
+    "@briefItemPasta": {
+        "description": "briefItemPasta"
+    },
+    "briefItemChicken": "鸡肉",
+    "@briefItemChicken": {
+        "description": "briefItemChicken"
+    },
+    "listTitle": "我们的清单",
+    "@listTitle": {
+        "description": "listTitle"
+    },
+    "listMembersCount": "2 人 · 8 件商品",
+    "@listMembersCount": {
+        "description": "listMembersCount"
+    },
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "listUrgent": "紧急",
     "@listUrgent": {
         "description": "listUrgent"
@@ -186,6 +303,33 @@
     "@listAdd": {
         "description": "listAdd"
     },
+<<<<<<< HEAD
+=======
+    "predictionsTitle": "Pora 来帮你！",
+    "@predictionsTitle": {
+        "description": "predictionsTitle"
+    },
+    "predictionsSubtitle": "即将用完 — 基于你的购买记录",
+    "@predictionsSubtitle": {
+        "description": "predictionsSubtitle"
+    },
+    "predictionTip": "小提示",
+    "@predictionTip": {
+        "description": "predictionTip"
+    },
+    "predictionsOrderTitle": "一键全部下单",
+    "@predictionsOrderTitle": {
+        "description": "predictionsOrderTitle"
+    },
+    "predictionsOrderSubtitle": "Samokat · 15 分钟送达",
+    "@predictionsOrderSubtitle": {
+        "description": "predictionsOrderSubtitle"
+    },
+    "predictionsOrderDiscount": "首单立减 15%",
+    "@predictionsOrderDiscount": {
+        "description": "predictionsOrderDiscount"
+    },
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "predictionsAddToList": "加入清单",
     "@predictionsAddToList": {
         "description": "predictionsAddToList"
@@ -194,6 +338,17 @@
     "@predictionsDismiss": {
         "description": "predictionsDismiss"
     },
+<<<<<<< HEAD
+=======
+    "itemDetailName": "牛奶",
+    "@itemDetailName": {
+        "description": "itemDetailName"
+    },
+    "itemDetailSubtitle": "2 L · 乳制品",
+    "@itemDetailSubtitle": {
+        "description": "itemDetailSubtitle"
+    },
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "itemDetailAddedBy": "添加者",
     "@itemDetailAddedBy": {
         "description": "itemDetailAddedBy"
@@ -210,6 +365,17 @@
     "@itemDetailRemind": {
         "description": "itemDetailRemind"
     },
+<<<<<<< HEAD
+=======
+    "itemDetailRemindEvery": "每 7 天",
+    "@itemDetailRemindEvery": {
+        "description": "itemDetailRemindEvery"
+    },
+    "itemDetailInsight": "你大约每 7 天买一次 · 上次购买是 6 天前。我很快会提醒你补货。",
+    "@itemDetailInsight": {
+        "description": "itemDetailInsight"
+    },
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "itemDetailMarkBought": "标记为已购买",
     "@itemDetailMarkBought": {
         "description": "itemDetailMarkBought"
@@ -218,10 +384,52 @@
     "@itemDetailDelete": {
         "description": "itemDetailDelete"
     },
+<<<<<<< HEAD
+=======
+    "addItemTitle": "添加商品",
+    "@addItemTitle": {
+        "description": "addItemTitle"
+    },
+    "addItemExampleValue": "牛油果",
+    "@addItemExampleValue": {
+        "description": "addItemExampleValue"
+    },
+    "addItemNameHint": "商品名称",
+    "@addItemNameHint": {
+        "description": "addItemNameHint"
+    },
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "addItemQuantity": "数量",
     "@addItemQuantity": {
         "description": "addItemQuantity"
     },
+<<<<<<< HEAD
+=======
+    "addItemSection": "分类",
+    "@addItemSection": {
+        "description": "addItemSection"
+    },
+    "addItemUrgent": "紧急",
+    "@addItemUrgent": {
+        "description": "addItemUrgent"
+    },
+    "addItemUrgentSubtitle": "今天就要买",
+    "@addItemUrgentSubtitle": {
+        "description": "addItemUrgentSubtitle"
+    },
+    "addItemRemind": "定期提醒",
+    "@addItemRemind": {
+        "description": "addItemRemind"
+    },
+    "addItemRemindEvery": "每 7 天",
+    "@addItemRemindEvery": {
+        "description": "addItemRemindEvery"
+    },
+    "addItemSubmit": "加入清单",
+    "@addItemSubmit": {
+        "description": "addItemSubmit"
+    },
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "settingsTitle": "设置",
     "@settingsTitle": {
         "description": "settingsTitle"
@@ -234,6 +442,21 @@
     "@settingsNotifications": {
         "description": "settingsNotifications"
     },
+<<<<<<< HEAD
+=======
+    "settingsDelivery": "配送",
+    "@settingsDelivery": {
+        "description": "settingsDelivery"
+    },
+    "settingsProAd": "Pora+ · 无广告",
+    "@settingsProAd": {
+        "description": "settingsProAd"
+    },
+    "settingsTryPill": "试用",
+    "@settingsTryPill": {
+        "description": "settingsTryPill"
+    },
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "settingsPrivacy": "隐私与数据",
     "@settingsPrivacy": {
         "description": "settingsPrivacy"
@@ -250,7 +473,11 @@
     "@settingsInvitePill": {
         "description": "settingsInvitePill"
     },
+<<<<<<< HEAD
     "householdInviteTitle": "邀请你的伴侣",
+=======
+    "householdInviteTitle": "邀请你的另一半",
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@householdInviteTitle": {
         "description": "householdInviteTitle"
     },
@@ -258,7 +485,11 @@
     "@householdCookTogether": {
         "description": "householdCookTogether"
     },
+<<<<<<< HEAD
     "householdInviteDescription": "两个人用 Pora 更方便。邀请你的伴侣，一起共享清单和提醒。",
+=======
+    "householdInviteDescription": "Pora 两个人用效果更好。邀请你的另一半，清单和提醒都会共享。",
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@householdInviteDescription": {
         "description": "householdInviteDescription"
     },
@@ -274,6 +505,7 @@
     "@householdConnectToFamily": {
         "description": "householdConnectToFamily"
     },
+<<<<<<< HEAD
     "householdInviteDescriptionWhenConnecting": "我们检测到了邀请码，如果识别有误，你也可以手动输入",
     "@householdInviteDescriptionWhenConnecting": {
         "description": "householdInviteDescriptionWhenConnecting"
@@ -282,6 +514,20 @@
     "@householdGotInvited": {
         "description": "householdGotInvited"
     },
+=======
+    "householdInviteDescriptionWhenConnecting": "我们识别到了邀请码，如果识别有误，你也可以手动输入",
+    "@householdInviteDescriptionWhenConnecting": {
+        "description": "householdInviteDescriptionWhenConnecting"
+    },
+    "householdGotInvited": "你收到了加入家庭的邀请",
+    "@householdGotInvited": {
+        "description": "householdGotInvited"
+    },
+    "householdWriteCode": "输入邀请码",
+    "@householdWriteCode": {
+        "description": "householdWriteCode"
+    },
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "householdDoLater": "我稍后再做",
     "@householdDoLater": {
         "description": "householdDoLater"
@@ -306,6 +552,61 @@
     "@notificationsReadAll": {
         "description": "notificationsReadAll"
     },
+<<<<<<< HEAD
+=======
+    "notificationsMilkTitle": "回家路上买点牛奶",
+    "@notificationsMilkTitle": {
+        "description": "notificationsMilkTitle"
+    },
+    "notificationsMilkBody": "牛奶没了 — Anna 10 分钟前标记的。",
+    "@notificationsMilkBody": {
+        "description": "notificationsMilkBody"
+    },
+    "notificationsMilkTime": "5 分钟前",
+    "@notificationsMilkTime": {
+        "description": "notificationsMilkTime"
+    },
+    "notificationsCoffeeTitle": "咖啡快用完了",
+    "@notificationsCoffeeTitle": {
+        "description": "notificationsCoffeeTitle"
+    },
+    "notificationsCoffeeBody": "你大约每 14 天买一次，已经过去 12 天了。",
+    "@notificationsCoffeeBody": {
+        "description": "notificationsCoffeeBody"
+    },
+    "notificationsPartnerAddedTitle": "Anna 添加了 2 件商品",
+    "@notificationsPartnerAddedTitle": {
+        "description": "notificationsPartnerAddedTitle"
+    },
+    "notificationsPartnerAddedBody": "香蕉和面包已加入共享清单。",
+    "@notificationsPartnerAddedBody": {
+        "description": "notificationsPartnerAddedBody"
+    },
+    "notificationsPartnerAddedTime": "今天 9:12",
+    "@notificationsPartnerAddedTime": {
+        "description": "notificationsPartnerAddedTime"
+    },
+    "notificationsPromoTitle": "Samokat 首单立减 15%",
+    "@notificationsPromoTitle": {
+        "description": "notificationsPromoTitle"
+    },
+    "notificationsPromoBody": "优惠还剩 6 天。",
+    "@notificationsPromoBody": {
+        "description": "notificationsPromoBody"
+    },
+    "notificationsPromoTime": "昨天",
+    "@notificationsPromoTime": {
+        "description": "notificationsPromoTime"
+    },
+    "notificationsOrderDeliveredTitle": "订单已送达",
+    "@notificationsOrderDeliveredTitle": {
+        "description": "notificationsOrderDeliveredTitle"
+    },
+    "notificationsOrderDeliveredBody": "8 件商品 · Samokat · ₽1,054",
+    "@notificationsOrderDeliveredBody": {
+        "description": "notificationsOrderDeliveredBody"
+    },
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "notificationsAddToListPill": "＋ 加入清单",
     "@notificationsAddToListPill": {
         "description": "notificationsAddToListPill"
@@ -314,7 +615,11 @@
     "@userCreateProfileTitle": {
         "description": "userCreateProfileTitle"
     },
+<<<<<<< HEAD
     "userCreateProfileSubtitle": "添加名字和照片，你的伴侣会在共享清单中看到。",
+=======
+    "userCreateProfileSubtitle": "添加名字和照片，你的另一半会在共享清单中看到。",
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@userCreateProfileSubtitle": {
         "description": "userCreateProfileSubtitle"
     },
@@ -330,6 +635,13 @@
     "@userCreateProfileNext": {
         "description": "userCreateProfileNext"
     },
+<<<<<<< HEAD
+=======
+    "searchTitle": "搜索",
+    "@searchTitle": {
+        "description": "searchTitle"
+    },
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "searchHint": "商品或食谱…",
     "@searchHint": {
         "description": "searchHint"
@@ -342,10 +654,113 @@
     "@insightsTitle": {
         "description": "insightsTitle"
     },
+<<<<<<< HEAD
     "recipeImportTitle": "从链接导入食谱",
     "@recipeImportTitle": {
         "description": "recipeImportTitle"
     },
+=======
+    "insightsTipKicker": "✨ PORA 提示",
+    "@insightsTipKicker": {
+        "description": "insightsTipKicker"
+    },
+    "insightsTipTitle": "你很爱吃卡邦尼意面！",
+    "@insightsTipTitle": {
+        "description": "insightsTipTitle"
+    },
+    "insightsTipBody": "口味相近 — 试试芝士通心粉吧。6 种食材中有 4 种你经常会买。",
+    "@insightsTipBody": {
+        "description": "insightsTipBody"
+    },
+    "insightsTipAction": "打开食谱 →",
+    "@insightsTipAction": {
+        "description": "insightsTipAction"
+    },
+    "insightsRunsOutMost": "最常用完",
+    "@insightsRunsOutMost": {
+        "description": "insightsRunsOutMost"
+    },
+    "insightsFavoriteCuisines": "常吃的菜系",
+    "@insightsFavoriteCuisines": {
+        "description": "insightsFavoriteCuisines"
+    },
+    "insightsCuisineItalian": "意大利菜",
+    "@insightsCuisineItalian": {
+        "description": "insightsCuisineItalian"
+    },
+    "insightsCuisinePasta": "意面",
+    "@insightsCuisinePasta": {
+        "description": "insightsCuisinePasta"
+    },
+    "insightsCuisineBreakfasts": "早餐",
+    "@insightsCuisineBreakfasts": {
+        "description": "insightsCuisineBreakfasts"
+    },
+    "insightsCuisineLight": "清淡",
+    "@insightsCuisineLight": {
+        "description": "insightsCuisineLight"
+    },
+    "orderTitle": "订单",
+    "@orderTitle": {
+        "description": "orderTitle"
+    },
+    "orderCart": "购物车",
+    "@orderCart": {
+        "description": "orderCart"
+    },
+    "orderWhenToDeliver": "配送时间",
+    "@orderWhenToDeliver": {
+        "description": "orderWhenToDeliver"
+    },
+    "orderCheckoutCta": "在 Samokat 下单 · {total}",
+    "@orderCheckoutCta": {
+        "placeholders": {
+            "total": {
+                "type": "String"
+            }
+        }
+    },
+    "orderSummaryGoods": "商品",
+    "@orderSummaryGoods": {
+        "description": "orderSummaryGoods"
+    },
+    "orderSummaryDiscount": "立减 15%",
+    "@orderSummaryDiscount": {
+        "description": "orderSummaryDiscount"
+    },
+    "orderSummaryDelivery": "配送",
+    "@orderSummaryDelivery": {
+        "description": "orderSummaryDelivery"
+    },
+    "orderSummaryFree": "免费",
+    "@orderSummaryFree": {
+        "description": "orderSummaryFree"
+    },
+    "orderSummaryTotal": "合计",
+    "@orderSummaryTotal": {
+        "description": "orderSummaryTotal"
+    },
+    "recipeImportTitle": "通过链接导入食谱",
+    "@recipeImportTitle": {
+        "description": "recipeImportTitle"
+    },
+    "recipePreviewTitle": "卡邦尼意面",
+    "@recipePreviewTitle": {
+        "description": "recipePreviewTitle"
+    },
+    "recipePreviewMeta": "eda.ru · 25 分钟 · 2 份",
+    "@recipePreviewMeta": {
+        "description": "recipePreviewMeta"
+    },
+    "recipePreviewFound": "找到 6 种食材",
+    "@recipePreviewFound": {
+        "description": "recipePreviewFound"
+    },
+    "recipeDedupBanner": "已移除 2 个重复项，避免与清单中已有的商品重复",
+    "@recipeDedupBanner": {
+        "description": "recipeDedupBanner"
+    },
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "recipeIngredients": "食材",
     "@recipeIngredients": {
         "description": "recipeIngredients"
@@ -380,10 +795,25 @@
     "@familiesTitle": {
         "description": "familiesTitle"
     },
+<<<<<<< HEAD
     "familiesSubtitle": "选择一个家庭以打开它的清单",
     "@familiesSubtitle": {
         "description": "familiesSubtitle"
     },
+=======
+    "familiesSubtitle": "选择一个家庭以打开其清单",
+    "@familiesSubtitle": {
+        "description": "familiesSubtitle"
+    },
+    "familiesCurrent": "当前",
+    "@familiesCurrent": {
+        "description": "familiesCurrent"
+    },
+    "familiesCreateOrJoin": "＋ 创建或加入",
+    "@familiesCreateOrJoin": {
+        "description": "familiesCreateOrJoin"
+    },
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "familiesCreateDialog": "给家庭起个什么名字？",
     "@familiesCreateDialog": {
         "description": "familiesCreateDialog"
@@ -569,7 +999,11 @@
     "@version": {
         "description": "version"
     },
+<<<<<<< HEAD
     "deleteItemTitle": "删除此商品？",
+=======
+    "deleteItemTitle": "删除商品？",
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@deleteItemTitle": {
         "description": "deleteItemTitle"
     },
@@ -585,7 +1019,11 @@
     "@delete": {
         "description": "delete"
     },
+<<<<<<< HEAD
     "returnToList": "返回清单",
+=======
+    "returnToList": "放回清单",
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@returnToList": {
         "description": "returnToList"
     },
@@ -597,10 +1035,21 @@
     "@notFound": {
         "description": "notFound"
     },
+<<<<<<< HEAD
     "recipeEmptyHint": "粘贴食谱链接并点击“解析”",
     "@recipeEmptyHint": {
         "description": "recipeEmptyHint"
     },
+=======
+    "recipeEmptyHint": "粘贴食谱链接，然后点击“解析”",
+    "@recipeEmptyHint": {
+        "description": "recipeEmptyHint"
+    },
+    "recipeDupMark": "已在清单中",
+    "@recipeDupMark": {
+        "description": "recipeDupMark"
+    },
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "done": "完成",
     "@done": {
         "description": "done"
@@ -719,11 +1168,19 @@
     "@briefSnackBar": {
         "description": "briefSnackBar"
     },
+<<<<<<< HEAD
     "noInternet": "无网络连接",
     "@noInternet": {
         "description": "noInternet"
     },
     "noInternetButLoadYouLocally": "无网络连接，将为你加载本地数据",
+=======
+    "noInternet": "没有网络连接",
+    "@noInternet": {
+        "description": "noInternet"
+    },
+    "noInternetButLoadYouLocally": "没有网络连接，但我们会为你加载本地数据",
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@groupDeletionTitle": {
         "description": "groupDeletionTitle"
     },
@@ -763,6 +1220,17 @@
     "@groupShared": {
         "description": "groupShared"
     },
+<<<<<<< HEAD
+=======
+    "noGroups": "还没有群组",
+    "@noGroups": {
+        "description": "noGroups"
+    },
+    "settingsChangeThemeIOSEasterEgg": "* 要更改主题，请前往 设置 > PORA > 主题\n* 在设置菜单中选择新主题\n* 点击应用设置中的“主题”，即可在浅色和深色模式之间切换",
+    "@settingsChangeThemeIOSEasterEgg": {
+        "description": "ios easter egg on advanced settings when tapped few times"
+    },
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "tutorialTitle": "使用方法",
     "@tutorialTitle": {
         "description": "tutorialTitle"
@@ -779,11 +1247,19 @@
     "@tutorialDone": {
         "description": "tutorialDone"
     },
+<<<<<<< HEAD
     "tutorialInviteTitle": "邀请你的家人",
     "@tutorialInviteTitle": {
         "description": "tutorialInviteTitle"
     },
     "tutorialInviteBody": "将群组向右滑动 → 邀请。你的伴侣会看到同一份清单。",
+=======
+    "tutorialInviteTitle": "邀请你的亲友",
+    "@tutorialInviteTitle": {
+        "description": "tutorialInviteTitle"
+    },
+    "tutorialInviteBody": "将群组向右滑动 → 邀请。你的另一半会看到同一份清单。",
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@tutorialInviteBody": {
         "description": "tutorialInviteBody"
     },
@@ -795,11 +1271,19 @@
     "@tutorialAddBody": {
         "description": "tutorialAddBody"
     },
+<<<<<<< HEAD
     "tutorialEditTitle": "编辑与勾选",
     "@tutorialEditTitle": {
         "description": "tutorialEditTitle"
     },
     "tutorialEditBody": "点击复选框表示已购买；点击该行可查看详情和编辑。",
+=======
+    "tutorialEditTitle": "编辑和勾选",
+    "@tutorialEditTitle": {
+        "description": "tutorialEditTitle"
+    },
+    "tutorialEditBody": "点击复选框即标记为已购买；点击该行可查看详情并编辑。",
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@tutorialEditBody": {
         "description": "tutorialEditBody"
     },
@@ -823,7 +1307,11 @@
     "@tutorialSettingsTitle": {
         "description": "tutorialSettingsTitle"
     },
+<<<<<<< HEAD
     "tutorialSettingsBody": "主题、语言、通知、确认，都在 个人资料 → 高级设置 中。",
+=======
+    "tutorialSettingsBody": "主题、语言、通知、确认 — 个人资料 → 高级设置。",
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@tutorialSettingsBody": {
         "description": "tutorialSettingsBody"
     },
@@ -891,7 +1379,11 @@
     "@tutorialConnectTitle": {
         "description": "tutorialConnectTitle"
     },
+<<<<<<< HEAD
     "tutorialConnectBody": "伴侣发来链接或邀请码，粘贴后你就加入共享清单了。",
+=======
+    "tutorialConnectBody": "另一半发来链接或邀请码，粘贴后即可加入共享清单。",
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@tutorialConnectBody": {
         "description": "tutorialConnectBody"
     },
@@ -899,6 +1391,7 @@
     "@tutorialNotifyTitle": {
         "description": "tutorialNotifyTitle"
     },
+<<<<<<< HEAD
     "tutorialNotifyBody": "在商品上点击「!」，你的伴侣会收到「马上买」的推送，不用再打电话。",
     "@tutorialNotifyBody": {
         "description": "tutorialNotifyBody"
@@ -908,6 +1401,17 @@
         "description": "tutorialOutroTitle"
     },
     "tutorialOutroBody": "随便点、随便滑，弄错也没关系，应用几乎都能包容。",
+=======
+    "tutorialNotifyBody": "点击商品上的「！」— 你的另一半会收到「马上买」的推送，不用再打电话。",
+    "@tutorialNotifyBody": {
+        "description": "tutorialNotifyBody"
+    },
+    "tutorialOutroTitle": "剩下的你自己就能摸索出来",
+    "@tutorialOutroTitle": {
+        "description": "tutorialOutroTitle"
+    },
+    "tutorialOutroBody": "随便点、随便滑、出错也没关系 — 这个应用几乎什么都能包容。",
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@tutorialOutroBody": {
         "description": "tutorialOutroBody"
     },
@@ -923,11 +1427,19 @@
     "@tutorialSamplePushBody": {
         "description": "sample push body in notify animation"
     },
+<<<<<<< HEAD
     "tutorialSampleInviteMessage": "加入清单吧",
     "@tutorialSampleInviteMessage": {
         "description": "sample chat message text before the invite link"
     },
     "supportMessage": "联系客服",
+=======
+    "tutorialSampleInviteMessage": "加入清单",
+    "@tutorialSampleInviteMessage": {
+        "description": "sample chat message text before the invite link"
+    },
+    "supportMessage": "发送邮件给客服",
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@supportMessage": {
         "description": "Email support"
     },
@@ -939,7 +1451,11 @@
     "@supportMessageBottomSheetSendButton": {
         "description": "Send button text in support message bottom bar"
     },
+<<<<<<< HEAD
     "supportMessageBottomSheetUnderButtonText": "我们会尽快通过邮件或应用内消息回复你！",
+=======
+    "supportMessageBottomSheetUnderButtonText": "我们会尽快回复，回复将发送到你的 Gmail 或应用内！",
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@supportMessageBottomSheetUnderButtonText": {
         "description": "supportMessageBottomSheetUnderButtonText"
     },
@@ -951,7 +1467,11 @@
     "@predictionsGreeting": {
         "description": "predictions main greeting"
     },
+<<<<<<< HEAD
     "predictionsGreetingSub": "根据你的购买记录生成的智能提示",
+=======
+    "predictionsGreetingSub": "根据你的购买记录给出智能建议",
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@predictionsGreetingSub": {
         "description": "predictions greeting subtitle"
     },
@@ -959,14 +1479,33 @@
     "@predictionsSectionSoon": {
         "description": "section title"
     },
+<<<<<<< HEAD
+=======
+    "predictionsSectionOften": "你经常购买",
+    "@predictionsSectionOften": {
+        "description": "section title"
+    },
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "predictionsSectionAiSuggests": "AI 推荐",
     "@predictionsSectionAiSuggests": {
         "description": "section title"
     },
+<<<<<<< HEAD
+=======
+    "predictionsAiSuggestionsTitle": "为你推荐的商品和食谱",
+    "@predictionsAiSuggestionsTitle": {
+        "description": "AI suggestions card title"
+    },
+    "predictionsAiSuggestionsTopic": "你的偏好和购买记录",
+    "@predictionsAiSuggestionsTopic": {
+        "description": "AI suggestions topic"
+    },
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "refresh": "刷新",
     "@refresh": {
         "description": "refresh action"
     },
+<<<<<<< HEAD
     "kpiWeek": "商品",
     "@kpiWeek": {
         "description": "kpi label"
@@ -1004,6 +1543,53 @@
         "description": "fallback tip"
     },
     "fallbackTip7": "冷冻过的肉更容易切薄：切之前放冷冻室 20 分钟。",
+=======
+    "predictionsOftenEmpty": "数据还不够",
+    "@predictionsOftenEmpty": {
+        "description": "empty frequent products"
+    },
+    "predictionsAskPora": "询问 PORA",
+    "@predictionsAskPora": {
+        "description": "FAB label"
+    },
+    "kpiWeek": "件商品/周",
+    "@kpiWeek": {
+        "description": "kpi label"
+    },
+    "kpiRecipes": "本月食谱",
+    "@kpiRecipes": {
+        "description": "kpi label"
+    },
+    "kpiDaysToRun": "天后需补货",
+    "@kpiDaysToRun": {
+        "description": "kpi label"
+    },
+    "fallbackTip1": "像插花一样保存香草：放进装水的杯子里，再罩上袋子，能保鲜 2 周。",
+    "@fallbackTip1": {
+        "description": "fallback tip"
+    },
+    "fallbackTip2": "盐要最后加进面团，因为盐会抑制酵母发酵。",
+    "@fallbackTip2": {
+        "description": "fallback tip"
+    },
+    "fallbackTip3": "切洋葱前先放进冷冻室冻 15 分钟，就不会辣眼睛了。",
+    "@fallbackTip3": {
+        "description": "fallback tip"
+    },
+    "fallbackTip4": "汤太咸了？放一个生土豆煮 10 分钟，就能吸走多余的盐分。",
+    "@fallbackTip4": {
+        "description": "fallback tip"
+    },
+    "fallbackTip5": "把鸡蛋放进水里检验新鲜度：沉底的新鲜，浮起来的就该扔了。",
+    "@fallbackTip5": {
+        "description": "fallback tip"
+    },
+    "fallbackTip6": "用加盖的平底锅加热披萨，饼底会重新变脆。",
+    "@fallbackTip6": {
+        "description": "fallback tip"
+    },
+    "fallbackTip7": "冷冻过的肉更容易切薄：切之前放进冷冻室 20 分钟。",
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@fallbackTip7": {
         "description": "fallback tip"
     },
@@ -1015,11 +1601,19 @@
     "@fallbackTip9": {
         "description": "fallback tip"
     },
+<<<<<<< HEAD
     "fallbackTip10": "面包放冷冻室可以保存一个月，烤的时候无需解冻，直接烤即可。",
     "@fallbackTip10": {
         "description": "fallback tip"
     },
     "aiTipOfDayLabel": "每日小贴士",
+=======
+    "fallbackTip10": "面包放冷冻室可保存一个月，烤面包时直接从冷冻状态烤即可。",
+    "@fallbackTip10": {
+        "description": "fallback tip"
+    },
+    "aiTipOfDayLabel": "今日提示",
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@aiTipOfDayLabel": {
         "description": "kicker"
     },
@@ -1031,7 +1625,11 @@
     "@aiCtaTitle": {
         "description": "CTA title"
     },
+<<<<<<< HEAD
     "aiCtaSubtitle": "食谱 · 食材替代 · 小贴士",
+=======
+    "aiCtaSubtitle": "食谱 · 替代 · 技巧",
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@aiCtaSubtitle": {
         "description": "CTA subtitle"
     },
@@ -1071,7 +1669,11 @@
     "@chatSample5": {
         "description": "sample question"
     },
+<<<<<<< HEAD
     "chatSample6": "帮我列一份 3 种简单早餐的购物清单",
+=======
+    "chatSample6": "为 3 份简单早餐列一个购物清单",
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@chatSample6": {
         "description": "sample question"
     },
@@ -1079,11 +1681,19 @@
     "@chatSample7": {
         "description": "sample question"
     },
+<<<<<<< HEAD
     "chatSample8": "熟米饭在冰箱里能放多久？",
     "@chatSample8": {
         "description": "sample question"
     },
     "chatSample9": "推荐一份高蛋白的素食晚餐",
+=======
+    "chatSample8": "煮熟的米饭能在冰箱里放多久？",
+    "@chatSample8": {
+        "description": "sample question"
+    },
+    "chatSample9": "推荐一份高蛋白素食晚餐",
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@chatSample9": {
         "description": "sample question"
     },
@@ -1091,6 +1701,7 @@
     "@chatSample10": {
         "description": "sample question"
     },
+<<<<<<< HEAD
     "chatSample11": "用我现有的食材安排三顿晚餐",
     "@chatSample11": {
         "description": "sample question"
@@ -1104,6 +1715,21 @@
         "description": "sample question"
     },
     "chatSample14": "怎样让这顿饭更省钱？",
+=======
+    "chatSample11": "用我现有的食材规划三顿晚餐",
+    "@chatSample11": {
+        "description": "sample question"
+    },
+    "chatSample12": "剩菜在 15 分钟内能做什么？",
+    "@chatSample12": {
+        "description": "sample question"
+    },
+    "chatSample13": "根据我的清单推荐一道不含过敏原的食谱",
+    "@chatSample13": {
+        "description": "sample question"
+    },
+    "chatSample14": "怎样让这道菜更省钱？",
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@chatSample14": {
         "description": "sample question"
     },
@@ -1115,6 +1741,17 @@
     "@chatInputHint": {
         "description": "chat input placeholder"
     },
+<<<<<<< HEAD
+=======
+    "aiModelBadge": "由 OpenRouter 提供支持 · ling-3.0-flash",
+    "@aiModelBadge": {
+        "description": "model badge"
+    },
+    "seeAll": "查看全部",
+    "@seeAll": {
+        "description": "see all link"
+    },
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "tipTopicHerbs": "香草",
     "@tipTopicHerbs": {
         "description": "predefined tip topic"
@@ -1167,7 +1804,11 @@
     "@tipTopicsSectionTitle": {
         "description": "settings section title"
     },
+<<<<<<< HEAD
     "tipTopicsSectionDescription": "选择小贴士的主题范围",
+=======
+    "tipTopicsSectionDescription": "选择提示内容来自哪些主题",
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@tipTopicsSectionDescription": {
         "description": "settings section description"
     },
@@ -1183,6 +1824,7 @@
     "@tipTopicsPredefinedLabel": {
         "description": "predefined topics label"
     },
+<<<<<<< HEAD
     "tipTopicsEmpty": "未选择主题，将显示通用小贴士",
     "@tipTopicsEmpty": {
         "description": "warning when no topics selected"
@@ -1192,6 +1834,17 @@
         "description": "champion card kicker"
     },
     "insightsChampionSubtitle": "已购买 {count} 次",
+=======
+    "tipTopicsEmpty": "未选择主题 — 将显示通用提示",
+    "@tipTopicsEmpty": {
+        "description": "warning when no topics selected"
+    },
+    "insightsChampionKicker": "本月冠军",
+    "@insightsChampionKicker": {
+        "description": "champion card kicker"
+    },
+    "insightsChampionSubtitle": "本月购买了 {count} 次",
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@insightsChampionSubtitle": {
         "description": "champion card subtitle",
         "placeholders": {
@@ -1209,7 +1862,11 @@
             }
         }
     },
+<<<<<<< HEAD
     "insightsStreakSubtitle": "状态正佳，继续保持",
+=======
+    "insightsStreakSubtitle": "保持得很好 — 继续加油",
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@insightsStreakSubtitle": {
         "description": "streak card subtitle"
     },
@@ -1230,7 +1887,15 @@
     "@insightsStatsProducts": {
         "description": "kpi label"
     },
+<<<<<<< HEAD
     "insightsEmpty": "暂无数据，先添加一些商品吧",
+=======
+    "insightsStatsLoginsWeek": "本周登录次数",
+    "@insightsStatsLoginsWeek": {
+        "description": "kpi label"
+    },
+    "insightsEmpty": "暂无数据 — 开始添加商品吧",
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@insightsEmpty": {
         "description": "empty state on insights"
     },
@@ -1274,7 +1939,11 @@
     "@notificationsEmptyTitle": {
         "description": "empty state title"
     },
+<<<<<<< HEAD
     "notificationsEmptyBody": "新通知会显示在这里",
+=======
+    "notificationsEmptyBody": "新通知将显示在这里",
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@notificationsEmptyBody": {
         "description": "empty state body"
     },
@@ -1282,7 +1951,24 @@
     "@recipeCreateListCta": {
         "description": "recipe cta"
     },
+<<<<<<< HEAD
     "offlineWriteBlocked": "无网络，此更改不会保存",
+=======
+    "recipeDupForceMark": "仍会添加",
+    "@recipeDupForceMark": {
+        "description": "dup pill when user unchecks flag"
+    },
+    "recipeDedupBannerMany": "将跳过 {n} 个重复项 — 取消勾选可强制添加",
+    "@recipeDedupBannerMany": {
+        "description": "dedup banner",
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "offlineWriteBlocked": "无网络 — 更改不会被保存",
+>>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@offlineWriteBlocked": {
         "description": "snackbar when write attempted offline"
     },
