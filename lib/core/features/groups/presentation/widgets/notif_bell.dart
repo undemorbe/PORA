@@ -21,6 +21,7 @@ class NotifBell extends StatelessWidget {
         icon: PhosphorIconsRegular.bell,
         iconColor: PoraColors.primary,
         badgeCount: store.unreadCount,
+        glass: true,
         onTap: onTap,
       ),
     );

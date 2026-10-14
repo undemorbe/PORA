@@ -14,6 +14,11 @@ migrate_working_dir/
 android/app/google-services.json
 ios/Runner/GoogleService-Info.plist
 /lib/core/features/ai_pora/
+.claude
+tool/
+scripts/
+.opencode/
+docs/
 # IntelliJ related
 *.iml
 *.ipr
@@ -58,3 +63,13 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# tgrep trigram index
+.tgrep/
+
+# Fastlane / Bundler (android/)
+android/vendor/
+android/.bundle/
+android/fastlane/report.xml
+android/fastlane/README.md
+android/app/upload-keystore.jks

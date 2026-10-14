@@ -58,7 +58,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  fake_async: ^1.3.3 # детерминированные таймеры (debounce UsageTracker)
   golden_toolkit: ^0.15.0 # loadAppFonts для golden/widget-тестов
+  flutter_launcher_icons: ^0.14.4 # генерация иконок (adaptive + iOS dark/tinted)
   flutter_lints: ^6.0.0
   build_runner: ^2.15.0
   auto_route_generator: ^10.5.0
@@ -87,3 +89,15 @@ flutter:
                 weight: 700
               - asset: assets/fonts/Inter_18pt-ExtraBold.ttf
                 weight: 800
+
+flutter_launcher_icons:
+  image_path: "assets/icon/icon_full.png"
+  android: "ic_launcher"
+  min_sdk_android: 21
+  adaptive_icon_background: "#E07A5F"
+  adaptive_icon_foreground: "assets/icon/icon_fg.png"
+  adaptive_icon_monochrome: "assets/icon/icon_mono.png"
+  ios: true
+  remove_alpha_ios: true
+  image_path_ios_dark_transparent: "assets/icon/icon_dark.png"
+  image_path_ios_tinted_grayscale: "assets/icon/icon_tinted.png"

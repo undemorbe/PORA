@@ -170,143 +170,158 @@ class _GroupsPageState extends State<GroupsPage> {
               child: RefreshIndicator.adaptive(
                 onRefresh: store.load,
                 child: Column(
-                children: [
-                  Observer(
-                    builder: (_) => AnimatedSize(
-                      duration: const Duration(milliseconds: 220),
-                      child: store.usingCache
-                          ? Container(
-                              margin: const EdgeInsets.only(
-                                bottom: PoraSpacing.sm,
-                              ),
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: PoraSpacing.md,
-                                vertical: 8,
-                              ),
-                              decoration: BoxDecoration(
-                                color: PoraColors.primary.withValues(
-                                  alpha: 0.1,
+                  children: [
+                    Observer(
+                      builder: (_) => AnimatedSize(
+                        duration: const Duration(milliseconds: 220),
+                        child: store.usingCache
+                            ? Container(
+                                margin: const EdgeInsets.only(
+                                  bottom: PoraSpacing.sm,
                                 ),
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: PoraSpacing.md,
+                                  vertical: 8,
+                                ),
+                                decoration: BoxDecoration(
                                   color: PoraColors.primary.withValues(
-                                    alpha: 0.4,
+                                    alpha: 0.1,
                                   ),
-                                  width: 1,
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(
+                                    color: PoraColors.primary.withValues(
+                                      alpha: 0.4,
+                                    ),
+                                    width: 1,
+                                  ),
                                 ),
-                              ),
-                              child: Row(
-                                children: [
-                                  const Icon(
-                                    PhosphorIconsRegular.cloudSlash,
-                                    size: 14,
-                                    color: PoraColors.primary,
-                                  ),
-                                  const SizedBox(width: 6),
-                                  Expanded(
-                                    child: Text(
-                                      l.offlineReadBanner,
-                                      style: PoraText.small.copyWith(
-                                        color: PoraColors.primaryDark,
-                                        fontWeight: FontWeight.w600,
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      PhosphorIconsRegular.cloudSlash,
+                                      size: 14,
+                                      color: PoraColors.primary,
+                                    ),
+                                    const SizedBox(width: 6),
+                                    Expanded(
+                                      child: Text(
+                                        l.offlineReadBanner,
+                                        style: PoraText.small.copyWith(
+                                          color: PoraColors.primaryDark,
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            )
-                          : const SizedBox.shrink(),
+                                  ],
+                                ),
+                              )
+                            : const SizedBox.shrink(),
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: PoraSpacing.lg),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Column(
-                          children: [
-                            Text(l.groupsTitle, style: PoraText.title),
-                            const SizedBox(height: 6),
-                            Text(
-                              l.groupsSubtitle,
-                              style: PoraText.caption.copyWith(
-                                color: context.colors.textSubtle,
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: PoraSpacing.lg),
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Column(
+                            children: [
+                              Text(l.groupsTitle, style: PoraText.title),
+                              const SizedBox(height: 6),
+                              Text(
+                                l.groupsSubtitle,
+                                style: PoraText.caption.copyWith(
+                                  color: context.colors.textSubtle,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                              textAlign: TextAlign.center,
+                            ],
+                          ),
+                          Positioned(
+                            left: 0,
+                            top: 0,
+                            child: ViewModeToggle(
+                              isGrid: _isGrid,
+                              onTap: _toggleViewMode,
                             ),
-                          ],
-                        ),
-                        Positioned(
-                          left: 0,
-                          top: 0,
-                          child: ViewModeToggle(
-                            isGrid: _isGrid,
-                            onTap: _toggleViewMode,
                           ),
-                        ),
-                        Positioned(
-                          right: 0,
-                          top: 0,
-                          child: NotifBell(
-                            onTap: () =>
-                                context.router.push(const NotificationsRoute()),
+                          Positioned(
+                            right: 0,
+                            top: 0,
+                            child: NotifBell(
+                              onTap: () => context.router.push(
+                                const NotificationsRoute(),
+                              ),
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: Observer(
-                      builder: (context) {
-                        if (store.isLoading && store.groups.isEmpty) {
-                          return const GroupsLoading();
-                        }
-                        if (store.errorMessage != null &&
-                            store.groups.isEmpty) {
-                          return GroupsErrorState(
-                            message: store.errorMessage,
-                            onRetry: store.load,
+                    Expanded(
+                      child: Observer(
+                        builder: (context) {
+                          if (store.isLoading && store.groups.isEmpty) {
+                            return const GroupsLoading();
+                          }
+                          if (store.errorMessage != null &&
+                              store.groups.isEmpty) {
+                            return GroupsErrorState(
+                              message: store.errorMessage,
+                              onRetry: store.load,
+                            );
+                          }
+                          if (store.groups.isEmpty) {
+                            return GroupsEmptyState(
+                              onCreate: () =>
+                                  showCreateGroupSheet(context, store: store),
+                            );
+                          }
+                          return AnimatedSwitcher(
+                            duration: const Duration(milliseconds: 260),
+                            // По умолчанию Stack центрирует контент по вертикали —
+                            // выравниваем по верху.
+                            layoutBuilder: (currentChild, previousChildren) =>
+                                Stack(
+                                  alignment: Alignment.topCenter,
+                                  children: [
+                                    ...previousChildren,
+                                    ?currentChild,
+                                  ],
+                                ),
+                            child: _isGrid
+                                ? _buildGrid(context)
+                                : _buildList(context),
                           );
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: PoraSpacing.sm),
+                    PoraOutlineButton(
+                      label: l.groupConnect,
+                      onPressed: () async {
+                        if (!await ConnectivityGuard.checkWrite(context)) {
+                          return;
                         }
-                        if (store.groups.isEmpty) {
-                          return GroupsEmptyState(
-                            onCreate: () =>
-                                showCreateGroupSheet(context, store: store),
-                          );
-                        }
-                        return AnimatedSwitcher(
-                          duration: const Duration(milliseconds: 260),
-                          child: _isGrid
-                              ? _buildGrid(context)
-                              : _buildList(context),
+                        if (!context.mounted) return;
+                        context.router.push(
+                          InvitationConnectRoute(linkCode: '8QwR...'),
                         );
                       },
                     ),
-                  ),
-                  const SizedBox(height: PoraSpacing.sm),
-                  PoraOutlineButton(
-                    label: l.groupConnect,
-                    onPressed: () async {
-                      if (!await ConnectivityGuard.checkWrite(context)) return;
-                      if (!context.mounted) return;
-                      context.router.push(
-                        InvitationConnectRoute(linkCode: '8QwR...'),
-                      );
-                    },
-                  ),
-                  // const SizedBox(height: PoraSpacing.sm),
-                  // const PoraCtaCard(),
-                  const SizedBox(height: PoraSpacing.sm),
-                  PoraPrimaryButton(
-                    label: l.groupCreate,
-                    onPressed: () async {
-                      if (!await ConnectivityGuard.checkWrite(context)) return;
-                      if (!context.mounted) return;
-                      showCreateGroupSheet(context, store: store);
-                    },
-                  ),
-                  const SizedBox(height: PoraSpacing.md),
-                ],
+                    // const SizedBox(height: PoraSpacing.sm),
+                    // const PoraCtaCard(),
+                    const SizedBox(height: PoraSpacing.sm),
+                    PoraPrimaryButton(
+                      label: l.groupCreate,
+                      onPressed: () async {
+                        if (!await ConnectivityGuard.checkWrite(context)) {
+                          return;
+                        }
+                        if (!context.mounted) return;
+                        showCreateGroupSheet(context, store: store);
+                      },
+                    ),
+                    const SizedBox(height: PoraSpacing.md),
+                  ],
                 ),
               ),
             ),
@@ -316,4 +331,3 @@ class _GroupsPageState extends State<GroupsPage> {
     );
   }
 }
-

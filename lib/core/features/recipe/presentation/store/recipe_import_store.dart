@@ -10,6 +10,7 @@ import 'package:pora/core/features/user/domain/usecase/user/get_user.dart';
 import 'package:pora/core/features/recipe/domain/entity/recipe.dart';
 import 'package:pora/core/features/recipe/domain/entity/recipe_ingredient.dart';
 import 'package:pora/core/features/recipe/domain/usecase/parse_recipe_from_url.dart';
+import 'package:pora/core/internal/analytics/analytics_service.dart';
 part 'recipe_import_store.g.dart';
 
 class RecipeImportStore = _RecipeImportStoreBase with _$RecipeImportStore;
@@ -79,6 +80,10 @@ abstract class _RecipeImportStoreBase with Store {
     }
 
     recipe = result.right;
+    final host = Uri.tryParse(url.trim())?.host ?? '';
+    AnalyticsService.instance.logRecipeImport(
+      source: host.contains('youtu') ? 'youtube' : 'web',
+    );
     rows = ObservableList<RecipeRow>.of(
       result.right.ingredients.map(
         (ingredient) => RecipeRow(ingredient: ingredient),

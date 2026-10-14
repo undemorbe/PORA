@@ -1,0 +1,3 @@
+package_name("com.boris.pora")
+# Google Play service account (JSON) — только для lane `play_internal`.
+json_key_data_raw(ENV["PLAY_STORE_JSON_KEY"]) if ENV["PLAY_STORE_JSON_KEY"].to_s != ""

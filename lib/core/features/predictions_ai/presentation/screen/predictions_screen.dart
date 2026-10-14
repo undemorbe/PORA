@@ -3,8 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
+import 'package:pora/core/features/add_item/domain/add_item_defaults.dart';
 import 'package:pora/core/features/insights/domain/entity/popular_product.dart';
 import 'package:pora/core/features/insights/presentation/store/statistics_store.dart';
+import 'package:pora/core/features/item_detail/domain/usecase/add_item.dart';
+import 'package:pora/core/features/lists/presentation/widgets/list_picker_sheet.dart';
+import 'package:pora/core/internal/network/connectivity/connectivity_guard.dart';
+import 'package:pora/core/internal/widgets/pora_snackbar.dart';
 import 'package:pora/core/features/predictions_ai/presentation/widgets/ai_tip_of_day_card.dart';
 import 'package:pora/core/internal/widgets/fade_slide_in.dart';
 import 'package:pora/core/features/predictions_ai/presentation/widgets/kpi_row.dart';
@@ -77,13 +82,13 @@ class _PredictionsPageState extends State<PredictionsPage> {
                         label: l.kpiWeek,
                       ),
                       KpiItem(
-                        icon: PhosphorIconsRegular.cookingPot,
+                        icon: PhosphorIconsRegular.repeat,
                         number: '${_store.popularProducts.length}',
                         label: l.kpiRecipes,
                       ),
                       KpiItem(
-                        icon: PhosphorIconsRegular.calendarBlank,
-                        number: '${_soonProducts.length}',
+                        icon: PhosphorIconsRegular.warningCircle,
+                        number: '$_runningOutCount',
                         label: l.kpiDaysToRun,
                       ),
                     ],
@@ -105,6 +110,7 @@ class _PredictionsPageState extends State<PredictionsPage> {
                   isLoading: _store.isPopularLoading,
                   errorMessage: _store.popularError,
                   onDismiss: _dismiss,
+                  onAdd: _addToList,
                 ),
                 // const SizedBox(height: PoraSpacing.xl),
                 // FadeSlideIn(
@@ -140,7 +146,36 @@ class _PredictionsPageState extends State<PredictionsPage> {
     return products.take(3).toList();
   }
 
+  /// Сколько товаров реально «скоро закончатся» (не капнутый до 3 список).
+  int get _runningOutCount => _store.popularProducts
+      .where((p) => !_dismissed.contains(p.name) && p.currentDay > 0)
+      .length;
+
   void _dismiss(String name) {
     setState(() => _dismissed.add(name));
+  }
+
+  /// «＋ В список»: выбор списка → добавление товара с дефолтами.
+  Future<void> _addToList(PopularProductEntity product) async {
+    if (!await ConnectivityGuard.checkWrite(context)) return;
+    if (!mounted) return;
+    final lid = await showListPickerSheet(context);
+    if (lid == null || !mounted) return;
+
+    final res = await GetIt.I<AddItemUseCase>().call(
+      listId: lid,
+      name: product.name,
+      section: AddItemDefaults.defaultSection,
+      quantity: 1,
+      unit: AddItemDefaults.defaultUnit,
+      priority: 1,
+      urgent: false,
+      remindEveryDays: null,
+    );
+    if (!mounted) return;
+    res.fold((f) => PoraSnackbar.show(context, message: f.message), (_) {
+      PoraSnackbar.show(context, message: context.l10n.predictionsAdded);
+      _dismiss(product.name);
+    });
   }
 }

@@ -17,12 +17,14 @@ class SoonProducts extends StatelessWidget {
     required this.isLoading,
     required this.errorMessage,
     required this.onDismiss,
+    required this.onAdd,
   });
 
   final List<PopularProductEntity> products;
   final bool isLoading;
   final String? errorMessage;
   final ValueChanged<String> onDismiss;
+  final ValueChanged<PopularProductEntity> onAdd;
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +56,7 @@ class SoonProducts extends StatelessWidget {
                 child: PredictionCard(
                   prediction: _prediction(context, products[index]),
                   tileColor: _tileColor(index),
+                  onAdd: () => onAdd(products[index]),
                   onDismiss: () => onDismiss(products[index].name),
                 ),
               ),

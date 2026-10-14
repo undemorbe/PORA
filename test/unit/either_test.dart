@@ -33,7 +33,10 @@ void main() {
     });
 
     test('mapLeft transforms Left only', () {
-      expect((Left<String, int>('e')).mapLeft((e) => e.toUpperCase()).left, 'E');
+      expect(
+        (Left<String, int>('e')).mapLeft((e) => e.toUpperCase()).left,
+        'E',
+      );
       expect((Right<String, int>(1)).mapLeft((e) => 'x').right, 1);
     });
 

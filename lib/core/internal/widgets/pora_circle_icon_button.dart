@@ -39,7 +39,10 @@ class PoraCircleIconButton extends StatelessWidget {
     final content = badgeCount != null && badgeCount! > 0
         ? Stack(
             alignment: Alignment.center,
-            children: [iconWidget, _Badge(count: badgeCount!)],
+            children: [
+              iconWidget,
+              _Badge(count: badgeCount!),
+            ],
           )
         : iconWidget;
 

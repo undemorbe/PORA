@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:mobx/mobx.dart';
 import 'package:pora/core/internal/analytics/analytics_service.dart';
+import 'package:pora/core/internal/analytics/usage/usage_tracker.dart';
 import 'package:pora/core/features/settings/domain/entity/message_entity.dart';
 import 'package:pora/core/features/settings/domain/usecase/send_support_msg.dart';
 import 'package:pora/core/features/user/domain/entity/user/user_entity.dart';
@@ -70,6 +71,7 @@ abstract class _SettingsStoreBase with Store {
     await tokensStore.clearTokens();
     // Чистим весь offline-cache — новый юзер не должен видеть чужие снапшоты.
     await HiveJsonCache.clear();
+    await UsageTracker.instance.clear();
     GetIt.I<AuthState>().setUnauthenticated();
   }
 

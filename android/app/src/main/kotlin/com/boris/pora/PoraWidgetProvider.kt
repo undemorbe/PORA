@@ -3,7 +3,7 @@ package com.boris.pora
 import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.widget.RemoteViews
-import es.antonborri.home_widget.HomeWidgetPlugin
+import es.antonborri.home_widget.HomeWidgetLaunchIntent
 import es.antonborri.home_widget.HomeWidgetProvider
 
 /**
@@ -37,8 +37,9 @@ class PoraWidgetProvider : HomeWidgetProvider() {
             )
 
             // Тап по виджету открывает приложение.
-            val pendingIntent = HomeWidgetPlugin.getBackgroundIntent(
+            val pendingIntent = HomeWidgetLaunchIntent.getActivity(
                 context,
+                MainActivity::class.java,
                 android.net.Uri.parse("pora://widget")
             )
             views.setOnClickPendingIntent(R.id.widget_root, pendingIntent)

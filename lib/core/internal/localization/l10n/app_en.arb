@@ -47,7 +47,7 @@
     "@authSignInWithPhone": {
         "description": "The sign in with Phone button text"
     },
-    "authPrivatePolicy": "By continuing, you agree to the\\nTerms and Privacy Policy",
+    "authPrivatePolicy": "By continuing, you agree to the\nTerms and Privacy Policy",
     "@authPrivatePolicy": {
         "description": "The private policy link text"
     },
@@ -136,7 +136,7 @@
             }
         }
     },
-    "onboardingSlide1Title": "Recipe → list\\nin seconds",
+    "onboardingSlide1Title": "Recipe → list\nin seconds",
     "@onboardingSlide1Title": {
         "description": "onboardingSlide1Title"
     },
@@ -144,7 +144,7 @@
     "@onboardingSlide1Body": {
         "description": "onboardingSlide1Body"
     },
-    "onboardingSlide2Title": "One list\\nfor two",
+    "onboardingSlide2Title": "One list\nfor two",
     "@onboardingSlide2Title": {
         "description": "onboardingSlide2Title"
     },
@@ -152,7 +152,7 @@
     "@onboardingSlide2Body": {
         "description": "onboardingSlide2Body"
     },
-    "onboardingSlide3Title": "Pora knows\\nwhen it's time",
+    "onboardingSlide3Title": "Pora knows\nwhen it's time",
     "@onboardingSlide3Title": {
         "description": "onboardingSlide3Title"
     },
@@ -625,46 +625,6 @@
     "@insightsTitle": {
         "description": "insightsTitle"
     },
-    "insightsTipKicker": "PORA TIP",
-    "@insightsTipKicker": {
-        "description": "insightsTipKicker"
-    },
-    "insightsTipTitle": "You love carbonara!",
-    "@insightsTipTitle": {
-        "description": "insightsTipTitle"
-    },
-    "insightsTipBody": "Similar flavor profile — try mac and cheese. You already regularly have 4 of 6 ingredients.",
-    "@insightsTipBody": {
-        "description": "insightsTipBody"
-    },
-    "insightsTipAction": "Open recipe →",
-    "@insightsTipAction": {
-        "description": "insightsTipAction"
-    },
-    "insightsRunsOutMost": "Runs out most often",
-    "@insightsRunsOutMost": {
-        "description": "insightsRunsOutMost"
-    },
-    "insightsFavoriteCuisines": "Favorite cuisines",
-    "@insightsFavoriteCuisines": {
-        "description": "insightsFavoriteCuisines"
-    },
-    "insightsCuisineItalian": "Italian",
-    "@insightsCuisineItalian": {
-        "description": "insightsCuisineItalian"
-    },
-    "insightsCuisinePasta": "Pasta",
-    "@insightsCuisinePasta": {
-        "description": "insightsCuisinePasta"
-    },
-    "insightsCuisineBreakfasts": "Breakfasts",
-    "@insightsCuisineBreakfasts": {
-        "description": "insightsCuisineBreakfasts"
-    },
-    "insightsCuisineLight": "Light",
-    "@insightsCuisineLight": {
-        "description": "insightsCuisineLight"
-    },
     "orderTitle": "Order",
     "@orderTitle": {
         "description": "orderTitle"
@@ -1132,11 +1092,11 @@
     "@predictionsOftenEmpty": { "description": "empty frequent products" },
     "predictionsAskPora": "Ask PORA",
     "@predictionsAskPora": { "description": "FAB label" },
-    "kpiWeek": "items per week",
+    "kpiWeek": "products",
     "@kpiWeek": { "description": "kpi label" },
-    "kpiRecipes": "recipes this month",
+    "kpiRecipes": "bought often",
     "@kpiRecipes": { "description": "kpi label" },
-    "kpiDaysToRun": "days until restock",
+    "kpiDaysToRun": "running out",
     "@kpiDaysToRun": { "description": "kpi label" },
     "fallbackTip1": "Store herbs like a bouquet: in a glass of water covered with a bag — lasts 2 weeks.",
     "@fallbackTip1": { "description": "fallback tip" },
@@ -1246,18 +1206,12 @@
     "@tipTopicsPredefinedLabel": { "description": "predefined topics label" },
     "tipTopicsEmpty": "No topics selected — tip will be generic",
     "@tipTopicsEmpty": { "description": "warning when no topics selected" },
-    "insightsChampionKicker": "CHAMPION OF THE MONTH",
-    "@insightsChampionKicker": { "description": "champion card kicker" },
-    "insightsChampionSubtitle": "bought {count} times this month",
-    "@insightsChampionSubtitle": {
-        "description": "champion card subtitle",
-        "placeholders": { "count": { "type": "int" } }
-    },
-    "insightsStreakDays": "{days} days in a row",
-    "@insightsStreakDays": {
-        "description": "streak headline",
-        "placeholders": { "days": { "type": "int" } }
-    },
+    "insightsChampionKicker": "YOUR TOP PRODUCT",
+    "@insightsChampionKicker": {"description": "insightsChampionKicker"},
+    "insightsChampionSubtitle": "{count, plural, =1{bought once} other{bought {count} times}}",
+    "@insightsChampionSubtitle": {"description": "insightsChampionSubtitle", "placeholders": {"count": {"type": "int"}}},
+    "insightsStreakDays": "{days, plural, =1{{days} day in a row} other{{days} days in a row}}",
+    "@insightsStreakDays": {"description": "insightsStreakDays", "placeholders": {"days": {"type": "int"}}},
     "insightsStreakSubtitle": "you're on it — keep going",
     "@insightsStreakSubtitle": { "description": "streak card subtitle" },
     "insightsFreqEvery": "~every {days}d",
@@ -1269,8 +1223,6 @@
     "@insightsPopular": { "description": "popular section title" },
     "insightsStatsProducts": "products",
     "@insightsStatsProducts": { "description": "kpi label" },
-    "insightsStatsLoginsWeek": "logins this week",
-    "@insightsStatsLoginsWeek": { "description": "kpi label" },
     "insightsEmpty": "No data yet — start adding products",
     "@insightsEmpty": { "description": "empty state on insights" },
     "notificationsFilterAll": "All",
@@ -1373,5 +1325,99 @@
     "liveActivityTestRow": "Test Live Activity",
     "@liveActivityTestRow": {"description": "liveActivityTestRow"},
     "liveActivityTestSample": "Milk",
-    "@liveActivityTestSample": {"description": "liveActivityTestSample"}
+    "@liveActivityTestSample": {"description": "liveActivityTestSample"},
+    "listPickerTitle": "Add to which list?",
+    "@listPickerTitle": {"description": "listPickerTitle"},
+    "listPickerEmpty": "No lists yet — create one first",
+    "@listPickerEmpty": {"description": "listPickerEmpty"},
+    "predictionsAdded": "Added to list",
+    "@predictionsAdded": {"description": "predictionsAdded"},
+    "shortcutOpenLists": "Open lists",
+    "@shortcutOpenLists": {"description": "shortcutOpenLists"},
+    "shortcutOpenPora": "Ask Pora-AI",
+    "@shortcutOpenPora": {"description": "shortcutOpenPora"},
+    "insightsPeriodDays": "{days}d",
+    "@insightsPeriodDays": {"description": "insightsPeriodDays", "placeholders": {"days": {"type": "int"}}},
+    "insightsStreakBest": "Best streak: {days}",
+    "@insightsStreakBest": {"description": "insightsStreakBest", "placeholders": {"days": {"type": "int"}}},
+    "insightsStreakStart": "Open Pora every day to build a streak",
+    "@insightsStreakStart": {"description": "insightsStreakStart"},
+    "insightsKpiAdded": "added",
+    "@insightsKpiAdded": {"description": "insightsKpiAdded"},
+    "insightsKpiBought": "bought",
+    "@insightsKpiBought": {"description": "insightsKpiBought"},
+    "insightsKpiCompletion": "of added got bought",
+    "@insightsKpiCompletion": {"description": "insightsKpiCompletion"},
+    "insightsKpiActiveDays": "active days",
+    "@insightsKpiActiveDays": {"description": "insightsKpiActiveDays"},
+    "insightsKpiMinutes": "minutes in app",
+    "@insightsKpiMinutes": {"description": "insightsKpiMinutes"},
+    "insightsKpiSessions": "sessions",
+    "@insightsKpiSessions": {"description": "insightsKpiSessions"},
+    "insightsAvgSession": "≈{minutes} min per session",
+    "@insightsAvgSession": {"description": "insightsAvgSession", "placeholders": {"minutes": {"type": "String"}}},
+    "insightsVsPrevious": "vs previous period",
+    "@insightsVsPrevious": {"description": "insightsVsPrevious"},
+    "insightsActivityTitle": "Added and bought",
+    "@insightsActivityTitle": {"description": "insightsActivityTitle"},
+    "insightsActivityEmpty": "No activity in this period yet",
+    "@insightsActivityEmpty": {"description": "insightsActivityEmpty"},
+    "insightsHeatmapTitle": "Activity · last 4 weeks",
+    "@insightsHeatmapTitle": {"description": "insightsHeatmapTitle"},
+    "insightsLess": "less",
+    "@insightsLess": {"description": "insightsLess"},
+    "insightsMore": "more",
+    "@insightsMore": {"description": "insightsMore"},
+    "insightsRhythmTitle": "Your rhythm",
+    "@insightsRhythmTitle": {"description": "insightsRhythmTitle"},
+    "insightsPartMorning": "Morning",
+    "@insightsPartMorning": {"description": "insightsPartMorning"},
+    "insightsPartAfternoon": "Afternoon",
+    "@insightsPartAfternoon": {"description": "insightsPartAfternoon"},
+    "insightsPartEvening": "Evening",
+    "@insightsPartEvening": {"description": "insightsPartEvening"},
+    "insightsPartNight": "Night",
+    "@insightsPartNight": {"description": "insightsPartNight"},
+    "insightsPeakMorning": "You're most active in the morning",
+    "@insightsPeakMorning": {"description": "insightsPeakMorning"},
+    "insightsPeakAfternoon": "You're most active in the afternoon",
+    "@insightsPeakAfternoon": {"description": "insightsPeakAfternoon"},
+    "insightsPeakEvening": "You're most active in the evening",
+    "@insightsPeakEvening": {"description": "insightsPeakEvening"},
+    "insightsPeakNight": "You're most active at night",
+    "@insightsPeakNight": {"description": "insightsPeakNight"},
+    "insightsPeakWeekday": "Busiest day — {day}",
+    "@insightsPeakWeekday": {"description": "insightsPeakWeekday", "placeholders": {"day": {"type": "String"}}},
+    "insightsCategoriesTitle": "What you add",
+    "@insightsCategoriesTitle": {"description": "insightsCategoriesTitle"},
+    "insightsDueSoonTitle": "Time to restock",
+    "@insightsDueSoonTitle": {"description": "insightsDueSoonTitle"},
+    "insightsDueNow": "now",
+    "@insightsDueNow": {"description": "insightsDueNow"},
+    "insightsDueInDays": "in ~{days}d",
+    "@insightsDueInDays": {"description": "insightsDueInDays", "placeholders": {"days": {"type": "int"}}},
+    "insightsTopBoughtTitle": "Bought most this period",
+    "@insightsTopBoughtTitle": {"description": "insightsTopBoughtTitle"},
+    "insightsEngagementTitle": "How you use Pora",
+    "@insightsEngagementTitle": {"description": "insightsEngagementTitle"},
+    "insightsKpiListsOpened": "lists opened",
+    "@insightsKpiListsOpened": {"description": "insightsKpiListsOpened"},
+    "insightsKpiListsCreated": "lists created",
+    "@insightsKpiListsCreated": {"description": "insightsKpiListsCreated"},
+    "insightsKpiRecipes": "recipes imported",
+    "@insightsKpiRecipes": {"description": "insightsKpiRecipes"},
+    "insightsKpiAi": "messages to Pora",
+    "@insightsKpiAi": {"description": "insightsKpiAi"},
+    "insightsKpiDeleted": "items deleted",
+    "@insightsKpiDeleted": {"description": "insightsKpiDeleted"},
+    "insightsAllTimeTitle": "All time",
+    "@insightsAllTimeTitle": {"description": "insightsAllTimeTitle"},
+    "insightsKpiReminders": "with reminders",
+    "@insightsKpiReminders": {"description": "insightsKpiReminders"},
+    "insightsKpiUrgent": "urgent",
+    "@insightsKpiUrgent": {"description": "insightsKpiUrgent"},
+    "insightsLocalNote": "Usage stats on this screen are calculated on your device",
+    "@insightsLocalNote": {"description": "insightsLocalNote"},
+    "insightsNoUsageYet": "Stats will appear as you use Pora",
+    "@insightsNoUsageYet": {"description": "insightsNoUsageYet"}
 }

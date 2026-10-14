@@ -50,7 +50,9 @@ class AiContext {
         .take(15)
         .toList();
     if (needed.isNotEmpty) {
-      parts.add('On the shopping list now (still to buy): ${needed.join(', ')}.');
+      parts.add(
+        'On the shopping list now (still to buy): ${needed.join(', ')}.',
+      );
     }
 
     final urgent = allProducts

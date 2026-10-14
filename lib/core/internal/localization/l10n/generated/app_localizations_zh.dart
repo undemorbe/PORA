@@ -46,7 +46,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get authPrivatePolicy =>
-      'By continuing, 你 agree 到 \\nTerms 和 Privacy Policy';
+      'By continuing, 你 agree 到 \nTerms 和 Privacy Policy';
 
   @override
   String get authTitle => '快完成了';
@@ -114,14 +114,14 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get onboardingSlide1Title => '食谱 → 清单\\nin seconds';
+  String get onboardingSlide1Title => '食谱 → 清单\nin seconds';
 
   @override
   String get onboardingSlide1Body =>
       'Drop a 食谱 link — Pora collects  食材 和 removes what 你 已经 有.';
 
   @override
-  String get onboardingSlide2Title => '一 清单\\nfor 二';
+  String get onboardingSlide2Title => '一 清单\nfor 二';
 
   @override
   String get onboardingSlide2Body =>
@@ -488,37 +488,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get insightsTitle => '洞察';
-
-  @override
-  String get insightsTipKicker => 'PORA 提示';
-
-  @override
-  String get insightsTipTitle => '你 love carbonara!';
-
-  @override
-  String get insightsTipBody =>
-      'Similar flavor profile — try mac 和 奶酪. 你 已经 regularly 有 4 of 6 食材.';
-
-  @override
-  String get insightsTipAction => '打开 食谱 →';
-
-  @override
-  String get insightsRunsOutMost => '最常用完';
-
-  @override
-  String get insightsFavoriteCuisines => '常吃的菜系';
-
-  @override
-  String get insightsCuisineItalian => '意大利菜';
-
-  @override
-  String get insightsCuisinePasta => '意面';
-
-  @override
-  String get insightsCuisineBreakfasts => '早餐';
-
-  @override
-  String get insightsCuisineLight => '浅色';
 
   @override
   String get orderTitle => '订单';
@@ -1084,13 +1053,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get predictionsAskPora => '询问 PORA';
 
   @override
-  String get kpiWeek => 'items per 周';
+  String get kpiWeek => '商品';
 
   @override
-  String get kpiRecipes => '食谱 这个 月';
+  String get kpiRecipes => '常买';
 
   @override
-  String get kpiDaysToRun => '天 until restock';
+  String get kpiDaysToRun => '快用完';
 
   @override
   String get fallbackTip1 =>
@@ -1263,16 +1232,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get tipTopicsEmpty => '没有 topics 已选择 — tip 将 be generic';
 
   @override
-  String get insightsChampionKicker => 'CHAMPION OF  月';
+  String get insightsChampionKicker => '你的最爱';
 
   @override
   String insightsChampionSubtitle(int count) {
-    return 'bought $count 次 这个 月';
+    return '已购买 $count 次';
   }
 
   @override
   String insightsStreakDays(int days) {
-    return '$days 天 在 a row';
+    return '连续 $days 天';
   }
 
   @override
@@ -1288,9 +1257,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get insightsStatsProducts => '件商品';
-
-  @override
-  String get insightsStatsLoginsWeek => 'logins 这个 周';
 
   @override
   String get insightsEmpty => '没有 data yet — start adding 商品';
@@ -1449,4 +1415,155 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get liveActivityTestSample => '牛奶';
+
+  @override
+  String get listPickerTitle => '添加到哪个列表？';
+
+  @override
+  String get listPickerEmpty => '还没有列表——请先创建一个';
+
+  @override
+  String get predictionsAdded => '已添加到列表';
+
+  @override
+  String get shortcutOpenLists => '打开列表';
+
+  @override
+  String get shortcutOpenPora => '问 Pora-AI';
+
+  @override
+  String insightsPeriodDays(int days) {
+    return '$days天';
+  }
+
+  @override
+  String insightsStreakBest(int days) {
+    return '最长纪录：$days';
+  }
+
+  @override
+  String get insightsStreakStart => '每天打开 Pora，开启连续记录';
+
+  @override
+  String get insightsKpiAdded => '已添加';
+
+  @override
+  String get insightsKpiBought => '已购买';
+
+  @override
+  String get insightsKpiCompletion => '添加后已购买';
+
+  @override
+  String get insightsKpiActiveDays => '活跃天数';
+
+  @override
+  String get insightsKpiMinutes => '使用分钟数';
+
+  @override
+  String get insightsKpiSessions => '次会话';
+
+  @override
+  String insightsAvgSession(String minutes) {
+    return '每次约 $minutes 分钟';
+  }
+
+  @override
+  String get insightsVsPrevious => '较上一周期';
+
+  @override
+  String get insightsActivityTitle => '添加与购买';
+
+  @override
+  String get insightsActivityEmpty => '该时段暂无活动';
+
+  @override
+  String get insightsHeatmapTitle => '近 4 周活跃度';
+
+  @override
+  String get insightsLess => '少';
+
+  @override
+  String get insightsMore => '多';
+
+  @override
+  String get insightsRhythmTitle => '你的节奏';
+
+  @override
+  String get insightsPartMorning => '早上';
+
+  @override
+  String get insightsPartAfternoon => '下午';
+
+  @override
+  String get insightsPartEvening => '晚上';
+
+  @override
+  String get insightsPartNight => '夜间';
+
+  @override
+  String get insightsPeakMorning => '你在早上最活跃';
+
+  @override
+  String get insightsPeakAfternoon => '你在下午最活跃';
+
+  @override
+  String get insightsPeakEvening => '你在晚上最活跃';
+
+  @override
+  String get insightsPeakNight => '你在夜间最活跃';
+
+  @override
+  String insightsPeakWeekday(String day) {
+    return '最活跃的一天：$day';
+  }
+
+  @override
+  String get insightsCategoriesTitle => '你常添加的类别';
+
+  @override
+  String get insightsDueSoonTitle => '该补货了';
+
+  @override
+  String get insightsDueNow => '现在';
+
+  @override
+  String insightsDueInDays(int days) {
+    return '约 $days 天后';
+  }
+
+  @override
+  String get insightsTopBoughtTitle => '本时段购买最多';
+
+  @override
+  String get insightsEngagementTitle => '你如何使用 Pora';
+
+  @override
+  String get insightsKpiListsOpened => '打开清单';
+
+  @override
+  String get insightsKpiListsCreated => '新建清单';
+
+  @override
+  String get insightsKpiRecipes => '导入食谱';
+
+  @override
+  String get insightsKpiAi => '发给 Pora 的消息';
+
+  @override
+  String get insightsKpiDeleted => '已删除';
+
+  @override
+  String get insightsAllTimeTitle => '累计';
+
+  @override
+  String get insightsKpiReminders => '设有提醒';
+
+  @override
+  String get insightsKpiUrgent => '紧急';
+
+  @override
+  String get insightsLocalNote => '此页面的使用统计在你的设备上计算';
+
+  @override
+  String get insightsNoUsageYet => '使用 Pora 后将显示统计';
 }

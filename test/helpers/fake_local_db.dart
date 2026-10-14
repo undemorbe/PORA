@@ -7,8 +7,10 @@ class FakeLocalDB implements ILocalDB<dynamic> {
   String _k(String key, LocalDBNames box) => '${box.name}::$key';
 
   @override
-  Future<dynamic> get({required String key, required LocalDBNames boxName}) async =>
-      _store[_k(key, boxName)];
+  Future<dynamic> get({
+    required String key,
+    required LocalDBNames boxName,
+  }) async => _store[_k(key, boxName)];
 
   @override
   Future<void> set({

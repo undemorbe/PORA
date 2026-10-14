@@ -40,43 +40,43 @@ class MainApp extends StatelessWidget {
           builder: (context) => MaterialApp.router(
             title: 'PORA',
             debugShowCheckedModeBanner: false,
-        //!Routing
-        routerConfig: router.config(
-          navigatorObservers: () => [
-            TalkerRouteObserver(Logger.talker),
-            PoraAnalyticsObserver(),
-          ],
-          reevaluateListenable: ReevaluateListenable.stream(
-            injectionContainer.getIt<AuthState>().stream,
-          ),
-          deepLinkBuilder: (deepLink) {
-            Logger.talker.debug(deepLink.path);
-            if (deepLink.path.contains('/api/families/join')) {
-              final segments = deepLink.uri.pathSegments;
-              final code = segments.isNotEmpty ? segments.last : '';
-              return DeepLink([
-                const FamiliesRoute(),
-                InvitationConnectRoute(linkCode: code),
-              ]);
-            } else {
-              return DeepLink.defaultPath;
-            }
-          },
-        ),
-        theme: lightTheme,
-        darkTheme: darkTheme,
-        themeMode: themeStore.themeMode,
-        themeAnimationDuration: const Duration(milliseconds: 320),
-        themeAnimationCurve: Curves.easeOutCubic,
+            //!Routing
+            routerConfig: router.config(
+              navigatorObservers: () => [
+                TalkerRouteObserver(Logger.talker),
+                PoraAnalyticsObserver(),
+              ],
+              reevaluateListenable: ReevaluateListenable.stream(
+                injectionContainer.getIt<AuthState>().stream,
+              ),
+              deepLinkBuilder: (deepLink) {
+                Logger.talker.debug(deepLink.path);
+                if (deepLink.path.contains('/api/families/join')) {
+                  final segments = deepLink.uri.pathSegments;
+                  final code = segments.isNotEmpty ? segments.last : '';
+                  return DeepLink([
+                    const FamiliesRoute(),
+                    InvitationConnectRoute(linkCode: code),
+                  ]);
+                } else {
+                  return DeepLink.defaultPath;
+                }
+              },
+            ),
+            theme: lightTheme,
+            darkTheme: darkTheme,
+            themeMode: themeStore.themeMode,
+            themeAnimationDuration: const Duration(milliseconds: 320),
+            themeAnimationCurve: Curves.easeOutCubic,
 
-        //! Localization.
-        supportedLocales: Locales.supportedLocales,
-        locale: Locale(localeStore.currentLocale),
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
+            //! Localization.
+            supportedLocales: Locales.supportedLocales,
+            locale: Locale(localeStore.currentLocale),
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
             ],
           ),
         );

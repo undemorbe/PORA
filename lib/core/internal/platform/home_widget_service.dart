@@ -22,7 +22,10 @@ class HomeWidgetService {
     if (!Platform.isAndroid) return; // iOS-виджет — отдельная нативная работа
     try {
       await HomeWidget.saveWidgetData<int>(_kCount, count);
-      await HomeWidget.saveWidgetData<String>(_kItems, items.take(3).join('\n'));
+      await HomeWidget.saveWidgetData<String>(
+        _kItems,
+        items.take(3).join('\n'),
+      );
       await HomeWidget.updateWidget(androidName: _androidProvider);
     } catch (e, s) {
       Logger.talker.warning('HomeWidget update failed', e, s);

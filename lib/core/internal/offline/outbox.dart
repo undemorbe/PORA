@@ -18,8 +18,7 @@ class Outbox {
   }
 
   /// Генерирует монотонный id (timestamp + счётчик в рамках сессии).
-  static String newId() =>
-      '${DateTime.now().microsecondsSinceEpoch}-${_seq++}';
+  static String newId() => '${DateTime.now().microsecondsSinceEpoch}-${_seq++}';
 
   Future<OutboxEntry> enqueue(String kind, Map<String, dynamic> args) async {
     final box = await _open();

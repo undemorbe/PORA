@@ -1,24 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as intl;
+import 'package:pora/core/internal/extensions/l10n_extension.dart';
 import 'package:pora/core/internal/theme/constant/additional_constants.dart';
 import 'package:pora/core/internal/theme/text/app_text_styles.dart';
 import 'package:pora/core/internal/theme/context_colors.dart';
 import 'package:pora/core/internal/theme/themes_colors/light_colors/app_colors.dart';
 
 /// Тепловая карта активности за 4 недели — 4×7 ячеек.
-/// Считает интенсивность по [logins]: `count(loginsInDay) / maxCountAcrossGrid`.
-/// Weekdays подписаны в текущей локали (Пн/Вт/... или Mon/Tue/...).
+/// Интенсивность: `activity[day] / max(activity)`; сегодняшняя ячейка
+/// обведена. Weekdays подписаны в текущей локали (Пн/Вт/... или Mon/Tue/...).
 class WeeklyHeatmap extends StatelessWidget {
-  const WeeklyHeatmap({super.key, required this.logins});
+  const WeeklyHeatmap({super.key, required this.activity, this.now});
 
-  /// Все логины пользователя за последнюю неделю (или больше — grid ограничит).
-  final List<DateTime> logins;
+  /// Полночь локального дня → количество событий (логины + действия).
+  final Map<DateTime, int> activity;
+
+  /// Подмена «сегодня» для тестов/golden'ов.
+  final DateTime? now;
 
   @override
   Widget build(BuildContext context) {
     final c = context.colors;
+    final l = context.l10n;
     final locale = Localizations.localeOf(context).toString();
-    final grid = _buildGrid(logins);
+    final today = now ?? DateTime.now();
+    final grid = _buildGrid(activity, today);
+    final todayIndex = 21 + today.weekday - 1;
     final weekdayLabels = _weekdayLabels(locale);
     return Container(
       padding: const EdgeInsets.all(PoraSpacing.lg),
@@ -31,7 +38,7 @@ class WeeklyHeatmap extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            _title(locale),
+            l.insightsHeatmapTitle,
             style: PoraText.itemTitle.copyWith(fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: PoraSpacing.md),
@@ -43,7 +50,13 @@ class WeeklyHeatmap extends StatelessWidget {
               child: Row(
                 children: [
                   for (var d = 0; d < grid[w].length; d++)
-                    Expanded(child: _Cell(intensity: grid[w][d])),
+                    Expanded(
+                      child: _Cell(
+                        intensity: grid[w][d],
+                        isToday: w * 7 + d == todayIndex,
+                        isFuture: w * 7 + d > todayIndex,
+                      ),
+                    ),
                 ],
               ),
             ),
@@ -51,7 +64,7 @@ class WeeklyHeatmap extends StatelessWidget {
           Row(
             children: [
               Text(
-                _less(locale),
+                l.insightsLess,
                 style: PoraText.micro.copyWith(color: c.textSubtle),
               ),
               const SizedBox(width: 6),
@@ -62,7 +75,7 @@ class WeeklyHeatmap extends StatelessWidget {
                 ),
               const SizedBox(width: 3),
               Text(
-                _more(locale),
+                l.insightsMore,
                 style: PoraText.micro.copyWith(color: c.textSubtle),
               ),
             ],
@@ -74,35 +87,25 @@ class WeeklyHeatmap extends StatelessWidget {
 
   /// Формирует 4×7 сетку [0..1] интенсивности.
   /// Ряд 0 — старейшая неделя, ряд 3 — текущая. Столбец 0 = понедельник.
-  static List<List<double>> _buildGrid(List<DateTime> logins) {
-    final now = DateTime.now();
-    final today = DateTime(now.year, now.month, now.day);
-    // Понедельник текущей недели.
-    final currentMonday = today.subtract(Duration(days: today.weekday - 1));
-
-    // 4 недели: старейшая = currentMonday - 21 дней.
-    final startDate = currentMonday.subtract(const Duration(days: 21));
-
+  static List<List<double>> _buildGrid(
+    Map<DateTime, int> activity,
+    DateTime now,
+  ) {
+    // Понедельник три недели назад; сдвиг календарный (DST-safe).
+    final start = DateTime(
+      now.year,
+      now.month,
+      now.day - (now.weekday - 1) - 21,
+    );
     final counts = List.generate(4, (_) => List<int>.filled(7, 0));
-
-    for (final t in logins) {
-      final local = t.toLocal();
-      final day = DateTime(local.year, local.month, local.day);
-      final diff = day.difference(startDate).inDays;
-      if (diff < 0 || diff >= 28) continue;
-      final w = diff ~/ 7;
-      final d = diff % 7;
-      counts[w][d]++;
-    }
-
     var max = 0;
-    for (final row in counts) {
-      for (final v in row) {
-        if (v > max) max = v;
-      }
+    for (var i = 0; i < 28; i++) {
+      final day = DateTime(start.year, start.month, start.day + i);
+      final v = activity[day] ?? 0;
+      counts[i ~/ 7][i % 7] = v;
+      if (v > max) max = v;
     }
     if (max == 0) return List.generate(4, (_) => List<double>.filled(7, 0));
-
     return counts.map((row) => row.map((v) => v / max).toList()).toList();
   }
 
@@ -112,16 +115,6 @@ class WeeklyHeatmap extends StatelessWidget {
     final f = intl.DateFormat.E(locale);
     return List.generate(7, (i) => f.format(base.add(Duration(days: i))));
   }
-
-  static String _title(String locale) => locale.startsWith('ru')
-      ? 'Активность за 4 недели'
-      : 'Activity · last 4 weeks';
-
-  static String _less(String locale) =>
-      locale.startsWith('ru') ? 'меньше' : 'less';
-
-  static String _more(String locale) =>
-      locale.startsWith('ru') ? 'больше' : 'more';
 }
 
 class _WeekdayLabels extends StatelessWidget {
@@ -149,8 +142,14 @@ class _WeekdayLabels extends StatelessWidget {
 }
 
 class _Cell extends StatelessWidget {
-  const _Cell({required this.intensity});
+  const _Cell({
+    required this.intensity,
+    this.isToday = false,
+    this.isFuture = false,
+  });
   final double intensity;
+  final bool isToday;
+  final bool isFuture;
 
   @override
   Widget build(BuildContext context) {
@@ -168,8 +167,13 @@ class _Cell extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.all(2),
         decoration: BoxDecoration(
-          color: color,
+          color: isFuture ? Colors.transparent : color,
           borderRadius: BorderRadius.circular(6),
+          border: isToday
+              ? Border.all(color: PoraColors.primaryDark, width: 1.5)
+              : isFuture
+              ? Border.all(color: c.surfaceAlt)
+              : null,
         ),
       ),
     );

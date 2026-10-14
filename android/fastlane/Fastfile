@@ -1,0 +1,170 @@
+# Release-пайплайн Android: сборка подписанных APK/AAB через Flutter и
+# публикация в GitHub Releases (опционально — в Google Play internal).
+#
+# Локально (из android/):
+#   bundle exec fastlane android build version:1.2.0 build_number:42
+#   bundle exec fastlane android release tag:v1.2.0
+# В CI вызывается из .github/workflows/release.yml.
+
+require "digest"
+require "fileutils"
+require "yaml"
+
+opt_out_usage
+default_platform(:android)
+
+ROOT = File.expand_path("../..", __dir__)
+ARTIFACTS_DIR = File.join(ROOT, "build", "release-artifacts")
+GITHUB_REPO = ENV.fetch("GITHUB_REPOSITORY", "undemorbe/PORA")
+
+# `1.2.0` из тега `v1.2.0` / `v1.2.0-beta.1` → build-name без префикса.
+def version_from_tag(tag)
+  tag.to_s.sub(/\Av/, "")
+end
+
+def pubspec_version
+  YAML.load_file(File.join(ROOT, "pubspec.yaml"))["version"].to_s.split("+").first
+end
+
+def resolve_version(options)
+  v = options[:version] || version_from_tag(options[:tag] || ENV["RELEASE_TAG"])
+  v = pubspec_version if v.to_s.empty?
+  UI.user_error!("Invalid version '#{v}' (expected semver like 1.2.0)") unless v =~ /\A\d+\.\d+\.\d+(-[0-9A-Za-z.]+)?\z/
+  v
+end
+
+def resolve_build_number(options)
+  n = (options[:build_number] || ENV["BUILD_NUMBER"]).to_s
+  n = Time.now.utc.strftime("%y%m%d%H") if n.empty? # монотонно для локальных сборок
+  UI.user_error!("Invalid build number '#{n}'") unless n =~ /\A\d+\z/
+  n
+end
+
+platform :android do
+  desc "Проверяет, что есть всё для подписанной release-сборки"
+  private_lane :verify_release_inputs do
+    missing = []
+    missing << ".env" unless File.exist?(File.join(ROOT, ".env"))
+    missing << "android/app/google-services.json" unless File.exist?(File.join(ROOT, "android/app/google-services.json"))
+    props = File.join(ROOT, "android/key.properties")
+    if File.exist?(props)
+      store = File.read(props)[/^storeFile=(.+)$/, 1].to_s.strip
+      store_path = File.expand_path(store, File.join(ROOT, "android/app"))
+      missing << "keystore (#{store})" unless File.exist?(store_path)
+    else
+      missing << "android/key.properties"
+    end
+    UI.user_error!("Release inputs missing: #{missing.join(', ')} (see scripts/ci/prepare_android.sh)") unless missing.empty?
+  end
+
+  desc "Собирает подписанные release APK и AAB. Опции: version, build_number"
+  lane :build do |options|
+    verify_release_inputs
+    version = resolve_version(options)
+    build_number = resolve_build_number(options)
+    # build-name для Android — только X.Y.Z; суффикс пре-релиза идёт в имя файла.
+    build_name = version.split("-").first
+    flags = ["--release", "--build-name=#{build_name}", "--build-number=#{build_number}"]
+
+    Dir.chdir(ROOT) do
+      sh("flutter", "build", "apk", *flags)
+      sh("flutter", "build", "appbundle", *flags)
+    end
+
+    FileUtils.rm_rf(ARTIFACTS_DIR)
+    FileUtils.mkdir_p(ARTIFACTS_DIR)
+    base = "pora-#{version}+#{build_number}"
+    apk = File.join(ARTIFACTS_DIR, "#{base}.apk")
+    aab = File.join(ARTIFACTS_DIR, "#{base}.aab")
+    FileUtils.cp(File.join(ROOT, "build/app/outputs/flutter-apk/app-release.apk"), apk)
+    FileUtils.cp(File.join(ROOT, "build/app/outputs/bundle/release/app-release.aab"), aab)
+
+    sums = [apk, aab].map { |f| "#{Digest::SHA256.file(f).hexdigest}  #{File.basename(f)}" }
+    File.write(File.join(ARTIFACTS_DIR, "SHA256SUMS.txt"), sums.join("\n") + "\n")
+
+    UI.success("Artifacts in #{ARTIFACTS_DIR}:")
+    Dir[File.join(ARTIFACTS_DIR, "*")].sort.each { |f| UI.message("  #{File.basename(f)} (#{(File.size(f) / 1024.0 / 1024).round(1)} MB)") }
+
+    lane_context[:PORA_VERSION] = version
+    lane_context[:PORA_BUILD_NUMBER] = build_number
+    lane_context[:PORA_AAB] = aab
+  end
+
+  desc "Создаёт GitHub Release для тега и прикладывает артефакты. Опции: tag"
+  lane :github_release do |options|
+    tag = options[:tag] || ENV["RELEASE_TAG"]
+    UI.user_error!("tag is required (e.g. tag:v1.2.0)") if tag.to_s.empty?
+    token = ENV["GITHUB_TOKEN"]
+    UI.user_error!("GITHUB_TOKEN is required") if token.to_s.empty?
+    assets = Dir[File.join(ARTIFACTS_DIR, "*")].sort
+    UI.user_error!("No artifacts in #{ARTIFACTS_DIR} — run `build` first") if assets.empty?
+
+    version = lane_context[:PORA_VERSION] || version_from_tag(tag)
+    previous = begin
+      sh("git", "describe", "--tags", "--abbrev=0", "--match", "v*", "#{tag}^", log: false).strip
+    rescue StandardError
+      nil
+    end
+    changelog = changelog_from_git_commits(
+      between: previous ? [previous, tag] : nil,
+      commits_count: previous ? nil : 30,
+      pretty: "- %s (%h)",
+      merge_commit_filtering: "exclude_merges",
+      quiet: true
+    ).to_s.strip
+    changelog = "- Initial release" if changelog.empty?
+
+    compare = previous ? "\n\n**Full diff:** https://github.com/#{GITHUB_REPO}/compare/#{previous}...#{tag}" : ""
+    description = <<~MD
+      ## Pora #{version}
+
+      | File | Use |
+      |---|---|
+      | `*.apk` | install directly on an Android device |
+      | `*.aab` | upload to Google Play |
+      | `SHA256SUMS.txt` | checksums |
+
+      ### Changes
+      #{changelog}#{compare}
+    MD
+
+    set_github_release(
+      repository_name: GITHUB_REPO,
+      api_token: token,
+      name: "Pora #{version}",
+      tag_name: tag,
+      commitish: ENV["GITHUB_SHA"],
+      description: description,
+      is_prerelease: tag.include?("-"),
+      upload_assets: assets
+    )
+  end
+
+  desc "Загружает AAB в Google Play (internal track, черновик). Нужен PLAY_STORE_JSON_KEY"
+  lane :play_internal do |options|
+    UI.user_error!("PLAY_STORE_JSON_KEY is not set") if ENV["PLAY_STORE_JSON_KEY"].to_s.empty?
+    aab = options[:aab] || lane_context[:PORA_AAB] || Dir[File.join(ARTIFACTS_DIR, "*.aab")].first
+    UI.user_error!("AAB not found — run `build` first") unless aab && File.exist?(aab)
+    upload_to_play_store(
+      track: options[:track] || "internal",
+      aab: aab,
+      release_status: "draft",
+      skip_upload_metadata: true,
+      skip_upload_changelogs: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true
+    )
+  end
+
+  desc "Полный релиз: build → GitHub Release (→ Google Play, если задан ключ)"
+  lane :release do |options|
+    tag = options[:tag] || ENV["RELEASE_TAG"]
+    build(version: options[:version], tag: tag, build_number: options[:build_number])
+    github_release(tag: tag)
+    if ENV["PLAY_STORE_JSON_KEY"].to_s.empty?
+      UI.important("PLAY_STORE_JSON_KEY not set — skipping Google Play upload")
+    else
+      play_internal
+    end
+  end
+end

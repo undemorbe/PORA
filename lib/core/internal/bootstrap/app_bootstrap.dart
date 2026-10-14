@@ -4,6 +4,8 @@ import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/widgets.dart' show Locale;
 import 'package:mobx/mobx.dart';
 import 'package:pora/core/internal/analytics/analytics_service.dart';
+import 'package:pora/core/internal/analytics/usage/usage_session_listener.dart';
+import 'package:pora/core/internal/analytics/usage/usage_tracker.dart';
 import 'package:pora/core/internal/di/export.dart';
 import 'package:pora/core/internal/network/websocket/app_websocket.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -37,6 +39,11 @@ class AppBootstrap {
     final sw = Stopwatch()..start();
     try {
       unawaited(container.getIt<ConnectivityStore>().init());
+      // Локальная статистика пользования: сессии + история для Insights.
+      UsageSessionListener.start();
+      unawaited(
+        UsageTracker.instance.attach(container.getIt<ILocalDB<dynamic>>()),
+      );
 
       await Future.wait<void>([
         _initLocalization(container),
@@ -74,8 +81,8 @@ class AppBootstrap {
       final locale = Locale(container.getIt<LocalizationStore>().currentLocale);
       final l = lookupAppLocalizations(locale);
       await AppShortcutsService.instance.init(
-        listsLabel: l.navList,
-        poraLabel: l.navPora,
+        listsLabel: l.shortcutOpenLists,
+        poraLabel: l.shortcutOpenPora,
         addLabel: l.shortcutAddItem,
       );
       await ShareIntentService.instance.init();

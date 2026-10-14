@@ -14,8 +14,10 @@ void main() {
       expect(const ServerFailure('x').isConnectivity, isFalse);
       expect(const CacheMissFailure().isConnectivity, isFalse);
       expect(
-        const NotFoundFailure(code: ApiErrorCode.unknown, message: 'nf')
-            .isConnectivity,
+        const NotFoundFailure(
+          code: ApiErrorCode.unknown,
+          message: 'nf',
+        ).isConnectivity,
         isFalse,
       );
     });

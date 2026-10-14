@@ -386,10 +386,8 @@ class InjectionContainer {
       () => ItemsRemoteImpl(apiClient: _getIt<ApiClient>()),
     );
     _getIt.registerLazySingleton<ItemsRepository>(
-      () => ItemsService(
-        remote: _getIt<ItemsRemote>(),
-        outbox: _getIt<Outbox>(),
-      ),
+      () =>
+          ItemsService(remote: _getIt<ItemsRemote>(), outbox: _getIt<Outbox>()),
     );
     _registerOutboxHandlers();
     _getIt.registerLazySingleton<ItemDetailsPrefs>(

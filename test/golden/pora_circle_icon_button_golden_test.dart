@@ -1,3 +1,8 @@
+// Golden-снапшоты зависят от растеризации шрифтов ОС: эталоны сняты на
+// macOS, поэтому в CI (Linux) тег `golden` исключается.
+@Tags(['golden'])
+library;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
@@ -9,7 +14,9 @@ Widget _wrap(Widget child) => MaterialApp(
   theme: PoraTheme.light,
   debugShowCheckedModeBanner: false,
   home: Scaffold(
-    body: Center(child: Padding(padding: const EdgeInsets.all(8), child: child)),
+    body: Center(
+      child: Padding(padding: const EdgeInsets.all(8), child: child),
+    ),
   ),
 );
 

@@ -179,7 +179,7 @@ abstract class AppLocalizations {
   /// The private policy link text
   ///
   /// In en, this message translates to:
-  /// **'By continuing, you agree to the\\nTerms and Privacy Policy'**
+  /// **'By continuing, you agree to the\nTerms and Privacy Policy'**
   String get authPrivatePolicy;
 
   /// authTitle
@@ -293,7 +293,7 @@ abstract class AppLocalizations {
   /// onboardingSlide1Title
   ///
   /// In en, this message translates to:
-  /// **'Recipe → list\\nin seconds'**
+  /// **'Recipe → list\nin seconds'**
   String get onboardingSlide1Title;
 
   /// onboardingSlide1Body
@@ -305,7 +305,7 @@ abstract class AppLocalizations {
   /// onboardingSlide2Title
   ///
   /// In en, this message translates to:
-  /// **'One list\\nfor two'**
+  /// **'One list\nfor two'**
   String get onboardingSlide2Title;
 
   /// onboardingSlide2Body
@@ -317,7 +317,7 @@ abstract class AppLocalizations {
   /// onboardingSlide3Title
   ///
   /// In en, this message translates to:
-  /// **'Pora knows\\nwhen it\'s time'**
+  /// **'Pora knows\nwhen it\'s time'**
   String get onboardingSlide3Title;
 
   /// onboardingSlide3Body
@@ -1021,66 +1021,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Insights'**
   String get insightsTitle;
-
-  /// insightsTipKicker
-  ///
-  /// In en, this message translates to:
-  /// **'PORA TIP'**
-  String get insightsTipKicker;
-
-  /// insightsTipTitle
-  ///
-  /// In en, this message translates to:
-  /// **'You love carbonara!'**
-  String get insightsTipTitle;
-
-  /// insightsTipBody
-  ///
-  /// In en, this message translates to:
-  /// **'Similar flavor profile — try mac and cheese. You already regularly have 4 of 6 ingredients.'**
-  String get insightsTipBody;
-
-  /// insightsTipAction
-  ///
-  /// In en, this message translates to:
-  /// **'Open recipe →'**
-  String get insightsTipAction;
-
-  /// insightsRunsOutMost
-  ///
-  /// In en, this message translates to:
-  /// **'Runs out most often'**
-  String get insightsRunsOutMost;
-
-  /// insightsFavoriteCuisines
-  ///
-  /// In en, this message translates to:
-  /// **'Favorite cuisines'**
-  String get insightsFavoriteCuisines;
-
-  /// insightsCuisineItalian
-  ///
-  /// In en, this message translates to:
-  /// **'Italian'**
-  String get insightsCuisineItalian;
-
-  /// insightsCuisinePasta
-  ///
-  /// In en, this message translates to:
-  /// **'Pasta'**
-  String get insightsCuisinePasta;
-
-  /// insightsCuisineBreakfasts
-  ///
-  /// In en, this message translates to:
-  /// **'Breakfasts'**
-  String get insightsCuisineBreakfasts;
-
-  /// insightsCuisineLight
-  ///
-  /// In en, this message translates to:
-  /// **'Light'**
-  String get insightsCuisineLight;
 
   /// orderTitle
   ///
@@ -2153,19 +2093,19 @@ abstract class AppLocalizations {
   /// kpi label
   ///
   /// In en, this message translates to:
-  /// **'items per week'**
+  /// **'products'**
   String get kpiWeek;
 
   /// kpi label
   ///
   /// In en, this message translates to:
-  /// **'recipes this month'**
+  /// **'bought often'**
   String get kpiRecipes;
 
   /// kpi label
   ///
   /// In en, this message translates to:
-  /// **'days until restock'**
+  /// **'running out'**
   String get kpiDaysToRun;
 
   /// fallback tip
@@ -2492,22 +2432,22 @@ abstract class AppLocalizations {
   /// **'No topics selected — tip will be generic'**
   String get tipTopicsEmpty;
 
-  /// champion card kicker
+  /// insightsChampionKicker
   ///
   /// In en, this message translates to:
-  /// **'CHAMPION OF THE MONTH'**
+  /// **'YOUR TOP PRODUCT'**
   String get insightsChampionKicker;
 
-  /// champion card subtitle
+  /// insightsChampionSubtitle
   ///
   /// In en, this message translates to:
-  /// **'bought {count} times this month'**
+  /// **'{count, plural, =1{bought once} other{bought {count} times}}'**
   String insightsChampionSubtitle(int count);
 
-  /// streak headline
+  /// insightsStreakDays
   ///
   /// In en, this message translates to:
-  /// **'{days} days in a row'**
+  /// **'{days, plural, =1{{days} day in a row} other{{days} days in a row}}'**
   String insightsStreakDays(int days);
 
   /// streak card subtitle
@@ -2533,12 +2473,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'products'**
   String get insightsStatsProducts;
-
-  /// kpi label
-  ///
-  /// In en, this message translates to:
-  /// **'logins this week'**
-  String get insightsStatsLoginsWeek;
 
   /// empty state on insights
   ///
@@ -2839,6 +2773,288 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Milk'**
   String get liveActivityTestSample;
+
+  /// listPickerTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Add to which list?'**
+  String get listPickerTitle;
+
+  /// listPickerEmpty
+  ///
+  /// In en, this message translates to:
+  /// **'No lists yet — create one first'**
+  String get listPickerEmpty;
+
+  /// predictionsAdded
+  ///
+  /// In en, this message translates to:
+  /// **'Added to list'**
+  String get predictionsAdded;
+
+  /// shortcutOpenLists
+  ///
+  /// In en, this message translates to:
+  /// **'Open lists'**
+  String get shortcutOpenLists;
+
+  /// shortcutOpenPora
+  ///
+  /// In en, this message translates to:
+  /// **'Ask Pora-AI'**
+  String get shortcutOpenPora;
+
+  /// insightsPeriodDays
+  ///
+  /// In en, this message translates to:
+  /// **'{days}d'**
+  String insightsPeriodDays(int days);
+
+  /// insightsStreakBest
+  ///
+  /// In en, this message translates to:
+  /// **'Best streak: {days}'**
+  String insightsStreakBest(int days);
+
+  /// insightsStreakStart
+  ///
+  /// In en, this message translates to:
+  /// **'Open Pora every day to build a streak'**
+  String get insightsStreakStart;
+
+  /// insightsKpiAdded
+  ///
+  /// In en, this message translates to:
+  /// **'added'**
+  String get insightsKpiAdded;
+
+  /// insightsKpiBought
+  ///
+  /// In en, this message translates to:
+  /// **'bought'**
+  String get insightsKpiBought;
+
+  /// insightsKpiCompletion
+  ///
+  /// In en, this message translates to:
+  /// **'of added got bought'**
+  String get insightsKpiCompletion;
+
+  /// insightsKpiActiveDays
+  ///
+  /// In en, this message translates to:
+  /// **'active days'**
+  String get insightsKpiActiveDays;
+
+  /// insightsKpiMinutes
+  ///
+  /// In en, this message translates to:
+  /// **'minutes in app'**
+  String get insightsKpiMinutes;
+
+  /// insightsKpiSessions
+  ///
+  /// In en, this message translates to:
+  /// **'sessions'**
+  String get insightsKpiSessions;
+
+  /// insightsAvgSession
+  ///
+  /// In en, this message translates to:
+  /// **'≈{minutes} min per session'**
+  String insightsAvgSession(String minutes);
+
+  /// insightsVsPrevious
+  ///
+  /// In en, this message translates to:
+  /// **'vs previous period'**
+  String get insightsVsPrevious;
+
+  /// insightsActivityTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Added and bought'**
+  String get insightsActivityTitle;
+
+  /// insightsActivityEmpty
+  ///
+  /// In en, this message translates to:
+  /// **'No activity in this period yet'**
+  String get insightsActivityEmpty;
+
+  /// insightsHeatmapTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Activity · last 4 weeks'**
+  String get insightsHeatmapTitle;
+
+  /// insightsLess
+  ///
+  /// In en, this message translates to:
+  /// **'less'**
+  String get insightsLess;
+
+  /// insightsMore
+  ///
+  /// In en, this message translates to:
+  /// **'more'**
+  String get insightsMore;
+
+  /// insightsRhythmTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Your rhythm'**
+  String get insightsRhythmTitle;
+
+  /// insightsPartMorning
+  ///
+  /// In en, this message translates to:
+  /// **'Morning'**
+  String get insightsPartMorning;
+
+  /// insightsPartAfternoon
+  ///
+  /// In en, this message translates to:
+  /// **'Afternoon'**
+  String get insightsPartAfternoon;
+
+  /// insightsPartEvening
+  ///
+  /// In en, this message translates to:
+  /// **'Evening'**
+  String get insightsPartEvening;
+
+  /// insightsPartNight
+  ///
+  /// In en, this message translates to:
+  /// **'Night'**
+  String get insightsPartNight;
+
+  /// insightsPeakMorning
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re most active in the morning'**
+  String get insightsPeakMorning;
+
+  /// insightsPeakAfternoon
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re most active in the afternoon'**
+  String get insightsPeakAfternoon;
+
+  /// insightsPeakEvening
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re most active in the evening'**
+  String get insightsPeakEvening;
+
+  /// insightsPeakNight
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re most active at night'**
+  String get insightsPeakNight;
+
+  /// insightsPeakWeekday
+  ///
+  /// In en, this message translates to:
+  /// **'Busiest day — {day}'**
+  String insightsPeakWeekday(String day);
+
+  /// insightsCategoriesTitle
+  ///
+  /// In en, this message translates to:
+  /// **'What you add'**
+  String get insightsCategoriesTitle;
+
+  /// insightsDueSoonTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Time to restock'**
+  String get insightsDueSoonTitle;
+
+  /// insightsDueNow
+  ///
+  /// In en, this message translates to:
+  /// **'now'**
+  String get insightsDueNow;
+
+  /// insightsDueInDays
+  ///
+  /// In en, this message translates to:
+  /// **'in ~{days}d'**
+  String insightsDueInDays(int days);
+
+  /// insightsTopBoughtTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Bought most this period'**
+  String get insightsTopBoughtTitle;
+
+  /// insightsEngagementTitle
+  ///
+  /// In en, this message translates to:
+  /// **'How you use Pora'**
+  String get insightsEngagementTitle;
+
+  /// insightsKpiListsOpened
+  ///
+  /// In en, this message translates to:
+  /// **'lists opened'**
+  String get insightsKpiListsOpened;
+
+  /// insightsKpiListsCreated
+  ///
+  /// In en, this message translates to:
+  /// **'lists created'**
+  String get insightsKpiListsCreated;
+
+  /// insightsKpiRecipes
+  ///
+  /// In en, this message translates to:
+  /// **'recipes imported'**
+  String get insightsKpiRecipes;
+
+  /// insightsKpiAi
+  ///
+  /// In en, this message translates to:
+  /// **'messages to Pora'**
+  String get insightsKpiAi;
+
+  /// insightsKpiDeleted
+  ///
+  /// In en, this message translates to:
+  /// **'items deleted'**
+  String get insightsKpiDeleted;
+
+  /// insightsAllTimeTitle
+  ///
+  /// In en, this message translates to:
+  /// **'All time'**
+  String get insightsAllTimeTitle;
+
+  /// insightsKpiReminders
+  ///
+  /// In en, this message translates to:
+  /// **'with reminders'**
+  String get insightsKpiReminders;
+
+  /// insightsKpiUrgent
+  ///
+  /// In en, this message translates to:
+  /// **'urgent'**
+  String get insightsKpiUrgent;
+
+  /// insightsLocalNote
+  ///
+  /// In en, this message translates to:
+  /// **'Usage stats on this screen are calculated on your device'**
+  String get insightsLocalNote;
+
+  /// insightsNoUsageYet
+  ///
+  /// In en, this message translates to:
+  /// **'Stats will appear as you use Pora'**
+  String get insightsNoUsageYet;
 }
 
 class _AppLocalizationsDelegate

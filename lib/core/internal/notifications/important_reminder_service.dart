@@ -31,8 +31,9 @@ class ImportantReminderService {
   int _idFor(String itemId) => itemId.hashCode & 0x7fffffff;
 
   /// Локализация без BuildContext — по активной локали приложения.
-  AppLocalizations get _l =>
-      lookupAppLocalizations(Locale(GetIt.I<LocalizationStore>().currentLocale));
+  AppLocalizations get _l => lookupAppLocalizations(
+    Locale(GetIt.I<LocalizationStore>().currentLocale),
+  );
 
   /// Регистрирует канал (вызывать один раз при инициализации нотификаций).
   Future<void> ensureChannel() async {

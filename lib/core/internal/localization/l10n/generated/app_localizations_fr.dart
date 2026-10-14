@@ -48,7 +48,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get authPrivatePolicy =>
-      'By continuing, vous agree à le\\nTerms et Privacy Policy';
+      'By continuing, vous agree à le\nTerms et Privacy Policy';
 
   @override
   String get authTitle => 'Presque terminé';
@@ -116,14 +116,14 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get onboardingSlide1Title => 'recette → liste\\nin seconds';
+  String get onboardingSlide1Title => 'recette → liste\nin seconds';
 
   @override
   String get onboardingSlide1Body =>
       'Drop a recette link — Pora collects le ingrédients et removes what vous déjà avez.';
 
   @override
-  String get onboardingSlide2Title => 'un liste\\nfor deux';
+  String get onboardingSlide2Title => 'un liste\nfor deux';
 
   @override
   String get onboardingSlide2Body =>
@@ -493,37 +493,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get insightsTitle => 'Analyses';
-
-  @override
-  String get insightsTipKicker => 'ASTUCE PORA';
-
-  @override
-  String get insightsTipTitle => 'Vous love carbonara!';
-
-  @override
-  String get insightsTipBody =>
-      'Similar flavor profile — try mac et fromage. Vous déjà regularly avez 4 of 6 ingrédients.';
-
-  @override
-  String get insightsTipAction => 'ouvrir recette →';
-
-  @override
-  String get insightsRunsOutMost => 'Épuisé le plus souvent';
-
-  @override
-  String get insightsFavoriteCuisines => 'Cuisines préférées';
-
-  @override
-  String get insightsCuisineItalian => 'Italienne';
-
-  @override
-  String get insightsCuisinePasta => 'Pâtes';
-
-  @override
-  String get insightsCuisineBreakfasts => 'Petits-déjeuners';
-
-  @override
-  String get insightsCuisineLight => 'Clair';
 
   @override
   String get orderTitle => 'Commande';
@@ -1091,13 +1060,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get predictionsAskPora => 'Demander à PORA';
 
   @override
-  String get kpiWeek => 'items per semaine';
+  String get kpiWeek => 'produits';
 
   @override
-  String get kpiRecipes => 'recettes ce mois';
+  String get kpiRecipes => 'achats fréquents';
 
   @override
-  String get kpiDaysToRun => 'jours until restock';
+  String get kpiDaysToRun => 'bientôt épuisés';
 
   @override
   String get fallbackTip1 =>
@@ -1274,16 +1243,28 @@ class AppLocalizationsFr extends AppLocalizations {
   String get tipTopicsEmpty => 'non topics sélectionné — tip sera be generic';
 
   @override
-  String get insightsChampionKicker => 'CHAMPION OF le mois';
+  String get insightsChampionKicker => 'VOTRE PRODUIT N°1';
 
   @override
   String insightsChampionSubtitle(int count) {
-    return 'bought $count fois ce mois';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'acheté $count fois',
+      one: 'acheté $count fois',
+    );
+    return '$_temp0';
   }
 
   @override
   String insightsStreakDays(int days) {
-    return '$days jours dans a row';
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days jours d\'affilée',
+      one: '$days jour d\'affilée',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1299,9 +1280,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get insightsStatsProducts => 'produits';
-
-  @override
-  String get insightsStatsLoginsWeek => 'logins ce semaine';
 
   @override
   String get insightsEmpty => 'non data yet — start adding produits';
@@ -1463,4 +1441,157 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get liveActivityTestSample => 'Lait';
+
+  @override
+  String get listPickerTitle => 'Ajouter à quelle liste ?';
+
+  @override
+  String get listPickerEmpty => 'Aucune liste — créez-en une d\'abord';
+
+  @override
+  String get predictionsAdded => 'Ajouté à la liste';
+
+  @override
+  String get shortcutOpenLists => 'Ouvrir les listes';
+
+  @override
+  String get shortcutOpenPora => 'Demander à Pora-AI';
+
+  @override
+  String insightsPeriodDays(int days) {
+    return '$days j';
+  }
+
+  @override
+  String insightsStreakBest(int days) {
+    return 'Record : $days';
+  }
+
+  @override
+  String get insightsStreakStart =>
+      'Ouvrez Pora chaque jour pour lancer une série';
+
+  @override
+  String get insightsKpiAdded => 'ajoutés';
+
+  @override
+  String get insightsKpiBought => 'achetés';
+
+  @override
+  String get insightsKpiCompletion => 'des ajouts achetés';
+
+  @override
+  String get insightsKpiActiveDays => 'jours actifs';
+
+  @override
+  String get insightsKpiMinutes => 'minutes dans l\'app';
+
+  @override
+  String get insightsKpiSessions => 'sessions';
+
+  @override
+  String insightsAvgSession(String minutes) {
+    return '≈$minutes min par session';
+  }
+
+  @override
+  String get insightsVsPrevious => 'vs période précédente';
+
+  @override
+  String get insightsActivityTitle => 'Ajoutés et achetés';
+
+  @override
+  String get insightsActivityEmpty => 'Aucune activité sur cette période';
+
+  @override
+  String get insightsHeatmapTitle => 'Activité · 4 dernières semaines';
+
+  @override
+  String get insightsLess => 'moins';
+
+  @override
+  String get insightsMore => 'plus';
+
+  @override
+  String get insightsRhythmTitle => 'Votre rythme';
+
+  @override
+  String get insightsPartMorning => 'Matin';
+
+  @override
+  String get insightsPartAfternoon => 'Après-midi';
+
+  @override
+  String get insightsPartEvening => 'Soir';
+
+  @override
+  String get insightsPartNight => 'Nuit';
+
+  @override
+  String get insightsPeakMorning => 'Vous êtes surtout actif le matin';
+
+  @override
+  String get insightsPeakAfternoon => 'Vous êtes surtout actif l\'après-midi';
+
+  @override
+  String get insightsPeakEvening => 'Vous êtes surtout actif le soir';
+
+  @override
+  String get insightsPeakNight => 'Vous êtes surtout actif la nuit';
+
+  @override
+  String insightsPeakWeekday(String day) {
+    return 'Jour le plus actif — $day';
+  }
+
+  @override
+  String get insightsCategoriesTitle => 'Ce que vous ajoutez';
+
+  @override
+  String get insightsDueSoonTitle => 'À racheter bientôt';
+
+  @override
+  String get insightsDueNow => 'maintenant';
+
+  @override
+  String insightsDueInDays(int days) {
+    return 'dans ~$days j';
+  }
+
+  @override
+  String get insightsTopBoughtTitle => 'Les plus achetés sur la période';
+
+  @override
+  String get insightsEngagementTitle => 'Votre usage de Pora';
+
+  @override
+  String get insightsKpiListsOpened => 'listes ouvertes';
+
+  @override
+  String get insightsKpiListsCreated => 'listes créées';
+
+  @override
+  String get insightsKpiRecipes => 'recettes importées';
+
+  @override
+  String get insightsKpiAi => 'messages à Pora';
+
+  @override
+  String get insightsKpiDeleted => 'articles supprimés';
+
+  @override
+  String get insightsAllTimeTitle => 'Depuis le début';
+
+  @override
+  String get insightsKpiReminders => 'avec rappel';
+
+  @override
+  String get insightsKpiUrgent => 'urgents';
+
+  @override
+  String get insightsLocalNote =>
+      'Les statistiques d\'usage sont calculées sur votre appareil';
+
+  @override
+  String get insightsNoUsageYet => 'Les stats apparaîtront au fil de l\'usage';
 }

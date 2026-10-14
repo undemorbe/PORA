@@ -632,46 +632,6 @@
     "@insightsTitle": {
         "description": "insightsTitle"
     },
-    "insightsTipKicker": "СОВЕТ PORA",
-    "@insightsTipKicker": {
-        "description": "insightsTipKicker"
-    },
-    "insightsTipTitle": "Вы любите карбонару!",
-    "@insightsTipTitle": {
-        "description": "insightsTipTitle"
-    },
-    "insightsTipBody": "Похожий профиль вкуса — попробуйте мак-н-чиз. 4 из 6 ингредиентов у вас уже бывают регулярно.",
-    "@insightsTipBody": {
-        "description": "insightsTipBody"
-    },
-    "insightsTipAction": "Открыть рецепт →",
-    "@insightsTipAction": {
-        "description": "insightsTipAction"
-    },
-    "insightsRunsOutMost": "Чаще всего заканчивается",
-    "@insightsRunsOutMost": {
-        "description": "insightsRunsOutMost"
-    },
-    "insightsFavoriteCuisines": "Любимые кухни",
-    "@insightsFavoriteCuisines": {
-        "description": "insightsFavoriteCuisines"
-    },
-    "insightsCuisineItalian": "Итальянская",
-    "@insightsCuisineItalian": {
-        "description": "insightsCuisineItalian"
-    },
-    "insightsCuisinePasta": "Паста",
-    "@insightsCuisinePasta": {
-        "description": "insightsCuisinePasta"
-    },
-    "insightsCuisineBreakfasts": "Завтраки",
-    "@insightsCuisineBreakfasts": {
-        "description": "insightsCuisineBreakfasts"
-    },
-    "insightsCuisineLight": "Лёгкое",
-    "@insightsCuisineLight": {
-        "description": "insightsCuisineLight"
-    },
     "orderTitle": "Заказ",
     "@orderTitle": {
         "description": "orderTitle"
@@ -1395,15 +1355,15 @@
     "@predictionsAskPora": {
         "description": "FAB label"
     },
-    "kpiWeek": "продукта в неделю",
+    "kpiWeek": "продуктов",
     "@kpiWeek": {
         "description": "kpi label"
     },
-    "kpiRecipes": "рецептов за месяц",
+    "kpiRecipes": "часто берёте",
     "@kpiRecipes": {
         "description": "kpi label"
     },
-    "kpiDaysToRun": "дней до закупки",
+    "kpiDaysToRun": "скоро закончатся",
     "@kpiDaysToRun": {
         "description": "kpi label"
     },
@@ -1623,11 +1583,11 @@
     "@tipTopicsEmpty": {
         "description": "warning when no topics selected"
     },
-    "insightsChampionKicker": "ЧЕМПИОН МЕСЯЦА",
+    "insightsChampionKicker": "ВАШ ЧЕМПИОН",
     "@insightsChampionKicker": {
         "description": "champion card kicker"
     },
-    "insightsChampionSubtitle": "куплено {count} раз за месяц",
+    "insightsChampionSubtitle": "куплено {count, plural, one{{count} раз} few{{count} раза} many{{count} раз} other{{count} раза}}",
     "@insightsChampionSubtitle": {
         "description": "champion card subtitle",
         "placeholders": {
@@ -1636,7 +1596,7 @@
             }
         }
     },
-    "insightsStreakDays": "{days} дней подряд",
+    "insightsStreakDays": "{days, plural, one{{days} день подряд} few{{days} дня подряд} many{{days} дней подряд} other{{days} дня подряд}}",
     "@insightsStreakDays": {
         "description": "streak headline",
         "placeholders": {
@@ -1664,10 +1624,6 @@
     },
     "insightsStatsProducts": "продуктов",
     "@insightsStatsProducts": {
-        "description": "kpi label"
-    },
-    "insightsStatsLoginsWeek": "входов за неделю",
-    "@insightsStatsLoginsWeek": {
         "description": "kpi label"
     },
     "insightsEmpty": "Пока нет данных — начните добавлять продукты",
@@ -1778,5 +1734,52 @@
     "importantReminderBody": "Отметьте «Куплено», когда купите",
     "importantReminderMarkBought": "Куплено",
     "liveActivityTestRow": "Тест Live Activity",
-    "liveActivityTestSample": "Молоко"
+    "liveActivityTestSample": "Молоко",
+    "listPickerTitle": "В какой список добавить?",
+    "listPickerEmpty": "Списков пока нет — сначала создайте",
+    "predictionsAdded": "Добавлено в список",
+    "shortcutOpenLists": "Открыть списки",
+    "shortcutOpenPora": "Спросить Pora-AI",
+    "insightsPeriodDays": "{days} дн.",
+    "insightsStreakBest": "Рекорд: {days}",
+    "insightsStreakStart": "Заходите каждый день, чтобы начать серию",
+    "insightsKpiAdded": "добавлено",
+    "insightsKpiBought": "куплено",
+    "insightsKpiCompletion": "добавленного куплено",
+    "insightsKpiActiveDays": "активных дней",
+    "insightsKpiMinutes": "минут в приложении",
+    "insightsKpiSessions": "сессий",
+    "insightsAvgSession": "≈{minutes} мин за сессию",
+    "insightsVsPrevious": "к прошлому периоду",
+    "insightsActivityTitle": "Добавлено и куплено",
+    "insightsActivityEmpty": "За этот период активности пока нет",
+    "insightsHeatmapTitle": "Активность за 4 недели",
+    "insightsLess": "меньше",
+    "insightsMore": "больше",
+    "insightsRhythmTitle": "Ваш ритм",
+    "insightsPartMorning": "Утро",
+    "insightsPartAfternoon": "День",
+    "insightsPartEvening": "Вечер",
+    "insightsPartNight": "Ночь",
+    "insightsPeakMorning": "Чаще всего вы активны утром",
+    "insightsPeakAfternoon": "Чаще всего вы активны днём",
+    "insightsPeakEvening": "Чаще всего вы активны вечером",
+    "insightsPeakNight": "Чаще всего вы активны ночью",
+    "insightsPeakWeekday": "Самый активный день — {day}",
+    "insightsCategoriesTitle": "Что вы добавляете",
+    "insightsDueSoonTitle": "Пора докупить",
+    "insightsDueNow": "уже пора",
+    "insightsDueInDays": "через ~{days} дн.",
+    "insightsTopBoughtTitle": "Чаще всего покупали за период",
+    "insightsEngagementTitle": "Как вы пользуетесь Pora",
+    "insightsKpiListsOpened": "открытий списков",
+    "insightsKpiListsCreated": "списков создано",
+    "insightsKpiRecipes": "рецептов импортировано",
+    "insightsKpiAi": "сообщений Pora",
+    "insightsKpiDeleted": "удалено позиций",
+    "insightsAllTimeTitle": "За всё время",
+    "insightsKpiReminders": "с напоминанием",
+    "insightsKpiUrgent": "срочных",
+    "insightsLocalNote": "Статистика пользования считается на этом устройстве",
+    "insightsNoUsageYet": "Статистика появится по мере использования"
 }

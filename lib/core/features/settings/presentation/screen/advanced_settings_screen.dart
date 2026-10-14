@@ -248,10 +248,13 @@ class _AdvancedSettingsPageState extends State<AdvancedSettingsPage> {
                     ),
                     ListTile(
                       leading: const Icon(PhosphorIconsRegular.broadcast),
-                      title: Text(l.liveActivityTestRow, style: PoraText.itemTitle),
+                      title: Text(
+                        l.liveActivityTestRow,
+                        style: PoraText.itemTitle,
+                      ),
                       trailing: const Icon(PhosphorIconsRegular.playCircle),
-                      onTap: () => NotificationService.instance.importantReminder
-                          .show(
+                      onTap: () =>
+                          NotificationService.instance.importantReminder.show(
                             itemId: 'live-activity-test',
                             productName: l.liveActivityTestSample,
                             fromUser: 'PORA',

@@ -15,6 +15,7 @@ import 'package:pora/core/features/lists/presentation/widgets/section_builder.da
 import 'package:pora/core/internal/router/app_router.gr.dart';
 import 'package:pora/core/internal/theme/constant/additional_constants.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
+import 'package:pora/core/internal/analytics/analytics_service.dart';
 
 /// Concrete list screen.
 ///
@@ -52,6 +53,7 @@ class _ListPageState extends State<ListPage> {
   void initState() {
     super.initState();
     listStore = ListStore()..getConcreteList(lid: widget.listId);
+    AnalyticsService.instance.logListOpened(widget.listId);
     _wsSub = AppWebsocket.instance.events.listen((event) {
       if (event.lid != widget.listId && listStore.isSelfUpdated == false) {
         return;

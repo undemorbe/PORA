@@ -2,6 +2,7 @@ import 'package:mobx/mobx.dart';
 import 'package:pora/core/features/predictions_ai/domain/entity/ai_message.dart';
 import 'package:pora/core/features/predictions_ai/domain/usecase/chat_with_pora.dart';
 import 'package:pora/core/features/predictions_ai/domain/prompt/ai_context.dart';
+import 'package:pora/core/internal/analytics/analytics_service.dart';
 
 part 'ai_chat_store.g.dart';
 
@@ -33,6 +34,7 @@ abstract class _AiChatStoreBase with Store {
     final trimmed = text.trim();
     if (trimmed.isEmpty || isBusy) return;
     history.add(AiMessage.user(trimmed));
+    AnalyticsService.instance.logAiMessageSent();
     isBusy = true;
     errorMessage = null;
     final res = await useCase(

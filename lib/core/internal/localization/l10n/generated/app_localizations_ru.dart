@@ -490,37 +490,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get insightsTitle => 'Инсайты';
 
   @override
-  String get insightsTipKicker => 'СОВЕТ PORA';
-
-  @override
-  String get insightsTipTitle => 'Вы любите карбонару!';
-
-  @override
-  String get insightsTipBody =>
-      'Похожий профиль вкуса — попробуйте мак-н-чиз. 4 из 6 ингредиентов у вас уже бывают регулярно.';
-
-  @override
-  String get insightsTipAction => 'Открыть рецепт →';
-
-  @override
-  String get insightsRunsOutMost => 'Чаще всего заканчивается';
-
-  @override
-  String get insightsFavoriteCuisines => 'Любимые кухни';
-
-  @override
-  String get insightsCuisineItalian => 'Итальянская';
-
-  @override
-  String get insightsCuisinePasta => 'Паста';
-
-  @override
-  String get insightsCuisineBreakfasts => 'Завтраки';
-
-  @override
-  String get insightsCuisineLight => 'Лёгкое';
-
-  @override
   String get orderTitle => 'Заказ';
 
   @override
@@ -1086,13 +1055,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get predictionsAskPora => 'Спросить PORA';
 
   @override
-  String get kpiWeek => 'продукта в неделю';
+  String get kpiWeek => 'продуктов';
 
   @override
-  String get kpiRecipes => 'рецептов за месяц';
+  String get kpiRecipes => 'часто берёте';
 
   @override
-  String get kpiDaysToRun => 'дней до закупки';
+  String get kpiDaysToRun => 'скоро закончатся';
 
   @override
   String get fallbackTip1 =>
@@ -1268,16 +1237,32 @@ class AppLocalizationsRu extends AppLocalizations {
   String get tipTopicsEmpty => 'Ни одной темы не выбрано — совет будет общий';
 
   @override
-  String get insightsChampionKicker => 'ЧЕМПИОН МЕСЯЦА';
+  String get insightsChampionKicker => 'ВАШ ЧЕМПИОН';
 
   @override
   String insightsChampionSubtitle(int count) {
-    return 'куплено $count раз за месяц';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count раза',
+      many: '$count раз',
+      few: '$count раза',
+      one: '$count раз',
+    );
+    return 'куплено $_temp0';
   }
 
   @override
   String insightsStreakDays(int days) {
-    return '$days дней подряд';
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days дня подряд',
+      many: '$days дней подряд',
+      few: '$days дня подряд',
+      one: '$days день подряд',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1293,9 +1278,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get insightsStatsProducts => 'продуктов';
-
-  @override
-  String get insightsStatsLoginsWeek => 'входов за неделю';
 
   @override
   String get insightsEmpty => 'Пока нет данных — начните добавлять продукты';
@@ -1457,4 +1439,156 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get liveActivityTestSample => 'Молоко';
+
+  @override
+  String get listPickerTitle => 'В какой список добавить?';
+
+  @override
+  String get listPickerEmpty => 'Списков пока нет — сначала создайте';
+
+  @override
+  String get predictionsAdded => 'Добавлено в список';
+
+  @override
+  String get shortcutOpenLists => 'Открыть списки';
+
+  @override
+  String get shortcutOpenPora => 'Спросить Pora-AI';
+
+  @override
+  String insightsPeriodDays(int days) {
+    return '$days дн.';
+  }
+
+  @override
+  String insightsStreakBest(int days) {
+    return 'Рекорд: $days';
+  }
+
+  @override
+  String get insightsStreakStart => 'Заходите каждый день, чтобы начать серию';
+
+  @override
+  String get insightsKpiAdded => 'добавлено';
+
+  @override
+  String get insightsKpiBought => 'куплено';
+
+  @override
+  String get insightsKpiCompletion => 'добавленного куплено';
+
+  @override
+  String get insightsKpiActiveDays => 'активных дней';
+
+  @override
+  String get insightsKpiMinutes => 'минут в приложении';
+
+  @override
+  String get insightsKpiSessions => 'сессий';
+
+  @override
+  String insightsAvgSession(String minutes) {
+    return '≈$minutes мин за сессию';
+  }
+
+  @override
+  String get insightsVsPrevious => 'к прошлому периоду';
+
+  @override
+  String get insightsActivityTitle => 'Добавлено и куплено';
+
+  @override
+  String get insightsActivityEmpty => 'За этот период активности пока нет';
+
+  @override
+  String get insightsHeatmapTitle => 'Активность за 4 недели';
+
+  @override
+  String get insightsLess => 'меньше';
+
+  @override
+  String get insightsMore => 'больше';
+
+  @override
+  String get insightsRhythmTitle => 'Ваш ритм';
+
+  @override
+  String get insightsPartMorning => 'Утро';
+
+  @override
+  String get insightsPartAfternoon => 'День';
+
+  @override
+  String get insightsPartEvening => 'Вечер';
+
+  @override
+  String get insightsPartNight => 'Ночь';
+
+  @override
+  String get insightsPeakMorning => 'Чаще всего вы активны утром';
+
+  @override
+  String get insightsPeakAfternoon => 'Чаще всего вы активны днём';
+
+  @override
+  String get insightsPeakEvening => 'Чаще всего вы активны вечером';
+
+  @override
+  String get insightsPeakNight => 'Чаще всего вы активны ночью';
+
+  @override
+  String insightsPeakWeekday(String day) {
+    return 'Самый активный день — $day';
+  }
+
+  @override
+  String get insightsCategoriesTitle => 'Что вы добавляете';
+
+  @override
+  String get insightsDueSoonTitle => 'Пора докупить';
+
+  @override
+  String get insightsDueNow => 'уже пора';
+
+  @override
+  String insightsDueInDays(int days) {
+    return 'через ~$days дн.';
+  }
+
+  @override
+  String get insightsTopBoughtTitle => 'Чаще всего покупали за период';
+
+  @override
+  String get insightsEngagementTitle => 'Как вы пользуетесь Pora';
+
+  @override
+  String get insightsKpiListsOpened => 'открытий списков';
+
+  @override
+  String get insightsKpiListsCreated => 'списков создано';
+
+  @override
+  String get insightsKpiRecipes => 'рецептов импортировано';
+
+  @override
+  String get insightsKpiAi => 'сообщений Pora';
+
+  @override
+  String get insightsKpiDeleted => 'удалено позиций';
+
+  @override
+  String get insightsAllTimeTitle => 'За всё время';
+
+  @override
+  String get insightsKpiReminders => 'с напоминанием';
+
+  @override
+  String get insightsKpiUrgent => 'срочных';
+
+  @override
+  String get insightsLocalNote =>
+      'Статистика пользования считается на этом устройстве';
+
+  @override
+  String get insightsNoUsageYet => 'Статистика появится по мере использования';
 }

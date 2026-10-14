@@ -173,9 +173,7 @@ class NotificationService {
     if (itemId == null || itemId.isEmpty) return false;
     // productName/fromUser: из data, иначе из текста уведомления.
     final productName =
-        data['item-name']?.toString() ??
-        message.notification?.title ??
-        'товар';
+        data['item-name']?.toString() ?? message.notification?.title ?? 'товар';
     final fromUser = data['from']?.toString() ?? data['added-by']?.toString();
     unawaited(
       _importantReminder.show(

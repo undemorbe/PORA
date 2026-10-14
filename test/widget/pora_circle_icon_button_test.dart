@@ -4,8 +4,10 @@ import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/core/internal/theme/themes_colors/app_themes.dart';
 import 'package:pora/core/internal/widgets/pora_circle_icon_button.dart';
 
-Widget _wrap(Widget child) =>
-    MaterialApp(theme: PoraTheme.light, home: Scaffold(body: Center(child: child)));
+Widget _wrap(Widget child) => MaterialApp(
+  theme: PoraTheme.light,
+  home: Scaffold(body: Center(child: child)),
+);
 
 void main() {
   testWidgets('renders icon and fires onTap', (tester) async {

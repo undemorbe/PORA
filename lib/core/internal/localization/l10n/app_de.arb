@@ -49,7 +49,7 @@
     "@authSignInWithPhone": {
         "description": "The sign in with Phone button text"
     },
-    "authPrivatePolicy": "Wenn du fortfährst, stimmst du den\\nNutzungsbedingungen und der Datenschutzerklärung zu",
+    "authPrivatePolicy": "Wenn du fortfährst, stimmst du den\nNutzungsbedingungen und der Datenschutzerklärung zu",
     "@authPrivatePolicy": {
         "description": "The private policy link text"
     },
@@ -138,7 +138,7 @@
             }
         }
     },
-    "onboardingSlide1Title": "Rezept → Liste\\nin Sekunden",
+    "onboardingSlide1Title": "Rezept → Liste\nin Sekunden",
     "@onboardingSlide1Title": {
         "description": "onboardingSlide1Title"
     },
@@ -146,7 +146,7 @@
     "@onboardingSlide1Body": {
         "description": "onboardingSlide1Body"
     },
-    "onboardingSlide2Title": "Eine Liste\\nfür zwei",
+    "onboardingSlide2Title": "Eine Liste\nfür zwei",
     "@onboardingSlide2Title": {
         "description": "onboardingSlide2Title"
     },
@@ -154,7 +154,7 @@
     "@onboardingSlide2Body": {
         "description": "onboardingSlide2Body"
     },
-    "onboardingSlide3Title": "Pora weiß,\\nwann es Zeit ist",
+    "onboardingSlide3Title": "Pora weiß,\nwann es Zeit ist",
     "@onboardingSlide3Title": {
         "description": "onboardingSlide3Title"
     },
@@ -625,46 +625,6 @@
     "insightsTitle": "Einblicke",
     "@insightsTitle": {
         "description": "insightsTitle"
-    },
-    "insightsTipKicker": "PORA-TIPP",
-    "@insightsTipKicker": {
-        "description": "insightsTipKicker"
-    },
-    "insightsTipTitle": "Du liebst Carbonara!",
-    "@insightsTipTitle": {
-        "description": "insightsTipTitle"
-    },
-    "insightsTipBody": "Ähnliches Geschmacksprofil — probiere Mac and Cheese. 4 von 6 Zutaten hast du bereits regelmäßig zu Hause.",
-    "@insightsTipBody": {
-        "description": "insightsTipBody"
-    },
-    "insightsTipAction": "Rezept öffnen →",
-    "@insightsTipAction": {
-        "description": "insightsTipAction"
-    },
-    "insightsRunsOutMost": "Geht am häufigsten aus",
-    "@insightsRunsOutMost": {
-        "description": "insightsRunsOutMost"
-    },
-    "insightsFavoriteCuisines": "Lieblingsküchen",
-    "@insightsFavoriteCuisines": {
-        "description": "insightsFavoriteCuisines"
-    },
-    "insightsCuisineItalian": "Italienisch",
-    "@insightsCuisineItalian": {
-        "description": "insightsCuisineItalian"
-    },
-    "insightsCuisinePasta": "Pasta",
-    "@insightsCuisinePasta": {
-        "description": "insightsCuisinePasta"
-    },
-    "insightsCuisineBreakfasts": "Frühstücke",
-    "@insightsCuisineBreakfasts": {
-        "description": "insightsCuisineBreakfasts"
-    },
-    "insightsCuisineLight": "Hell",
-    "@insightsCuisineLight": {
-        "description": "insightsCuisineLight"
     },
     "orderTitle": "Bestellung",
     "@orderTitle": {
@@ -1400,15 +1360,15 @@
     "@predictionsAskPora": {
         "description": "FAB label"
     },
-    "kpiWeek": "Artikel pro Woche",
+    "kpiWeek": "Produkte",
     "@kpiWeek": {
         "description": "kpi label"
     },
-    "kpiRecipes": "Rezepte diesen Monat",
+    "kpiRecipes": "oft gekauft",
     "@kpiRecipes": {
         "description": "kpi label"
     },
-    "kpiDaysToRun": "Tage bis zum Nachkauf",
+    "kpiDaysToRun": "gehen zur Neige",
     "@kpiDaysToRun": {
         "description": "kpi label"
     },
@@ -1628,11 +1588,11 @@
     "@tipTopicsEmpty": {
         "description": "warning when no topics selected"
     },
-    "insightsChampionKicker": "CHAMPION DES MONATS",
+    "insightsChampionKicker": "DEIN TOP-PRODUKT",
     "@insightsChampionKicker": {
         "description": "champion card kicker"
     },
-    "insightsChampionSubtitle": "diesen Monat {count}-mal gekauft",
+    "insightsChampionSubtitle": "{count, plural, =1{einmal gekauft} other{{count}-mal gekauft}}",
     "@insightsChampionSubtitle": {
         "description": "champion card subtitle",
         "placeholders": {
@@ -1641,7 +1601,7 @@
             }
         }
     },
-    "insightsStreakDays": "{days} Tage in Folge",
+    "insightsStreakDays": "{days, plural, =1{{days} Tag in Folge} other{{days} Tage in Folge}}",
     "@insightsStreakDays": {
         "description": "streak headline",
         "placeholders": {
@@ -1669,10 +1629,6 @@
     },
     "insightsStatsProducts": "Produkte",
     "@insightsStatsProducts": {
-        "description": "kpi label"
-    },
-    "insightsStatsLoginsWeek": "Anmeldungen diese Woche",
-    "@insightsStatsLoginsWeek": {
         "description": "kpi label"
     },
     "insightsEmpty": "Noch keine Daten — füge Produkte hinzu",
@@ -1781,5 +1737,52 @@
     "importantReminderBody": "Als gekauft markieren, wenn erledigt",
     "importantReminderMarkBought": "Gekauft",
     "liveActivityTestRow": "Live Activity testen",
-    "liveActivityTestSample": "Milch"
+    "liveActivityTestSample": "Milch",
+    "listPickerTitle": "Zu welcher Liste hinzufügen?",
+    "listPickerEmpty": "Noch keine Listen — zuerst eine erstellen",
+    "predictionsAdded": "Zur Liste hinzugefügt",
+    "shortcutOpenLists": "Listen öffnen",
+    "shortcutOpenPora": "Pora-AI fragen",
+    "insightsPeriodDays": "{days} T.",
+    "insightsStreakBest": "Rekord: {days}",
+    "insightsStreakStart": "Öffne Pora täglich, um eine Serie aufzubauen",
+    "insightsKpiAdded": "hinzugefügt",
+    "insightsKpiBought": "gekauft",
+    "insightsKpiCompletion": "des Hinzugefügten gekauft",
+    "insightsKpiActiveDays": "aktive Tage",
+    "insightsKpiMinutes": "Minuten in der App",
+    "insightsKpiSessions": "Sitzungen",
+    "insightsAvgSession": "≈{minutes} Min. pro Sitzung",
+    "insightsVsPrevious": "ggü. Vorperiode",
+    "insightsActivityTitle": "Hinzugefügt und gekauft",
+    "insightsActivityEmpty": "In diesem Zeitraum noch keine Aktivität",
+    "insightsHeatmapTitle": "Aktivität · letzte 4 Wochen",
+    "insightsLess": "weniger",
+    "insightsMore": "mehr",
+    "insightsRhythmTitle": "Dein Rhythmus",
+    "insightsPartMorning": "Morgen",
+    "insightsPartAfternoon": "Mittag",
+    "insightsPartEvening": "Abend",
+    "insightsPartNight": "Nacht",
+    "insightsPeakMorning": "Am aktivsten bist du morgens",
+    "insightsPeakAfternoon": "Am aktivsten bist du mittags",
+    "insightsPeakEvening": "Am aktivsten bist du abends",
+    "insightsPeakNight": "Am aktivsten bist du nachts",
+    "insightsPeakWeekday": "Aktivster Tag — {day}",
+    "insightsCategoriesTitle": "Was du hinzufügst",
+    "insightsDueSoonTitle": "Zeit nachzukaufen",
+    "insightsDueNow": "jetzt",
+    "insightsDueInDays": "in ~{days} T.",
+    "insightsTopBoughtTitle": "Im Zeitraum am häufigsten gekauft",
+    "insightsEngagementTitle": "So nutzt du Pora",
+    "insightsKpiListsOpened": "Listen geöffnet",
+    "insightsKpiListsCreated": "Listen erstellt",
+    "insightsKpiRecipes": "Rezepte importiert",
+    "insightsKpiAi": "Nachrichten an Pora",
+    "insightsKpiDeleted": "Artikel gelöscht",
+    "insightsAllTimeTitle": "Insgesamt",
+    "insightsKpiReminders": "mit Erinnerung",
+    "insightsKpiUrgent": "dringend",
+    "insightsLocalNote": "Nutzungsstatistiken werden auf deinem Gerät berechnet",
+    "insightsNoUsageYet": "Statistiken erscheinen, sobald du Pora nutzt"
 }

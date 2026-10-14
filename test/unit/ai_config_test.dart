@@ -12,7 +12,8 @@ void main() {
 
   setUp(() {
     dotenv.loadFromString(
-      envString: 'AI_API_KEY=ENV_KEY\n'
+      envString:
+          'AI_API_KEY=ENV_KEY\n'
           'AI_MODEL=ENV_MODEL\n'
           'AI_CHAT_MODEL=ENV_CHAT\n'
           'AI_TIP_MODEL=ENV_TIP\n',
@@ -43,11 +44,7 @@ void main() {
   });
 
   test('user key + both models', () async {
-    await prefs.save(
-      apiKey: 'K',
-      poraModel: 'P',
-      tipsModel: 'T',
-    );
+    await prefs.save(apiKey: 'K', poraModel: 'P', tipsModel: 'T');
     await config.reload();
     expect(config.apiKey, 'K');
     expect(config.poraModel, 'P');

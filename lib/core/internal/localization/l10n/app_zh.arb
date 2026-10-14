@@ -49,7 +49,7 @@
     "@authSignInWithPhone": {
         "description": "The sign in with Phone button text"
     },
-    "authPrivatePolicy": "By continuing, 你 agree 到 \\nTerms 和 Privacy Policy",
+    "authPrivatePolicy": "By continuing, 你 agree 到 \nTerms 和 Privacy Policy",
     "@authPrivatePolicy": {
         "description": "The private policy link text"
     },
@@ -138,7 +138,7 @@
             }
         }
     },
-    "onboardingSlide1Title": "食谱 → 清单\\nin seconds",
+    "onboardingSlide1Title": "食谱 → 清单\nin seconds",
     "@onboardingSlide1Title": {
         "description": "onboardingSlide1Title"
     },
@@ -146,7 +146,7 @@
     "@onboardingSlide1Body": {
         "description": "onboardingSlide1Body"
     },
-    "onboardingSlide2Title": "一 清单\\nfor 二",
+    "onboardingSlide2Title": "一 清单\nfor 二",
     "@onboardingSlide2Title": {
         "description": "onboardingSlide2Title"
     },
@@ -625,46 +625,6 @@
     "insightsTitle": "洞察",
     "@insightsTitle": {
         "description": "insightsTitle"
-    },
-    "insightsTipKicker": "PORA 提示",
-    "@insightsTipKicker": {
-        "description": "insightsTipKicker"
-    },
-    "insightsTipTitle": "你 love carbonara!",
-    "@insightsTipTitle": {
-        "description": "insightsTipTitle"
-    },
-    "insightsTipBody": "Similar flavor profile — try mac 和 奶酪. 你 已经 regularly 有 4 of 6 食材.",
-    "@insightsTipBody": {
-        "description": "insightsTipBody"
-    },
-    "insightsTipAction": "打开 食谱 →",
-    "@insightsTipAction": {
-        "description": "insightsTipAction"
-    },
-    "insightsRunsOutMost": "最常用完",
-    "@insightsRunsOutMost": {
-        "description": "insightsRunsOutMost"
-    },
-    "insightsFavoriteCuisines": "常吃的菜系",
-    "@insightsFavoriteCuisines": {
-        "description": "insightsFavoriteCuisines"
-    },
-    "insightsCuisineItalian": "意大利菜",
-    "@insightsCuisineItalian": {
-        "description": "insightsCuisineItalian"
-    },
-    "insightsCuisinePasta": "意面",
-    "@insightsCuisinePasta": {
-        "description": "insightsCuisinePasta"
-    },
-    "insightsCuisineBreakfasts": "早餐",
-    "@insightsCuisineBreakfasts": {
-        "description": "insightsCuisineBreakfasts"
-    },
-    "insightsCuisineLight": "浅色",
-    "@insightsCuisineLight": {
-        "description": "insightsCuisineLight"
     },
     "orderTitle": "订单",
     "@orderTitle": {
@@ -1400,15 +1360,15 @@
     "@predictionsAskPora": {
         "description": "FAB label"
     },
-    "kpiWeek": "items per 周",
+    "kpiWeek": "商品",
     "@kpiWeek": {
         "description": "kpi label"
     },
-    "kpiRecipes": "食谱 这个 月",
+    "kpiRecipes": "常买",
     "@kpiRecipes": {
         "description": "kpi label"
     },
-    "kpiDaysToRun": "天 until restock",
+    "kpiDaysToRun": "快用完",
     "@kpiDaysToRun": {
         "description": "kpi label"
     },
@@ -1628,11 +1588,11 @@
     "@tipTopicsEmpty": {
         "description": "warning when no topics selected"
     },
-    "insightsChampionKicker": "CHAMPION OF  月",
+    "insightsChampionKicker": "你的最爱",
     "@insightsChampionKicker": {
         "description": "champion card kicker"
     },
-    "insightsChampionSubtitle": "bought {count} 次 这个 月",
+    "insightsChampionSubtitle": "已购买 {count} 次",
     "@insightsChampionSubtitle": {
         "description": "champion card subtitle",
         "placeholders": {
@@ -1641,7 +1601,7 @@
             }
         }
     },
-    "insightsStreakDays": "{days} 天 在 a row",
+    "insightsStreakDays": "连续 {days} 天",
     "@insightsStreakDays": {
         "description": "streak headline",
         "placeholders": {
@@ -1669,10 +1629,6 @@
     },
     "insightsStatsProducts": "件商品",
     "@insightsStatsProducts": {
-        "description": "kpi label"
-    },
-    "insightsStatsLoginsWeek": "logins 这个 周",
-    "@insightsStatsLoginsWeek": {
         "description": "kpi label"
     },
     "insightsEmpty": "没有 data yet — start adding 商品",
@@ -1781,5 +1737,52 @@
     "importantReminderBody": "买到后请标记「已购买」",
     "importantReminderMarkBought": "已购买",
     "liveActivityTestRow": "测试 Live Activity",
-    "liveActivityTestSample": "牛奶"
+    "liveActivityTestSample": "牛奶",
+    "listPickerTitle": "添加到哪个列表？",
+    "listPickerEmpty": "还没有列表——请先创建一个",
+    "predictionsAdded": "已添加到列表",
+    "shortcutOpenLists": "打开列表",
+    "shortcutOpenPora": "问 Pora-AI",
+    "insightsPeriodDays": "{days}天",
+    "insightsStreakBest": "最长纪录：{days}",
+    "insightsStreakStart": "每天打开 Pora，开启连续记录",
+    "insightsKpiAdded": "已添加",
+    "insightsKpiBought": "已购买",
+    "insightsKpiCompletion": "添加后已购买",
+    "insightsKpiActiveDays": "活跃天数",
+    "insightsKpiMinutes": "使用分钟数",
+    "insightsKpiSessions": "次会话",
+    "insightsAvgSession": "每次约 {minutes} 分钟",
+    "insightsVsPrevious": "较上一周期",
+    "insightsActivityTitle": "添加与购买",
+    "insightsActivityEmpty": "该时段暂无活动",
+    "insightsHeatmapTitle": "近 4 周活跃度",
+    "insightsLess": "少",
+    "insightsMore": "多",
+    "insightsRhythmTitle": "你的节奏",
+    "insightsPartMorning": "早上",
+    "insightsPartAfternoon": "下午",
+    "insightsPartEvening": "晚上",
+    "insightsPartNight": "夜间",
+    "insightsPeakMorning": "你在早上最活跃",
+    "insightsPeakAfternoon": "你在下午最活跃",
+    "insightsPeakEvening": "你在晚上最活跃",
+    "insightsPeakNight": "你在夜间最活跃",
+    "insightsPeakWeekday": "最活跃的一天：{day}",
+    "insightsCategoriesTitle": "你常添加的类别",
+    "insightsDueSoonTitle": "该补货了",
+    "insightsDueNow": "现在",
+    "insightsDueInDays": "约 {days} 天后",
+    "insightsTopBoughtTitle": "本时段购买最多",
+    "insightsEngagementTitle": "你如何使用 Pora",
+    "insightsKpiListsOpened": "打开清单",
+    "insightsKpiListsCreated": "新建清单",
+    "insightsKpiRecipes": "导入食谱",
+    "insightsKpiAi": "发给 Pora 的消息",
+    "insightsKpiDeleted": "已删除",
+    "insightsAllTimeTitle": "累计",
+    "insightsKpiReminders": "设有提醒",
+    "insightsKpiUrgent": "紧急",
+    "insightsLocalNote": "此页面的使用统计在你的设备上计算",
+    "insightsNoUsageYet": "使用 Pora 后将显示统计"
 }

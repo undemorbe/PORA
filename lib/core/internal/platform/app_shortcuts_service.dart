@@ -25,10 +25,26 @@ class AppShortcutsService {
   }) async {
     try {
       _quickActions.initialize(_handle);
+      // icon: имя ресурса — Android drawable `res/drawable/ic_shortcut_*`,
+      // iOS ищет одноимённый image set в Assets.xcassets (без него — без
+      // кастомной иконки, но шорткат работает). Векторы под стиль приложения
+      // (list / sparkle / plus).
       await _quickActions.setShortcutItems(<ShortcutItem>[
-        ShortcutItem(type: _openLists, localizedTitle: listsLabel),
-        ShortcutItem(type: _openPora, localizedTitle: poraLabel),
-        ShortcutItem(type: _addItem, localizedTitle: addLabel),
+        ShortcutItem(
+          type: _openLists,
+          localizedTitle: listsLabel,
+          icon: 'ic_shortcut_lists',
+        ),
+        ShortcutItem(
+          type: _openPora,
+          localizedTitle: poraLabel,
+          icon: 'ic_shortcut_pora',
+        ),
+        ShortcutItem(
+          type: _addItem,
+          localizedTitle: addLabel,
+          icon: 'ic_shortcut_add',
+        ),
       ]);
     } catch (e, s) {
       Logger.talker.warning('AppShortcuts init failed', e, s);

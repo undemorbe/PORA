@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 import 'package:pora/core/features/families/domain/entity/member.dart';
@@ -37,6 +39,8 @@ abstract class _ListStoreBase with Store {
 
   @observable
   bool? isSelfUpdated;
+
+  Timer? _selfUpdateTimer;
 
   /// True когда contract показывает данные из cache (offline read).
   @observable
@@ -184,8 +188,11 @@ abstract class _ListStoreBase with Store {
 
   @action
   Future<bool> toggleItemBought({required String itemId}) async {
+    // Окно, в котором WS-эхо собственного изменения не перезагружает список.
+    // Повторный тап продлевает окно, а не плодит параллельные таймеры.
     isSelfUpdated = true;
-    Future.delayed(Duration(seconds: 2)).whenComplete(() {
+    _selfUpdateTimer?.cancel();
+    _selfUpdateTimer = Timer(const Duration(seconds: 2), () {
       isSelfUpdated = false;
     });
     final cur = list;
@@ -206,6 +213,7 @@ abstract class _ListStoreBase with Store {
     final res = await getIt<MarkItemBoughtUseCase>().call(
       itemId: itemId,
       checked: target,
+      name: found.name,
     );
     if (res.isRight) return true;
     _patchItem(itemId, checked: !target);

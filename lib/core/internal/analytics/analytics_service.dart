@@ -1,21 +1,28 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:pora/core/internal/analytics/usage/usage_tracker.dart';
 import 'package:pora/core/internal/logging/logger.dart';
 
-/// Тонкая обёртка над Firebase Analytics с типизированными событиями.
+/// Единая точка аналитики: типизированные события уходят в Firebase
+/// Analytics (агрегаты по всем юзерам) и в локальный [UsageTracker]
+/// (персональная статистика на экране Insights).
+///
+/// Firebase поднимается отложенно (AppBootstrap) — до этого Firebase-часть
+/// no-op'ит, а локальный трекер копит события в буфере.
 class AnalyticsService {
   AnalyticsService._();
   static final AnalyticsService instance = AnalyticsService._();
 
+  UsageTracker get _usage => UsageTracker.instance;
+
   bool get _ready => Firebase.apps.isNotEmpty;
 
-  FirebaseAnalytics? get _analytics => _ready ? FirebaseAnalytics.instance : null;
+  FirebaseAnalytics? get _analytics =>
+      _ready ? FirebaseAnalytics.instance : null;
 
-  /// Включает сбор аналитики (в debug — выключаем, чтобы не шуметь).
+  /// Включает сбор аналитики (в т.ч. debug → виден в Firebase DebugView).
   Future<void> init() async {
     try {
-      // Собираем всегда (в т.ч. debug → виден в Firebase DebugView). Раньше в
-      // debug сбор был выключен, из-за чего казалось, что аналитика «не работает».
       await _analytics?.setAnalyticsCollectionEnabled(true);
       await logAppOpen();
     } catch (e, s) {
@@ -30,7 +37,13 @@ class AnalyticsService {
   }
 
   /// Экранное событие для навигации (см. PoraAnalyticsObserver).
-  Future<void> logScreenView(String screenName) async {
+  /// [countVisit] = false — возврат назад: Firebase-событие шлём, но в
+  /// локальную статистику визитов не пишем.
+  Future<void> logScreenView(
+    String screenName, {
+    bool countVisit = true,
+  }) async {
+    if (countVisit) _usage.screenViewed(screenName);
     try {
       await _analytics?.logScreenView(screenName: screenName);
     } catch (e, s) {
@@ -47,20 +60,50 @@ class AnalyticsService {
   }
 
   //! --- Типизированные события домена ---
-  Future<void> logListOpened(String listId) =>
-      _log('list_opened', {'list_id': listId});
+  Future<void> logListOpened(String listId) {
+    _usage.listOpened();
+    return _log('list_opened', {'list_id': listId});
+  }
 
-  Future<void> logItemAdded({required String listId}) =>
-      _log('item_added', {'list_id': listId});
+  Future<void> logListCreated({required bool shared}) {
+    _usage.listCreated();
+    return _log('list_created', {'shared': shared.toString()});
+  }
 
-  Future<void> logItemMarkedBought() => _log('item_marked_bought');
+  Future<void> logItemAdded({required String listId, String? section}) {
+    _usage.itemAdded(section: section);
+    return _log('item_added', {
+      'list_id': listId,
+      if (section != null && section.isNotEmpty) 'section': section,
+    });
+  }
+
+  Future<void> logItemMarkedBought({String? name}) {
+    _usage.itemBought(name: name);
+    return _log('item_marked_bought');
+  }
+
+  Future<void> logItemDeleted() {
+    _usage.itemDeleted();
+    return _log('item_deleted');
+  }
 
   Future<void> logAiChatOpened() => _log('ai_chat_opened');
 
+  Future<void> logAiMessageSent() {
+    _usage.aiMessageSent();
+    return _log('ai_message_sent');
+  }
+
   Future<void> logTipGenerated() => _log('ai_tip_generated');
 
-  Future<void> logRecipeImport({required String source}) =>
-      _log('recipe_import', {'source': source});
+  Future<void> logRecipeImport({required String source}) {
+    _usage.recipeImported();
+    return _log('recipe_import', {'source': source});
+  }
+
+  Future<void> logInsightsPeriodChanged(int days) =>
+      _log('insights_period', {'days': days});
 
   Future<void> logSupportMessageSent() => _log('support_message_sent');
 

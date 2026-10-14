@@ -260,7 +260,8 @@ class ChatTypingIndicatorState extends State<ChatTypingIndicator>
 }
 
 class ChatInputBar extends StatelessWidget {
-  const ChatInputBar({super.key, 
+  const ChatInputBar({
+    super.key,
     required this.controller,
     required this.busy,
     required this.onSend,

@@ -1,0 +1,121 @@
+name: Release
+
+# Публикация: push тега `vX.Y.Z` (или `vX.Y.Z-beta.N` → pre-release).
+#   git tag v1.2.0 && git push origin v1.2.0
+# Либо вручную: Actions → Release → Run workflow (тег создаётся на выбранной
+# ветке, если его ещё нет).
+on:
+  push:
+    tags: ["v*.*.*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag, e.g. v1.2.0"
+        required: true
+
+concurrency:
+  group: release-${{ inputs.tag || github.ref_name }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  FLUTTER_VERSION: "3.47.2"
+  RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+
+jobs:
+  quality:
+    uses: ./.github/workflows/ci.yml
+    with:
+      skip_android_build: true
+    secrets: inherit
+
+  android:
+    name: Build APK + AAB → GitHub Release
+    needs: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: write # создание релиза и загрузка ассетов
+    env:
+      LC_ALL: en_US.UTF-8
+      LANG: en_US.UTF-8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # теги и история — для changelog
+
+      - name: Validate tag and compute build number
+        env:
+          OFFSET: ${{ vars.BUILD_NUMBER_OFFSET || '0' }}
+        run: |
+          if [[ ! "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.]+)?$ ]]; then
+            echo "::error::Tag '$RELEASE_TAG' must look like v1.2.3 or v1.2.3-beta.1"
+            exit 1
+          fi
+          # Ручной запуск с новым тегом: создаём его локально для changelog;
+          # на GitHub тег создаст сам релиз (commitish = текущий SHA).
+          git rev-parse -q --verify "refs/tags/$RELEASE_TAG" >/dev/null || git tag "$RELEASE_TAG"
+          # versionCode должен расти монотонно: номер запуска + сдвиг
+          # (сдвиг нужен, если в Play уже есть сборки с бОльшим кодом).
+          echo "BUILD_NUMBER=$(( ${{ github.run_number }} + OFFSET ))" >> "$GITHUB_ENV"
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: zulu
+          java-version: "17"
+          cache: gradle
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          working-directory: android
+          bundler-cache: true
+
+      - name: Prepare secrets (.env, google-services.json, keystore)
+        env:
+          DOT_ENV: ${{ secrets.DOT_ENV }}
+          EMBED_AI_KEY: ${{ vars.EMBED_AI_KEY }}
+          API_URL: ${{ vars.API_URL }}
+          WS_URL: ${{ vars.WS_URL }}
+          AI_API_URL: ${{ vars.AI_API_URL }}
+          AI_CHAT_MODEL: ${{ vars.AI_CHAT_MODEL }}
+          AI_TIP_MODEL: ${{ vars.AI_TIP_MODEL }}
+          AI_RECIPE_SCRAPPER_URL: ${{ vars.AI_RECIPE_SCRAPPER_URL }}
+          PRIVACY_POLICY_URL: ${{ vars.PRIVACY_POLICY_URL }}
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          ANDROID_KEY_PROPERTIES: ${{ secrets.ANDROID_KEY_PROPERTIES }}
+        run: scripts/ci/prepare_android.sh release
+
+      - run: flutter pub get
+
+      - name: Fastlane release
+        working-directory: android
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PLAY_STORE_JSON_KEY: ${{ secrets.PLAY_STORE_JSON_KEY }}
+        run: bundle exec fastlane android release tag:"$RELEASE_TAG"
+
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-${{ env.RELEASE_TAG }}
+          path: build/release-artifacts/
+          if-no-files-found: ignore
+          retention-days: 30
+
+      - name: Remove signing material
+        if: always()
+        run: rm -f android/app/upload-keystore.jks android/key.properties android/app/google-services.json .env

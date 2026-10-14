@@ -47,7 +47,7 @@
     "@authSignInWithPhone": {
         "description": "The sign in with Phone button text"
     },
-    "authPrivatePolicy": "By continuing, vous agree à le\\nTerms et Privacy Policy",
+    "authPrivatePolicy": "By continuing, vous agree à le\nTerms et Privacy Policy",
     "@authPrivatePolicy": {
         "description": "The private policy link text"
     },
@@ -138,7 +138,7 @@
             }
         }
     },
-    "onboardingSlide1Title": "recette → liste\\nin seconds",
+    "onboardingSlide1Title": "recette → liste\nin seconds",
     "@onboardingSlide1Title": {
         "description": "onboardingSlide1Title"
     },
@@ -146,7 +146,7 @@
     "@onboardingSlide1Body": {
         "description": "onboardingSlide1Body"
     },
-    "onboardingSlide2Title": "un liste\\nfor deux",
+    "onboardingSlide2Title": "un liste\nfor deux",
     "@onboardingSlide2Title": {
         "description": "onboardingSlide2Title"
     },
@@ -625,46 +625,6 @@
     "insightsTitle": "Analyses",
     "@insightsTitle": {
         "description": "insightsTitle"
-    },
-    "insightsTipKicker": "ASTUCE PORA",
-    "@insightsTipKicker": {
-        "description": "insightsTipKicker"
-    },
-    "insightsTipTitle": "Vous love carbonara!",
-    "@insightsTipTitle": {
-        "description": "insightsTipTitle"
-    },
-    "insightsTipBody": "Similar flavor profile — try mac et fromage. Vous déjà regularly avez 4 of 6 ingrédients.",
-    "@insightsTipBody": {
-        "description": "insightsTipBody"
-    },
-    "insightsTipAction": "ouvrir recette →",
-    "@insightsTipAction": {
-        "description": "insightsTipAction"
-    },
-    "insightsRunsOutMost": "Épuisé le plus souvent",
-    "@insightsRunsOutMost": {
-        "description": "insightsRunsOutMost"
-    },
-    "insightsFavoriteCuisines": "Cuisines préférées",
-    "@insightsFavoriteCuisines": {
-        "description": "insightsFavoriteCuisines"
-    },
-    "insightsCuisineItalian": "Italienne",
-    "@insightsCuisineItalian": {
-        "description": "insightsCuisineItalian"
-    },
-    "insightsCuisinePasta": "Pâtes",
-    "@insightsCuisinePasta": {
-        "description": "insightsCuisinePasta"
-    },
-    "insightsCuisineBreakfasts": "Petits-déjeuners",
-    "@insightsCuisineBreakfasts": {
-        "description": "insightsCuisineBreakfasts"
-    },
-    "insightsCuisineLight": "Clair",
-    "@insightsCuisineLight": {
-        "description": "insightsCuisineLight"
     },
     "orderTitle": "Commande",
     "@orderTitle": {
@@ -1400,15 +1360,15 @@
     "@predictionsAskPora": {
         "description": "FAB label"
     },
-    "kpiWeek": "items per semaine",
+    "kpiWeek": "produits",
     "@kpiWeek": {
         "description": "kpi label"
     },
-    "kpiRecipes": "recettes ce mois",
+    "kpiRecipes": "achats fréquents",
     "@kpiRecipes": {
         "description": "kpi label"
     },
-    "kpiDaysToRun": "jours until restock",
+    "kpiDaysToRun": "bientôt épuisés",
     "@kpiDaysToRun": {
         "description": "kpi label"
     },
@@ -1628,11 +1588,11 @@
     "@tipTopicsEmpty": {
         "description": "warning when no topics selected"
     },
-    "insightsChampionKicker": "CHAMPION OF le mois",
+    "insightsChampionKicker": "VOTRE PRODUIT N°1",
     "@insightsChampionKicker": {
         "description": "champion card kicker"
     },
-    "insightsChampionSubtitle": "bought {count} fois ce mois",
+    "insightsChampionSubtitle": "{count, plural, one{acheté {count} fois} other{acheté {count} fois}}",
     "@insightsChampionSubtitle": {
         "description": "champion card subtitle",
         "placeholders": {
@@ -1641,7 +1601,7 @@
             }
         }
     },
-    "insightsStreakDays": "{days} jours dans a row",
+    "insightsStreakDays": "{days, plural, one{{days} jour d'affilée} other{{days} jours d'affilée}}",
     "@insightsStreakDays": {
         "description": "streak headline",
         "placeholders": {
@@ -1669,10 +1629,6 @@
     },
     "insightsStatsProducts": "produits",
     "@insightsStatsProducts": {
-        "description": "kpi label"
-    },
-    "insightsStatsLoginsWeek": "logins ce semaine",
-    "@insightsStatsLoginsWeek": {
         "description": "kpi label"
     },
     "insightsEmpty": "non data yet — start adding produits",
@@ -1781,5 +1737,52 @@
     "importantReminderBody": "Marquer comme acheté une fois fait",
     "importantReminderMarkBought": "Acheté",
     "liveActivityTestRow": "Tester Live Activity",
-    "liveActivityTestSample": "Lait"
+    "liveActivityTestSample": "Lait",
+    "listPickerTitle": "Ajouter à quelle liste ?",
+    "listPickerEmpty": "Aucune liste — créez-en une d'abord",
+    "predictionsAdded": "Ajouté à la liste",
+    "shortcutOpenLists": "Ouvrir les listes",
+    "shortcutOpenPora": "Demander à Pora-AI",
+    "insightsPeriodDays": "{days} j",
+    "insightsStreakBest": "Record : {days}",
+    "insightsStreakStart": "Ouvrez Pora chaque jour pour lancer une série",
+    "insightsKpiAdded": "ajoutés",
+    "insightsKpiBought": "achetés",
+    "insightsKpiCompletion": "des ajouts achetés",
+    "insightsKpiActiveDays": "jours actifs",
+    "insightsKpiMinutes": "minutes dans l'app",
+    "insightsKpiSessions": "sessions",
+    "insightsAvgSession": "≈{minutes} min par session",
+    "insightsVsPrevious": "vs période précédente",
+    "insightsActivityTitle": "Ajoutés et achetés",
+    "insightsActivityEmpty": "Aucune activité sur cette période",
+    "insightsHeatmapTitle": "Activité · 4 dernières semaines",
+    "insightsLess": "moins",
+    "insightsMore": "plus",
+    "insightsRhythmTitle": "Votre rythme",
+    "insightsPartMorning": "Matin",
+    "insightsPartAfternoon": "Après-midi",
+    "insightsPartEvening": "Soir",
+    "insightsPartNight": "Nuit",
+    "insightsPeakMorning": "Vous êtes surtout actif le matin",
+    "insightsPeakAfternoon": "Vous êtes surtout actif l'après-midi",
+    "insightsPeakEvening": "Vous êtes surtout actif le soir",
+    "insightsPeakNight": "Vous êtes surtout actif la nuit",
+    "insightsPeakWeekday": "Jour le plus actif — {day}",
+    "insightsCategoriesTitle": "Ce que vous ajoutez",
+    "insightsDueSoonTitle": "À racheter bientôt",
+    "insightsDueNow": "maintenant",
+    "insightsDueInDays": "dans ~{days} j",
+    "insightsTopBoughtTitle": "Les plus achetés sur la période",
+    "insightsEngagementTitle": "Votre usage de Pora",
+    "insightsKpiListsOpened": "listes ouvertes",
+    "insightsKpiListsCreated": "listes créées",
+    "insightsKpiRecipes": "recettes importées",
+    "insightsKpiAi": "messages à Pora",
+    "insightsKpiDeleted": "articles supprimés",
+    "insightsAllTimeTitle": "Depuis le début",
+    "insightsKpiReminders": "avec rappel",
+    "insightsKpiUrgent": "urgents",
+    "insightsLocalNote": "Les statistiques d'usage sont calculées sur votre appareil",
+    "insightsNoUsageYet": "Les stats apparaîtront au fil de l'usage"
 }

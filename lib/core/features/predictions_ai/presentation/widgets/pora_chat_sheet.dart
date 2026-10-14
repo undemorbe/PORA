@@ -22,6 +22,7 @@ import 'package:pora/core/internal/theme/text/app_text_styles.dart';
 import 'package:pora/core/internal/theme/context_colors.dart';
 import 'package:pora/core/internal/theme/themes_colors/light_colors/app_colors.dart';
 import 'package:pora/core/features/predictions_ai/presentation/widgets/pora_chat_widgets.dart';
+import 'package:pora/core/internal/analytics/analytics_service.dart';
 
 /// Модальный чат с PORA. Никакой persist-памяти — история живёт только пока
 /// открыт лист. Каждый запрос идёт с system-prompt'ом из `chat_guard`.
@@ -261,6 +262,7 @@ Future<void> openPoraChatSheet(
   BuildContext context, {
   Object heroTag = PoraHeroTags.poraAvatarFab,
 }) {
+  AnalyticsService.instance.logAiChatOpened();
   return showModalBottomSheet<void>(
     context: context,
     isScrollControlled: true,

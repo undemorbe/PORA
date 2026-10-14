@@ -118,6 +118,7 @@ abstract class _ItemDetailsStoreBase with Store {
     final res = await GetIt.I<MarkItemBoughtUseCase>().call(
       itemId: itemId,
       checked: target,
+      name: cur.name,
     );
     if (res.isRight) return true;
     item = _PatchedProduct(cur, checked: !target);
