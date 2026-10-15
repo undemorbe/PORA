@@ -191,3 +191,13 @@ Rollup-таблицы/materialized views (агрегируем на лету; и
 - `/api/system/notify-everyone` больше не существует; `/api/admin/push` без admin-токена → `401/403`.
 - Действия в приложении (добавить/купить товар, AI-чат, импорт рецепта) появляются в `analytics_events` без дублей.
 - CI зелёный: format, analyze, flutter test, go vet/test, admin typecheck/test/build.
+
+## 7. Уточнения после планирования (2026-10-15)
+
+Зафиксированы в планах `docs/superpowers/plans/2026-10-15-admin-analytics-{1-backend,2-flutter,3-admin-site}.md`; при расхождении с разделами выше действуют эти пункты.
+
+- **Товары (§2.1, §2.2):** топ добавляемых/покупаемых и секции считаются по **серверным** событиям `item_added`/`item_bought`, в props которых сервер кладёт нормализованное название (`lower(trim)`, ≤64 символа) и секцию. Причина: `ProcessCheckedItems` удаляет купленные разовые товары — по таблице `items` топ покупок занижен. Медиана «добавлено → куплено» — по `items`. Клиентский whitelist названия товаров по-прежнему не пропускает.
+- **Очередь клиента (§3.1):** хранится ключом `analytics-queue-v1` в `LocalDBNames.settings` (как `UsageTracker`), а не отдельным Hive-box — тестируемость через `FakeLocalDB`.
+- **Репозитории:** `backend/` — отдельный git-репозиторий (корневой репо публичный, `backend/` в его `.gitignore`); CI бэкенда — в `backend/.github/workflows/`. `admin/` — в корневом репо.
+- **Безопасность, найдено при планировании:** `DeleteItem`/`DeleteItems`/`MarkAsBought` не проверяли токен — теперь требуют его (нужен `actorID` для событий). Выход из приложения удаляет только `client=app` refresh-токен, выход из админки — только `client=admin`.
+- **Логин админки** (`verify-otp` с `client=admin`) не создаёт пользователей: несуществующий или не-админ → `403`. Refresh админки не пишет `user_logins`.
