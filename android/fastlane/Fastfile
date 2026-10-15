@@ -130,7 +130,9 @@ platform :android do
 
     set_github_release(
       repository_name: GITHUB_REPO,
-      api_token: token,
+      # GITHUB_TOKEN воркфлоу принимается только как Bearer; `api_token`
+      # шлёт Basic-auth (годится для PAT) → GitHub отвечает 404.
+      api_bearer: token,
       name: "Pora #{version}",
       tag_name: tag,
       commitish: ENV["GITHUB_SHA"],
