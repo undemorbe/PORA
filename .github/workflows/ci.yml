@@ -41,7 +41,7 @@ jobs:
       - name: Prepare .env
         env:
           API_URL: ${{ vars.API_URL }}
-        run: scripts/ci/prepare_android.sh test
+        run: .github/ci/prepare_android.sh test
 
       - name: Install dependencies
         run: flutter pub get
@@ -88,7 +88,7 @@ jobs:
         env:
           API_URL: ${{ vars.API_URL }}
           GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
-        run: scripts/ci/prepare_android.sh debug
+        run: .github/ci/prepare_android.sh debug
 
       - run: flutter pub get
 

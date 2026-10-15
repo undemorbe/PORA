@@ -96,7 +96,7 @@ jobs:
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
           ANDROID_KEY_PROPERTIES: ${{ secrets.ANDROID_KEY_PROPERTIES }}
-        run: scripts/ci/prepare_android.sh release
+        run: .github/ci/prepare_android.sh release
 
       - run: flutter pub get
 
