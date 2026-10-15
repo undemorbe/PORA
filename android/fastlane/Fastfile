@@ -54,7 +54,7 @@ platform :android do
     else
       missing << "android/key.properties"
     end
-    UI.user_error!("Release inputs missing: #{missing.join(', ')} (see scripts/ci/prepare_android.sh)") unless missing.empty?
+    UI.user_error!("Release inputs missing: #{missing.join(', ')} (see .github/ci/prepare_android.sh)") unless missing.empty?
   end
 
   desc "Собирает подписанные release APK и AAB. Опции: version, build_number"
