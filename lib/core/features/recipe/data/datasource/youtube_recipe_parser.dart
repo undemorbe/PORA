@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:html/parser.dart' as html_parser;
 import 'package:http/http.dart' as http;
 import 'package:pora/core/features/recipe/data/datasource/ai_recipe_parser.dart';
+import 'package:pora/core/features/recipe/data/datasource/ingredient_line_parser.dart';
 import 'package:pora/core/features/recipe/domain/entity/recipe.dart';
 import 'package:pora/core/features/recipe/domain/entity/recipe_ingredient.dart';
 
@@ -134,11 +135,16 @@ class YouTubeRecipeParser {
       );
 
       if (input.isNotEmpty) {
-        final aiResult = await aiParser!.parse(
-          pageText: input,
-          sourceUrl: uri.toString(),
-          languageCode: languageCode,
-        );
+        RecipeEntity? aiResult;
+        try {
+          aiResult = await aiParser!.parse(
+            pageText: input,
+            sourceUrl: uri.toString(),
+            languageCode: languageCode,
+          );
+        } catch (_) {
+          // Сбой провайдера не должен терять детерминированных кандидатов.
+        }
 
         if (aiResult != null && aiResult.ingredients.isNotEmpty) {
           return RecipeEntity(
@@ -152,6 +158,7 @@ class YouTubeRecipeParser {
             servings: aiResult.servings,
             foodEmoji: aiResult.foodEmoji ?? _fallbackFoodEmoji(title),
             sourceUrl: uri.toString(),
+            extractor: 'youtube+ai',
             ingredients: aiResult.ingredients
                 .map(_capitalizeIngredient)
                 .toList(growable: false),
@@ -166,6 +173,7 @@ class YouTubeRecipeParser {
         imageUrl: image,
         foodEmoji: _fallbackFoodEmoji(title),
         sourceUrl: uri.toString(),
+        extractor: 'youtube',
         ingredients: candidates
             .map(_capitalizeIngredient)
             .toList(growable: false),
@@ -552,86 +560,32 @@ class YouTubeRecipeParser {
   }
 
   bool _looksLikeIngredientText(String text) {
-    if (text.length < 3 || text.length > 180) {
-      return false;
-    }
-
     if (text.contains('https://') || text.contains('www.')) {
       return false;
     }
 
-    if (RegExp(r'^\s*\d{1,2}:\d{2}(?::\d{2})?\b').hasMatch(text)) {
-      return false;
-    }
-
     if (RegExp(
-      r'\b(?:intro|introduction|вступление|приготовление|готовим)\b',
+      r'(?:^|\s)(?:intro|introduction|вступление|приготовление|готовим)(?:\s|$|[:.,!])',
+      unicode: true,
     ).hasMatch(text)) {
       return false;
     }
 
-    return RegExp(r'\d', unicode: true).hasMatch(text);
+    return IngredientLineParser.looksLikeIngredient(text);
   }
 
   RecipeIngredient _parseIngredient(String raw) {
-    final match = RegExp(
-      r'^\s*'
-      r'(?<quantity>\d+(?:[.,]\d+)?)'
-      r'\s*'
-      r'(?<unit>г|кг|мл|л|шт\.?|'
-      r'ст\.?\s*л\.?|ч\.?\s*л\.?|'
-      r'g|kg|ml|l|tsp|tbsp|cup|cups)?'
-      r'\s+'
-      r'(?<name>.+)$',
-      caseSensitive: false,
-      unicode: true,
-    ).firstMatch(raw);
-
-    if (match == null) {
-      return RecipeIngredient(name: raw, raw: raw);
-    }
-
-    final name = match.namedGroup('name')?.trim() ?? raw;
+    final parsed = IngredientLineParser.parse(raw);
     return RecipeIngredient(
-      name: name.replaceFirst(
+      name: parsed.name.replaceFirst(
         RegExp(r'\s+(?:and|и)$', caseSensitive: false),
         '',
       ),
-      quantity: match.namedGroup('quantity'),
-      unit: _normalizeUnit(match.namedGroup('unit')),
-      raw: raw,
+      quantity: parsed.quantity,
+      unit: parsed.unit,
+      note: parsed.note,
+      raw: parsed.raw,
     );
-  }
-
-  String? _normalizeUnit(String? value) {
-    if (value == null) {
-      return null;
-    }
-
-    final normalized = value
-        .toLowerCase()
-        .replaceAll('.', '')
-        .replaceAll(' ', '');
-
-    const units = {
-      'г': 'g',
-      'кг': 'kg',
-      'мл': 'ml',
-      'л': 'l',
-      'шт': 'pcs',
-      'стл': 'tbsp',
-      'чл': 'tsp',
-      'g': 'g',
-      'kg': 'kg',
-      'ml': 'ml',
-      'l': 'l',
-      'tsp': 'tsp',
-      'tbsp': 'tbsp',
-      'cup': 'cup',
-      'cups': 'cup',
-    };
-
-    return units[normalized];
   }
 
   String _buildAiText({

@@ -229,6 +229,11 @@ class InjectionContainer {
       () => DeleteFamilyUseCase(familyRepository: _getIt<FamilyRepository>()),
     );
 
+    //! Groups
+    _getIt.registerFactory<GetUserGroupsUseCase>(
+      () => GetUserGroupsUseCase(groupsRepository: _getIt<GroupsRepository>()),
+    );
+
     //! Invitations (linkCodes for families)
     _getIt.registerFactory<GetInviteCodeUseCase>(
       () => GetInviteCodeUseCase(
@@ -343,6 +348,14 @@ class InjectionContainer {
       ),
     );
 
+    //! Groups
+    _getIt.registerLazySingleton<GroupsRemote>(
+      () => GroupsRemoteImpl(apiClient: _getIt<ApiClient>()),
+    );
+    _getIt.registerLazySingleton<GroupsRepository>(
+      () => GroupsService(groupsRemote: _getIt<GroupsRemote>()),
+    );
+
     //! Invitations (linkCodes to families)
     _getIt.registerLazySingleton<RemoteInvitations>(
       () => RemoteInvitationsImpl(apiClient: _getIt<ApiClient>()),
@@ -369,7 +382,14 @@ class InjectionContainer {
       () => AiRecipeParser(ai: _getIt<AiRepository>()),
     );
     _getIt.registerLazySingleton<RecipeScraper>(
-      () => HttpRecipeScraper(aiParser: _getIt<AiRecipeParser>()),
+      () => HttpRecipeScraper(
+        aiParser: _getIt<AiRecipeParser>(),
+        recipeStripper: RecipeStripperClient(
+          host:
+              dotenv.maybeGet('AI_RECIPE_SCRAPPER_URL') ??
+              RecipeStripperClient.defaultHost,
+        ),
+      ),
     );
     _getIt.registerLazySingleton<RecipeRepository>(
       () => RecipeService(scraper: _getIt<RecipeScraper>()),

@@ -55,6 +55,7 @@ dependencies:
   device_preview: ^3.0.0
   flutter_localizations:
     sdk: flutter
+  recipe_scraper: 1.0.1 # пин: ревью исходников 1.0.1 (только html+http, без I/O). Новые версии — после аудита.
 dev_dependencies:
   flutter_test:
     sdk: flutter

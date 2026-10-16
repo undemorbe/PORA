@@ -9,7 +9,9 @@ abstract class ListsRemote {
   Future<Either<Failure, ListsArrayEntity>> getFamilyLists({
     required String fid,
   });
-  Future<Either<Failure, Success>> createList({
+
+  /// Возвращает id созданного списка.
+  Future<Either<Failure, String>> createList({
     required String name,
     String? fid,
   });
@@ -23,13 +25,19 @@ class ListsRemoteImpl implements ListsRemote {
   const ListsRemoteImpl({required this.apiClient});
 
   @override
-  Future<Either<Failure, Success>> createList({
+  Future<Either<Failure, String>> createList({
     required String name,
     String? fid,
   }) async {
     try {
-      await apiClient.createList(body: {'family-id': fid, 'name': name});
-      return Right(const ServerSuccess());
+      final res = await apiClient.createList(
+        body: {'family-id': fid, 'name': name},
+      );
+      final id = res is Map ? res['id'] : null;
+      if (id is! String || id.isEmpty) {
+        return Left(const ServerFailure('create-list: no id in response'));
+      }
+      return Right(id);
     } on Exception catch (e) {
       return Left(NetworkFailure(e.toString()));
     }

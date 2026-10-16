@@ -81,7 +81,7 @@ class _AdvancedSettingsPageState extends State<AdvancedSettingsPage> {
   }
 
   Future<void> _resyncDeviceToken() async {
-    await syncDeviceToken();
+    await syncDeviceToken(force: true);
     if (!mounted) return;
     PoraSnackbar.show(context, message: context.l10n.tokenSynced);
     setState(() {}); // rerender для обновления token preview

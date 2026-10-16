@@ -55,9 +55,10 @@ class _ListPageState extends State<ListPage> {
     listStore = ListStore()..getConcreteList(lid: widget.listId);
     AnalyticsService.instance.logListOpened(widget.listId);
     _wsSub = AppWebsocket.instance.events.listen((event) {
-      if (event.lid != widget.listId && listStore.isSelfUpdated == false) {
-        return;
-      }
+      // Чужие списки не трогаем; эхо собственного toggle уже применено
+      // оптимистично — повторно не грузим.
+      if (event.lid != widget.listId) return;
+      if (listStore.isSelfUpdated == true) return;
       _debouncer.call(_refresh);
     });
   }

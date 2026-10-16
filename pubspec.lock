@@ -1349,6 +1349,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.0"
+  recipe_scraper:
+    dependency: "direct main"
+    description:
+      name: recipe_scraper
+      sha256: "5757b8ad5d40adbe7bdc05d60997fe54e34a2a1629ce4df15ce1b0acebc4f923"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   record_use:
     dependency: transitive
     description:

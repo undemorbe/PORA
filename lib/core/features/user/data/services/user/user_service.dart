@@ -10,15 +10,23 @@ import 'package:pora/core/internal/errors/failure.dart';
 import 'package:pora/core/internal/errors/failure_mapper.dart';
 import 'package:pora/core/internal/errors/success.dart';
 import 'package:pora/core/internal/extensions/either.dart';
+import 'package:pora/core/internal/network/single_flight.dart';
 
 const _profileCacheKey = 'profile:user-me-v1';
 
 class UserService implements UserRepository {
-  const UserService(this.remoteDataSource);
+  UserService(this.remoteDataSource);
   final UserRemoteDataSource remoteDataSource;
 
+  /// `/user/me` дёргают groups, lists, settings и recipe одновременно —
+  /// параллельные вызовы склеиваем в один запрос.
+  final _getUserFlight = SingleFlight<Either<Failure, UserEntity>>();
+
   @override
-  Future<Either<Failure, UserEntity>> getUser() async {
+  Future<Either<Failure, UserEntity>> getUser() =>
+      _getUserFlight.run(_fetchUser);
+
+  Future<Either<Failure, UserEntity>> _fetchUser() async {
     try {
       final model = await remoteDataSource.getUser();
       await HiveJsonCache.put(_profileCacheKey, model.toJson());

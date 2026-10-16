@@ -24,6 +24,14 @@ abstract class _AiChatStoreBase with Store {
   @computed
   bool get isEmpty => history.isEmpty;
 
+  /// Последний запрос упал — можно повторить без повторного ввода.
+  @computed
+  bool get canRetry =>
+      !isBusy &&
+      errorMessage != null &&
+      history.isNotEmpty &&
+      history.last.role == 'user';
+
   @action
   Future<void> send({
     required String text,
@@ -33,21 +41,59 @@ abstract class _AiChatStoreBase with Store {
   }) async {
     final trimmed = text.trim();
     if (trimmed.isEmpty || isBusy) return;
+    // Не копим подряд два вопроса без ответа после ошибки.
+    if (canRetry) history.removeLast();
     history.add(AiMessage.user(trimmed));
     AnalyticsService.instance.logAiMessageSent();
+    await _request(
+      languageCode: languageCode,
+      contextSummary: contextSummary,
+      context: context,
+    );
+  }
+
+  @action
+  Future<void> retry({
+    required String languageCode,
+    String? contextSummary,
+    AiContext context = const AiContext(),
+  }) async {
+    if (!canRetry) return;
+    await _request(
+      languageCode: languageCode,
+      contextSummary: contextSummary,
+      context: context,
+    );
+  }
+
+  @action
+  Future<void> _request({
+    required String languageCode,
+    String? contextSummary,
+    required AiContext context,
+  }) async {
     isBusy = true;
     errorMessage = null;
+    final watch = Stopwatch()..start();
     final res = await useCase(
       history: List.of(history),
       languageCode: languageCode,
       contextSummary: contextSummary,
       context: context,
     );
-    if (res.isRight) {
-      history.add(AiMessage.assistant(res.right.content));
+    final content = res.isRight ? res.right.content.trim() : '';
+    if (content.isNotEmpty) {
+      history.add(AiMessage.assistant(content));
     } else {
-      errorMessage = res.left.message;
+      errorMessage = res.isLeft ? res.left.message : null;
+      errorMessage ??= 'Empty response';
     }
+    AnalyticsService.instance.logAiResponse(
+      kind: 'chat',
+      success: content.isNotEmpty,
+      latencyMs: watch.elapsedMilliseconds,
+      error: res.isLeft ? res.left.runtimeType.toString() : null,
+    );
     isBusy = false;
   }
 

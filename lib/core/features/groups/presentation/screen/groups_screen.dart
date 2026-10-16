@@ -53,16 +53,41 @@ class _GroupsPageState extends State<GroupsPage> {
     super.initState();
     _loadViewMode();
     try {
+      // Первый load уже запущен DI (`GroupsStore()..load()`) — повторный
+      // вызов склеивается с ним и в сеть не идёт.
       store.load();
-      _sub = AppWebsocket.instance.events.listen((e) {
-        // Любое событие → refresh (общая переорганизация — редко, ok).
-        _debouncer.call((() {
-          store.load();
-        }));
-      });
+      _sub = AppWebsocket.instance.events.listen(_onWsEvent);
     } on Exception {
       // TODO
     }
+  }
+
+  /// Семьи, затронутые WS-событиями за окно debounce.
+  final _pendingFamilies = <String>{};
+  bool _pendingFullReload = false;
+
+  void _onWsEvent(WsDataModel e) {
+    final fid = e.fid;
+    if (fid != null && e.lid != null) {
+      // Изменился список/товар — достаточно lists одной семьи.
+      _pendingFamilies.add(fid);
+    } else {
+      // Событие уровня семьи (участники, удаление) или без fid — полный refresh.
+      _pendingFullReload = true;
+    }
+    _debouncer.call(_flushWsEvents);
+  }
+
+  void _flushWsEvents() {
+    if (_pendingFullReload) {
+      store.load();
+    } else {
+      for (final fid in _pendingFamilies) {
+        store.refreshFamily(fid);
+      }
+    }
+    _pendingFamilies.clear();
+    _pendingFullReload = false;
   }
 
   Future<void> _loadViewMode() async {

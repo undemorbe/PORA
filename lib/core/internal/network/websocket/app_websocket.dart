@@ -22,8 +22,13 @@ class AppWebsocket {
 
   Future<void> connect(Uri wsUrl) async {
     _shouldRun = true;
+    // Уже подключены — второй канал продублировал бы каждое событие
+    // (и каждый refresh, который оно запускает).
+    if (_channel != null) return;
     final token = await GetIt.I<TokensSecureStore>().getAccessToken();
     if (token == null) return;
+    // Параллельный connect() мог успеть открыть канал, пока читали токен.
+    if (_channel != null) return;
     Logger.talker.debug('token exists, starting connecting');
 
     _channel = IOWebSocketChannel.connect(
@@ -36,10 +41,12 @@ class AppWebsocket {
       _onData,
       onError: (e) {
         Logger.talker.critical('Ws error: $e');
+        _dropChannel();
         _scheduleReconnect(wsUrl);
       },
       onDone: () {
         Logger.talker.info('ws closed');
+        _dropChannel();
         _scheduleReconnect(wsUrl);
       },
       cancelOnError: true,
@@ -51,11 +58,17 @@ class AppWebsocket {
       final data = jsonDecode(raw);
       WsDataModel event = WsDataModel.fromJson(data);
       Logger.talker.debug('Ws data getted');
+      retryAttempts = 0;
 
       _events.add(event);
     } catch (e) {
       Logger.talker.warning('ws bad frame');
     }
+  }
+
+  void _dropChannel() {
+    _channel = null;
+    _subscription = null;
   }
 
   void _scheduleReconnect(Uri url) async {
@@ -71,9 +84,12 @@ class AppWebsocket {
 
     _shouldRun = false;
     _reconnectTimer?.cancel();
-    await _subscription?.cancel();
-    await _channel?.sink.close(WebSocketStatus.normalClosure);
+    // Обнуляем синхронно, чтобы connect() сразу после disconnect() не
+    // принял закрывающийся канал за живой.
+    final channel = _channel;
     _channel = null;
+    await _subscription?.cancel();
     _subscription = null;
+    await channel?.sink.close(WebSocketStatus.normalClosure);
   }
 }

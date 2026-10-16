@@ -35,7 +35,7 @@ class _FamiliesPageState extends State<FamiliesPage>
   void initState() {
     super.initState();
     familyTextController = TextEditingController();
-    familiesStore = FamiliesStore();
+    familiesStore = FamiliesStore()..getFamilies();
     subscription = AppWebsocket.instance.events.listen((event) {
       if (event.fid != null && event.iid == null && event.lid == null) {
         debouncer.call(() {
@@ -56,7 +56,6 @@ class _FamiliesPageState extends State<FamiliesPage>
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
-    familiesStore.getFamilies();
     return Scaffold(
       body: SafeArea(
         child: Padding(

@@ -12,7 +12,7 @@ class ListsService implements ListsRepository {
   const ListsService({required this.listsRemote});
 
   @override
-  Future<Either<Failure, Success>> createList({
+  Future<Either<Failure, String>> createList({
     required String name,
     String? fid,
   }) => listsRemote.createList(name: name, fid: fid);

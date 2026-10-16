@@ -16,6 +16,13 @@ mixin _$AiChatStore on _AiChatStoreBase, Store {
     () => super.isEmpty,
     name: '_AiChatStoreBase.isEmpty',
   )).value;
+  Computed<bool>? _$canRetryComputed;
+
+  @override
+  bool get canRetry => (_$canRetryComputed ??= Computed<bool>(
+    () => super.canRetry,
+    name: '_AiChatStoreBase.canRetry',
+  )).value;
 
   late final _$historyAtom = Atom(
     name: '_AiChatStoreBase.history',
@@ -93,6 +100,46 @@ mixin _$AiChatStore on _AiChatStoreBase, Store {
     );
   }
 
+  late final _$retryAsyncAction = AsyncAction(
+    '_AiChatStoreBase.retry',
+    context: context,
+  );
+
+  @override
+  Future<void> retry({
+    required String languageCode,
+    String? contextSummary,
+    AiContext context = const AiContext(),
+  }) {
+    return _$retryAsyncAction.run(
+      () => super.retry(
+        languageCode: languageCode,
+        contextSummary: contextSummary,
+        context: context,
+      ),
+    );
+  }
+
+  late final _$_requestAsyncAction = AsyncAction(
+    '_AiChatStoreBase._request',
+    context: context,
+  );
+
+  @override
+  Future<void> _request({
+    required String languageCode,
+    String? contextSummary,
+    required AiContext context,
+  }) {
+    return _$_requestAsyncAction.run(
+      () => super._request(
+        languageCode: languageCode,
+        contextSummary: contextSummary,
+        context: context,
+      ),
+    );
+  }
+
   late final _$_AiChatStoreBaseActionController = ActionController(
     name: '_AiChatStoreBase',
     context: context,
@@ -116,7 +163,8 @@ mixin _$AiChatStore on _AiChatStoreBase, Store {
 history: ${history},
 isBusy: ${isBusy},
 errorMessage: ${errorMessage},
-isEmpty: ${isEmpty}
+isEmpty: ${isEmpty},
+canRetry: ${canRetry}
     ''';
   }
 }

@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:pora/core/features/auth_and_validation/data/models/jwt_models/tokens_model.dart';
 import 'package:pora/core/features/brief/data/models/brief_product_model_list.dart';
 import 'package:pora/core/features/families/data/models/families_models.dart';
+import 'package:pora/core/features/groups/data/models/user_groups_model.dart';
 import 'package:pora/core/features/item_detail/data/models/add_item_response.dart';
 import 'package:pora/core/features/invitation/data/models/link_code_model.dart';
 import 'package:pora/core/features/lists/data/models/lists/list_model.dart';
@@ -49,6 +50,10 @@ abstract class ApiClient {
 
   @GET('/user/me')
   Future<UserModel> getUser();
+
+  /// Семьи (участники + превью списков) и личные списки одним запросом.
+  @GET('/user/groups')
+  Future<UserGroupsModel> getUserGroups();
 
   @POST('/user/save-image')
   @MultiPart()
@@ -102,8 +107,10 @@ abstract class ApiClient {
   Future<void> deleteFamily({@Path('fid') required String familyId});
 
   //! Lists
+  /// Ответ: `{"id": "<list-id>"}`. `dynamic`, а не `Map<String, dynamic>`:
+  /// retrofit_generator генерирует для Map невалидный `dynamic.fromJson`.
   @POST('/lists/create-list')
-  Future<void> createList({@Body() required Map<String, dynamic> body});
+  Future<dynamic> createList({@Body() required Map<String, dynamic> body});
 
   @GET('/lists/{lid}')
   Future<ListModel> getList({@Path('lid') required String listId});

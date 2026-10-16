@@ -51,6 +51,12 @@ class AnalyticsService {
     }
   }
 
+  /// Firebase режет значения параметров длиннее 100 символов.
+  static String? _short(String? value) {
+    if (value == null || value.isEmpty) return null;
+    return value.length <= 100 ? value : value.substring(0, 100);
+  }
+
   Future<void> _log(String name, [Map<String, Object>? params]) async {
     try {
       await _analytics?.logEvent(name: name, parameters: params);
@@ -95,12 +101,55 @@ class AnalyticsService {
     return _log('ai_message_sent');
   }
 
-  Future<void> logTipGenerated() => _log('ai_tip_generated');
+  /// Результат запроса к AI: [kind] — `chat`/`tip`/`recipe`, [latencyMs] —
+  /// время ответа, [error] — тип Failure при ошибке. Позволяет видеть
+  /// долю сбоев и медленные модели в Firebase.
+  Future<void> logAiResponse({
+    required String kind,
+    required bool success,
+    required int latencyMs,
+    String? error,
+  }) => _log('ai_response', {
+    'kind': kind,
+    'success': success.toString(),
+    'latency_ms': latencyMs,
+    'error': ?_short(error),
+  });
 
-  Future<void> logRecipeImport({required String source}) {
+  Future<void> logTipGenerated({required bool fromFallback}) =>
+      _log('ai_tip_generated', {'fallback': fromFallback.toString()});
+
+  Future<void> logRecipeImport({
+    required String source,
+    String? extractor,
+    String? host,
+    int? ingredients,
+    int? durationMs,
+  }) {
     _usage.recipeImported();
-    return _log('recipe_import', {'source': source});
+    return _log('recipe_import', {
+      'source': source,
+      'extractor': ?_short(extractor),
+      'host': ?_short(host),
+      'ingredients': ?ingredients,
+      'duration_ms': ?durationMs,
+    });
   }
+
+  /// Неудачный импорт: [reason] — `invalid_url`/`http`/`no_ingredients`/
+  /// `youtube`/`network`/…; по [host] видно, какие сайты чинить первыми.
+  Future<void> logRecipeImportFailed({
+    required String reason,
+    String? host,
+    int? durationMs,
+  }) => _log('recipe_import_failed', {
+    'reason': reason,
+    'host': ?_short(host),
+    'duration_ms': ?durationMs,
+  });
+
+  Future<void> logRecipeItemsAdded({required int count, int failed = 0}) =>
+      _log('recipe_items_added', {'count': count, 'failed': failed});
 
   Future<void> logInsightsPeriodChanged(int days) =>
       _log('insights_period', {'days': days});

@@ -95,18 +95,28 @@ class _PoraChatSheetState extends State<PoraChatSheet> {
     final text = _input.text.trim();
     if (text.isEmpty || _store.isBusy) return;
     _input.clear();
-    final locale = Localizations.localeOf(context).languageCode;
     await _store.send(
       text: text,
-      languageCode: locale,
+      languageCode: Localizations.localeOf(context).languageCode,
       contextSummary: _shoppingContext,
-      context: AiContext(
-        allProducts: _statistics.allProducts.toList(),
-        briefProducts: _briefProducts,
-      ),
+      context: _aiContext,
     );
     _scrollToBottom();
   }
+
+  Future<void> _retry() async {
+    await _store.retry(
+      languageCode: Localizations.localeOf(context).languageCode,
+      contextSummary: _shoppingContext,
+      context: _aiContext,
+    );
+    _scrollToBottom();
+  }
+
+  AiContext get _aiContext => AiContext(
+    allProducts: _statistics.allProducts.toList(),
+    briefProducts: _briefProducts,
+  );
 
   String? get _shoppingContext {
     final products = _statistics.popularProducts.take(8).toList();
@@ -231,12 +241,23 @@ class _PoraChatSheetState extends State<PoraChatSheet> {
                           horizontal: PoraSpacing.screen,
                           vertical: 4,
                         ),
-                        child: Text(
-                          _store.errorMessage!,
-                          style: PoraText.small.copyWith(
-                            color: PoraColors.danger,
-                          ),
-                          textAlign: TextAlign.center,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              _store.errorMessage!,
+                              style: PoraText.small.copyWith(
+                                color: PoraColors.danger,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            if (_store.canRetry)
+                              TextButton.icon(
+                                onPressed: _retry,
+                                icon: const Icon(Icons.refresh, size: 18),
+                                label: Text(context.l10n.retry),
+                              ),
+                          ],
                         ),
                       )
                     : const SizedBox.shrink(),

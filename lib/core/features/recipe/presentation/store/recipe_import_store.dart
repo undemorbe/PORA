@@ -3,14 +3,14 @@ import 'dart:convert';
 import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 import 'package:pora/core/features/families/domain/usecase/create_family.dart';
-import 'package:pora/core/features/groups/presentation/store/groups_store.dart';
-import 'package:pora/core/features/item_detail/domain/usecase/add_item.dart';
 import 'package:pora/core/features/lists/domain/usecase/create_list.dart';
-import 'package:pora/core/features/user/domain/usecase/user/get_user.dart';
 import 'package:pora/core/features/recipe/domain/entity/recipe.dart';
+import 'package:pora/core/features/recipe/domain/recipe_creator.dart';
 import 'package:pora/core/features/recipe/domain/entity/recipe_ingredient.dart';
 import 'package:pora/core/features/recipe/domain/usecase/parse_recipe_from_url.dart';
 import 'package:pora/core/internal/analytics/analytics_service.dart';
+import 'package:pora/core/internal/errors/failure.dart';
+import 'package:pora/core/features/recipe/domain/recipe_import_failure.dart';
 part 'recipe_import_store.g.dart';
 
 class RecipeImportStore = _RecipeImportStoreBase with _$RecipeImportStore;
@@ -66,23 +66,33 @@ abstract class _RecipeImportStoreBase with Store {
     if (url.trim().isEmpty) return;
     isLoading = true;
     errorMessage = null;
+    final watch = Stopwatch()..start();
     final result = await GetIt.I<ParseRecipeFromUrlUseCase>().call(
       url: url,
       languageCode: languageCode,
     );
     isLoading = false;
+    final host = Uri.tryParse(url.trim())?.host ?? '';
     if (result.isLeft) {
       recipe = null;
       rows = ObservableList<RecipeRow>();
       selected = ObservableSet<int>();
       errorMessage = result.left.message;
+      AnalyticsService.instance.logRecipeImportFailed(
+        reason: _failureReason(result.left),
+        host: host,
+        durationMs: watch.elapsedMilliseconds,
+      );
       return;
     }
 
     recipe = result.right;
-    final host = Uri.tryParse(url.trim())?.host ?? '';
     AnalyticsService.instance.logRecipeImport(
       source: host.contains('youtu') ? 'youtube' : 'web',
+      extractor: result.right.extractor,
+      host: host,
+      ingredients: result.right.ingredients.length,
+      durationMs: watch.elapsedMilliseconds,
     );
     rows = ObservableList<RecipeRow>.of(
       result.right.ingredients.map(
@@ -95,31 +105,17 @@ abstract class _RecipeImportStoreBase with Store {
   /// Возвращает список ошибок (может быть пустым).
   @action
   Future<List<String>> addSelected() async {
-    final errs = <String>[];
-    final addUC = GetIt.I<AddItemUseCase>();
-
-    for (var i = 0; i < rows.length; i++) {
-      if (!selected.contains(i)) continue;
-      final ing = rows[i].ingredient;
-      final res = await addUC.call(
-        listId: lid,
-        name: ing.name,
-        section: 'Разное',
-        quantity: _parseQty(ing.quantity),
-        unit: ing.unit ?? '',
-        priority: 0,
-        urgent: false,
-        remindEveryDays: null,
-      );
-      if (res.isLeft) errs.add(res.left.message);
-    }
-    return errs;
+    final picked = [
+      for (var i = 0; i < rows.length; i++)
+        if (selected.contains(i)) rows[i].ingredient,
+    ];
+    return RecipeCreator.addIngredients(picked, lid);
   }
 
-  int _parseQty(String? raw) {
-    if (raw == null) return 1;
-    final match = RegExp(r'\d+').firstMatch(raw);
-    return int.tryParse(match?.group(0) ?? '') ?? 1;
+  static String _failureReason(Failure failure) {
+    if (failure is RecipeImportFailure) return failure.kind.name;
+    if (failure.isConnectivity) return 'network';
+    return failure.runtimeType.toString();
   }
 
   @action
@@ -139,21 +135,7 @@ abstract class _RecipeImportStoreBase with Store {
     final r = recipe;
     if (r == null || r.ingredients.isEmpty) return const [];
     isLoading = true;
-    final errs = <String>[];
-    final addUC = GetIt.I<AddItemUseCase>();
-    for (final ing in r.ingredients) {
-      final res = await addUC.call(
-        listId: targetLid,
-        name: ing.name,
-        section: 'Разное',
-        quantity: _parseQty(ing.quantity),
-        unit: ing.unit ?? '',
-        priority: 0,
-        urgent: false,
-        remindEveryDays: null,
-      );
-      if (res.isLeft) errs.add(res.left.message);
-    }
+    final errs = await RecipeCreator.addIngredients(r.ingredients, targetLid);
     isLoading = false;
     return errs;
   }
@@ -196,21 +178,8 @@ abstract class _RecipeImportStoreBase with Store {
       return null;
     }
 
-    // 3. Refresh groups + найти созданный лист.
-    final groupsStore = GetIt.I<GroupsStore>();
-    await groupsStore.load();
-    String? newLid;
-    for (final g in groupsStore.groups) {
-      if (g.familyId == fid && g.list.name == r.title) {
-        newLid = g.list.id;
-        break;
-      }
-    }
-    if (newLid == null) {
-      isLoading = false;
-      errorMessage = 'List id lookup failed';
-      return null;
-    }
+    // 3. create-list сразу отдаёт id; GroupsStore обновится по WS-событию.
+    final newLid = listRes.right;
 
     // 4. Добавляем ингредиенты.
     final errs = await addRecipeToExistingList(newLid);
@@ -238,40 +207,10 @@ abstract class _RecipeImportStoreBase with Store {
       return null;
     }
 
-    // Backend не возвращает lid — берём из /user/me новейший список
-    // с матчащимся именем.
-    final userRes = await GetIt.I<GetUserUseCase>().call();
-    String? newLid;
-    if (userRes.isRight) {
-      final lists = userRes.right.selfLists ?? const [];
-      final matches = lists.where((l) => l.name == r.title).toList();
-      if (matches.isNotEmpty) {
-        // Берём последний в списке (обычно новый в конце). Если id ISO-like
-        // — можно сортировать; для простоты — последний.
-        newLid = matches.last.id;
-      }
-    }
-
-    if (newLid == null) {
-      isLoading = false;
-      errorMessage = 'List created, but id lookup failed';
-      return null;
-    }
+    final newLid = createRes.right;
 
     // Добавляем все ингредиенты.
-    final addUC = GetIt.I<AddItemUseCase>();
-    for (final ing in r.ingredients) {
-      await addUC.call(
-        listId: newLid,
-        name: ing.name,
-        section: 'Разное',
-        quantity: _parseQty(ing.quantity),
-        unit: ing.unit ?? '',
-        priority: 0,
-        urgent: false,
-        remindEveryDays: null,
-      );
-    }
+    await RecipeCreator.addIngredients(r.ingredients, newLid);
 
     isLoading = false;
     return newLid;

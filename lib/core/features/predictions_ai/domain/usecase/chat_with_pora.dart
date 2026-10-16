@@ -18,9 +18,7 @@ class ChatWithPoraUseCase {
     String? contextSummary,
     AiContext context = const AiContext(),
   }) {
-    final recentHistory = history.length <= 12
-        ? history
-        : history.sublist(history.length - 12);
+    final recentHistory = compactHistory(history);
     final guarded = guardedMessages(
       recentHistory,
       languageCode: languageCode,
@@ -30,5 +28,32 @@ class ChatWithPoraUseCase {
       ].whereType<String>().where((value) => value.trim().isNotEmpty).join(' '),
     );
     return repository.chat(messages: guarded, maxTokens: 3500);
+  }
+
+  static const historyWindow = 12;
+
+  static final _recipeBlock = RegExp(
+    r'<recipe>[\s\S]*?(?:</recipe>|$)',
+    caseSensitive: false,
+  );
+
+  /// Последние [historyWindow] реплик; из прошлых ответов ассистента
+  /// вырезается машинный `<recipe>{json}</recipe>` — модель видит текст
+  /// рецепта, а JSON только съедал бы токены контекста. Окно начинается с
+  /// реплики пользователя, чтобы модель не видела «ответ без вопроса».
+  static List<AiMessage> compactHistory(List<AiMessage> history) {
+    var recent = history.length <= historyWindow
+        ? history
+        : history.sublist(history.length - historyWindow);
+    final firstUser = recent.indexWhere((m) => m.role == 'user');
+    if (firstUser > 0) recent = recent.sublist(firstUser);
+    return [
+      for (final m in recent)
+        if (m.role == 'assistant' &&
+            m.content.toLowerCase().contains('<recipe>'))
+          AiMessage.assistant(m.content.replaceAll(_recipeBlock, '').trim())
+        else
+          m,
+    ];
   }
 }

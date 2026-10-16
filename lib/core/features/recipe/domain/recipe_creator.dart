@@ -2,11 +2,13 @@ import 'dart:convert';
 
 import 'package:get_it/get_it.dart';
 import 'package:pora/core/features/families/domain/usecase/create_family.dart';
-import 'package:pora/core/features/groups/presentation/store/groups_store.dart';
 import 'package:pora/core/features/item_detail/domain/usecase/add_item.dart';
 import 'package:pora/core/features/lists/domain/usecase/create_list.dart';
+import 'package:pora/core/features/add_item/domain/add_item_defaults.dart';
 import 'package:pora/core/features/recipe/domain/entity/recipe.dart';
-import 'package:pora/core/features/user/domain/usecase/user/get_user.dart';
+import 'package:pora/core/features/recipe/domain/entity/recipe_ingredient.dart';
+import 'package:pora/core/features/recipe/domain/recipe_units.dart';
+import 'package:pora/core/internal/analytics/analytics_service.dart';
 
 /// Универсальный executor рецепт-таргетинга. Один код для recipe_import_screen
 /// и для chat message (когда AI вернул `<recipe>` тег).
@@ -33,16 +35,8 @@ class RecipeCreator {
     );
     if (listRes.isLeft) return null;
 
-    final groups = GetIt.I<GroupsStore>();
-    await groups.load();
-    String? lid;
-    for (final g in groups.groups) {
-      if (g.familyId == fid && g.list.name == recipe.title) {
-        lid = g.list.id;
-        break;
-      }
-    }
-    if (lid == null) return null;
+    // create-list сразу отдаёт id; GroupsStore обновится по WS-событию семьи.
+    final lid = listRes.right;
     await _addAll(recipe, lid);
     return lid;
   }
@@ -53,13 +47,7 @@ class RecipeCreator {
     final res = await GetIt.I<CreateListUseCase>().call(name: recipe.title);
     if (res.isLeft) return null;
 
-    final userRes = await GetIt.I<GetUserUseCase>().call();
-    if (userRes.isLeft) return null;
-    final matches = (userRes.right.selfLists ?? const [])
-        .where((l) => l.name == recipe.title)
-        .toList();
-    if (matches.isEmpty) return null;
-    final lid = matches.last.id;
+    final lid = res.right;
     await _addAll(recipe, lid);
     return lid;
   }
@@ -73,28 +61,38 @@ class RecipeCreator {
     return _addAll(recipe, lid);
   }
 
-  static Future<List<String>> _addAll(RecipeEntity recipe, String lid) async {
+  static Future<List<String>> _addAll(RecipeEntity recipe, String lid) =>
+      addIngredients(recipe.ingredients, lid);
+
+  /// Добавляет ингредиенты в список [lid]: количество и единица переводятся
+  /// в единицы списка покупок ([RecipeUnits.toShopping]) — «0.5 кг» станет
+  /// «500 г», «2 ст. л.» — «1 шт». Возвращает ошибки (пустой = OK).
+  static Future<List<String>> addIngredients(
+    Iterable<RecipeIngredient> ingredients,
+    String lid,
+  ) async {
     final errs = <String>[];
     final addUC = GetIt.I<AddItemUseCase>();
-    for (final ing in recipe.ingredients) {
+    for (final ing in ingredients) {
+      final shopping = RecipeUnits.toShopping(ing.quantity, ing.unit);
       final res = await addUC.call(
         listId: lid,
         name: ing.name,
-        section: 'Разное',
-        quantity: _parseQty(ing.quantity),
-        unit: ing.unit ?? '',
+        section: AddItemDefaults.defaultSection,
+        quantity: shopping.quantity,
+        unit: shopping.unit,
         priority: 0,
         urgent: false,
         remindEveryDays: null,
       );
       if (res.isLeft) errs.add(res.left.message);
     }
+    if (ingredients.isNotEmpty) {
+      AnalyticsService.instance.logRecipeItemsAdded(
+        count: ingredients.length,
+        failed: errs.length,
+      );
+    }
     return errs;
-  }
-
-  static int _parseQty(String? raw) {
-    if (raw == null) return 1;
-    final m = RegExp(r'\d+').firstMatch(raw);
-    return int.tryParse(m?.group(0) ?? '') ?? 1;
   }
 }

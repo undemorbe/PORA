@@ -68,6 +68,7 @@ export 'package:pora/core/features/recipe/data/datasource/recipe_scraper.dart';
 export 'package:pora/core/features/recipe/data/service/recipe_service.dart';
 export 'package:pora/core/features/recipe/domain/repository/recipe_repository.dart';
 export 'package:pora/core/features/recipe/data/datasource/ai_recipe_parser.dart';
+export 'package:pora/core/features/recipe/data/datasource/recipe_stripper_client.dart';
 export 'package:pora/core/features/recipe/domain/usecase/parse_recipe_from_url.dart';
 export 'package:pora/core/features/user/domain/usecase/user/logout.dart';
 export 'package:pora/core/features/user/domain/usecase/user/update_device_token.dart';
@@ -75,6 +76,10 @@ export 'package:pora/core/internal/formatters/image_formatter.dart';
 export 'package:pora/core/internal/notifications/notification_service.dart';
 export 'package:pora/core/internal/links/share_conf.dart';
 export 'package:pora/core/features/notifications/presentation/store/notifications_store.dart';
+export 'package:pora/core/features/groups/data/datasource/remote/groups_remote.dart';
+export 'package:pora/core/features/groups/data/service/groups_service.dart';
+export 'package:pora/core/features/groups/domain/repository/groups_repository.dart';
+export 'package:pora/core/features/groups/domain/usecase/get_user_groups.dart';
 export 'package:pora/core/features/groups/presentation/store/groups_store.dart';
 // AI (OpenRouter clean-arch)
 export 'package:pora/core/features/predictions_ai/data/datasource/ai_remote.dart';

@@ -81,14 +81,24 @@ mixin _$GroupsStore on _GroupsStoreBase, Store {
     });
   }
 
-  late final _$loadAsyncAction = AsyncAction(
-    '_GroupsStoreBase.load',
+  late final _$_loadAsyncAction = AsyncAction(
+    '_GroupsStoreBase._load',
     context: context,
   );
 
   @override
-  Future<void> load() {
-    return _$loadAsyncAction.run(() => super.load());
+  Future<void> _load() {
+    return _$_loadAsyncAction.run(() => super._load());
+  }
+
+  late final _$refreshFamilyAsyncAction = AsyncAction(
+    '_GroupsStoreBase.refreshFamily',
+    context: context,
+  );
+
+  @override
+  Future<void> refreshFamily(String fid) {
+    return _$refreshFamilyAsyncAction.run(() => super.refreshFamily(fid));
   }
 
   late final _$createGroupAsyncAction = AsyncAction(

@@ -49,7 +49,13 @@ class AuthInterceptor extends QueuedInterceptorsWrapper {
 
     if (is401 && !alreadyRetried && !isRefreshRequest && !isLogoutRequest) {
       try {
-        final freshToken = await onRefresh();
+        // Очередь 401-ок: если токен уже обновлён предыдущим запросом,
+        // просто повторяем с ним, без ещё одного /authorize/refresh.
+        final current = tokenProvider();
+        final sentAuth = err.requestOptions.headers['Authorization'];
+        final freshToken = current != null && sentAuth != 'Bearer $current'
+            ? current
+            : await onRefresh();
 
         if (freshToken != null) {
           // Создаем новый запрос с обновленным токеном
