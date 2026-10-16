@@ -62,6 +62,10 @@ abstract class ApiClient {
   @PUT('/user/device')
   Future<void> updateUserDevice({@Body() required Map<String, dynamic> body});
 
+  /// Безвозвратное удаление аккаунта (требование Google Play).
+  @DELETE('/user/me')
+  Future<void> deleteAccount();
+
   //! Brief
   @POST('/user/statistics/brief')
   Future<void> setUserBrief({

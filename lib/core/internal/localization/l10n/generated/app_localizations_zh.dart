@@ -9,40 +9,13 @@ class AppLocalizationsZh extends AppLocalizations {
   AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
-  String get appName => 'Pora';
-
-  @override
   String get language => '语言';
-
-  @override
-  String get authUnderAppName1 => '情侣和家庭共享清单';
-
-  @override
-  String get authUnderAppName2 => '食谱、家庭采购和配送，一站搞定';
 
   @override
   String get onlyYou => '仅你';
 
   @override
-  String get authSignInExpansibleExpand => '使用其他方式登录';
-
-  @override
-  String get authSignInExpansibleCollapse => '收起';
-
-  @override
   String get sendAgainAfter => '重新发送，倒计时…';
-
-  @override
-  String get authSignInWithEmail => '使用邮箱登录';
-
-  @override
-  String get authSignInWithGoogle => '使用 Google 登录';
-
-  @override
-  String get authSignInWithApple => '使用 Apple 登录';
-
-  @override
-  String get authSignInWithPhone => '使用手机号登录';
 
   @override
   String get authPrivatePolicy =>
@@ -131,8 +104,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get onboardingSlide3Title => 'Pora 知道\n什么时候该买';
 
   @override
-  String get onboardingSlide3Body =>
-      'Based 在 你的 purchases, Pora predicts what 将 run out 很快 和 lets 你 订单 it 和 一 点击.';
+  String get onboardingSlide3Body => 'Pora 会根据你的购买记录预测哪些东西快用完了，并提醒你把它们加入清单。';
 
   @override
   String get onboardingSkip => '跳过';
@@ -175,70 +147,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get briefNext => '下一步';
 
   @override
-  String get briefItemMilk => '牛奶';
-
-  @override
-  String get briefItemBread => '面包';
-
-  @override
-  String get briefItemEggs => '鸡蛋';
-
-  @override
-  String get briefItemCoffee => '咖啡';
-
-  @override
-  String get briefItemCheese => '奶酪';
-
-  @override
-  String get briefItemBananas => '香蕉';
-
-  @override
-  String get briefItemButter => '黄油';
-
-  @override
-  String get briefItemWater => '水';
-
-  @override
-  String get briefItemVegetables => '蔬菜';
-
-  @override
-  String get briefItemTomatoes => '番茄';
-
-  @override
-  String get briefItemPasta => '意面';
-
-  @override
-  String get briefItemChicken => '鸡肉';
-
-  @override
-  String get listTitle => '我们的清单';
-
-  @override
-  String get listMembersCount => '2 人 · 8 商品';
-
-  @override
   String get listUrgent => '紧急';
 
   @override
   String get listAdd => '添加';
-
-  @override
-  String get predictionsTitle => 'Pora 可以 help!';
-
-  @override
-  String get predictionsSubtitle => 'Running out 很快 — based 在 你的 purchases';
-
-  @override
-  String get predictionTip => '小提示';
-
-  @override
-  String get predictionsOrderTitle => '订单 everything 和 一 点击';
-
-  @override
-  String get predictionsOrderSubtitle => 'Samokat · 配送 在 15 分钟';
-
-  @override
-  String get predictionsOrderDiscount => '15% off 你的 first 订单';
 
   @override
   String get predictionsAddToList => 'Add 到 清单';
@@ -247,25 +159,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get predictionsDismiss => '没有 thanks';
 
   @override
-  String get itemDetailName => '牛奶';
-
-  @override
-  String get itemDetailSubtitle => '2 L · 乳制品';
-
-  @override
   String get itemDetailAddedBy => '已添加 by';
 
   @override
-  String get itemDetailSection => '分类';
-
-  @override
-  String get itemDetailSectionValue => '乳制品';
-
-  @override
   String get itemDetailQuantity => '数量';
-
-  @override
-  String get itemDetailQuantityValue => '2 L';
 
   @override
   String get itemDetailUrgent => '紧急';
@@ -274,68 +171,22 @@ class AppLocalizationsZh extends AppLocalizations {
   String get itemDetailRemind => '提醒我';
 
   @override
-  String get itemDetailRemindEvery => 'Every 7 天';
-
-  @override
-  String get itemDetailInsight =>
-      '你 buy it about every 7 天 · last bought 6 天 ago. I\'ll suggest restocking 很快.';
-
-  @override
   String get itemDetailMarkBought => '标记为已购买';
 
   @override
   String get itemDetailDelete => '移除 来自 清单';
 
   @override
-  String get addItemTitle => 'Add 商品';
-
-  @override
-  String get addItemExampleValue => '牛油果';
-
-  @override
-  String get addItemNameHint => '商品 名称';
-
-  @override
   String get addItemQuantity => '数量';
 
   @override
-  String get addItemSection => '分类';
-
-  @override
-  String get addItemUrgent => '紧急';
-
-  @override
-  String get addItemUrgentSubtitle => 'Need 到 buy 今天';
-
-  @override
-  String get addItemRemind => '定期提醒';
-
-  @override
-  String get addItemRemindEvery => 'Every 7 天';
-
-  @override
-  String get addItemSubmit => 'Add 到 清单';
-
-  @override
   String get settingsTitle => '设置';
-
-  @override
-  String get settingsHouseholdSection => '家庭';
 
   @override
   String get settingsAppSection => '应用';
 
   @override
   String get settingsNotifications => '通知';
-
-  @override
-  String get settingsDelivery => '配送';
-
-  @override
-  String get settingsProAd => 'Pora+ · ad-免费';
-
-  @override
-  String get settingsTryPill => '试用';
 
   @override
   String get settingsPrivacy => '隐私与数据';
@@ -345,9 +196,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get settingsLogout => '退出登录';
-
-  @override
-  String get settingsMembersNames => 'Boris 和 Anna';
 
   @override
   String get settingsInvitePill => '邀请';
@@ -379,9 +227,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get householdGotInvited => '你\'ve been invited 到 a 家庭';
 
   @override
-  String get householdWriteCode => '输入 invite 代码';
-
-  @override
   String get householdDoLater => '我稍后再做';
 
   @override
@@ -398,47 +243,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get notificationsReadAll => '全部已读';
-
-  @override
-  String get notificationsMilkTitle => 'Grab 牛奶 在 你的 way home';
-
-  @override
-  String get notificationsMilkBody =>
-      'It\'s run out — Anna marked it 10 分钟 ago.';
-
-  @override
-  String get notificationsMilkTime => '5 分钟 ago';
-
-  @override
-  String get notificationsCoffeeTitle => '咖啡 是 running out 很快';
-
-  @override
-  String get notificationsCoffeeBody =>
-      '你 buy it about every 14 天, 12 有 passed.';
-
-  @override
-  String get notificationsPartnerAddedTitle => 'Anna 已添加 2 商品';
-
-  @override
-  String get notificationsPartnerAddedBody => '香蕉 和 面包 是 在  共享 清单.';
-
-  @override
-  String get notificationsPartnerAddedTime => '今天, 9:12';
-
-  @override
-  String get notificationsPromoTitle => '15% off 你的 first Samokat 订单';
-
-  @override
-  String get notificationsPromoBody => ' promo 是 active 用于 6 more 天.';
-
-  @override
-  String get notificationsPromoTime => '昨天';
-
-  @override
-  String get notificationsOrderDeliveredTitle => '订单 delivered';
-
-  @override
-  String get notificationsOrderDeliveredBody => '8 商品 · Samokat · ₽1,054';
 
   @override
   String get notificationsAddToListPill => '＋ Add 到 清单';
@@ -460,28 +264,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get userCreateProfileNext => '下一步';
 
   @override
-  String get searchTitle => '搜索';
-
-  @override
   String get searchHint => '商品 或 食谱…';
-
-  @override
-  String get searchFilterAll => '全部';
-
-  @override
-  String get searchFilterVegetables => '蔬菜';
-
-  @override
-  String get searchFilterDairy => '乳制品';
-
-  @override
-  String get searchFilterGrocery => '杂货';
-
-  @override
-  String get searchFilterRecipes => '食谱';
-
-  @override
-  String get searchResults => '结果';
 
   @override
   String get searchNothingFound => '未找到内容';
@@ -490,49 +273,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get insightsTitle => '洞察';
 
   @override
-  String get orderTitle => '订单';
-
-  @override
-  String get orderCart => '购物车';
-
-  @override
-  String get orderWhenToDeliver => '配送时间';
-
-  @override
-  String orderCheckoutCta(String total) {
-    return '订单 来自 Samokat · $total';
-  }
-
-  @override
-  String get orderSummaryGoods => '商品';
-
-  @override
-  String get orderSummaryDiscount => '立减 15%';
-
-  @override
-  String get orderSummaryDelivery => '配送';
-
-  @override
-  String get orderSummaryFree => '免费';
-
-  @override
-  String get orderSummaryTotal => '合计';
-
-  @override
   String get recipeImportTitle => '食谱 来自 a link';
-
-  @override
-  String get recipePreviewTitle => 'Pasta Carbonara';
-
-  @override
-  String get recipePreviewMeta => 'eda.ru · 25 分钟 · 2 份';
-
-  @override
-  String get recipePreviewFound => '6 食材 found';
-
-  @override
-  String get recipeDedupBanner =>
-      'Removed 2 duplicates 到 avoid duplicating items 已经 在 你的 清单';
 
   @override
   String get recipeIngredients => '食材';
@@ -557,9 +298,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get navPora => 'Pora';
 
   @override
-  String get navOrder => '订单';
-
-  @override
   String get navProfile => '个人资料';
 
   @override
@@ -569,22 +307,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get familiesSubtitle => '选择 a 家庭 到 打开 its 清单';
 
   @override
-  String get familiesCurrent => '当前';
-
-  @override
-  String get familiesCreateOrJoin => '＋ Create 或 join';
-
-  @override
   String get familiesCreateDialog => 'What should we call  家庭?';
 
   @override
   String get tryToUpdate => '尝试刷新';
-
-  @override
-  String get checkOut => '检查';
-
-  @override
-  String get settingsMore => '高级';
 
   @override
   String get listsYour => '你的个人清单';
@@ -682,9 +408,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get appearance => '外观';
 
   @override
-  String get themeSection => '主题';
-
-  @override
   String get themeLight => '浅色';
 
   @override
@@ -743,9 +466,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get recipeEmptyHint => 'Paste a 食谱 URL 和 点击 “Parse”';
-
-  @override
-  String get recipeDupMark => '已经 在 清单';
 
   @override
   String get done => '完成';
@@ -865,13 +585,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get groupShared => '共享';
-
-  @override
-  String get noGroups => '还没有群组';
-
-  @override
-  String get settingsChangeThemeIOSEasterEgg =>
-      '* 到 change 你的 主题, go 到 设置 > PORA > 主题\n* 选择 a new 主题 来自  设置 menu\n* 点击 在 \'主题\' 在  app\'s 设置 到 switch between 浅色 和 深色 modes';
 
   @override
   String get tutorialTitle => '使用方法';
@@ -1032,25 +745,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get predictionsSectionSoon => 'Running out 很快';
 
   @override
-  String get predictionsSectionOften => '你 buy often';
-
-  @override
   String get predictionsSectionAiSuggests => 'AI 推荐';
 
   @override
-  String get predictionsAiSuggestionsTitle => '商品 和 食谱 用于 你';
-
-  @override
-  String get predictionsAiSuggestionsTopic => '你的 preferences 和 purchases';
-
-  @override
   String get refresh => '刷新';
-
-  @override
-  String get predictionsOftenEmpty => '不 enough data yet';
-
-  @override
-  String get predictionsAskPora => '询问 PORA';
 
   @override
   String get kpiWeek => '商品';
@@ -1172,12 +870,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get chatInputHint => '随便问…';
 
   @override
-  String get aiModelBadge => 'Powered by OpenRouter · ling-3.0-flash';
-
-  @override
-  String get seeAll => '查看全部';
-
-  @override
   String get tipTopicHerbs => '香草';
 
   @override
@@ -1296,14 +988,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get recipeCreateListCta => '要把这个食谱添加到哪里？';
-
-  @override
-  String get recipeDupForceMark => '仍会添加';
-
-  @override
-  String recipeDedupBannerMany(int n) {
-    return '$n duplicates 将 be skipped — uncheck 到 force-add';
-  }
 
   @override
   String get offlineWriteBlocked => '没有 internet — change won\'t be saved';
@@ -1468,9 +1152,6 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get insightsVsPrevious => '较上一周期';
-
-  @override
   String get insightsActivityTitle => '添加与购买';
 
   @override
@@ -1566,4 +1247,29 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get insightsNoUsageYet => '使用 Pora 后将显示统计';
+
+  @override
+  String get settingsDeleteAccount => '删除账户';
+
+  @override
+  String get deleteAccountTitle => '删除账户？';
+
+  @override
+  String get deleteAccountBody =>
+      '你的个人资料、个人清单和使用数据将被永久删除。共享的家庭清单会保留在家庭中；如果你是家庭所有者，所有权将转给加入最早的成员。此操作无法撤销。';
+
+  @override
+  String get deleteAccountFailed => '无法删除账户。请检查网络连接后重试。';
+
+  @override
+  String get chatReportAi => '举报';
+
+  @override
+  String get chatReportSent => '谢谢，我们会审核这条回答。';
+
+  @override
+  String get chatReportFailed => '举报发送失败，请稍后重试。';
+
+  @override
+  String get aiDisclaimer => 'Pora AI 可能会出错，请核实重要信息。';
 }

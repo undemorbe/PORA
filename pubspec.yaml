@@ -1,5 +1,5 @@
 name: pora
-description: "PORA"
+description: "Pora — shared shopping lists for families."
 publish_to: 'none'
 version: 1.0.0
 
@@ -9,7 +9,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_localization: ^0.4.1
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   mobx: ^2.6.0
@@ -27,7 +26,6 @@ dependencies:
   dio: ^5.10.0
   json_annotation: ^4.12.0
   flutter_secure_storage: ^10.3.1
-  flutter_gen: ^5.14.1
   url_launcher: ^6.3.2
   image_picker: ^1.2.3
   pretty_qr_code: ^3.6.0
@@ -66,7 +64,6 @@ dev_dependencies:
   build_runner: ^2.15.0
   auto_route_generator: ^10.5.0
   mobx_codegen: ^2.7.7
-  change_app_package_name: ^1.5.0
   json_serializable: ^6.14.0
   retrofit_generator: ^10.2.7
 

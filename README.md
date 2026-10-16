@@ -1,24 +1,19 @@
 # PORA
 
-PORA is a Flutter mobile app for shared household grocery planning. The app is
-currently an early product scaffold with screen-level flows, clean architecture
-boundaries, generated routing, localization, and networking foundations in
-place.
+PORA is a Flutter mobile app for shared household grocery planning, backed by
+the Go API in `backend/`.
 
 ## Current Scope
 
-- Phone and OTP authentication flow.
-- Onboarding screens for first-time users.
-- Shared household grocery list with grouped items and member markers.
-- Add item, item detail, search, notifications, household, settings, and
-  insights screens.
-- Prediction and replenishment screens for "time to restock" suggestions.
-- Order checkout UI with cart rows, delivery slots, totals, and CTA.
-- API client, token refresh, secure token storage, local storage, routing,
-  theming, and localization infrastructure.
-
-Many screens still use demo data. Data sources and stores should be connected
-feature by feature as backend contracts stabilize.
+- Phone / email OTP authentication, onboarding and tutorial.
+- Family groups with invite links / QR codes and real-time shared lists.
+- Personal lists, sections, urgent items, repeating reminders, member notify.
+- Recipe import (web pages, YouTube, share sheet) into a chosen list.
+- Pora AI chat and tips (with in-app reporting of AI answers).
+- Purchase insights and restock predictions.
+- Home widget, app shortcuts, Material You, iOS Live Activity.
+- In-app account deletion (Settings → Delete account) and a public
+  `/account/delete` page on the backend.
 
 ## Tech Stack
 

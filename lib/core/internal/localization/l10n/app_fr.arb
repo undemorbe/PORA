@@ -1,51 +1,15 @@
 {
-    "appName": "Pora",
-    "@appName": {
-        "description": "The name of the application"
-    },
     "language": "Langue",
     "@language": {
         "description": "language"
-    },
-    "authUnderAppName1": "Liste partagée pour les couples et les familles",
-    "@authUnderAppName1": {
-        "description": "The first line under the app name"
-    },
-    "authUnderAppName2": "Recettes, maison et livraison — tout au même endroit",
-    "@authUnderAppName2": {
-        "description": "The second line under the app name"
     },
     "onlyYou": "Vous seulement",
     "@onlyYou": {
         "description": "onlyYou"
     },
-    "authSignInExpansibleExpand": "Se connecter autrement",
-    "@authSignInExpansibleExpand": {
-        "description": "The sign in with other methods title"
-    },
-    "authSignInExpansibleCollapse": "Réduire",
-    "@authSignInExpansibleCollapse": {
-        "description": "The sign in with other methods title"
-    },
     "sendAgainAfter": "Renvoyer dans...",
     "@sendAgainAfter": {
         "description": "The sign in with other methods title"
-    },
-    "authSignInWithEmail": "Se connecter avec un e-mail",
-    "@authSignInWithEmail": {
-        "description": "The sign in with email button text"
-    },
-    "authSignInWithGoogle": "Se connecter avec Google",
-    "@authSignInWithGoogle": {
-        "description": "The sign in with Google button text"
-    },
-    "authSignInWithApple": "Se connecter avec Apple",
-    "@authSignInWithApple": {
-        "description": "The sign in with Apple button text"
-    },
-    "authSignInWithPhone": "Se connecter avec un numéro de téléphone",
-    "@authSignInWithPhone": {
-        "description": "The sign in with Phone button text"
     },
     "authPrivatePolicy": "By continuing, vous agree à le\nTerms et Privacy Policy",
     "@authPrivatePolicy": {
@@ -158,7 +122,7 @@
     "@onboardingSlide3Title": {
         "description": "onboardingSlide3Title"
     },
-    "onboardingSlide3Body": "Based sur votre purchases, Pora predicts what sera run out bientôt et lets vous commande it avec un appuyez.",
+    "onboardingSlide3Body": "D’après vos achats, Pora prévoit ce qui va bientôt manquer et vous rappelle de l’ajouter à votre liste.",
     "@onboardingSlide3Body": {
         "description": "onboardingSlide3Body"
     },
@@ -214,62 +178,6 @@
     "@briefNext": {
         "description": "briefNext"
     },
-    "briefItemMilk": "Lait",
-    "@briefItemMilk": {
-        "description": "briefItemMilk"
-    },
-    "briefItemBread": "Pain",
-    "@briefItemBread": {
-        "description": "briefItemBread"
-    },
-    "briefItemEggs": "Œufs",
-    "@briefItemEggs": {
-        "description": "briefItemEggs"
-    },
-    "briefItemCoffee": "Café",
-    "@briefItemCoffee": {
-        "description": "briefItemCoffee"
-    },
-    "briefItemCheese": "fromage",
-    "@briefItemCheese": {
-        "description": "briefItemCheese"
-    },
-    "briefItemBananas": "bananes",
-    "@briefItemBananas": {
-        "description": "briefItemBananas"
-    },
-    "briefItemButter": "beurre",
-    "@briefItemButter": {
-        "description": "briefItemButter"
-    },
-    "briefItemWater": "eau",
-    "@briefItemWater": {
-        "description": "briefItemWater"
-    },
-    "briefItemVegetables": "légumes",
-    "@briefItemVegetables": {
-        "description": "briefItemVegetables"
-    },
-    "briefItemTomatoes": "tomates",
-    "@briefItemTomatoes": {
-        "description": "briefItemTomatoes"
-    },
-    "briefItemPasta": "Pâtes",
-    "@briefItemPasta": {
-        "description": "briefItemPasta"
-    },
-    "briefItemChicken": "poulet",
-    "@briefItemChicken": {
-        "description": "briefItemChicken"
-    },
-    "listTitle": "Notre liste",
-    "@listTitle": {
-        "description": "listTitle"
-    },
-    "listMembersCount": "2 personnes · 8 produits",
-    "@listMembersCount": {
-        "description": "listMembersCount"
-    },
     "listUrgent": "Urgent",
     "@listUrgent": {
         "description": "listUrgent"
@@ -277,30 +185,6 @@
     "listAdd": "Ajouter",
     "@listAdd": {
         "description": "listAdd"
-    },
-    "predictionsTitle": "Pora peut help!",
-    "@predictionsTitle": {
-        "description": "predictionsTitle"
-    },
-    "predictionsSubtitle": "Running out bientôt — based sur votre purchases",
-    "@predictionsSubtitle": {
-        "description": "predictionsSubtitle"
-    },
-    "predictionTip": "Une petite astuce",
-    "@predictionTip": {
-        "description": "predictionTip"
-    },
-    "predictionsOrderTitle": "commande everything avec un appuyez",
-    "@predictionsOrderTitle": {
-        "description": "predictionsOrderTitle"
-    },
-    "predictionsOrderSubtitle": "Samokat · livraison dans 15 minutes",
-    "@predictionsOrderSubtitle": {
-        "description": "predictionsOrderSubtitle"
-    },
-    "predictionsOrderDiscount": "15% off votre first commande",
-    "@predictionsOrderDiscount": {
-        "description": "predictionsOrderDiscount"
     },
     "predictionsAddToList": "Add à liste",
     "@predictionsAddToList": {
@@ -310,33 +194,13 @@
     "@predictionsDismiss": {
         "description": "predictionsDismiss"
     },
-    "itemDetailName": "Lait",
-    "@itemDetailName": {
-        "description": "itemDetailName"
-    },
-    "itemDetailSubtitle": "2 L · Produits laitiers",
-    "@itemDetailSubtitle": {
-        "description": "itemDetailSubtitle"
-    },
     "itemDetailAddedBy": "ajouté by",
     "@itemDetailAddedBy": {
         "description": "itemDetailAddedBy"
     },
-    "itemDetailSection": "Section",
-    "@itemDetailSection": {
-        "description": "itemDetailSection"
-    },
-    "itemDetailSectionValue": "Produits laitiers",
-    "@itemDetailSectionValue": {
-        "description": "itemDetailSectionValue"
-    },
     "itemDetailQuantity": "quantité",
     "@itemDetailQuantity": {
         "description": "itemDetailQuantity"
-    },
-    "itemDetailQuantityValue": "2 L",
-    "@itemDetailQuantityValue": {
-        "description": "itemDetailQuantityValue"
     },
     "itemDetailUrgent": "Urgent",
     "@itemDetailUrgent": {
@@ -346,14 +210,6 @@
     "@itemDetailRemind": {
         "description": "itemDetailRemind"
     },
-    "itemDetailRemindEvery": "Every 7 jours",
-    "@itemDetailRemindEvery": {
-        "description": "itemDetailRemindEvery"
-    },
-    "itemDetailInsight": "Vous buy it about every 7 jours · last bought 6 jours ago. I'll suggest restocking bientôt.",
-    "@itemDetailInsight": {
-        "description": "itemDetailInsight"
-    },
     "itemDetailMarkBought": "Marquer comme acheté",
     "@itemDetailMarkBought": {
         "description": "itemDetailMarkBought"
@@ -362,53 +218,13 @@
     "@itemDetailDelete": {
         "description": "itemDetailDelete"
     },
-    "addItemTitle": "Add produit",
-    "@addItemTitle": {
-        "description": "addItemTitle"
-    },
-    "addItemExampleValue": "Avocat",
-    "@addItemExampleValue": {
-        "description": "addItemExampleValue"
-    },
-    "addItemNameHint": "produit nom",
-    "@addItemNameHint": {
-        "description": "addItemNameHint"
-    },
     "addItemQuantity": "quantité",
     "@addItemQuantity": {
         "description": "addItemQuantity"
     },
-    "addItemSection": "Section",
-    "@addItemSection": {
-        "description": "addItemSection"
-    },
-    "addItemUrgent": "Urgent",
-    "@addItemUrgent": {
-        "description": "addItemUrgent"
-    },
-    "addItemUrgentSubtitle": "Need à buy aujourd’hui",
-    "@addItemUrgentSubtitle": {
-        "description": "addItemUrgentSubtitle"
-    },
-    "addItemRemind": "Rappeler régulièrement",
-    "@addItemRemind": {
-        "description": "addItemRemind"
-    },
-    "addItemRemindEvery": "Every 7 jours",
-    "@addItemRemindEvery": {
-        "description": "addItemRemindEvery"
-    },
-    "addItemSubmit": "Add à liste",
-    "@addItemSubmit": {
-        "description": "addItemSubmit"
-    },
     "settingsTitle": "Paramètres",
     "@settingsTitle": {
         "description": "settingsTitle"
-    },
-    "settingsHouseholdSection": "Foyer",
-    "@settingsHouseholdSection": {
-        "description": "settingsHouseholdSection"
     },
     "settingsAppSection": "Application",
     "@settingsAppSection": {
@@ -417,18 +233,6 @@
     "settingsNotifications": "Notifications",
     "@settingsNotifications": {
         "description": "settingsNotifications"
-    },
-    "settingsDelivery": "Livraison",
-    "@settingsDelivery": {
-        "description": "settingsDelivery"
-    },
-    "settingsProAd": "Pora+ · ad-gratuit",
-    "@settingsProAd": {
-        "description": "settingsProAd"
-    },
-    "settingsTryPill": "Essayer",
-    "@settingsTryPill": {
-        "description": "settingsTryPill"
     },
     "settingsPrivacy": "Confidentialité et données",
     "@settingsPrivacy": {
@@ -441,10 +245,6 @@
     "settingsLogout": "Se déconnecter",
     "@settingsLogout": {
         "description": "settingsLogout"
-    },
-    "settingsMembersNames": "Boris et Anna",
-    "@settingsMembersNames": {
-        "description": "settingsMembersNames"
     },
     "settingsInvitePill": "Inviter",
     "@settingsInvitePill": {
@@ -482,10 +282,6 @@
     "@householdGotInvited": {
         "description": "householdGotInvited"
     },
-    "householdWriteCode": "Saisissez invite code",
-    "@householdWriteCode": {
-        "description": "householdWriteCode"
-    },
     "householdDoLater": "Je le ferai plus tard",
     "@householdDoLater": {
         "description": "householdDoLater"
@@ -509,58 +305,6 @@
     "notificationsReadAll": "Tout lire",
     "@notificationsReadAll": {
         "description": "notificationsReadAll"
-    },
-    "notificationsMilkTitle": "Grab lait sur votre way home",
-    "@notificationsMilkTitle": {
-        "description": "notificationsMilkTitle"
-    },
-    "notificationsMilkBody": "C’est épuisé — Anna l’a indiqué il y a 10 minutes.",
-    "@notificationsMilkBody": {
-        "description": "notificationsMilkBody"
-    },
-    "notificationsMilkTime": "Il y a 5 minutes",
-    "@notificationsMilkTime": {
-        "description": "notificationsMilkTime"
-    },
-    "notificationsCoffeeTitle": "café est running out bientôt",
-    "@notificationsCoffeeTitle": {
-        "description": "notificationsCoffeeTitle"
-    },
-    "notificationsCoffeeBody": "Vous buy it about every 14 jours, 12 avez passed.",
-    "@notificationsCoffeeBody": {
-        "description": "notificationsCoffeeBody"
-    },
-    "notificationsPartnerAddedTitle": "Anna ajouté 2 produits",
-    "@notificationsPartnerAddedTitle": {
-        "description": "notificationsPartnerAddedTitle"
-    },
-    "notificationsPartnerAddedBody": "bananes et pain sont dans le partagé liste.",
-    "@notificationsPartnerAddedBody": {
-        "description": "notificationsPartnerAddedBody"
-    },
-    "notificationsPartnerAddedTime": "aujourd’hui, 9:12",
-    "@notificationsPartnerAddedTime": {
-        "description": "notificationsPartnerAddedTime"
-    },
-    "notificationsPromoTitle": "15% off votre first Samokat commande",
-    "@notificationsPromoTitle": {
-        "description": "notificationsPromoTitle"
-    },
-    "notificationsPromoBody": "le promo est active pour 6 more jours.",
-    "@notificationsPromoBody": {
-        "description": "notificationsPromoBody"
-    },
-    "notificationsPromoTime": "Hier",
-    "@notificationsPromoTime": {
-        "description": "notificationsPromoTime"
-    },
-    "notificationsOrderDeliveredTitle": "commande delivered",
-    "@notificationsOrderDeliveredTitle": {
-        "description": "notificationsOrderDeliveredTitle"
-    },
-    "notificationsOrderDeliveredBody": "8 produits · Samokat · ₽1,054",
-    "@notificationsOrderDeliveredBody": {
-        "description": "notificationsOrderDeliveredBody"
     },
     "notificationsAddToListPill": "＋ Add à liste",
     "@notificationsAddToListPill": {
@@ -586,37 +330,9 @@
     "@userCreateProfileNext": {
         "description": "userCreateProfileNext"
     },
-    "searchTitle": "Rechercher",
-    "@searchTitle": {
-        "description": "searchTitle"
-    },
     "searchHint": "produit ou recette…",
     "@searchHint": {
         "description": "searchHint"
-    },
-    "searchFilterAll": "Tous",
-    "@searchFilterAll": {
-        "description": "searchFilterAll"
-    },
-    "searchFilterVegetables": "légumes",
-    "@searchFilterVegetables": {
-        "description": "searchFilterVegetables"
-    },
-    "searchFilterDairy": "Produits laitiers",
-    "@searchFilterDairy": {
-        "description": "searchFilterDairy"
-    },
-    "searchFilterGrocery": "Courses",
-    "@searchFilterGrocery": {
-        "description": "searchFilterGrocery"
-    },
-    "searchFilterRecipes": "Recettes",
-    "@searchFilterRecipes": {
-        "description": "searchFilterRecipes"
-    },
-    "searchResults": "Résultats",
-    "@searchResults": {
-        "description": "searchResults"
     },
     "searchNothingFound": "Aucun résultat",
     "@searchNothingFound": {
@@ -626,65 +342,9 @@
     "@insightsTitle": {
         "description": "insightsTitle"
     },
-    "orderTitle": "Commande",
-    "@orderTitle": {
-        "description": "orderTitle"
-    },
-    "orderCart": "Panier",
-    "@orderCart": {
-        "description": "orderCart"
-    },
-    "orderWhenToDeliver": "Quand livrer",
-    "@orderWhenToDeliver": {
-        "description": "orderWhenToDeliver"
-    },
-    "orderCheckoutCta": "commande de Samokat · {total}",
-    "@orderCheckoutCta": {
-        "placeholders": {
-            "total": {
-                "type": "String"
-            }
-        }
-    },
-    "orderSummaryGoods": "Articles",
-    "@orderSummaryGoods": {
-        "description": "orderSummaryGoods"
-    },
-    "orderSummaryDiscount": "15 % de réduction",
-    "@orderSummaryDiscount": {
-        "description": "orderSummaryDiscount"
-    },
-    "orderSummaryDelivery": "Livraison",
-    "@orderSummaryDelivery": {
-        "description": "orderSummaryDelivery"
-    },
-    "orderSummaryFree": "Gratuit",
-    "@orderSummaryFree": {
-        "description": "orderSummaryFree"
-    },
-    "orderSummaryTotal": "Total",
-    "@orderSummaryTotal": {
-        "description": "orderSummaryTotal"
-    },
     "recipeImportTitle": "recette de a link",
     "@recipeImportTitle": {
         "description": "recipeImportTitle"
-    },
-    "recipePreviewTitle": "Pasta Carbonara",
-    "@recipePreviewTitle": {
-        "description": "recipePreviewTitle"
-    },
-    "recipePreviewMeta": "eda.ru · 25 min · 2 portions",
-    "@recipePreviewMeta": {
-        "description": "recipePreviewMeta"
-    },
-    "recipePreviewFound": "6 ingrédients found",
-    "@recipePreviewFound": {
-        "description": "recipePreviewFound"
-    },
-    "recipeDedupBanner": "Removed 2 duplicates à avoid duplicating items déjà sur votre liste",
-    "@recipeDedupBanner": {
-        "description": "recipeDedupBanner"
     },
     "recipeIngredients": "Ingrédients",
     "@recipeIngredients": {
@@ -694,7 +354,10 @@
     "@recipeAddToListCta": {
         "description": "Add the selected recipe products to the list",
         "placeholders": {
-            "count": {"type": "int", "format":"compact"}
+            "count": {
+                "type": "int",
+                "format": "compact"
+            }
         }
     },
     "recipeParseButton": "Analyser",
@@ -709,10 +372,6 @@
     "@navPora": {
         "description": "navPora"
     },
-    "navOrder": "Commande",
-    "@navOrder": {
-        "description": "navOrder"
-    },
     "navProfile": "Profil",
     "@navProfile": {
         "description": "navProfile"
@@ -725,14 +384,6 @@
     "@familiesSubtitle": {
         "description": "familiesSubtitle"
     },
-    "familiesCurrent": "Actuelle",
-    "@familiesCurrent": {
-        "description": "familiesCurrent"
-    },
-    "familiesCreateOrJoin": "＋ Create ou join",
-    "@familiesCreateOrJoin": {
-        "description": "familiesCreateOrJoin"
-    },
     "familiesCreateDialog": "What should we call le famille?",
     "@familiesCreateDialog": {
         "description": "familiesCreateDialog"
@@ -740,14 +391,6 @@
     "tryToUpdate": "Réessayer",
     "@tryToUpdate": {
         "description": "tryToUpdate"
-    },
-    "checkOut": "Vérifier",
-    "@checkOut": {
-        "description": "checkOut"
-    },
-    "settingsMore": "Avancé",
-    "@settingsMore": {
-        "description": "settingsMore"
     },
     "listsYour": "Votre liste personnelle",
     "@listsYour": {
@@ -878,10 +521,6 @@
     "@appearance": {
         "description": "appearance"
     },
-    "themeSection": "Thème",
-    "@themeSection": {
-        "description": "themeSection"
-    },
     "themeLight": "Clair",
     "@themeLight": {
         "description": "themeLight"
@@ -961,10 +600,6 @@
     "recipeEmptyHint": "Paste a recette URL et appuyez “Parse”",
     "@recipeEmptyHint": {
         "description": "recipeEmptyHint"
-    },
-    "recipeDupMark": "déjà dans liste",
-    "@recipeDupMark": {
-        "description": "recipeDupMark"
     },
     "done": "Terminé",
     "@done": {
@@ -1127,14 +762,6 @@
     "groupShared": "Partagé",
     "@groupShared": {
         "description": "groupShared"
-    },
-    "noGroups": "Aucun groupe pour le moment",
-    "@noGroups": {
-        "description": "noGroups"
-    },
-    "settingsChangeThemeIOSEasterEgg": "* à change votre thème, go à paramètres > PORA > thème\n* sélectionner a new thème de le paramètres menu\n* appuyez sur 'thème' dans le app's paramètres à switch between clair et sombre modes",
-    "@settingsChangeThemeIOSEasterEgg": {
-        "description": "ios easter egg on advanced settings when tapped few times"
     },
     "tutorialTitle": "Comment ça marche",
     "@tutorialTitle": {
@@ -1332,33 +959,13 @@
     "@predictionsSectionSoon": {
         "description": "section title"
     },
-    "predictionsSectionOften": "Vous buy often",
-    "@predictionsSectionOften": {
-        "description": "section title"
-    },
     "predictionsSectionAiSuggests": "L’IA suggère",
     "@predictionsSectionAiSuggests": {
         "description": "section title"
     },
-    "predictionsAiSuggestionsTitle": "produits et recettes pour vous",
-    "@predictionsAiSuggestionsTitle": {
-        "description": "AI suggestions card title"
-    },
-    "predictionsAiSuggestionsTopic": "votre preferences et purchases",
-    "@predictionsAiSuggestionsTopic": {
-        "description": "AI suggestions topic"
-    },
     "refresh": "Actualiser",
     "@refresh": {
         "description": "refresh action"
-    },
-    "predictionsOftenEmpty": "ne enough data yet",
-    "@predictionsOftenEmpty": {
-        "description": "empty frequent products"
-    },
-    "predictionsAskPora": "Demander à PORA",
-    "@predictionsAskPora": {
-        "description": "FAB label"
     },
     "kpiWeek": "produits",
     "@kpiWeek": {
@@ -1507,14 +1114,6 @@
     "chatInputHint": "Demandez n’importe quoi…",
     "@chatInputHint": {
         "description": "chat input placeholder"
-    },
-    "aiModelBadge": "Powered by OpenRouter · ling-3.0-flash",
-    "@aiModelBadge": {
-        "description": "model badge"
-    },
-    "seeAll": "Tout voir",
-    "@seeAll": {
-        "description": "see all link"
     },
     "tipTopicHerbs": "herbes",
     "@tipTopicHerbs": {
@@ -1683,19 +1282,6 @@
     "@recipeCreateListCta": {
         "description": "recipe cta"
     },
-    "recipeDupForceMark": "sera quand même ajouté",
-    "@recipeDupForceMark": {
-        "description": "dup pill when user unchecks flag"
-    },
-    "recipeDedupBannerMany": "{n} duplicates sera be skipped — uncheck à force-add",
-    "@recipeDedupBannerMany": {
-        "description": "dedup banner",
-        "placeholders": {
-            "n": {
-                "type": "int"
-            }
-        }
-    },
     "offlineWriteBlocked": "non internet — change won't be saved",
     "@offlineWriteBlocked": {
         "description": "snackbar when write attempted offline"
@@ -1753,7 +1339,6 @@
     "insightsKpiMinutes": "minutes dans l'app",
     "insightsKpiSessions": "sessions",
     "insightsAvgSession": "≈{minutes} min par session",
-    "insightsVsPrevious": "vs période précédente",
     "insightsActivityTitle": "Ajoutés et achetés",
     "insightsActivityEmpty": "Aucune activité sur cette période",
     "insightsHeatmapTitle": "Activité · 4 dernières semaines",
@@ -1784,5 +1369,37 @@
     "insightsKpiReminders": "avec rappel",
     "insightsKpiUrgent": "urgents",
     "insightsLocalNote": "Les statistiques d'usage sont calculées sur votre appareil",
-    "insightsNoUsageYet": "Les stats apparaîtront au fil de l'usage"
+    "insightsNoUsageYet": "Les stats apparaîtront au fil de l'usage",
+    "settingsDeleteAccount": "Supprimer le compte",
+    "@settingsDeleteAccount": {
+        "description": "settingsDeleteAccount"
+    },
+    "deleteAccountTitle": "Supprimer le compte ?",
+    "@deleteAccountTitle": {
+        "description": "deleteAccountTitle"
+    },
+    "deleteAccountBody": "Votre profil, vos listes personnelles et vos données d’utilisation seront définitivement supprimés. Les listes familiales partagées restent à la famille ; si vous en êtes propriétaire, elle passe au membre le plus ancien. Cette action est irréversible.",
+    "@deleteAccountBody": {
+        "description": "deleteAccountBody"
+    },
+    "deleteAccountFailed": "Impossible de supprimer le compte. Vérifiez votre connexion et réessayez.",
+    "@deleteAccountFailed": {
+        "description": "deleteAccountFailed"
+    },
+    "chatReportAi": "Signaler",
+    "@chatReportAi": {
+        "description": "chatReportAi"
+    },
+    "chatReportSent": "Merci, nous allons examiner cette réponse.",
+    "@chatReportSent": {
+        "description": "chatReportSent"
+    },
+    "chatReportFailed": "Impossible d’envoyer le signalement. Réessayez plus tard.",
+    "@chatReportFailed": {
+        "description": "chatReportFailed"
+    },
+    "aiDisclaimer": "Pora AI peut se tromper. Vérifiez les informations importantes.",
+    "@aiDisclaimer": {
+        "description": "aiDisclaimer"
+    }
 }

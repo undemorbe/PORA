@@ -1,9 +1,11 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/foundation.dart' show kReleaseMode;
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/core/features/auth_and_validation/presentation/controller/privacy_store.dart';
 import 'package:pora/core/features/settings/presentation/store/settings_store.dart';
+import 'package:pora/core/features/settings/presentation/widgets/delete_account_dialog.dart';
 import 'package:pora/core/features/settings/presentation/widgets/support_message_bottom_bar.dart';
 import 'package:pora/core/internal/di/export.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
@@ -35,6 +37,21 @@ class _SettingsPageState extends State<SettingsPage> {
   void initState() {
     super.initState();
     settingsStore = SettingsStore()..getUserMe();
+  }
+
+  /// Debug-инструменты (Talker, brief) — только вне release и при DEBUG=true.
+  bool get _debugTools =>
+      !kReleaseMode && dotenv.getBool('DEBUG', fallback: false);
+
+  Future<void> _deleteAccount() async {
+    if (settingsStore.isDeletingAccount) return;
+    if (!await confirmDeleteAccount(context)) return;
+    final ok = await settingsStore.deleteAccount();
+    if (!ok && mounted) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(context.l10n.deleteAccountFailed)));
+    }
   }
 
   @override
@@ -119,7 +136,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     trailing: PoraSettingRow.chevron,
                     onTap: () => privacyStore.openPrivacy(),
                   ),
-                  if (dotenv.getBool('DEBUG'))
+                  if (_debugTools)
                     PoraSettingRow(
                       icon: Icons.zoom_out_sharp,
                       label: 'Open debug route',
@@ -131,10 +148,10 @@ class _SettingsPageState extends State<SettingsPage> {
                         ),
                       ),
                     ),
-                  if (dotenv.getBool('DEBUG'))
+                  if (_debugTools)
                     PoraSettingRow(
                       icon: Icons.add_ic_call,
-                      label: 'Open especcial route',
+                      label: 'Open brief route',
                       onTap: () => context.router.push(BriefRoute()),
                     ),
                 ],
@@ -164,6 +181,18 @@ class _SettingsPageState extends State<SettingsPage> {
                     label: context.l10n.settingsLogout,
                     danger: true,
                     onTap: () => settingsStore.logout(),
+                  ),
+                ],
+              ),
+              const SizedBox(height: PoraSpacing.lg),
+
+              PoraRowsCard(
+                children: [
+                  PoraSettingRow(
+                    icon: PhosphorIconsRegular.trash,
+                    label: context.l10n.settingsDeleteAccount,
+                    danger: true,
+                    onTap: _deleteAccount,
                   ),
                 ],
               ),

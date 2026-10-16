@@ -105,6 +105,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PLAY_STORE_JSON_KEY: ${{ secrets.PLAY_STORE_JSON_KEY }}
+          # Google Play: трек и статус релиза (repo variables). Пока приложение
+          # не опубликовано, Play принимает только draft.
+          PLAY_TRACK: ${{ vars.PLAY_TRACK || 'internal' }}
+          PLAY_RELEASE_STATUS: ${{ vars.PLAY_RELEASE_STATUS || 'draft' }}
+          PLAY_ROLLOUT: ${{ vars.PLAY_ROLLOUT }}
         run: bundle exec fastlane android release tag:"$RELEASE_TAG"
 
       - name: Upload artifacts

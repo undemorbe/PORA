@@ -71,6 +71,7 @@ export 'package:pora/core/features/recipe/data/datasource/ai_recipe_parser.dart'
 export 'package:pora/core/features/recipe/data/datasource/recipe_stripper_client.dart';
 export 'package:pora/core/features/recipe/domain/usecase/parse_recipe_from_url.dart';
 export 'package:pora/core/features/user/domain/usecase/user/logout.dart';
+export 'package:pora/core/features/user/domain/usecase/user/delete_account.dart';
 export 'package:pora/core/features/user/domain/usecase/user/update_device_token.dart';
 export 'package:pora/core/internal/formatters/image_formatter.dart';
 export 'package:pora/core/internal/notifications/notification_service.dart';

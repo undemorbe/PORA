@@ -16,10 +16,14 @@ class ChatMessageBubble extends StatelessWidget {
     required this.text,
     required this.fromUser,
     this.onImportRecipe,
+    this.onReport,
   });
 
   final String text;
   final bool fromUser;
+
+  /// Жалоба на ответ AI. `null` — кнопки нет (свои сообщения, уже отправлено).
+  final VoidCallback? onReport;
 
   final void Function(RecipeEntity)? onImportRecipe;
 
@@ -85,6 +89,19 @@ class ChatMessageBubble extends StatelessWidget {
                 _RecipeCta(
                   recipe: recipe,
                   onTap: () => onImportRecipe!(recipe),
+                ),
+              if (!fromUser && onReport != null)
+                TextButton.icon(
+                  onPressed: onReport,
+                  style: TextButton.styleFrom(
+                    foregroundColor: c.textMuted,
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                    minimumSize: const Size(0, 28),
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    visualDensity: VisualDensity.compact,
+                  ),
+                  icon: const Icon(PhosphorIconsRegular.flag, size: 14),
+                  label: Text(context.l10n.chatReportAi, style: PoraText.small),
                 ),
             ],
           ),

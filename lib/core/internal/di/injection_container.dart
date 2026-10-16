@@ -186,6 +186,9 @@ class InjectionContainer {
     _getIt.registerFactory<LogoutUseCase>(
       () => LogoutUseCase(repository: _getIt<UserRepository>()),
     );
+    _getIt.registerFactory<DeleteAccountUseCase>(
+      () => DeleteAccountUseCase(repository: _getIt<UserRepository>()),
+    );
     _getIt.registerFactory<UpdateDeviceTokenUseCase>(
       () => UpdateDeviceTokenUseCase(repository: _getIt<UserRepository>()),
     );

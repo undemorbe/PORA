@@ -11,6 +11,8 @@ import 'package:pora/core/features/predictions_ai/presentation/store/ai_chat_sto
 import 'package:pora/core/features/recipe/domain/entity/recipe.dart';
 import 'package:pora/core/features/recipe/domain/recipe_creator.dart';
 import 'package:pora/core/features/recipe/presentation/widgets/recipe_target_sheet.dart';
+import 'package:pora/core/features/settings/domain/entity/message_entity.dart';
+import 'package:pora/core/features/settings/domain/usecase/send_support_msg.dart';
 import 'package:pora/core/internal/network/connectivity/connectivity_guard.dart';
 import 'package:pora/core/internal/widgets/pora_snackbar.dart';
 import 'package:pora/core/features/predictions_ai/presentation/widgets/chat_message_bubble.dart';
@@ -49,6 +51,9 @@ class _PoraChatSheetState extends State<PoraChatSheet> {
   final _scroll = ScrollController();
   List<String> _sampleQuestions = const [];
   List<BriefProductEntity> _briefProducts = const [];
+
+  /// Индексы ответов, на которые уже пожаловались в этой сессии чата.
+  final Set<int> _reported = {};
 
   @override
   void didChangeDependencies() {
@@ -166,6 +171,29 @@ class _PoraChatSheetState extends State<PoraChatSheet> {
     );
   }
 
+  /// Жалоба на ответ AI (политика Google Play «AI-Generated Content»):
+  /// уходит в поддержку вместе с вопросом пользователя.
+  Future<void> _reportAnswer(int index) async {
+    final history = _store.history;
+    final answer = history[index].content;
+    final question = index > 0 ? history[index - 1].content : '';
+    setState(() => _reported.add(index));
+    final res = await GetIt.I<SendSupportMsgUseCase>().call(
+      message: MessageEntity(
+        title: 'AI content report',
+        message: 'Question:\n$question\n\nAnswer:\n$answer',
+      ),
+    );
+    if (!mounted) return;
+    if (res.isLeft) setState(() => _reported.remove(index));
+    PoraSnackbar.show(
+      context,
+      message: res.isRight
+          ? context.l10n.chatReportSent
+          : context.l10n.chatReportFailed,
+    );
+  }
+
   void _scrollToBottom() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!_scroll.hasClients) return;
@@ -221,6 +249,9 @@ class _PoraChatSheetState extends State<PoraChatSheet> {
                               text: m.content,
                               fromUser: m.role == 'user',
                               onImportRecipe: _importRecipe,
+                              onReport: _reported.contains(i)
+                                  ? null
+                                  : () => _reportAnswer(i),
                             );
                           },
                         ),
@@ -261,6 +292,16 @@ class _PoraChatSheetState extends State<PoraChatSheet> {
                         ),
                       )
                     : const SizedBox.shrink(),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: PoraSpacing.screen,
+                ),
+                child: Text(
+                  context.l10n.aiDisclaimer,
+                  style: PoraText.small.copyWith(color: c.textMuted),
+                  textAlign: TextAlign.center,
+                ),
               ),
               Observer(
                 builder: (_) => ChatInputBar(

@@ -67,6 +67,28 @@ abstract class _SettingsStoreBase with Store {
   @action
   Future<void> logout() async {
     await GetIt.I<LogoutUseCase>().call();
+    await _clearSession();
+  }
+
+  @observable
+  bool isDeletingAccount = false;
+
+  /// Безвозвратно удаляет аккаунт. Возвращает `false` при ошибке сервера —
+  /// локальная сессия тогда остаётся, UI покажет snackbar.
+  @action
+  Future<bool> deleteAccount() async {
+    isDeletingAccount = true;
+    try {
+      final res = await GetIt.I<DeleteAccountUseCase>().call();
+      if (res.isLeft) return false;
+      await _clearSession();
+      return true;
+    } finally {
+      isDeletingAccount = false;
+    }
+  }
+
+  Future<void> _clearSession() async {
     final tokensStore = GetIt.I<TokensSecureStore>();
     await tokensStore.clearTokens();
     // Чистим весь offline-cache — новый юзер не должен видеть чужие снапшоты.

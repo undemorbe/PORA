@@ -1,0 +1,29 @@
+Pora is a shared shopping list for couples, families and flatmates.
+
+ONE LIST FOR EVERYONE
+• Create a family group and invite members with a link or QR code
+• Changes sync in real time — see who added what
+• Personal lists for things only you need
+• Sections, quantities, urgent items and swipe actions
+
+RECIPE → LIST IN SECONDS
+• Share a recipe link from your browser or YouTube to Pora
+• Pora extracts the ingredients and adds them to the list you choose
+• Items you already have on the list are not duplicated
+
+SMART REMINDERS
+• Pora learns how often you buy things and suggests what will run out soon
+• Set repeating reminders for items you buy regularly
+• Notify family members about an urgent item
+
+PORA AI ASSISTANT
+• Ask for meal ideas, shopping tips or a list for a dinner party
+• Turn an answer into a shopping list with one tap
+• AI answers can contain mistakes — check important information. You can report any answer right in the chat.
+
+ALSO
+• Home screen widget and app shortcuts
+• Light and dark theme, Material You colors
+• English, Russian, German, French and Chinese
+
+Your account can be deleted at any time in Settings → Delete account.

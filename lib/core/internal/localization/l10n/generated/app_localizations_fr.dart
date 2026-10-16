@@ -9,42 +9,13 @@ class AppLocalizationsFr extends AppLocalizations {
   AppLocalizationsFr([String locale = 'fr']) : super(locale);
 
   @override
-  String get appName => 'Pora';
-
-  @override
   String get language => 'Langue';
-
-  @override
-  String get authUnderAppName1 =>
-      'Liste partagée pour les couples et les familles';
-
-  @override
-  String get authUnderAppName2 =>
-      'Recettes, maison et livraison — tout au même endroit';
 
   @override
   String get onlyYou => 'Vous seulement';
 
   @override
-  String get authSignInExpansibleExpand => 'Se connecter autrement';
-
-  @override
-  String get authSignInExpansibleCollapse => 'Réduire';
-
-  @override
   String get sendAgainAfter => 'Renvoyer dans...';
-
-  @override
-  String get authSignInWithEmail => 'Se connecter avec un e-mail';
-
-  @override
-  String get authSignInWithGoogle => 'Se connecter avec Google';
-
-  @override
-  String get authSignInWithApple => 'Se connecter avec Apple';
-
-  @override
-  String get authSignInWithPhone => 'Se connecter avec un numéro de téléphone';
 
   @override
   String get authPrivatePolicy =>
@@ -134,7 +105,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get onboardingSlide3Body =>
-      'Based sur votre purchases, Pora predicts what sera run out bientôt et lets vous commande it avec un appuyez.';
+      'D’après vos achats, Pora prévoit ce qui va bientôt manquer et vous rappelle de l’ajouter à votre liste.';
 
   @override
   String get onboardingSkip => 'Ignorer';
@@ -178,71 +149,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get briefNext => 'Suivant';
 
   @override
-  String get briefItemMilk => 'Lait';
-
-  @override
-  String get briefItemBread => 'Pain';
-
-  @override
-  String get briefItemEggs => 'Œufs';
-
-  @override
-  String get briefItemCoffee => 'Café';
-
-  @override
-  String get briefItemCheese => 'fromage';
-
-  @override
-  String get briefItemBananas => 'bananes';
-
-  @override
-  String get briefItemButter => 'beurre';
-
-  @override
-  String get briefItemWater => 'eau';
-
-  @override
-  String get briefItemVegetables => 'légumes';
-
-  @override
-  String get briefItemTomatoes => 'tomates';
-
-  @override
-  String get briefItemPasta => 'Pâtes';
-
-  @override
-  String get briefItemChicken => 'poulet';
-
-  @override
-  String get listTitle => 'Notre liste';
-
-  @override
-  String get listMembersCount => '2 personnes · 8 produits';
-
-  @override
   String get listUrgent => 'Urgent';
 
   @override
   String get listAdd => 'Ajouter';
-
-  @override
-  String get predictionsTitle => 'Pora peut help!';
-
-  @override
-  String get predictionsSubtitle =>
-      'Running out bientôt — based sur votre purchases';
-
-  @override
-  String get predictionTip => 'Une petite astuce';
-
-  @override
-  String get predictionsOrderTitle => 'commande everything avec un appuyez';
-
-  @override
-  String get predictionsOrderSubtitle => 'Samokat · livraison dans 15 minutes';
-
-  @override
-  String get predictionsOrderDiscount => '15% off votre first commande';
 
   @override
   String get predictionsAddToList => 'Add à liste';
@@ -251,25 +161,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get predictionsDismiss => 'non thanks';
 
   @override
-  String get itemDetailName => 'Lait';
-
-  @override
-  String get itemDetailSubtitle => '2 L · Produits laitiers';
-
-  @override
   String get itemDetailAddedBy => 'ajouté by';
 
   @override
-  String get itemDetailSection => 'Section';
-
-  @override
-  String get itemDetailSectionValue => 'Produits laitiers';
-
-  @override
   String get itemDetailQuantity => 'quantité';
-
-  @override
-  String get itemDetailQuantityValue => '2 L';
 
   @override
   String get itemDetailUrgent => 'Urgent';
@@ -278,68 +173,22 @@ class AppLocalizationsFr extends AppLocalizations {
   String get itemDetailRemind => 'Me rappeler';
 
   @override
-  String get itemDetailRemindEvery => 'Every 7 jours';
-
-  @override
-  String get itemDetailInsight =>
-      'Vous buy it about every 7 jours · last bought 6 jours ago. I\'ll suggest restocking bientôt.';
-
-  @override
   String get itemDetailMarkBought => 'Marquer comme acheté';
 
   @override
   String get itemDetailDelete => 'retirer de liste';
 
   @override
-  String get addItemTitle => 'Add produit';
-
-  @override
-  String get addItemExampleValue => 'Avocat';
-
-  @override
-  String get addItemNameHint => 'produit nom';
-
-  @override
   String get addItemQuantity => 'quantité';
 
   @override
-  String get addItemSection => 'Section';
-
-  @override
-  String get addItemUrgent => 'Urgent';
-
-  @override
-  String get addItemUrgentSubtitle => 'Need à buy aujourd’hui';
-
-  @override
-  String get addItemRemind => 'Rappeler régulièrement';
-
-  @override
-  String get addItemRemindEvery => 'Every 7 jours';
-
-  @override
-  String get addItemSubmit => 'Add à liste';
-
-  @override
   String get settingsTitle => 'Paramètres';
-
-  @override
-  String get settingsHouseholdSection => 'Foyer';
 
   @override
   String get settingsAppSection => 'Application';
 
   @override
   String get settingsNotifications => 'Notifications';
-
-  @override
-  String get settingsDelivery => 'Livraison';
-
-  @override
-  String get settingsProAd => 'Pora+ · ad-gratuit';
-
-  @override
-  String get settingsTryPill => 'Essayer';
 
   @override
   String get settingsPrivacy => 'Confidentialité et données';
@@ -349,9 +198,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get settingsLogout => 'Se déconnecter';
-
-  @override
-  String get settingsMembersNames => 'Boris et Anna';
 
   @override
   String get settingsInvitePill => 'Inviter';
@@ -383,9 +229,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get householdGotInvited => 'Vous\'ve been invited à a famille';
 
   @override
-  String get householdWriteCode => 'Saisissez invite code';
-
-  @override
   String get householdDoLater => 'Je le ferai plus tard';
 
   @override
@@ -402,48 +245,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get notificationsReadAll => 'Tout lire';
-
-  @override
-  String get notificationsMilkTitle => 'Grab lait sur votre way home';
-
-  @override
-  String get notificationsMilkBody =>
-      'C’est épuisé — Anna l’a indiqué il y a 10 minutes.';
-
-  @override
-  String get notificationsMilkTime => 'Il y a 5 minutes';
-
-  @override
-  String get notificationsCoffeeTitle => 'café est running out bientôt';
-
-  @override
-  String get notificationsCoffeeBody =>
-      'Vous buy it about every 14 jours, 12 avez passed.';
-
-  @override
-  String get notificationsPartnerAddedTitle => 'Anna ajouté 2 produits';
-
-  @override
-  String get notificationsPartnerAddedBody =>
-      'bananes et pain sont dans le partagé liste.';
-
-  @override
-  String get notificationsPartnerAddedTime => 'aujourd’hui, 9:12';
-
-  @override
-  String get notificationsPromoTitle => '15% off votre first Samokat commande';
-
-  @override
-  String get notificationsPromoBody => 'le promo est active pour 6 more jours.';
-
-  @override
-  String get notificationsPromoTime => 'Hier';
-
-  @override
-  String get notificationsOrderDeliveredTitle => 'commande delivered';
-
-  @override
-  String get notificationsOrderDeliveredBody => '8 produits · Samokat · ₽1,054';
 
   @override
   String get notificationsAddToListPill => '＋ Add à liste';
@@ -465,28 +266,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get userCreateProfileNext => 'Suivant';
 
   @override
-  String get searchTitle => 'Rechercher';
-
-  @override
   String get searchHint => 'produit ou recette…';
-
-  @override
-  String get searchFilterAll => 'Tous';
-
-  @override
-  String get searchFilterVegetables => 'légumes';
-
-  @override
-  String get searchFilterDairy => 'Produits laitiers';
-
-  @override
-  String get searchFilterGrocery => 'Courses';
-
-  @override
-  String get searchFilterRecipes => 'Recettes';
-
-  @override
-  String get searchResults => 'Résultats';
 
   @override
   String get searchNothingFound => 'Aucun résultat';
@@ -495,49 +275,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get insightsTitle => 'Analyses';
 
   @override
-  String get orderTitle => 'Commande';
-
-  @override
-  String get orderCart => 'Panier';
-
-  @override
-  String get orderWhenToDeliver => 'Quand livrer';
-
-  @override
-  String orderCheckoutCta(String total) {
-    return 'commande de Samokat · $total';
-  }
-
-  @override
-  String get orderSummaryGoods => 'Articles';
-
-  @override
-  String get orderSummaryDiscount => '15 % de réduction';
-
-  @override
-  String get orderSummaryDelivery => 'Livraison';
-
-  @override
-  String get orderSummaryFree => 'Gratuit';
-
-  @override
-  String get orderSummaryTotal => 'Total';
-
-  @override
   String get recipeImportTitle => 'recette de a link';
-
-  @override
-  String get recipePreviewTitle => 'Pasta Carbonara';
-
-  @override
-  String get recipePreviewMeta => 'eda.ru · 25 min · 2 portions';
-
-  @override
-  String get recipePreviewFound => '6 ingrédients found';
-
-  @override
-  String get recipeDedupBanner =>
-      'Removed 2 duplicates à avoid duplicating items déjà sur votre liste';
 
   @override
   String get recipeIngredients => 'Ingrédients';
@@ -562,9 +300,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get navPora => 'Pora';
 
   @override
-  String get navOrder => 'Commande';
-
-  @override
   String get navProfile => 'Profil';
 
   @override
@@ -574,22 +309,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get familiesSubtitle => 'choisir a famille à ouvrir its liste';
 
   @override
-  String get familiesCurrent => 'Actuelle';
-
-  @override
-  String get familiesCreateOrJoin => '＋ Create ou join';
-
-  @override
   String get familiesCreateDialog => 'What should we call le famille?';
 
   @override
   String get tryToUpdate => 'Réessayer';
-
-  @override
-  String get checkOut => 'Vérifier';
-
-  @override
-  String get settingsMore => 'Avancé';
 
   @override
   String get listsYour => 'Votre liste personnelle';
@@ -687,9 +410,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get appearance => 'Apparence';
 
   @override
-  String get themeSection => 'Thème';
-
-  @override
   String get themeLight => 'Clair';
 
   @override
@@ -748,9 +468,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get recipeEmptyHint => 'Paste a recette URL et appuyez “Parse”';
-
-  @override
-  String get recipeDupMark => 'déjà dans liste';
 
   @override
   String get done => 'Terminé';
@@ -872,13 +589,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get groupShared => 'Partagé';
-
-  @override
-  String get noGroups => 'Aucun groupe pour le moment';
-
-  @override
-  String get settingsChangeThemeIOSEasterEgg =>
-      '* à change votre thème, go à paramètres > PORA > thème\n* sélectionner a new thème de le paramètres menu\n* appuyez sur \'thème\' dans le app\'s paramètres à switch between clair et sombre modes';
 
   @override
   String get tutorialTitle => 'Comment ça marche';
@@ -1039,25 +749,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get predictionsSectionSoon => 'Running out bientôt';
 
   @override
-  String get predictionsSectionOften => 'Vous buy often';
-
-  @override
   String get predictionsSectionAiSuggests => 'L’IA suggère';
 
   @override
-  String get predictionsAiSuggestionsTitle => 'produits et recettes pour vous';
-
-  @override
-  String get predictionsAiSuggestionsTopic => 'votre preferences et purchases';
-
-  @override
   String get refresh => 'Actualiser';
-
-  @override
-  String get predictionsOftenEmpty => 'ne enough data yet';
-
-  @override
-  String get predictionsAskPora => 'Demander à PORA';
 
   @override
   String get kpiWeek => 'produits';
@@ -1180,12 +875,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get chatInputHint => 'Demandez n’importe quoi…';
-
-  @override
-  String get aiModelBadge => 'Powered by OpenRouter · ling-3.0-flash';
-
-  @override
-  String get seeAll => 'Tout voir';
 
   @override
   String get tipTopicHerbs => 'herbes';
@@ -1319,14 +1008,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get recipeCreateListCta => 'Où ajouter cette recette ?';
-
-  @override
-  String get recipeDupForceMark => 'sera quand même ajouté';
-
-  @override
-  String recipeDedupBannerMany(int n) {
-    return '$n duplicates sera be skipped — uncheck à force-add';
-  }
 
   @override
   String get offlineWriteBlocked => 'non internet — change won\'t be saved';
@@ -1495,9 +1176,6 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get insightsVsPrevious => 'vs période précédente';
-
-  @override
   String get insightsActivityTitle => 'Ajoutés et achetés';
 
   @override
@@ -1594,4 +1272,32 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get insightsNoUsageYet => 'Les stats apparaîtront au fil de l\'usage';
+
+  @override
+  String get settingsDeleteAccount => 'Supprimer le compte';
+
+  @override
+  String get deleteAccountTitle => 'Supprimer le compte ?';
+
+  @override
+  String get deleteAccountBody =>
+      'Votre profil, vos listes personnelles et vos données d’utilisation seront définitivement supprimés. Les listes familiales partagées restent à la famille ; si vous en êtes propriétaire, elle passe au membre le plus ancien. Cette action est irréversible.';
+
+  @override
+  String get deleteAccountFailed =>
+      'Impossible de supprimer le compte. Vérifiez votre connexion et réessayez.';
+
+  @override
+  String get chatReportAi => 'Signaler';
+
+  @override
+  String get chatReportSent => 'Merci, nous allons examiner cette réponse.';
+
+  @override
+  String get chatReportFailed =>
+      'Impossible d’envoyer le signalement. Réessayez plus tard.';
+
+  @override
+  String get aiDisclaimer =>
+      'Pora AI peut se tromper. Vérifiez les informations importantes.';
 }

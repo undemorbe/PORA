@@ -104,29 +104,11 @@ abstract class AppLocalizations {
     Locale('zh'),
   ];
 
-  /// The name of the application
-  ///
-  /// In en, this message translates to:
-  /// **'Pora'**
-  String get appName;
-
   /// language
   ///
   /// In en, this message translates to:
   /// **'Language'**
   String get language;
-
-  /// The first line under the app name
-  ///
-  /// In en, this message translates to:
-  /// **'Shared list for couples and families'**
-  String get authUnderAppName1;
-
-  /// The second line under the app name
-  ///
-  /// In en, this message translates to:
-  /// **'Recipes, home, and delivery — all in one place'**
-  String get authUnderAppName2;
 
   /// onlyYou
   ///
@@ -137,44 +119,8 @@ abstract class AppLocalizations {
   /// The sign in with other methods title
   ///
   /// In en, this message translates to:
-  /// **'Sign in another way'**
-  String get authSignInExpansibleExpand;
-
-  /// The sign in with other methods title
-  ///
-  /// In en, this message translates to:
-  /// **'Collapse'**
-  String get authSignInExpansibleCollapse;
-
-  /// The sign in with other methods title
-  ///
-  /// In en, this message translates to:
   /// **'Send again in...'**
   String get sendAgainAfter;
-
-  /// The sign in with email button text
-  ///
-  /// In en, this message translates to:
-  /// **'Sign in with email'**
-  String get authSignInWithEmail;
-
-  /// The sign in with Google button text
-  ///
-  /// In en, this message translates to:
-  /// **'Sign in with Google'**
-  String get authSignInWithGoogle;
-
-  /// The sign in with Apple button text
-  ///
-  /// In en, this message translates to:
-  /// **'Sign in with Apple'**
-  String get authSignInWithApple;
-
-  /// The sign in with Phone button text
-  ///
-  /// In en, this message translates to:
-  /// **'Sign in with phone'**
-  String get authSignInWithPhone;
 
   /// The private policy link text
   ///
@@ -323,7 +269,7 @@ abstract class AppLocalizations {
   /// onboardingSlide3Body
   ///
   /// In en, this message translates to:
-  /// **'Based on your purchases, Pora predicts what will run out soon and lets you order it with one tap.'**
+  /// **'Based on your purchases, Pora predicts what will run out soon and reminds you to add it to your list.'**
   String get onboardingSlide3Body;
 
   /// onboardingSkip
@@ -404,90 +350,6 @@ abstract class AppLocalizations {
   /// **'Next'**
   String get briefNext;
 
-  /// briefItemMilk
-  ///
-  /// In en, this message translates to:
-  /// **'Milk'**
-  String get briefItemMilk;
-
-  /// briefItemBread
-  ///
-  /// In en, this message translates to:
-  /// **'Bread'**
-  String get briefItemBread;
-
-  /// briefItemEggs
-  ///
-  /// In en, this message translates to:
-  /// **'Eggs'**
-  String get briefItemEggs;
-
-  /// briefItemCoffee
-  ///
-  /// In en, this message translates to:
-  /// **'Coffee'**
-  String get briefItemCoffee;
-
-  /// briefItemCheese
-  ///
-  /// In en, this message translates to:
-  /// **'Cheese'**
-  String get briefItemCheese;
-
-  /// briefItemBananas
-  ///
-  /// In en, this message translates to:
-  /// **'Bananas'**
-  String get briefItemBananas;
-
-  /// briefItemButter
-  ///
-  /// In en, this message translates to:
-  /// **'Butter'**
-  String get briefItemButter;
-
-  /// briefItemWater
-  ///
-  /// In en, this message translates to:
-  /// **'Water'**
-  String get briefItemWater;
-
-  /// briefItemVegetables
-  ///
-  /// In en, this message translates to:
-  /// **'Vegetables'**
-  String get briefItemVegetables;
-
-  /// briefItemTomatoes
-  ///
-  /// In en, this message translates to:
-  /// **'Tomatoes'**
-  String get briefItemTomatoes;
-
-  /// briefItemPasta
-  ///
-  /// In en, this message translates to:
-  /// **'Pasta'**
-  String get briefItemPasta;
-
-  /// briefItemChicken
-  ///
-  /// In en, this message translates to:
-  /// **'Chicken'**
-  String get briefItemChicken;
-
-  /// listTitle
-  ///
-  /// In en, this message translates to:
-  /// **'Our list'**
-  String get listTitle;
-
-  /// listMembersCount
-  ///
-  /// In en, this message translates to:
-  /// **'2 people · 8 products'**
-  String get listMembersCount;
-
   /// listUrgent
   ///
   /// In en, this message translates to:
@@ -499,42 +361,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add'**
   String get listAdd;
-
-  /// predictionsTitle
-  ///
-  /// In en, this message translates to:
-  /// **'Pora can help!'**
-  String get predictionsTitle;
-
-  /// predictionsSubtitle
-  ///
-  /// In en, this message translates to:
-  /// **'Running out soon — based on your purchases'**
-  String get predictionsSubtitle;
-
-  /// predictionTip
-  ///
-  /// In en, this message translates to:
-  /// **'A tiny tip'**
-  String get predictionTip;
-
-  /// predictionsOrderTitle
-  ///
-  /// In en, this message translates to:
-  /// **'Order everything with one tap'**
-  String get predictionsOrderTitle;
-
-  /// predictionsOrderSubtitle
-  ///
-  /// In en, this message translates to:
-  /// **'Samokat · delivery in 15 minutes'**
-  String get predictionsOrderSubtitle;
-
-  /// predictionsOrderDiscount
-  ///
-  /// In en, this message translates to:
-  /// **'15% off your first order'**
-  String get predictionsOrderDiscount;
 
   /// predictionsAddToList
   ///
@@ -548,47 +374,17 @@ abstract class AppLocalizations {
   /// **'No thanks'**
   String get predictionsDismiss;
 
-  /// itemDetailName
-  ///
-  /// In en, this message translates to:
-  /// **'Milk'**
-  String get itemDetailName;
-
-  /// itemDetailSubtitle
-  ///
-  /// In en, this message translates to:
-  /// **'2 L · Dairy'**
-  String get itemDetailSubtitle;
-
   /// itemDetailAddedBy
   ///
   /// In en, this message translates to:
   /// **'Added by'**
   String get itemDetailAddedBy;
 
-  /// itemDetailSection
-  ///
-  /// In en, this message translates to:
-  /// **'Section'**
-  String get itemDetailSection;
-
-  /// itemDetailSectionValue
-  ///
-  /// In en, this message translates to:
-  /// **'Dairy'**
-  String get itemDetailSectionValue;
-
   /// itemDetailQuantity
   ///
   /// In en, this message translates to:
   /// **'Quantity'**
   String get itemDetailQuantity;
-
-  /// itemDetailQuantityValue
-  ///
-  /// In en, this message translates to:
-  /// **'2 L'**
-  String get itemDetailQuantityValue;
 
   /// itemDetailUrgent
   ///
@@ -602,18 +398,6 @@ abstract class AppLocalizations {
   /// **'Remind me'**
   String get itemDetailRemind;
 
-  /// itemDetailRemindEvery
-  ///
-  /// In en, this message translates to:
-  /// **'Every 7 days'**
-  String get itemDetailRemindEvery;
-
-  /// itemDetailInsight
-  ///
-  /// In en, this message translates to:
-  /// **'You buy it about every 7 days · last bought 6 days ago. I\'ll suggest restocking soon.'**
-  String get itemDetailInsight;
-
   /// itemDetailMarkBought
   ///
   /// In en, this message translates to:
@@ -626,77 +410,17 @@ abstract class AppLocalizations {
   /// **'Remove from list'**
   String get itemDetailDelete;
 
-  /// addItemTitle
-  ///
-  /// In en, this message translates to:
-  /// **'Add product'**
-  String get addItemTitle;
-
-  /// addItemExampleValue
-  ///
-  /// In en, this message translates to:
-  /// **'Avocado'**
-  String get addItemExampleValue;
-
-  /// addItemNameHint
-  ///
-  /// In en, this message translates to:
-  /// **'Product name'**
-  String get addItemNameHint;
-
   /// addItemQuantity
   ///
   /// In en, this message translates to:
   /// **'Quantity'**
   String get addItemQuantity;
 
-  /// addItemSection
-  ///
-  /// In en, this message translates to:
-  /// **'Section'**
-  String get addItemSection;
-
-  /// addItemUrgent
-  ///
-  /// In en, this message translates to:
-  /// **'Urgent'**
-  String get addItemUrgent;
-
-  /// addItemUrgentSubtitle
-  ///
-  /// In en, this message translates to:
-  /// **'Need to buy today'**
-  String get addItemUrgentSubtitle;
-
-  /// addItemRemind
-  ///
-  /// In en, this message translates to:
-  /// **'Remind regularly'**
-  String get addItemRemind;
-
-  /// addItemRemindEvery
-  ///
-  /// In en, this message translates to:
-  /// **'Every 7 days'**
-  String get addItemRemindEvery;
-
-  /// addItemSubmit
-  ///
-  /// In en, this message translates to:
-  /// **'Add to list'**
-  String get addItemSubmit;
-
   /// settingsTitle
   ///
   /// In en, this message translates to:
   /// **'Settings'**
   String get settingsTitle;
-
-  /// settingsHouseholdSection
-  ///
-  /// In en, this message translates to:
-  /// **'Household'**
-  String get settingsHouseholdSection;
 
   /// settingsAppSection
   ///
@@ -709,24 +433,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Notifications'**
   String get settingsNotifications;
-
-  /// settingsDelivery
-  ///
-  /// In en, this message translates to:
-  /// **'Delivery'**
-  String get settingsDelivery;
-
-  /// settingsProAd
-  ///
-  /// In en, this message translates to:
-  /// **'Pora+ · ad-free'**
-  String get settingsProAd;
-
-  /// settingsTryPill
-  ///
-  /// In en, this message translates to:
-  /// **'Try it'**
-  String get settingsTryPill;
 
   /// settingsPrivacy
   ///
@@ -745,12 +451,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sign out'**
   String get settingsLogout;
-
-  /// settingsMembersNames
-  ///
-  /// In en, this message translates to:
-  /// **'Boris and Anna'**
-  String get settingsMembersNames;
 
   /// settingsInvitePill
   ///
@@ -806,12 +506,6 @@ abstract class AppLocalizations {
   /// **'You\'ve been invited to a family'**
   String get householdGotInvited;
 
-  /// householdWriteCode
-  ///
-  /// In en, this message translates to:
-  /// **'Enter invite code'**
-  String get householdWriteCode;
-
   /// householdDoLater
   ///
   /// In en, this message translates to:
@@ -847,84 +541,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Read all'**
   String get notificationsReadAll;
-
-  /// notificationsMilkTitle
-  ///
-  /// In en, this message translates to:
-  /// **'Grab milk on your way home'**
-  String get notificationsMilkTitle;
-
-  /// notificationsMilkBody
-  ///
-  /// In en, this message translates to:
-  /// **'It\'s run out — Anna marked it 10 minutes ago.'**
-  String get notificationsMilkBody;
-
-  /// notificationsMilkTime
-  ///
-  /// In en, this message translates to:
-  /// **'5 minutes ago'**
-  String get notificationsMilkTime;
-
-  /// notificationsCoffeeTitle
-  ///
-  /// In en, this message translates to:
-  /// **'Coffee is running out soon'**
-  String get notificationsCoffeeTitle;
-
-  /// notificationsCoffeeBody
-  ///
-  /// In en, this message translates to:
-  /// **'You buy it about every 14 days, 12 have passed.'**
-  String get notificationsCoffeeBody;
-
-  /// notificationsPartnerAddedTitle
-  ///
-  /// In en, this message translates to:
-  /// **'Anna added 2 products'**
-  String get notificationsPartnerAddedTitle;
-
-  /// notificationsPartnerAddedBody
-  ///
-  /// In en, this message translates to:
-  /// **'Bananas and bread are in the shared list.'**
-  String get notificationsPartnerAddedBody;
-
-  /// notificationsPartnerAddedTime
-  ///
-  /// In en, this message translates to:
-  /// **'Today, 9:12'**
-  String get notificationsPartnerAddedTime;
-
-  /// notificationsPromoTitle
-  ///
-  /// In en, this message translates to:
-  /// **'15% off your first Samokat order'**
-  String get notificationsPromoTitle;
-
-  /// notificationsPromoBody
-  ///
-  /// In en, this message translates to:
-  /// **'The promo is active for 6 more days.'**
-  String get notificationsPromoBody;
-
-  /// notificationsPromoTime
-  ///
-  /// In en, this message translates to:
-  /// **'Yesterday'**
-  String get notificationsPromoTime;
-
-  /// notificationsOrderDeliveredTitle
-  ///
-  /// In en, this message translates to:
-  /// **'Order delivered'**
-  String get notificationsOrderDeliveredTitle;
-
-  /// notificationsOrderDeliveredBody
-  ///
-  /// In en, this message translates to:
-  /// **'8 products · Samokat · ₽1,054'**
-  String get notificationsOrderDeliveredBody;
 
   /// notificationsAddToListPill
   ///
@@ -962,53 +578,11 @@ abstract class AppLocalizations {
   /// **'Next'**
   String get userCreateProfileNext;
 
-  /// searchTitle
-  ///
-  /// In en, this message translates to:
-  /// **'Search'**
-  String get searchTitle;
-
   /// searchHint
   ///
   /// In en, this message translates to:
   /// **'Product or recipe…'**
   String get searchHint;
-
-  /// searchFilterAll
-  ///
-  /// In en, this message translates to:
-  /// **'All'**
-  String get searchFilterAll;
-
-  /// searchFilterVegetables
-  ///
-  /// In en, this message translates to:
-  /// **'Vegetables'**
-  String get searchFilterVegetables;
-
-  /// searchFilterDairy
-  ///
-  /// In en, this message translates to:
-  /// **'Dairy'**
-  String get searchFilterDairy;
-
-  /// searchFilterGrocery
-  ///
-  /// In en, this message translates to:
-  /// **'Groceries'**
-  String get searchFilterGrocery;
-
-  /// searchFilterRecipes
-  ///
-  /// In en, this message translates to:
-  /// **'Recipes'**
-  String get searchFilterRecipes;
-
-  /// searchResults
-  ///
-  /// In en, this message translates to:
-  /// **'Results'**
-  String get searchResults;
 
   /// searchNothingFound
   ///
@@ -1022,89 +596,11 @@ abstract class AppLocalizations {
   /// **'Insights'**
   String get insightsTitle;
 
-  /// orderTitle
-  ///
-  /// In en, this message translates to:
-  /// **'Order'**
-  String get orderTitle;
-
-  /// orderCart
-  ///
-  /// In en, this message translates to:
-  /// **'Cart'**
-  String get orderCart;
-
-  /// orderWhenToDeliver
-  ///
-  /// In en, this message translates to:
-  /// **'When to deliver'**
-  String get orderWhenToDeliver;
-
-  /// No description provided for @orderCheckoutCta.
-  ///
-  /// In en, this message translates to:
-  /// **'Order from Samokat · {total}'**
-  String orderCheckoutCta(String total);
-
-  /// orderSummaryGoods
-  ///
-  /// In en, this message translates to:
-  /// **'Items'**
-  String get orderSummaryGoods;
-
-  /// orderSummaryDiscount
-  ///
-  /// In en, this message translates to:
-  /// **'15% off'**
-  String get orderSummaryDiscount;
-
-  /// orderSummaryDelivery
-  ///
-  /// In en, this message translates to:
-  /// **'Delivery'**
-  String get orderSummaryDelivery;
-
-  /// orderSummaryFree
-  ///
-  /// In en, this message translates to:
-  /// **'Free'**
-  String get orderSummaryFree;
-
-  /// orderSummaryTotal
-  ///
-  /// In en, this message translates to:
-  /// **'Total'**
-  String get orderSummaryTotal;
-
   /// recipeImportTitle
   ///
   /// In en, this message translates to:
   /// **'Recipe from a link'**
   String get recipeImportTitle;
-
-  /// recipePreviewTitle
-  ///
-  /// In en, this message translates to:
-  /// **'Pasta Carbonara'**
-  String get recipePreviewTitle;
-
-  /// recipePreviewMeta
-  ///
-  /// In en, this message translates to:
-  /// **'eda.ru · 25 min · 2 servings'**
-  String get recipePreviewMeta;
-
-  /// recipePreviewFound
-  ///
-  /// In en, this message translates to:
-  /// **'6 ingredients found'**
-  String get recipePreviewFound;
-
-  /// recipeDedupBanner
-  ///
-  /// In en, this message translates to:
-  /// **'Removed 2 duplicates to avoid duplicating items already on your list'**
-  String get recipeDedupBanner;
 
   /// recipeIngredients
   ///
@@ -1136,12 +632,6 @@ abstract class AppLocalizations {
   /// **'Pora'**
   String get navPora;
 
-  /// navOrder
-  ///
-  /// In en, this message translates to:
-  /// **'Order'**
-  String get navOrder;
-
   /// navProfile
   ///
   /// In en, this message translates to:
@@ -1160,18 +650,6 @@ abstract class AppLocalizations {
   /// **'Choose a family to open its list'**
   String get familiesSubtitle;
 
-  /// familiesCurrent
-  ///
-  /// In en, this message translates to:
-  /// **'Current'**
-  String get familiesCurrent;
-
-  /// familiesCreateOrJoin
-  ///
-  /// In en, this message translates to:
-  /// **'＋ Create or join'**
-  String get familiesCreateOrJoin;
-
   /// familiesCreateDialog
   ///
   /// In en, this message translates to:
@@ -1183,18 +661,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Try refreshing'**
   String get tryToUpdate;
-
-  /// checkOut
-  ///
-  /// In en, this message translates to:
-  /// **'Check'**
-  String get checkOut;
-
-  /// settingsMore
-  ///
-  /// In en, this message translates to:
-  /// **'Advanced'**
-  String get settingsMore;
 
   /// listsYour
   ///
@@ -1382,12 +848,6 @@ abstract class AppLocalizations {
   /// **'Appearance'**
   String get appearance;
 
-  /// themeSection
-  ///
-  /// In en, this message translates to:
-  /// **'Theme'**
-  String get themeSection;
-
   /// themeLight
   ///
   /// In en, this message translates to:
@@ -1507,12 +967,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Paste a recipe URL and tap “Parse”'**
   String get recipeEmptyHint;
-
-  /// recipeDupMark
-  ///
-  /// In en, this message translates to:
-  /// **'already in list'**
-  String get recipeDupMark;
 
   /// done
   ///
@@ -1741,18 +1195,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Shared'**
   String get groupShared;
-
-  /// noGroups
-  ///
-  /// In en, this message translates to:
-  /// **'No groups yet'**
-  String get noGroups;
-
-  /// ios easter egg on advanced settings when tapped few times
-  ///
-  /// In en, this message translates to:
-  /// **'* To change your theme, go to Settings > PORA > Theme\n* Select a new theme from the settings menu\n* Tap on \'Theme\' in the app\'s settings to switch between light and dark modes'**
-  String get settingsChangeThemeIOSEasterEgg;
 
   /// tutorialTitle
   ///
@@ -2051,44 +1493,14 @@ abstract class AppLocalizations {
   /// section title
   ///
   /// In en, this message translates to:
-  /// **'You buy often'**
-  String get predictionsSectionOften;
-
-  /// section title
-  ///
-  /// In en, this message translates to:
   /// **'AI suggests'**
   String get predictionsSectionAiSuggests;
-
-  /// AI suggestions card title
-  ///
-  /// In en, this message translates to:
-  /// **'Products and recipes for you'**
-  String get predictionsAiSuggestionsTitle;
-
-  /// AI suggestions topic
-  ///
-  /// In en, this message translates to:
-  /// **'your preferences and purchases'**
-  String get predictionsAiSuggestionsTopic;
 
   /// refresh action
   ///
   /// In en, this message translates to:
   /// **'Refresh'**
   String get refresh;
-
-  /// empty frequent products
-  ///
-  /// In en, this message translates to:
-  /// **'Not enough data yet'**
-  String get predictionsOftenEmpty;
-
-  /// FAB label
-  ///
-  /// In en, this message translates to:
-  /// **'Ask PORA'**
-  String get predictionsAskPora;
 
   /// kpi label
   ///
@@ -2311,18 +1723,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Ask anything…'**
   String get chatInputHint;
-
-  /// model badge
-  ///
-  /// In en, this message translates to:
-  /// **'Powered by OpenRouter · ling-3.0-flash'**
-  String get aiModelBadge;
-
-  /// see all link
-  ///
-  /// In en, this message translates to:
-  /// **'See all'**
-  String get seeAll;
 
   /// predefined tip topic
   ///
@@ -2551,18 +1951,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Where to add this recipe?'**
   String get recipeCreateListCta;
-
-  /// dup pill when user unchecks flag
-  ///
-  /// In en, this message translates to:
-  /// **'will add anyway'**
-  String get recipeDupForceMark;
-
-  /// dedup banner
-  ///
-  /// In en, this message translates to:
-  /// **'{n} duplicates will be skipped — uncheck to force-add'**
-  String recipeDedupBannerMany(int n);
 
   /// snackbar when write attempted offline
   ///
@@ -2864,12 +2252,6 @@ abstract class AppLocalizations {
   /// **'≈{minutes} min per session'**
   String insightsAvgSession(String minutes);
 
-  /// insightsVsPrevious
-  ///
-  /// In en, this message translates to:
-  /// **'vs previous period'**
-  String get insightsVsPrevious;
-
   /// insightsActivityTitle
   ///
   /// In en, this message translates to:
@@ -3055,6 +2437,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Stats will appear as you use Pora'**
   String get insightsNoUsageYet;
+
+  /// settingsDeleteAccount
+  ///
+  /// In en, this message translates to:
+  /// **'Delete account'**
+  String get settingsDeleteAccount;
+
+  /// deleteAccountTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Delete account?'**
+  String get deleteAccountTitle;
+
+  /// deleteAccountBody
+  ///
+  /// In en, this message translates to:
+  /// **'Your profile, personal lists and usage data will be permanently deleted. Shared family lists stay with the family; if you own a family, it passes to its longest-standing member. This cannot be undone.'**
+  String get deleteAccountBody;
+
+  /// deleteAccountFailed
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t delete the account. Check your connection and try again.'**
+  String get deleteAccountFailed;
+
+  /// chatReportAi
+  ///
+  /// In en, this message translates to:
+  /// **'Report'**
+  String get chatReportAi;
+
+  /// chatReportSent
+  ///
+  /// In en, this message translates to:
+  /// **'Thanks — we\'ll review this answer.'**
+  String get chatReportSent;
+
+  /// chatReportFailed
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t send the report. Try again later.'**
+  String get chatReportFailed;
+
+  /// aiDisclaimer
+  ///
+  /// In en, this message translates to:
+  /// **'Pora AI can make mistakes. Check important information.'**
+  String get aiDisclaimer;
 }
 
 class _AppLocalizationsDelegate

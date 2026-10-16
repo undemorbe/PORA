@@ -87,6 +87,16 @@ class UserService implements UserRepository {
   }
 
   @override
+  Future<Either<Failure, Success>> deleteAccount() async {
+    try {
+      await remoteDataSource.deleteAccount();
+      return Right(const ServerSuccess());
+    } catch (e, s) {
+      return Left(FailureMapper.map(e, s));
+    }
+  }
+
+  @override
   Future<Either<Failure, Success>> logout() async {
     try {
       await remoteDataSource.logout();
