@@ -22,11 +22,11 @@ void main() {
   });
 
   setUp(() async {
-    await const Outbox().clear();
+    await Outbox().clear();
   });
 
   test('successful handlers drain the queue', () async {
-    const outbox = Outbox();
+    final outbox = Outbox();
     await outbox.enqueue('a', {'n': 1});
     await outbox.enqueue('a', {'n': 2});
     final replayer = OutboxReplayer(outbox: outbox)
@@ -37,7 +37,7 @@ void main() {
   });
 
   test('connectivity failure pauses flush and keeps entries', () async {
-    const outbox = Outbox();
+    final outbox = Outbox();
     await outbox.enqueue('a', {});
     final replayer = OutboxReplayer(outbox: outbox)
       ..register('a', (_) async => Left(const NetworkFailure()));
@@ -47,7 +47,7 @@ void main() {
   });
 
   test('permanent (4xx) failure drops the poisoned entry', () async {
-    const outbox = Outbox();
+    final outbox = Outbox();
     await outbox.enqueue('a', {});
     final replayer = OutboxReplayer(outbox: outbox)
       ..register('a', (_) async => Left(const ValidationFailure('bad')));
@@ -57,7 +57,7 @@ void main() {
   });
 
   test('unknown kind is dropped', () async {
-    const outbox = Outbox();
+    final outbox = Outbox();
     await outbox.enqueue('unregistered', {});
     final replayer = OutboxReplayer(outbox: outbox);
 

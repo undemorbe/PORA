@@ -1,16 +1,24 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pora/core/internal/offline/outbox_entry.dart';
+import 'package:pora/core/internal/offline/outbox_kinds.dart';
 
 /// Персистентная offline-очередь write-операций поверх Hive box `pora-outbox`.
 /// Операции, сделанные без сети, складываются сюда и проигрываются
 /// OutboxReplayer'ом при восстановлении связи.
 class Outbox {
-  const Outbox();
+  Outbox();
 
   static const _boxName = 'pora-outbox';
   static int _seq = 0;
+
+  final _changes = StreamController<void>.broadcast();
+
+  /// Эмитит после каждой постановки в очередь — по нему OutboxReplayer
+  /// планирует flush.
+  Stream<void> get changes => _changes.stream;
 
   Future<Box<String>> _open() async {
     if (Hive.isBoxOpen(_boxName)) return Hive.box<String>(_boxName);
@@ -29,7 +37,32 @@ class Outbox {
       createdAt: DateTime.now().millisecondsSinceEpoch,
     );
     await box.put(entry.id, jsonEncode(entry.toJson()));
+    if (!_changes.isClosed) _changes.add(null);
     return entry;
+  }
+
+  /// Ставит операцию над товаром [itemId], предварительно выкидывая записи,
+  /// которые она делает бессмысленными ([OutboxKinds.supersededBy]).
+  Future<OutboxEntry> enqueueCoalesced(
+    String kind,
+    Map<String, dynamic> args, {
+    required String itemId,
+  }) async {
+    final superseded = OutboxKinds.supersededBy(kind);
+    if (superseded.isNotEmpty) {
+      await removeWhere(
+        (e) => e.args['item-id'] == itemId && superseded.contains(e.kind),
+      );
+    }
+    return enqueue(kind, args);
+  }
+
+  /// Удаляет записи, удовлетворяющие [test]. Возвращает число удалённых.
+  Future<int> removeWhere(bool Function(OutboxEntry entry) test) async {
+    final box = await _open();
+    final doomed = (await all()).where(test).map((e) => e.id).toList();
+    await box.deleteAll(doomed);
+    return doomed.length;
   }
 
   /// Все записи в порядке создания.
@@ -65,4 +98,6 @@ class Outbox {
     final box = await _open();
     await box.clear();
   }
+
+  Future<void> dispose() => _changes.close();
 }

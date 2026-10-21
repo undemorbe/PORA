@@ -399,7 +399,7 @@ class InjectionContainer {
     );
 
     //! Offline outbox
-    _getIt.registerLazySingleton<Outbox>(() => const Outbox());
+    _getIt.registerLazySingleton<Outbox>(Outbox.new);
     _getIt.registerLazySingleton<OutboxReplayer>(
       () => OutboxReplayer(outbox: _getIt<Outbox>()),
     );
