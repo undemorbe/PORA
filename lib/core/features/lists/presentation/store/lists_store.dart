@@ -16,6 +16,7 @@ import 'package:pora/core/features/lists/domain/usecase/get_list_data.dart';
 import 'package:pora/core/features/item_detail/domain/usecase/delete_item.dart';
 import 'package:pora/core/features/item_detail/domain/usecase/mark_item_bought.dart';
 import 'package:pora/core/features/user/domain/usecase/user/get_user.dart';
+import 'package:pora/core/internal/cache/cache_keys.dart';
 import 'package:pora/core/internal/cache/hive_json_cache.dart';
 import 'package:pora/core/internal/cache/offline_policy.dart';
 part 'lists_store.g.dart';
@@ -123,12 +124,12 @@ abstract class _ListStoreBase with Store {
       // Write-through cache — открытый список доступен offline.
       final asModel = _asListModel(response.right);
       if (asModel != null) {
-        await HiveJsonCache.put(_listCacheKey(lid), asModel.toJson());
+        await HiveJsonCache.put(CacheKeys.listContent(lid), asModel.toJson());
       }
     } else {
       // Кэш отдаём только при проблемах с доступностью, не при 4xx.
       if (canServeCache(response.left)) {
-        final cached = await HiveJsonCache.read(_listCacheKey(lid));
+        final cached = await HiveJsonCache.read(CacheKeys.listContent(lid));
         if (cached is Map<String, dynamic>) {
           try {
             list = ListModel.fromJson(cached);
@@ -142,9 +143,6 @@ abstract class _ListStoreBase with Store {
       errorMessage = response.left.message;
     }
   }
-
-  String _listCacheKey(String lid) => 'list-content-v1-$lid';
-  String _famListsCacheKey(String fid) => 'fam-lists-v1-$fid';
 
   ListModel? _asListModel(ListEntity e) {
     if (e is ListModel) return e;
@@ -165,13 +163,13 @@ abstract class _ListStoreBase with Store {
       usingCache = false;
       if (response.right is ListsArrayModel) {
         await HiveJsonCache.put(
-          _famListsCacheKey(fid),
+          CacheKeys.familyLists(fid),
           (response.right as ListsArrayModel).toJson(),
         );
       }
     } else {
       if (canServeCache(response.left)) {
-        final cached = await HiveJsonCache.read(_famListsCacheKey(fid));
+        final cached = await HiveJsonCache.read(CacheKeys.familyLists(fid));
         if (cached is Map<String, dynamic>) {
           try {
             listsWithPreview = ListsArrayModel.fromJson(cached);

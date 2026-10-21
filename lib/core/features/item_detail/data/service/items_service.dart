@@ -2,6 +2,7 @@ import 'package:pora/core/features/item_detail/data/datasource/items_remote.dart
 import 'package:pora/core/features/lists/data/models/products/product_model.dart';
 import 'package:pora/core/features/item_detail/domain/repository/items_repository.dart';
 import 'package:pora/core/features/lists/domain/entity/products/product.dart';
+import 'package:pora/core/internal/cache/cache_keys.dart';
 import 'package:pora/core/internal/cache/hive_json_cache.dart';
 import 'package:pora/core/internal/cache/offline_policy.dart';
 import 'package:pora/core/internal/errors/failure.dart';
@@ -10,8 +11,6 @@ import 'package:pora/core/internal/errors/success.dart';
 import 'package:pora/core/internal/extensions/either.dart';
 import 'package:pora/core/internal/offline/outbox.dart';
 import 'package:pora/core/internal/offline/outbox_kinds.dart';
-
-String _itemCacheKey(String itemId) => 'items:item:$itemId:v1';
 
 /// Оборачивает `ItemsRemote` в `Either<Failure, T>`.
 /// Идемпотентные write-операции (отметка куплено / удаление / правка / пинг)
@@ -28,13 +27,13 @@ class ItemsService implements ItemsRepository {
   }) async {
     try {
       final model = await remote.getItem(itemId: itemId);
-      await HiveJsonCache.put(_itemCacheKey(itemId), model.toJson());
+      await HiveJsonCache.put(CacheKeys.item(itemId), model.toJson());
       return Right(model);
     } catch (e, s) {
       final failure = FailureMapper.map(e, s);
       // Кэш товара отдаём только при проблемах с доступностью, не при 4xx.
       if (canServeCache(failure)) {
-        final cached = await HiveJsonCache.read(_itemCacheKey(itemId));
+        final cached = await HiveJsonCache.read(CacheKeys.item(itemId));
         if (cached is Map) {
           try {
             return Right(
@@ -130,12 +129,12 @@ class ItemsService implements ItemsRepository {
   Future<Either<Failure, Success>> deleteItem({required String itemId}) async {
     try {
       await remote.deleteItem(itemId: itemId);
-      await HiveJsonCache.invalidate(_itemCacheKey(itemId));
+      await HiveJsonCache.invalidate(CacheKeys.item(itemId));
       return Right(const ServerSuccess());
     } catch (e, s) {
       final failure = FailureMapper.map(e, s);
       if (failure.isConnectivity) {
-        await HiveJsonCache.invalidate(_itemCacheKey(itemId));
+        await HiveJsonCache.invalidate(CacheKeys.item(itemId));
         await outbox.enqueue(OutboxKinds.itemDelete, {'item-id': itemId});
         return Right(const QueuedSuccess());
       }
@@ -211,9 +210,9 @@ class ItemsService implements ItemsRepository {
     String itemId,
     Map<String, dynamic> patch,
   ) async {
-    final raw = await HiveJsonCache.read(_itemCacheKey(itemId));
+    final raw = await HiveJsonCache.read(CacheKeys.item(itemId));
     if (raw is! Map) return;
     final updated = Map<String, dynamic>.from(raw)..addAll(patch);
-    await HiveJsonCache.put(_itemCacheKey(itemId), updated);
+    await HiveJsonCache.put(CacheKeys.item(itemId), updated);
   }
 }

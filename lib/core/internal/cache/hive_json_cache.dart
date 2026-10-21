@@ -85,6 +85,15 @@ class HiveJsonCache {
     return entry.data;
   }
 
+  /// Все ключи, начинающиеся с [prefix].
+  static Future<List<String>> keysWithPrefix(String prefix) async {
+    final box = await _open();
+    return box.keys
+        .whereType<String>()
+        .where((k) => k.startsWith(prefix))
+        .toList();
+  }
+
   static CacheEntry _unwrap(dynamic decoded) {
     if (decoded is Map &&
         decoded[_tsKey] is int &&
