@@ -1958,6 +1958,18 @@ abstract class AppLocalizations {
   /// **'No internet — change won\'t be saved'**
   String get offlineWriteBlocked;
 
+  /// snackbar when an offline change was queued for sync
+  ///
+  /// In en, this message translates to:
+  /// **'Saved. We\'ll send it when you\'re back online'**
+  String get offlineSavedQueued;
+
+  /// snackbar when queued offline changes were rejected by the server
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t sync changes: {count}'**
+  String offlineSyncDropped(int count);
+
   /// top banner when cached data shown
   ///
   /// In en, this message translates to:

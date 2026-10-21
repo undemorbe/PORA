@@ -1284,6 +1284,20 @@
     "@offlineWriteBlocked": {
         "description": "snackbar when write attempted offline"
     },
+    "offlineSavedQueued": "Saved. We'll send it when you're back online",
+    "@offlineSavedQueued": {
+        "description": "snackbar when an offline change was queued for sync"
+    },
+    "offlineSyncDropped": "Couldn't sync changes: {count}",
+    "@offlineSyncDropped": {
+        "description": "snackbar when queued offline changes were rejected by the server",
+        "placeholders": {
+            "count": {
+                "type": "int",
+                "example": "2"
+            }
+        }
+    },
     "offlineReadBanner": "Offline — showing cached data",
     "@offlineReadBanner": {
         "description": "top banner when cached data shown"

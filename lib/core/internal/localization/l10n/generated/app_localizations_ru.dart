@@ -1015,6 +1015,14 @@ class AppLocalizationsRu extends AppLocalizations {
   String get offlineWriteBlocked => 'Нет интернета — изменение не сохранится';
 
   @override
+  String get offlineSavedQueued => 'Сохранено. Отправим, когда появится сеть';
+
+  @override
+  String offlineSyncDropped(int count) {
+    return 'Не удалось синхронизировать изменений: $count';
+  }
+
+  @override
   String get offlineReadBanner => 'Работаете офлайн — данные из кэша';
 
   @override

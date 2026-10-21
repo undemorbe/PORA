@@ -15,65 +15,62 @@ class AppLocalizationsZh extends AppLocalizations {
   String get onlyYou => '仅你';
 
   @override
-  String get sendAgainAfter => '重新发送，倒计时…';
+  String get sendAgainAfter => '重新发送倒计时';
 
   @override
-  String get authPrivatePolicy =>
-      'By continuing, 你 agree 到 \nTerms 和 Privacy Policy';
+  String get authPrivatePolicy => '继续即表示你同意\n《服务条款》和《隐私政策》';
 
   @override
   String get authTitle => '快完成了';
 
   @override
-  String get authSubtitle =>
-      '输入 你的 电话 number 或 邮箱 — we\'ll send 你 a sign-在 代码.';
+  String get authSubtitle => '输入你的手机号或邮箱，我们会发送登录验证码。';
 
   @override
-  String get authSubtitle2 =>
-      'Start typing — we\'ll detect whether it\'s a 电话 number 或 邮箱.';
+  String get authSubtitle2 => '直接输入即可，我们会自动识别是手机号还是邮箱。';
 
   @override
   String get authJoinButton => '加入';
 
   @override
-  String get userCreateProfileNameRequired => 'How about telling us 你的 名称?';
+  String get userCreateProfileNameRequired => '能告诉我们你的名字吗？';
 
   @override
   String get commonError => '错误';
 
   @override
-  String get authErrorInvalidPhone => 'Invalid 电话 / 邮箱!';
+  String get authErrorInvalidPhone => '手机号或邮箱无效！';
 
   @override
   String authPhoneSendOtp(String isPhone) {
     String _temp0 = intl.Intl.selectLogic(isPhone, {
-      'true': 'Telegram!',
-      'false': 'email!',
-      'other': 'destination you wrote',
+      'true': 'Telegram！',
+      'false': '邮箱！',
+      'other': '你填写的地址',
     });
-    return 'We\'ll send 代码 onto $_temp0';
+    return '我们会将验证码发送到$_temp0';
   }
 
   @override
   String get otpTitle => '快完成了！';
 
   @override
-  String get otpEnterCodeSentTo => '输入  代码 已发送 到 ';
+  String get otpEnterCodeSentTo => '请输入验证码，已发送至 ';
 
   @override
-  String get otpResendQuestion => 'Didn\'t receive  代码?';
+  String get otpResendQuestion => '没有收到验证码？';
 
   @override
   String get otpResend => '重新发送';
 
   @override
-  String get otpVerifyButton => 'Verify 代码';
+  String get otpVerifyButton => '验证';
 
   @override
-  String get otpValidationLength => '输入  6-digit 代码';
+  String get otpValidationLength => '请输入 6 位验证码';
 
   @override
-  String get otpValidationDigits => ' 代码 contains digits only';
+  String get otpValidationDigits => '验证码只能包含数字';
 
   @override
   String get authSwitchToEmail => '使用邮箱登录';
@@ -87,18 +84,16 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get onboardingSlide1Title => '食谱 → 清单\nin seconds';
+  String get onboardingSlide1Title => '食谱 → 清单\n只需几秒';
 
   @override
-  String get onboardingSlide1Body =>
-      'Drop a 食谱 link — Pora collects  食材 和 removes what 你 已经 有.';
+  String get onboardingSlide1Body => '粘贴食谱链接，Pora 会整理所需食材，并去掉你已经有的东西。';
 
   @override
-  String get onboardingSlide2Title => '一 清单\nfor 二';
+  String get onboardingSlide2Title => '一份清单\n两人共享';
 
   @override
-  String get onboardingSlide2Body =>
-      'Add things together — 你 可以 see who 已添加 what. 你的 partner 可以 pick up what 你 need 在  way home.';
+  String get onboardingSlide2Body => '一起添加商品，谁加了什么一目了然。你的伴侣可以在回家路上顺手买齐。';
 
   @override
   String get onboardingSlide3Title => 'Pora 知道\n什么时候该买';
@@ -116,29 +111,28 @@ class AppLocalizationsZh extends AppLocalizations {
   String get onboardingNext => '下一步';
 
   @override
-  String get splashTagline => ' 清单 that remembers 用于 你';
+  String get splashTagline => '替你记住一切的清单';
 
   @override
-  String get briefTitle => 'What do 你 often run out of?';
+  String get briefTitle => '你经常用完哪些东西？';
 
   @override
-  String get briefDeletionTitle => '是 你 sure 你 want 到 删除 这个 商品?';
+  String get briefDeletionTitle => '确定要删除这个商品吗？';
 
   @override
   String get briefAddYourOwn => '添加';
 
   @override
-  String get briefInputProduct => '输入 a 商品 或 category';
+  String get briefInputProduct => '输入商品或类别';
 
   @override
-  String get briefInputEmoji => '输入 an emoji/icon 用于  商品';
+  String get briefInputEmoji => '为商品输入一个表情或图标';
 
   @override
-  String get briefAlreadyContains => '这个 商品 是 已经 已选择';
+  String get briefAlreadyContains => '该商品已选择';
 
   @override
-  String get briefSubtitle =>
-      '选择 商品 — Pora 将 remind 你 at  right time. 你 可以 skip 这个.';
+  String get briefSubtitle => '选择商品，Pora 会在合适的时候提醒你。也可以跳过这一步。';
 
   @override
   String get briefSkip => '跳过';
@@ -153,13 +147,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get listAdd => '添加';
 
   @override
-  String get predictionsAddToList => 'Add 到 清单';
+  String get predictionsAddToList => '加入清单';
 
   @override
-  String get predictionsDismiss => '没有 thanks';
+  String get predictionsDismiss => '不用了';
 
   @override
-  String get itemDetailAddedBy => '已添加 by';
+  String get itemDetailAddedBy => '添加者';
 
   @override
   String get itemDetailQuantity => '数量';
@@ -174,7 +168,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get itemDetailMarkBought => '标记为已购买';
 
   @override
-  String get itemDetailDelete => '移除 来自 清单';
+  String get itemDetailDelete => '从清单中移除';
 
   @override
   String get addItemQuantity => '数量';
@@ -201,14 +195,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsInvitePill => '邀请';
 
   @override
-  String get householdInviteTitle => 'Invite 你的 partner';
+  String get householdInviteTitle => '邀请你的伴侣';
 
   @override
   String get householdCookTogether => '一起做饭';
 
   @override
-  String get householdInviteDescription =>
-      'Pora works better 用于 二. Invite 你的 partner — 你的 清单 和 reminders 将 be 共享.';
+  String get householdInviteDescription => '两个人用 Pora 更方便。邀请你的伴侣，一起共享清单和提醒。';
 
   @override
   String get householdShareLink => '分享链接';
@@ -221,10 +214,10 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get householdInviteDescriptionWhenConnecting =>
-      'We detected an invite 代码, but 你 可以 enter it yourself if we got it wrong';
+      '我们检测到了邀请码，如果识别有误，你也可以手动输入';
 
   @override
-  String get householdGotInvited => '你\'ve been invited 到 a 家庭';
+  String get householdGotInvited => '你已被邀请加入一个家庭';
 
   @override
   String get householdDoLater => '我稍后再做';
@@ -245,17 +238,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get notificationsReadAll => '全部已读';
 
   @override
-  String get notificationsAddToListPill => '＋ Add 到 清单';
+  String get notificationsAddToListPill => '＋ 加入清单';
 
   @override
-  String get userCreateProfileTitle => 'What\'s 你的 名称?';
+  String get userCreateProfileTitle => '你叫什么名字？';
 
   @override
-  String get userCreateProfileSubtitle =>
-      'Add a 名称 和 照片 — 你的 partner 将 see them 在  共享 清单.';
+  String get userCreateProfileSubtitle => '添加名字和照片，你的伴侣会在共享清单中看到。';
 
   @override
-  String get userCreateProfileNameHint => '你的 名称';
+  String get userCreateProfileNameHint => '你的名字';
 
   @override
   String get userCreateProfileSkip => '跳过';
@@ -264,7 +256,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get userCreateProfileNext => '下一步';
 
   @override
-  String get searchHint => '商品 或 食谱…';
+  String get searchHint => '商品或食谱…';
 
   @override
   String get searchNothingFound => '未找到内容';
@@ -273,7 +265,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get insightsTitle => '洞察';
 
   @override
-  String get recipeImportTitle => '食谱 来自 a link';
+  String get recipeImportTitle => '从链接导入食谱';
 
   @override
   String get recipeIngredients => '食材';
@@ -304,10 +296,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get familiesTitle => '家庭';
 
   @override
-  String get familiesSubtitle => '选择 a 家庭 到 打开 its 清单';
+  String get familiesSubtitle => '选择一个家庭以打开它的清单';
 
   @override
-  String get familiesCreateDialog => 'What should we call  家庭?';
+  String get familiesCreateDialog => '给家庭起个什么名字？';
 
   @override
   String get tryToUpdate => '尝试刷新';
@@ -337,7 +329,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get welcomeBackTitle => '欢迎回来！';
 
   @override
-  String get welcomeBackSubtitle => '一 second, opening 你的 清单…';
+  String get welcomeBackSubtitle => '稍等，正在打开你的清单…';
 
   @override
   String get errorDuringLoading => '加载时出错';
@@ -417,7 +409,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get themeSystem => '跟随系统';
 
   @override
-  String get notificationsPermission => '通知 permission';
+  String get notificationsPermission => '通知权限';
 
   @override
   String get granted => '已允许';
@@ -444,10 +436,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get version => '版本';
 
   @override
-  String get deleteItemTitle => '删除 item?';
+  String get deleteItemTitle => '删除此商品？';
 
   @override
-  String get deleteItemBody => '这个 cannot be undone.';
+  String get deleteItemBody => '此操作无法撤销。';
 
   @override
   String get dontAskAgain => '不再询问';
@@ -456,16 +448,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get delete => '删除';
 
   @override
-  String get returnToList => 'Return 到 清单';
+  String get returnToList => '返回清单';
 
   @override
-  String get nooneToNotify => '没有 一 到 notify';
+  String get nooneToNotify => '没有可通知的人';
 
   @override
-  String get notFound => '不 found';
+  String get notFound => '未找到';
 
   @override
-  String get recipeEmptyHint => 'Paste a 食谱 URL 和 点击 “Parse”';
+  String get recipeEmptyHint => '粘贴食谱链接并点击“解析”';
 
   @override
   String get done => '完成';
@@ -483,11 +475,11 @@ class AppLocalizationsZh extends AppLocalizations {
   String get tokenSynced => '令牌已同步';
 
   @override
-  String get deleteListTitle => '删除 清单?';
+  String get deleteListTitle => '删除清单？';
 
   @override
   String deleteListBody(String listName) {
-    return '清单 “$listName” 和 all its items 将 be deleted. 这个 cannot be undone.';
+    return '清单“$listName”及其中的所有商品都将被删除。此操作无法撤销。';
   }
 
   @override
@@ -500,7 +492,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get member => '成员';
 
   @override
-  String get addProduct => 'Add 商品';
+  String get addProduct => '添加商品';
 
   @override
   String get productName => '名称';
@@ -537,7 +529,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String addedByName(String name) {
-    return '已添加 by: $name';
+    return '添加者：$name';
   }
 
   @override
@@ -550,17 +542,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get profileNameUpdate => '正在更新资料';
 
   @override
-  String get briefSnackBar => 'Maybe 你 forgot 到 选择 any 商品?';
+  String get briefSnackBar => '是不是忘了选择商品？';
 
   @override
-  String get noInternet => '没有 internet connection';
+  String get noInternet => '无网络连接';
 
   @override
-  String get noInternetButLoadYouLocally =>
-      '没有 internet connection, but we 将 load 你 locally';
+  String get noInternetButLoadYouLocally => '无网络连接，将为你加载本地数据';
 
   @override
-  String get groupDeletionTitle => '是 你 sure want 到 删除 群组?';
+  String get groupDeletionTitle => '确定要删除该群组吗？';
 
   @override
   String get retry => '重试';
@@ -569,7 +560,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get groupsTitle => '你的群组';
 
   @override
-  String get groupsSubtitle => 'A 清单 是 a 群组. Invite 人 — they\'ll see  清单.';
+  String get groupsSubtitle => '一个清单就是一个群组。邀请他人后，他们就能看到这个清单。';
 
   @override
   String get groupCreate => '创建群组';
@@ -599,46 +590,40 @@ class AppLocalizationsZh extends AppLocalizations {
   String get tutorialDone => '开始';
 
   @override
-  String get tutorialInviteTitle => 'Invite 你的 人';
+  String get tutorialInviteTitle => '邀请你的家人';
 
   @override
-  String get tutorialInviteBody =>
-      '滑动 a 群组 right → Invite. 你的 partner sees  same 清单.';
+  String get tutorialInviteBody => '将群组向右滑动 → 邀请。你的伴侣会看到同一份清单。';
 
   @override
-  String get tutorialAddTitle => 'Add a 商品';
+  String get tutorialAddTitle => '添加商品';
 
   @override
-  String get tutorialAddBody =>
-      '点击 + at  bottom of  清单. 名称, qty, 分类, priority — done.';
+  String get tutorialAddBody => '点击清单底部的 +，填写名称、数量、分类、优先级，就完成了。';
 
   @override
-  String get tutorialEditTitle => 'Edit 和 check off';
+  String get tutorialEditTitle => '编辑与勾选';
 
   @override
-  String get tutorialEditBody =>
-      '点击  checkbox — bought. 点击  row — details 和 edits.';
+  String get tutorialEditBody => '点击复选框表示已购买；点击该行可查看详情和编辑。';
 
   @override
   String get tutorialDeleteTitle => '删除';
 
   @override
-  String get tutorialDeleteBody =>
-      '滑动 a 商品 left → 删除. Confirmation 可以 be turned off.';
+  String get tutorialDeleteBody => '将商品向左滑动 → 删除。删除确认可以关闭。';
 
   @override
-  String get tutorialAiTitle => 'Import a 食谱';
+  String get tutorialAiTitle => '导入食谱';
 
   @override
-  String get tutorialAiBody =>
-      'Paste a 食谱 URL, 点击 Parse. 食材 drop into  清单, duplicates marked.';
+  String get tutorialAiBody => '粘贴食谱链接，点击“解析”。食材会加入清单，重复项会被标记。';
 
   @override
-  String get tutorialSettingsTitle => 'Everything 在 reach';
+  String get tutorialSettingsTitle => '一切触手可及';
 
   @override
-  String get tutorialSettingsBody =>
-      '主题, language, 通知, confirmations — Profile → Advanced 设置.';
+  String get tutorialSettingsBody => '主题、语言、通知、确认，都在 个人资料 → 高级设置 中。';
 
   @override
   String get showTutorial => '查看教程';
@@ -668,13 +653,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get tutorialSampleRecipeUrl => 'recipe.example/pasta';
 
   @override
-  String get tutorialSampleIngredient1 => 'Spaghetti 400 g';
+  String get tutorialSampleIngredient1 => '意大利面 400 克';
 
   @override
-  String get tutorialSampleIngredient2 => '番茄 500 g';
+  String get tutorialSampleIngredient2 => '番茄 500 克';
 
   @override
-  String get tutorialSampleIngredient3 => 'Garlic 3 cloves';
+  String get tutorialSampleIngredient3 => '大蒜 3 瓣';
 
   @override
   String get tutorialSampleToggleTheme => '主题';
@@ -686,63 +671,59 @@ class AppLocalizationsZh extends AppLocalizations {
   String get tutorialSampleToggleConfirm => '确认';
 
   @override
-  String get tutorialConnectTitle => 'Join by 代码';
+  String get tutorialConnectTitle => '通过邀请码加入';
 
   @override
-  String get tutorialConnectBody =>
-      'Partner sends a link 或 代码. Paste it — 你\'re 在  共享 清单.';
+  String get tutorialConnectBody => '伴侣发来链接或邀请码，粘贴后你就加入共享清单了。';
 
   @override
   String get tutorialNotifyTitle => '提醒「现在需要」';
 
   @override
-  String get tutorialNotifyBody =>
-      '点击 «!» 在 a 商品 — 你的 partner gets a push «buy it now». 没有 calls needed.';
+  String get tutorialNotifyBody => '在商品上点击「!」，你的伴侣会收到「马上买」的推送，不用再打电话。';
 
   @override
-  String get tutorialOutroTitle => '你\'ll figure out  rest';
+  String get tutorialOutroTitle => '剩下的你自己就能搞定';
 
   @override
-  String get tutorialOutroBody =>
-      '点击, 滑动, mess up —  app forgives almost anything.';
+  String get tutorialOutroBody => '随便点、随便滑，弄错也没关系，应用几乎都能包容。';
 
   @override
   String get tutorialSampleInviteCode => 'PORA-4F72';
 
   @override
-  String get tutorialSamplePushSender => 'Anna';
+  String get tutorialSamplePushSender => '安娜';
 
   @override
-  String get tutorialSamplePushBody => 'Need 牛奶, 紧急';
+  String get tutorialSamplePushBody => '急需牛奶';
 
   @override
-  String get tutorialSampleInviteMessage => 'Join  清单';
+  String get tutorialSampleInviteMessage => '加入清单吧';
 
   @override
-  String get supportMessage => '邮箱 支持';
+  String get supportMessage => '联系客服';
 
   @override
   String get supportMessageBottomSheetTopDescription =>
-      '你的 消息 将 be 已发送 到  支持 team. Please provide as much detail as possible.';
+      '你的消息将发送给客服团队。请尽可能详细地描述问题。';
 
   @override
   String get supportMessageBottomSheetSendButton => '发送';
 
   @override
-  String get supportMessageBottomSheetUnderButtonText =>
-      'We 将 answer as 很快 as possible, 和 mail 到 你的 gmail 或 inapp!';
+  String get supportMessageBottomSheetUnderButtonText => '我们会尽快通过邮件或应用内消息回复你！';
 
   @override
   String get allergen => '过敏原';
 
   @override
-  String get predictionsGreeting => '你的 天 和 PORA';
+  String get predictionsGreeting => '你与 PORA 的一天';
 
   @override
-  String get predictionsGreetingSub => 'Smart hints 来自 你的 purchases';
+  String get predictionsGreetingSub => '根据你的购买记录生成的智能提示';
 
   @override
-  String get predictionsSectionSoon => 'Running out 很快';
+  String get predictionsSectionSoon => '即将用完';
 
   @override
   String get predictionsSectionAiSuggests => 'AI 推荐';
@@ -760,45 +741,37 @@ class AppLocalizationsZh extends AppLocalizations {
   String get kpiDaysToRun => '快用完';
 
   @override
-  String get fallbackTip1 =>
-      '保存 herbs like a bouquet: 在 a glass of 水 covered 和 a bag — lasts 2 weeks.';
+  String get fallbackTip1 => '像插花一样保存香草：插进一杯水里，再用袋子罩住，可保鲜 2 周。';
 
   @override
-  String get fallbackTip2 => 'Add 盐 到 dough at  end — it slows down yeast.';
+  String get fallbackTip2 => '最后再往面团里加盐，因为盐会抑制酵母。';
 
   @override
-  String get fallbackTip3 =>
-      '到 stop onions stinging, chill them 用于 15 分钟 在  freezer 之前 cutting.';
+  String get fallbackTip3 => '切洋葱前先放进冷冻室冰 15 分钟，就不会辣眼睛了。';
 
   @override
-  String get fallbackTip4 =>
-      'Oversalted soup? A raw potato 用于 10 分钟 soaks up  extra 盐.';
+  String get fallbackTip4 => '汤太咸了？放一个生土豆煮 10 分钟，能吸走多余的盐分。';
 
   @override
-  String get fallbackTip5 =>
-      'Check egg freshness 在 水: sinks — 新鲜, floats — discard.';
+  String get fallbackTip5 => '把鸡蛋放进水里检验新鲜度：下沉的新鲜，浮起的就扔掉。';
 
   @override
-  String get fallbackTip6 =>
-      'Reheat pizza 在 a covered skillet —  crust crisps back up.';
+  String get fallbackTip6 => '用加盖的平底锅加热披萨，饼皮会重新变脆。';
 
   @override
-  String get fallbackTip7 =>
-      '冷冻 meat slices thinner — 20 分钟 在  freezer 之前 cutting.';
+  String get fallbackTip7 => '冷冻过的肉更容易切薄：切之前放冷冻室 20 分钟。';
 
   @override
-  String get fallbackTip8 =>
-      'Roll a lemon 在  counter 之前 cutting — 你\'ll get more juice.';
+  String get fallbackTip8 => '切柠檬前先在台面上滚一滚，能挤出更多汁。';
 
   @override
-  String get fallbackTip9 => 'A pinch of 糖 在 tomato sauce cuts  acidity.';
+  String get fallbackTip9 => '番茄酱汁里加一小撮糖，可以中和酸味。';
 
   @override
-  String get fallbackTip10 =>
-      '面包 keeps a 月 在  freezer; toasting it goes straight 来自 冷冻.';
+  String get fallbackTip10 => '面包放冷冻室可以保存一个月，烤的时候无需解冻，直接烤即可。';
 
   @override
-  String get aiTipOfDayLabel => 'TIP OF  天';
+  String get aiTipOfDayLabel => '每日小贴士';
 
   @override
   String get aiTipOfDayTopic => '今天';
@@ -807,7 +780,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get aiCtaTitle => '询问 PORA';
 
   @override
-  String get aiCtaSubtitle => '食谱 · swaps · tips';
+  String get aiCtaSubtitle => '食谱 · 食材替代 · 小贴士';
 
   @override
   String get chatSheetTitle => 'PORA';
@@ -822,49 +795,49 @@ class AppLocalizationsZh extends AppLocalizations {
   String get chatEmptyExamplesLabel => '示例问题：';
 
   @override
-  String get chatSample1 => '我可以做什么 cook 和 鸡肉 和 米饭?';
+  String get chatSample1 => '鸡肉和米饭能做什么菜？';
 
   @override
-  String get chatSample2 => 'What 可以 替代 sour cream 在 dough?';
+  String get chatSample2 => '面团里的酸奶油可以用什么代替？';
 
   @override
-  String get chatSample3 => '如何 保存 herbs so they don\'t wilt?';
+  String get chatSample3 => '香草怎么保存才不会蔫？';
 
   @override
-  String get chatSample4 => '快速 20-分钟 晚餐 食谱';
+  String get chatSample4 => '20 分钟快手晚餐食谱';
 
   @override
-  String get chatSample5 => '我怎样才能 use up 蔬菜 之前 they spoil?';
+  String get chatSample5 => '怎样在蔬菜变质前把它们用完？';
 
   @override
-  String get chatSample6 => '制作一个 shopping 清单 用于 3 简单 breakfasts';
+  String get chatSample6 => '帮我列一份 3 种简单早餐的购物清单';
 
   @override
-  String get chatSample7 => '我应该 cook 用于 二 和 a 小 budget?';
+  String get chatSample7 => '预算不多，两个人做什么吃好？';
 
   @override
-  String get chatSample8 => 'How long 可以 I 保存 熟的 米饭 在  fridge?';
+  String get chatSample8 => '熟米饭在冰箱里能放多久？';
 
   @override
-  String get chatSample9 => '给我 a 高-protein 素食 晚餐';
+  String get chatSample9 => '推荐一份高蛋白的素食晚餐';
 
   @override
-  String get chatSample10 => 'What 可以 替代 黄油 在 这个 食谱?';
+  String get chatSample10 => '这道菜里的黄油可以用什么代替？';
 
   @override
-  String get chatSample11 => '规划三个 dinners 来自 what I 已经 有';
+  String get chatSample11 => '用我现有的食材安排三顿晚餐';
 
   @override
-  String get chatSample12 => '我可以做什么 cook 和 剩菜 在 15 分钟?';
+  String get chatSample12 => '剩菜 15 分钟内能做什么？';
 
   @override
-  String get chatSample13 => '推荐一个 适合过敏者 食谱 来自 my 清单';
+  String get chatSample13 => '根据我的清单推荐一道不含过敏原的菜';
 
   @override
-  String get chatSample14 => '我怎样才能 make 这个 meal 更便宜?';
+  String get chatSample14 => '怎样让这顿饭更省钱？';
 
   @override
-  String get chatTyping => 'PORA 是 typing…';
+  String get chatTyping => 'PORA 正在输入…';
 
   @override
   String get chatInputHint => '随便问…';
@@ -906,13 +879,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get tipTopicDinner => '晚餐';
 
   @override
-  String get tipTopicsSectionTitle => '提示主题';
+  String get tipTopicsSectionTitle => '小贴士主题';
 
   @override
-  String get tipTopicsSectionDescription => 'Pick which topics  tip 是 drawn 来自';
+  String get tipTopicsSectionDescription => '选择小贴士的主题范围';
 
   @override
-  String get tipTopicsAddCustom => 'Add 你的 own topic';
+  String get tipTopicsAddCustom => '添加自定义主题';
 
   @override
   String get tipTopicsCustomLabel => '自定义';
@@ -921,7 +894,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get tipTopicsPredefinedLabel => '预设';
 
   @override
-  String get tipTopicsEmpty => '没有 topics 已选择 — tip 将 be generic';
+  String get tipTopicsEmpty => '未选择主题，将显示通用小贴士';
 
   @override
   String get insightsChampionKicker => '你的最爱';
@@ -937,7 +910,7 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get insightsStreakSubtitle => '你\'re 在 it — 保存 going';
+  String get insightsStreakSubtitle => '状态正佳，继续保持';
 
   @override
   String insightsFreqEvery(int days) {
@@ -945,13 +918,13 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get insightsPopular => '你 buy often';
+  String get insightsPopular => '你经常购买';
 
   @override
   String get insightsStatsProducts => '件商品';
 
   @override
-  String get insightsEmpty => '没有 data yet — start adding 商品';
+  String get insightsEmpty => '暂无数据，先添加一些商品吧';
 
   @override
   String get notificationsFilterAll => '全部';
@@ -984,13 +957,21 @@ class AppLocalizationsZh extends AppLocalizations {
   String get notificationsEmptyTitle => '一切安静';
 
   @override
-  String get notificationsEmptyBody => 'New 通知 将 appear here';
+  String get notificationsEmptyBody => '新通知会显示在这里';
 
   @override
   String get recipeCreateListCta => '要把这个食谱添加到哪里？';
 
   @override
-  String get offlineWriteBlocked => '没有 internet — change won\'t be saved';
+  String get offlineWriteBlocked => '无网络，此更改不会保存';
+
+  @override
+  String get offlineSavedQueued => '已保存。联网后将自动发送';
+
+  @override
+  String offlineSyncDropped(int count) {
+    return '$count 项更改同步失败';
+  }
 
   @override
   String get offlineReadBanner => '离线 — 正在显示缓存数据';
@@ -999,7 +980,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get chatImportRecipeCta => '导入食谱';
 
   @override
-  String get listsEmptyTitle => '您还没有任何列表';
+  String get listsEmptyTitle => '你还没有任何清单';
 
   @override
   String get listsEmptySubtitle => '要不要创建一个新的？';
@@ -1036,7 +1017,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get aiConfigPoraModelHint => '例如 openai/gpt-4o-mini';
 
   @override
-  String get aiConfigTipsModelLabel => '提示 (Tips) 模型';
+  String get aiConfigTipsModelLabel => '小贴士 (Tips) 模型';
 
   @override
   String get aiConfigTipsModelHint => '留空 — 与应用默认相同';
@@ -1101,16 +1082,16 @@ class AppLocalizationsZh extends AppLocalizations {
   String get liveActivityTestSample => '牛奶';
 
   @override
-  String get listPickerTitle => '添加到哪个列表？';
+  String get listPickerTitle => '添加到哪个清单？';
 
   @override
-  String get listPickerEmpty => '还没有列表——请先创建一个';
+  String get listPickerEmpty => '还没有清单——请先创建一个';
 
   @override
-  String get predictionsAdded => '已添加到列表';
+  String get predictionsAdded => '已加入清单';
 
   @override
-  String get shortcutOpenLists => '打开列表';
+  String get shortcutOpenLists => '打开清单';
 
   @override
   String get shortcutOpenPora => '问 Pora-AI';

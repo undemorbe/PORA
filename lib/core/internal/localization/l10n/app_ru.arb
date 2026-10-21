@@ -1281,6 +1281,14 @@
     "@offlineWriteBlocked": {
         "description": "snackbar when write attempted offline"
     },
+    "offlineSavedQueued": "Сохранено. Отправим, когда появится сеть",
+    "@offlineSavedQueued": {
+        "description": "snackbar when an offline change was queued for sync"
+    },
+    "offlineSyncDropped": "Не удалось синхронизировать изменений: {count}",
+    "@offlineSyncDropped": {
+        "description": "snackbar when queued offline changes were rejected by the server"
+    },
     "offlineReadBanner": "Работаете офлайн — данные из кэша",
     "@offlineReadBanner": {
         "description": "top banner when cached data shown"

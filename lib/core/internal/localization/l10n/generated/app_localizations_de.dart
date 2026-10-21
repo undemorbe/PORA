@@ -1029,6 +1029,15 @@ class AppLocalizationsDe extends AppLocalizations {
       'Kein Internet — die Änderung wird nicht gespeichert';
 
   @override
+  String get offlineSavedQueued =>
+      'Gespeichert. Wird gesendet, sobald du wieder online bist';
+
+  @override
+  String offlineSyncDropped(int count) {
+    return 'Änderungen nicht synchronisiert: $count';
+  }
+
+  @override
   String get offlineReadBanner =>
       'Offline — zwischengespeicherte Daten werden angezeigt';
 

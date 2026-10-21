@@ -1011,6 +1011,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get offlineWriteBlocked => 'No internet — change won\'t be saved';
 
   @override
+  String get offlineSavedQueued =>
+      'Saved. We\'ll send it when you\'re back online';
+
+  @override
+  String offlineSyncDropped(int count) {
+    return 'Couldn\'t sync changes: $count';
+  }
+
+  @override
   String get offlineReadBanner => 'Offline — showing cached data';
 
   @override
