@@ -5,9 +5,11 @@ abstract class Failure extends Equatable {
   final String message;
   const Failure(this.message);
 
-  /// `true` если ошибка связана с доступностью сети (offline / timeout).
-  /// Кэш-слой (`cachedOrLive`) откатывается на сохранённые данные только
-  /// для таких ошибок, а не для 4xx/валидации.
+  /// `true` если ошибка временная, связанная с доступностью: offline /
+  /// timeout, а также 5xx и 429 от сервера ([ApiFailure]).
+  /// Кэш-слой (`cachedOrLive`) откатывается на сохранённые данные, а
+  /// offline-очередь повторяет операцию только для таких ошибок, а не для
+  /// 4xx/валидации.
   bool get isConnectivity => false;
 
   @override

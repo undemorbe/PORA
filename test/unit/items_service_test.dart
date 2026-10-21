@@ -184,4 +184,34 @@ void main() {
     expect(await outbox.length, 0);
     expect((await _cachedListItem('i1'))!['checked'], isFalse);
   });
+
+  test('concurrent offline writes keep both patches in item cache', () async {
+    remote.error = _offline();
+    await HiveJsonCache.put(CacheKeys.item('i1'), {
+      'id': 'i1',
+      'name': 'milk',
+      'checked': false,
+    });
+
+    await Future.wait([
+      service.updateItem(
+        itemId: 'i1',
+        name: 'oat milk',
+        section: 's',
+        quantity: 1,
+        unit: '',
+        priority: 0,
+        urgent: false,
+        remindEveryDays: null,
+      ),
+      service.markBought(itemId: 'i1', checked: true),
+    ]);
+
+    final cached = await HiveJsonCache.read(CacheKeys.item('i1')) as Map;
+    expect(cached['name'], 'oat milk');
+    expect(cached['checked'], isTrue);
+    final listed = (await _cachedListItem('i1'))!;
+    expect(listed['name'], 'oat milk');
+    expect(listed['checked'], isTrue);
+  });
 }

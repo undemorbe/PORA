@@ -207,21 +207,31 @@ class ItemsService implements ItemsRepository {
     'remind-every-days': remindEveryDays,
   };
 
-  /// Патчит кэш карточки товара и все снапшоты списков, где он есть.
-  Future<void> _patchEverywhere(
-    String itemId,
-    Map<String, dynamic> patch,
-  ) async {
-    final raw = await HiveJsonCache.read(CacheKeys.item(itemId));
-    if (raw is Map) {
-      final updated = Map<String, dynamic>.from(raw)..addAll(patch);
-      await HiveJsonCache.put(CacheKeys.item(itemId), updated);
-    }
-    await listCache.patchItem(itemId, patch);
+  /// Правки кэша товара идут строго по очереди: read→edit→write с await
+  /// между шагами, параллельные вызовы (два быстрых офлайн-тапа) иначе
+  /// затирают друг друга.
+  static Future<void> _tail = Future.value();
+
+  static Future<void> _serialized(Future<void> Function() body) {
+    final next = _tail.then((_) => body());
+    // Ошибка одной правки не должна рвать очередь для следующих.
+    _tail = next.catchError((Object _) {});
+    return next;
   }
 
-  Future<void> _removeEverywhere(String itemId) async {
+  /// Патчит кэш карточки товара и все снапшоты списков, где он есть.
+  Future<void> _patchEverywhere(String itemId, Map<String, dynamic> patch) =>
+      _serialized(() async {
+        final raw = await HiveJsonCache.read(CacheKeys.item(itemId));
+        if (raw is Map) {
+          final updated = Map<String, dynamic>.from(raw)..addAll(patch);
+          await HiveJsonCache.put(CacheKeys.item(itemId), updated);
+        }
+        await listCache.patchItem(itemId, patch);
+      });
+
+  Future<void> _removeEverywhere(String itemId) => _serialized(() async {
     await HiveJsonCache.invalidate(CacheKeys.item(itemId));
     await listCache.removeItem(itemId);
-  }
+  });
 }

@@ -30,10 +30,26 @@ class ListCachePatcher {
     return items.length != before;
   }, dropEmptySections: true);
 
-  /// [edit] мутирует копию `items` секции и возвращает, изменила ли что-то.
+  /// Все правки снапшотов идут строго по очереди: read→edit→write с await
+  /// между шагами, параллельные вызовы иначе затирают друг друга.
+  static Future<void> _tail = Future.value();
+
   Future<void> _rewrite(
     bool Function(List<dynamic> items) edit, {
     bool dropEmptySections = false,
+  }) {
+    final next = _tail.then(
+      (_) => _doRewrite(edit, dropEmptySections: dropEmptySections),
+    );
+    // Ошибка одной правки не должна рвать очередь для следующих.
+    _tail = next.catchError((Object _) {});
+    return next;
+  }
+
+  /// [edit] мутирует копию `items` секции и возвращает, изменила ли что-то.
+  Future<void> _doRewrite(
+    bool Function(List<dynamic> items) edit, {
+    required bool dropEmptySections,
   }) async {
     final keys = await HiveJsonCache.keysWithPrefix(
       CacheKeys.listContentPrefix,

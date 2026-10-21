@@ -111,4 +111,22 @@ void main() {
     final after = await HiveJsonCache.readEntry(CacheKeys.listContent('a'));
     expect(after!.savedAt, before!.savedAt);
   });
+
+  test('concurrent patches on one list do not lose updates', () async {
+    await HiveJsonCache.put(
+      CacheKeys.listContent('a'),
+      _list('a', [
+        _section('s', [_item('i1'), _item('i2')]),
+      ]),
+    );
+
+    await Future.wait([
+      patcher.patchItem('i1', {'checked': true}),
+      patcher.patchItem('i2', {'checked': true}),
+    ]);
+
+    final items = await _items('a');
+    expect(items[0]['checked'], isTrue);
+    expect(items[1]['checked'], isTrue);
+  });
 }
