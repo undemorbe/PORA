@@ -15,6 +15,7 @@ class UpdateItemUseCase {
     required String unit,
     required int priority,
     required bool urgent,
+    required bool checked,
     required int? remindEveryDays,
   }) => repository.updateItem(
     itemId: itemId,
@@ -24,6 +25,7 @@ class UpdateItemUseCase {
     unit: unit,
     priority: priority,
     urgent: urgent,
+    checked: checked,
     remindEveryDays: remindEveryDays,
   );
 }

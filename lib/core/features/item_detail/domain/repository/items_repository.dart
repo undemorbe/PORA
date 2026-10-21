@@ -19,7 +19,9 @@ abstract class ItemsRepository {
     required int? remindEveryDays,
   });
 
-  /// PUT /items/{iid} — все поля обязательны.
+  /// PUT /items/{iid} — все поля обязательны. Бэкенд перезаписывает
+  /// `checked` и `remind-every-days` целиком, поэтому передаём их текущие
+  /// значения — иначе правка сбросит «куплено» и напоминание.
   Future<Either<Failure, Success>> updateItem({
     required String itemId,
     required String name,
@@ -28,6 +30,7 @@ abstract class ItemsRepository {
     required String unit,
     required int priority,
     required bool urgent,
+    required bool checked,
     required int? remindEveryDays,
   });
 

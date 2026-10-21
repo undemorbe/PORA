@@ -100,17 +100,23 @@ class ItemsService implements ItemsRepository {
     required String unit,
     required int priority,
     required bool urgent,
+    required bool checked,
     required int? remindEveryDays,
   }) async {
-    final body = _body(
-      name: name,
-      section: section,
-      quantity: quantity,
-      unit: unit,
-      priority: priority,
-      urgent: urgent,
-      remindEveryDays: remindEveryDays,
-    );
+    // PUT перезаписывает товар целиком — `checked` обязателен, иначе
+    // бэкенд снимет отметку «куплено».
+    final body = {
+      ..._body(
+        name: name,
+        section: section,
+        quantity: quantity,
+        unit: unit,
+        priority: priority,
+        urgent: urgent,
+        remindEveryDays: remindEveryDays,
+      ),
+      'checked': checked,
+    };
     try {
       await remote.updateItem(itemId: itemId, body: body);
     } catch (e, s) {

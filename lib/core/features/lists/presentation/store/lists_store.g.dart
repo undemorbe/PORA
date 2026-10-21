@@ -273,6 +273,18 @@ mixin _$ListStore on _ListStoreBase, Store {
   );
 
   @override
+  void clearQueuedFlag() {
+    final _$actionInfo = _$_ListStoreBaseActionController.startAction(
+      name: '_ListStoreBase.clearQueuedFlag',
+    );
+    try {
+      return super.clearQueuedFlag();
+    } finally {
+      _$_ListStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setQuery(String value) {
     final _$actionInfo = _$_ListStoreBaseActionController.startAction(
       name: '_ListStoreBase.setQuery',

@@ -16,6 +16,7 @@ import 'package:pora/core/internal/offline/outbox_kinds.dart';
 
 class _FakeRemote implements ItemsRemote {
   Object? error;
+  Map<String, dynamic>? lastUpdateBody;
 
   Future<void> _call() async {
     final e = error;
@@ -36,7 +37,10 @@ class _FakeRemote implements ItemsRemote {
   Future<void> updateItem({
     required String itemId,
     required Map<String, dynamic> body,
-  }) => _call();
+  }) {
+    lastUpdateBody = body;
+    return _call();
+  }
 
   @override
   Future<void> deleteItem({required String itemId}) => _call();
@@ -169,6 +173,7 @@ void main() {
         unit: '',
         priority: 0,
         urgent: false,
+        checked: true,
         remindEveryDays: null,
       );
       await service.deleteItem(itemId: 'i1');
@@ -215,6 +220,7 @@ void main() {
         unit: '',
         priority: 0,
         urgent: false,
+        checked: true,
         remindEveryDays: null,
       ),
       service.markBought(itemId: 'i1', checked: true),
@@ -237,6 +243,7 @@ void main() {
       unit: 'l',
       priority: 0,
       urgent: false,
+      checked: false,
       remindEveryDays: null,
     );
 
@@ -245,6 +252,73 @@ void main() {
     expect(listed['name'], 'oat milk');
     expect(listed['quantity'], 2);
     expect(await outbox.length, 0);
+  });
+
+  test('online updateItem sends checked and remind-every-days', () async {
+    final res = await service.updateItem(
+      itemId: 'i1',
+      name: 'milk',
+      section: 's',
+      quantity: 1,
+      unit: '',
+      priority: 0,
+      urgent: true,
+      checked: true,
+      remindEveryDays: 7,
+    );
+
+    expect(res.right, isA<ServerSuccess>());
+    expect(remote.lastUpdateBody!['checked'], isTrue);
+    expect(remote.lastUpdateBody!['remind-every-days'], 7);
+    final listed = (await _cachedListItem('i1'))!;
+    expect(listed['checked'], isTrue);
+    expect(listed['remind-every-days'], 7);
+  });
+
+  test('offline updateItem queues body with checked and reminder', () async {
+    remote.error = _offline();
+
+    final res = await service.updateItem(
+      itemId: 'i1',
+      name: 'milk',
+      section: 's',
+      quantity: 1,
+      unit: '',
+      priority: 0,
+      urgent: true,
+      checked: true,
+      remindEveryDays: 3,
+    );
+
+    expect(res.right, isA<QueuedSuccess>());
+    final entry = (await outbox.all()).single;
+    expect(entry.kind, OutboxKinds.itemUpdate);
+    final body = Map<String, dynamic>.from(entry.args['body'] as Map);
+    expect(body['checked'], isTrue);
+    expect(body['remind-every-days'], 3);
+    expect(body['urgent'], isTrue);
+    expect((await _cachedListItem('i1'))!['checked'], isTrue);
+  });
+
+  test('offline markBought then update → only update queued', () async {
+    remote.error = _offline();
+
+    await service.markBought(itemId: 'i1', checked: true);
+    await service.updateItem(
+      itemId: 'i1',
+      name: 'milk',
+      section: 's',
+      quantity: 1,
+      unit: '',
+      priority: 0,
+      urgent: true,
+      checked: true,
+      remindEveryDays: null,
+    );
+
+    final entry = (await outbox.all()).single;
+    expect(entry.kind, OutboxKinds.itemUpdate);
+    expect((entry.args['body'] as Map)['checked'], isTrue);
   });
 
   test('online deleteItem removes item from list cache', () async {

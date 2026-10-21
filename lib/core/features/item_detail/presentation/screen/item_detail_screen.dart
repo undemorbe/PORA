@@ -141,7 +141,6 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
             }
             return _Body(
               item: it,
-              store: store,
               onDelete: _delete,
               onToggleUrgent: _toggleUrgent,
               onNotify: _notify,
@@ -157,7 +156,6 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
 class _Body extends StatelessWidget {
   const _Body({
     required this.item,
-    required this.store,
     required this.onDelete,
     required this.onToggleUrgent,
     required this.onNotify,
@@ -165,7 +163,6 @@ class _Body extends StatelessWidget {
   });
 
   final ProductEntity item;
-  final ItemDetailsStore store;
   final VoidCallback onDelete;
   final VoidCallback onToggleUrgent;
   final VoidCallback onNotify;

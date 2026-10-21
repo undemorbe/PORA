@@ -77,6 +77,50 @@ void main() {
     expect(await kinds(), [OutboxKinds.itemMarkBought, OutboxKinds.itemDelete]);
   });
 
+  test(
+    'update supersedes earlier markBought and update on that item',
+    () async {
+      await outbox.enqueueCoalesced(OutboxKinds.itemMarkBought, {
+        'item-id': 'i1',
+        'checked': true,
+      }, itemId: 'i1');
+      await outbox.enqueueCoalesced(OutboxKinds.itemUpdate, {
+        'item-id': 'i1',
+        'body': {'name': 'x', 'checked': true},
+      }, itemId: 'i1');
+      await outbox.enqueueCoalesced(OutboxKinds.itemMarkBought, {
+        'item-id': 'i2',
+        'checked': true,
+      }, itemId: 'i2');
+      await outbox.enqueueCoalesced(OutboxKinds.itemUpdate, {
+        'item-id': 'i1',
+        'body': {'name': 'y', 'checked': true},
+      }, itemId: 'i1');
+
+      final all = await outbox.all();
+      expect(all.map((e) => e.kind), [
+        OutboxKinds.itemMarkBought,
+        OutboxKinds.itemUpdate,
+      ]);
+      expect(all.first.args['item-id'], 'i2');
+      expect((all.last.args['body'] as Map)['name'], 'y');
+      expect((all.last.args['body'] as Map)['checked'], isTrue);
+    },
+  );
+
+  test('markBought after update keeps the update (order preserved)', () async {
+    await outbox.enqueueCoalesced(OutboxKinds.itemUpdate, {
+      'item-id': 'i1',
+      'body': {'name': 'x', 'checked': false},
+    }, itemId: 'i1');
+    await outbox.enqueueCoalesced(OutboxKinds.itemMarkBought, {
+      'item-id': 'i1',
+      'checked': true,
+    }, itemId: 'i1');
+
+    expect(await kinds(), [OutboxKinds.itemUpdate, OutboxKinds.itemMarkBought]);
+  });
+
   test('notify is never coalesced', () async {
     for (final m in ['a', 'b']) {
       await outbox.enqueueCoalesced(OutboxKinds.itemNotify, {

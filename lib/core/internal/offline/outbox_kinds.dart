@@ -8,10 +8,12 @@ abstract class OutboxKinds {
 
   /// Какие ранее поставленные операции над тем же товаром теряют смысл,
   /// когда в очередь встаёт [kind]. notify не схлопывается: каждое
-  /// сообщение — отдельное.
+  /// сообщение — отдельное. update несёт полное состояние товара, включая
+  /// актуальный `checked`, поэтому поглощает и ранние markBought; обратное
+  /// неверно — markBought не знает остальных полей правки.
   static Set<String> supersededBy(String kind) => switch (kind) {
     itemMarkBought => const {itemMarkBought},
-    itemUpdate => const {itemUpdate},
+    itemUpdate => const {itemUpdate, itemMarkBought},
     itemDelete => const {itemMarkBought, itemUpdate, itemNotify, itemDelete},
     _ => const <String>{},
   };

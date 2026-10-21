@@ -111,6 +111,11 @@ abstract class _ListStoreBase with Store {
     return byId.values.toList();
   }
 
+  /// Очередь доехала до сервера — сбрасываем флаг, чтобы следующая
+  /// офлайн-запись снова дала snackbar (reaction ловит только false→true).
+  @action
+  void clearQueuedFlag() => lastWriteQueued = false;
+
   @action
   void setQuery(String value) => query = value;
 

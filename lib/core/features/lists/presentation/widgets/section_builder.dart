@@ -108,14 +108,23 @@ class SectionBuilder extends StatelessWidget {
       );
     }
 
-    void onProductTap(ProductEntity p) {
-      context.router.push(
+    Future<void> onProductTap(ProductEntity p) async {
+      var deleted = false;
+      await context.router.push(
         ItemDetailRoute(
           itemId: p.id,
-          additionalEffectOnDeletion: () =>
-              listStore.getConcreteList(lid: lid ?? ''),
+          additionalEffectOnDeletion: () {
+            deleted = true;
+            listStore.getConcreteList(lid: lid ?? '');
+          },
         ),
       );
+      // Правки в карточке офлайн не приходят WS-эхом — после возврата
+      // перечитываем список (офлайн отдаст пропатченный кэш, онлайн —
+      // свежие данные). Удаление уже перегрузило список само.
+      final listId = lid;
+      if (deleted || listId == null || !context.mounted) return;
+      await listStore.getConcreteList(lid: listId);
     }
 
     Future<void> onNotify(ProductEntity p) async {

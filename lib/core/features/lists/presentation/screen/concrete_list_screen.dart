@@ -69,9 +69,10 @@ class _ListPageState extends State<ListPage> {
     });
     // Очередь доехала до сервера (или отклонена) — сверяемся с сервером.
     // WS-эхо тут ненадёжно: сокет может переподключиться позже flush.
-    _syncSub = GetIt.I<OutboxReplayer>().events.listen(
-      (_) => _debouncer.call(_refresh),
-    );
+    _syncSub = GetIt.I<OutboxReplayer>().events.listen((_) {
+      listStore.clearQueuedFlag();
+      _debouncer.call(_refresh);
+    });
     _queuedReaction = reaction<bool>((_) => listStore.lastWriteQueued, (
       queued,
     ) {
