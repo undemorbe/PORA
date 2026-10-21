@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -10,6 +11,29 @@ import 'package:pora/core/internal/offline/outbox_replayer.dart';
 
 void main() {
   late Directory tmp;
+  late Outbox outbox;
+  late OutboxReplayer replayer;
+  late List<Duration> scheduled;
+  var online = true;
+  var clockShift = Duration.zero;
+
+  OutboxReplayer build() => OutboxReplayer(
+    outbox: outbox,
+    isOnline: () => online,
+    now: () => DateTime.now().add(clockShift),
+    timerFactory: (delay, _) {
+      scheduled.add(delay);
+      // Не стреляет в рамках теста; отменяется в dispose().
+      return Timer(const Duration(days: 1), () {});
+    },
+  );
+
+  Future<Either<Failure, Object?>> ok(Map<String, dynamic> _) async =>
+      Right(const ServerSuccess());
+  Future<Either<Failure, Object?>> offline(Map<String, dynamic> _) async =>
+      Left(const NetworkFailure());
+  Future<Either<Failure, Object?>> rejected(Map<String, dynamic> _) async =>
+      Left(const ValidationFailure('bad'));
 
   setUpAll(() {
     tmp = Directory.systemTemp.createTempSync('pora_outbox_test');
@@ -22,46 +46,157 @@ void main() {
   });
 
   setUp(() async {
-    await Outbox().clear();
+    outbox = Outbox();
+    await outbox.clear();
+    scheduled = [];
+    online = true;
+    clockShift = Duration.zero;
+    replayer = build();
   });
 
-  test('successful handlers drain the queue', () async {
-    final outbox = Outbox();
+  tearDown(() async {
+    await replayer.dispose();
+    await outbox.dispose();
+  });
+
+  test('successful handlers drain the queue and report replayed', () async {
     await outbox.enqueue('a', {'n': 1});
     await outbox.enqueue('a', {'n': 2});
-    final replayer = OutboxReplayer(outbox: outbox)
-      ..register('a', (_) async => Right(const ServerSuccess()));
+    replayer.register('a', ok);
 
+    final outcome = await replayer.flush();
+
+    expect(outcome.replayed, 2);
+    expect(outcome.paused, isFalse);
+    expect(await outbox.length, 0);
+    expect(scheduled, isEmpty);
+  });
+
+  test(
+    'connectivity failure pauses, keeps entry, schedules 5s retry',
+    () async {
+      await outbox.enqueue('a', {});
+      replayer.register('a', offline);
+
+      final outcome = await replayer.flush();
+
+      expect(outcome.paused, isTrue);
+      expect(await outbox.length, 1);
+      expect(scheduled, [const Duration(seconds: 5)]);
+    },
+  );
+
+  test('backoff doubles up to 5 minutes and resets on success', () async {
+    await outbox.enqueue('a', {});
+    replayer.register('a', offline);
+
+    final seen = <Duration?>[];
+    for (var i = 0; i < 8; i++) {
+      await replayer.flush();
+      seen.add(replayer.currentBackoff);
+    }
+    expect(seen, [
+      const Duration(seconds: 5),
+      const Duration(seconds: 10),
+      const Duration(seconds: 20),
+      const Duration(seconds: 40),
+      const Duration(seconds: 80),
+      const Duration(seconds: 160),
+      const Duration(minutes: 5),
+      const Duration(minutes: 5),
+    ]);
+
+    replayer.register('a', ok);
     await replayer.flush();
+    expect(replayer.currentBackoff, isNull);
+  });
+
+  test(
+    'paused while device offline → no timer (connectivity reaction will flush)',
+    () async {
+      online = false;
+      await outbox.enqueue('a', {});
+      replayer.register('a', offline);
+
+      await replayer.flush();
+
+      expect(scheduled, isEmpty);
+    },
+  );
+
+  test('permanent failure drops entry and reports it', () async {
+    await outbox.enqueue('a', {'item-id': 'i1'});
+    replayer.register('a', rejected);
+
+    final outcome = await replayer.flush();
+
+    expect(await outbox.length, 0);
+    expect(outcome.dropped.single.args['item-id'], 'i1');
+  });
+
+  test('entries older than TTL are dropped without calling handler', () async {
+    await outbox.enqueue('a', {});
+    var calls = 0;
+    replayer.register('a', (_) async {
+      calls++;
+      return Right(const ServerSuccess());
+    });
+    clockShift = const Duration(days: 8);
+
+    final outcome = await replayer.flush();
+
+    expect(calls, 0);
+    expect(outcome.dropped, hasLength(1));
     expect(await outbox.length, 0);
   });
 
-  test('connectivity failure pauses flush and keeps entries', () async {
-    final outbox = Outbox();
-    await outbox.enqueue('a', {});
-    final replayer = OutboxReplayer(outbox: outbox)
-      ..register('a', (_) async => Left(const NetworkFailure()));
-
-    await replayer.flush();
-    expect(await outbox.length, 1); // осталось для следующей попытки
-  });
-
-  test('permanent (4xx) failure drops the poisoned entry', () async {
-    final outbox = Outbox();
-    await outbox.enqueue('a', {});
-    final replayer = OutboxReplayer(outbox: outbox)
-      ..register('a', (_) async => Left(const ValidationFailure('bad')));
-
-    await replayer.flush();
-    expect(await outbox.length, 0);
-  });
-
-  test('unknown kind is dropped', () async {
-    final outbox = Outbox();
+  test('unknown kind is dropped silently (not user-visible)', () async {
     await outbox.enqueue('unregistered', {});
-    final replayer = OutboxReplayer(outbox: outbox);
 
-    await replayer.flush();
+    final outcome = await replayer.flush();
+
     expect(await outbox.length, 0);
+    expect(outcome.dropped, isEmpty);
+  });
+
+  test('events emit only when something was replayed or dropped', () async {
+    final got = <FlushOutcome>[];
+    final sub = replayer.events.listen(got.add);
+    addTearDown(sub.cancel);
+
+    await replayer.flush(); // пустая очередь
+    await Future<void>.delayed(Duration.zero);
+    expect(got, isEmpty);
+
+    await outbox.enqueue('a', {});
+    replayer.register('a', ok);
+    await replayer.flush();
+    await Future<void>.delayed(Duration.zero);
+    expect(got.single.replayed, 1);
+  });
+
+  test('scheduleFlush keeps the earlier timer', () {
+    replayer.scheduleFlush(const Duration(seconds: 10));
+    replayer.scheduleFlush(const Duration(seconds: 20)); // позже — no-op
+    replayer.scheduleFlush(const Duration(seconds: 3)); // раньше — replace
+    expect(scheduled, [
+      const Duration(seconds: 10),
+      const Duration(seconds: 3),
+    ]);
+  });
+
+  test('start(): enqueue while online schedules flush after 3s', () async {
+    replayer.start();
+    await outbox.enqueue('a', {});
+    await Future<void>.delayed(Duration.zero);
+    expect(scheduled, [OutboxReplayer.enqueueDelay]);
+  });
+
+  test('start(): enqueue while offline schedules nothing', () async {
+    online = false;
+    replayer.start();
+    await outbox.enqueue('a', {});
+    await Future<void>.delayed(Duration.zero);
+    expect(scheduled, isEmpty);
   });
 }
