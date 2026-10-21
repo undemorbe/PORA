@@ -94,6 +94,51 @@ void main() {
     expect(await kinds(), ['b']);
   });
 
+  test(
+    'concurrent enqueueCoalesced on the same item keeps one entry',
+    () async {
+      await Future.wait([
+        outbox.enqueueCoalesced(OutboxKinds.itemMarkBought, {
+          'item-id': 'i1',
+          'checked': true,
+        }, itemId: 'i1'),
+        outbox.enqueueCoalesced(OutboxKinds.itemMarkBought, {
+          'item-id': 'i1',
+          'checked': false,
+        }, itemId: 'i1'),
+      ]);
+
+      final all = await outbox.all();
+      expect(all, hasLength(1));
+      expect(all.single.args['checked'], isFalse);
+    },
+  );
+
+  test('contains reflects presence of an entry', () async {
+    final e = await outbox.enqueue('a', {});
+    expect(await outbox.contains(e.id), isTrue);
+    await outbox.remove(e.id);
+    expect(await outbox.contains(e.id), isFalse);
+  });
+
+  test('update does not resurrect a removed entry', () async {
+    final e = await outbox.enqueue('a', {});
+    await outbox.removeWhere((x) => x.id == e.id);
+    e.attempts++;
+    await outbox.update(e);
+    expect(await outbox.length, 0);
+  });
+
+  test('a failing op does not break the serialization chain', () async {
+    await outbox.enqueue('x', {});
+    await expectLater(
+      outbox.removeWhere((_) => throw StateError('boom')),
+      throwsStateError,
+    );
+    await outbox.enqueue('a', {});
+    expect(await kinds(), ['x', 'a']);
+  });
+
   test('changes emits on enqueue', () async {
     final emitted = outbox.changes.first;
     await outbox.enqueue('a', {});

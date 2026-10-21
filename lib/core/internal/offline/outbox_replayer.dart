@@ -21,10 +21,11 @@ class FlushOutcome {
     this.replayed = 0,
     this.dropped = const [],
     this.paused = false,
+    this.wasSkipped = false,
   });
 
   /// Flush уже шёл — этот вызов ничего не делал.
-  static const skipped = FlushOutcome();
+  static const skipped = FlushOutcome(wasSkipped: true);
 
   /// Сколько записей успешно ушло на сервер.
   final int replayed;
@@ -35,6 +36,9 @@ class FlushOutcome {
 
   /// Проход прерван из-за проблем со связью — остаток ждёт повтора.
   final bool paused;
+
+  /// Вызов пропущен, потому что уже шёл другой flush.
+  final bool wasSkipped;
 
   bool get hasChanges => replayed > 0 || dropped.isNotEmpty;
 }
@@ -72,6 +76,13 @@ class OutboxReplayer {
   Duration? _backoff;
   bool _flushing = false;
 
+  /// Во время flush пришёл ещё один вызов — после завершения нужен повтор,
+  /// иначе записи, поставленные после снимка очереди, ждут следующего триггера.
+  bool _rerun = false;
+
+  /// После [dispose] таймеры и подписки больше не заводятся.
+  bool _disposed = false;
+
   /// Итоги flush'ей, в которых что-то ушло на сервер или было отброшено.
   /// Экраны перезагружаются по нему, OutboxSyncEffects показывает snackbar.
   Stream<FlushOutcome> get events => _events.stream;
@@ -86,6 +97,7 @@ class OutboxReplayer {
   /// Подписка на новые записи очереди: при онлайне — flush через
   /// [enqueueDelay] (сервер мог быть недоступен лишь кратковременно).
   void start() {
+    if (_disposed) return;
     _changesSub ??= outbox.changes.listen((_) {
       if (_isOnline()) scheduleFlush(enqueueDelay);
     });
@@ -94,6 +106,7 @@ class OutboxReplayer {
   /// Планирует flush через [delay]. Если уже запланирован более ранний —
   /// ничего не делает; более поздний — перепланирует.
   void scheduleFlush(Duration delay) {
+    if (_disposed) return;
     final due = _now().add(delay);
     final current = _dueAt;
     if (current != null && !due.isBefore(current)) return;
@@ -107,7 +120,10 @@ class OutboxReplayer {
   }
 
   Future<FlushOutcome> flush() async {
-    if (_flushing) return FlushOutcome.skipped;
+    if (_flushing) {
+      _rerun = true;
+      return FlushOutcome.skipped;
+    }
     _flushing = true;
     var replayed = 0;
     final dropped = <OutboxEntry>[];
@@ -119,6 +135,10 @@ class OutboxReplayer {
       }
       final now = _now();
       for (final entry in entries) {
+        // Снимок взят в начале flush — запись могли выкинуть коалесингом,
+        // пока проигрывались предыдущие.
+        if (!await outbox.contains(entry.id)) continue;
+
         final created = DateTime.fromMillisecondsSinceEpoch(entry.createdAt);
         if (now.difference(created) > ttl) {
           Logger.talker.warning('Outbox: dropping stale ${entry.kind}');
@@ -136,7 +156,21 @@ class OutboxReplayer {
         entry.attempts++;
         await outbox.update(entry);
 
-        final res = await handler(entry.args);
+        final Either<Failure, Object?> res;
+        try {
+          res = await handler(entry.args);
+        } catch (e, s) {
+          // Баг в обработчике — повтор не поможет; не блокируем остальную
+          // очередь, запись считаем «отравленной».
+          Logger.talker.error(
+            'Outbox: ${entry.kind} handler threw, drop',
+            e,
+            s,
+          );
+          await outbox.remove(entry.id);
+          dropped.add(entry);
+          continue;
+        }
         if (res.isRight) {
           await outbox.remove(entry.id);
           replayed++;
@@ -175,6 +209,9 @@ class OutboxReplayer {
   }
 
   void _afterFlush(FlushOutcome outcome) {
+    if (_disposed) return;
+    final rerun = _rerun;
+    _rerun = false;
     if (outcome.paused) {
       final prev = _backoff;
       final next = prev == null ? _minBackoff : prev * 2;
@@ -183,11 +220,14 @@ class OutboxReplayer {
       if (_isOnline()) scheduleFlush(_backoff!);
     } else {
       _backoff = null;
+      // На паузе повтор и так придёт по backoff или reaction на online.
+      if (rerun) scheduleFlush(Duration.zero);
     }
     if (outcome.hasChanges && !_events.isClosed) _events.add(outcome);
   }
 
   Future<void> dispose() async {
+    _disposed = true;
     _timer?.cancel();
     _timer = null;
     _dueAt = null;

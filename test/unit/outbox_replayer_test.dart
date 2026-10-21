@@ -199,4 +199,99 @@ void main() {
     await Future<void>.delayed(Duration.zero);
     expect(scheduled, isEmpty);
   });
+
+  test(
+    'flush during a running flush is skipped and re-run afterwards',
+    () async {
+      await outbox.enqueue('a', {});
+      final gate = Completer<void>();
+      replayer.register('a', (_) async {
+        await gate.future;
+        return Right(const ServerSuccess());
+      });
+
+      final first = replayer.flush();
+      final second = await replayer.flush();
+      expect(second.wasSkipped, isTrue);
+      expect(second.hasChanges, isFalse);
+
+      gate.complete();
+      final outcome = await first;
+      expect(outcome.wasSkipped, isFalse);
+      expect(scheduled, contains(Duration.zero));
+    },
+  );
+
+  test('no re-run is scheduled when nothing was skipped', () async {
+    await outbox.enqueue('a', {});
+    replayer.register('a', ok);
+    await replayer.flush();
+    expect(scheduled, isEmpty);
+  });
+
+  test(
+    'entry coalesced away mid-flush is neither replayed nor resurrected',
+    () async {
+      await outbox.enqueue('a', {});
+      await outbox.enqueue('b', {});
+      var bCalls = 0;
+      replayer.register('a', (_) async {
+        await outbox.removeWhere((e) => e.kind == 'b');
+        return Right(const ServerSuccess());
+      });
+      replayer.register('b', (_) async {
+        bCalls++;
+        return Right(const ServerSuccess());
+      });
+
+      final outcome = await replayer.flush();
+
+      expect(bCalls, 0);
+      expect(outcome.replayed, 1);
+      expect(await outbox.length, 0);
+    },
+  );
+
+  test(
+    'throwing handler drops only its entry and the rest is replayed',
+    () async {
+      await outbox.enqueue('boom', {'item-id': 'i1'});
+      await outbox.enqueue('a', {});
+      replayer.register('boom', (_) async => throw StateError('bug'));
+      replayer.register('a', ok);
+
+      final outcome = await replayer.flush();
+
+      expect(outcome.paused, isFalse);
+      expect(outcome.replayed, 1);
+      expect(outcome.dropped.single.kind, 'boom');
+      expect(await outbox.length, 0);
+    },
+  );
+
+  test('dispose makes scheduleFlush and start no-ops', () async {
+    await replayer.dispose();
+    replayer.scheduleFlush(const Duration(seconds: 1));
+    replayer.start();
+    await outbox.enqueue('a', {});
+    await Future<void>.delayed(Duration.zero);
+    expect(scheduled, isEmpty);
+  });
+
+  test('dispose during flush suppresses backoff scheduling', () async {
+    await outbox.enqueue('a', {});
+    final gate = Completer<void>();
+    replayer.register('a', (_) async {
+      await gate.future;
+      return Left(const NetworkFailure());
+    });
+
+    final running = replayer.flush();
+    await replayer.dispose();
+    gate.complete();
+    final outcome = await running;
+
+    expect(outcome.paused, isTrue);
+    expect(scheduled, isEmpty);
+  });
 }

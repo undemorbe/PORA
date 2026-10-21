@@ -28,7 +28,48 @@ class Outbox {
   /// Генерирует монотонный id (timestamp + счётчик в рамках сессии).
   static String newId() => '${DateTime.now().microsecondsSinceEpoch}-${_seq++}';
 
-  Future<OutboxEntry> enqueue(String kind, Map<String, dynamic> args) async {
+  /// Хвост цепочки мутирующих операций: каждая следующая стартует только
+  /// после завершения предыдущей, иначе два быстрых [enqueueCoalesced]
+  /// по одному товару переплетаются и оба выживают.
+  Future<void> _lock = Future<void>.value();
+
+  /// Выполняет [op] строго после всех ранее поставленных мутаций.
+  /// Ошибка [op] уходит вызывающему, но цепочку не ломает.
+  Future<T> _serialized<T>(Future<T> Function() op) {
+    final result = _lock.then((_) => op());
+    _lock = result.then<void>((_) {}, onError: (Object _) {});
+    return result;
+  }
+
+  Future<OutboxEntry> enqueue(String kind, Map<String, dynamic> args) =>
+      _serialized(() => _enqueueUnlocked(kind, args));
+
+  /// Ставит операцию над товаром [itemId], предварительно выкидывая записи,
+  /// которые она делает бессмысленными ([OutboxKinds.supersededBy]).
+  /// Удаление и постановка выполняются атомарно относительно других мутаций.
+  Future<OutboxEntry> enqueueCoalesced(
+    String kind,
+    Map<String, dynamic> args, {
+    required String itemId,
+  }) => _serialized(() async {
+    final superseded = OutboxKinds.supersededBy(kind);
+    if (superseded.isNotEmpty) {
+      // Unlocked-хелперы: мы уже внутри замка, повторный вход = deadlock.
+      await _removeWhereUnlocked(
+        (e) => e.args['item-id'] == itemId && superseded.contains(e.kind),
+      );
+    }
+    return _enqueueUnlocked(kind, args);
+  });
+
+  /// Удаляет записи, удовлетворяющие [test]. Возвращает число удалённых.
+  Future<int> removeWhere(bool Function(OutboxEntry entry) test) =>
+      _serialized(() => _removeWhereUnlocked(test));
+
+  Future<OutboxEntry> _enqueueUnlocked(
+    String kind,
+    Map<String, dynamic> args,
+  ) async {
     final box = await _open();
     final entry = OutboxEntry(
       id: newId(),
@@ -41,24 +82,9 @@ class Outbox {
     return entry;
   }
 
-  /// Ставит операцию над товаром [itemId], предварительно выкидывая записи,
-  /// которые она делает бессмысленными ([OutboxKinds.supersededBy]).
-  Future<OutboxEntry> enqueueCoalesced(
-    String kind,
-    Map<String, dynamic> args, {
-    required String itemId,
-  }) async {
-    final superseded = OutboxKinds.supersededBy(kind);
-    if (superseded.isNotEmpty) {
-      await removeWhere(
-        (e) => e.args['item-id'] == itemId && superseded.contains(e.kind),
-      );
-    }
-    return enqueue(kind, args);
-  }
-
-  /// Удаляет записи, удовлетворяющие [test]. Возвращает число удалённых.
-  Future<int> removeWhere(bool Function(OutboxEntry entry) test) async {
+  Future<int> _removeWhereUnlocked(
+    bool Function(OutboxEntry entry) test,
+  ) async {
     final box = await _open();
     final doomed = (await all()).where(test).map((e) => e.id).toList();
     await box.deleteAll(doomed);
@@ -82,17 +108,23 @@ class Outbox {
     return entries;
   }
 
+  /// Есть ли ещё запись [id] в очереди (её могли выкинуть коалесингом).
+  Future<bool> contains(String id) async => (await _open()).containsKey(id);
+
   Future<int> get length async => (await _open()).length;
 
-  Future<void> update(OutboxEntry entry) async {
+  /// Перезаписывает существующую запись. Если её уже удалили (коалесинг,
+  /// removeWhere) — no-op: иначе put воскресил бы выкинутую операцию.
+  Future<void> update(OutboxEntry entry) => _serialized(() async {
     final box = await _open();
+    if (!box.containsKey(entry.id)) return;
     await box.put(entry.id, jsonEncode(entry.toJson()));
-  }
+  });
 
-  Future<void> remove(String id) async {
+  Future<void> remove(String id) => _serialized(() async {
     final box = await _open();
     await box.delete(id);
-  }
+  });
 
   Future<void> clear() async {
     final box = await _open();
