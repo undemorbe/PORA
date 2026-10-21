@@ -30,17 +30,24 @@ class ListCachePatcher {
     return items.length != before;
   }, dropEmptySections: true);
 
+  /// Пишет целый снапшот списка [key] (write-through из `ListStore`) через
+  /// ту же очередь, что и патчи: свежий снапшот не затрёт идущий патч, а
+  /// патч не потеряется, наложившись на устаревшие данные.
+  Future<void> writeSnapshot(String key, Map<String, dynamic> json) =>
+      _enqueue(() => HiveJsonCache.put(key, json));
+
   /// Все правки снапшотов идут строго по очереди: read→edit→write с await
   /// между шагами, параллельные вызовы иначе затирают друг друга.
   static Future<void> _tail = Future.value();
 
+  /// Тело не должно снова заходить в эту очередь ([_enqueue]) — иначе дедлок.
   Future<void> _rewrite(
     bool Function(List<dynamic> items) edit, {
     bool dropEmptySections = false,
-  }) {
-    final next = _tail.then(
-      (_) => _doRewrite(edit, dropEmptySections: dropEmptySections),
-    );
+  }) => _enqueue(() => _doRewrite(edit, dropEmptySections: dropEmptySections));
+
+  Future<void> _enqueue(Future<void> Function() body) {
+    final next = _tail.then((_) => body());
     // Ошибка одной правки не должна рвать очередь для следующих.
     _tail = next.catchError((Object _) {});
     return next;

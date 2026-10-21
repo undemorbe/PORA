@@ -10,6 +10,7 @@ import 'package:pora/core/internal/errors/failure.dart';
 import 'package:pora/core/internal/errors/failure_mapper.dart';
 import 'package:pora/core/internal/errors/success.dart';
 import 'package:pora/core/internal/extensions/either.dart';
+import 'package:pora/core/internal/logging/logger.dart';
 import 'package:pora/core/internal/offline/outbox.dart';
 import 'package:pora/core/internal/offline/outbox_kinds.dart';
 
@@ -19,6 +20,9 @@ import 'package:pora/core/internal/offline/outbox_kinds.dart';
 /// возвращают [QueuedSuccess]. Кэш товара и все закэшированные списки
 /// патчатся и при успехе, и при постановке в очередь — офлайн-UI сразу
 /// видит изменение, в том числе после переоткрытия списка.
+/// Патч кэша — best-effort: его сбой логируется и не меняет результат.
+/// В офлайне сначала пишем в [Outbox], потом кэш — запись не теряется,
+/// даже если кэш упал.
 class ItemsService implements ItemsRepository {
   final ItemsRemote remote;
   final Outbox outbox;
@@ -35,7 +39,8 @@ class ItemsService implements ItemsRepository {
   }) async {
     try {
       final model = await remote.getItem(itemId: itemId);
-      await HiveJsonCache.put(CacheKeys.item(itemId), model.toJson());
+      final json = model.toJson();
+      await _serialized(() => HiveJsonCache.put(CacheKeys.item(itemId), json));
       return Right(model);
     } catch (e, s) {
       final failure = FailureMapper.map(e, s);
@@ -108,39 +113,39 @@ class ItemsService implements ItemsRepository {
     );
     try {
       await remote.updateItem(itemId: itemId, body: body);
-      await _patchEverywhere(itemId, body);
-      return Right(const ServerSuccess());
     } catch (e, s) {
       final failure = FailureMapper.map(e, s);
       if (failure.isConnectivity) {
-        await _patchEverywhere(itemId, body);
         await outbox.enqueueCoalesced(OutboxKinds.itemUpdate, {
           'item-id': itemId,
           'body': body,
         }, itemId: itemId);
+        await _bestEffort(() => _patchEverywhere(itemId, body), 'update');
         return Right(const QueuedSuccess());
       }
       return Left(failure);
     }
+    await _bestEffort(() => _patchEverywhere(itemId, body), 'update');
+    return Right(const ServerSuccess());
   }
 
   @override
   Future<Either<Failure, Success>> deleteItem({required String itemId}) async {
     try {
       await remote.deleteItem(itemId: itemId);
-      await _removeEverywhere(itemId);
-      return Right(const ServerSuccess());
     } catch (e, s) {
       final failure = FailureMapper.map(e, s);
       if (failure.isConnectivity) {
-        await _removeEverywhere(itemId);
         await outbox.enqueueCoalesced(OutboxKinds.itemDelete, {
           'item-id': itemId,
         }, itemId: itemId);
+        await _bestEffort(() => _removeEverywhere(itemId), 'delete');
         return Right(const QueuedSuccess());
       }
       return Left(failure);
     }
+    await _bestEffort(() => _removeEverywhere(itemId), 'delete');
+    return Right(const ServerSuccess());
   }
 
   @override
@@ -171,22 +176,23 @@ class ItemsService implements ItemsRepository {
     required String itemId,
     required bool checked,
   }) async {
+    final patch = <String, dynamic>{'checked': checked};
     try {
       await remote.markBought(itemId: itemId, checked: checked);
-      await _patchEverywhere(itemId, {'checked': checked});
-      return Right(const ServerSuccess());
     } catch (e, s) {
       final failure = FailureMapper.map(e, s);
       if (failure.isConnectivity) {
-        await _patchEverywhere(itemId, {'checked': checked});
         await outbox.enqueueCoalesced(OutboxKinds.itemMarkBought, {
           'item-id': itemId,
           'checked': checked,
         }, itemId: itemId);
+        await _bestEffort(() => _patchEverywhere(itemId, patch), 'markBought');
         return Right(const QueuedSuccess());
       }
       return Left(failure);
     }
+    await _bestEffort(() => _patchEverywhere(itemId, patch), 'markBought');
+    return Right(const ServerSuccess());
   }
 
   Map<String, dynamic> _body({
@@ -212,11 +218,22 @@ class ItemsService implements ItemsRepository {
   /// затирают друг друга.
   static Future<void> _tail = Future.value();
 
+  /// Тело не должно снова заходить в [_serialized] — иначе дедлок.
   static Future<void> _serialized(Future<void> Function() body) {
     final next = _tail.then((_) => body());
     // Ошибка одной правки не должна рвать очередь для следующих.
     _tail = next.catchError((Object _) {});
     return next;
+  }
+
+  /// Выполняет патч кэша, не пропуская его ошибку наружу: результат
+  /// write-операции определяется сервером/[Outbox], а не диском.
+  Future<void> _bestEffort(Future<void> Function() op, String what) async {
+    try {
+      await op();
+    } catch (e, s) {
+      Logger.talker.warning('ItemsService: cache patch failed ($what)', e, s);
+    }
   }
 
   /// Патчит кэш карточки товара и все снапшоты списков, где он есть.

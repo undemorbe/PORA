@@ -52,6 +52,19 @@ class _FakeRemote implements ItemsRemote {
       _call();
 }
 
+/// Патчер, у которого «сломан диск» — проверяем, что сбой кэша не
+/// теряет офлайн-запись и не превращает серверный успех в `Left`.
+class _ThrowingPatcher extends ListCachePatcher {
+  const _ThrowingPatcher();
+
+  @override
+  Future<void> patchItem(String itemId, Map<String, dynamic> patch) async =>
+      throw StateError('disk');
+
+  @override
+  Future<void> removeItem(String itemId) async => throw StateError('disk');
+}
+
 DioException _offline() => DioException(
   requestOptions: RequestOptions(path: '/x'),
   type: DioExceptionType.connectionError,
@@ -213,5 +226,88 @@ void main() {
     final listed = (await _cachedListItem('i1'))!;
     expect(listed['name'], 'oat milk');
     expect(listed['checked'], isTrue);
+  });
+
+  test('online updateItem patches list cache', () async {
+    final res = await service.updateItem(
+      itemId: 'i1',
+      name: 'oat milk',
+      section: 's',
+      quantity: 2,
+      unit: 'l',
+      priority: 0,
+      urgent: false,
+      remindEveryDays: null,
+    );
+
+    expect(res.right, isA<ServerSuccess>());
+    final listed = (await _cachedListItem('i1'))!;
+    expect(listed['name'], 'oat milk');
+    expect(listed['quantity'], 2);
+    expect(await outbox.length, 0);
+  });
+
+  test('online deleteItem removes item from list cache', () async {
+    final res = await service.deleteItem(itemId: 'i1');
+
+    expect(res.right, isA<ServerSuccess>());
+    expect(await _cachedListItem('i1'), isNull);
+    expect(await outbox.length, 0);
+  });
+
+  test('offline notify → QueuedSuccess and one item.notify entry', () async {
+    remote.error = _offline();
+
+    final res = await service.notify(
+      itemId: 'i1',
+      to: const ['u1'],
+      message: 'buy',
+    );
+
+    expect(res.right, isA<QueuedSuccess>());
+    final all = await outbox.all();
+    expect(all.single.kind, OutboxKinds.itemNotify);
+    expect(all.single.args['message'], 'buy');
+  });
+
+  group('cache patch failure', () {
+    setUp(() {
+      service = ItemsService(
+        remote: remote,
+        outbox: outbox,
+        listCache: const _ThrowingPatcher(),
+      );
+    });
+
+    test('offline markBought is still queued', () async {
+      remote.error = _offline();
+
+      final res = await service.markBought(itemId: 'i1', checked: true);
+
+      expect(res.right, isA<QueuedSuccess>());
+      expect(await outbox.length, 1);
+    });
+
+    test('offline deleteItem is still queued', () async {
+      remote.error = _offline();
+
+      final res = await service.deleteItem(itemId: 'i1');
+
+      expect(res.right, isA<QueuedSuccess>());
+      expect((await outbox.all()).single.kind, OutboxKinds.itemDelete);
+    });
+
+    test('online markBought stays ServerSuccess', () async {
+      final res = await service.markBought(itemId: 'i1', checked: true);
+
+      expect(res.right, isA<ServerSuccess>());
+      expect(await outbox.length, 0);
+    });
+
+    test('online deleteItem stays ServerSuccess', () async {
+      final res = await service.deleteItem(itemId: 'i1');
+
+      expect(res.right, isA<ServerSuccess>());
+    });
   });
 }

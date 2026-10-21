@@ -129,4 +129,41 @@ void main() {
     expect(items[0]['checked'], isTrue);
     expect(items[1]['checked'], isTrue);
   });
+
+  test('writeSnapshot stores the snapshot as is', () async {
+    final snap = _list('a', [
+      _section('s', [_item('i1')]),
+    ]);
+
+    await patcher.writeSnapshot(CacheKeys.listContent('a'), snap);
+
+    expect((await _items('a')).single['id'], 'i1');
+  });
+
+  test('writeSnapshot and a concurrent patch are serialized', () async {
+    await HiveJsonCache.put(
+      CacheKeys.listContent('a'),
+      _list('a', [
+        _section('s', [_item('i1')]),
+      ]),
+    );
+
+    // Свежий снапшот с сервера (новое имя) и офлайн-патч в одной гонке:
+    // патч должен лечь поверх записанного снапшота, а не потеряться.
+    await Future.wait([
+      patcher.writeSnapshot(
+        CacheKeys.listContent('a'),
+        _list('a', [
+          _section('s', [
+            {'id': 'i1', 'name': 'fresh', 'checked': false},
+          ]),
+        ]),
+      ),
+      patcher.patchItem('i1', {'checked': true}),
+    ]);
+
+    final it = (await _items('a')).single;
+    expect(it['name'], 'fresh');
+    expect(it['checked'], isTrue);
+  });
 }

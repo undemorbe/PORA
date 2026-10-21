@@ -18,6 +18,7 @@ import 'package:pora/core/features/item_detail/domain/usecase/mark_item_bought.d
 import 'package:pora/core/features/user/domain/usecase/user/get_user.dart';
 import 'package:pora/core/internal/cache/cache_keys.dart';
 import 'package:pora/core/internal/cache/hive_json_cache.dart';
+import 'package:pora/core/internal/cache/list_cache_patcher.dart';
 import 'package:pora/core/internal/cache/offline_policy.dart';
 part 'lists_store.g.dart';
 
@@ -124,7 +125,11 @@ abstract class _ListStoreBase with Store {
       // Write-through cache — открытый список доступен offline.
       final asModel = _asListModel(response.right);
       if (asModel != null) {
-        await HiveJsonCache.put(CacheKeys.listContent(lid), asModel.toJson());
+        // Через очередь патчера — не гоняемся с офлайн-патчами товаров.
+        await getIt<ListCachePatcher>().writeSnapshot(
+          CacheKeys.listContent(lid),
+          asModel.toJson(),
+        );
       }
     } else {
       // Кэш отдаём только при проблемах с доступностью, не при 4xx.
