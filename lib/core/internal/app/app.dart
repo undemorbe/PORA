@@ -16,6 +16,7 @@ import 'package:pora/core/internal/router/app_router.gr.dart';
 import 'package:pora/core/internal/router/guard/auth_state.dart';
 import 'package:pora/core/internal/theme/themes_colors/app_themes.dart';
 import 'package:pora/core/internal/theme/store/theme_store.dart';
+import 'package:pora/core/internal/widgets/app_messenger.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
 class MainApp extends StatelessWidget {
@@ -40,6 +41,7 @@ class MainApp extends StatelessWidget {
           builder: (context) => MaterialApp.router(
             title: 'PORA',
             debugShowCheckedModeBanner: false,
+            scaffoldMessengerKey: appMessengerKey,
             //!Routing
             routerConfig: router.config(
               navigatorObservers: () => [

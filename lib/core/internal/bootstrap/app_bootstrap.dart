@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart' show kDebugMode;
-import 'package:flutter/widgets.dart' show Locale;
+import 'package:flutter/widgets.dart' show AppLifecycleListener, Locale;
 import 'package:mobx/mobx.dart';
 import 'package:pora/core/internal/analytics/analytics_service.dart';
 import 'package:pora/core/internal/analytics/usage/usage_session_listener.dart';
@@ -14,12 +14,16 @@ import 'package:pora/core/internal/localization/l10n/generated/app_localizations
 import 'package:pora/core/internal/notifications/deep_link_handler.dart';
 import 'package:pora/core/internal/notifications/device_token_sync.dart';
 import 'package:pora/core/internal/offline/outbox_replayer.dart';
+import 'package:pora/core/internal/offline/outbox_sync_effects.dart';
 import 'package:pora/core/internal/platform/app_shortcuts_service.dart';
 import 'package:pora/core/internal/platform/share_intent_service.dart';
 
 class AppBootstrap {
   AppBootstrap._();
   static final AppBootstrap instance = AppBootstrap._();
+
+  /// Держит подписку на resume для flush offline-очереди.
+  AppLifecycleListener? _outboxLifecycle;
 
   Future<void>? _future;
 
@@ -61,16 +65,29 @@ class AppBootstrap {
     }
   }
 
-  /// Проигрываем offline-очередь при старте (если онлайн) и на каждом
-  /// восстановлении связи.
+  /// Проигрываем offline-очередь: при старте (если онлайн), на каждом
+  /// восстановлении связи, при возврате из фона и вскоре после постановки
+  /// новой записи (`replayer.start()`). Ошибки связи — backoff внутри
+  /// replayer'а.
   void _bindOutboxToConnectivity(InjectionContainer container) {
     final connectivity = container.getIt<ConnectivityStore>();
-    final replayer = container.getIt<OutboxReplayer>();
+    final replayer = container.getIt<OutboxReplayer>()..start();
+    OutboxSyncEffects(
+      replayer: replayer,
+      localeCode: () => container.getIt<LocalizationStore>().currentLocale,
+    ).start();
     if (connectivity.online) unawaited(replayer.flush());
-    // reaction живёт весь lifecycle приложения (singleton не диспоузится).
+    // reaction и listener живут весь lifecycle приложения (singleton'ы не
+    // диспоузятся).
     reaction<bool>((_) => connectivity.online, (online) {
       if (online) unawaited(replayer.flush());
     });
+    // Возврат из фона: сеть могла появиться, пока процесс спал.
+    _outboxLifecycle ??= AppLifecycleListener(
+      onResume: () {
+        if (connectivity.online) unawaited(replayer.flush());
+      },
+    );
   }
 
   /// Платформенные интеграции: App Shortcuts (иконка long-press) + Share-to-app

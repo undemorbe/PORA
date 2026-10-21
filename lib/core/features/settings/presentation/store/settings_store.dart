@@ -9,6 +9,7 @@ import 'package:pora/core/features/settings/domain/usecase/send_support_msg.dart
 import 'package:pora/core/features/user/domain/entity/user/user_entity.dart';
 import 'package:pora/core/internal/cache/hive_json_cache.dart';
 import 'package:pora/core/internal/di/export.dart';
+import 'package:pora/core/internal/offline/outbox.dart';
 part 'settings_store.g.dart';
 
 class SettingsStore = _SettingsStoreBase with _$SettingsStore;
@@ -93,6 +94,9 @@ abstract class _SettingsStoreBase with Store {
     await tokensStore.clearTokens();
     // Чистим весь offline-cache — новый юзер не должен видеть чужие снапшоты.
     await HiveJsonCache.clear();
+    // Неотправленные операции принадлежат ушедшему юзеру — с токеном
+    // следующего их проигрывать нельзя.
+    await GetIt.I<Outbox>().clear();
     await UsageTracker.instance.clear();
     GetIt.I<AuthState>().setUnauthenticated();
   }

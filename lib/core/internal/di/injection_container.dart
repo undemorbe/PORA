@@ -405,7 +405,10 @@ class InjectionContainer {
       () => const ListCachePatcher(),
     );
     _getIt.registerLazySingleton<OutboxReplayer>(
-      () => OutboxReplayer(outbox: _getIt<Outbox>()),
+      () => OutboxReplayer(
+        outbox: _getIt<Outbox>(),
+        isOnline: () => _getIt<ConnectivityStore>().online,
+      ),
     );
 
     //! Items
