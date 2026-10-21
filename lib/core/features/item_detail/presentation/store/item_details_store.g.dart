@@ -81,6 +81,24 @@ mixin _$ItemDetailsStore on _ItemDetailsStoreBase, Store {
     });
   }
 
+  late final _$lastWriteQueuedAtom = Atom(
+    name: '_ItemDetailsStoreBase.lastWriteQueued',
+    context: context,
+  );
+
+  @override
+  bool get lastWriteQueued {
+    _$lastWriteQueuedAtom.reportRead();
+    return super.lastWriteQueued;
+  }
+
+  @override
+  set lastWriteQueued(bool value) {
+    _$lastWriteQueuedAtom.reportWrite(value, super.lastWriteQueued, () {
+      super.lastWriteQueued = value;
+    });
+  }
+
   late final _$loadAsyncAction = AsyncAction(
     '_ItemDetailsStoreBase.load',
     context: context,
@@ -145,7 +163,8 @@ mixin _$ItemDetailsStore on _ItemDetailsStoreBase, Store {
 item: ${item},
 isLoading: ${isLoading},
 errorMessage: ${errorMessage},
-isDeleted: ${isDeleted}
+isDeleted: ${isDeleted},
+lastWriteQueued: ${lastWriteQueued}
     ''';
   }
 }

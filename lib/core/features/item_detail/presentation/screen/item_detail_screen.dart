@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/core/features/item_detail/presentation/store/item_details_store.dart';
 import 'package:pora/core/features/item_detail/presentation/widgets/added_by.dart';
@@ -16,7 +19,7 @@ import 'package:pora/core/internal/widgets/pora_buttons.dart';
 import 'package:pora/core/internal/widgets/pora_icon_tile.dart';
 import 'package:pora/core/internal/widgets/pora_rows_card.dart';
 import 'package:pora/core/internal/widgets/pora_setting_row.dart';
-import 'package:pora/core/internal/network/connectivity/connectivity_guard.dart';
+import 'package:pora/core/internal/offline/outbox_replayer.dart';
 import 'package:pora/core/internal/widgets/pora_snackbar.dart';
 import 'package:pora/core/internal/widgets/pora_toggle.dart';
 import 'package:pora/core/internal/widgets/screen_back_header.dart';
@@ -39,24 +42,41 @@ class ItemDetailPage extends StatefulWidget {
 
 class _ItemDetailPageState extends State<ItemDetailPage> {
   late final ItemDetailsStore store;
+  StreamSubscription<FlushOutcome>? _syncSub;
 
   @override
   void initState() {
     super.initState();
     store = ItemDetailsStore(itemId: widget.itemId);
     store.load();
+    // Очередь доехала до сервера (или отклонена) — перечитываем товар.
+    _syncSub = GetIt.I<OutboxReplayer>().events.listen((_) {
+      if (mounted && !store.isDeleted) store.load();
+    });
+  }
+
+  @override
+  void dispose() {
+    _syncSub?.cancel();
+    super.dispose();
+  }
+
+  void _snackIfQueued() {
+    if (!mounted || !store.lastWriteQueued) return;
+    PoraSnackbar.show(context, message: context.l10n.offlineSavedQueued);
   }
 
   Future<void> _toggleUrgent() async {
-    if (!await ConnectivityGuard.checkWrite(context)) return;
     final it = store.item;
     if (it == null) return;
-    await store.save(urgent: !it.urgent);
+    if (await store.save(urgent: !it.urgent)) _snackIfQueued();
+  }
+
+  Future<void> _toggleBought() async {
+    if (await store.toggleBought()) _snackIfQueued();
   }
 
   Future<void> _notify() async {
-    if (!await ConnectivityGuard.checkWrite(context)) return;
-    if (!mounted) return;
     final it = store.item;
     if (it == null) return;
     final added = it.addedBy;
@@ -71,12 +91,15 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
       fixedRecipients: [added.id],
     );
     if (!mounted || sent != true) return;
-    PoraSnackbar.show(context, message: context.l10n.notifySent);
+    PoraSnackbar.show(
+      context,
+      message: store.lastWriteQueued
+          ? context.l10n.offlineSavedQueued
+          : context.l10n.notifySent,
+    );
   }
 
   Future<void> _delete() async {
-    if (!await ConnectivityGuard.checkWrite(context)) return;
-    if (!mounted) return;
     final ok = await confirmDeleteItem(context);
     if (!ok || !mounted) return;
     final res = await store.delete().whenComplete(
@@ -84,6 +107,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
     );
     if (!mounted) return;
     if (res) {
+      _snackIfQueued();
       context.router.maybePop();
     } else {
       PoraSnackbar.show(
@@ -121,6 +145,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
               onDelete: _delete,
               onToggleUrgent: _toggleUrgent,
               onNotify: _notify,
+              onToggleBought: _toggleBought,
             );
           },
         ),
@@ -136,6 +161,7 @@ class _Body extends StatelessWidget {
     required this.onDelete,
     required this.onToggleUrgent,
     required this.onNotify,
+    required this.onToggleBought,
   });
 
   final ProductEntity item;
@@ -143,6 +169,7 @@ class _Body extends StatelessWidget {
   final VoidCallback onDelete;
   final VoidCallback onToggleUrgent;
   final VoidCallback onNotify;
+  final VoidCallback onToggleBought;
 
   @override
   Widget build(BuildContext context) {
@@ -227,10 +254,7 @@ class _Body extends StatelessWidget {
           label: item.checked
               ? context.l10n.returnToList
               : context.l10n.itemDetailMarkBought,
-          onPressed: () async {
-            if (!await ConnectivityGuard.checkWrite(context)) return;
-            store.toggleBought();
-          },
+          onPressed: onToggleBought,
         ),
         const SizedBox(height: PoraSpacing.lg),
         Center(
