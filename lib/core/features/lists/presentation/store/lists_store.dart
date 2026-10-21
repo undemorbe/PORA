@@ -20,6 +20,7 @@ import 'package:pora/core/internal/cache/cache_keys.dart';
 import 'package:pora/core/internal/cache/hive_json_cache.dart';
 import 'package:pora/core/internal/cache/list_cache_patcher.dart';
 import 'package:pora/core/internal/cache/offline_policy.dart';
+import 'package:pora/core/internal/errors/success.dart';
 part 'lists_store.g.dart';
 
 class ListStore = _ListStoreBase with _$ListStore;
@@ -47,6 +48,12 @@ abstract class _ListStoreBase with Store {
   /// True когда contract показывает данные из cache (offline read).
   @observable
   bool usingCache = false;
+
+  /// Последняя write-операция ушла в offline-очередь. Остаётся true, пока
+  /// следующая не дойдёт до сервера — так серия офлайн-тапов даёт один
+  /// snackbar (reaction срабатывает только на переходе false→true).
+  @observable
+  bool lastWriteQueued = false;
 
   @observable
   ListsArrayEntity? listsWithPreview;
@@ -218,7 +225,10 @@ abstract class _ListStoreBase with Store {
       checked: target,
       name: found.name,
     );
-    if (res.isRight) return true;
+    if (res.isRight) {
+      lastWriteQueued = res.right is QueuedSuccess;
+      return true;
+    }
     _patchItem(itemId, checked: !target);
     errorMessage = res.left.message;
     return false;
@@ -241,6 +251,7 @@ abstract class _ListStoreBase with Store {
   Future<void> deleteItem({required String itemId}) async {
     final res = await getIt<DeleteItemUseCase>().call(itemId: itemId);
     if (res.isRight) {
+      lastWriteQueued = res.right is QueuedSuccess;
       // Оптимистично убираем item из loaded list.
       final cur = list;
       if (cur != null) {

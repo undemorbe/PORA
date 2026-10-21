@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
+import 'package:mobx/mobx.dart';
 import 'package:pora/core/features/families/domain/entity/member.dart';
 import 'package:pora/core/features/lists/presentation/store/lists_store.dart';
 import 'package:pora/core/internal/network/websocket/app_websocket.dart';
@@ -16,6 +18,8 @@ import 'package:pora/core/internal/router/app_router.gr.dart';
 import 'package:pora/core/internal/theme/constant/additional_constants.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
 import 'package:pora/core/internal/analytics/analytics_service.dart';
+import 'package:pora/core/internal/offline/outbox_replayer.dart';
+import 'package:pora/core/internal/widgets/pora_snackbar.dart';
 
 /// Concrete list screen.
 ///
@@ -48,6 +52,8 @@ class _ListPageState extends State<ListPage> {
   final _searchController = TextEditingController();
   StreamSubscription<WsDataModel>? _wsSub;
   final _debouncer = Debouncer();
+  StreamSubscription<FlushOutcome>? _syncSub;
+  ReactionDisposer? _queuedReaction;
 
   @override
   void initState() {
@@ -61,6 +67,18 @@ class _ListPageState extends State<ListPage> {
       if (listStore.isSelfUpdated == true) return;
       _debouncer.call(_refresh);
     });
+    // Очередь доехала до сервера (или отклонена) — сверяемся с сервером.
+    // WS-эхо тут ненадёжно: сокет может переподключиться позже flush.
+    _syncSub = GetIt.I<OutboxReplayer>().events.listen(
+      (_) => _debouncer.call(_refresh),
+    );
+    _queuedReaction = reaction<bool>((_) => listStore.lastWriteQueued, (
+      queued,
+    ) {
+      if (queued && mounted) {
+        PoraSnackbar.show(context, message: context.l10n.offlineSavedQueued);
+      }
+    });
   }
 
   Future<void> _refresh() => listStore.getConcreteList(lid: widget.listId);
@@ -70,6 +88,8 @@ class _ListPageState extends State<ListPage> {
     _searchController.dispose();
     _wsSub?.cancel();
     _debouncer.cancel();
+    _syncSub?.cancel();
+    _queuedReaction?.call();
     super.dispose();
   }
 
