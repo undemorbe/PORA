@@ -144,4 +144,16 @@ void main() {
     await outbox.enqueue('a', {});
     await expectLater(emitted, completes);
   });
+
+  test('clear waits for an in-flight enqueue', () async {
+    await Future.wait([
+      outbox.enqueueCoalesced(OutboxKinds.itemMarkBought, {
+        'item-id': 'i1',
+        'checked': true,
+      }, itemId: 'i1'),
+      outbox.clear(),
+    ]);
+
+    expect(await outbox.length, 0);
+  });
 }

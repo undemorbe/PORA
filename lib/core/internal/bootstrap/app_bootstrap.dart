@@ -49,12 +49,17 @@ class AppBootstrap {
         UsageTracker.instance.attach(container.getIt<ILocalDB<dynamic>>()),
       );
 
-      await Future.wait<void>([
-        _initLocalization(container),
-        _refreshAndAuth(container),
-      ]);
-
-      _bindOutboxToConnectivity(container);
+      // finally: ошибка локализации/авторизации не должна оставить outbox
+      // непривязанным (локаль читается лениво). Сама ошибка летит дальше в
+      // общий catch — платформенные интеграции и фон, как и раньше, пропускаем.
+      try {
+        await Future.wait<void>([
+          _initLocalization(container),
+          _refreshAndAuth(container),
+        ]);
+      } finally {
+        _bindOutboxToConnectivity(container);
+      }
       unawaited(_initPlatformIntegrations(container));
 
       Logger.talker.info('AppBootstrap ready in ${sw.elapsedMilliseconds}ms');

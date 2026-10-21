@@ -126,10 +126,12 @@ class Outbox {
     await box.delete(id);
   });
 
-  Future<void> clear() async {
+  /// Через замок: in-flight мутация не должна записаться после очистки
+  /// (иначе операция ушедшего юзера переживёт logout).
+  Future<void> clear() => _serialized(() async {
     final box = await _open();
     await box.clear();
-  }
+  });
 
   Future<void> dispose() => _changes.close();
 }

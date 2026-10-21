@@ -1285,7 +1285,7 @@
     "@offlineSavedQueued": {
         "description": "snackbar when an offline change was queued for sync"
     },
-    "offlineSyncDropped": "Не удалось синхронизировать изменений: {count}",
+    "offlineSyncDropped": "Не синхронизировано изменений: {count}",
     "@offlineSyncDropped": {
         "description": "snackbar when queued offline changes were rejected by the server"
     },

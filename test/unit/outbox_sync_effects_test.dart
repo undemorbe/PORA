@@ -54,4 +54,35 @@ void main() {
     await replayer.dispose();
     await outbox.dispose();
   });
+
+  test('unsupported locale falls back without throwing', () async {
+    await HiveJsonCache.put(CacheKeys.item('i3'), {'id': 'i3'});
+    final outbox = Outbox();
+    final replayer = OutboxReplayer(outbox: outbox);
+    final effects = OutboxSyncEffects(
+      replayer: replayer,
+      localeCode: () => 'es',
+    );
+
+    await expectLater(
+      effects.handle(
+        FlushOutcome(
+          dropped: [
+            OutboxEntry(
+              id: '3',
+              kind: 'item.delete',
+              args: {'item-id': 'i3'},
+              createdAt: 0,
+            ),
+          ],
+        ),
+      ),
+      completes,
+    );
+
+    expect(await HiveJsonCache.read(CacheKeys.item('i3')), isNull);
+    await effects.dispose();
+    await replayer.dispose();
+    await outbox.dispose();
+  });
 }

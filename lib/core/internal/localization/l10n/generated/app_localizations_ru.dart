@@ -1019,7 +1019,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String offlineSyncDropped(int count) {
-    return 'Не удалось синхронизировать изменений: $count';
+    return 'Не синхронизировано изменений: $count';
   }
 
   @override

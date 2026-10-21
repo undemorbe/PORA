@@ -90,13 +90,14 @@ abstract class _SettingsStoreBase with Store {
   }
 
   Future<void> _clearSession() async {
+    // Неотправленные операции принадлежат ушедшему юзеру — с токеном
+    // следующего их проигрывать нельзя. Чистим до токенов, чтобы flush
+    // не успел проиграть их без авторизации.
+    await GetIt.I<Outbox>().clear();
     final tokensStore = GetIt.I<TokensSecureStore>();
     await tokensStore.clearTokens();
     // Чистим весь offline-cache — новый юзер не должен видеть чужие снапшоты.
     await HiveJsonCache.clear();
-    // Неотправленные операции принадлежат ушедшему юзеру — с токеном
-    // следующего их проигрывать нельзя.
-    await GetIt.I<Outbox>().clear();
     await UsageTracker.instance.clear();
     GetIt.I<AuthState>().setUnauthenticated();
   }
