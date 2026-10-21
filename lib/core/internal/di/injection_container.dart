@@ -7,6 +7,7 @@ import 'package:pora/core/features/brief/presentation/controller/brief_store.dar
 import 'package:pora/core/features/groups/data/home_view_prefs.dart';
 import 'package:pora/core/features/predictions_ai/data/config/ai_config.dart';
 import 'package:pora/core/features/predictions_ai/data/prefs/ai_config_prefs.dart';
+import 'package:pora/core/internal/cache/list_cache_patcher.dart';
 import 'package:pora/core/internal/errors/failure.dart';
 import 'package:pora/core/internal/errors/failure_mapper.dart';
 import 'package:pora/core/internal/errors/success.dart';
@@ -400,6 +401,9 @@ class InjectionContainer {
 
     //! Offline outbox
     _getIt.registerLazySingleton<Outbox>(Outbox.new);
+    _getIt.registerLazySingleton<ListCachePatcher>(
+      () => const ListCachePatcher(),
+    );
     _getIt.registerLazySingleton<OutboxReplayer>(
       () => OutboxReplayer(outbox: _getIt<Outbox>()),
     );
@@ -409,8 +413,11 @@ class InjectionContainer {
       () => ItemsRemoteImpl(apiClient: _getIt<ApiClient>()),
     );
     _getIt.registerLazySingleton<ItemsRepository>(
-      () =>
-          ItemsService(remote: _getIt<ItemsRemote>(), outbox: _getIt<Outbox>()),
+      () => ItemsService(
+        remote: _getIt<ItemsRemote>(),
+        outbox: _getIt<Outbox>(),
+        listCache: _getIt<ListCachePatcher>(),
+      ),
     );
     _registerOutboxHandlers();
     _getIt.registerLazySingleton<ItemDetailsPrefs>(

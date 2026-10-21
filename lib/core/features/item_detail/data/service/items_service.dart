@@ -4,6 +4,7 @@ import 'package:pora/core/features/item_detail/domain/repository/items_repositor
 import 'package:pora/core/features/lists/domain/entity/products/product.dart';
 import 'package:pora/core/internal/cache/cache_keys.dart';
 import 'package:pora/core/internal/cache/hive_json_cache.dart';
+import 'package:pora/core/internal/cache/list_cache_patcher.dart';
 import 'package:pora/core/internal/cache/offline_policy.dart';
 import 'package:pora/core/internal/errors/failure.dart';
 import 'package:pora/core/internal/errors/failure_mapper.dart';
@@ -14,12 +15,19 @@ import 'package:pora/core/internal/offline/outbox_kinds.dart';
 
 /// Оборачивает `ItemsRemote` в `Either<Failure, T>`.
 /// Идемпотентные write-операции (отметка куплено / удаление / правка / пинг)
-/// при отсутствии сети уходят в [Outbox] и возвращают [QueuedSuccess];
-/// кэш патчится оптимистично, чтобы UI сразу отразил изменение.
+/// при проблемах со связью уходят в [Outbox] (со схлопыванием по товару) и
+/// возвращают [QueuedSuccess]. Кэш товара и все закэшированные списки
+/// патчатся и при успехе, и при постановке в очередь — офлайн-UI сразу
+/// видит изменение, в том числе после переоткрытия списка.
 class ItemsService implements ItemsRepository {
   final ItemsRemote remote;
   final Outbox outbox;
-  const ItemsService({required this.remote, required this.outbox});
+  final ListCachePatcher listCache;
+  const ItemsService({
+    required this.remote,
+    required this.outbox,
+    required this.listCache,
+  });
 
   @override
   Future<Either<Failure, ProductEntity>> getItem({
@@ -89,36 +97,27 @@ class ItemsService implements ItemsRepository {
     required bool urgent,
     required int? remindEveryDays,
   }) async {
+    final body = _body(
+      name: name,
+      section: section,
+      quantity: quantity,
+      unit: unit,
+      priority: priority,
+      urgent: urgent,
+      remindEveryDays: remindEveryDays,
+    );
     try {
-      final body = _body(
-        name: name,
-        section: section,
-        quantity: quantity,
-        unit: unit,
-        priority: priority,
-        urgent: urgent,
-        remindEveryDays: remindEveryDays,
-      );
       await remote.updateItem(itemId: itemId, body: body);
-      await _patchCachedItem(itemId, body);
+      await _patchEverywhere(itemId, body);
       return Right(const ServerSuccess());
     } catch (e, s) {
       final failure = FailureMapper.map(e, s);
       if (failure.isConnectivity) {
-        final body = _body(
-          name: name,
-          section: section,
-          quantity: quantity,
-          unit: unit,
-          priority: priority,
-          urgent: urgent,
-          remindEveryDays: remindEveryDays,
-        );
-        await _patchCachedItem(itemId, body);
-        await outbox.enqueue(OutboxKinds.itemUpdate, {
+        await _patchEverywhere(itemId, body);
+        await outbox.enqueueCoalesced(OutboxKinds.itemUpdate, {
           'item-id': itemId,
           'body': body,
-        });
+        }, itemId: itemId);
         return Right(const QueuedSuccess());
       }
       return Left(failure);
@@ -129,13 +128,15 @@ class ItemsService implements ItemsRepository {
   Future<Either<Failure, Success>> deleteItem({required String itemId}) async {
     try {
       await remote.deleteItem(itemId: itemId);
-      await HiveJsonCache.invalidate(CacheKeys.item(itemId));
+      await _removeEverywhere(itemId);
       return Right(const ServerSuccess());
     } catch (e, s) {
       final failure = FailureMapper.map(e, s);
       if (failure.isConnectivity) {
-        await HiveJsonCache.invalidate(CacheKeys.item(itemId));
-        await outbox.enqueue(OutboxKinds.itemDelete, {'item-id': itemId});
+        await _removeEverywhere(itemId);
+        await outbox.enqueueCoalesced(OutboxKinds.itemDelete, {
+          'item-id': itemId,
+        }, itemId: itemId);
         return Right(const QueuedSuccess());
       }
       return Left(failure);
@@ -154,11 +155,11 @@ class ItemsService implements ItemsRepository {
     } catch (e, s) {
       final failure = FailureMapper.map(e, s);
       if (failure.isConnectivity) {
-        await outbox.enqueue(OutboxKinds.itemNotify, {
+        await outbox.enqueueCoalesced(OutboxKinds.itemNotify, {
           'item-id': itemId,
           'to': to,
           'message': message,
-        });
+        }, itemId: itemId);
         return Right(const QueuedSuccess());
       }
       return Left(failure);
@@ -172,16 +173,16 @@ class ItemsService implements ItemsRepository {
   }) async {
     try {
       await remote.markBought(itemId: itemId, checked: checked);
-      await _patchCachedItem(itemId, {'checked': checked});
+      await _patchEverywhere(itemId, {'checked': checked});
       return Right(const ServerSuccess());
     } catch (e, s) {
       final failure = FailureMapper.map(e, s);
       if (failure.isConnectivity) {
-        await _patchCachedItem(itemId, {'checked': checked});
-        await outbox.enqueue(OutboxKinds.itemMarkBought, {
+        await _patchEverywhere(itemId, {'checked': checked});
+        await outbox.enqueueCoalesced(OutboxKinds.itemMarkBought, {
           'item-id': itemId,
           'checked': checked,
-        });
+        }, itemId: itemId);
         return Right(const QueuedSuccess());
       }
       return Left(failure);
@@ -206,13 +207,21 @@ class ItemsService implements ItemsRepository {
     'remind-every-days': remindEveryDays,
   };
 
-  Future<void> _patchCachedItem(
+  /// Патчит кэш карточки товара и все снапшоты списков, где он есть.
+  Future<void> _patchEverywhere(
     String itemId,
     Map<String, dynamic> patch,
   ) async {
     final raw = await HiveJsonCache.read(CacheKeys.item(itemId));
-    if (raw is! Map) return;
-    final updated = Map<String, dynamic>.from(raw)..addAll(patch);
-    await HiveJsonCache.put(CacheKeys.item(itemId), updated);
+    if (raw is Map) {
+      final updated = Map<String, dynamic>.from(raw)..addAll(patch);
+      await HiveJsonCache.put(CacheKeys.item(itemId), updated);
+    }
+    await listCache.patchItem(itemId, patch);
+  }
+
+  Future<void> _removeEverywhere(String itemId) async {
+    await HiveJsonCache.invalidate(CacheKeys.item(itemId));
+    await listCache.removeItem(itemId);
   }
 }
