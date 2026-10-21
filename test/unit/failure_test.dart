@@ -21,6 +21,33 @@ void main() {
         isFalse,
       );
     });
+
+    test('5xx and 429 ApiFailures are transient (connectivity)', () {
+      expect(
+        const ApiFailure(
+          code: ApiErrorCode.unknown,
+          message: 'x',
+          statusCode: 503,
+        ).isConnectivity,
+        isTrue,
+      );
+      expect(const RateLimitFailure(message: 'x').isConnectivity, isTrue);
+      expect(
+        const ApiFailure(
+          code: ApiErrorCode.unknown,
+          message: 'x',
+          statusCode: 403,
+        ).isConnectivity,
+        isFalse,
+      );
+      expect(
+        const ApiFailure(
+          code: ApiErrorCode.unknown,
+          message: 'x',
+        ).isConnectivity,
+        isFalse,
+      );
+    });
   });
 
   group('specialised ApiFailures', () {

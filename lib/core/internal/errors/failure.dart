@@ -31,6 +31,14 @@ class ApiFailure extends Failure {
       code == ApiErrorCode.accessTokenExpired ||
       code == ApiErrorCode.refreshTokenExpired;
 
+  /// 5xx и 429 — временные проблемы сервера: offline-очередь повторяет
+  /// операцию, а чтение отдаёт кэш — так же, как при отсутствии сети.
+  @override
+  bool get isConnectivity {
+    final s = statusCode;
+    return s != null && (s >= 500 || s == 429);
+  }
+
   @override
   List<Object?> get props => [message, code, statusCode];
 }
