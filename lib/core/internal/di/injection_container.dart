@@ -478,10 +478,17 @@ class InjectionContainer {
         ),
       ),
     );
-    replayer.register(
-      OutboxKinds.itemDelete,
-      (a) => guard(() => remote.deleteItem(itemId: a['item-id'] as String)),
-    );
+    replayer.register(OutboxKinds.itemDelete, (a) async {
+      final res = await guard(
+        () => remote.deleteItem(itemId: a['item-id'] as String),
+      );
+      // 404 — товар уже удалён (например, другим участником семьи): цель
+      // операции достигнута, это не ошибка синхронизации.
+      if (res.isLeft && res.left is NotFoundFailure) {
+        return Right(const ServerSuccess());
+      }
+      return res;
+    });
     replayer.register(
       OutboxKinds.itemUpdate,
       (a) => guard(

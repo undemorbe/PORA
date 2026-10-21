@@ -54,6 +54,9 @@ class Outbox {
   }) => _serialized(() async {
     final superseded = OutboxKinds.supersededBy(kind);
     if (superseded.isNotEmpty) {
+      if (kind == OutboxKinds.itemUpdate) {
+        await _carryPendingChecked(itemId, args);
+      }
       // Unlocked-хелперы: мы уже внутри замка, повторный вход = deadlock.
       await _removeWhereUnlocked(
         (e) => e.args['item-id'] == itemId && superseded.contains(e.kind),
@@ -61,6 +64,24 @@ class Outbox {
     }
     return _enqueueUnlocked(kind, args);
   });
+
+  /// update поглощает ожидающий markBought того же товара, но `checked` в его
+  /// теле берётся из UI-стора и может быть устаревшим. Ожидающая отметка —
+  /// самое свежее намерение пользователя, поэтому переносим её в тело.
+  Future<void> _carryPendingChecked(
+    String itemId,
+    Map<String, dynamic> args,
+  ) async {
+    final body = args['body'];
+    if (body is! Map) return;
+    final pending = (await all()).where(
+      (e) =>
+          e.kind == OutboxKinds.itemMarkBought && e.args['item-id'] == itemId,
+    );
+    if (pending.isEmpty) return;
+    final checked = pending.last.args['checked'];
+    if (checked is bool) body['checked'] = checked;
+  }
 
   /// Удаляет записи, удовлетворяющие [test]. Возвращает число удалённых.
   Future<int> removeWhere(bool Function(OutboxEntry entry) test) =>

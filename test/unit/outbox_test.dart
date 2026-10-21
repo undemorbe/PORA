@@ -200,4 +200,22 @@ void main() {
 
     expect(await outbox.length, 0);
   });
+
+  test(
+    'update absorbing a pending markBought keeps its checked value',
+    () async {
+      await outbox.enqueueCoalesced(OutboxKinds.itemMarkBought, {
+        'item-id': 'i1',
+        'checked': true,
+      }, itemId: 'i1');
+      await outbox.enqueueCoalesced(OutboxKinds.itemUpdate, {
+        'item-id': 'i1',
+        'body': <String, dynamic>{'name': 'x', 'checked': false},
+      }, itemId: 'i1');
+
+      final all = await outbox.all();
+      expect(all.single.kind, OutboxKinds.itemUpdate);
+      expect((all.single.args['body'] as Map)['checked'], isTrue);
+    },
+  );
 }
