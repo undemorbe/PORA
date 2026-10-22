@@ -71,15 +71,17 @@ cd backend && go build ./... && go vet ./...      # после каждого т
 cd backend && go test -p 1 ./...                   # все тесты; -p 1 обязателен: интеграционные пакеты делят одну БД
 ```
 
-**Тестовая БД (один раз, нужна для интеграционных тестов):**
+**Тестовая БД (обновлено 2026-10-16):** отдельный одноразовый контейнер, как в CI. На `localhost:5432` этой машины отвечает host-Postgres, а не Docker — не используй его.
 
 ```bash
-docker compose -f backend/docker-compose.yml up -d postgres
-docker compose -f backend/docker-compose.yml exec postgres sh -c 'createdb -U "$POSTGRES_USER" pora_test'
-export TEST_DATABASE_URL="host=localhost port=5432 user=$(grep '^DB_USER=' backend/.env | cut -d= -f2-) password=$(grep '^DB_PASSWORD=' backend/.env | cut -d= -f2-) dbname=pora_test sslmode=disable"
+docker start pora-test-pg 2>/dev/null || docker run -d --name pora-test-pg --restart unless-stopped \
+  -e POSTGRES_DB=pora_test -e POSTGRES_USER=pora -e POSTGRES_PASSWORD=pora -p 127.0.0.1:55432:5432 postgres:16
+export TEST_DATABASE_URL="host=127.0.0.1 port=55432 user=pora password=pora dbname=pora_test sslmode=disable"
 ```
 
-Не печатай значение `TEST_DATABASE_URL` в лог/чат — там пароль. Без переменной интеграционные тесты делают `t.Skip`.
+Креды одноразовые (не секрет). Без переменной интеграционные тесты делают `t.Skip`. `OpenTestDB` отказывается работать с БД, имя которой не оканчивается на `_test`.
+
+**Где выполняется (обновлено 2026-10-16):** ветка `feat/admin-analytics` вынесена в git worktree `/Users/dolbobob/Programming/FlutterApps/pora/.claude/worktrees/backend-admin` (в `backend/` параллельно работает другая сессия на ветке `feat/account-deletion`). Читай `backend/` в этом плане как корень worktree, `cd backend` — как `cd` в worktree, `git -C backend …` — как `git …` в worktree. `.env` в worktree — симлинк на `backend/.env`.
 
 ---
 

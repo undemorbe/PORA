@@ -201,3 +201,14 @@ Rollup-таблицы/materialized views (агрегируем на лету; и
 - **Репозитории:** `backend/` — отдельный git-репозиторий (корневой репо публичный, `backend/` в его `.gitignore`); CI бэкенда — в `backend/.github/workflows/`. `admin/` — в корневом репо.
 - **Безопасность, найдено при планировании:** `DeleteItem`/`DeleteItems`/`MarkAsBought` не проверяли токен — теперь требуют его (нужен `actorID` для событий). Выход из приложения удаляет только `client=app` refresh-токен, выход из админки — только `client=admin`.
 - **Логин админки** (`verify-otp` с `client=admin`) не создаёт пользователей: несуществующий или не-админ → `403`. Refresh админки не пишет `user_logins`.
+
+## 8. Итог выполнения плана 1 (бэкенд, 2026-10-22)
+
+Ветка `feat/admin-analytics` отдельного репо `backend/` (worktree `.claude/worktrees/backend-admin`), 29 коммитов от импорта `29f61d6`. Поверх плана по итогам ревью:
+
+- **Админ-доступ:** access-JWT несёт claim `client`; `AdminMiddleware` требует `client=admin` **и** `is_admin` из БД. Обычные эндпоинты приложения отвергают admin-токены (403). Вход в админку — только по email. `SyncAdmins` не выдаёт права, если email встречается у нескольких юзеров; ошибка синхронизации валит старт. `JWT_TOKEN_KEY` ≥ 32 байт, алгоритм зафиксирован HS256. Refresh admin-токена: проверка срока и отзыв при снятии прав. Refresh-токены — upsert по `(user_id, client)`.
+- **Ingest:** rate limit 1 запрос/3 с, burst 20 на юзера → 429; удалённый юзер (FK) → 401; props типизированы (`screen`/`source` — строки, `grid` — bool); NUL вычищается.
+- **Emitter:** NUL-safe props, повтор батча построчно при ошибке, агрегированный счётчик дропов. `item_bought` — только при переходе «не куплен → куплен»; для разовых товаров несёт `hours_to_buy`, медиана «добавлено → куплено» считается по событиям.
+- **Статистика:** миграция `20261021120000_admin_stats_indexes` (индексы `user_logins(created_at)`, `users(created_at)`, покрывающий `analytics_events(occurred_at) INCLUDE (user_id)`); sargable-фильтры по `users.created_at`; дедуп активности по веткам UNION; retention ограничен концом периода; `total-users` — на конец периода; список юзеров пагинируется через CTE, `page ≤ 100 000`.
+- **Прочее:** access-лог без query-строк (refresh-токен в query); `/authorize/logout` удаляет токен клиента своего access-токена; починен retry коллизии invite-кода семьи (pgx/v5 `PgError`).
+- **Вне плана, отдельно:** авторизация list/item/family эндпоинтов — ветка `feat/authz-hardening` (отрезана от этой); перебор OTP, смена email без подтверждения, context/таймауты admin-запросов — follow-up.
