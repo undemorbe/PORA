@@ -128,15 +128,11 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
             }
             final it = store.item;
             if (it == null) {
-              return Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(PoraSpacing.xl),
-                  child: Text(
-                    store.errorMessage ?? context.l10n.notFound,
-                    style: PoraText.body,
-                    textAlign: TextAlign.center,
-                  ),
-                ),
+              return _LoadError(
+                message: store.loadFailedOffline
+                    ? context.l10n.noInternet
+                    : store.errorMessage ?? context.l10n.notFound,
+                onRetry: store.loadFailedOffline ? store.load : null,
               );
             }
             return _Body(
@@ -148,6 +144,54 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
             );
           },
         ),
+      ),
+    );
+  }
+}
+
+/// Товар не загрузился: кнопка «назад» остаётся (без неё экран тупиковый),
+/// при сетевой ошибке — повтор.
+class _LoadError extends StatelessWidget {
+  const _LoadError({required this.message, this.onRetry});
+
+  final String message;
+  final VoidCallback? onRetry;
+
+  @override
+  Widget build(BuildContext context) {
+    final retry = onRetry;
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(
+        PoraSpacing.screen,
+        PoraSpacing.sm,
+        PoraSpacing.screen,
+        PoraSpacing.xxl,
+      ),
+      child: Column(
+        children: [
+          const ScreenBackHeader(title: ''),
+          Expanded(
+            child: Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    message,
+                    style: PoraText.body,
+                    textAlign: TextAlign.center,
+                  ),
+                  if (retry != null) ...[
+                    const SizedBox(height: PoraSpacing.lg),
+                    PoraOutlineButton(
+                      label: context.l10n.retry,
+                      onPressed: retry,
+                    ),
+                  ],
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

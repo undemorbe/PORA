@@ -62,6 +62,11 @@ abstract class _ItemDetailsStoreBase with Store {
   @observable
   bool lastWriteQueued = false;
 
+  /// Последняя загрузка упала из-за сети (и в кэше товара не нашлось) —
+  /// экран показывает локализованное «нет интернета» и кнопку повтора.
+  @observable
+  bool loadFailedOffline = false;
+
   @action
   Future<void> load() async {
     isLoading = true;
@@ -70,8 +75,10 @@ abstract class _ItemDetailsStoreBase with Store {
     isLoading = false;
     if (res.isRight) {
       item = res.right;
+      loadFailedOffline = false;
     } else {
       errorMessage = res.left.message;
+      loadFailedOffline = res.left.isConnectivity;
     }
   }
 

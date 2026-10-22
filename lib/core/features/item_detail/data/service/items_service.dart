@@ -56,6 +56,15 @@ class ItemsService implements ItemsRepository {
             // Broken cache is treated as a cache miss.
           }
         }
+        // Карточку не открывали онлайн — берём товар из снапшота списка.
+        final fromList = await listCache.findItem(itemId);
+        if (fromList != null) {
+          try {
+            return Right(ProductModel.fromJson(fromList));
+          } catch (_) {
+            // Broken snapshot is treated as a cache miss.
+          }
+        }
       }
       return Left(failure);
     }

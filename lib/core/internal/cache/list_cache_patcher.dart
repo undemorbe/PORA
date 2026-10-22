@@ -8,6 +8,29 @@ import 'package:pora/core/internal/cache/hive_json_cache.dart';
 class ListCachePatcher {
   const ListCachePatcher();
 
+  /// Ищет товар [itemId] в снапшотах списков — офлайн-фолбэк для карточки
+  /// товара, которую не открывали онлайн. В JSON товара внутри списка нет
+  /// `section`, поэтому подставляем имя секции снапшота. `null` — не найден.
+  Future<Map<String, dynamic>?> findItem(String itemId) async {
+    final keys = await HiveJsonCache.keysWithPrefix(
+      CacheKeys.listContentPrefix,
+    );
+    for (final key in keys) {
+      final raw = await HiveJsonCache.read(key);
+      if (raw is! Map || raw['sections'] is! List) continue;
+      for (final s in raw['sections'] as List) {
+        if (s is! Map || s['items'] is! List) continue;
+        for (final it in s['items'] as List) {
+          if (it is Map && it['id'] == itemId) {
+            return Map<String, dynamic>.from(it)
+              ..putIfAbsent('section', () => s['name']);
+          }
+        }
+      }
+    }
+    return null;
+  }
+
   /// Мержит [patch] в товар [itemId] во всех списках, где он есть.
   Future<void> patchItem(String itemId, Map<String, dynamic> patch) =>
       _rewrite((items) {

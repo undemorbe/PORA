@@ -99,6 +99,24 @@ mixin _$ItemDetailsStore on _ItemDetailsStoreBase, Store {
     });
   }
 
+  late final _$loadFailedOfflineAtom = Atom(
+    name: '_ItemDetailsStoreBase.loadFailedOffline',
+    context: context,
+  );
+
+  @override
+  bool get loadFailedOffline {
+    _$loadFailedOfflineAtom.reportRead();
+    return super.loadFailedOffline;
+  }
+
+  @override
+  set loadFailedOffline(bool value) {
+    _$loadFailedOfflineAtom.reportWrite(value, super.loadFailedOffline, () {
+      super.loadFailedOffline = value;
+    });
+  }
+
   late final _$loadAsyncAction = AsyncAction(
     '_ItemDetailsStoreBase.load',
     context: context,
@@ -164,7 +182,8 @@ item: ${item},
 isLoading: ${isLoading},
 errorMessage: ${errorMessage},
 isDeleted: ${isDeleted},
-lastWriteQueued: ${lastWriteQueued}
+lastWriteQueued: ${lastWriteQueued},
+loadFailedOffline: ${loadFailedOffline}
     ''';
   }
 }

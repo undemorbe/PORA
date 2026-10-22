@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pora/core/features/item_detail/data/datasource/items_remote.dart';
 import 'package:pora/core/features/item_detail/data/models/add_item_response.dart';
@@ -11,6 +12,7 @@ import 'package:pora/core/internal/cache/cache_keys.dart';
 import 'package:pora/core/internal/cache/hive_json_cache.dart';
 import 'package:pora/core/internal/cache/list_cache_patcher.dart';
 import 'package:pora/core/internal/errors/success.dart';
+import 'package:pora/core/internal/network/connectivity/connectivity_store.dart';
 import 'package:pora/core/internal/offline/outbox.dart';
 import 'package:pora/core/internal/offline/outbox_kinds.dart';
 
@@ -24,8 +26,11 @@ class _FakeRemote implements ItemsRemote {
   }
 
   @override
-  Future<ProductModel> getItem({required String itemId}) =>
-      throw UnimplementedError();
+  Future<ProductModel> getItem({required String itemId}) async {
+    final e = error;
+    if (e != null) throw e;
+    throw UnimplementedError();
+  }
 
   @override
   Future<AddItemResponse> addItem({
@@ -111,6 +116,10 @@ void main() {
   });
 
   setUp(() async {
+    // canServeCache() читает статус сети из GetIt.
+    if (!GetIt.I.isRegistered<ConnectivityStore>()) {
+      GetIt.I.registerSingleton<ConnectivityStore>(ConnectivityStore());
+    }
     remote = _FakeRemote();
     outbox = Outbox();
     await outbox.clear();
@@ -135,6 +144,24 @@ void main() {
   });
 
   tearDown(() => outbox.dispose());
+
+  test('offline getItem falls back to the item inside a cached list', () async {
+    remote.error = _offline();
+
+    final res = await service.getItem(itemId: 'i1');
+
+    expect(res.isRight, isTrue);
+    expect(res.right.name, 'milk');
+    expect(res.right.section, 's'); // имя секции снапшота
+  });
+
+  test('offline getItem for unknown item stays Left', () async {
+    remote.error = _offline();
+
+    final res = await service.getItem(itemId: 'nope');
+
+    expect(res.isLeft, isTrue);
+  });
 
   test('online markBought patches list cache, nothing queued', () async {
     final res = await service.markBought(itemId: 'i1', checked: true);
