@@ -61,7 +61,10 @@ class OutboxReplayer {
   static const enqueueDelay = Duration(seconds: 3);
 
   static const _minBackoff = Duration(seconds: 5);
-  static const _maxBackoff = Duration(minutes: 5);
+
+  /// Пока транспорт «онлайн», о возврате упавшего сервера мы узнаём только
+  /// повтором — поэтому потолок небольшой (запрос дешёвый).
+  static const _maxBackoff = Duration(minutes: 1);
 
   final Outbox outbox;
   final bool Function() _isOnline;
@@ -101,6 +104,13 @@ class OutboxReplayer {
     _changesSub ??= outbox.changes.listen((_) {
       if (_isOnline()) scheduleFlush(enqueueDelay);
     });
+  }
+
+  /// Сервер ответил успехом (любой запрос приложения) — если очередь ждёт
+  /// повтора после ошибки связи, проигрываем сразу, не дожидаясь backoff.
+  void notifyServerReachable() {
+    if (_disposed || _flushing || _backoff == null) return;
+    scheduleFlush(Duration.zero);
   }
 
   /// Планирует flush через [delay]. Если уже запланирован более ранний —

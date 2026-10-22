@@ -86,7 +86,7 @@ void main() {
     },
   );
 
-  test('backoff doubles up to 5 minutes and resets on success', () async {
+  test('backoff doubles up to 1 minute and resets on success', () async {
     await outbox.enqueue('a', {});
     replayer.register('a', offline);
 
@@ -100,10 +100,10 @@ void main() {
       const Duration(seconds: 10),
       const Duration(seconds: 20),
       const Duration(seconds: 40),
-      const Duration(seconds: 80),
-      const Duration(seconds: 160),
-      const Duration(minutes: 5),
-      const Duration(minutes: 5),
+      const Duration(minutes: 1),
+      const Duration(minutes: 1),
+      const Duration(minutes: 1),
+      const Duration(minutes: 1),
     ]);
 
     replayer.register('a', ok);
@@ -292,6 +292,25 @@ void main() {
     final outcome = await running;
 
     expect(outcome.paused, isTrue);
+    expect(scheduled, isEmpty);
+  });
+
+  test(
+    'notifyServerReachable flushes at once while a retry is pending',
+    () async {
+      await outbox.enqueue('a', {});
+      replayer.register('a', offline);
+      await replayer.flush(); // пауза → backoff 5s
+      scheduled.clear();
+
+      replayer.notifyServerReachable();
+
+      expect(scheduled, [Duration.zero]);
+    },
+  );
+
+  test('notifyServerReachable is a no-op without a pending retry', () {
+    replayer.notifyServerReachable();
     expect(scheduled, isEmpty);
   });
 }

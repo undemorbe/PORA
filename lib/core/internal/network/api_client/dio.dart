@@ -7,6 +7,8 @@ import 'package:pora/core/features/user/domain/usecase/user/logout.dart';
 import 'package:pora/core/internal/logging/logger.dart';
 import 'package:pora/core/internal/network/interceptors/auth_interceptor.dart';
 import 'package:pora/core/internal/network/interceptors/error_interceptor.dart';
+import 'package:pora/core/internal/network/interceptors/server_reachable_interceptor.dart';
+import 'package:pora/core/internal/offline/outbox_replayer.dart';
 import 'package:talker_dio_logger/talker_dio_logger_interceptor.dart';
 import 'package:talker_dio_logger/talker_dio_logger_settings.dart';
 
@@ -61,6 +63,15 @@ class DioClient {
 
       // Обработка ошибок
       ErrorInterceptor(),
+
+      // Сервер снова отвечает — будим offline-очередь
+      ServerReachableInterceptor(
+        onReachable: () {
+          if (GetIt.I.isRegistered<OutboxReplayer>()) {
+            GetIt.I<OutboxReplayer>().notifyServerReachable();
+          }
+        },
+      ),
     ]);
 
     return dio;
