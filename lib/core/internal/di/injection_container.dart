@@ -232,6 +232,9 @@ class InjectionContainer {
     _getIt.registerFactory<DeleteFamilyUseCase>(
       () => DeleteFamilyUseCase(familyRepository: _getIt<FamilyRepository>()),
     );
+    _getIt.registerFactory<LeaveFamilyUseCase>(
+      () => LeaveFamilyUseCase(familyRepository: _getIt<FamilyRepository>()),
+    );
 
     //! Groups
     _getIt.registerFactory<GetUserGroupsUseCase>(

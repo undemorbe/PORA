@@ -1309,4 +1309,22 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get aiDisclaimer =>
       'Pora AI может ошибаться. Проверяйте важную информацию.';
+
+  @override
+  String get groupLeave => 'Выйти';
+
+  @override
+  String get groupLeaveTitle =>
+      'Выйти из группы? Список останется у остальных участников.';
+
+  @override
+  String get groupDeleteOwnerOnly => 'Удалить группу может только её владелец';
+
+  @override
+  String get groupDeleteFailed =>
+      'Не удалось удалить группу. Попробуйте ещё раз.';
+
+  @override
+  String get groupLeaveFailed =>
+      'Не удалось выйти из группы. Попробуйте ещё раз.';
 }

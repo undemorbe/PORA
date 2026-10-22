@@ -1409,5 +1409,10 @@
     "aiDisclaimer": "Pora AI peut se tromper. Vérifiez les informations importantes.",
     "@aiDisclaimer": {
         "description": "aiDisclaimer"
-    }
+    },
+    "groupLeave": "Quitter",
+    "groupLeaveTitle": "Quitter ce groupe ? La liste reste disponible pour les autres membres.",
+    "groupDeleteOwnerOnly": "Seul le propriétaire du groupe peut le supprimer",
+    "groupDeleteFailed": "Impossible de supprimer le groupe. Réessayez.",
+    "groupLeaveFailed": "Impossible de quitter le groupe. Réessayez."
 }

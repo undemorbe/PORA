@@ -81,6 +81,24 @@ mixin _$GroupsStore on _GroupsStoreBase, Store {
     });
   }
 
+  late final _$currentUserIdAtom = Atom(
+    name: '_GroupsStoreBase.currentUserId',
+    context: context,
+  );
+
+  @override
+  String? get currentUserId {
+    _$currentUserIdAtom.reportRead();
+    return super.currentUserId;
+  }
+
+  @override
+  set currentUserId(String? value) {
+    _$currentUserIdAtom.reportWrite(value, super.currentUserId, () {
+      super.currentUserId = value;
+    });
+  }
+
   late final _$_loadAsyncAction = AsyncAction(
     '_GroupsStoreBase._load',
     context: context,
@@ -119,8 +137,18 @@ mixin _$GroupsStore on _GroupsStoreBase, Store {
   );
 
   @override
-  Future<void> deleteGroup(GroupEntity g) {
+  Future<Failure?> deleteGroup(GroupEntity g) {
     return _$deleteGroupAsyncAction.run(() => super.deleteGroup(g));
+  }
+
+  late final _$leaveGroupAsyncAction = AsyncAction(
+    '_GroupsStoreBase.leaveGroup',
+    context: context,
+  );
+
+  @override
+  Future<Failure?> leaveGroup(GroupEntity g) {
+    return _$leaveGroupAsyncAction.run(() => super.leaveGroup(g));
   }
 
   @override
@@ -129,7 +157,8 @@ mixin _$GroupsStore on _GroupsStoreBase, Store {
 groups: ${groups},
 isLoading: ${isLoading},
 errorMessage: ${errorMessage},
-usingCache: ${usingCache}
+usingCache: ${usingCache},
+currentUserId: ${currentUserId}
     ''';
   }
 }

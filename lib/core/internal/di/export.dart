@@ -45,6 +45,7 @@ export 'package:pora/core/features/families/domain/usecase/create_family.dart';
 export 'package:pora/core/features/families/presentation/store/selected_family_store.dart';
 export 'package:pora/core/internal/network/connectivity/connectivity_store.dart';
 export 'package:pora/core/features/families/domain/usecase/delete_family.dart';
+export 'package:pora/core/features/families/domain/usecase/leave_family.dart';
 export 'package:pora/core/features/families/domain/usecase/get_families.dart';
 export 'package:pora/core/features/lists/data/datasource/remote/lists_remote.dart';
 export 'package:pora/core/features/lists/data/service/lists_service.dart';

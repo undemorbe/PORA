@@ -20,12 +20,22 @@ import 'package:pora/core/internal/widgets/pora_card.dart';
 const int _kPreviewProductsLimit = 3;
 
 /// Карточка группы = один список + аватары участников + превью продуктов.
-/// Slidable → Invite (only shared) + Delete.
+/// Slidable → Invite (only shared) + Delete (владелец) / Leave (участник).
 class GroupCard extends StatelessWidget {
-  const GroupCard({super.key, required this.group, required this.onDelete});
+  const GroupCard({
+    super.key,
+    required this.group,
+    this.onDelete,
+    this.onLeave,
+  });
 
   final GroupEntity group;
-  final Future<void> Function() onDelete;
+
+  /// `null` — Delete не показываем (не владелец общей группы).
+  final Future<void> Function()? onDelete;
+
+  /// `null` — Leave не показываем (личная группа или владелец).
+  final Future<void> Function()? onLeave;
 
   @override
   Widget build(BuildContext context) {
@@ -148,32 +158,47 @@ class GroupCard extends StatelessWidget {
       ),
     );
 
+    final delete = onDelete;
+    final leave = onLeave;
+    final actions = <Widget>[
+      if (!group.isPersonal && group.familyId != null)
+        SlidableAction(
+          onPressed: (ctx) =>
+              ctx.router.push(InviteRoute(familyId: group.familyId!)),
+          backgroundColor: PoraColors.primary,
+          foregroundColor: PoraColors.inkInverse,
+          icon: PhosphorIconsFill.userPlus,
+          label: context.l10n.settingsInvitePill,
+        ),
+      if (delete != null)
+        SlidableAction(
+          onPressed: (_) => delete(),
+          backgroundColor: PoraColors.danger,
+          foregroundColor: PoraColors.inkInverse,
+          icon: PhosphorIconsFill.trash,
+          label: context.l10n.delete,
+        ),
+      if (leave != null)
+        SlidableAction(
+          onPressed: (_) => leave(),
+          backgroundColor: PoraColors.danger,
+          foregroundColor: PoraColors.inkInverse,
+          icon: PhosphorIconsFill.signOut,
+          label: context.l10n.groupLeave,
+        ),
+    ];
+
     return ClipRRect(
       borderRadius: PoraRadii.card,
       child: Slidable(
         key: ValueKey('group_${list.id}'),
-        startActionPane: ActionPane(
-          motion: const BehindMotion(),
-          extentRatio: group.isPersonal ? 0.28 : 0.56,
-          children: [
-            if (!group.isPersonal && group.familyId != null)
-              SlidableAction(
-                onPressed: (ctx) =>
-                    ctx.router.push(InviteRoute(familyId: group.familyId!)),
-                backgroundColor: PoraColors.primary,
-                foregroundColor: PoraColors.inkInverse,
-                icon: PhosphorIconsFill.userPlus,
-                label: context.l10n.settingsInvitePill,
+        startActionPane: actions.isEmpty
+            ? null
+            : ActionPane(
+                motion: const BehindMotion(),
+                extentRatio: 0.28 * actions.length,
+                children: actions,
               ),
-            SlidableAction(
-              onPressed: (_) => onDelete(),
-              backgroundColor: PoraColors.danger,
-              foregroundColor: PoraColors.inkInverse,
-              icon: PhosphorIconsFill.trash,
-              label: context.l10n.delete,
-            ),
-          ],
-        ),
         child: body,
       ),
     );

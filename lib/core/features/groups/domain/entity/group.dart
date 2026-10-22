@@ -20,6 +20,16 @@ class GroupEntity extends Equatable {
 
   bool get isPersonal => familyId == null;
 
+  /// Личную группу удаляет её хозяин; общую — только владелец семьи
+  /// (DELETE /families для остальных → 403). `userId == null` — ещё не
+  /// известен: общую не удаляем.
+  bool canDelete(String? userId) =>
+      isPersonal || (userId != null && ownerId == userId);
+
+  /// Не-владелец общей группы может только выйти из семьи.
+  bool canLeave(String? userId) =>
+      !isPersonal && userId != null && ownerId != userId;
+
   @override
   List<Object?> get props => [list, members, ownerId, familyId];
 }

@@ -1253,4 +1253,19 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get aiDisclaimer => 'Pora AI 可能会出错，请核实重要信息。';
+
+  @override
+  String get groupLeave => '退出';
+
+  @override
+  String get groupLeaveTitle => '退出此群组？清单将保留给其他成员。';
+
+  @override
+  String get groupDeleteOwnerOnly => '只有群组所有者可以删除它';
+
+  @override
+  String get groupDeleteFailed => '无法删除群组，请重试。';
+
+  @override
+  String get groupLeaveFailed => '无法退出群组，请重试。';
 }

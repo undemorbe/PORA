@@ -9,7 +9,9 @@ import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/core/internal/network/connectivity/connectivity_guard.dart';
 import 'package:pora/core/internal/network/connectivity/no_internet_banner.dart';
 import 'package:pora/core/internal/theme/themes_colors/light_colors/app_colors.dart';
+import 'package:pora/core/internal/errors/failure.dart';
 import 'package:pora/core/internal/widgets/deletion_dialogue.dart';
+import 'package:pora/core/internal/widgets/pora_snackbar.dart';
 import 'package:pora/core/features/groups/data/home_view_prefs.dart';
 import 'package:pora/core/features/groups/domain/entity/group.dart';
 import 'package:pora/core/features/groups/presentation/store/groups_store.dart';
@@ -103,6 +105,8 @@ class _GroupsPageState extends State<GroupsPage> {
   }
 
   Widget _buildList(BuildContext context) {
+    // Читаем синхронно в Observer'е: lazy itemBuilder вне его трекинга.
+    final me = store.currentUserId;
     return ListView.separated(
       key: ValueKey('list-${store.groups.length}'),
       physics: const AlwaysScrollableScrollPhysics(),
@@ -113,13 +117,14 @@ class _GroupsPageState extends State<GroupsPage> {
         return FadeSlideIn(
           key: ValueKey('grp-${g.list.id}'),
           delay: Duration(milliseconds: 40 * i),
-          child: _groupTile(context, g),
+          child: _groupTile(context, g, me),
         );
       },
     );
   }
 
   Widget _buildGrid(BuildContext context) {
+    final me = store.currentUserId;
     return LayoutBuilder(
       key: ValueKey('grid-${store.groups.length}'),
       builder: (context, constraints) {
@@ -140,7 +145,7 @@ class _GroupsPageState extends State<GroupsPage> {
                   child: FadeSlideIn(
                     key: ValueKey('grp-grid-${store.groups[i].list.id}'),
                     delay: Duration(milliseconds: 30 * i),
-                    child: _groupTile(context, store.groups[i]),
+                    child: _groupTile(context, store.groups[i], me),
                   ),
                 ),
             ],
@@ -150,20 +155,58 @@ class _GroupsPageState extends State<GroupsPage> {
     );
   }
 
-  Widget _groupTile(BuildContext context, GroupEntity g) {
+  Widget _groupTile(BuildContext context, GroupEntity g, String? me) {
+    final l = context.l10n;
     return GroupCard(
       group: g,
-      onDelete: () async {
-        if (!await ConnectivityGuard.checkWrite(context)) return;
-        if (!context.mounted) return;
-        await showAdaptiveDialog(
-          context: context,
-          builder: (context) => DeletionDialogue(
-            onDelete: () => store.deleteGroup(g),
-            title: context.l10n.groupDeletionTitle,
-          ),
-        );
-      },
+      onDelete: g.canDelete(me)
+          ? () => _confirmGroupAction(
+              context,
+              title: l.groupDeletionTitle,
+              action: () => store.deleteGroup(g),
+              failedMessage: l.groupDeleteFailed,
+              forbiddenMessage: l.groupDeleteOwnerOnly,
+            )
+          : null,
+      onLeave: g.canLeave(me)
+          ? () => _confirmGroupAction(
+              context,
+              title: l.groupLeaveTitle,
+              action: () => store.leaveGroup(g),
+              failedMessage: l.groupLeaveFailed,
+            )
+          : null,
+    );
+  }
+
+  /// Подтверждение → действие стора → снекбар при ошибке. 403 с
+  /// [forbiddenMessage] — сервер не считает пользователя владельцем.
+  Future<void> _confirmGroupAction(
+    BuildContext context, {
+    required String title,
+    required Future<Failure?> Function() action,
+    required String failedMessage,
+    String? forbiddenMessage,
+  }) async {
+    if (!await ConnectivityGuard.checkWrite(context)) return;
+    if (!context.mounted) return;
+    await showAdaptiveDialog(
+      context: context,
+      builder: (context) => DeletionDialogue(
+        title: title,
+        onDelete: () async {
+          final failure = await action();
+          if (failure == null || !mounted) return;
+          final forbidden = failure is ApiFailure && failure.statusCode == 403;
+          PoraSnackbar.show(
+            this.context,
+            message: forbidden
+                ? forbiddenMessage ?? failedMessage
+                : failedMessage,
+            type: PoraSnackType.failure,
+          );
+        },
+      ),
     );
   }
 

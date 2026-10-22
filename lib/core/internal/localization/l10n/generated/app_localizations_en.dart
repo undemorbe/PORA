@@ -1304,4 +1304,20 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get aiDisclaimer =>
       'Pora AI can make mistakes. Check important information.';
+
+  @override
+  String get groupLeave => 'Leave';
+
+  @override
+  String get groupLeaveTitle =>
+      'Leave this group? Its list stays with the other members.';
+
+  @override
+  String get groupDeleteOwnerOnly => 'Only the group owner can delete it';
+
+  @override
+  String get groupDeleteFailed => 'Couldn\'t delete the group. Try again.';
+
+  @override
+  String get groupLeaveFailed => 'Couldn\'t leave the group. Try again.';
 }

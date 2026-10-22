@@ -1328,4 +1328,22 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get aiDisclaimer =>
       'Pora AI kann Fehler machen. Prüfe wichtige Informationen.';
+
+  @override
+  String get groupLeave => 'Verlassen';
+
+  @override
+  String get groupLeaveTitle =>
+      'Gruppe verlassen? Die Liste bleibt bei den anderen Mitgliedern.';
+
+  @override
+  String get groupDeleteOwnerOnly => 'Nur der Gruppeninhaber kann sie löschen';
+
+  @override
+  String get groupDeleteFailed =>
+      'Gruppe konnte nicht gelöscht werden. Bitte erneut versuchen.';
+
+  @override
+  String get groupLeaveFailed =>
+      'Gruppe konnte nicht verlassen werden. Bitte erneut versuchen.';
 }

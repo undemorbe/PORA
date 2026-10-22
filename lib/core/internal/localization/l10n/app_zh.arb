@@ -1409,5 +1409,10 @@
     "aiDisclaimer": "Pora AI 可能会出错，请核实重要信息。",
     "@aiDisclaimer": {
         "description": "aiDisclaimer"
-    }
+    },
+    "groupLeave": "退出",
+    "groupLeaveTitle": "退出此群组？清单将保留给其他成员。",
+    "groupDeleteOwnerOnly": "只有群组所有者可以删除它",
+    "groupDeleteFailed": "无法删除群组，请重试。",
+    "groupLeaveFailed": "无法退出群组，请重试。"
 }

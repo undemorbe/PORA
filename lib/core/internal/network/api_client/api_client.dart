@@ -110,6 +110,10 @@ abstract class ApiClient {
   @DELETE('/families/{fid}')
   Future<void> deleteFamily({@Path('fid') required String familyId});
 
+  /// Выйти из семьи (только не-владелец; владельцу backend отвечает 403).
+  @POST('/families/{fid}/leave')
+  Future<void> leaveFamily({@Path('fid') required String familyId});
+
   //! Lists
   /// Ответ: `{"id": "<list-id>"}`. `dynamic`, а не `Map<String, dynamic>`:
   /// retrofit_generator генерирует для Map невалидный `dynamic.fromJson`.

@@ -2497,6 +2497,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Pora AI can make mistakes. Check important information.'**
   String get aiDisclaimer;
+
+  /// groupLeave
+  ///
+  /// In en, this message translates to:
+  /// **'Leave'**
+  String get groupLeave;
+
+  /// groupLeaveTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Leave this group? Its list stays with the other members.'**
+  String get groupLeaveTitle;
+
+  /// groupDeleteOwnerOnly
+  ///
+  /// In en, this message translates to:
+  /// **'Only the group owner can delete it'**
+  String get groupDeleteOwnerOnly;
+
+  /// groupDeleteFailed
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t delete the group. Try again.'**
+  String get groupDeleteFailed;
+
+  /// groupLeaveFailed
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t leave the group. Try again.'**
+  String get groupLeaveFailed;
 }
 
 class _AppLocalizationsDelegate

@@ -8,13 +8,16 @@ import 'package:pora/core/features/families/data/models/member_model.dart';
 import 'package:pora/core/features/families/domain/entity/member.dart';
 import 'package:pora/core/features/families/domain/usecase/create_family.dart';
 import 'package:pora/core/features/families/domain/usecase/delete_family.dart';
+import 'package:pora/core/features/families/domain/usecase/leave_family.dart';
 import 'package:pora/core/features/groups/domain/entity/group.dart';
 import 'package:pora/core/features/groups/domain/usecase/get_user_groups.dart';
 import 'package:pora/core/features/lists/data/models/lists/list_model.dart';
 import 'package:pora/core/features/lists/domain/usecase/create_list.dart';
 import 'package:pora/core/features/lists/domain/usecase/delete_list.dart';
 import 'package:pora/core/features/lists/domain/usecase/get_families_lists.dart';
+import 'package:pora/core/features/user/domain/usecase/user/get_user.dart';
 import 'package:pora/core/internal/cache/hive_json_cache.dart';
+import 'package:pora/core/internal/errors/failure.dart';
 import 'package:pora/core/internal/logging/logger.dart';
 import 'package:pora/core/internal/network/single_flight.dart';
 part 'groups_store.g.dart';
@@ -38,6 +41,10 @@ abstract class _GroupsStoreBase with Store {
   @observable
   bool usingCache = false;
 
+  /// id текущего пользователя — для [GroupEntity.canDelete] / `canLeave`.
+  @observable
+  String? currentUserId;
+
   /// load() дёргают DI (`..load()`), groups_screen, WS, pull-to-refresh и
   /// recipe-флоу — параллельные вызовы склеиваем в один проход.
   final _loadFlight = SingleFlight<void>();
@@ -57,7 +64,9 @@ abstract class _GroupsStoreBase with Store {
     }
 
     // Один GET /user/groups: семьи + их lists + личные lists.
+    final userIdFuture = _fetchUserId();
     final fresh = await _fetchGroups();
+    currentUserId = await userIdFuture ?? currentUserId;
 
     if (fresh != null) {
       // Свежие данные — сохраняем snapshot, снимаем cache-флаг.
@@ -85,6 +94,20 @@ abstract class _GroupsStoreBase with Store {
       }, (data) => data.groups);
     } catch (e, s) {
       Logger.talker.error('groups: fetch failed', e, s);
+      return null;
+    }
+  }
+
+  /// `/user/me` single-flight'ится и офлайн отдаётся из кэша профиля.
+  Future<String?> _fetchUserId() async {
+    try {
+      final res = await GetIt.I<GetUserUseCase>().call();
+      return res.fold<String?>((failure) {
+        Logger.talker.warning('groups: user fetch failed: ${failure.message}');
+        return null;
+      }, (user) => user.id);
+    } catch (e, s) {
+      Logger.talker.error('groups: user fetch failed', e, s);
       return null;
     }
   }
@@ -237,22 +260,50 @@ abstract class _GroupsStoreBase with Store {
     }
   }
 
+  /// Удалить группу. `null` — успех, иначе [Failure] для UI.
+  /// Личная → DELETE /lists. Общая → только DELETE /families (каскадом
+  /// уходят все её списки): при 403 список не трогаем, иначе не-владелец
+  /// удалил бы его у всей семьи.
   @action
-  Future<void> deleteGroup(GroupEntity g) async {
-    final res = await GetIt.I<DeleteListUseCase>().call(lid: g.list.id);
-    // Личный список не привязан к семье — DELETE /families/ без id не шлём.
+  Future<Failure?> deleteGroup(GroupEntity g) async {
     final fid = g.familyId;
-    if (fid != null) {
-      await GetIt.I<DeleteFamilyUseCase>().call(familyId: fid);
+    if (fid == null) {
+      final res = await GetIt.I<DeleteListUseCase>().call(lid: g.list.id);
+      if (res.isLeft) {
+        Logger.talker.warning('deleteList failed: ${res.left.message}');
+        return res.left;
+      }
+      await _dropGroups((x) => x.list.id == g.list.id);
+      return null;
     }
-    if (res.isRight) {
-      groups.removeWhere((x) => x.list.id == g.list.id);
-      await _writeSnapshot(groups.toList());
-    } else {
-      errorMessage = res.left.message;
-    }
+
+    final res = await GetIt.I<DeleteFamilyUseCase>().call(familyId: fid);
     if (res.isLeft) {
-      Logger.talker.error('deleteFamily failed', res.left.message);
+      Logger.talker.warning('deleteFamily failed: ${res.left.message}');
+      return res.left;
     }
+    await _dropGroups((x) => x.familyId == fid);
+    return null;
+  }
+
+  /// Выйти из общей группы (семьи). Списки остаются у остальных участников.
+  @action
+  Future<Failure?> leaveGroup(GroupEntity g) async {
+    final fid = g.familyId;
+    if (fid == null) return null;
+    final res = await GetIt.I<LeaveFamilyUseCase>().call(familyId: fid);
+    if (res.isLeft) {
+      Logger.talker.warning('leaveFamily failed: ${res.left.message}');
+      return res.left;
+    }
+    await _dropGroups((x) => x.familyId == fid);
+    return null;
+  }
+
+  Future<void> _dropGroups(bool Function(GroupEntity) test) async {
+    groups.removeWhere(test);
+    final next = groups.toList();
+    await _writeSnapshot(next);
+    _updateHomeWidget(next);
   }
 }

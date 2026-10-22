@@ -1682,5 +1682,25 @@
     "aiDisclaimer": "Pora AI can make mistakes. Check important information.",
     "@aiDisclaimer": {
         "description": "aiDisclaimer"
+    },
+    "groupLeave": "Leave",
+    "@groupLeave": {
+        "description": "groupLeave"
+    },
+    "groupLeaveTitle": "Leave this group? Its list stays with the other members.",
+    "@groupLeaveTitle": {
+        "description": "groupLeaveTitle"
+    },
+    "groupDeleteOwnerOnly": "Only the group owner can delete it",
+    "@groupDeleteOwnerOnly": {
+        "description": "groupDeleteOwnerOnly"
+    },
+    "groupDeleteFailed": "Couldn't delete the group. Try again.",
+    "@groupDeleteFailed": {
+        "description": "groupDeleteFailed"
+    },
+    "groupLeaveFailed": "Couldn't leave the group. Try again.",
+    "@groupLeaveFailed": {
+        "description": "groupLeaveFailed"
     }
 }
