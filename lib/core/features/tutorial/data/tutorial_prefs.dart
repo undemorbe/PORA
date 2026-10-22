@@ -9,7 +9,8 @@ class TutorialPrefs {
 
   Future<bool> hasSeen() async {
     final v = await _db.get(key: _seenKey, boxName: LocalDBNames.settings);
-    assert(v is bool);
+    // null — флаг ещё не ставился (первый запуск).
+    assert(v == null || v is bool);
     return v == true;
   }
 
