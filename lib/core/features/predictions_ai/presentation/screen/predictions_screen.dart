@@ -33,11 +33,38 @@ class PredictionsPage extends StatefulWidget {
 class _PredictionsPageState extends State<PredictionsPage> {
   final StatisticsStore _store = GetIt.I<StatisticsStore>();
   final Set<String> _dismissed = <String>{};
+  TabsRouter? _tabs;
+  bool _wasActive = true;
 
   @override
   void initState() {
     super.initState();
     _store.loadAll();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Вкладки AutoTabsScaffold живут постоянно — initState только на первом
+    // показе. Обновляем данные на каждом возврате на вкладку (throttle и
+    // «грязный» флаг после локальных изменений — внутри store).
+    // Без AutoTabsRouter (вне shell'а) просто не подписываемся.
+    final tabs = TabsRouterScope.of(context)?.controller;
+    if (identical(tabs, _tabs)) return;
+    _tabs?.removeListener(_onTabChanged);
+    _tabs = tabs?..addListener(_onTabChanged);
+  }
+
+  void _onTabChanged() {
+    final active = _tabs?.current.name == PredictionsRoute.name;
+    if (active && !_wasActive) _store.loadAll();
+    _wasActive = active;
+  }
+
+  @override
+  void dispose() {
+    _tabs?.removeListener(_onTabChanged);
+    super.dispose();
   }
 
   @override
@@ -52,7 +79,8 @@ class _PredictionsPageState extends State<PredictionsPage> {
       body: SafeArea(
         bottom: false,
         child: RefreshIndicator.adaptive(
-          onRefresh: _store.loadAll,
+          // Жест пользователя — минуя throttle.
+          onRefresh: () => _store.loadAll(force: true),
           child: Observer(
             builder: (_) => ListView(
               padding: const EdgeInsets.fromLTRB(
@@ -78,7 +106,9 @@ class _PredictionsPageState extends State<PredictionsPage> {
                     items: [
                       KpiItem(
                         icon: PhosphorIconsRegular.basket,
-                        number: '${_store.allProducts.length}',
+                        // Уникальные названия: один товар в двух списках
+                        // или купленный повторно — один продукт.
+                        number: '${_store.uniqueProducts}',
                         label: l.kpiWeek,
                       ),
                       KpiItem(

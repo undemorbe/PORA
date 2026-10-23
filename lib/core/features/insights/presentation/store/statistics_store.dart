@@ -50,7 +50,21 @@ abstract class _StatisticsStoreBase with Store {
     UsageTracker? usage,
     DateTime Function()? clock,
   }) : _usage = usage ?? UsageTracker.instance,
-       _clock = clock ?? DateTime.now;
+       _clock = clock ?? DateTime.now {
+    // Свои изменения товаров (добавил/купил/удалил) делают серверный снапшот
+    // устаревшим: следующий loadAll() идёт в сеть, минуя throttle. Иначе
+    // вкладка Pora до 2 минут (или до перезапуска) показывает старые KPI.
+    _disposeStaleReaction = reaction<int>(
+      (_) => _usage.days.values.fold<int>(
+        0,
+        (sum, d) => sum + d.added + d.bought + d.deleted,
+      ),
+      (_) {
+        _mutations++;
+        _lastLoadedAt = null;
+      },
+    );
+  }
 
   final GetLoginTimesUseCase loginTimesUseCase;
   final GetAllUserProductsUseCase allProductsUseCase;
@@ -62,6 +76,10 @@ abstract class _StatisticsStoreBase with Store {
   bool _hydrated = false;
   DateTime? _lastLoadedAt;
   Future<void>? _inFlight;
+  late final ReactionDisposer _disposeStaleReaction;
+  // Счётчик локальных изменений: загрузка, во время которой товар
+  // изменился, не считается свежей.
+  int _mutations = 0;
 
   // --- период ---
   @observable
@@ -174,14 +192,19 @@ abstract class _StatisticsStoreBase with Store {
   }
 
   Future<void> _loadAll() async {
+    final mutationsAtStart = _mutations;
     if (!_hydrated) {
       _hydrated = true;
       await _hydrateFromCache();
     }
     await Future.wait([loadLoginTimes(), loadAllProducts()]);
     await loadPopularProducts();
-    _lastLoadedAt = _clock();
+    if (_mutations == mutationsAtStart) _lastLoadedAt = _clock();
   }
+
+  /// Снимает reaction на локальные изменения. В приложении store — singleton
+  /// и живёт весь lifecycle; нужно тестам.
+  void dispose() => _disposeStaleReaction();
 
   /// Один раз за жизнь store поднимаем снапшоты из кэша — дальше данные
   /// в памяти актуальнее.
