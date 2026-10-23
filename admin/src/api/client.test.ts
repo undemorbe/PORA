@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { ApiError, apiFetch, setAuthErrorHandler } from './client';
-import { clearTokens, getRefresh, setTokens } from './tokens';
+import { clearTokens, getAccess, getRefresh, setTokens } from './tokens';
 
 const json = (status: number, body: unknown) =>
   new Response(JSON.stringify(body), {
@@ -103,5 +103,109 @@ describe('apiFetch', () => {
     ).rejects.toMatchObject({ status: 400, code: 'OTP_INCORRECT' });
     expect(fetchMock).toHaveBeenCalledTimes(1);
     expect(headerOf(fetchMock.mock.calls[0], 'Authorization')).toBeUndefined();
+  });
+
+  it('shares one refresh between parallel 401s and retries both with the new token', async () => {
+    setTokens('old', 'r1');
+    let releaseRefresh!: () => void;
+    const refreshGate = new Promise<void>((resolve) => {
+      releaseRefresh = resolve;
+    });
+    const fetchMock = vi.fn(async (url: string, init?: RequestInit) => {
+      if (url.startsWith('/api/authorize/refresh')) {
+        await refreshGate;
+        return json(200, { 'access-token': 'new', 'refresh-token': 'r2' });
+      }
+      const auth = (init?.headers as Record<string, string>).Authorization;
+      return auth === 'Bearer new' ? json(200, { url }) : json(401, { code: 'ACCESS_TOKEN_EXPIRED' });
+    });
+    vi.stubGlobal('fetch', fetchMock);
+
+    const both = Promise.all([apiFetch<{ url: string }>('/api/admin/a'), apiFetch<{ url: string }>('/api/admin/b')]);
+    await vi.waitFor(() => expect(fetchMock.mock.calls.filter(([u]) => u.startsWith('/api/authorize/refresh'))).toHaveLength(1));
+    await new Promise((resolve) => setTimeout(resolve, 0)); // оба 401 уже получены, refresh ещё висит
+    releaseRefresh();
+
+    expect(await both).toEqual([{ url: '/api/admin/a' }, { url: '/api/admin/b' }]);
+    const refreshCalls = fetchMock.mock.calls.filter(([u]) => u.startsWith('/api/authorize/refresh'));
+    expect(refreshCalls).toHaveLength(1);
+    const retries = fetchMock.mock.calls.filter((call) => call[1] && headerOf(call, 'Authorization') === 'Bearer new');
+    expect(retries.map(([u]) => u).sort()).toEqual(['/api/admin/a', '/api/admin/b']);
+  });
+
+  it('keeps the session and reports NETWORK when the refresh request itself fails', async () => {
+    setTokens('old', 'r1');
+    const onAuthError = vi.fn();
+    setAuthErrorHandler(onAuthError);
+    vi.stubGlobal(
+      'fetch',
+      vi
+        .fn()
+        .mockResolvedValueOnce(json(401, { code: 'ACCESS_TOKEN_EXPIRED' }))
+        .mockRejectedValueOnce(new TypeError('Failed to fetch')),
+    );
+
+    const error = await apiFetch('/api/admin/me').catch((e: unknown) => e);
+
+    expect(error).toBeInstanceOf(ApiError);
+    expect(error).toMatchObject({ status: 0, code: 'NETWORK', message: 'Нет связи с сервером' });
+    expect(getRefresh()).toBe('r1');
+    expect(getAccess()).toBe('old');
+    expect(onAuthError).not.toHaveBeenCalled();
+  });
+
+  it('retries a late 401 with the already refreshed token without refreshing again', async () => {
+    setTokens('old', 'r1');
+    const fetchMock = vi
+      .fn()
+      .mockImplementationOnce(async () => {
+        // Пока запрос летел, другой вызов уже обновил токены.
+        setTokens('new', 'r2');
+        return json(401, { code: 'ACCESS_TOKEN_EXPIRED' });
+      })
+      .mockResolvedValueOnce(json(200, { ok: true }));
+    vi.stubGlobal('fetch', fetchMock);
+
+    await expect(apiFetch('/api/admin/me')).resolves.toEqual({ ok: true });
+
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+    expect(headerOf(fetchMock.mock.calls[0], 'Authorization')).toBe('Bearer old');
+    expect(headerOf(fetchMock.mock.calls[1], 'Authorization')).toBe('Bearer new');
+    expect(getRefresh()).toBe('r2');
+  });
+
+  it('falls back to status text when the error body is not an object', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi
+        .fn()
+        .mockResolvedValueOnce(new Response('null', { status: 500 }))
+        .mockResolvedValueOnce(new Response('<html>oops</html>', { status: 502, statusText: 'Bad Gateway' })),
+    );
+
+    await expect(apiFetch('/api/admin/overview')).rejects.toMatchObject({
+      status: 500,
+      code: undefined,
+      message: 'HTTP 500',
+    });
+    await expect(apiFetch('/api/admin/overview')).rejects.toMatchObject({
+      status: 502,
+      code: undefined,
+      message: 'Bad Gateway',
+    });
+  });
+
+  it('rejects a 2xx response whose body is not JSON', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue(
+        new Response('<!doctype html><html></html>', { status: 200, headers: { 'Content-Type': 'text/html' } }),
+      ),
+    );
+
+    const error = await apiFetch('/api/admin/overview').catch((e: unknown) => e);
+
+    expect(error).toBeInstanceOf(ApiError);
+    expect(error).toMatchObject({ status: 200, code: 'BAD_RESPONSE', message: 'Некорректный ответ сервера' });
   });
 });

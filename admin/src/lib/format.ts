@@ -41,15 +41,16 @@ export function formatDateTime(iso: string, timeZone: string): string {
   }).format(new Date(iso));
 }
 
-/** Сегодня в таймзоне tz как 'YYYY-MM-DD'. */
+/** Сегодня в таймзоне tz как 'YYYY-MM-DD' (собираем из частей, не завися от формата локали). */
 function todayIn(now: Date, timeZone: string): string {
-  // en-CA форматирует дату как YYYY-MM-DD.
-  return new Intl.DateTimeFormat('en-CA', {
+  const parts = new Intl.DateTimeFormat('en-US', {
     timeZone,
     year: 'numeric',
     month: '2-digit',
     day: '2-digit',
-  }).format(now);
+  }).formatToParts(now);
+  const part = (type: 'year' | 'month' | 'day') => parts.find((p) => p.type === type)?.value ?? '';
+  return `${part('year')}-${part('month')}-${part('day')}`;
 }
 
 function shiftDay(date: string, days: number): string {

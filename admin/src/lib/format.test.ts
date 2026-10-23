@@ -30,6 +30,24 @@ describe('periodRange', () => {
     expect(periodRange(7, now, 'Europe/Moscow')).toEqual({ from: '2026-10-10', to: '2026-10-16' });
   });
 
+  it('handles DST transition days in America/New_York', () => {
+    const tz = 'America/New_York';
+    // 2026-03-08: переход EST → EDT в 02:00 местного.
+    expect(periodRange(1, new Date('2026-03-08T04:30:00Z'), tz).to).toBe('2026-03-07'); // 23:30 EST
+    expect(periodRange(1, new Date('2026-03-09T03:30:00Z'), tz).to).toBe('2026-03-08'); // 23:30 EDT
+    expect(periodRange(7, new Date('2026-03-08T12:00:00Z'), tz)).toEqual({ from: '2026-03-02', to: '2026-03-08' });
+    // 2026-11-01: переход EDT → EST в 02:00 местного.
+    expect(periodRange(1, new Date('2026-11-01T03:30:00Z'), tz).to).toBe('2026-10-31'); // 23:30 EDT
+    expect(periodRange(1, new Date('2026-11-02T04:30:00Z'), tz).to).toBe('2026-11-01'); // 23:30 EST
+    expect(periodRange(7, new Date('2026-11-02T04:30:00Z'), tz)).toEqual({ from: '2026-10-26', to: '2026-11-01' });
+  });
+
+  it('handles extreme offsets (UTC+14 and UTC−11)', () => {
+    const now = new Date('2026-10-15T10:30:00Z');
+    expect(periodRange(7, now, 'Pacific/Kiritimati')).toEqual({ from: '2026-10-10', to: '2026-10-16' }); // 00:30 16-го
+    expect(periodRange(7, now, 'Pacific/Pago_Pago')).toEqual({ from: '2026-10-08', to: '2026-10-14' }); // 23:30 14-го
+  });
+
   it('crosses month boundaries', () => {
     const now = new Date(Date.UTC(2026, 2, 2, 12));
     expect(periodRange(30, now, 'UTC').from).toBe('2026-02-01');
