@@ -213,14 +213,27 @@ class AppBootstrap {
     }
   }
 
+  /// Шаги независимы: сбой Firebase (нет конфига, симулятор) не должен
+  /// отключать realtime-сокет, и наоборот.
   Future<void> _startBackgroundServices() async {
+    var pushReady = false;
     try {
       await _initFirebaseAndPush();
+      pushReady = true;
+    } catch (e, s) {
+      Logger.talker.warning('Firebase/push failed to start', e, s);
+    }
+    try {
       await _openAppWebsocket();
+    } catch (e, s) {
+      Logger.talker.warning('Websocket failed to start', e, s);
+    }
+    if (!pushReady) return;
+    try {
       bindDeviceTokenSyncToAuth();
       unawaited(syncDeviceToken());
     } catch (e, s) {
-      Logger.talker.warning('Background services failed to start', e, s);
+      Logger.talker.warning('Device token sync failed to start', e, s);
     }
   }
 
