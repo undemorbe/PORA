@@ -1403,4 +1403,42 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get sectionOther => 'Прочее';
+
+  @override
+  String get predictionEveryDay => '~каждый день';
+
+  @override
+  String predictionEvery(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '~раз в $days дня',
+      many: '~раз в $days дней',
+      few: '~раз в $days дня',
+      one: '~раз в $days день',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get predictionBoughtRegularly => 'Покупаете регулярно';
+
+  @override
+  String get predictionBoughtToday => 'куплено сегодня';
+
+  @override
+  String get predictionBoughtYesterday => 'куплено вчера';
+
+  @override
+  String predictionBoughtDaysAgo(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'куплено $days дня назад',
+      many: 'куплено $days дней назад',
+      few: 'куплено $days дня назад',
+      one: 'куплено $days день назад',
+    );
+    return '$_temp0';
+  }
 }

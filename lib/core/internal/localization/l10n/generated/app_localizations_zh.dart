@@ -1926,4 +1926,36 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get sectionOther => '其他';
+
+  @override
+  String get predictionEveryDay => '~每天';
+
+  @override
+  String predictionEvery(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '~每$days天',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get predictionBoughtRegularly => '经常购买';
+
+  @override
+  String get predictionBoughtToday => '今天买过';
+
+  @override
+  String get predictionBoughtYesterday => '昨天买过';
+
+  @override
+  String predictionBoughtDaysAgo(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days天前买过',
+    );
+    return '$_temp0';
+  }
 }

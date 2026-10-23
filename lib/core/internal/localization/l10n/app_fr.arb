@@ -308,10 +308,8 @@
     },
 >>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "predictionsAddToList": "Ajouter à la liste",
-    "@predictionsAddToList": {
-        "description": "predictionsAddToList"
-    },
     "predictionsDismiss": "Non merci",
+<<<<<<< HEAD
     "@predictionsDismiss": {
         "description": "predictionsDismiss"
     },
@@ -326,6 +324,8 @@
         "description": "itemDetailSubtitle"
     },
 >>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
+=======
+>>>>>>> f817e1d (feat(predictions): enhance product prediction localization and add unit tests for days calculation)
     "itemDetailAddedBy": "Ajouté par",
     "@itemDetailAddedBy": {
         "description": "itemDetailAddedBy"
@@ -1466,6 +1466,7 @@
         "description": "Allergen toggle label"
     },
     "predictionsGreeting": "Votre journée avec PORA",
+<<<<<<< HEAD
     "@predictionsGreeting": {
         "description": "predictions main greeting"
     },
@@ -1503,6 +1504,11 @@
         "description": "AI suggestions topic"
     },
 >>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
+=======
+    "predictionsGreetingSub": "Des suggestions intelligentes d’après vos achats",
+    "predictionsSectionSoon": "Bientôt épuisé",
+    "predictionsSectionAiSuggests": "L’IA suggère",
+>>>>>>> f817e1d (feat(predictions): enhance product prediction localization and add unit tests for days calculation)
     "refresh": "Actualiser",
     "@refresh": {
         "description": "refresh action"
@@ -2136,5 +2142,11 @@
     "sectionOther": "Autre",
     "@sectionOther": {
         "description": "Display label of server section 'Прочее' (items without a section)"
-    }
+    },
+    "predictionEveryDay": "~chaque jour",
+    "predictionEvery": "{days, plural, other{~tous les {days} jours}}",
+    "predictionBoughtRegularly": "Acheté régulièrement",
+    "predictionBoughtToday": "acheté aujourd’hui",
+    "predictionBoughtYesterday": "acheté hier",
+    "predictionBoughtDaysAgo": "{days, plural, one{acheté il y a {days} jour} other{acheté il y a {days} jours}}"
 }

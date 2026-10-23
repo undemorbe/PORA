@@ -362,13 +362,13 @@ abstract class AppLocalizations {
   /// **'Add'**
   String get listAdd;
 
-  /// predictionsAddToList
+  /// No description provided for @predictionsAddToList.
   ///
   /// In en, this message translates to:
   /// **'Add to list'**
   String get predictionsAddToList;
 
-  /// predictionsDismiss
+  /// No description provided for @predictionsDismiss.
   ///
   /// In en, this message translates to:
   /// **'No thanks'**
@@ -1472,25 +1472,25 @@ abstract class AppLocalizations {
   /// **'Allergen'**
   String get allergen;
 
-  /// predictions main greeting
+  /// No description provided for @predictionsGreeting.
   ///
   /// In en, this message translates to:
   /// **'Your day with PORA'**
   String get predictionsGreeting;
 
-  /// predictions greeting subtitle
+  /// No description provided for @predictionsGreetingSub.
   ///
   /// In en, this message translates to:
   /// **'Smart hints from your purchases'**
   String get predictionsGreetingSub;
 
-  /// section title
+  /// No description provided for @predictionsSectionSoon.
   ///
   /// In en, this message translates to:
   /// **'Running out soon'**
   String get predictionsSectionSoon;
 
-  /// section title
+  /// No description provided for @predictionsSectionAiSuggests.
   ///
   /// In en, this message translates to:
   /// **'AI suggests'**
@@ -2186,7 +2186,7 @@ abstract class AppLocalizations {
   /// **'No lists yet — create one first'**
   String get listPickerEmpty;
 
-  /// predictionsAdded
+  /// No description provided for @predictionsAdded.
   ///
   /// In en, this message translates to:
   /// **'Added to list'**
@@ -2617,6 +2617,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Other'**
   String get sectionOther;
+
+  /// Product runs out daily (prediction card)
+  ///
+  /// In en, this message translates to:
+  /// **'~every day'**
+  String get predictionEveryDay;
+
+  /// How often a product runs out, in days (prediction card); 1 day uses predictionEveryDay
+  ///
+  /// In en, this message translates to:
+  /// **'{days, plural, other{~every {days} days}}'**
+  String predictionEvery(int days);
+
+  /// Prediction card meta when the cycle length is unknown
+  ///
+  /// In en, this message translates to:
+  /// **'Bought regularly'**
+  String get predictionBoughtRegularly;
+
+  /// Product was bought today (prediction card)
+  ///
+  /// In en, this message translates to:
+  /// **'bought today'**
+  String get predictionBoughtToday;
+
+  /// Product was bought yesterday (prediction card)
+  ///
+  /// In en, this message translates to:
+  /// **'bought yesterday'**
+  String get predictionBoughtYesterday;
+
+  /// Days since the product was last bought, 2+ (prediction card)
+  ///
+  /// In en, this message translates to:
+  /// **'{days, plural, one{bought {days} day ago} other{bought {days} days ago}}'**
+  String predictionBoughtDaysAgo(int days);
 }
 
 class _AppLocalizationsDelegate

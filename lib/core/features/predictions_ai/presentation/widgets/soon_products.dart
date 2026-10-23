@@ -70,21 +70,31 @@ class SoonProducts extends StatelessWidget {
     BuildContext context,
     PopularProductEntity product,
   ) {
-    final locale = Localizations.localeOf(context).languageCode;
-    final every = product.howOftenEnds > 0
-        ? (locale == 'ru'
-              ? '~раз в ${product.howOftenEnds} дней'
-              : '~every ${product.howOftenEnds}d')
-        : (locale == 'ru' ? 'Покупаете регулярно' : 'Bought regularly');
-    final lastBought = product.currentDay > 0 && product.howOftenEnds > 0
-        ? (product.howOftenEnds / product.currentDay).round()
-        : 0;
-    final meta = lastBought > 0
-        ? (locale == 'ru'
-              ? '$every · куплено $lastBought дн. назад'
-              : '$every · bought ${lastBought}d ago')
-        : every;
+    final l10n = context.l10n;
+    final cycle = product.howOftenEnds;
+    final every = cycle <= 0
+        ? l10n.predictionBoughtRegularly
+        : cycle == 1
+        ? l10n.predictionEveryDay
+        : l10n.predictionEvery(cycle);
+    final days = daysSinceBought(product);
+    final meta = days == null
+        ? every
+        : '$every · ${switch (days) {
+            0 => l10n.predictionBoughtToday,
+            1 => l10n.predictionBoughtYesterday,
+            _ => l10n.predictionBoughtDaysAgo(days),
+          }}';
     return PredictionEntity(emoji: '🛒', name: product.name, meta: meta);
+  }
+
+  /// Дней с последней покупки. `currentDay` с сервера — доля прошедшего
+  /// цикла (часы с покупки / длина цикла / 24), поэтому дни = доля × цикл.
+  /// `null`, если данных о цикле нет.
+  @visibleForTesting
+  static int? daysSinceBought(PopularProductEntity product) {
+    if (product.howOftenEnds <= 0 || product.currentDay < 0) return null;
+    return (product.currentDay * product.howOftenEnds).floor();
   }
 
   Color _tileColor(int index) {

@@ -189,13 +189,7 @@
         "description": "Написать письмо в поддержку"
     },
     "predictionsAddToList": "В список",
-    "@predictionsAddToList": {
-        "description": "predictionsAddToList"
-    },
     "predictionsDismiss": "Не надо",
-    "@predictionsDismiss": {
-        "description": "predictionsDismiss"
-    },
     "itemDetailAddedBy": "Добавил(а)",
     "@itemDetailAddedBy": {
         "description": "itemDetailAddedBy"
@@ -958,21 +952,9 @@
         "description": "Allergen toggle label"
     },
     "predictionsGreeting": "Ваш день с PORA",
-    "@predictionsGreeting": {
-        "description": "predictions main greeting"
-    },
     "predictionsGreetingSub": "Умные подсказки на основе покупок",
-    "@predictionsGreetingSub": {
-        "description": "predictions greeting subtitle"
-    },
     "predictionsSectionSoon": "Скоро закончится",
-    "@predictionsSectionSoon": {
-        "description": "section title"
-    },
     "predictionsSectionAiSuggests": "ИИ предлагает",
-    "@predictionsSectionAiSuggests": {
-        "description": "section title"
-    },
     "refresh": "Обновить",
     "@refresh": {
         "description": "refresh action"
@@ -1486,5 +1468,11 @@
     "sectionOther": "Прочее",
     "@sectionOther": {
         "description": "Display label of server section 'Прочее' (items without a section)"
-    }
+    },
+    "predictionEveryDay": "~каждый день",
+    "predictionEvery": "{days, plural, one{~раз в {days} день} few{~раз в {days} дня} many{~раз в {days} дней} other{~раз в {days} дня}}",
+    "predictionBoughtRegularly": "Покупаете регулярно",
+    "predictionBoughtToday": "куплено сегодня",
+    "predictionBoughtYesterday": "куплено вчера",
+    "predictionBoughtDaysAgo": "{days, plural, one{куплено {days} день назад} few{куплено {days} дня назад} many{куплено {days} дней назад} other{куплено {days} дня назад}}"
 }

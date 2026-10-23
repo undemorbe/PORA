@@ -1390,4 +1390,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sectionOther => 'Other';
+
+  @override
+  String get predictionEveryDay => '~every day';
+
+  @override
+  String predictionEvery(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '~every $days days',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get predictionBoughtRegularly => 'Bought regularly';
+
+  @override
+  String get predictionBoughtToday => 'bought today';
+
+  @override
+  String get predictionBoughtYesterday => 'bought yesterday';
+
+  @override
+  String predictionBoughtDaysAgo(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'bought $days days ago',
+      one: 'bought $days day ago',
+    );
+    return '$_temp0';
+  }
 }

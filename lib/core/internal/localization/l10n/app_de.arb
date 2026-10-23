@@ -187,13 +187,7 @@
         "description": "listAdd"
     },
     "predictionsAddToList": "Füge hinzu zu Liste",
-    "@predictionsAddToList": {
-        "description": "predictionsAddToList"
-    },
     "predictionsDismiss": "Nein, danke",
-    "@predictionsDismiss": {
-        "description": "predictionsDismiss"
-    },
     "itemDetailAddedBy": "Hinzugefügt von",
     "@itemDetailAddedBy": {
         "description": "itemDetailAddedBy"
@@ -963,21 +957,9 @@
         "description": "Allergen toggle label"
     },
     "predictionsGreeting": "Dein Tag mit PORA",
-    "@predictionsGreeting": {
-        "description": "predictions main greeting"
-    },
     "predictionsGreetingSub": "Intelligente Hinweise aus deinen Einkäufen",
-    "@predictionsGreetingSub": {
-        "description": "predictions greeting subtitle"
-    },
     "predictionsSectionSoon": "Running out bald",
-    "@predictionsSectionSoon": {
-        "description": "section title"
-    },
     "predictionsSectionAiSuggests": "KI schlägt vor",
-    "@predictionsSectionAiSuggests": {
-        "description": "section title"
-    },
     "refresh": "Aktualisieren",
     "@refresh": {
         "description": "refresh action"
@@ -1489,5 +1471,11 @@
     "sectionOther": "Sonstiges",
     "@sectionOther": {
         "description": "Display label of server section 'Прочее' (items without a section)"
-    }
+    },
+    "predictionEveryDay": "~täglich",
+    "predictionEvery": "{days, plural, other{~alle {days} Tage}}",
+    "predictionBoughtRegularly": "Regelmäßig gekauft",
+    "predictionBoughtToday": "heute gekauft",
+    "predictionBoughtYesterday": "gestern gekauft",
+    "predictionBoughtDaysAgo": "{days, plural, one{vor {days} Tag gekauft} other{vor {days} Tagen gekauft}}"
 }

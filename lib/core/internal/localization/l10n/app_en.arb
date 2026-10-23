@@ -204,13 +204,7 @@
         "description": "listAdd"
     },
     "predictionsAddToList": "Add to list",
-    "@predictionsAddToList": {
-        "description": "predictionsAddToList"
-    },
     "predictionsDismiss": "No thanks",
-    "@predictionsDismiss": {
-        "description": "predictionsDismiss"
-    },
     "itemDetailAddedBy": "Added by",
     "@itemDetailAddedBy": {
         "description": "itemDetailAddedBy"
@@ -980,21 +974,9 @@
         "description": "Allergen toggle label"
     },
     "predictionsGreeting": "Your day with PORA",
-    "@predictionsGreeting": {
-        "description": "predictions main greeting"
-    },
     "predictionsGreetingSub": "Smart hints from your purchases",
-    "@predictionsGreetingSub": {
-        "description": "predictions greeting subtitle"
-    },
     "predictionsSectionSoon": "Running out soon",
-    "@predictionsSectionSoon": {
-        "description": "section title"
-    },
     "predictionsSectionAiSuggests": "AI suggests",
-    "@predictionsSectionAiSuggests": {
-        "description": "section title"
-    },
     "refresh": "Refresh",
     "@refresh": {
         "description": "refresh action"
@@ -1485,9 +1467,6 @@
         "description": "listPickerEmpty"
     },
     "predictionsAdded": "Added to list",
-    "@predictionsAdded": {
-        "description": "predictionsAdded"
-    },
     "shortcutOpenLists": "Open lists",
     "@shortcutOpenLists": {
         "description": "shortcutOpenLists"
@@ -1796,5 +1775,39 @@
     "sectionOther": "Other",
     "@sectionOther": {
         "description": "Display label of server section 'Прочее' (items without a section)"
+    },
+    "predictionEveryDay": "~every day",
+    "@predictionEveryDay": {
+        "description": "Product runs out daily (prediction card)"
+    },
+    "predictionEvery": "{days, plural, other{~every {days} days}}",
+    "@predictionEvery": {
+        "description": "How often a product runs out, in days (prediction card); 1 day uses predictionEveryDay",
+        "placeholders": {
+            "days": {
+                "type": "int"
+            }
+        }
+    },
+    "predictionBoughtRegularly": "Bought regularly",
+    "@predictionBoughtRegularly": {
+        "description": "Prediction card meta when the cycle length is unknown"
+    },
+    "predictionBoughtToday": "bought today",
+    "@predictionBoughtToday": {
+        "description": "Product was bought today (prediction card)"
+    },
+    "predictionBoughtYesterday": "bought yesterday",
+    "@predictionBoughtYesterday": {
+        "description": "Product was bought yesterday (prediction card)"
+    },
+    "predictionBoughtDaysAgo": "{days, plural, one{bought {days} day ago} other{bought {days} days ago}}",
+    "@predictionBoughtDaysAgo": {
+        "description": "Days since the product was last bought, 2+ (prediction card)",
+        "placeholders": {
+            "days": {
+                "type": "int"
+            }
+        }
     }
 }

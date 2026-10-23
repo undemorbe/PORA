@@ -331,10 +331,8 @@
     },
 >>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "predictionsAddToList": "加入清单",
-    "@predictionsAddToList": {
-        "description": "predictionsAddToList"
-    },
     "predictionsDismiss": "不用了",
+<<<<<<< HEAD
     "@predictionsDismiss": {
         "description": "predictionsDismiss"
     },
@@ -349,6 +347,8 @@
         "description": "itemDetailSubtitle"
     },
 >>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
+=======
+>>>>>>> f817e1d (feat(predictions): enhance product prediction localization and add unit tests for days calculation)
     "itemDetailAddedBy": "添加者",
     "@itemDetailAddedBy": {
         "description": "itemDetailAddedBy"
@@ -1479,6 +1479,7 @@
         "description": "Allergen toggle label"
     },
     "predictionsGreeting": "你与 PORA 的一天",
+<<<<<<< HEAD
     "@predictionsGreeting": {
         "description": "predictions main greeting"
     },
@@ -1516,6 +1517,11 @@
         "description": "AI suggestions topic"
     },
 >>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
+=======
+    "predictionsGreetingSub": "根据你的购买记录生成的智能提示",
+    "predictionsSectionSoon": "即将用完",
+    "predictionsSectionAiSuggests": "AI 推荐",
+>>>>>>> f817e1d (feat(predictions): enhance product prediction localization and add unit tests for days calculation)
     "refresh": "刷新",
     "@refresh": {
         "description": "refresh action"
@@ -2175,5 +2181,11 @@
     "sectionOther": "其他",
     "@sectionOther": {
         "description": "Display label of server section 'Прочее' (items without a section)"
-    }
+    },
+    "predictionEveryDay": "~每天",
+    "predictionEvery": "{days, plural, other{~每{days}天}}",
+    "predictionBoughtRegularly": "经常购买",
+    "predictionBoughtToday": "今天买过",
+    "predictionBoughtYesterday": "昨天买过",
+    "predictionBoughtDaysAgo": "{days, plural, other{{days}天前买过}}"
 }
