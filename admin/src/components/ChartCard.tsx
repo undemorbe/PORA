@@ -1,0 +1,54 @@
+import type { UseQueryResult } from '@tanstack/react-query';
+import type { ReactNode } from 'react';
+import { ApiError } from '../api/client';
+
+interface Props<T> {
+  title: string;
+  query: UseQueryResult<T>;
+  isEmpty?: (data: T) => boolean;
+  action?: ReactNode;
+  children: (data: T) => ReactNode;
+}
+
+function errorText(error: unknown): string {
+  if (error instanceof ApiError) {
+    if (error.status === 0) return 'Нет связи с сервером';
+    return error.status >= 500 ? 'Сервер недоступен' : error.message;
+  }
+  return 'Нет связи с сервером';
+}
+
+/** Карточка блока с независимыми состояниями: загрузка / ошибка / пусто / данные. */
+export function ChartCard<T>({ title, query, isEmpty, action, children }: Props<T>) {
+  let body: ReactNode;
+  if (query.isPending) {
+    body = (
+      <div className="state" aria-busy="true">
+        Загрузка…
+      </div>
+    );
+  } else if (query.isError) {
+    body = (
+      <div className="state state-error" role="alert">
+        <p>{errorText(query.error)}</p>
+        <button type="button" className="btn" onClick={() => void query.refetch()}>
+          Повторить
+        </button>
+      </div>
+    );
+  } else if (query.data === undefined || isEmpty?.(query.data)) {
+    body = <div className="state">Нет данных за период</div>;
+  } else {
+    body = children(query.data);
+  }
+
+  return (
+    <section className="card">
+      <header className="card-head">
+        <h2>{title}</h2>
+        {action}
+      </header>
+      {body}
+    </section>
+  );
+}
