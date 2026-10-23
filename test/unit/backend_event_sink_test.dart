@@ -274,6 +274,21 @@ void main() {
     },
   );
 
+  test('long string props are cut to maxPropStringLength runes', () async {
+    await attach(sink);
+    final emoji = '😀' * 100;
+    sink.track('screen_view', {'screen': emoji, 'short': 'list'});
+    await sink.flush();
+
+    final props = sender.batches.single.single['props'] as Map;
+    expect(
+      (props['screen'] as String).runes.length,
+      BackendEventSink.maxPropStringLength,
+    );
+    expect(props['screen'], '😀' * BackendEventSink.maxPropStringLength);
+    expect(props['short'], 'list');
+  });
+
   test('periodic timer flushes', () {
     fakeAsync((async) {
       attach(sink);

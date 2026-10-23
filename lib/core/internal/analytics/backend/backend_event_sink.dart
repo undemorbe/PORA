@@ -249,21 +249,33 @@ class BackendEventSink {
     return delay > maxBackoff ? maxBackoff : delay;
   }
 
+  /// Максимум символов в строковом prop — столько же хранит сервер
+  /// (`maxPropStringLen`); длиннее только раздувает батч сверх 64 KB.
+  static const maxPropStringLength = 64;
+
   /// Оставляет в props только JSON-примитивы: String, bool, конечные num.
   /// NaN/Infinity выбрасываются, остальное (DateTime, enum, коллекции…)
   /// превращается в строку — иначе jsonEncode уронит persist всей очереди.
+  /// Строки обрезаются до [maxPropStringLength] символов (рун).
   static Map<String, Object> _sanitize(Map<String, Object> props) {
     if (props.isEmpty) return props;
     return {
       for (final MapEntry(:key, :value) in props.entries)
         if (value is! num || value.isFinite)
           key: switch (value) {
-            String() || bool() || num() => value,
+            bool() || num() => value,
+            String() => _truncate(value),
             DateTime() => value.toUtc().toIso8601String(),
             Enum() => value.name,
-            _ => '$value',
+            _ => _truncate('$value'),
           },
     };
+  }
+
+  static String _truncate(String value) {
+    final runes = value.runes;
+    if (runes.length <= maxPropStringLength) return value;
+    return String.fromCharCodes(runes.take(maxPropStringLength));
   }
 
   void _trimToCap() {
