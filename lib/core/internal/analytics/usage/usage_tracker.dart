@@ -68,10 +68,12 @@ class UsageTracker {
 
   /// Начало сессии (холодный старт или возврат из фона).
   /// Повторный вызов в рамках живой сессии (inactive → resumed) игнорируется.
-  void sessionStarted() {
-    if (_sessionStart != null) return;
+  /// Возвращает `true`, если началась новая сессия.
+  bool sessionStarted() {
+    if (_sessionStart != null) return false;
     _sessionStart = _clock();
     _record((d) => d.copyWith(opens: d.opens + 1), hour: true);
+    return true;
   }
 
   /// Конец сессии — копим foreground-время в день начала сессии.

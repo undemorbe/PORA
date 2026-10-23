@@ -69,6 +69,16 @@ void main() {
     expect(today.seconds, 120);
   });
 
+  test('sessionStarted reports whether a new session began', () async {
+    final t = tracker();
+    await t.attach(FakeLocalDB());
+    expect(t.sessionStarted(), isTrue);
+    expect(t.sessionStarted(), isFalse); // inactive → resumed — та же сессия
+    t.sessionEnded();
+    expect(t.sessionStarted(), isTrue);
+    expect(t.days['2026-10-06']!.opens, 2);
+  });
+
   test('implausible session length is discarded', () async {
     final t = tracker();
     await t.attach(FakeLocalDB());

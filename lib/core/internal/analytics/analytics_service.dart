@@ -1,21 +1,49 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart' show visibleForTesting;
+import 'package:pora/core/internal/analytics/backend/backend_event_sink.dart';
 import 'package:pora/core/internal/analytics/usage/usage_tracker.dart';
 import 'package:pora/core/internal/logging/logger.dart';
 
-/// Единая точка аналитики: типизированные события уходят в Firebase
-/// Analytics (агрегаты по всем юзерам) и в локальный [UsageTracker]
-/// (персональная статистика на экране Insights).
+/// Единая точка аналитики. Типизированные события раздаются в три приёмника:
+/// - Firebase Analytics (агрегаты по всем юзерам, DebugView);
+/// - локальный [UsageTracker] (персональная статистика на экране Insights);
+/// - [BackendEventSink] → `POST /api/analytics/events` (админ-панель).
+///
+/// В backend идут только client-only события (сессии, экраны, AI, рецепты,
+/// поддержка, режим отображения). Доменные (товар/список) пишет сервер —
+/// здесь их в backend не шлём, иначе двойной счёт.
 ///
 /// Firebase поднимается отложенно (AppBootstrap) — до этого Firebase-часть
-/// no-op'ит, а локальный трекер копит события в буфере.
+/// no-op'ит, а локальный трекер и backend-очередь копят события в буфере.
 class AnalyticsService {
-  AnalyticsService._();
+  AnalyticsService._()
+    : _usageOverride = null,
+      _backendOverride = null,
+      _firebaseReady = _defaultFirebaseReady;
+
+  @visibleForTesting
+  AnalyticsService.test({
+    required UsageTracker usage,
+    required BackendEventSink backend,
+    required this._firebaseReady,
+  }) : _usageOverride = usage,
+       _backendOverride = backend;
+
   static final AnalyticsService instance = AnalyticsService._();
 
-  UsageTracker get _usage => UsageTracker.instance;
+  final UsageTracker? _usageOverride;
+  final BackendEventSink? _backendOverride;
+  final bool Function() _firebaseReady;
 
-  bool get _ready => Firebase.apps.isNotEmpty;
+  static bool _defaultFirebaseReady() => Firebase.apps.isNotEmpty;
+
+  UsageTracker get _usage => _usageOverride ?? UsageTracker.instance;
+
+  BackendEventSink get _backend =>
+      _backendOverride ?? BackendEventSink.instance;
+
+  bool get _ready => _firebaseReady();
 
   FirebaseAnalytics? get _analytics =>
       _ready ? FirebaseAnalytics.instance : null;
@@ -43,7 +71,10 @@ class AnalyticsService {
     String screenName, {
     bool countVisit = true,
   }) async {
-    if (countVisit) _usage.screenViewed(screenName);
+    if (countVisit) {
+      _usage.screenViewed(screenName);
+      _backend.track('screen_view', {'screen': screenName});
+    }
     try {
       await _analytics?.logScreenView(screenName: screenName);
     } catch (e, s) {
@@ -63,6 +94,12 @@ class AnalyticsService {
     } catch (e, s) {
       Logger.talker.warning('Analytics event "$name" failed', e, s);
     }
+  }
+
+  /// Начало сессии (холодный старт или возврат из фона). Firebase-аналог —
+  /// `logAppOpen` в [init]; здесь — только backend.
+  Future<void> logSessionStart() async {
+    _backend.track('session_start');
   }
 
   //! --- Типизированные события домена ---
@@ -94,10 +131,14 @@ class AnalyticsService {
     return _log('item_deleted');
   }
 
-  Future<void> logAiChatOpened() => _log('ai_chat_opened');
+  Future<void> logAiChatOpened() {
+    _backend.track('ai_chat_opened');
+    return _log('ai_chat_opened');
+  }
 
   Future<void> logAiMessageSent() {
     _usage.aiMessageSent();
+    _backend.track('ai_message_sent');
     return _log('ai_message_sent');
   }
 
@@ -116,8 +157,10 @@ class AnalyticsService {
     'error': ?_short(error),
   });
 
-  Future<void> logTipGenerated({required bool fromFallback}) =>
-      _log('ai_tip_generated', {'fallback': fromFallback.toString()});
+  Future<void> logTipGenerated({required bool fromFallback}) {
+    _backend.track('ai_tip_generated');
+    return _log('ai_tip_generated', {'fallback': fromFallback.toString()});
+  }
 
   Future<void> logRecipeImport({
     required String source,
@@ -127,6 +170,7 @@ class AnalyticsService {
     int? durationMs,
   }) {
     _usage.recipeImported();
+    _backend.track('recipe_import', {'source': source});
     return _log('recipe_import', {
       'source': source,
       'extractor': ?_short(extractor),
@@ -154,11 +198,16 @@ class AnalyticsService {
   Future<void> logInsightsPeriodChanged(int days) =>
       _log('insights_period', {'days': days});
 
-  Future<void> logSupportMessageSent() => _log('support_message_sent');
+  Future<void> logSupportMessageSent() {
+    _backend.track('support_message_sent');
+    return _log('support_message_sent');
+  }
 
   Future<void> logAiConfigSaved({required bool custom}) =>
       _log('ai_config_saved', {'custom': custom.toString()});
 
-  Future<void> logViewModeChanged({required bool grid}) =>
-      _log('home_view_mode', {'grid': grid.toString()});
+  Future<void> logViewModeChanged({required bool grid}) {
+    _backend.track('view_mode_changed', {'grid': grid});
+    return _log('home_view_mode', {'grid': grid.toString()});
+  }
 }
