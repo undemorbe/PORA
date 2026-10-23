@@ -84,15 +84,20 @@ async function errorFrom(res: Response): Promise<ApiError> {
 export async function apiFetch<T>(path: string, options: RequestOptions = {}): Promise<T> {
   const { method = 'GET', query, body, auth = true } = options;
 
-  const send = (token: string | null) => {
+  const send = async (token: string | null): Promise<Response> => {
     const headers: Record<string, string> = { Accept: 'application/json' };
     if (body !== undefined) headers['Content-Type'] = 'application/json';
     if (auth && token) headers.Authorization = `Bearer ${token}`;
-    return fetch(buildUrl(path, query), {
-      method,
-      headers,
-      body: body === undefined ? undefined : JSON.stringify(body),
-    });
+    try {
+      return await fetch(buildUrl(path, query), {
+        method,
+        headers,
+        body: body === undefined ? undefined : JSON.stringify(body),
+      });
+    } catch {
+      // Сеть недоступна: сессию не трогаем и не уведомляем — это не отказ сервера.
+      throw new ApiError(0, 'NETWORK', 'Нет связи с сервером');
+    }
   };
 
   const usedToken = getAccess();

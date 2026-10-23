@@ -154,6 +154,41 @@ describe('apiFetch', () => {
     expect(onAuthError).not.toHaveBeenCalled();
   });
 
+  it('wraps a failed request into a NETWORK error without touching the session', async () => {
+    setTokens('access-1', 'r1');
+    const onAuthError = vi.fn();
+    setAuthErrorHandler(onAuthError);
+    vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new TypeError('Failed to fetch')));
+
+    const error = await apiFetch('/api/admin/me').catch((e: unknown) => e);
+
+    expect(error).toBeInstanceOf(ApiError);
+    expect(error).toMatchObject({ status: 0, code: 'NETWORK', message: 'Нет связи с сервером' });
+    expect(getRefresh()).toBe('r1');
+    expect(getAccess()).toBe('access-1');
+    expect(onAuthError).not.toHaveBeenCalled();
+  });
+
+  it('wraps a failed retry after refresh into a NETWORK error', async () => {
+    setTokens('old', 'r1');
+    const onAuthError = vi.fn();
+    setAuthErrorHandler(onAuthError);
+    vi.stubGlobal(
+      'fetch',
+      vi
+        .fn()
+        .mockResolvedValueOnce(json(401, { code: 'ACCESS_TOKEN_EXPIRED' }))
+        .mockResolvedValueOnce(json(200, { 'access-token': 'new', 'refresh-token': 'r2' }))
+        .mockRejectedValueOnce(new TypeError('Failed to fetch')),
+    );
+
+    const error = await apiFetch('/api/admin/me').catch((e: unknown) => e);
+
+    expect(error).toMatchObject({ status: 0, code: 'NETWORK' });
+    expect(getRefresh()).toBe('r2');
+    expect(onAuthError).not.toHaveBeenCalled();
+  });
+
   it('retries a late 401 with the already refreshed token without refreshing again', async () => {
     setTokens('old', 'r1');
     const fetchMock = vi

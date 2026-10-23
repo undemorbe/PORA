@@ -64,8 +64,11 @@ a { color: var(--accent-strong); }
 @media (max-width: 760px) {
   .shell { grid-template-columns: minmax(0, 1fr); }
   .sidebar { flex-direction: row; overflow-x: auto; border-right: 0; border-bottom: 1px solid var(--border); padding: 8px; }
-  .brand, .sidebar-foot { display: none; }
-  .nav-link { white-space: nowrap; }
+  .brand { display: none; }
+  /* «Выйти» остаётся доступным в конце строки навигации; почту прячем. */
+  .sidebar-foot { margin: 0 0 0 auto; padding: 0 0 0 8px; display: flex; align-items: center; }
+  .sidebar-foot span { display: none; }
+  .nav-link, .sidebar-foot .btn { white-space: nowrap; }
 }
 
 /* Карточки и состояния */
