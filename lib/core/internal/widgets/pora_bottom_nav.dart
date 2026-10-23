@@ -25,6 +25,7 @@ class PoraBottomNav extends StatelessWidget {
   final ValueChanged<PoraTab>? onTap;
 
   static const _order = [PoraTab.group, PoraTab.pora, PoraTab.profile];
+  static const double _barHeight = 64;
 
   static const _icons = {
     PoraTab.group: PhosphorIconsRegular.listChecks,
@@ -56,73 +57,77 @@ class PoraBottomNav extends StatelessWidget {
       return SafeArea(
         top: false,
         child: Padding(
-          padding: EdgeInsets.only(
-            bottom: bottomInset > 0 ? 8 : 16,
-            left: 12,
-            right: 12,
-          ),
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(32),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.28),
-                  blurRadius: 36,
-                  offset: const Offset(0, 14),
-                  spreadRadius: -6,
-                ),
-              ],
-            ),
-            child: Stack(
-              children: [
-                SizedBox(
-                  width: barWidth,
-                  child: LiquidGlassBottomNavBar(
-                    pillStyle: LiquidGlassNavPillStyle(
-                      animated: true,
-                      jelly: LiquidGlassJellyConfig(),
+          padding: EdgeInsets.only(bottom: bottomInset > 0 ? 8 : 16),
+          // Scaffold отдаёт bottom bar tight-ширину экрана: без Align тень и
+          // hairline растягивались на неё, а стекло оставалось barWidth у
+          // левого края → второй контур капсулы правее бара. Теперь все слои
+          // ровно barWidth × 64 и по центру.
+          child: Align(
+            heightFactor: 1,
+            child: SizedBox(
+              width: barWidth,
+              height: _barHeight,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(32),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.28),
+                      blurRadius: 36,
+                      offset: const Offset(0, 14),
+                      spreadRadius: -6,
                     ),
-
-                    selectedIndex: _selectedIndex,
-                    onChanged: (i) => onTap?.call(_order[i]),
-                    width: barWidth,
-                    height: 64,
-                    margin: EdgeInsets.zero,
-                    items: [
-                      for (final t in _order)
-                        LiquidGlassTabBarItem(
-                          icon: _icons[t]!,
-                          selectedIcon: _iconsFill[t],
-                          label: _label(context, t),
-                        ),
-                    ],
-                  ),
+                  ],
                 ),
-                // Двойной hairline поверх стекла — не блокирует тапы.
-                Positioned.fill(
-                  child: IgnorePointer(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(32),
-                        border: Border.all(
-                          color: Colors.black.withValues(alpha: 0.14),
-                          width: 0.6,
-                        ),
+                child: Stack(
+                  children: [
+                    LiquidGlassBottomNavBar(
+                      pillStyle: LiquidGlassNavPillStyle(
+                        animated: true,
+                        jelly: LiquidGlassJellyConfig(),
                       ),
-                      child: Container(
-                        margin: const EdgeInsets.all(0.6),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(31.4),
-                          border: Border.all(
-                            color: Colors.white.withValues(alpha: 0.55),
-                            width: 0.6,
+
+                      selectedIndex: _selectedIndex,
+                      onChanged: (i) => onTap?.call(_order[i]),
+                      width: barWidth,
+                      height: _barHeight,
+                      margin: EdgeInsets.zero,
+                      items: [
+                        for (final t in _order)
+                          LiquidGlassTabBarItem(
+                            icon: _icons[t]!,
+                            selectedIcon: _iconsFill[t],
+                            label: _label(context, t),
+                          ),
+                      ],
+                    ),
+                    // Двойной hairline поверх стекла — не блокирует тапы.
+                    Positioned.fill(
+                      child: IgnorePointer(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(32),
+                            border: Border.all(
+                              color: Colors.black.withValues(alpha: 0.14),
+                              width: 0.6,
+                            ),
+                          ),
+                          child: Container(
+                            margin: const EdgeInsets.all(0.6),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(31.4),
+                              border: Border.all(
+                                color: Colors.white.withValues(alpha: 0.55),
+                                width: 0.6,
+                              ),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ),
@@ -166,42 +171,47 @@ class _AndroidFloatingBar extends StatelessWidget {
     return SafeArea(
       top: false,
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 12, left: 12, right: 12),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(32),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 18, sigmaY: 18),
-            child: Container(
-              width: width,
-              height: 64,
-              decoration: BoxDecoration(
-                // В light bg cream + surface белый = мало контраста.
-                // Используем surfaceAlt (в dark он темнее surface;
-                // в light всё равно surface белый — контраст даёт border+shadow).
-                color: c.surfaceAlt,
-                borderRadius: BorderRadius.circular(32),
-                border: Border.all(color: PoraColors.borderStrong, width: 1),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.22),
-                    blurRadius: 32,
-                    offset: const Offset(0, 12),
-                    spreadRadius: -4,
-                  ),
-                ],
-              ),
-              child: Row(
-                children: [
-                  for (final t in order)
-                    Expanded(
-                      child: _Tab(
-                        active: t == current,
-                        icon: t == current ? iconsFill[t]! : icons[t]!,
-                        label: labelOf(t),
-                        onTap: () => onTap?.call(t),
-                      ),
+        padding: const EdgeInsets.only(bottom: 12),
+        // Без Align tight-ширина Scaffold'а перебивала [width] — бар
+        // растягивался на экран минус padding вместо min(360, w − 32).
+        child: Align(
+          heightFactor: 1,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(32),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 18, sigmaY: 18),
+              child: Container(
+                width: width,
+                height: 64,
+                decoration: BoxDecoration(
+                  // В light bg cream + surface белый = мало контраста.
+                  // Используем surfaceAlt (в dark он темнее surface;
+                  // в light всё равно surface белый — контраст даёт border+shadow).
+                  color: c.surfaceAlt,
+                  borderRadius: BorderRadius.circular(32),
+                  border: Border.all(color: PoraColors.borderStrong, width: 1),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.22),
+                      blurRadius: 32,
+                      offset: const Offset(0, 12),
+                      spreadRadius: -4,
                     ),
-                ],
+                  ],
+                ),
+                child: Row(
+                  children: [
+                    for (final t in order)
+                      Expanded(
+                        child: _Tab(
+                          active: t == current,
+                          icon: t == current ? iconsFill[t]! : icons[t]!,
+                          label: labelOf(t),
+                          onTap: () => onTap?.call(t),
+                        ),
+                      ),
+                  ],
+                ),
               ),
             ),
           ),
