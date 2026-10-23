@@ -279,6 +279,10 @@ class AppBootstrap {
   // ignore: cancel_subscriptions
   StreamSubscription<AuthStatus>? _wsAuthSub;
 
+  /// Ускоренный reconnect сокета: возврат из фона / появление сети.
+  AppLifecycleListener? _wsLifecycle;
+  ReactionDisposer? _wsOnlineReaction;
+
   Future<void> _openAppWebsocket() async {
     final rawUrl = dotenv.maybeGet('WS_URL');
     if (rawUrl == null || rawUrl.trim().isEmpty) {
@@ -305,6 +309,16 @@ class AppBootstrap {
       } else {
         AppWebsocket.instance.disconnect();
       }
+    });
+
+    // Пока сокет ждёт backoff (до минуты), свежие условия поднимают его
+    // сразу. После logout `reconnectNow()` ничего не делает.
+    _wsLifecycle ??= AppLifecycleListener(
+      onResume: AppWebsocket.instance.reconnectNow,
+    );
+    final connectivity = GetIt.I<ConnectivityStore>();
+    _wsOnlineReaction ??= reaction<bool>((_) => connectivity.online, (online) {
+      if (online) AppWebsocket.instance.reconnectNow();
     });
   }
 }
