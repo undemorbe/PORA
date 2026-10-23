@@ -15,6 +15,7 @@ import 'package:pora/core/features/insights/data/models/popular_product_model.da
 import 'package:pora/core/features/insights/data/models/user_products_model.dart';
 import 'package:pora/core/features/user/data/models/user/user_model.dart';
 import 'package:pora/core/features/user/data/models/user/user_update_model.dart';
+import 'package:retrofit/dio.dart' show Extra;
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 
@@ -165,7 +166,10 @@ abstract class ApiClient {
   //! Analytics
   /// Батч клиентских событий. Ответ `202 {"accepted": n, "rejected": m}`
   /// не нужен клиенту — отбрасываем.
+  /// `skip-auth-refresh`: 401 не обновляет токен и не повторяет запрос —
+  /// батч старого юзера не должен уйти с токеном нового; sink ретраит сам.
   @POST('/analytics/events')
+  @Extra({'skip-auth-refresh': true})
   Future<void> sendAnalyticsEvents({
     @Body() required Map<String, dynamic> body,
   });

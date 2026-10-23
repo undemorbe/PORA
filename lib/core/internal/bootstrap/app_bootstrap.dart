@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart'
-    show TargetPlatform, defaultTargetPlatform, kDebugMode;
+    show TargetPlatform, defaultTargetPlatform, kDebugMode, visibleForTesting;
 import 'package:flutter/widgets.dart' show AppLifecycleListener, Locale;
 import 'package:mobx/mobx.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -22,12 +22,23 @@ import 'package:pora/core/internal/offline/outbox_sync_effects.dart';
 import 'package:pora/core/internal/platform/app_shortcuts_service.dart';
 import 'package:pora/core/internal/platform/share_intent_service.dart';
 
+/// Backend-сессия на логине: только повторный вход в рамках того же запуска
+/// (`unauthenticated → authenticated`). Холодный старт (`unknown →
+/// authenticated`) уже отметил `UsageSessionListener`.
+@visibleForTesting
+bool shouldStartSessionOnAuth(AuthStatus prev, AuthStatus next) =>
+    prev == AuthStatus.unauthenticated && next == AuthStatus.authenticated;
+
 class AppBootstrap {
   AppBootstrap._();
   static final AppBootstrap instance = AppBootstrap._();
 
   /// Держит подписку на resume для flush offline-очереди.
   AppLifecycleListener? _outboxLifecycle;
+
+  /// Подписки backend-аналитики: логин → flush, появление сети → flush.
+  StreamSubscription<AuthStatus>? _analyticsAuthSub;
+  ReactionDisposer? _analyticsOnlineReaction;
 
   Future<void>? _future;
 
@@ -110,8 +121,15 @@ class AppBootstrap {
       final auth = container.getIt<AuthState>();
       final connectivity = container.getIt<ConnectivityStore>();
       final api = container.getIt<ApiClient>();
-      final info = await PackageInfo.fromPlatform();
       final sink = BackendEventSink.instance;
+      // Без версии аналитика всё равно нужна — шлём с 'unknown'.
+      String appVersion;
+      try {
+        appVersion = (await PackageInfo.fromPlatform()).version;
+      } catch (e, s) {
+        Logger.talker.warning('PackageInfo unavailable for analytics', e, s);
+        appVersion = 'unknown';
+      }
 
       await sink.attach(
         db: container.getIt<ILocalDB<dynamic>>(),
@@ -120,14 +138,24 @@ class AppBootstrap {
         ),
         canSend: () => auth.isAuthenticated && connectivity.online,
         platform: _analyticsPlatform(),
-        appVersion: info.version,
+        appVersion: appVersion,
       );
 
-      // Подписки живут весь lifecycle приложения (singleton не диспоузится).
-      auth.stream
-          .where((status) => status == AuthStatus.authenticated)
-          .listen((_) => unawaited(sink.flush(force: true)));
-      reaction<bool>((_) => connectivity.online, (online) {
+      // Подписки живут весь lifecycle приложения (singleton не диспоузится);
+      // `??=` — повторный attach не подписывается дважды.
+      var lastStatus = auth.status;
+      _analyticsAuthSub ??= auth.stream.listen((status) {
+        final prev = lastStatus;
+        lastStatus = status;
+        if (status != AuthStatus.authenticated) return;
+        if (shouldStartSessionOnAuth(prev, status)) {
+          unawaited(AnalyticsService.instance.logSessionStart());
+        }
+        unawaited(sink.flush(force: true));
+      });
+      _analyticsOnlineReaction ??= reaction<bool>((_) => connectivity.online, (
+        online,
+      ) {
         if (online) unawaited(sink.flush(force: true));
       });
       // Хвост прошлого запуска: авторизация могла выставиться до подписки
@@ -136,6 +164,16 @@ class AppBootstrap {
     } catch (e, s) {
       Logger.talker.warning('Analytics sink attach failed', e, s);
     }
+  }
+
+  /// Снимает подписки backend-аналитики. В приложении не вызывается
+  /// (singleton живёт весь lifecycle) — для тестов и горячего перезапуска.
+  @visibleForTesting
+  Future<void> disposeAnalyticsBindings() async {
+    _analyticsOnlineReaction?.call();
+    _analyticsOnlineReaction = null;
+    await _analyticsAuthSub?.cancel();
+    _analyticsAuthSub = null;
   }
 
   /// Бэкенд принимает события только с мобильных платформ.

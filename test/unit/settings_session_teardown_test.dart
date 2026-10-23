@@ -43,9 +43,29 @@ class _FakeUserRepository implements UserRepository {
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }
 
+/// Журналирует удаление очереди sink'а (clear() стирает её ключ).
+class _LoggingDB extends FakeLocalDB {
+  @override
+  Future<void> delete({
+    required String key,
+    required LocalDBNames boxName,
+  }) async {
+    if (key == BackendEventSink.storageKey) _log.add('sink-clear');
+    return super.delete(key: key, boxName: boxName);
+  }
+}
+
+class _LoggingTokens extends TokensSecureStore {
+  @override
+  Future<void> clearTokens() async {
+    _log.add('clearTokens');
+    return super.clearTokens();
+  }
+}
+
 void main() {
   late Directory tmp;
-  late FakeLocalDB db;
+  late _LoggingDB db;
   late _FakeUserRepository repo;
   late AuthState auth;
   var canSend = true;
@@ -57,7 +77,7 @@ void main() {
   setUpAll(() async {
     tmp = Directory.systemTemp.createTempSync('pora_settings_teardown');
     Hive.init(tmp.path);
-    db = FakeLocalDB();
+    db = _LoggingDB();
     await sink.attach(
       db: db,
       sender: (events) => send(events),
@@ -68,13 +88,13 @@ void main() {
   });
 
   tearDownAll(() async {
+    sink.dispose();
     await Hive.deleteFromDisk();
     await Hive.close();
     tmp.deleteSync(recursive: true);
   });
 
   setUp(() async {
-    _log.clear();
     canSend = true;
     send = (events) async {
       _log.add('send:${events.length}');
@@ -92,9 +112,10 @@ void main() {
         () => DeleteAccountUseCase(repository: repo),
       )
       ..registerSingleton<Outbox>(Outbox())
-      ..registerSingleton<TokensSecureStore>(TokensSecureStore())
+      ..registerSingleton<TokensSecureStore>(_LoggingTokens())
       ..registerSingleton<AuthState>(auth);
     await sink.clear();
+    _log.clear();
   });
 
   tearDown(() async {
@@ -112,7 +133,7 @@ void main() {
 
     await SettingsStore().logout();
 
-    expect(_log, ['send:2', 'logout']);
+    expect(_log, ['send:2', 'logout', 'sink-clear', 'clearTokens']);
     expect(sink.pending, isEmpty);
     expect(await stored(), isNull);
     expect(await GetIt.I<TokensSecureStore>().getAccessToken(), isNull);
@@ -128,7 +149,7 @@ void main() {
 
     await SettingsStore().logout();
 
-    expect(_log, ['send:1', 'logout']);
+    expect(_log, ['send:1', 'logout', 'sink-clear', 'clearTokens']);
     expect(sink.pending, isEmpty, reason: 'next user must not inherit them');
     expect(await stored(), isNull);
   });
@@ -138,7 +159,10 @@ void main() {
     logoutAnalyticsFlushTimeout = const Duration(milliseconds: 50);
     addTearDown(() => logoutAnalyticsFlushTimeout = previous);
     final hang = Completer<SendOutcome>();
-    addTearDown(() => hang.complete(SendOutcome.sent));
+    addTearDown(() async {
+      hang.complete(SendOutcome.sent);
+      await sink.flush();
+    });
     send = (events) {
       _log.add('send:${events.length}');
       return hang.future;
@@ -147,7 +171,7 @@ void main() {
 
     await SettingsStore().logout().timeout(const Duration(seconds: 2));
 
-    expect(_log, ['send:1', 'logout']);
+    expect(_log, ['send:1', 'logout', 'sink-clear', 'clearTokens']);
     expect(sink.pending, isEmpty);
     expect(auth.isAuthenticated, isFalse);
   });
@@ -161,7 +185,7 @@ void main() {
     final ok = await SettingsStore().deleteAccount();
 
     expect(ok, isTrue);
-    expect(_log, ['delete']);
+    expect(_log, ['delete', 'sink-clear', 'clearTokens']);
     expect(sink.pending, isEmpty);
     expect(await stored(), isNull);
     expect(auth.isAuthenticated, isFalse);

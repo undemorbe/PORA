@@ -26,6 +26,11 @@ class AuthInterceptor extends QueuedInterceptorsWrapper {
 
   static const _retriedKey = '__auth_retried';
 
+  /// `extra`-флаг запроса: 401 не обновляет токен и не повторяет запрос.
+  /// Нужен фоновым отправкам (аналитика), которые сами ретраят позже, —
+  /// иначе запрос, начатый под старым юзером, повторится с токеном нового.
+  static const skipAuthRefreshKey = 'skip-auth-refresh';
+
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     final token = tokenProvider();
@@ -40,6 +45,9 @@ class AuthInterceptor extends QueuedInterceptorsWrapper {
     DioException err,
     ErrorInterceptorHandler handler,
   ) async {
+    if (err.requestOptions.extra[skipAuthRefreshKey] == true) {
+      return handler.next(err);
+    }
     final is401 = err.response?.statusCode == 401;
     final alreadyRetried = err.requestOptions.extra[_retriedKey] == true;
 

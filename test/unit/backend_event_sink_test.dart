@@ -309,4 +309,55 @@ void main() {
       isTrue,
     );
   });
+
+  test('clear during an in-flight send: late outcome does not touch the '
+      'new state', () async {
+    final db = _CountingDB();
+    final hang = Completer<SendOutcome>();
+    final s = newSink();
+    addTearDown(s.dispose);
+    await s.attach(
+      db: db,
+      sender: (_) => hang.future,
+      canSend: () => canSend,
+      platform: 'ios',
+      appVersion: '1.4.0',
+    );
+    s
+      ..track('screen_view', {'screen': 'HomeRoute'})
+      ..track('ai_chat_opened');
+    final flushing = s.flush();
+    await Future<void>.delayed(Duration.zero);
+
+    await s.clear(); // logout: события старого юзера больше не наши
+    final setsAfterClear = db.sets;
+    hang.complete(SendOutcome.retry);
+    await flushing;
+
+    expect(s.retryDelay, isNull, reason: 'no backoff inherited by next user');
+    expect(s.pending, isEmpty);
+    expect(db.sets, setsAfterClear, reason: 'old events must not be persisted');
+    expect(
+      await db.get(
+        key: BackendEventSink.storageKey,
+        boxName: LocalDBNames.settings,
+      ),
+      isNull,
+    );
+  });
+}
+
+/// [FakeLocalDB], считающий записи.
+class _CountingDB extends FakeLocalDB {
+  int sets = 0;
+
+  @override
+  Future<void> set({
+    required String key,
+    required dynamic value,
+    required LocalDBNames boxName,
+  }) {
+    sets++;
+    return super.set(key: key, value: value, boxName: boxName);
+  }
 }

@@ -827,7 +827,7 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<void> sendAnalyticsEvents({required Map<String, dynamic> body}) async {
-    final _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{'skip-auth-refresh': true};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};

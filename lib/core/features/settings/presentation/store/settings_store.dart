@@ -108,13 +108,14 @@ abstract class _SettingsStoreBase with Store {
     // следующего их проигрывать нельзя. Чистим до токенов, чтобы flush
     // не успел проиграть их без авторизации.
     await GetIt.I<Outbox>().clear();
+    // События ушедшего юзера не смешиваем с событиями следующего; чистим до
+    // токенов — фоновый flush не успеет отправить их с чужой авторизацией.
+    await BackendEventSink.instance.clear();
     final tokensStore = GetIt.I<TokensSecureStore>();
     await tokensStore.clearTokens();
     // Чистим весь offline-cache — новый юзер не должен видеть чужие снапшоты.
     await HiveJsonCache.clear();
     await UsageTracker.instance.clear();
-    // События ушедшего юзера не смешиваем с событиями следующего.
-    await BackendEventSink.instance.clear();
     GetIt.I<AuthState>().setUnauthenticated();
   }
 

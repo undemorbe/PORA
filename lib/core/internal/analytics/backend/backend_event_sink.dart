@@ -198,6 +198,7 @@ class BackendEventSink {
 
     while (_queue.isNotEmpty && _canSend()) {
       final batch = _queue.take(maxBatch).toList();
+      final epoch = _epoch;
       SendOutcome outcome;
       try {
         outcome = await sender([
@@ -208,6 +209,9 @@ class BackendEventSink {
         Logger.talker.warning('BackendEventSink: send failed', e, s);
         outcome = SendOutcome.retry;
       }
+      // Пока шёл запрос, был clear() (logout): очередь, backoff и storage
+      // уже принадлежат следующему юзеру — ничего не трогаем.
+      if (epoch != _epoch) return;
 
       if (outcome == SendOutcome.retry) {
         _failures++;
