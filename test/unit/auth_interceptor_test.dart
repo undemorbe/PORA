@@ -41,6 +41,27 @@ class _Capture implements HttpClientAdapter {
   void close({bool force = false}) {}
 }
 
+/// Первый запрос — 401, повтор — обрыв сети.
+class _UnauthorizedThenOffline implements HttpClientAdapter {
+  int calls = 0;
+
+  @override
+  Future<ResponseBody> fetch(
+    RequestOptions options,
+    Stream<Uint8List>? requestStream,
+    Future<void>? cancelFuture,
+  ) async {
+    if (calls++ == 0) return ResponseBody.fromString('', 401);
+    throw DioException.connectionError(
+      requestOptions: options,
+      reason: 'offline',
+    );
+  }
+
+  @override
+  void close({bool force = false}) {}
+}
+
 void main() {
   late _Unauthorized adapter;
   late int refreshes;
@@ -61,9 +82,6 @@ void main() {
           return 'fresh';
         },
         onRefreshFailed: () => refreshFailures++,
-        // Отдельный Dio для повтора: повтор через тот же Dio с
-        // QueuedInterceptorsWrapper ждал бы очередь onError, занятую
-        // исходным запросом, если и он вернёт 401.
         dioProvider: () => Dio()..httpClientAdapter = adapter,
       ),
     );
@@ -92,6 +110,70 @@ void main() {
     await expectLater(dio.get<void>('/user/me'), throwsA(isA<DioException>()));
     expect(refreshes, 1);
     expect(adapter.calls, 2);
+  });
+
+  test('retry through the same Dio that 401s again does not hang', () async {
+    final failures = <int>[];
+    final same = Dio(BaseOptions(baseUrl: 'http://localhost'))
+      ..httpClientAdapter = adapter;
+    same.interceptors.add(
+      AuthInterceptor(
+        tokenProvider: () => 'stale',
+        onRefresh: () async => 'fresh',
+        onRefreshFailed: () => failures.add(1),
+        dioProvider: () => same,
+      ),
+    );
+
+    await expectLater(
+      same.get<void>('/user/me').timeout(const Duration(seconds: 2)),
+      throwsA(
+        isA<DioException>().having(
+          (e) => e.response?.statusCode,
+          'status',
+          401,
+        ),
+      ),
+    );
+    expect(adapter.calls, 2);
+    expect(failures, [1], reason: '401 with a fresh token ends the session');
+  });
+
+  test('network error on retry keeps the session', () async {
+    final flaky = _UnauthorizedThenOffline();
+    final failures = <int>[];
+    final client = Dio(BaseOptions(baseUrl: 'http://localhost'))
+      ..httpClientAdapter = flaky;
+    client.interceptors.add(
+      AuthInterceptor(
+        tokenProvider: () => 'stale',
+        onRefresh: () async => 'fresh',
+        onRefreshFailed: () => failures.add(1),
+        dioProvider: () => client,
+      ),
+    );
+
+    await expectLater(
+      client.get<void>('/user/me').timeout(const Duration(seconds: 2)),
+      throwsA(
+        isA<DioException>().having(
+          (e) => e.type,
+          'type',
+          DioExceptionType.connectionError,
+        ),
+      ),
+    );
+    expect(failures, isEmpty);
+  });
+
+  test('401 from /refresh itself ends the session without retry', () async {
+    await expectLater(
+      dio.get<void>('/authorize/refresh'),
+      throwsA(isA<DioException>()),
+    );
+    expect(refreshes, 0);
+    expect(refreshFailures, 1);
+    expect(adapter.calls, 1);
   });
 
   test('ApiClient marks analytics requests with skip-auth-refresh', () async {
