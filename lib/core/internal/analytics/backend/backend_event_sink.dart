@@ -146,7 +146,12 @@ class BackendEventSink {
       _retryAfter = null;
     }
     final running = _inFlight;
-    if (running != null) return running;
+    if (running != null) {
+      if (!force) return running;
+      // Идущая отправка могла быть прервана clear() (logout) и не тронет
+      // новую очередь — досылаем сразу по её завершении, не ждём таймера.
+      return running.then((_) => _readyToDrain() ? flush() : null);
+    }
     if (!_readyToDrain()) return Future.value();
     return _inFlight = _drain().whenComplete(() => _inFlight = null);
   }

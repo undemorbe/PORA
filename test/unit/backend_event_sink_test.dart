@@ -292,6 +292,38 @@ void main() {
     expect(sink.pending, isEmpty);
   });
 
+  test('forced flush during an aborted in-flight drain sends the new queue '
+      'right after it', () async {
+    final hang = Completer<SendOutcome>();
+    final batches = <List<Map<String, dynamic>>>[];
+    await sink.attach(
+      db: db,
+      sender: (events) {
+        batches.add(events);
+        return batches.length == 1
+            ? hang.future
+            : Future.value(SendOutcome.sent);
+      },
+      canSend: () => canSend,
+      platform: 'ios',
+      appVersion: '1.4.0',
+    );
+    sink.track('ai_chat_opened');
+    final first = sink.flush();
+    await Future<void>.delayed(Duration.zero);
+
+    await sink.clear(); // logout посреди отправки
+    sink.track('session_start'); // новый юзер
+    final forced = sink.flush(force: true);
+    hang.complete(SendOutcome.retry);
+    await first;
+    await forced;
+
+    expect(batches, hasLength(2));
+    expect([for (final e in batches.last) e['name']], ['session_start']);
+    expect(sink.pending, isEmpty);
+  });
+
   test('hasPending reports queued events by name', () async {
     canSend = false;
     await attach(sink);

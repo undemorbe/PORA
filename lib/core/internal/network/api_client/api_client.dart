@@ -169,6 +169,7 @@ abstract class ApiClient {
   /// `skip-auth-refresh`: 401 не обновляет токен и не повторяет запрос —
   /// батч старого юзера не должен уйти с токеном нового; sink ретраит сам.
   @POST('/analytics/events')
+  // Аналитика никогда не запускает refresh токена — так задумано.
   @Extra({'skip-auth-refresh': true})
   Future<void> sendAnalyticsEvents({
     @Body() required Map<String, dynamic> body,
