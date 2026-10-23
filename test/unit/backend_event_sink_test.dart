@@ -1,8 +1,10 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 
 import 'package:fake_async/fake_async.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:pora/core/internal/analytics/backend/analytics_event.dart';
 import 'package:pora/core/internal/analytics/backend/backend_event_sink.dart';
 import 'package:pora/core/internal/local_storage/abstract_local_db.dart';
 
@@ -11,14 +13,33 @@ import '../helpers/fake_local_db.dart';
 class _Sender {
   final List<List<Map<String, dynamic>>> batches = [];
   SendOutcome outcome = SendOutcome.sent;
+  Object? error;
 
   Future<SendOutcome> call(List<Map<String, dynamic>> events) async {
     batches.add(events);
+    final e = error;
+    if (e != null) throw e;
     return outcome;
   }
 
   int get sentEvents => batches.fold(0, (sum, b) => sum + b.length);
 }
+
+/// [FakeLocalDB], у которого чтение ждёт [gate] — окно загрузки в attach.
+class _SlowDB extends FakeLocalDB {
+  final gate = Completer<void>();
+
+  @override
+  Future<dynamic> get({
+    required String key,
+    required LocalDBNames boxName,
+  }) async {
+    await gate.future;
+    return super.get(key: key, boxName: boxName);
+  }
+}
+
+enum _Kind { alpha }
 
 void main() {
   late DateTime clock;
@@ -155,9 +176,103 @@ void main() {
     for (var i = 0; i < BackendEventSink.flushThreshold; i++) {
       sink.track('screen_view');
     }
+    expect(sender.batches, hasLength(1)); // отправка стартовала сама
     await sink.flush(); // дожидаемся уже запущенной отправки
     expect(sender.sentEvents, BackendEventSink.flushThreshold);
   });
+
+  test('flush on empty queue does not swallow a following flush', () async {
+    await attach(sink);
+    unawaited(sink.flush());
+    for (var i = 0; i < BackendEventSink.flushThreshold; i++) {
+      sink.track('screen_view');
+    }
+    await sink.flush();
+    await sink.flush();
+    expect(sender.batches, hasLength(1));
+    expect(sender.sentEvents, BackendEventSink.flushThreshold);
+    expect(sink.pending, isEmpty);
+  });
+
+  test('sender throwing is treated as retry', () async {
+    await attach(sink);
+    sink.track('session_start');
+    sender.error = StateError('boom');
+    await sink.flush();
+    expect(sink.pending, hasLength(1));
+    expect(sink.retryDelay, BackendEventSink.initialBackoff);
+  });
+
+  test('forced flush ignores backoff', () async {
+    await attach(sink);
+    sink.track('session_start');
+    sender.outcome = SendOutcome.retry;
+    await sink.flush();
+    expect(sink.retryDelay, isNotNull);
+
+    sender.outcome = SendOutcome.sent;
+    await sink.flush(force: true);
+    expect(sender.batches, hasLength(2));
+    expect(sink.pending, isEmpty);
+    expect(sink.retryDelay, isNull);
+  });
+
+  test('unencodable props are stored as strings', () async {
+    canSend = false;
+    await attach(sink);
+    sink.track('screen_view', {
+      'at': DateTime.utc(2026, 10, 15, 10),
+      'kind': _Kind.alpha,
+      'nan': double.nan,
+      'n': 3,
+      'ok': true,
+    });
+    await sink.persistNow();
+
+    final stored = await db.get(
+      key: BackendEventSink.storageKey,
+      boxName: LocalDBNames.settings,
+    );
+    final props = (jsonDecode(stored as String) as List).single['props'] as Map;
+    expect(props['at'], isA<String>());
+    expect(props['kind'], isA<String>());
+    expect(props.containsKey('nan'), isFalse);
+    expect(props['n'], 3);
+    expect(props['ok'], true);
+  });
+
+  test(
+    'no send during attach load; stored and new events go together',
+    () async {
+      final slow = _SlowDB();
+      final old = AnalyticsEvent(
+        id: 'stored-1',
+        name: 'ai_chat_opened',
+        props: const {},
+        occurredAt: DateTime.utc(2026, 10, 14),
+      );
+      await slow.set(
+        key: BackendEventSink.storageKey,
+        value: jsonEncode([old.toStorage()]),
+        boxName: LocalDBNames.settings,
+      );
+      db = slow;
+
+      final attaching = attach(sink);
+      for (var i = 0; i < BackendEventSink.flushThreshold; i++) {
+        sink.track('screen_view');
+      }
+      await sink.flush();
+      expect(sender.batches, isEmpty);
+
+      slow.gate.complete();
+      await attaching;
+      await sink.flush();
+      expect(sender.batches, hasLength(1));
+      expect(sender.batches.single.first['id'], 'stored-1');
+      expect(sender.sentEvents, BackendEventSink.flushThreshold + 1);
+    },
+  );
 
   test('periodic timer flushes', () {
     fakeAsync((async) {

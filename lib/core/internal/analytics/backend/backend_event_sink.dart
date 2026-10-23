@@ -49,6 +49,13 @@ class BackendEventSink {
   String _appVersion = '';
   bool _disabled = false;
 
+  /// Сохранённая очередь загружена и слита с новыми событиями. До этого
+  /// не шлём и не пишем на диск — иначе затрём ещё не прочитанное.
+  bool _loaded = false;
+
+  /// Растёт на каждый [clear] — clear во время загрузки отменяет слияние.
+  int _epoch = 0;
+
   Timer? _flushTimer;
   Timer? _persistTimer;
   Future<void>? _inFlight;
@@ -71,7 +78,7 @@ class BackendEventSink {
       AnalyticsEvent(
         id: uuidV4(_random),
         name: name,
-        props: props,
+        props: _sanitize(props),
         occurredAt: _clock(),
       ),
     );
@@ -96,19 +103,26 @@ class BackendEventSink {
       _queue.clear();
       return;
     }
+    // _db ставим сразу: повторный attach отсекается, track() во время
+    // загрузки планирует persist. Отправка и запись ждут [_loaded].
     _db = db;
+    final epoch = _epoch;
+    try {
+      final raw = await db.get(key: storageKey, boxName: LocalDBNames.settings);
+      if (epoch == _epoch) {
+        _queue.insertAll(0, _decode(raw));
+        _trimToCap();
+      }
+    } catch (e, s) {
+      Logger.talker.warning('BackendEventSink: load failed', e, s);
+    }
     _sender = sender;
     _canSend = canSend;
     _platform = platform;
     _appVersion = appVersion;
-    try {
-      final raw = await db.get(key: storageKey, boxName: LocalDBNames.settings);
-      _queue.insertAll(0, _decode(raw));
-      _trimToCap();
-    } catch (e, s) {
-      Logger.talker.warning('BackendEventSink: load failed', e, s);
-    }
+    _loaded = true;
     _schedulePersist();
+    if (_queue.length >= flushThreshold) unawaited(flush());
     _flushTimer = Timer.periodic(flushInterval, (_) => unawaited(flush()));
   }
 
@@ -118,7 +132,14 @@ class BackendEventSink {
   /// Предусловия проверяются синхронно, до записи [_inFlight]: иначе вызов
   /// сразу после «пустого» flush получил бы уже завершившийся future и
   /// ничего бы не отправил.
-  Future<void> flush() {
+  ///
+  /// [force] сбрасывает backoff (логин, появление сети — повод попробовать
+  /// сразу, не дожидаясь [_retryAfter]).
+  Future<void> flush({bool force = false}) {
+    if (force) {
+      _failures = 0;
+      _retryAfter = null;
+    }
     final running = _inFlight;
     if (running != null) return running;
     if (!_readyToDrain()) return Future.value();
@@ -130,7 +151,7 @@ class BackendEventSink {
     _persistTimer?.cancel();
     _persistTimer = null;
     final db = _db;
-    if (db == null) return;
+    if (db == null || !_loaded) return;
     try {
       await db.set(
         key: storageKey,
@@ -145,6 +166,7 @@ class BackendEventSink {
   /// Полная очистка (logout — события нового юзера не смешиваем со старыми).
   Future<void> clear() async {
     _persistTimer?.cancel();
+    _epoch++;
     _queue.clear();
     _failures = 0;
     _retryAfter = null;
@@ -164,7 +186,7 @@ class BackendEventSink {
   //! --- internals ---
 
   bool _readyToDrain() {
-    if (_sender == null || _platform == null) return false;
+    if (!_loaded || _sender == null || _platform == null) return false;
     if (_queue.isEmpty || !_canSend()) return false;
     final retryAfter = _retryAfter;
     return retryAfter == null || !_clock().isBefore(retryAfter);
@@ -176,10 +198,16 @@ class BackendEventSink {
 
     while (_queue.isNotEmpty && _canSend()) {
       final batch = _queue.take(maxBatch).toList();
-      final outcome = await sender([
-        for (final e in batch)
-          e.toJson(platform: platform, appVersion: _appVersion),
-      ]);
+      SendOutcome outcome;
+      try {
+        outcome = await sender([
+          for (final e in batch)
+            e.toJson(platform: platform, appVersion: _appVersion),
+        ]);
+      } catch (e, s) {
+        Logger.talker.warning('BackendEventSink: send failed', e, s);
+        outcome = SendOutcome.retry;
+      }
 
       if (outcome == SendOutcome.retry) {
         _failures++;
@@ -205,6 +233,23 @@ class BackendEventSink {
     final factor = 1 << (failures - 1).clamp(0, 10);
     final delay = initialBackoff * factor;
     return delay > maxBackoff ? maxBackoff : delay;
+  }
+
+  /// Оставляет в props только JSON-примитивы: String, bool, конечные num.
+  /// NaN/Infinity выбрасываются, остальное (DateTime, enum, коллекции…)
+  /// превращается в строку — иначе jsonEncode уронит persist всей очереди.
+  static Map<String, Object> _sanitize(Map<String, Object> props) {
+    if (props.isEmpty) return props;
+    return {
+      for (final MapEntry(:key, :value) in props.entries)
+        if (value is! num || value.isFinite)
+          key: switch (value) {
+            String() || bool() || num() => value,
+            DateTime() => value.toUtc().toIso8601String(),
+            Enum() => value.name,
+            _ => '$value',
+          },
+    };
   }
 
   void _trimToCap() {
