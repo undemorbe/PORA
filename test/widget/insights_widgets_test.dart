@@ -157,4 +157,44 @@ void main() {
     await tester.pumpWidget(_wrap(ActivityChart(points: s.series)));
     expect(find.text('За этот период активности пока нет'), findsOneWidget);
   });
+
+  testWidgets('heatmap empty days use the lightest level, cells are square', (
+    tester,
+  ) async {
+    final now = DateTime(2026, 10, 7, 12); // среда
+    await tester.pumpWidget(
+      _wrap(WeeklyHeatmap(activity: {DateTime(2026, 10, 7): 3}, now: now)),
+    );
+    await tester.pumpAndSettle();
+
+    BoxDecoration deco(int i) =>
+        tester
+                .widget<Container>(
+                  find.descendant(
+                    of: find.byKey(ValueKey('heatmap-cell-$i')),
+                    matching: find.byType(Container),
+                  ),
+                )
+                .decoration!
+            as BoxDecoration;
+
+    final empty = WeeklyHeatmap.levelColor(0);
+    expect(empty.a, greaterThan(0));
+    // Пустой прошлый день — видимая ступень, а не цвет карточки.
+    expect(deco(0).color, empty);
+    // Сегодня (ряд 3, среда) — самая насыщенная ступень.
+    expect(deco(23).color, WeeklyHeatmap.levelColor(1));
+    // Будущее — контур пустой ступени.
+    expect(deco(27).color, Colors.transparent);
+    expect(deco(27).border, isNotNull);
+
+    final sizes = {
+      for (var i = 0; i < 28; i++)
+        tester.getSize(find.byKey(ValueKey('heatmap-cell-$i'))),
+    };
+    expect(sizes, hasLength(1), reason: 'все ячейки одного размера');
+    final size = sizes.single;
+    expect(size.width, size.height);
+    expect(size.width, lessThanOrEqualTo(34));
+  });
 }

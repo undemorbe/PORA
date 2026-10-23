@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
@@ -17,6 +19,23 @@ class WeeklyHeatmap extends StatelessWidget {
 
   /// Подмена «сегодня» для тестов/golden'ов.
   final DateTime? now;
+
+  static const double _gap = 4;
+  static const double _maxCell = 34;
+
+  /// Цвет ступени интенсивности (общий для ячеек и легенды). Пустой день —
+  /// самая светлая ступень, а не цвет карточки: сетка 4×7 видна всегда.
+  /// Полупрозрачный primary поверх `surface` читается в обеих темах.
+  @visibleForTesting
+  static Color levelColor(double intensity) {
+    final v = intensity.clamp(0.0, 1.0);
+    if (v < 0.05) return PoraColors.primary.withValues(alpha: 0.12);
+    return Color.lerp(
+      PoraColors.primary.withValues(alpha: 0.3),
+      PoraColors.primary,
+      v,
+    )!;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,25 +61,44 @@ class WeeklyHeatmap extends StatelessWidget {
             style: PoraText.itemTitle.copyWith(fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: PoraSpacing.md),
-          _WeekdayLabels(labels: weekdayLabels),
-          const SizedBox(height: 6),
-          for (var w = 0; w < grid.length; w++)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 4),
-              child: Row(
+          // Квадратные ячейки одного размера: ширина колонки, но не больше
+          // [_maxCell] — на широком экране сетка не раздувается.
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final cell = math.min(
+                (constraints.maxWidth - _gap * 6) / 7,
+                _maxCell,
+              );
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  for (var d = 0; d < grid[w].length; d++)
-                    Expanded(
-                      child: _Cell(
-                        intensity: grid[w][d],
-                        isToday: w * 7 + d == todayIndex,
-                        isFuture: w * 7 + d > todayIndex,
+                  _WeekdayLabels(labels: weekdayLabels, cell: cell),
+                  const SizedBox(height: 6),
+                  for (var w = 0; w < grid.length; w++)
+                    Padding(
+                      padding: EdgeInsets.only(
+                        bottom: w == grid.length - 1 ? 0 : _gap,
+                      ),
+                      child: Row(
+                        children: [
+                          for (var d = 0; d < grid[w].length; d++) ...[
+                            if (d > 0) const SizedBox(width: _gap),
+                            _Cell(
+                              key: ValueKey('heatmap-cell-${w * 7 + d}'),
+                              size: cell,
+                              intensity: grid[w][d],
+                              isToday: w * 7 + d == todayIndex,
+                              isFuture: w * 7 + d > todayIndex,
+                            ),
+                          ],
+                        ],
                       ),
                     ),
                 ],
-              ),
-            ),
-          const SizedBox(height: 6),
+              );
+            },
+          ),
+          const SizedBox(height: PoraSpacing.md),
           Row(
             children: [
               Text(
@@ -68,7 +106,8 @@ class WeeklyHeatmap extends StatelessWidget {
                 style: PoraText.micro.copyWith(color: c.textSubtle),
               ),
               const SizedBox(width: 6),
-              for (final v in const [0.15, 0.4, 0.7, 1.0])
+              // Первая ступень легенды = пустой день.
+              for (final v in const [0.0, 0.35, 0.7, 1.0])
                 Padding(
                   padding: const EdgeInsets.only(right: 3),
                   child: _LegendDot(intensity: v),
@@ -118,24 +157,27 @@ class WeeklyHeatmap extends StatelessWidget {
 }
 
 class _WeekdayLabels extends StatelessWidget {
-  const _WeekdayLabels({required this.labels});
+  const _WeekdayLabels({required this.labels, required this.cell});
   final List<String> labels;
+  final double cell;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        for (final d in labels)
-          Expanded(
-            child: Center(
-              child: Text(
-                d,
-                style: PoraText.micro.copyWith(
-                  color: context.colors.textSubtle,
-                ),
-              ),
+        for (var i = 0; i < labels.length; i++) ...[
+          if (i > 0) const SizedBox(width: WeeklyHeatmap._gap),
+          SizedBox(
+            width: cell,
+            child: Text(
+              labels[i],
+              textAlign: TextAlign.center,
+              maxLines: 1,
+              overflow: TextOverflow.clip,
+              style: PoraText.micro.copyWith(color: context.colors.textSubtle),
             ),
           ),
+        ],
       ],
     );
   }
@@ -143,38 +185,34 @@ class _WeekdayLabels extends StatelessWidget {
 
 class _Cell extends StatelessWidget {
   const _Cell({
+    super.key,
+    required this.size,
     required this.intensity,
     this.isToday = false,
     this.isFuture = false,
   });
+  final double size;
   final double intensity;
   final bool isToday;
   final bool isFuture;
 
   @override
   Widget build(BuildContext context) {
-    final c = context.colors;
-    final v = intensity.clamp(0.0, 1.0);
-    final color = v < 0.05
-        ? c.surfaceAlt
-        : Color.lerp(
-            PoraColors.primary.withValues(alpha: 0.15),
-            PoraColors.primary,
-            v,
-          )!;
-    return AspectRatio(
-      aspectRatio: 1,
-      child: Container(
-        margin: const EdgeInsets.all(2),
-        decoration: BoxDecoration(
-          color: isFuture ? Colors.transparent : color,
-          borderRadius: BorderRadius.circular(6),
-          border: isToday
-              ? Border.all(color: PoraColors.primaryDark, width: 1.5)
-              : isFuture
-              ? Border.all(color: c.surfaceAlt)
-              : null,
-        ),
+    final empty = WeeklyHeatmap.levelColor(0);
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        // Будущие дни — только контур пустой ступени.
+        color: isFuture
+            ? Colors.transparent
+            : WeeklyHeatmap.levelColor(intensity),
+        borderRadius: BorderRadius.circular(6),
+        border: isToday
+            ? Border.all(color: PoraColors.primaryDark, width: 1.5)
+            : isFuture
+            ? Border.all(color: empty)
+            : null,
       ),
     );
   }
@@ -186,16 +224,11 @@ class _LegendDot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = Color.lerp(
-      PoraColors.primary.withValues(alpha: 0.2),
-      PoraColors.primary,
-      intensity,
-    )!;
     return Container(
       width: 10,
       height: 10,
       decoration: BoxDecoration(
-        color: color,
+        color: WeeklyHeatmap.levelColor(intensity),
         borderRadius: BorderRadius.circular(3),
       ),
     );
