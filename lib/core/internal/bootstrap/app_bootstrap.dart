@@ -24,10 +24,18 @@ import 'package:pora/core/internal/platform/share_intent_service.dart';
 
 /// Backend-сессия на логине: только повторный вход в рамках того же запуска
 /// (`unauthenticated → authenticated`). Холодный старт (`unknown →
-/// authenticated`) уже отметил `UsageSessionListener`.
+/// authenticated`) уже отметил `UsageSessionListener`. [alreadyQueued] —
+/// в очереди лежит неотправленный `session_start` (холодный старт без
+/// авторизации: он уйдёт под этим логином), второй не нужен.
 @visibleForTesting
-bool shouldStartSessionOnAuth(AuthStatus prev, AuthStatus next) =>
-    prev == AuthStatus.unauthenticated && next == AuthStatus.authenticated;
+bool shouldStartSessionOnAuth(
+  AuthStatus prev,
+  AuthStatus next, {
+  required bool alreadyQueued,
+}) =>
+    !alreadyQueued &&
+    prev == AuthStatus.unauthenticated &&
+    next == AuthStatus.authenticated;
 
 class AppBootstrap {
   AppBootstrap._();
@@ -148,7 +156,11 @@ class AppBootstrap {
         final prev = lastStatus;
         lastStatus = status;
         if (status != AuthStatus.authenticated) return;
-        if (shouldStartSessionOnAuth(prev, status)) {
+        if (shouldStartSessionOnAuth(
+          prev,
+          status,
+          alreadyQueued: sink.hasPending('session_start'),
+        )) {
           unawaited(AnalyticsService.instance.logSessionStart());
         }
         unawaited(sink.flush(force: true));

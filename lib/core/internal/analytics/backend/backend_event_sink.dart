@@ -67,6 +67,11 @@ class BackendEventSink {
   @visibleForTesting
   List<AnalyticsEvent> get pending => List.unmodifiable(_queue);
 
+  /// Есть ли в очереди неотправленное событие [name] (например,
+  /// `session_start` холодного старта без авторизации — чтобы логин не
+  /// продублировал сессию).
+  bool hasPending(String name) => _queue.any((e) => e.name == name);
+
   /// Текущая задержка до следующей попытки (null — backoff не активен).
   @visibleForTesting
   Duration? get retryDelay => _failures == 0 ? null : _backoffFor(_failures);

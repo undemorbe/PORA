@@ -8,17 +8,36 @@ void main() {
       shouldStartSessionOnAuth(
         AuthStatus.unauthenticated,
         AuthStatus.authenticated,
+        alreadyQueued: false,
       ),
       isTrue,
     );
   });
 
-  test('cold start (unknown → authenticated) does not — the lifecycle '
-      'listener already emitted session_start', () {
+  test('first login after a logged-out cold start reuses the queued '
+      'session_start', () {
     expect(
-      shouldStartSessionOnAuth(AuthStatus.unknown, AuthStatus.authenticated),
+      shouldStartSessionOnAuth(
+        AuthStatus.unauthenticated,
+        AuthStatus.authenticated,
+        alreadyQueued: true,
+      ),
       isFalse,
     );
+  });
+
+  test('cold start (unknown → authenticated) does not — the lifecycle '
+      'listener already emitted session_start', () {
+    for (final queued in [true, false]) {
+      expect(
+        shouldStartSessionOnAuth(
+          AuthStatus.unknown,
+          AuthStatus.authenticated,
+          alreadyQueued: queued,
+        ),
+        isFalse,
+      );
+    }
   });
 
   test('no session on any other transition', () {
@@ -29,7 +48,7 @@ void main() {
           continue;
         }
         expect(
-          shouldStartSessionOnAuth(prev, next),
+          shouldStartSessionOnAuth(prev, next, alreadyQueued: false),
           isFalse,
           reason: '$prev → $next',
         );

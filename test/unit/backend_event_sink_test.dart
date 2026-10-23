@@ -292,6 +292,17 @@ void main() {
     expect(sink.pending, isEmpty);
   });
 
+  test('hasPending reports queued events by name', () async {
+    canSend = false;
+    await attach(sink);
+    expect(sink.hasPending('session_start'), isFalse);
+    sink.track('session_start');
+    expect(sink.hasPending('session_start'), isTrue);
+    expect(sink.hasPending('screen_view'), isFalse);
+    await sink.clear();
+    expect(sink.hasPending('session_start'), isFalse);
+  });
+
   test('clear wipes queue and storage', () async {
     canSend = false;
     await attach(sink);
