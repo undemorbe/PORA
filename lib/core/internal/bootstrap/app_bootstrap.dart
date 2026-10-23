@@ -1,9 +1,13 @@
 import 'dart:async';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:flutter/foundation.dart' show kDebugMode;
+import 'package:flutter/foundation.dart'
+    show TargetPlatform, defaultTargetPlatform, kDebugMode;
 import 'package:flutter/widgets.dart' show AppLifecycleListener, Locale;
 import 'package:mobx/mobx.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:pora/core/internal/analytics/analytics_service.dart';
+import 'package:pora/core/internal/analytics/backend/api_analytics_sender.dart';
+import 'package:pora/core/internal/analytics/backend/backend_event_sink.dart';
 import 'package:pora/core/internal/analytics/usage/usage_session_listener.dart';
 import 'package:pora/core/internal/analytics/usage/usage_tracker.dart';
 import 'package:pora/core/internal/di/export.dart';
@@ -48,6 +52,8 @@ class AppBootstrap {
       unawaited(
         UsageTracker.instance.attach(container.getIt<ILocalDB<dynamic>>()),
       );
+      // Клиентские события → бэкенд (админ-панель аналитики).
+      unawaited(_attachAnalyticsSink(container));
 
       // finally: ошибка локализации/авторизации не должна оставить outbox
       // непривязанным (локаль читается лениво). Сама ошибка летит дальше в
@@ -94,6 +100,50 @@ class AppBootstrap {
       },
     );
   }
+
+  /// Очередь клиентских событий: шлём только авторизованным и онлайн;
+  /// дополнительно сбрасываем её при логине и при появлении сети. Эти два
+  /// триггера — свежие условия, поэтому flush с `force` (минуя backoff);
+  /// периодический и lifecycle-flush идут без него.
+  Future<void> _attachAnalyticsSink(InjectionContainer container) async {
+    try {
+      final auth = container.getIt<AuthState>();
+      final connectivity = container.getIt<ConnectivityStore>();
+      final api = container.getIt<ApiClient>();
+      final info = await PackageInfo.fromPlatform();
+      final sink = BackendEventSink.instance;
+
+      await sink.attach(
+        db: container.getIt<ILocalDB<dynamic>>(),
+        sender: apiAnalyticsSender(
+          (body) => api.sendAnalyticsEvents(body: body),
+        ),
+        canSend: () => auth.isAuthenticated && connectivity.online,
+        platform: _analyticsPlatform(),
+        appVersion: info.version,
+      );
+
+      // Подписки живут весь lifecycle приложения (singleton не диспоузится).
+      auth.stream
+          .where((status) => status == AuthStatus.authenticated)
+          .listen((_) => unawaited(sink.flush(force: true)));
+      reaction<bool>((_) => connectivity.online, (online) {
+        if (online) unawaited(sink.flush(force: true));
+      });
+      // Хвост прошлого запуска: авторизация могла выставиться до подписки
+      // (attach ждёт PackageInfo) — не ждём периодического таймера.
+      unawaited(sink.flush());
+    } catch (e, s) {
+      Logger.talker.warning('Analytics sink attach failed', e, s);
+    }
+  }
+
+  /// Бэкенд принимает события только с мобильных платформ.
+  static String? _analyticsPlatform() => switch (defaultTargetPlatform) {
+    TargetPlatform.iOS => 'ios',
+    TargetPlatform.android => 'android',
+    _ => null,
+  };
 
   /// Платформенные интеграции: App Shortcuts (иконка long-press) + Share-to-app
   /// (импорт рецептов по шарингу). Локализованные подписи берём из активной

@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:mobx/mobx.dart';
 import 'package:pora/core/internal/analytics/analytics_service.dart';
+import 'package:pora/core/internal/analytics/backend/backend_event_sink.dart';
 import 'package:pora/core/internal/analytics/usage/usage_tracker.dart';
 import 'package:pora/core/features/settings/domain/entity/message_entity.dart';
 import 'package:pora/core/features/settings/domain/usecase/send_support_msg.dart';
@@ -11,6 +13,11 @@ import 'package:pora/core/internal/cache/hive_json_cache.dart';
 import 'package:pora/core/internal/di/export.dart';
 import 'package:pora/core/internal/offline/outbox.dart';
 part 'settings_store.g.dart';
+
+/// Сколько logout ждёт отправки аналитики: зависший запрос (Dio-таймауты по
+/// 30 с) не должен держать пользователя на экране настроек.
+@visibleForTesting
+Duration logoutAnalyticsFlushTimeout = const Duration(seconds: 5);
 
 class SettingsStore = _SettingsStoreBase with _$SettingsStore;
 
@@ -67,6 +74,12 @@ abstract class _SettingsStoreBase with Store {
 
   @action
   Future<void> logout() async {
+    // Пока токен жив (до серверного logout) — отправляем накопленные события
+    // текущего юзера. Не дождались — остаток вычистит _clearSession.
+    await BackendEventSink.instance.flush().timeout(
+      logoutAnalyticsFlushTimeout,
+      onTimeout: () {},
+    );
     await GetIt.I<LogoutUseCase>().call();
     await _clearSession();
   }
@@ -76,6 +89,7 @@ abstract class _SettingsStoreBase with Store {
 
   /// Безвозвратно удаляет аккаунт. Возвращает `false` при ошибке сервера —
   /// локальная сессия тогда остаётся, UI покажет snackbar.
+  /// Аналитику удалённого аккаунта не досылаем — только чистим очередь.
   @action
   Future<bool> deleteAccount() async {
     isDeletingAccount = true;
@@ -99,6 +113,8 @@ abstract class _SettingsStoreBase with Store {
     // Чистим весь offline-cache — новый юзер не должен видеть чужие снапшоты.
     await HiveJsonCache.clear();
     await UsageTracker.instance.clear();
+    // События ушедшего юзера не смешиваем с событиями следующего.
+    await BackendEventSink.instance.clear();
     GetIt.I<AuthState>().setUnauthenticated();
   }
 
