@@ -1,5 +1,5 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { adminApi } from '../api/endpoints';
 import { ChartCard } from '../components/ChartCard';
@@ -17,16 +17,37 @@ export function UsersPage() {
   const [page, setPage] = useState(1);
   const query = useDebounced(search.trim().slice(0, QUERY_MAX));
 
+  // Новый (уже debounced) запрос → с первой страницы.
+  useEffect(() => setPage(1), [query]);
+
   const users = useQuery({
     queryKey: ['users', query, page],
     queryFn: () => adminApi.users(query, page),
     placeholderData: keepPreviousData,
   });
 
-  const onSearch = (value: string) => {
-    setSearch(value);
-    setPage(1);
-  };
+  const data = users.data;
+  const pages = data ? Math.max(1, Math.ceil(data.total / Math.max(1, data['page-size']))) : 1;
+  const stale = users.isPlaceholderData;
+
+  // Список сжался (кого-то удалили, сменился поиск), а мы за его концом — на последнюю страницу.
+  useEffect(() => {
+    if (data && !stale && page > pages) setPage(pages);
+  }, [data, stale, page, pages]);
+
+  const pager = (current: number, total: number): ReactNode => (
+    <div className="pager">
+      <span className="muted">
+        {total} всего · стр. {current} из {pages}
+      </span>
+      <button type="button" className="btn" disabled={page <= 1} onClick={() => setPage((p) => p - 1)}>
+        Назад
+      </button>
+      <button type="button" className="btn" disabled={page >= pages} onClick={() => setPage((p) => p + 1)}>
+        Вперёд
+      </button>
+    </div>
+  );
 
   return (
     <div className="page">
@@ -38,20 +59,28 @@ export function UsersPage() {
           type="search"
           maxLength={QUERY_MAX}
           value={search}
-          onChange={(e) => onSearch(e.target.value)}
+          onChange={(e) => setSearch(e.target.value)}
         />
       </label>
 
       <ChartCard
         title="Список"
         query={users}
-        isEmpty={(u) => (u.users ?? []).length === 0}
+        // На странице >1 пустой ответ — не «никого нет», а «ушли за конец»: оставляем пагинацию.
+        isEmpty={(u) => (u.users ?? []).length === 0 && page <= 1}
         emptyText={query ? 'Никого не нашли' : 'Пользователей пока нет'}
       >
         {(u) => {
-          const pages = Math.max(1, Math.ceil(u.total / u['page-size']));
+          if ((u.users ?? []).length === 0) {
+            return (
+              <>
+                <div className="state">На этой странице никого нет</div>
+                {pager(u.page, u.total)}
+              </>
+            );
+          }
           return (
-            <>
+            <div className={stale ? 'is-stale' : undefined} aria-busy={stale}>
               <div className="table-wrap">
                 <table>
                   <thead>
@@ -86,18 +115,8 @@ export function UsersPage() {
                   </tbody>
                 </table>
               </div>
-              <div className="pager">
-                <span className="muted">
-                  {u.total} всего · стр. {u.page} из {pages}
-                </span>
-                <button type="button" className="btn" disabled={page <= 1} onClick={() => setPage((p) => p - 1)}>
-                  Назад
-                </button>
-                <button type="button" className="btn" disabled={page >= pages} onClick={() => setPage((p) => p + 1)}>
-                  Вперёд
-                </button>
-              </div>
-            </>
+              {pager(u.page, u.total)}
+            </div>
           );
         }}
       </ChartCard>

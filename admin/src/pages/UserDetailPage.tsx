@@ -5,7 +5,7 @@ import { ChartCard } from '../components/ChartCard';
 import { KpiTile } from '../components/KpiTile';
 import { formatDateTime } from '../lib/format';
 import { EVENT_LABELS } from '../lib/labels';
-import { displayName } from '../lib/users';
+import { contactLine, displayName } from '../lib/users';
 
 const TZ = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
 
@@ -13,19 +13,20 @@ export function UserDetailPage() {
   const { id = '' } = useParams();
   const detail = useQuery({ queryKey: ['user', id], queryFn: () => adminApi.user(id), enabled: id !== '' });
 
+  const user = detail.data?.user;
+
   return (
     <div className="page">
       <Link to="/users">← Все пользователи</Link>
+      <h1>
+        {user ? displayName(user) : 'Пользователь'}{' '}
+        {user?.['is-admin'] && <span className="badge">админ</span>}
+      </h1>
 
-      <ChartCard title="Профиль" query={detail}>
+      <ChartCard title="Профиль" query={detail} retryLabel="Повторить загрузку профиля">
         {({ user }) => (
           <>
-            <h1>
-              {displayName(user)} {user['is-admin'] && <span className="badge">админ</span>}
-            </h1>
-            <p className="muted">
-              {[user.email, user.phone].filter(Boolean).join(' · ')} · статус {user.status}
-            </p>
+            <p className="muted">{contactLine(user)}</p>
             <div className="kpi-grid">
               <KpiTile label="Регистрация" value={formatDateTime(user['created-at'], TZ)} />
               <KpiTile
@@ -45,6 +46,7 @@ export function UserDetailPage() {
         query={detail}
         isEmpty={(d) => (d.events ?? []).length === 0}
         emptyText="Событий пока нет"
+        retryLabel="Повторить загрузку событий"
       >
         {({ events }) => (
           <div className="table-wrap">

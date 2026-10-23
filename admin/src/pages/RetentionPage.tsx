@@ -48,34 +48,46 @@ export function RetentionPage() {
         query={retention}
         isEmpty={(r) => (r.cohorts ?? []).length === 0}
       >
-        {(r) => (
-          <div className="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Неделя регистрации</th>
-                  <th>Юзеров</th>
-                  {Array.from({ length: WEEKS + 1 }, (_, n) => (
-                    <th key={n}>Нед. {n}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {(r.cohorts ?? []).map((cohort) => (
-                  <tr key={cohort.week}>
-                    <td>с {formatDay(cohort.week)}</td>
-                    <td>{cohort.size}</td>
-                    {cohort.retained.map((value, n) => (
-                      <td key={n} className="heat" style={heatStyle(value)}>
-                        {value === null ? '' : formatPercent(value, 0)}
-                      </td>
+        {(r) => {
+          const cohorts = r.cohorts ?? [];
+          // Колонок столько, сколько недель пришло в самой длинной когорте (сервер может отдать не WEEKS+1).
+          const columns = Math.max(0, ...cohorts.map((c) => (c.retained ?? []).length)) || WEEKS + 1;
+          return (
+            <div className="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Неделя регистрации</th>
+                    <th>Юзеров</th>
+                    {Array.from({ length: columns }, (_, n) => (
+                      <th key={n}>Нед. {n}</th>
                     ))}
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+                </thead>
+                <tbody>
+                  {cohorts.map((cohort) => (
+                    <tr key={cohort.week}>
+                      <td>с {formatDay(cohort.week)}</td>
+                      <td>{cohort.size}</td>
+                      {Array.from({ length: columns }, (_, n) => {
+                        const value = cohort.retained?.[n] ?? null;
+                        return value === null ? (
+                          <td key={n} className="heat heat-empty" aria-label="нет данных">
+                            ·
+                          </td>
+                        ) : (
+                          <td key={n} className="heat" style={heatStyle(value)}>
+                            {formatPercent(value, 0)}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          );
+        }}
       </ChartCard>
       <p className="muted">Активность — вход в приложение или любое событие. Неделя 0 — неделя регистрации (100%).</p>
     </div>

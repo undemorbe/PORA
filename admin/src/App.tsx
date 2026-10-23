@@ -1,19 +1,22 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { lazy } from 'react';
 import { ApiError } from './api/client';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { AuthProvider, useAuth } from './auth/AuthContext';
 import { Layout } from './components/Layout';
-import { EngagementPage } from './pages/EngagementPage';
 import { ForbiddenPage } from './pages/ForbiddenPage';
 import { LoginPage } from './pages/LoginPage';
 import { OfflinePage } from './pages/OfflinePage';
-import { OverviewPage } from './pages/OverviewPage';
-import { PlatformsPage } from './pages/PlatformsPage';
-import { ProductsPage } from './pages/ProductsPage';
-import { PushPage } from './pages/PushPage';
-import { RetentionPage } from './pages/RetentionPage';
-import { UserDetailPage } from './pages/UserDetailPage';
-import { UsersPage } from './pages/UsersPage';
+
+// Экраны данных грузятся по требованию (Recharts — отдельный чанк); логин и экраны ошибок — сразу.
+const OverviewPage = lazy(() => import('./pages/OverviewPage').then((m) => ({ default: m.OverviewPage })));
+const RetentionPage = lazy(() => import('./pages/RetentionPage').then((m) => ({ default: m.RetentionPage })));
+const EngagementPage = lazy(() => import('./pages/EngagementPage').then((m) => ({ default: m.EngagementPage })));
+const ProductsPage = lazy(() => import('./pages/ProductsPage').then((m) => ({ default: m.ProductsPage })));
+const PlatformsPage = lazy(() => import('./pages/PlatformsPage').then((m) => ({ default: m.PlatformsPage })));
+const UsersPage = lazy(() => import('./pages/UsersPage').then((m) => ({ default: m.UsersPage })));
+const UserDetailPage = lazy(() => import('./pages/UserDetailPage').then((m) => ({ default: m.UserDetailPage })));
+const PushPage = lazy(() => import('./pages/PushPage').then((m) => ({ default: m.PushPage })));
 
 /** Один повтор для сети/5xx; 4xx повторять бессмысленно. */
 export function shouldRetryQuery(failureCount: number, error: unknown): boolean {

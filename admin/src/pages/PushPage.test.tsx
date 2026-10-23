@@ -1,19 +1,11 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
+import { json, renderWithProviders } from '../test/render';
 import { PushPage } from './PushPage';
 
-const json = (status: number, body: unknown) =>
-  new Response(JSON.stringify(body), { status, headers: { 'Content-Type': 'application/json' } });
-
 function renderPage() {
-  const client = new QueryClient({ defaultOptions: { mutations: { retry: false } } });
-  return render(
-    <QueryClientProvider client={client}>
-      <PushPage />
-    </QueryClientProvider>,
-  );
+  return renderWithProviders(<PushPage />, '/push');
 }
 
 describe('PushPage', () => {
@@ -66,7 +58,23 @@ describe('PushPage', () => {
     expect(sent).toEqual({ title: 'Привет', body: 'мир' });
   });
 
-  it('shows the server message on 400 and keeps the text', async () => {
+  it('explains INVALID_INPUT in plain words', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(json(400, { code: 'INVALID_INPUT', message: 'bad input' })));
+    renderPage();
+
+    await userEvent.type(screen.getByLabelText('Заголовок'), 'A');
+    await userEvent.type(screen.getByLabelText('Текст'), 'B');
+    await userEvent.click(screen.getByRole('button', { name: 'Отправить всем' }));
+    const group = screen.getByRole('group', { name: 'Подтверждение' });
+    // Безопасный вариант первым и с фокусом.
+    expect(group.querySelectorAll('button')[0]).toHaveTextContent('Отмена');
+    expect(screen.getByRole('button', { name: 'Отмена' })).toHaveFocus();
+    await userEvent.click(screen.getByRole('button', { name: 'Да, отправить' }));
+
+    expect(await screen.findByRole('alert')).toHaveTextContent('Заголовок до 65 и текст до 240 символов, оба не пустые');
+  });
+
+  it('shows the server message on other 400s and keeps the text', async () => {
     vi.stubGlobal(
       'fetch',
       vi.fn().mockResolvedValue(json(400, { code: 'VALIDATION_ERROR', message: 'title is too long' })),

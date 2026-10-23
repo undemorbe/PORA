@@ -26,4 +26,23 @@ describe('EngagementPage', () => {
     for (const url of seriesUrls) expect(new URL(url, 'http://x').searchParams.get('names')).not.toBe('');
     expect(seriesUrls.every((u) => u.includes('names='))).toBe(true);
   });
+
+  it('requests events in canonical order regardless of click order', async () => {
+    const fetchMock = vi.fn(async (_input: RequestInfo | URL) => json(200, { points: [], steps: [], mau: 0, features: null }));
+    vi.stubGlobal('fetch', fetchMock);
+    renderWithProviders(<EngagementPage />);
+
+    const chips = within(screen.getByRole('group', { name: 'События' }));
+    // Снимаем «Товар добавлен» (первый в EVENT_LABELS) и включаем обратно — он должен остаться первым, а не уйти в конец.
+    await userEvent.click(chips.getByRole('button', { name: 'Товар добавлен' }));
+    await userEvent.click(chips.getByRole('button', { name: 'Товар добавлен' }));
+
+    const last = fetchMock.mock.calls
+      .map(([u]) => String(u))
+      .filter((u) => u.includes('/events/timeseries'))
+      .at(-1);
+    expect(new URL(String(last), 'http://x').searchParams.get('names')).toBe(
+      'item_added,item_bought,session_start,ai_message_sent,recipe_import',
+    );
+  });
 });

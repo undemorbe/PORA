@@ -1,12 +1,8 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
+import { json, renderWithProviders } from '../test/render';
 import { OverviewPage } from './OverviewPage';
-
-const json = (status: number, body: unknown) =>
-  new Response(JSON.stringify(body), { status, headers: { 'Content-Type': 'application/json' } });
 
 const overview = {
   'total-users': 120,
@@ -22,14 +18,7 @@ const overview = {
 };
 
 function renderPage() {
-  const client = new QueryClient({ defaultOptions: { queries: { retry: false } } });
-  return render(
-    <QueryClientProvider client={client}>
-      <MemoryRouter initialEntries={['/?days=7']}>
-        <OverviewPage />
-      </MemoryRouter>
-    </QueryClientProvider>,
-  );
+  return renderWithProviders(<OverviewPage />, '/?days=7');
 }
 
 describe('OverviewPage', () => {

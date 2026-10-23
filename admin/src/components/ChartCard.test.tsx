@@ -87,4 +87,17 @@ describe('ChartCard', () => {
     expect(screen.getByText('Выберите события')).toBeInTheDocument();
     expect(screen.queryByText('Нет данных за период')).not.toBeInTheDocument();
   });
+
+  it('names the retry button when asked', () => {
+    render(
+      <ChartCard
+        title="T"
+        query={query({ isError: true, error: new ApiError(500, 'INTERNAL_ERROR', 'x') })}
+        retryLabel="Повторить загрузку профиля"
+      >
+        {() => 'data'}
+      </ChartCard>,
+    );
+    expect(screen.getByRole('button', { name: 'Повторить загрузку профиля' })).toHaveTextContent('Повторить');
+  });
 });

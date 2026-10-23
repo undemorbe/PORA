@@ -16,6 +16,7 @@ function pushErrorText(error: unknown): string {
   if (error instanceof ApiError) {
     if (error.status === 0) return 'Нет связи с сервером';
     if (error.status >= 500) return 'Сервер недоступен';
+    if (error.code === 'INVALID_INPUT') return 'Заголовок до 65 и текст до 240 символов, оба не пустые';
     // 400 — сервер объясняет, что не так с текстом.
     return error.message;
   }
@@ -97,14 +98,6 @@ export function PushPage() {
             <div role="group" aria-label="Подтверждение" className="chips">
               <span>Уведомление получат все пользователи приложения. Отменить после отправки нельзя.</span>
               <button
-                type="button"
-                className="btn btn-danger"
-                disabled={push.isPending}
-                onClick={() => push.mutate(message)}
-              >
-                Да, отправить
-              </button>
-              <button
                 ref={cancelRef}
                 type="button"
                 className="btn"
@@ -112,6 +105,14 @@ export function PushPage() {
                 onClick={() => setConfirming(false)}
               >
                 Отмена
+              </button>
+              <button
+                type="button"
+                className="btn btn-danger"
+                disabled={push.isPending}
+                onClick={() => push.mutate(message)}
+              >
+                Да, отправить
               </button>
             </div>
           ) : (

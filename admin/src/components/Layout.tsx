@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
 import { usePeriod } from '../hooks/usePeriod';
@@ -50,7 +51,15 @@ export function Layout() {
             <PeriodSwitch value={days} onChange={setDays} />
           </div>
         )}
-        <Outlet />
+        <Suspense
+          fallback={
+            <div className="state" aria-busy="true">
+              Загрузка…
+            </div>
+          }
+        >
+          <Outlet />
+        </Suspense>
       </main>
     </div>
   );

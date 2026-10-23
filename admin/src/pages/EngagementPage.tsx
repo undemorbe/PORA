@@ -17,10 +17,12 @@ export function EngagementPage() {
 
   const funnel = useQuery({ queryKey: ['funnel', period], queryFn: () => adminApi.funnel(period) });
   const features = useQuery({ queryKey: ['features', period], queryFn: () => adminApi.features(period) });
+  // Канонический порядок (как в EVENT_LABELS): цвета и легенда не зависят от порядка кликов.
+  const names = Object.keys(EVENT_LABELS).filter((name) => selected.includes(name));
   const events = useQuery({
-    queryKey: ['events', period, selected],
-    queryFn: () => adminApi.eventSeries(period, selected),
-    enabled: selected.length > 0,
+    queryKey: ['events', period, names],
+    queryFn: () => adminApi.eventSeries(period, names),
+    enabled: names.length > 0,
   });
 
   const toggle = (name: string) =>
@@ -63,7 +65,7 @@ export function EngagementPage() {
         title="События по дням"
         query={events}
         isEmpty={(e) => (e.points ?? []).length === 0}
-        emptyText={selected.length === 0 ? 'Выберите события' : undefined}
+        emptyText={names.length === 0 ? 'Выберите события' : undefined}
         action={
           <div className="chips" role="group" aria-label="События">
             {Object.keys(EVENT_LABELS).map((name) => (
@@ -82,8 +84,8 @@ export function EngagementPage() {
       >
         {(e) => (
           <StackedEvents
-            rows={pivotEvents(e.points ?? [], daysInRange(period.from, period.to), selected)}
-            names={selected}
+            rows={pivotEvents(e.points ?? [], daysInRange(period.from, period.to), names)}
+            names={names}
             labels={EVENT_LABELS}
           />
         )}
