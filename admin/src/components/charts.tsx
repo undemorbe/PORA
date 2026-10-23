@@ -35,7 +35,7 @@ export function DailyLine({ data, label }: { data: DayCount[]; label: string }) 
         <XAxis dataKey="date" tickFormatter={formatDay} {...axis} />
         <YAxis allowDecimals={false} {...axis} />
         <Tooltip contentStyle={tooltipStyle} labelFormatter={(d) => formatDay(String(d))} />
-        <Line type="monotone" dataKey="count" name={label} stroke="var(--accent)" strokeWidth={2} dot={false} />
+        <Line type="monotone" dataKey="count" name={label} stroke="var(--accent-strong)" strokeWidth={2} dot={false} />
       </LineChart>
     </ResponsiveContainer>
   );
@@ -49,7 +49,7 @@ export function DailyBars({ data, label }: { data: DayCount[]; label: string }) 
         <XAxis dataKey="date" tickFormatter={formatDay} {...axis} />
         <YAxis allowDecimals={false} {...axis} />
         <Tooltip contentStyle={tooltipStyle} labelFormatter={(d) => formatDay(String(d))} />
-        <Bar dataKey="count" name={label} fill="var(--accent)" radius={[4, 4, 0, 0]} />
+        <Bar dataKey="count" name={label} fill="var(--accent-strong)" radius={[4, 4, 0, 0]} />
       </BarChart>
     </ResponsiveContainer>
   );
