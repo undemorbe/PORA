@@ -50,6 +50,7 @@ DOCKER.md
 .pub-cache/
 .pub/
 /build/
+/android/build/
 /coverage/
 
 # Symbolication related
