@@ -24,6 +24,27 @@ env:
   FLUTTER_VERSION: "3.47.2"
 
 jobs:
+  admin:
+    name: Admin · typecheck · test · build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: admin
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: admin/package-lock.json
+
+      - run: npm ci --no-audit --no-fund
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+
   quality:
     name: Format · Analyze · Test
     runs-on: ubuntu-latest
