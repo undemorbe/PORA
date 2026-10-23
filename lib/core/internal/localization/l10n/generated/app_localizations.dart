@@ -668,23 +668,23 @@ abstract class AppLocalizations {
   /// **'Your personal list'**
   String get listsYour;
 
-  /// human
+  /// Members count in the list header
   ///
   /// In en, this message translates to:
-  /// **'people'**
-  String get human;
+  /// **'{count, plural, one{{count} person} other{{count} people}}'**
+  String peopleCount(int count);
 
-  /// products
+  /// Products count in the list header
   ///
   /// In en, this message translates to:
-  /// **'products'**
-  String get products;
+  /// **'{count, plural, one{{count} product} other{{count} products}}'**
+  String productsCount(int count);
 
-  /// lists
+  /// Lists count in the lists header
   ///
   /// In en, this message translates to:
-  /// **'lists'**
-  String get lists;
+  /// **'{count, plural, one{{count} list} other{{count} lists}}'**
+  String listsCount(int count);
 
   /// update
   ///
@@ -2527,6 +2527,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Couldn\'t leave the group. Try again.'**
   String get groupLeaveFailed;
+
+  /// Empty state title of a list without products
+  ///
+  /// In en, this message translates to:
+  /// **'No products yet'**
+  String get listNoProductsTitle;
+
+  /// Empty state subtitle of a list without products
+  ///
+  /// In en, this message translates to:
+  /// **'Tap “Add” to put the first one on the list'**
+  String get listNoProductsSubtitle;
+
+  /// Display label of stored unit 'шт'
+  ///
+  /// In en, this message translates to:
+  /// **'pcs'**
+  String get unitPcs;
+
+  /// Display label of stored unit 'г'
+  ///
+  /// In en, this message translates to:
+  /// **'g'**
+  String get unitG;
+
+  /// Display label of stored unit 'кг'
+  ///
+  /// In en, this message translates to:
+  /// **'kg'**
+  String get unitKg;
+
+  /// Display label of stored unit 'мл'
+  ///
+  /// In en, this message translates to:
+  /// **'ml'**
+  String get unitMl;
+
+  /// Display label of stored unit 'л'
+  ///
+  /// In en, this message translates to:
+  /// **'l'**
+  String get unitL;
+
+  /// Display label of stored unit 'уп'
+  ///
+  /// In en, this message translates to:
+  /// **'pack'**
+  String get unitPack;
+
+  /// Display label of stored section 'Овощи и фрукты'
+  ///
+  /// In en, this message translates to:
+  /// **'Fruit & vegetables'**
+  String get sectionProduce;
+
+  /// Display label of stored section 'Молочное'
+  ///
+  /// In en, this message translates to:
+  /// **'Dairy'**
+  String get sectionDairy;
+
+  /// Display label of stored section 'Бакалея'
+  ///
+  /// In en, this message translates to:
+  /// **'Pantry'**
+  String get sectionPantry;
+
+  /// Display label of stored section 'Напитки'
+  ///
+  /// In en, this message translates to:
+  /// **'Drinks'**
+  String get sectionDrinks;
+
+  /// Display label of stored section 'Хлеб'
+  ///
+  /// In en, this message translates to:
+  /// **'Bread'**
+  String get sectionBread;
+
+  /// Display label of stored section 'Разное'
+  ///
+  /// In en, this message translates to:
+  /// **'Miscellaneous'**
+  String get sectionMisc;
+
+  /// Display label of server section 'Прочее' (items without a section)
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get sectionOther;
 }
 
 class _AppLocalizationsDelegate

@@ -821,17 +821,32 @@
     "@listsYour": {
         "description": "listsYour"
     },
-    "human": "personnes",
-    "@human": {
-        "description": "human"
+    "peopleCount": "{count, plural, one{{count} personne} other{{count} personnes}}",
+    "@peopleCount": {
+        "description": "Members count in the list header",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
     },
-    "products": "produits",
-    "@products": {
-        "description": "products"
+    "productsCount": "{count, plural, one{{count} produit} other{{count} produits}}",
+    "@productsCount": {
+        "description": "Products count in the list header",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
     },
-    "lists": "listes",
-    "@lists": {
-        "description": "lists"
+    "listsCount": "{count, plural, one{{count} liste} other{{count} listes}}",
+    "@listsCount": {
+        "description": "Lists count in the lists header",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
     },
     "update": "Actualiser",
     "@update": {
@@ -2061,5 +2076,65 @@
     "groupLeaveTitle": "Quitter ce groupe ? La liste reste disponible pour les autres membres.",
     "groupDeleteOwnerOnly": "Seul le propriétaire du groupe peut le supprimer",
     "groupDeleteFailed": "Impossible de supprimer le groupe. Réessayez.",
-    "groupLeaveFailed": "Impossible de quitter le groupe. Réessayez."
+    "groupLeaveFailed": "Impossible de quitter le groupe. Réessayez.",
+    "listNoProductsTitle": "Aucun produit pour l’instant",
+    "@listNoProductsTitle": {
+        "description": "Empty state title of a list without products"
+    },
+    "listNoProductsSubtitle": "Touchez « Ajouter » pour mettre le premier produit sur la liste",
+    "@listNoProductsSubtitle": {
+        "description": "Empty state subtitle of a list without products"
+    },
+    "unitPcs": "pc",
+    "@unitPcs": {
+        "description": "Display label of stored unit 'шт'"
+    },
+    "unitG": "g",
+    "@unitG": {
+        "description": "Display label of stored unit 'г'"
+    },
+    "unitKg": "kg",
+    "@unitKg": {
+        "description": "Display label of stored unit 'кг'"
+    },
+    "unitMl": "ml",
+    "@unitMl": {
+        "description": "Display label of stored unit 'мл'"
+    },
+    "unitL": "l",
+    "@unitL": {
+        "description": "Display label of stored unit 'л'"
+    },
+    "unitPack": "paq.",
+    "@unitPack": {
+        "description": "Display label of stored unit 'уп'"
+    },
+    "sectionProduce": "Fruits et légumes",
+    "@sectionProduce": {
+        "description": "Display label of stored section 'Овощи и фрукты'"
+    },
+    "sectionDairy": "Produits laitiers",
+    "@sectionDairy": {
+        "description": "Display label of stored section 'Молочное'"
+    },
+    "sectionPantry": "Épicerie",
+    "@sectionPantry": {
+        "description": "Display label of stored section 'Бакалея'"
+    },
+    "sectionDrinks": "Boissons",
+    "@sectionDrinks": {
+        "description": "Display label of stored section 'Напитки'"
+    },
+    "sectionBread": "Pain",
+    "@sectionBread": {
+        "description": "Display label of stored section 'Хлеб'"
+    },
+    "sectionMisc": "Divers",
+    "@sectionMisc": {
+        "description": "Display label of stored section 'Разное'"
+    },
+    "sectionOther": "Autre",
+    "@sectionOther": {
+        "description": "Display label of server section 'Прочее' (items without a section)"
+    }
 }

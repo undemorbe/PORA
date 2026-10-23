@@ -648,13 +648,37 @@ class AppLocalizationsFr extends AppLocalizations {
   String get listsYour => 'Votre liste personnelle';
 
   @override
-  String get human => 'personnes';
+  String peopleCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count personnes',
+      one: '$count personne',
+    );
+    return '$_temp0';
+  }
 
   @override
-  String get products => 'produits';
+  String productsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count produits',
+      one: '$count produit',
+    );
+    return '$_temp0';
+  }
 
   @override
-  String get lists => 'listes';
+  String listsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count listes',
+      one: '$count liste',
+    );
+    return '$_temp0';
+  }
 
   @override
   String get update => 'Actualiser';
@@ -1873,4 +1897,50 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get groupLeaveFailed => 'Impossible de quitter le groupe. Réessayez.';
+
+  @override
+  String get listNoProductsTitle => 'Aucun produit pour l’instant';
+
+  @override
+  String get listNoProductsSubtitle =>
+      'Touchez « Ajouter » pour mettre le premier produit sur la liste';
+
+  @override
+  String get unitPcs => 'pc';
+
+  @override
+  String get unitG => 'g';
+
+  @override
+  String get unitKg => 'kg';
+
+  @override
+  String get unitMl => 'ml';
+
+  @override
+  String get unitL => 'l';
+
+  @override
+  String get unitPack => 'paq.';
+
+  @override
+  String get sectionProduce => 'Fruits et légumes';
+
+  @override
+  String get sectionDairy => 'Produits laitiers';
+
+  @override
+  String get sectionPantry => 'Épicerie';
+
+  @override
+  String get sectionDrinks => 'Boissons';
+
+  @override
+  String get sectionBread => 'Pain';
+
+  @override
+  String get sectionMisc => 'Divers';
+
+  @override
+  String get sectionOther => 'Autre';
 }

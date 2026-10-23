@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pora/core/features/add_item/presentation/item_labels.dart';
 import 'package:pora/core/features/insights/presentation/widgets/category_bars.dart';
 import 'package:pora/core/features/insights/presentation/widgets/insight_card.dart';
 import 'package:pora/core/internal/analytics/usage/usage_summary.dart';
@@ -30,7 +31,8 @@ class CategoriesSection extends StatelessWidget {
           items: [
             for (final c in categories)
               CategoryBar(
-                name: c.name,
+                // Канонические русские названия секций → язык интерфейса
+                name: context.l10n.sectionName(c.name),
                 share: total == 0 ? 0 : c.count / total,
               ),
           ],

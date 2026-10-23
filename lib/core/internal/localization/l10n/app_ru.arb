@@ -402,21 +402,36 @@
     "@listsYour": {
         "description": "listsYour"
     },
-    "human": "человека",
-    "@human": {
-        "description": "human"
+    "peopleCount": "{count, plural, one{{count} человек} few{{count} человека} many{{count} человек} other{{count} человека}}",
+    "@peopleCount": {
+        "description": "Members count in the list header",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
     },
     "connectionSuccess": "Присоединились",
     "@connectionSuccess": {
         "description": "connectionSuccess"
     },
-    "products": "продуктов",
-    "@products": {
-        "description": "products"
+    "productsCount": "{count, plural, one{{count} продукт} few{{count} продукта} many{{count} продуктов} other{{count} продукта}}",
+    "@productsCount": {
+        "description": "Products count in the list header",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
     },
-    "lists": "списков",
-    "@lists": {
-        "description": "lists"
+    "listsCount": "{count, plural, one{{count} список} few{{count} списка} many{{count} списков} other{{count} списка}}",
+    "@listsCount": {
+        "description": "Lists count in the lists header",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
     },
     "familiesNoUrgent": "Нет срочного",
     "@familiesNoUrgent": {
@@ -1411,5 +1426,65 @@
     "groupLeaveTitle": "Выйти из группы? Список останется у остальных участников.",
     "groupDeleteOwnerOnly": "Удалить группу может только её владелец",
     "groupDeleteFailed": "Не удалось удалить группу. Попробуйте ещё раз.",
-    "groupLeaveFailed": "Не удалось выйти из группы. Попробуйте ещё раз."
+    "groupLeaveFailed": "Не удалось выйти из группы. Попробуйте ещё раз.",
+    "listNoProductsTitle": "Пока нет продуктов",
+    "@listNoProductsTitle": {
+        "description": "Empty state title of a list without products"
+    },
+    "listNoProductsSubtitle": "Нажмите «Добавить», чтобы внести первый продукт в список",
+    "@listNoProductsSubtitle": {
+        "description": "Empty state subtitle of a list without products"
+    },
+    "unitPcs": "шт",
+    "@unitPcs": {
+        "description": "Display label of stored unit 'шт'"
+    },
+    "unitG": "г",
+    "@unitG": {
+        "description": "Display label of stored unit 'г'"
+    },
+    "unitKg": "кг",
+    "@unitKg": {
+        "description": "Display label of stored unit 'кг'"
+    },
+    "unitMl": "мл",
+    "@unitMl": {
+        "description": "Display label of stored unit 'мл'"
+    },
+    "unitL": "л",
+    "@unitL": {
+        "description": "Display label of stored unit 'л'"
+    },
+    "unitPack": "уп",
+    "@unitPack": {
+        "description": "Display label of stored unit 'уп'"
+    },
+    "sectionProduce": "Овощи и фрукты",
+    "@sectionProduce": {
+        "description": "Display label of stored section 'Овощи и фрукты'"
+    },
+    "sectionDairy": "Молочное",
+    "@sectionDairy": {
+        "description": "Display label of stored section 'Молочное'"
+    },
+    "sectionPantry": "Бакалея",
+    "@sectionPantry": {
+        "description": "Display label of stored section 'Бакалея'"
+    },
+    "sectionDrinks": "Напитки",
+    "@sectionDrinks": {
+        "description": "Display label of stored section 'Напитки'"
+    },
+    "sectionBread": "Хлеб",
+    "@sectionBread": {
+        "description": "Display label of stored section 'Хлеб'"
+    },
+    "sectionMisc": "Разное",
+    "@sectionMisc": {
+        "description": "Display label of stored section 'Разное'"
+    },
+    "sectionOther": "Прочее",
+    "@sectionOther": {
+        "description": "Display label of server section 'Прочее' (items without a section)"
+    }
 }

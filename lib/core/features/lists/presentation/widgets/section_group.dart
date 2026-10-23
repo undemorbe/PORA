@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
+import 'package:pora/core/features/add_item/presentation/item_labels.dart';
 import 'package:pora/core/features/item_detail/presentation/widgets/delete_confirmation_dialog.dart';
 import 'package:pora/core/features/lists/domain/entity/lists/list_section.dart';
 import 'package:pora/core/features/lists/domain/entity/products/product.dart';
@@ -64,7 +65,8 @@ class SectionGroup extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SectionLabel(section.name),
+        // Имя секции хранится канонически (рус.) — показываем перевод.
+        SectionLabel(context.l10n.sectionName(section.name)),
         PoraCard(
           padding: EdgeInsets.zero,
           child: ClipRRect(

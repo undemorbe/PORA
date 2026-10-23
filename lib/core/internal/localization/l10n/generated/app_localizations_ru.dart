@@ -317,13 +317,43 @@ class AppLocalizationsRu extends AppLocalizations {
   String get listsYour => 'Ваш личный список';
 
   @override
-  String get human => 'человека';
+  String peopleCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count человека',
+      many: '$count человек',
+      few: '$count человека',
+      one: '$count человек',
+    );
+    return '$_temp0';
+  }
 
   @override
-  String get products => 'продуктов';
+  String productsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count продукта',
+      many: '$count продуктов',
+      few: '$count продукта',
+      one: '$count продукт',
+    );
+    return '$_temp0';
+  }
 
   @override
-  String get lists => 'списков';
+  String listsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count списка',
+      many: '$count списков',
+      few: '$count списка',
+      one: '$count список',
+    );
+    return '$_temp0';
+  }
 
   @override
   String get update => 'Обновить';
@@ -1327,4 +1357,50 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get groupLeaveFailed =>
       'Не удалось выйти из группы. Попробуйте ещё раз.';
+
+  @override
+  String get listNoProductsTitle => 'Пока нет продуктов';
+
+  @override
+  String get listNoProductsSubtitle =>
+      'Нажмите «Добавить», чтобы внести первый продукт в список';
+
+  @override
+  String get unitPcs => 'шт';
+
+  @override
+  String get unitG => 'г';
+
+  @override
+  String get unitKg => 'кг';
+
+  @override
+  String get unitMl => 'мл';
+
+  @override
+  String get unitL => 'л';
+
+  @override
+  String get unitPack => 'уп';
+
+  @override
+  String get sectionProduce => 'Овощи и фрукты';
+
+  @override
+  String get sectionDairy => 'Молочное';
+
+  @override
+  String get sectionPantry => 'Бакалея';
+
+  @override
+  String get sectionDrinks => 'Напитки';
+
+  @override
+  String get sectionBread => 'Хлеб';
+
+  @override
+  String get sectionMisc => 'Разное';
+
+  @override
+  String get sectionOther => 'Прочее';
 }

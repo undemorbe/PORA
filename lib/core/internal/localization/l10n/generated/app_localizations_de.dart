@@ -320,13 +320,37 @@ class AppLocalizationsDe extends AppLocalizations {
   String get listsYour => 'Deine persönliche Liste';
 
   @override
-  String get human => 'Personen';
+  String peopleCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Personen',
+      one: '$count Person',
+    );
+    return '$_temp0';
+  }
 
   @override
-  String get products => 'Produkte';
+  String productsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Produkte',
+      one: '$count Produkt',
+    );
+    return '$_temp0';
+  }
 
   @override
-  String get lists => 'Listen';
+  String listsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Listen',
+      one: '$count Liste',
+    );
+    return '$_temp0';
+  }
 
   @override
   String get update => 'Aktualisieren';
@@ -1346,4 +1370,50 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get groupLeaveFailed =>
       'Gruppe konnte nicht verlassen werden. Bitte erneut versuchen.';
+
+  @override
+  String get listNoProductsTitle => 'Noch keine Produkte';
+
+  @override
+  String get listNoProductsSubtitle =>
+      'Tippe auf „Hinzufügen“, um das erste Produkt auf die Liste zu setzen';
+
+  @override
+  String get unitPcs => 'Stk.';
+
+  @override
+  String get unitG => 'g';
+
+  @override
+  String get unitKg => 'kg';
+
+  @override
+  String get unitMl => 'ml';
+
+  @override
+  String get unitL => 'l';
+
+  @override
+  String get unitPack => 'Pkg.';
+
+  @override
+  String get sectionProduce => 'Obst & Gemüse';
+
+  @override
+  String get sectionDairy => 'Milchprodukte';
+
+  @override
+  String get sectionPantry => 'Vorräte';
+
+  @override
+  String get sectionDrinks => 'Getränke';
+
+  @override
+  String get sectionBread => 'Brot';
+
+  @override
+  String get sectionMisc => 'Verschiedenes';
+
+  @override
+  String get sectionOther => 'Sonstiges';
 }

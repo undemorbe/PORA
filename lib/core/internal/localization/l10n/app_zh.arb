@@ -826,17 +826,32 @@
     "@listsYour": {
         "description": "listsYour"
     },
-    "human": "人",
-    "@human": {
-        "description": "human"
+    "peopleCount": "{count, plural, other{{count} 人}}",
+    "@peopleCount": {
+        "description": "Members count in the list header",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
     },
-    "products": "件商品",
-    "@products": {
-        "description": "products"
+    "productsCount": "{count, plural, other{{count} 件商品}}",
+    "@productsCount": {
+        "description": "Products count in the list header",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
     },
-    "lists": "个清单",
-    "@lists": {
-        "description": "lists"
+    "listsCount": "{count, plural, other{{count} 个清单}}",
+    "@listsCount": {
+        "description": "Lists count in the lists header",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
     },
     "update": "刷新",
     "@update": {
@@ -2100,5 +2115,65 @@
     "groupLeaveTitle": "退出此群组？清单将保留给其他成员。",
     "groupDeleteOwnerOnly": "只有群组所有者可以删除它",
     "groupDeleteFailed": "无法删除群组，请重试。",
-    "groupLeaveFailed": "无法退出群组，请重试。"
+    "groupLeaveFailed": "无法退出群组，请重试。",
+    "listNoProductsTitle": "还没有商品",
+    "@listNoProductsTitle": {
+        "description": "Empty state title of a list without products"
+    },
+    "listNoProductsSubtitle": "点击“添加”，把第一件商品加入清单",
+    "@listNoProductsSubtitle": {
+        "description": "Empty state subtitle of a list without products"
+    },
+    "unitPcs": "个",
+    "@unitPcs": {
+        "description": "Display label of stored unit 'шт'"
+    },
+    "unitG": "克",
+    "@unitG": {
+        "description": "Display label of stored unit 'г'"
+    },
+    "unitKg": "千克",
+    "@unitKg": {
+        "description": "Display label of stored unit 'кг'"
+    },
+    "unitMl": "毫升",
+    "@unitMl": {
+        "description": "Display label of stored unit 'мл'"
+    },
+    "unitL": "升",
+    "@unitL": {
+        "description": "Display label of stored unit 'л'"
+    },
+    "unitPack": "包",
+    "@unitPack": {
+        "description": "Display label of stored unit 'уп'"
+    },
+    "sectionProduce": "蔬菜水果",
+    "@sectionProduce": {
+        "description": "Display label of stored section 'Овощи и фрукты'"
+    },
+    "sectionDairy": "乳制品",
+    "@sectionDairy": {
+        "description": "Display label of stored section 'Молочное'"
+    },
+    "sectionPantry": "粮油干货",
+    "@sectionPantry": {
+        "description": "Display label of stored section 'Бакалея'"
+    },
+    "sectionDrinks": "饮品",
+    "@sectionDrinks": {
+        "description": "Display label of stored section 'Напитки'"
+    },
+    "sectionBread": "面包",
+    "@sectionBread": {
+        "description": "Display label of stored section 'Хлеб'"
+    },
+    "sectionMisc": "杂项",
+    "@sectionMisc": {
+        "description": "Display label of stored section 'Разное'"
+    },
+    "sectionOther": "其他",
+    "@sectionOther": {
+        "description": "Display label of server section 'Прочее' (items without a section)"
+    }
 }

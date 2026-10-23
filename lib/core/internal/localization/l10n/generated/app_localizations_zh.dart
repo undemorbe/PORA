@@ -680,13 +680,34 @@ class AppLocalizationsZh extends AppLocalizations {
   String get listsYour => '你的个人清单';
 
   @override
-  String get human => '人';
+  String peopleCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count 人',
+    );
+    return '$_temp0';
+  }
 
   @override
-  String get products => '件商品';
+  String productsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count 件商品',
+    );
+    return '$_temp0';
+  }
 
   @override
-  String get lists => '个清单';
+  String listsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count 个清单',
+    );
+    return '$_temp0';
+  }
 
   @override
   String get update => '刷新';
@@ -1860,4 +1881,49 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get groupLeaveFailed => '无法退出群组，请重试。';
+
+  @override
+  String get listNoProductsTitle => '还没有商品';
+
+  @override
+  String get listNoProductsSubtitle => '点击“添加”，把第一件商品加入清单';
+
+  @override
+  String get unitPcs => '个';
+
+  @override
+  String get unitG => '克';
+
+  @override
+  String get unitKg => '千克';
+
+  @override
+  String get unitMl => '毫升';
+
+  @override
+  String get unitL => '升';
+
+  @override
+  String get unitPack => '包';
+
+  @override
+  String get sectionProduce => '蔬菜水果';
+
+  @override
+  String get sectionDairy => '乳制品';
+
+  @override
+  String get sectionPantry => '粮油干货';
+
+  @override
+  String get sectionDrinks => '饮品';
+
+  @override
+  String get sectionBread => '面包';
+
+  @override
+  String get sectionMisc => '杂项';
+
+  @override
+  String get sectionOther => '其他';
 }

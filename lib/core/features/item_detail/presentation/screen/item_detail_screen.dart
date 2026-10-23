@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
+import 'package:pora/core/features/add_item/presentation/item_labels.dart';
 import 'package:pora/core/features/item_detail/presentation/store/item_details_store.dart';
 import 'package:pora/core/features/item_detail/presentation/widgets/added_by.dart';
 import 'package:pora/core/features/item_detail/presentation/widgets/delete_confirmation_dialog.dart';
@@ -252,11 +253,11 @@ class _Body extends StatelessWidget {
               ),
             InfoRow(
               label: context.l10n.itemDetailQuantity,
-              value: '${item.quantity} ${item.unit}'.trim(),
+              value: context.l10n.quantityWithUnit(item.quantity, item.unit),
             ),
             InfoRow(
               label: context.l10n.priorityLabel,
-              value: item.priority.toString(),
+              value: context.l10n.priorityName(item.priority),
             ),
             if (item.remindEveryDay != null)
               InfoRow(

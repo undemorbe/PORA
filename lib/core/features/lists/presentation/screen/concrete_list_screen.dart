@@ -110,7 +110,12 @@ class _ListPageState extends State<ListPage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: AddListButton(
         onTap: () async {
-          await context.router.push(AddItemRoute(lid: widget.listId));
+          final added = await context.router.push<bool>(
+            AddItemRoute(lid: widget.listId),
+          );
+          // WS-эхо может не прийти (переподключение, своё событие) —
+          // после успешного добавления перечитываем список сами.
+          if (added == true && mounted) await _refresh();
         },
       ),
       body: SafeArea(
@@ -134,14 +139,19 @@ class _ListPageState extends State<ListPage> {
                   return ListHeader(
                     title: title,
                     subtitle: members.length == 1
-                        ? "${context.l10n.onlyYou} · ${listStore.productsAmount} ${context.l10n.products}"
-                        : "${members.length} ${context.l10n.human} · ${listStore.productsAmount} ${context.l10n.products}",
+                        ? "${context.l10n.onlyYou} · ${context.l10n.productsCount(listStore.productsAmount)}"
+                        : "${context.l10n.peopleCount(members.length)} · ${context.l10n.productsCount(listStore.productsAmount)}",
                     members: members,
                     onBack: () => context.router.maybePop(),
                     onSearch: _toggleSearch,
-                    onRecipe: () => context.router.push(
-                      RecipeImportRoute(lid: widget.listId),
-                    ),
+                    onRecipe: () async {
+                      await context.router.push(
+                        RecipeImportRoute(lid: widget.listId),
+                      );
+                      // Импорт мог добавить часть товаров даже с ошибками —
+                      // перечитываем без оглядки на результат.
+                      if (mounted) await _refresh();
+                    },
                     onNotifications: () =>
                         context.router.push(const NotificationsRoute()),
                     onMembersTap: members.isEmpty

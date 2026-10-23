@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pora/core/features/add_item/domain/add_item_defaults.dart';
+import 'package:pora/core/features/add_item/presentation/item_labels.dart';
 import 'package:pora/core/features/add_item/presentation/widgets/custom_value_dialog.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
 import 'package:pora/core/internal/widgets/pora_chip.dart';
@@ -25,7 +26,8 @@ class SectionSelector extends StatelessWidget {
       children: [
         for (final (emoji, name) in AddItemDefaults.sections)
           PoraChip(
-            label: name,
+            // На backend уходит каноническое name, на чипе — перевод.
+            label: context.l10n.sectionName(name),
             leading: emoji,
             dense: true,
             selected: name == value,

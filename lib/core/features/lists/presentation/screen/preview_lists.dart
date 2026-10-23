@@ -114,7 +114,7 @@ class _PreviewListsPageState extends State<PreviewListsPage> {
                   if (_isPersonal) {
                     return ListHeader(
                       title: context.l10n.personal,
-                      subtitle: '$count ${context.l10n.lists}',
+                      subtitle: context.l10n.listsCount(count),
                       members: const [],
                       onBack: () => context.router.maybePop(),
                     );
@@ -123,7 +123,7 @@ class _PreviewListsPageState extends State<PreviewListsPage> {
                   return ListHeader(
                     title: widget.familyName ?? '',
                     subtitle:
-                        "${members.length} ${context.l10n.human} · $count ${context.l10n.lists}",
+                        "${context.l10n.peopleCount(members.length)} · ${context.l10n.listsCount(count)}",
                     members: members,
                     onBack: () => context.router.maybePop(),
                     onMembersTap: members.isEmpty
@@ -145,6 +145,7 @@ class _PreviewListsPageState extends State<PreviewListsPage> {
                 listStore: listStore,
                 isPreview: true,
                 members: widget.members,
+                onListClosed: _refresh,
               ),
             ],
           ),

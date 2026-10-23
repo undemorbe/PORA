@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
+import 'package:pora/core/features/add_item/presentation/item_labels.dart';
 import 'package:pora/core/features/families/domain/entity/member.dart';
 import 'package:pora/core/features/lists/domain/entity/products/product.dart';
 import 'package:pora/core/features/lists/presentation/widgets/strike_through_text.dart';
@@ -36,7 +37,7 @@ class ListItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final qty = _formatQuantity(item);
+    final qty = _formatQuantity(context, item);
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -83,7 +84,7 @@ class ListItemTile extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: PoraSpacing.xxs),
                       child: Text(
-                        '${context.l10n.priorityLabel}: ${item.priority}',
+                        '${context.l10n.priorityLabel}: ${context.l10n.priorityName(item.priority)}',
                         style: PoraText.small.copyWith(
                           color: context.colors.textSubtle,
                         ),
@@ -145,9 +146,8 @@ class ListItemTile extends StatelessWidget {
     );
   }
 
-  String? _formatQuantity(ProductEntity item) {
+  String? _formatQuantity(BuildContext context, ProductEntity item) {
     if (item.quantity <= 0) return null;
-    final unit = item.unit.trim();
-    return unit.isEmpty ? '${item.quantity}' : '${item.quantity} $unit';
+    return context.l10n.quantityWithUnit(item.quantity, item.unit);
   }
 }

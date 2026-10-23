@@ -318,13 +318,37 @@ class AppLocalizationsEn extends AppLocalizations {
   String get listsYour => 'Your personal list';
 
   @override
-  String get human => 'people';
+  String peopleCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count people',
+      one: '$count person',
+    );
+    return '$_temp0';
+  }
 
   @override
-  String get products => 'products';
+  String productsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count products',
+      one: '$count product',
+    );
+    return '$_temp0';
+  }
 
   @override
-  String get lists => 'lists';
+  String listsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count lists',
+      one: '$count list',
+    );
+    return '$_temp0';
+  }
 
   @override
   String get update => 'Refresh';
@@ -1320,4 +1344,50 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get groupLeaveFailed => 'Couldn\'t leave the group. Try again.';
+
+  @override
+  String get listNoProductsTitle => 'No products yet';
+
+  @override
+  String get listNoProductsSubtitle =>
+      'Tap “Add” to put the first one on the list';
+
+  @override
+  String get unitPcs => 'pcs';
+
+  @override
+  String get unitG => 'g';
+
+  @override
+  String get unitKg => 'kg';
+
+  @override
+  String get unitMl => 'ml';
+
+  @override
+  String get unitL => 'l';
+
+  @override
+  String get unitPack => 'pack';
+
+  @override
+  String get sectionProduce => 'Fruit & vegetables';
+
+  @override
+  String get sectionDairy => 'Dairy';
+
+  @override
+  String get sectionPantry => 'Pantry';
+
+  @override
+  String get sectionDrinks => 'Drinks';
+
+  @override
+  String get sectionBread => 'Bread';
+
+  @override
+  String get sectionMisc => 'Miscellaneous';
+
+  @override
+  String get sectionOther => 'Other';
 }
