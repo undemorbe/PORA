@@ -6,6 +6,8 @@ interface Props<T> {
   title: string;
   query: UseQueryResult<T>;
   isEmpty?: (data: T) => boolean;
+  /** Текст пустого состояния (и выключенного запроса); по умолчанию «Нет данных за период». */
+  emptyText?: string;
   action?: ReactNode;
   children: (data: T) => ReactNode;
 }
@@ -19,7 +21,7 @@ function errorText(error: unknown): string {
 }
 
 /** Карточка блока с независимыми состояниями: загрузка / ошибка / пусто / данные. */
-export function ChartCard<T>({ title, query, isEmpty, action, children }: Props<T>) {
+export function ChartCard<T>({ title, query, isEmpty, emptyText = 'Нет данных за период', action, children }: Props<T>) {
   let body: ReactNode;
   // isLoading (v5) = первая загрузка идёт; у выключенного запроса isPending без загрузки.
   if (query.isLoading) {
@@ -38,7 +40,7 @@ export function ChartCard<T>({ title, query, isEmpty, action, children }: Props<
       </div>
     );
   } else if (query.data === undefined || isEmpty?.(query.data)) {
-    body = <div className="state">Нет данных за период</div>;
+    body = <div className="state">{emptyText}</div>;
   } else {
     body = children(query.data);
   }

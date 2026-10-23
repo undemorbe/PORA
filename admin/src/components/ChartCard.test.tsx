@@ -77,4 +77,14 @@ describe('ChartCard', () => {
     );
     expect(screen.getByText('items: 2')).toBeInTheDocument();
   });
+
+  it('uses a custom empty text', () => {
+    render(
+      <ChartCard title="T" query={query({ isPending: true })} emptyText="Выберите события">
+        {() => 'data'}
+      </ChartCard>,
+    );
+    expect(screen.getByText('Выберите события')).toBeInTheDocument();
+    expect(screen.queryByText('Нет данных за период')).not.toBeInTheDocument();
+  });
 });
