@@ -16,8 +16,8 @@ import type { DayCount } from '../api/types';
 import { formatDay } from '../lib/format';
 import type { PivotRow } from '../lib/series';
 
-// Палитра серий: акцент + приглушённые нейтрали, различимые в обеих темах.
-export const SERIES_COLORS = ['#e07a5f', '#3d7ea6', '#81b29a', '#f2cc8f', '#8d6a9f', '#6b6560'];
+// Палитра серий: контраст ≥3:1 и к светлой (#ffffff), и к тёмной (#1e1c1b) поверхности.
+export const SERIES_COLORS = ['#d4694e', '#3d7ea6', '#4a9572', '#a87a26', '#8d6a9f', '#c0699a'];
 
 const axis = { stroke: 'var(--text-muted)', fontSize: 12 };
 const tooltipStyle = {

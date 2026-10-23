@@ -52,4 +52,68 @@ describe('LoginPage', () => {
 
     expect(await screen.findByText('У этой почты нет прав администратора')).toBeInTheDocument();
   });
+
+  it('shows the server error when the code is accepted but /me fails', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi
+        .fn()
+        .mockResolvedValueOnce(json(200, {}))
+        .mockResolvedValueOnce(json(200, { 'access-token': 'a', 'refresh-token': 'r' }))
+        .mockResolvedValueOnce(json(500, { code: 'INTERNAL_ERROR' })),
+    );
+    renderLogin();
+
+    await userEvent.type(await screen.findByLabelText('Почта'), 'boss@mail.ru');
+    await userEvent.click(screen.getByRole('button', { name: 'Получить код' }));
+    await userEvent.type(await screen.findByLabelText('Код из письма'), '123456');
+    await userEvent.click(screen.getByRole('button', { name: 'Войти' }));
+
+    expect(await screen.findByRole('alert')).toHaveTextContent('Сервер недоступен');
+    expect(screen.getByRole('button', { name: 'Войти' })).toBeInTheDocument();
+  });
+
+  it('resets the code and error when switching to another email', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi
+        .fn()
+        .mockResolvedValueOnce(json(200, {}))
+        .mockResolvedValueOnce(json(400, { code: 'OTP_INCORRECT', message: 'bad' }))
+        .mockResolvedValueOnce(json(200, {})),
+    );
+    renderLogin();
+
+    await userEvent.type(await screen.findByLabelText('Почта'), 'boss@mail.ru');
+    await userEvent.click(screen.getByRole('button', { name: 'Получить код' }));
+    await userEvent.type(await screen.findByLabelText('Код из письма'), '111111');
+    await userEvent.click(screen.getByRole('button', { name: 'Войти' }));
+    expect(await screen.findByText('Неверный код')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole('button', { name: 'Другая почта' }));
+    expect(screen.queryByText('Неверный код')).not.toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: 'Получить код' }));
+    expect(await screen.findByLabelText('Код из письма')).toHaveValue('');
+  });
+
+  it('marks the submit button busy while a request is in flight', async () => {
+    let release!: (res: Response) => void;
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockReturnValueOnce(
+        new Promise<Response>((resolve) => {
+          release = resolve;
+        }),
+      ),
+    );
+    renderLogin();
+
+    await userEvent.type(await screen.findByLabelText('Почта'), 'boss@mail.ru');
+    await userEvent.click(screen.getByRole('button', { name: 'Получить код' }));
+    expect(screen.getByRole('button', { name: 'Получить код' })).toHaveAttribute('aria-busy', 'true');
+
+    release(json(200, {}));
+    expect(await screen.findByLabelText('Код из письма')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Войти' })).toHaveAttribute('aria-busy', 'false');
+  });
 });

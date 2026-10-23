@@ -23,11 +23,20 @@ interface RequestOptions {
 
 type AuthErrorHandler = (status: 401 | 403) => void;
 
-/** ok — токены обновлены; refused — сервер отказал (сессия сброшена); network — нет связи (сессия сохранена). */
-export type RefreshResult = 'ok' | 'refused' | 'network';
+/**
+ * ok — токены обновлены; refused — сервер отказал 4xx (сессия сброшена);
+ * network — нет связи; server — 5xx или нечитаемый ответ. В последних двух сессия сохранена.
+ */
+export type RefreshResult = 'ok' | 'refused' | 'network' | 'server';
+
+interface RefreshOutcome {
+  result: RefreshResult;
+  /** HTTP-статус для `server` (нечитаемый 2xx считаем 502). */
+  status?: number;
+}
 
 let authErrorHandler: AuthErrorHandler | null = null;
-let refreshing: Promise<RefreshResult> | null = null;
+let refreshing: Promise<RefreshOutcome> | null = null;
 
 /** Реакция приложения на потерю сессии (401) или прав (403). */
 export function setAuthErrorHandler(handler: AuthErrorHandler | null): void {
@@ -36,30 +45,43 @@ export function setAuthErrorHandler(handler: AuthErrorHandler | null): void {
 
 /** Обновляет access-токен; параллельные вызовы делят один запрос. */
 export function refreshSession(): Promise<RefreshResult> {
+  return sharedRefresh().then((outcome) => outcome.result);
+}
+
+function sharedRefresh(): Promise<RefreshOutcome> {
   refreshing ??= doRefresh().finally(() => {
     refreshing = null;
   });
   return refreshing;
 }
 
-async function doRefresh(): Promise<RefreshResult> {
+async function doRefresh(): Promise<RefreshOutcome> {
   const refresh = getRefresh();
-  if (!refresh) return 'refused';
+  if (!refresh) return { result: 'refused' };
+  let res: Response;
   try {
     // Контракт бэкенда: refresh-токен в query. nginx не логирует /api/authorize/.
-    // Любой отказ (401 REFRESH_TOKEN_EXPIRED, 403 — админ-права отозваны) → сессия сброшена.
-    const res = await fetch(`/api/authorize/refresh?${new URLSearchParams({ 'refresh-token': refresh })}`);
-    if (!res.ok) {
-      clearTokens();
-      return 'refused';
-    }
-    const body = (await res.json()) as { 'access-token': string; 'refresh-token': string };
-    setTokens(body['access-token'], body['refresh-token']);
-    return 'ok';
+    res = await fetch(`/api/authorize/refresh?${new URLSearchParams({ 'refresh-token': refresh })}`);
   } catch {
-    // Сеть моргнула (или ответ не прочитался) — не разлогиниваем, refresh-токен остаётся.
-    return 'network';
+    // Сеть моргнула — не разлогиниваем, refresh-токен остаётся.
+    return { result: 'network' };
   }
+  if (res.status >= 400 && res.status < 500) {
+    // Отказ сервера (401 REFRESH_TOKEN_EXPIRED, 403 — админ-права отозваны, 400/404) → сессия сброшена.
+    clearTokens();
+    return { result: 'refused' };
+  }
+  if (!res.ok) return { result: 'server', status: res.status };
+  // Сервер ответил 2xx, но не токенами (прокси отдал HTML и т.п.) — сбой сервера, не отказ.
+  const payload: unknown = await res.json().catch(() => null);
+  const fields = payload !== null && typeof payload === 'object' ? (payload as Record<string, unknown>) : {};
+  const access = fields['access-token'];
+  const next = fields['refresh-token'];
+  if (typeof access !== 'string' || !access || typeof next !== 'string' || !next) {
+    return { result: 'server', status: 502 };
+  }
+  setTokens(access, next);
+  return { result: 'ok' };
 }
 
 function buildUrl(path: string, query?: Query): string {
@@ -109,8 +131,9 @@ export async function apiFetch<T>(path: string, options: RequestOptions = {}): P
       // Поздний 401: пока запрос летел, кто-то уже обновил токен — просто повторяем.
       res = await send(current);
     } else {
-      const result = await refreshSession();
+      const { result, status } = await sharedRefresh();
       if (result === 'network') throw new ApiError(0, 'NETWORK', 'Нет связи с сервером');
+      if (result === 'server') throw new ApiError(status ?? 502, 'SERVER', 'Сервер недоступен');
       if (result === 'ok') res = await send(getAccess());
     }
   }

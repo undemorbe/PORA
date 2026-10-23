@@ -34,6 +34,12 @@ export function LoginPage() {
     }
   };
 
+  const changeEmail = () => {
+    setStep('email');
+    setOtp('');
+    setError(null);
+  };
+
   const onSubmit = (event: FormEvent) => {
     event.preventDefault();
     if (step === 'email') {
@@ -81,11 +87,11 @@ export function LoginPage() {
             {error}
           </p>
         )}
-        <button type="submit" className="btn btn-primary" disabled={busy}>
+        <button type="submit" className="btn btn-primary" disabled={busy} aria-busy={busy}>
           {step === 'email' ? 'Получить код' : 'Войти'}
         </button>
         {step === 'code' && (
-          <button type="button" className="btn" disabled={busy} onClick={() => setStep('email')}>
+          <button type="button" className="btn" disabled={busy} onClick={changeEmail}>
             Другая почта
           </button>
         )}

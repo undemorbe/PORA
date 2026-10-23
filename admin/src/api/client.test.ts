@@ -189,6 +189,64 @@ describe('apiFetch', () => {
     expect(onAuthError).not.toHaveBeenCalled();
   });
 
+  it('keeps the session and reports SERVER when refresh hits a 5xx', async () => {
+    setTokens('old', 'r1');
+    const onAuthError = vi.fn();
+    setAuthErrorHandler(onAuthError);
+    vi.stubGlobal(
+      'fetch',
+      vi
+        .fn()
+        .mockResolvedValueOnce(json(401, { code: 'ACCESS_TOKEN_EXPIRED' }))
+        .mockResolvedValueOnce(new Response('<html>Bad Gateway</html>', { status: 502 })),
+    );
+
+    const error = await apiFetch('/api/admin/me').catch((e: unknown) => e);
+
+    expect(error).toBeInstanceOf(ApiError);
+    expect(error).toMatchObject({ status: 502, code: 'SERVER', message: 'Сервер недоступен' });
+    expect(getRefresh()).toBe('r1');
+    expect(getAccess()).toBe('old');
+    expect(onAuthError).not.toHaveBeenCalled();
+  });
+
+  it('keeps the session and reports SERVER when a 200 refresh body is unreadable', async () => {
+    setTokens('old', 'r1');
+    const onAuthError = vi.fn();
+    setAuthErrorHandler(onAuthError);
+    vi.stubGlobal(
+      'fetch',
+      vi
+        .fn()
+        .mockResolvedValueOnce(json(401, { code: 'ACCESS_TOKEN_EXPIRED' }))
+        .mockResolvedValueOnce(new Response('<!doctype html>', { status: 200 })),
+    );
+
+    const error = await apiFetch('/api/admin/me').catch((e: unknown) => e);
+
+    expect(error).toMatchObject({ code: 'SERVER', message: 'Сервер недоступен' });
+    expect((error as ApiError).status).toBeGreaterThanOrEqual(500);
+    expect(getRefresh()).toBe('r1');
+    expect(onAuthError).not.toHaveBeenCalled();
+  });
+
+  it('treats any 4xx from refresh as refused', async () => {
+    setTokens('old', 'r1');
+    const onAuthError = vi.fn();
+    setAuthErrorHandler(onAuthError);
+    vi.stubGlobal(
+      'fetch',
+      vi
+        .fn()
+        .mockResolvedValueOnce(json(401, { code: 'ACCESS_TOKEN_EXPIRED' }))
+        .mockResolvedValueOnce(json(400, { code: 'BAD_REQUEST' })),
+    );
+
+    await expect(apiFetch('/api/admin/me')).rejects.toMatchObject({ status: 401 });
+    expect(getRefresh()).toBeNull();
+    expect(onAuthError).toHaveBeenCalledWith(401);
+  });
+
   it('retries a late 401 with the already refreshed token without refreshing again', async () => {
     setTokens('old', 'r1');
     const fetchMock = vi

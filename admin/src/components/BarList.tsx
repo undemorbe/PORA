@@ -10,8 +10,8 @@ export function BarList({ items }: { items: BarItem[] }) {
   const max = Math.max(0, ...items.map((item) => item.value));
   return (
     <ul className="bars">
-      {items.map((item) => (
-        <li key={item.name} className="bar-row">
+      {items.map((item, index) => (
+        <li key={`${index}-${item.name}`} className="bar-row">
           <span className="bar-name" title={item.name}>
             {item.name}
           </span>

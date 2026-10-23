@@ -21,7 +21,8 @@ function errorText(error: unknown): string {
 /** Карточка блока с независимыми состояниями: загрузка / ошибка / пусто / данные. */
 export function ChartCard<T>({ title, query, isEmpty, action, children }: Props<T>) {
   let body: ReactNode;
-  if (query.isPending) {
+  // isLoading (v5) = первая загрузка идёт; у выключенного запроса isPending без загрузки.
+  if (query.isLoading) {
     body = (
       <div className="state" aria-busy="true">
         Загрузка…
@@ -29,9 +30,9 @@ export function ChartCard<T>({ title, query, isEmpty, action, children }: Props<
     );
   } else if (query.isError) {
     body = (
-      <div className="state state-error" role="alert">
+      <div className="state state-error" role="status">
         <p>{errorText(query.error)}</p>
-        <button type="button" className="btn" onClick={() => void query.refetch()}>
+        <button type="button" className="btn" disabled={query.isFetching} onClick={() => void query.refetch()}>
           Повторить
         </button>
       </div>

@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ApiError } from './api/client';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { AuthProvider, useAuth } from './auth/AuthContext';
 import { Layout } from './components/Layout';
@@ -14,9 +15,14 @@ import { RetentionPage } from './pages/RetentionPage';
 import { UserDetailPage } from './pages/UserDetailPage';
 import { UsersPage } from './pages/UsersPage';
 
+/** Один повтор для сети/5xx; 4xx повторять бессмысленно. */
+export function shouldRetryQuery(failureCount: number, error: unknown): boolean {
+  return !(error instanceof ApiError && error.status >= 400 && error.status < 500) && failureCount < 1;
+}
+
 const queryClient = new QueryClient({
   defaultOptions: {
-    queries: { retry: 1, staleTime: 60_000, refetchOnWindowFocus: false },
+    queries: { retry: shouldRetryQuery, staleTime: 60_000, refetchOnWindowFocus: false },
   },
 });
 

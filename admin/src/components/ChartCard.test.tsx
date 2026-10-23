@@ -6,12 +6,39 @@ import { ApiError } from '../api/client';
 import { ChartCard } from './ChartCard';
 
 const query = (partial: Partial<UseQueryResult<number[]>>) =>
-  ({ isPending: false, isError: false, data: undefined, error: null, refetch: vi.fn(), ...partial }) as UseQueryResult<number[]>;
+  ({
+    isPending: false,
+    isLoading: false,
+    isFetching: false,
+    isError: false,
+    data: undefined,
+    error: null,
+    refetch: vi.fn(),
+    ...partial,
+  }) as UseQueryResult<number[]>;
 
 describe('ChartCard', () => {
   it('shows loading', () => {
-    render(<ChartCard title="T" query={query({ isPending: true })}>{() => 'data'}</ChartCard>);
+    render(<ChartCard title="T" query={query({ isPending: true, isLoading: true, isFetching: true })}>{() => 'data'}</ChartCard>);
     expect(screen.getByText('Загрузка…')).toBeInTheDocument();
+  });
+
+  it('does not show loading for a disabled query', () => {
+    render(<ChartCard title="T" query={query({ isPending: true })}>{() => 'data'}</ChartCard>);
+    expect(screen.queryByText('Загрузка…')).not.toBeInTheDocument();
+    expect(screen.getByText('Нет данных за период')).toBeInTheDocument();
+  });
+
+  it('disables retry while refetching', () => {
+    render(
+      <ChartCard
+        title="T"
+        query={query({ isError: true, isFetching: true, error: new ApiError(500, 'INTERNAL_ERROR', 'x') })}
+      >
+        {() => 'data'}
+      </ChartCard>,
+    );
+    expect(screen.getByRole('button', { name: 'Повторить' })).toBeDisabled();
   });
 
   it('shows error with retry', async () => {
@@ -21,7 +48,7 @@ describe('ChartCard', () => {
         {() => 'data'}
       </ChartCard>,
     );
-    expect(screen.getByRole('alert')).toHaveTextContent('Сервер недоступен');
+    expect(screen.getByRole('status')).toHaveTextContent('Сервер недоступен');
     await userEvent.click(screen.getByRole('button', { name: 'Повторить' }));
     expect(refetch).toHaveBeenCalled();
   });
@@ -32,7 +59,7 @@ describe('ChartCard', () => {
         {() => 'data'}
       </ChartCard>,
     );
-    expect(screen.getByRole('alert')).toHaveTextContent('Нет связи с сервером');
+    expect(screen.getByRole('status')).toHaveTextContent('Нет связи с сервером');
   });
 
   it('shows empty state and data', () => {
