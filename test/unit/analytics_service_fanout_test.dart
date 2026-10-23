@@ -50,6 +50,8 @@ void main() {
     await analytics.logScreenView('HomeRoute', countVisit: false);
     await analytics.logAiChatOpened();
     await analytics.logAiMessageSent();
+    await analytics.logTipGenerated(fromFallback: false);
+    // запасной локальный совет — не AI-ответ, на сервер не идёт
     await analytics.logTipGenerated(fromFallback: true);
     await analytics.logRecipeImport(
       source: 'youtube',

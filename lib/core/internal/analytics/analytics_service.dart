@@ -158,7 +158,8 @@ class AnalyticsService {
   });
 
   Future<void> logTipGenerated({required bool fromFallback}) {
-    _backend.track('ai_tip_generated');
+    // В админке «AI-совет» — только ответы модели, не локальный запас
+    if (!fromFallback) _backend.track('ai_tip_generated');
     return _log('ai_tip_generated', {'fallback': fromFallback.toString()});
   }
 
