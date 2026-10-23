@@ -18,54 +18,22 @@ class AppLocalizationsZh extends AppLocalizations {
   String get sendAgainAfter => '重新发送倒计时';
 
   @override
-<<<<<<< HEAD
-=======
-  String get authSignInExpansibleCollapse => '收起';
-
-  @override
-  String get sendAgainAfter => '重新发送，倒计时…';
-
-  @override
-  String get authSignInWithEmail => '使用邮箱登录';
-
-  @override
-  String get authSignInWithGoogle => '使用 Google 登录';
-
-  @override
-  String get authSignInWithApple => '使用 Apple 登录';
-
-  @override
-  String get authSignInWithPhone => '使用手机号登录';
-
-  @override
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
   String get authPrivatePolicy => '继续即表示你同意\n《服务条款》和《隐私政策》';
 
   @override
   String get authTitle => '快完成了';
 
   @override
-<<<<<<< HEAD
   String get authSubtitle => '输入你的手机号或邮箱，我们会发送登录验证码。';
 
   @override
   String get authSubtitle2 => '直接输入即可，我们会自动识别是手机号还是邮箱。';
-=======
-  String get authSubtitle => '输入你的手机号或邮箱，我们会向你发送登录验证码。';
-
-  @override
-  String get authSubtitle2 => '直接开始输入，我们会自动识别是手机号还是邮箱。';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get authJoinButton => '加入';
 
   @override
-<<<<<<< HEAD
   String get userCreateProfileNameRequired => '能告诉我们你的名字吗？';
-=======
-  String get userCreateProfileNameRequired => '告诉我们你的名字好吗？';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get commonError => '错误';
@@ -87,11 +55,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get otpTitle => '快完成了！';
 
   @override
-<<<<<<< HEAD
   String get otpEnterCodeSentTo => '请输入验证码，已发送至 ';
-=======
-  String get otpEnterCodeSentTo => '请输入发送至以下地址的验证码 ';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get otpResendQuestion => '没有收到验证码？';
@@ -123,31 +87,19 @@ class AppLocalizationsZh extends AppLocalizations {
   String get onboardingSlide1Title => '食谱 → 清单\n只需几秒';
 
   @override
-<<<<<<< HEAD
   String get onboardingSlide1Body => '粘贴食谱链接，Pora 会整理所需食材，并去掉你已经有的东西。';
-=======
-  String get onboardingSlide1Body => '粘贴食谱链接，Pora 会汇总所需食材，并去掉你已有的。';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get onboardingSlide2Title => '一份清单\n两人共享';
 
   @override
-<<<<<<< HEAD
   String get onboardingSlide2Body => '一起添加商品，谁加了什么一目了然。你的伴侣可以在回家路上顺手买齐。';
-=======
-  String get onboardingSlide2Body => '一起添加物品，谁加了什么一目了然。另一半在回家路上就能顺手买齐。';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get onboardingSlide3Title => 'Pora 知道\n什么时候该买';
 
   @override
-<<<<<<< HEAD
   String get onboardingSlide3Body => 'Pora 会根据你的购买记录预测哪些东西快用完了，并提醒你把它们加入清单。';
-=======
-  String get onboardingSlide3Body => 'Pora 会根据你的购买记录预测哪些东西快用完了，一键即可下单。';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get onboardingSkip => '跳过';
@@ -180,11 +132,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get briefAlreadyContains => '该商品已选择';
 
   @override
-<<<<<<< HEAD
   String get briefSubtitle => '选择商品，Pora 会在合适的时候提醒你。也可以跳过这一步。';
-=======
-  String get briefSubtitle => '选择商品，Pora 会在合适的时候提醒你。此步骤可以跳过。';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get briefSkip => '跳过';
@@ -193,58 +141,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get briefNext => '下一步';
 
   @override
-<<<<<<< HEAD
-=======
-  String get briefItemMilk => '牛奶';
-
-  @override
-  String get briefItemBread => '面包';
-
-  @override
-  String get briefItemEggs => '鸡蛋';
-
-  @override
-  String get briefItemCoffee => '咖啡';
-
-  @override
-  String get briefItemCheese => '奶酪';
-
-  @override
-  String get briefItemBananas => '香蕉';
-
-  @override
-  String get briefItemButter => '黄油';
-
-  @override
-  String get briefItemWater => '水';
-
-  @override
-  String get briefItemVegetables => '蔬菜';
-
-  @override
-  String get briefItemTomatoes => '番茄';
-
-  @override
-  String get briefItemPasta => '意面';
-
-  @override
-  String get briefItemChicken => '鸡肉';
-
-  @override
-  String get listTitle => '我们的清单';
-
-  @override
-  String get listMembersCount => '2 人 · 8 件商品';
-
-  @override
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
   String get listUrgent => '紧急';
 
   @override
   String get listAdd => '添加';
 
   @override
-<<<<<<< HEAD
   String get predictionsAddToList => '加入清单';
 
   @override
@@ -252,45 +154,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get itemDetailAddedBy => '添加者';
-=======
-  String get predictionsTitle => 'Pora 来帮你！';
-
-  @override
-  String get predictionsSubtitle => '即将用完 — 基于你的购买记录';
-
-  @override
-  String get predictionTip => '小提示';
-
-  @override
-  String get predictionsOrderTitle => '一键全部下单';
-
-  @override
-  String get predictionsOrderSubtitle => 'Samokat · 15 分钟送达';
-
-  @override
-  String get predictionsOrderDiscount => '首单立减 15%';
-
-  @override
-  String get predictionsAddToList => '加入清单';
-
-  @override
-  String get predictionsDismiss => '不用了';
-
-  @override
-  String get itemDetailName => '牛奶';
-
-  @override
-  String get itemDetailSubtitle => '2 L · 乳制品';
-
-  @override
-  String get itemDetailAddedBy => '添加者';
-
-  @override
-  String get itemDetailSection => '分类';
-
-  @override
-  String get itemDetailSectionValue => '乳制品';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get itemDetailQuantity => '数量';
@@ -302,57 +165,15 @@ class AppLocalizationsZh extends AppLocalizations {
   String get itemDetailRemind => '提醒我';
 
   @override
-<<<<<<< HEAD
-=======
-  String get itemDetailRemindEvery => '每 7 天';
-
-  @override
-  String get itemDetailInsight => '你大约每 7 天买一次 · 上次购买是 6 天前。我很快会提醒你补货。';
-
-  @override
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
   String get itemDetailMarkBought => '标记为已购买';
 
   @override
   String get itemDetailDelete => '从清单中移除';
-<<<<<<< HEAD
-=======
-
-  @override
-  String get addItemTitle => '添加商品';
-
-  @override
-  String get addItemExampleValue => '牛油果';
-
-  @override
-  String get addItemNameHint => '商品名称';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get addItemQuantity => '数量';
 
   @override
-<<<<<<< HEAD
-=======
-  String get addItemSection => '分类';
-
-  @override
-  String get addItemUrgent => '紧急';
-
-  @override
-  String get addItemUrgentSubtitle => '今天就要买';
-
-  @override
-  String get addItemRemind => '定期提醒';
-
-  @override
-  String get addItemRemindEvery => '每 7 天';
-
-  @override
-  String get addItemSubmit => '加入清单';
-
-  @override
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
   String get settingsTitle => '设置';
 
   @override
@@ -362,18 +183,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsNotifications => '通知';
 
   @override
-<<<<<<< HEAD
-=======
-  String get settingsDelivery => '配送';
-
-  @override
-  String get settingsProAd => 'Pora+ · 无广告';
-
-  @override
-  String get settingsTryPill => '试用';
-
-  @override
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
   String get settingsPrivacy => '隐私与数据';
 
   @override
@@ -386,21 +195,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsInvitePill => '邀请';
 
   @override
-<<<<<<< HEAD
   String get householdInviteTitle => '邀请你的伴侣';
-=======
-  String get householdInviteTitle => '邀请你的另一半';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get householdCookTogether => '一起做饭';
 
   @override
-<<<<<<< HEAD
   String get householdInviteDescription => '两个人用 Pora 更方便。邀请你的伴侣，一起共享清单和提醒。';
-=======
-  String get householdInviteDescription => 'Pora 两个人用效果更好。邀请你的另一半，清单和提醒都会共享。';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get householdShareLink => '分享链接';
@@ -413,20 +214,10 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get householdInviteDescriptionWhenConnecting =>
-<<<<<<< HEAD
       '我们检测到了邀请码，如果识别有误，你也可以手动输入';
 
   @override
   String get householdGotInvited => '你已被邀请加入一个家庭';
-=======
-      '我们识别到了邀请码，如果识别有误，你也可以手动输入';
-
-  @override
-  String get householdGotInvited => '你收到了加入家庭的邀请';
-
-  @override
-  String get householdWriteCode => '输入邀请码';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get householdDoLater => '我稍后再做';
@@ -447,7 +238,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get notificationsReadAll => '全部已读';
 
   @override
-<<<<<<< HEAD
   String get notificationsAddToListPill => '＋ 加入清单';
 
   @override
@@ -457,56 +247,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get userCreateProfileSubtitle => '添加名字和照片，你的伴侣会在共享清单中看到。';
 
   @override
-=======
-  String get notificationsMilkTitle => '回家路上买点牛奶';
-
-  @override
-  String get notificationsMilkBody => '牛奶没了 — Anna 10 分钟前标记的。';
-
-  @override
-  String get notificationsMilkTime => '5 分钟前';
-
-  @override
-  String get notificationsCoffeeTitle => '咖啡快用完了';
-
-  @override
-  String get notificationsCoffeeBody => '你大约每 14 天买一次，已经过去 12 天了。';
-
-  @override
-  String get notificationsPartnerAddedTitle => 'Anna 添加了 2 件商品';
-
-  @override
-  String get notificationsPartnerAddedBody => '香蕉和面包已加入共享清单。';
-
-  @override
-  String get notificationsPartnerAddedTime => '今天 9:12';
-
-  @override
-  String get notificationsPromoTitle => 'Samokat 首单立减 15%';
-
-  @override
-  String get notificationsPromoBody => '优惠还剩 6 天。';
-
-  @override
-  String get notificationsPromoTime => '昨天';
-
-  @override
-  String get notificationsOrderDeliveredTitle => '订单已送达';
-
-  @override
-  String get notificationsOrderDeliveredBody => '8 件商品 · Samokat · ₽1,054';
-
-  @override
-  String get notificationsAddToListPill => '＋ 加入清单';
-
-  @override
-  String get userCreateProfileTitle => '你叫什么名字？';
-
-  @override
-  String get userCreateProfileSubtitle => '添加名字和照片，你的另一半会在共享清单中看到。';
-
-  @override
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
   String get userCreateProfileNameHint => '你的名字';
 
   @override
@@ -516,32 +256,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get userCreateProfileNext => '下一步';
 
   @override
-<<<<<<< HEAD
   String get searchHint => '商品或食谱…';
-=======
-  String get searchTitle => '搜索';
-
-  @override
-  String get searchHint => '商品或食谱…';
-
-  @override
-  String get searchFilterAll => '全部';
-
-  @override
-  String get searchFilterVegetables => '蔬菜';
-
-  @override
-  String get searchFilterDairy => '乳制品';
-
-  @override
-  String get searchFilterGrocery => '杂货';
-
-  @override
-  String get searchFilterRecipes => '食谱';
-
-  @override
-  String get searchResults => '结果';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get searchNothingFound => '未找到内容';
@@ -550,82 +265,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get insightsTitle => '洞察';
 
   @override
-<<<<<<< HEAD
   String get recipeImportTitle => '从链接导入食谱';
-=======
-  String get insightsTipKicker => '✨ PORA 提示';
-
-  @override
-  String get insightsTipTitle => '你很爱吃卡邦尼意面！';
-
-  @override
-  String get insightsTipBody => '口味相近 — 试试芝士通心粉吧。6 种食材中有 4 种你经常会买。';
-
-  @override
-  String get insightsTipAction => '打开食谱 →';
-
-  @override
-  String get insightsRunsOutMost => '最常用完';
-
-  @override
-  String get insightsFavoriteCuisines => '常吃的菜系';
-
-  @override
-  String get insightsCuisineItalian => '意大利菜';
-
-  @override
-  String get insightsCuisinePasta => '意面';
-
-  @override
-  String get insightsCuisineBreakfasts => '早餐';
-
-  @override
-  String get insightsCuisineLight => '清淡';
-
-  @override
-  String get orderTitle => '订单';
-
-  @override
-  String get orderCart => '购物车';
-
-  @override
-  String get orderWhenToDeliver => '配送时间';
-
-  @override
-  String orderCheckoutCta(String total) {
-    return '在 Samokat 下单 · $total';
-  }
-
-  @override
-  String get orderSummaryGoods => '商品';
-
-  @override
-  String get orderSummaryDiscount => '立减 15%';
-
-  @override
-  String get orderSummaryDelivery => '配送';
-
-  @override
-  String get orderSummaryFree => '免费';
-
-  @override
-  String get orderSummaryTotal => '合计';
-
-  @override
-  String get recipeImportTitle => '通过链接导入食谱';
-
-  @override
-  String get recipePreviewTitle => '卡邦尼意面';
-
-  @override
-  String get recipePreviewMeta => 'eda.ru · 25 分钟 · 2 份';
-
-  @override
-  String get recipePreviewFound => '找到 6 种食材';
-
-  @override
-  String get recipeDedupBanner => '已移除 2 个重复项，避免与清单中已有的商品重复';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get recipeIngredients => '食材';
@@ -656,21 +296,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get familiesTitle => '家庭';
 
   @override
-<<<<<<< HEAD
   String get familiesSubtitle => '选择一个家庭以打开它的清单';
 
   @override
-=======
-  String get familiesSubtitle => '选择一个家庭以打开其清单';
-
-  @override
-  String get familiesCurrent => '当前';
-
-  @override
-  String get familiesCreateOrJoin => '＋ 创建或加入';
-
-  @override
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
   String get familiesCreateDialog => '给家庭起个什么名字？';
 
   @override
@@ -829,11 +457,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get version => '版本';
 
   @override
-<<<<<<< HEAD
   String get deleteItemTitle => '删除此商品？';
-=======
-  String get deleteItemTitle => '删除商品？';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get deleteItemBody => '此操作无法撤销。';
@@ -845,11 +469,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get delete => '删除';
 
   @override
-<<<<<<< HEAD
   String get returnToList => '返回清单';
-=======
-  String get returnToList => '放回清单';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get nooneToNotify => '没有可通知的人';
@@ -858,14 +478,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get notFound => '未找到';
 
   @override
-<<<<<<< HEAD
   String get recipeEmptyHint => '粘贴食谱链接并点击“解析”';
-=======
-  String get recipeEmptyHint => '粘贴食谱链接，然后点击“解析”';
-
-  @override
-  String get recipeDupMark => '已在清单中';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get done => '完成';
@@ -953,17 +566,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get briefSnackBar => '是不是忘了选择商品？';
 
   @override
-<<<<<<< HEAD
   String get noInternet => '无网络连接';
 
   @override
   String get noInternetButLoadYouLocally => '无网络连接，将为你加载本地数据';
-=======
-  String get noInternet => '没有网络连接';
-
-  @override
-  String get noInternetButLoadYouLocally => '没有网络连接，但我们会为你加载本地数据';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get groupDeletionTitle => '确定要删除该群组吗？';
@@ -993,16 +599,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get groupShared => '共享';
 
   @override
-<<<<<<< HEAD
-=======
-  String get noGroups => '还没有群组';
-
-  @override
-  String get settingsChangeThemeIOSEasterEgg =>
-      '* 要更改主题，请前往 设置 > PORA > 主题\n* 在设置菜单中选择新主题\n* 点击应用设置中的“主题”，即可在浅色和深色模式之间切换';
-
-  @override
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
   String get tutorialTitle => '使用方法';
 
   @override
@@ -1015,17 +611,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get tutorialDone => '开始';
 
   @override
-<<<<<<< HEAD
   String get tutorialInviteTitle => '邀请你的家人';
 
   @override
   String get tutorialInviteBody => '将群组向右滑动 → 邀请。你的伴侣会看到同一份清单。';
-=======
-  String get tutorialInviteTitle => '邀请你的亲友';
-
-  @override
-  String get tutorialInviteBody => '将群组向右滑动 → 邀请。你的另一半会看到同一份清单。';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get tutorialAddTitle => '添加商品';
@@ -1034,17 +623,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get tutorialAddBody => '点击清单底部的 +，填写名称、数量、分类、优先级，就完成了。';
 
   @override
-<<<<<<< HEAD
   String get tutorialEditTitle => '编辑与勾选';
 
   @override
   String get tutorialEditBody => '点击复选框表示已购买；点击该行可查看详情和编辑。';
-=======
-  String get tutorialEditTitle => '编辑和勾选';
-
-  @override
-  String get tutorialEditBody => '点击复选框即标记为已购买；点击该行可查看详情并编辑。';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get tutorialDeleteTitle => '删除';
@@ -1062,11 +644,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get tutorialSettingsTitle => '一切触手可及';
 
   @override
-<<<<<<< HEAD
   String get tutorialSettingsBody => '主题、语言、通知、确认，都在 个人资料 → 高级设置 中。';
-=======
-  String get tutorialSettingsBody => '主题、语言、通知、确认 — 个人资料 → 高级设置。';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get showTutorial => '查看教程';
@@ -1117,17 +695,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get tutorialConnectTitle => '通过邀请码加入';
 
   @override
-<<<<<<< HEAD
   String get tutorialConnectBody => '伴侣发来链接或邀请码，粘贴后你就加入共享清单了。';
-=======
-  String get tutorialConnectBody => '另一半发来链接或邀请码，粘贴后即可加入共享清单。';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get tutorialNotifyTitle => '提醒「现在需要」';
 
   @override
-<<<<<<< HEAD
   String get tutorialNotifyBody => '在商品上点击「!」，你的伴侣会收到「马上买」的推送，不用再打电话。';
 
   @override
@@ -1135,15 +708,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get tutorialOutroBody => '随便点、随便滑，弄错也没关系，应用几乎都能包容。';
-=======
-  String get tutorialNotifyBody => '点击商品上的「！」— 你的另一半会收到「马上买」的推送，不用再打电话。';
-
-  @override
-  String get tutorialOutroTitle => '剩下的你自己就能摸索出来';
-
-  @override
-  String get tutorialOutroBody => '随便点、随便滑、出错也没关系 — 这个应用几乎什么都能包容。';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get tutorialSampleInviteCode => 'PORA-4F72';
@@ -1155,17 +719,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get tutorialSamplePushBody => '急需牛奶';
 
   @override
-<<<<<<< HEAD
   String get tutorialSampleInviteMessage => '加入清单吧';
 
   @override
   String get supportMessage => '联系客服';
-=======
-  String get tutorialSampleInviteMessage => '加入清单';
-
-  @override
-  String get supportMessage => '发送邮件给客服';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get supportMessageBottomSheetTopDescription =>
@@ -1175,12 +732,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get supportMessageBottomSheetSendButton => '发送';
 
   @override
-<<<<<<< HEAD
   String get supportMessageBottomSheetUnderButtonText => '我们会尽快通过邮件或应用内消息回复你！';
-=======
-  String get supportMessageBottomSheetUnderButtonText =>
-      '我们会尽快回复，回复将发送到你的 Gmail 或应用内！';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get allergen => '过敏原';
@@ -1189,48 +741,24 @@ class AppLocalizationsZh extends AppLocalizations {
   String get predictionsGreeting => '你与 PORA 的一天';
 
   @override
-<<<<<<< HEAD
   String get predictionsGreetingSub => '根据你的购买记录生成的智能提示';
 
   @override
   String get predictionsSectionSoon => '即将用完';
-=======
-  String get predictionsGreetingSub => '根据你的购买记录给出智能建议';
-
-  @override
-  String get predictionsSectionSoon => '即将用完';
-
-  @override
-  String get predictionsSectionOften => '你经常购买';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get predictionsSectionAiSuggests => 'AI 推荐';
 
   @override
-<<<<<<< HEAD
   String get refresh => '刷新';
 
   @override
   String get kpiWeek => '商品';
-=======
-  String get predictionsAiSuggestionsTitle => '为你推荐的商品和食谱';
-
-  @override
-  String get predictionsAiSuggestionsTopic => '你的偏好和购买记录';
-
-  @override
-  String get refresh => '刷新';
-
-  @override
-  String get predictionsOftenEmpty => '数据还不够';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get kpiRecipes => '常买';
 
   @override
-<<<<<<< HEAD
   String get kpiDaysToRun => '快用完';
 
   @override
@@ -1265,48 +793,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get aiTipOfDayLabel => '每日小贴士';
-=======
-  String get kpiWeek => '件商品/周';
-
-  @override
-  String get kpiRecipes => '本月食谱';
-
-  @override
-  String get kpiDaysToRun => '天后需补货';
-
-  @override
-  String get fallbackTip1 => '像插花一样保存香草：放进装水的杯子里，再罩上袋子，能保鲜 2 周。';
-
-  @override
-  String get fallbackTip2 => '盐要最后加进面团，因为盐会抑制酵母发酵。';
-
-  @override
-  String get fallbackTip3 => '切洋葱前先放进冷冻室冻 15 分钟，就不会辣眼睛了。';
-
-  @override
-  String get fallbackTip4 => '汤太咸了？放一个生土豆煮 10 分钟，就能吸走多余的盐分。';
-
-  @override
-  String get fallbackTip5 => '把鸡蛋放进水里检验新鲜度：沉底的新鲜，浮起来的就该扔了。';
-
-  @override
-  String get fallbackTip6 => '用加盖的平底锅加热披萨，饼底会重新变脆。';
-
-  @override
-  String get fallbackTip7 => '冷冻过的肉更容易切薄：切之前放进冷冻室 20 分钟。';
-
-  @override
-  String get fallbackTip8 => '切柠檬前先在台面上滚一滚，能挤出更多汁。';
-
-  @override
-  String get fallbackTip9 => '番茄酱汁里加一小撮糖，可以中和酸味。';
-
-  @override
-  String get fallbackTip10 => '面包放冷冻室可保存一个月，烤面包时直接从冷冻状态烤即可。';
-
-  @override
-  String get aiTipOfDayLabel => '今日提示';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get aiTipOfDayTopic => '今天';
@@ -1315,11 +801,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get aiCtaTitle => '询问 PORA';
 
   @override
-<<<<<<< HEAD
   String get aiCtaSubtitle => '食谱 · 食材替代 · 小贴士';
-=======
-  String get aiCtaSubtitle => '食谱 · 替代 · 技巧';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get chatSheetTitle => 'PORA';
@@ -1349,33 +831,21 @@ class AppLocalizationsZh extends AppLocalizations {
   String get chatSample5 => '怎样在蔬菜变质前把它们用完？';
 
   @override
-<<<<<<< HEAD
   String get chatSample6 => '帮我列一份 3 种简单早餐的购物清单';
-=======
-  String get chatSample6 => '为 3 份简单早餐列一个购物清单';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get chatSample7 => '预算不多，两个人做什么吃好？';
 
   @override
-<<<<<<< HEAD
   String get chatSample8 => '熟米饭在冰箱里能放多久？';
 
   @override
   String get chatSample9 => '推荐一份高蛋白的素食晚餐';
-=======
-  String get chatSample8 => '煮熟的米饭能在冰箱里放多久？';
-
-  @override
-  String get chatSample9 => '推荐一份高蛋白素食晚餐';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get chatSample10 => '这道菜里的黄油可以用什么代替？';
 
   @override
-<<<<<<< HEAD
   String get chatSample11 => '用我现有的食材安排三顿晚餐';
 
   @override
@@ -1386,18 +856,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get chatSample14 => '怎样让这顿饭更省钱？';
-=======
-  String get chatSample11 => '用我现有的食材规划三顿晚餐';
-
-  @override
-  String get chatSample12 => '剩菜在 15 分钟内能做什么？';
-
-  @override
-  String get chatSample13 => '根据我的清单推荐一道不含过敏原的食谱';
-
-  @override
-  String get chatSample14 => '怎样让这道菜更省钱？';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get chatTyping => 'PORA 正在输入…';
@@ -1406,15 +864,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get chatInputHint => '随便问…';
 
   @override
-<<<<<<< HEAD
-=======
-  String get aiModelBadge => '由 OpenRouter 提供支持 · ling-3.0-flash';
-
-  @override
-  String get seeAll => '查看全部';
-
-  @override
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
   String get tipTopicHerbs => '香草';
 
   @override
@@ -1454,11 +903,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get tipTopicsSectionTitle => '小贴士主题';
 
   @override
-<<<<<<< HEAD
   String get tipTopicsSectionDescription => '选择小贴士的主题范围';
-=======
-  String get tipTopicsSectionDescription => '选择提示内容来自哪些主题';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get tipTopicsAddCustom => '添加自定义主题';
@@ -1470,7 +915,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get tipTopicsPredefinedLabel => '预设';
 
   @override
-<<<<<<< HEAD
   String get tipTopicsEmpty => '未选择主题，将显示通用小贴士';
 
   @override
@@ -1479,16 +923,6 @@ class AppLocalizationsZh extends AppLocalizations {
   @override
   String insightsChampionSubtitle(int count) {
     return '已购买 $count 次';
-=======
-  String get tipTopicsEmpty => '未选择主题 — 将显示通用提示';
-
-  @override
-  String get insightsChampionKicker => '本月冠军';
-
-  @override
-  String insightsChampionSubtitle(int count) {
-    return '本月购买了 $count 次';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
   }
 
   @override
@@ -1497,11 +931,7 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-<<<<<<< HEAD
   String get insightsStreakSubtitle => '状态正佳，继续保持';
-=======
-  String get insightsStreakSubtitle => '保持得很好 — 继续加油';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String insightsFreqEvery(int days) {
@@ -1515,14 +945,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get insightsStatsProducts => '件商品';
 
   @override
-<<<<<<< HEAD
   String get insightsEmpty => '暂无数据，先添加一些商品吧';
-=======
-  String get insightsStatsLoginsWeek => '本周登录次数';
-
-  @override
-  String get insightsEmpty => '暂无数据 — 开始添加商品吧';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get notificationsFilterAll => '全部';
@@ -1555,11 +978,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get notificationsEmptyTitle => '一切安静';
 
   @override
-<<<<<<< HEAD
   String get notificationsEmptyBody => '新通知会显示在这里';
-=======
-  String get notificationsEmptyBody => '新通知将显示在这里';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get recipeCreateListCta => '要把这个食谱添加到哪里？';
@@ -1568,7 +987,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get offlineWriteBlocked => '无网络，此更改不会保存';
 
   @override
-<<<<<<< HEAD
   String get offlineSavedQueued => '已保存。联网后将自动发送';
 
   @override
@@ -1577,16 +995,6 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-=======
-  String recipeDedupBannerMany(int n) {
-    return '将跳过 $n 个重复项 — 取消勾选可强制添加';
-  }
-
-  @override
-  String get offlineWriteBlocked => '无网络 — 更改不会被保存';
-
-  @override
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
   String get offlineReadBanner => '离线 — 正在显示缓存数据';
 
   @override

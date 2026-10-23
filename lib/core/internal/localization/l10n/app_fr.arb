@@ -11,25 +11,6 @@
     "@sendAgainAfter": {
         "description": "The sign in with other methods title"
     },
-<<<<<<< HEAD
-=======
-    "authSignInWithEmail": "Se connecter avec un e-mail",
-    "@authSignInWithEmail": {
-        "description": "The sign in with email button text"
-    },
-    "authSignInWithGoogle": "Se connecter avec Google",
-    "@authSignInWithGoogle": {
-        "description": "The sign in with Google button text"
-    },
-    "authSignInWithApple": "Se connecter avec Apple",
-    "@authSignInWithApple": {
-        "description": "The sign in with Apple button text"
-    },
-    "authSignInWithPhone": "Se connecter avec un numéro de téléphone",
-    "@authSignInWithPhone": {
-        "description": "The sign in with Phone button text"
-    },
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "authPrivatePolicy": "En continuant, vous acceptez les\nConditions d’utilisation et la Politique de confidentialité",
     "@authPrivatePolicy": {
         "description": "The private policy link text"
@@ -42,11 +23,7 @@
     "@authSubtitle": {
         "description": "authSubtitle"
     },
-<<<<<<< HEAD
     "authSubtitle2": "Commencez à taper — nous détecterons s’il s’agit d’un numéro de téléphone ou d’un e-mail.",
-=======
-    "authSubtitle2": "Commencez à saisir — nous détecterons s’il s’agit d’un numéro de téléphone ou d’un e-mail.",
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@authSubtitle2": {
         "description": "authSubtitle2"
     },
@@ -129,11 +106,7 @@
     "@onboardingSlide1Title": {
         "description": "onboardingSlide1Title"
     },
-<<<<<<< HEAD
     "onboardingSlide1Body": "Déposez le lien d’une recette — Pora rassemble les ingrédients et retire ce que vous avez déjà.",
-=======
-    "onboardingSlide1Body": "Collez le lien d’une recette — Pora rassemble les ingrédients et retire ce que vous avez déjà.",
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@onboardingSlide1Body": {
         "description": "onboardingSlide1Body"
     },
@@ -141,11 +114,7 @@
     "@onboardingSlide2Title": {
         "description": "onboardingSlide2Title"
     },
-<<<<<<< HEAD
     "onboardingSlide2Body": "Ajoutez des articles ensemble — vous voyez qui a ajouté quoi. Votre partenaire peut acheter ce qu’il vous faut en rentrant.",
-=======
-    "onboardingSlide2Body": "Ajoutez des articles ensemble — vous voyez qui a ajouté quoi. Votre partenaire peut prendre ce qu’il vous faut en rentrant.",
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@onboardingSlide2Body": {
         "description": "onboardingSlide2Body"
     },
@@ -153,11 +122,7 @@
     "@onboardingSlide3Title": {
         "description": "onboardingSlide3Title"
     },
-<<<<<<< HEAD
     "onboardingSlide3Body": "D’après vos achats, Pora prévoit ce qui va bientôt manquer et vous rappelle de l’ajouter à votre liste.",
-=======
-    "onboardingSlide3Body": "D’après vos achats, Pora prévoit ce qui va bientôt manquer et vous permet de le commander en un clic.",
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@onboardingSlide3Body": {
         "description": "onboardingSlide3Body"
     },
@@ -213,65 +178,6 @@
     "@briefNext": {
         "description": "briefNext"
     },
-<<<<<<< HEAD
-=======
-    "briefItemMilk": "Lait",
-    "@briefItemMilk": {
-        "description": "briefItemMilk"
-    },
-    "briefItemBread": "Pain",
-    "@briefItemBread": {
-        "description": "briefItemBread"
-    },
-    "briefItemEggs": "Œufs",
-    "@briefItemEggs": {
-        "description": "briefItemEggs"
-    },
-    "briefItemCoffee": "Café",
-    "@briefItemCoffee": {
-        "description": "briefItemCoffee"
-    },
-    "briefItemCheese": "Fromage",
-    "@briefItemCheese": {
-        "description": "briefItemCheese"
-    },
-    "briefItemBananas": "Bananes",
-    "@briefItemBananas": {
-        "description": "briefItemBananas"
-    },
-    "briefItemButter": "Beurre",
-    "@briefItemButter": {
-        "description": "briefItemButter"
-    },
-    "briefItemWater": "Eau",
-    "@briefItemWater": {
-        "description": "briefItemWater"
-    },
-    "briefItemVegetables": "Légumes",
-    "@briefItemVegetables": {
-        "description": "briefItemVegetables"
-    },
-    "briefItemTomatoes": "Tomates",
-    "@briefItemTomatoes": {
-        "description": "briefItemTomatoes"
-    },
-    "briefItemPasta": "Pâtes",
-    "@briefItemPasta": {
-        "description": "briefItemPasta"
-    },
-    "briefItemChicken": "Poulet",
-    "@briefItemChicken": {
-        "description": "briefItemChicken"
-    },
-    "listTitle": "Notre liste",
-    "@listTitle": {
-        "description": "listTitle"
-    },
-    "listMembersCount": "2 personnes · 8 produits",
-    "@listMembersCount": {
-        "description": "listMembersCount"
-    },
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "listUrgent": "Urgent",
     "@listUrgent": {
         "description": "listUrgent"
@@ -280,67 +186,18 @@
     "@listAdd": {
         "description": "listAdd"
     },
-<<<<<<< HEAD
-=======
-    "predictionsTitle": "Pora peut vous aider !",
-    "@predictionsTitle": {
-        "description": "predictionsTitle"
-    },
-    "predictionsSubtitle": "Bientôt épuisé — d’après vos achats",
-    "@predictionsSubtitle": {
-        "description": "predictionsSubtitle"
-    },
-    "predictionTip": "Une petite astuce",
-    "@predictionTip": {
-        "description": "predictionTip"
-    },
-    "predictionsOrderTitle": "Tout commander en un clic",
-    "@predictionsOrderTitle": {
-        "description": "predictionsOrderTitle"
-    },
-    "predictionsOrderSubtitle": "Samokat · livraison en 15 minutes",
-    "@predictionsOrderSubtitle": {
-        "description": "predictionsOrderSubtitle"
-    },
-    "predictionsOrderDiscount": "15 % de réduction sur votre première commande",
-    "@predictionsOrderDiscount": {
-        "description": "predictionsOrderDiscount"
-    },
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "predictionsAddToList": "Ajouter à la liste",
+    "@predictionsAddToList": {
+        "description": "predictionsAddToList"
+    },
     "predictionsDismiss": "Non merci",
-<<<<<<< HEAD
     "@predictionsDismiss": {
         "description": "predictionsDismiss"
     },
-<<<<<<< HEAD
-=======
-    "itemDetailName": "Lait",
-    "@itemDetailName": {
-        "description": "itemDetailName"
-    },
-    "itemDetailSubtitle": "2 L · Produits laitiers",
-    "@itemDetailSubtitle": {
-        "description": "itemDetailSubtitle"
-    },
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
-=======
->>>>>>> f817e1d (feat(predictions): enhance product prediction localization and add unit tests for days calculation)
     "itemDetailAddedBy": "Ajouté par",
     "@itemDetailAddedBy": {
         "description": "itemDetailAddedBy"
     },
-<<<<<<< HEAD
-=======
-    "itemDetailSection": "Section",
-    "@itemDetailSection": {
-        "description": "itemDetailSection"
-    },
-    "itemDetailSectionValue": "Produits laitiers",
-    "@itemDetailSectionValue": {
-        "description": "itemDetailSectionValue"
-    },
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "itemDetailQuantity": "Quantité",
     "@itemDetailQuantity": {
         "description": "itemDetailQuantity"
@@ -353,17 +210,6 @@
     "@itemDetailRemind": {
         "description": "itemDetailRemind"
     },
-<<<<<<< HEAD
-=======
-    "itemDetailRemindEvery": "Tous les 7 jours",
-    "@itemDetailRemindEvery": {
-        "description": "itemDetailRemindEvery"
-    },
-    "itemDetailInsight": "Vous l’achetez environ tous les 7 jours · dernier achat il y a 6 jours. Je vous proposerai bientôt d’en racheter.",
-    "@itemDetailInsight": {
-        "description": "itemDetailInsight"
-    },
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "itemDetailMarkBought": "Marquer comme acheté",
     "@itemDetailMarkBought": {
         "description": "itemDetailMarkBought"
@@ -372,52 +218,10 @@
     "@itemDetailDelete": {
         "description": "itemDetailDelete"
     },
-<<<<<<< HEAD
-=======
-    "addItemTitle": "Ajouter un produit",
-    "@addItemTitle": {
-        "description": "addItemTitle"
-    },
-    "addItemExampleValue": "Avocat",
-    "@addItemExampleValue": {
-        "description": "addItemExampleValue"
-    },
-    "addItemNameHint": "Nom du produit",
-    "@addItemNameHint": {
-        "description": "addItemNameHint"
-    },
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "addItemQuantity": "Quantité",
     "@addItemQuantity": {
         "description": "addItemQuantity"
     },
-<<<<<<< HEAD
-=======
-    "addItemSection": "Section",
-    "@addItemSection": {
-        "description": "addItemSection"
-    },
-    "addItemUrgent": "Urgent",
-    "@addItemUrgent": {
-        "description": "addItemUrgent"
-    },
-    "addItemUrgentSubtitle": "À acheter aujourd’hui",
-    "@addItemUrgentSubtitle": {
-        "description": "addItemUrgentSubtitle"
-    },
-    "addItemRemind": "Rappeler régulièrement",
-    "@addItemRemind": {
-        "description": "addItemRemind"
-    },
-    "addItemRemindEvery": "Tous les 7 jours",
-    "@addItemRemindEvery": {
-        "description": "addItemRemindEvery"
-    },
-    "addItemSubmit": "Ajouter à la liste",
-    "@addItemSubmit": {
-        "description": "addItemSubmit"
-    },
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "settingsTitle": "Paramètres",
     "@settingsTitle": {
         "description": "settingsTitle"
@@ -430,21 +234,6 @@
     "@settingsNotifications": {
         "description": "settingsNotifications"
     },
-<<<<<<< HEAD
-=======
-    "settingsDelivery": "Livraison",
-    "@settingsDelivery": {
-        "description": "settingsDelivery"
-    },
-    "settingsProAd": "Pora+ · sans publicité",
-    "@settingsProAd": {
-        "description": "settingsProAd"
-    },
-    "settingsTryPill": "Essayer",
-    "@settingsTryPill": {
-        "description": "settingsTryPill"
-    },
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "settingsPrivacy": "Confidentialité et données",
     "@settingsPrivacy": {
         "description": "settingsPrivacy"
@@ -489,21 +278,10 @@
     "@householdInviteDescriptionWhenConnecting": {
         "description": "householdInviteDescriptionWhenConnecting"
     },
-<<<<<<< HEAD
     "householdGotInvited": "Vous avez été invité à rejoindre une famille",
     "@householdGotInvited": {
         "description": "householdGotInvited"
     },
-=======
-    "householdGotInvited": "Vous avez été invité(e) à rejoindre une famille",
-    "@householdGotInvited": {
-        "description": "householdGotInvited"
-    },
-    "householdWriteCode": "Saisissez le code d’invitation",
-    "@householdWriteCode": {
-        "description": "householdWriteCode"
-    },
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "householdDoLater": "Je le ferai plus tard",
     "@householdDoLater": {
         "description": "householdDoLater"
@@ -528,61 +306,6 @@
     "@notificationsReadAll": {
         "description": "notificationsReadAll"
     },
-<<<<<<< HEAD
-=======
-    "notificationsMilkTitle": "Prends du lait en rentrant",
-    "@notificationsMilkTitle": {
-        "description": "notificationsMilkTitle"
-    },
-    "notificationsMilkBody": "C’est épuisé — Anna l’a indiqué il y a 10 minutes.",
-    "@notificationsMilkBody": {
-        "description": "notificationsMilkBody"
-    },
-    "notificationsMilkTime": "Il y a 5 minutes",
-    "@notificationsMilkTime": {
-        "description": "notificationsMilkTime"
-    },
-    "notificationsCoffeeTitle": "Le café va bientôt manquer",
-    "@notificationsCoffeeTitle": {
-        "description": "notificationsCoffeeTitle"
-    },
-    "notificationsCoffeeBody": "Vous en achetez environ tous les 14 jours, 12 se sont déjà écoulés.",
-    "@notificationsCoffeeBody": {
-        "description": "notificationsCoffeeBody"
-    },
-    "notificationsPartnerAddedTitle": "Anna a ajouté 2 produits",
-    "@notificationsPartnerAddedTitle": {
-        "description": "notificationsPartnerAddedTitle"
-    },
-    "notificationsPartnerAddedBody": "Les bananes et le pain sont dans la liste partagée.",
-    "@notificationsPartnerAddedBody": {
-        "description": "notificationsPartnerAddedBody"
-    },
-    "notificationsPartnerAddedTime": "Aujourd’hui, 9:12",
-    "@notificationsPartnerAddedTime": {
-        "description": "notificationsPartnerAddedTime"
-    },
-    "notificationsPromoTitle": "15 % de réduction sur votre première commande Samokat",
-    "@notificationsPromoTitle": {
-        "description": "notificationsPromoTitle"
-    },
-    "notificationsPromoBody": "La promo est encore valable 6 jours.",
-    "@notificationsPromoBody": {
-        "description": "notificationsPromoBody"
-    },
-    "notificationsPromoTime": "Hier",
-    "@notificationsPromoTime": {
-        "description": "notificationsPromoTime"
-    },
-    "notificationsOrderDeliveredTitle": "Commande livrée",
-    "@notificationsOrderDeliveredTitle": {
-        "description": "notificationsOrderDeliveredTitle"
-    },
-    "notificationsOrderDeliveredBody": "8 produits · Samokat · ₽1,054",
-    "@notificationsOrderDeliveredBody": {
-        "description": "notificationsOrderDeliveredBody"
-    },
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "notificationsAddToListPill": "＋ Ajouter à la liste",
     "@notificationsAddToListPill": {
         "description": "notificationsAddToListPill"
@@ -607,44 +330,10 @@
     "@userCreateProfileNext": {
         "description": "userCreateProfileNext"
     },
-<<<<<<< HEAD
-=======
-    "searchTitle": "Rechercher",
-    "@searchTitle": {
-        "description": "searchTitle"
-    },
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "searchHint": "Produit ou recette…",
     "@searchHint": {
         "description": "searchHint"
     },
-<<<<<<< HEAD
-=======
-    "searchFilterAll": "Tous",
-    "@searchFilterAll": {
-        "description": "searchFilterAll"
-    },
-    "searchFilterVegetables": "Légumes",
-    "@searchFilterVegetables": {
-        "description": "searchFilterVegetables"
-    },
-    "searchFilterDairy": "Produits laitiers",
-    "@searchFilterDairy": {
-        "description": "searchFilterDairy"
-    },
-    "searchFilterGrocery": "Courses",
-    "@searchFilterGrocery": {
-        "description": "searchFilterGrocery"
-    },
-    "searchFilterRecipes": "Recettes",
-    "@searchFilterRecipes": {
-        "description": "searchFilterRecipes"
-    },
-    "searchResults": "Résultats",
-    "@searchResults": {
-        "description": "searchResults"
-    },
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "searchNothingFound": "Aucun résultat",
     "@searchNothingFound": {
         "description": "searchNothingFound"
@@ -653,112 +342,10 @@
     "@insightsTitle": {
         "description": "insightsTitle"
     },
-<<<<<<< HEAD
-=======
-    "insightsTipKicker": "✨ ASTUCE PORA",
-    "@insightsTipKicker": {
-        "description": "insightsTipKicker"
-    },
-    "insightsTipTitle": "Vous adorez la carbonara !",
-    "@insightsTipTitle": {
-        "description": "insightsTipTitle"
-    },
-    "insightsTipBody": "Profil de saveurs similaire — essayez le mac and cheese. Vous avez déjà régulièrement 4 des 6 ingrédients.",
-    "@insightsTipBody": {
-        "description": "insightsTipBody"
-    },
-    "insightsTipAction": "Ouvrir la recette →",
-    "@insightsTipAction": {
-        "description": "insightsTipAction"
-    },
-    "insightsRunsOutMost": "Épuisé le plus souvent",
-    "@insightsRunsOutMost": {
-        "description": "insightsRunsOutMost"
-    },
-    "insightsFavoriteCuisines": "Cuisines préférées",
-    "@insightsFavoriteCuisines": {
-        "description": "insightsFavoriteCuisines"
-    },
-    "insightsCuisineItalian": "Italienne",
-    "@insightsCuisineItalian": {
-        "description": "insightsCuisineItalian"
-    },
-    "insightsCuisinePasta": "Pâtes",
-    "@insightsCuisinePasta": {
-        "description": "insightsCuisinePasta"
-    },
-    "insightsCuisineBreakfasts": "Petits-déjeuners",
-    "@insightsCuisineBreakfasts": {
-        "description": "insightsCuisineBreakfasts"
-    },
-    "insightsCuisineLight": "Légère",
-    "@insightsCuisineLight": {
-        "description": "insightsCuisineLight"
-    },
-    "orderTitle": "Commande",
-    "@orderTitle": {
-        "description": "orderTitle"
-    },
-    "orderCart": "Panier",
-    "@orderCart": {
-        "description": "orderCart"
-    },
-    "orderWhenToDeliver": "Quand livrer",
-    "@orderWhenToDeliver": {
-        "description": "orderWhenToDeliver"
-    },
-    "orderCheckoutCta": "Commander chez Samokat · {total}",
-    "@orderCheckoutCta": {
-        "placeholders": {
-            "total": {
-                "type": "String"
-            }
-        }
-    },
-    "orderSummaryGoods": "Articles",
-    "@orderSummaryGoods": {
-        "description": "orderSummaryGoods"
-    },
-    "orderSummaryDiscount": "15 % de réduction",
-    "@orderSummaryDiscount": {
-        "description": "orderSummaryDiscount"
-    },
-    "orderSummaryDelivery": "Livraison",
-    "@orderSummaryDelivery": {
-        "description": "orderSummaryDelivery"
-    },
-    "orderSummaryFree": "Gratuit",
-    "@orderSummaryFree": {
-        "description": "orderSummaryFree"
-    },
-    "orderSummaryTotal": "Total",
-    "@orderSummaryTotal": {
-        "description": "orderSummaryTotal"
-    },
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "recipeImportTitle": "Recette depuis un lien",
     "@recipeImportTitle": {
         "description": "recipeImportTitle"
     },
-<<<<<<< HEAD
-=======
-    "recipePreviewTitle": "Pâtes à la carbonara",
-    "@recipePreviewTitle": {
-        "description": "recipePreviewTitle"
-    },
-    "recipePreviewMeta": "eda.ru · 25 min · 2 portions",
-    "@recipePreviewMeta": {
-        "description": "recipePreviewMeta"
-    },
-    "recipePreviewFound": "6 ingrédients trouvés",
-    "@recipePreviewFound": {
-        "description": "recipePreviewFound"
-    },
-    "recipeDedupBanner": "2 doublons retirés pour ne pas répéter les articles déjà dans votre liste",
-    "@recipeDedupBanner": {
-        "description": "recipeDedupBanner"
-    },
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "recipeIngredients": "Ingrédients",
     "@recipeIngredients": {
         "description": "recipeIngredients"
@@ -797,19 +384,7 @@
     "@familiesSubtitle": {
         "description": "familiesSubtitle"
     },
-<<<<<<< HEAD
     "familiesCreateDialog": "Comment appeler la famille ?",
-=======
-    "familiesCurrent": "Actuelle",
-    "@familiesCurrent": {
-        "description": "familiesCurrent"
-    },
-    "familiesCreateOrJoin": "＋ Créer ou rejoindre",
-    "@familiesCreateOrJoin": {
-        "description": "familiesCreateOrJoin"
-    },
-    "familiesCreateDialog": "Quel nom donner à la famille ?",
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@familiesCreateDialog": {
         "description": "familiesCreateDialog"
     },
@@ -864,11 +439,7 @@
     "@welcomeBackTitle": {
         "description": "welcomeBackTitle"
     },
-<<<<<<< HEAD
     "welcomeBackSubtitle": "Un instant, ouverture de votre liste…",
-=======
-    "welcomeBackSubtitle": "Une seconde, nous ouvrons votre liste…",
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@welcomeBackSubtitle": {
         "description": "welcomeBackSubtitle"
     },
@@ -1029,11 +600,7 @@
     "@delete": {
         "description": "delete"
     },
-<<<<<<< HEAD
     "returnToList": "Retour à la liste",
-=======
-    "returnToList": "Remettre dans la liste",
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@returnToList": {
         "description": "returnToList"
     },
@@ -1049,13 +616,6 @@
     "@recipeEmptyHint": {
         "description": "recipeEmptyHint"
     },
-<<<<<<< HEAD
-=======
-    "recipeDupMark": "déjà dans la liste",
-    "@recipeDupMark": {
-        "description": "recipeDupMark"
-    },
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "done": "Terminé",
     "@done": {
         "description": "done"
@@ -1178,11 +738,7 @@
     "@noInternet": {
         "description": "noInternet"
     },
-<<<<<<< HEAD
     "noInternetButLoadYouLocally": "Pas de connexion Internet, nous chargeons vos données locales",
-=======
-    "noInternetButLoadYouLocally": "Pas de connexion Internet, mais nous chargerons vos données locales",
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@groupDeletionTitle": {
         "description": "groupDeletionTitle"
     },
@@ -1222,17 +778,6 @@
     "@groupShared": {
         "description": "groupShared"
     },
-<<<<<<< HEAD
-=======
-    "noGroups": "Aucun groupe pour le moment",
-    "@noGroups": {
-        "description": "noGroups"
-    },
-    "settingsChangeThemeIOSEasterEgg": "* Pour changer de thème, allez dans Réglages > PORA > Thème\n* Sélectionnez un nouveau thème dans le menu des réglages\n* Appuyez sur « Thème » dans les paramètres de l’app pour basculer entre les modes clair et sombre",
-    "@settingsChangeThemeIOSEasterEgg": {
-        "description": "ios easter egg on advanced settings when tapped few times"
-    },
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "tutorialTitle": "Comment ça marche",
     "@tutorialTitle": {
         "description": "tutorialTitle"
@@ -1257,7 +802,6 @@
     "@tutorialInviteBody": {
         "description": "tutorialInviteBody"
     },
-<<<<<<< HEAD
     "tutorialAddTitle": "Ajoutez un produit",
     "@tutorialAddTitle": {
         "description": "tutorialAddTitle"
@@ -1267,17 +811,6 @@
         "description": "tutorialAddBody"
     },
     "tutorialEditTitle": "Modifiez et cochez",
-=======
-    "tutorialAddTitle": "Ajouter un produit",
-    "@tutorialAddTitle": {
-        "description": "tutorialAddTitle"
-    },
-    "tutorialAddBody": "Appuyez sur + en bas de la liste. Nom, quantité, section, priorité — c’est fait.",
-    "@tutorialAddBody": {
-        "description": "tutorialAddBody"
-    },
-    "tutorialEditTitle": "Modifier et cocher",
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@tutorialEditTitle": {
         "description": "tutorialEditTitle"
     },
@@ -1293,11 +826,7 @@
     "@tutorialDeleteBody": {
         "description": "tutorialDeleteBody"
     },
-<<<<<<< HEAD
     "tutorialAiTitle": "Importez une recette",
-=======
-    "tutorialAiTitle": "Importer une recette",
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@tutorialAiTitle": {
         "description": "tutorialAiTitle"
     },
@@ -1333,11 +862,7 @@
     "@tutorialSampleAvocado": {
         "description": "sample product added in add animation"
     },
-<<<<<<< HEAD
     "tutorialSampleMilkQty": "Lait 2×1 L",
-=======
-    "tutorialSampleMilkQty": "Lait 2×1L",
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@tutorialSampleMilkQty": {
         "description": "sample product with qty"
     },
@@ -1385,7 +910,6 @@
     "@tutorialConnectBody": {
         "description": "tutorialConnectBody"
     },
-<<<<<<< HEAD
     "tutorialNotifyTitle": "Alerte « il le faut maintenant »",
     "@tutorialNotifyTitle": {
         "description": "tutorialNotifyTitle"
@@ -1395,17 +919,6 @@
         "description": "tutorialNotifyBody"
     },
     "tutorialOutroTitle": "Vous découvrirez le reste",
-=======
-    "tutorialNotifyTitle": "Ping « besoin urgent »",
-    "@tutorialNotifyTitle": {
-        "description": "tutorialNotifyTitle"
-    },
-    "tutorialNotifyBody": "Appuyez sur « ! » sur un produit — votre partenaire reçoit une notification « achète-le maintenant ». Pas besoin d’appeler.",
-    "@tutorialNotifyBody": {
-        "description": "tutorialNotifyBody"
-    },
-    "tutorialOutroTitle": "Le reste, vous le découvrirez vous-même",
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@tutorialOutroTitle": {
         "description": "tutorialOutroTitle"
     },
@@ -1421,11 +934,7 @@
     "@tutorialSamplePushSender": {
         "description": "sample partner name in notify push preview"
     },
-<<<<<<< HEAD
     "tutorialSamplePushBody": "Il faut du lait, urgent",
-=======
-    "tutorialSamplePushBody": "Besoin de lait, urgent",
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@tutorialSamplePushBody": {
         "description": "sample push body in notify animation"
     },
@@ -1433,19 +942,11 @@
     "@tutorialSampleInviteMessage": {
         "description": "sample chat message text before the invite link"
     },
-<<<<<<< HEAD
     "supportMessage": "Contacter l’assistance",
     "@supportMessage": {
         "description": "Email support"
     },
     "supportMessageBottomSheetTopDescription": "Votre message sera envoyé à l’équipe d’assistance. Merci de donner le plus de détails possible.",
-=======
-    "supportMessage": "Écrire au support",
-    "@supportMessage": {
-        "description": "Email support"
-    },
-    "supportMessageBottomSheetTopDescription": "Votre message sera envoyé à l’équipe d’assistance. Merci de fournir autant de détails que possible.",
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@supportMessageBottomSheetTopDescription": {
         "description": "Your message will be sent to the support team. Please provide as much detail as possible."
     },
@@ -1453,11 +954,7 @@
     "@supportMessageBottomSheetSendButton": {
         "description": "Send button text in support message bottom bar"
     },
-<<<<<<< HEAD
     "supportMessageBottomSheetUnderButtonText": "Nous vous répondrons dès que possible, par e-mail ou dans l’application !",
-=======
-    "supportMessageBottomSheetUnderButtonText": "Nous répondrons dès que possible, par e-mail sur votre Gmail ou dans l’app !",
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@supportMessageBottomSheetUnderButtonText": {
         "description": "supportMessageBottomSheetUnderButtonText"
     },
@@ -1466,15 +963,10 @@
         "description": "Allergen toggle label"
     },
     "predictionsGreeting": "Votre journée avec PORA",
-<<<<<<< HEAD
     "@predictionsGreeting": {
         "description": "predictions main greeting"
     },
-<<<<<<< HEAD
     "predictionsGreetingSub": "Des suggestions intelligentes d’après vos achats",
-=======
-    "predictionsGreetingSub": "Des suggestions intelligentes basées sur vos achats",
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@predictionsGreetingSub": {
         "description": "predictions greeting subtitle"
     },
@@ -1482,38 +974,14 @@
     "@predictionsSectionSoon": {
         "description": "section title"
     },
-<<<<<<< HEAD
-=======
-    "predictionsSectionOften": "Vous achetez souvent",
-    "@predictionsSectionOften": {
-        "description": "section title"
-    },
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "predictionsSectionAiSuggests": "L’IA suggère",
     "@predictionsSectionAiSuggests": {
         "description": "section title"
     },
-<<<<<<< HEAD
-=======
-    "predictionsAiSuggestionsTitle": "Produits et recettes pour vous",
-    "@predictionsAiSuggestionsTitle": {
-        "description": "AI suggestions card title"
-    },
-    "predictionsAiSuggestionsTopic": "vos préférences et vos achats",
-    "@predictionsAiSuggestionsTopic": {
-        "description": "AI suggestions topic"
-    },
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
-=======
-    "predictionsGreetingSub": "Des suggestions intelligentes d’après vos achats",
-    "predictionsSectionSoon": "Bientôt épuisé",
-    "predictionsSectionAiSuggests": "L’IA suggère",
->>>>>>> f817e1d (feat(predictions): enhance product prediction localization and add unit tests for days calculation)
     "refresh": "Actualiser",
     "@refresh": {
         "description": "refresh action"
     },
-<<<<<<< HEAD
     "kpiWeek": "produits",
     "@kpiWeek": {
         "description": "kpi label"
@@ -1523,25 +991,6 @@
         "description": "kpi label"
     },
     "kpiDaysToRun": "bientôt épuisés",
-=======
-    "predictionsOftenEmpty": "Pas encore assez de données",
-    "@predictionsOftenEmpty": {
-        "description": "empty frequent products"
-    },
-    "predictionsAskPora": "Demander à PORA",
-    "@predictionsAskPora": {
-        "description": "FAB label"
-    },
-    "kpiWeek": "articles par semaine",
-    "@kpiWeek": {
-        "description": "kpi label"
-    },
-    "kpiRecipes": "recettes ce mois-ci",
-    "@kpiRecipes": {
-        "description": "kpi label"
-    },
-    "kpiDaysToRun": "jours avant le réapprovisionnement",
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@kpiDaysToRun": {
         "description": "kpi label"
     },
@@ -1549,7 +998,6 @@
     "@fallbackTip1": {
         "description": "fallback tip"
     },
-<<<<<<< HEAD
     "fallbackTip2": "Ajoutez le sel à la pâte en dernier — il ralentit la levure.",
     "@fallbackTip2": {
         "description": "fallback tip"
@@ -1563,21 +1011,6 @@
         "description": "fallback tip"
     },
     "fallbackTip5": "Testez la fraîcheur d’un œuf dans l’eau : il coule — frais, il flotte — à jeter.",
-=======
-    "fallbackTip2": "Ajoutez le sel à la pâte à la fin — il ralentit la levure.",
-    "@fallbackTip2": {
-        "description": "fallback tip"
-    },
-    "fallbackTip3": "Pour que les oignons ne piquent pas les yeux, mettez-les 15 minutes au congélateur avant de les couper.",
-    "@fallbackTip3": {
-        "description": "fallback tip"
-    },
-    "fallbackTip4": "Soupe trop salée ? Une pomme de terre crue pendant 10 minutes absorbe l’excès de sel.",
-    "@fallbackTip4": {
-        "description": "fallback tip"
-    },
-    "fallbackTip5": "Testez la fraîcheur d’un œuf dans l’eau : il coule — il est frais, il flotte — à jeter.",
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@fallbackTip5": {
         "description": "fallback tip"
     },
@@ -1585,19 +1018,11 @@
     "@fallbackTip6": {
         "description": "fallback tip"
     },
-<<<<<<< HEAD
     "fallbackTip7": "La viande congelée se tranche plus finement — 20 minutes au congélateur avant de la couper.",
     "@fallbackTip7": {
         "description": "fallback tip"
     },
     "fallbackTip8": "Roulez le citron sur le plan de travail avant de le couper — vous obtiendrez plus de jus.",
-=======
-    "fallbackTip7": "La viande congelée se coupe plus finement — 20 minutes au congélateur avant de la découper.",
-    "@fallbackTip7": {
-        "description": "fallback tip"
-    },
-    "fallbackTip8": "Roulez un citron sur le plan de travail avant de le couper — vous obtiendrez plus de jus.",
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@fallbackTip8": {
         "description": "fallback tip"
     },
@@ -1605,11 +1030,7 @@
     "@fallbackTip9": {
         "description": "fallback tip"
     },
-<<<<<<< HEAD
     "fallbackTip10": "Le pain se garde un mois au congélateur ; on peut le griller directement sans le décongeler.",
-=======
-    "fallbackTip10": "Le pain se conserve un mois au congélateur ; on peut le griller directement congelé.",
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@fallbackTip10": {
         "description": "fallback tip"
     },
@@ -1649,11 +1070,7 @@
     "@chatSample1": {
         "description": "sample question"
     },
-<<<<<<< HEAD
     "chatSample2": "Par quoi remplacer la crème fraîche dans une pâte ?",
-=======
-    "chatSample2": "Par quoi remplacer la crème aigre dans une pâte ?",
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@chatSample2": {
         "description": "sample question"
     },
@@ -1661,11 +1078,7 @@
     "@chatSample3": {
         "description": "sample question"
     },
-<<<<<<< HEAD
     "chatSample4": "Recette de dîner rapide en 20 minutes",
-=======
-    "chatSample4": "Une recette de dîner rapide en 20 minutes",
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@chatSample4": {
         "description": "sample question"
     },
@@ -1673,11 +1086,7 @@
     "@chatSample5": {
         "description": "sample question"
     },
-<<<<<<< HEAD
     "chatSample6": "Faites une liste de courses pour 3 petits-déjeuners simples",
-=======
-    "chatSample6": "Créez une liste de courses pour 3 petits-déjeuners faciles",
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@chatSample6": {
         "description": "sample question"
     },
@@ -1685,11 +1094,7 @@
     "@chatSample7": {
         "description": "sample question"
     },
-<<<<<<< HEAD
     "chatSample8": "Combien de temps garder du riz cuit au réfrigérateur ?",
-=======
-    "chatSample8": "Combien de temps puis-je garder du riz cuit au réfrigérateur ?",
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@chatSample8": {
         "description": "sample question"
     },
@@ -1701,19 +1106,11 @@
     "@chatSample10": {
         "description": "sample question"
     },
-<<<<<<< HEAD
     "chatSample11": "Prévoyez trois dîners avec ce que j’ai déjà",
     "@chatSample11": {
         "description": "sample question"
     },
     "chatSample12": "Que cuisiner avec des restes en 15 minutes ?",
-=======
-    "chatSample11": "Planifiez trois dîners avec ce que j’ai déjà",
-    "@chatSample11": {
-        "description": "sample question"
-    },
-    "chatSample12": "Que puis-je cuisiner avec des restes en 15 minutes ?",
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@chatSample12": {
         "description": "sample question"
     },
@@ -1733,17 +1130,6 @@
     "@chatInputHint": {
         "description": "chat input placeholder"
     },
-<<<<<<< HEAD
-=======
-    "aiModelBadge": "Propulsé par OpenRouter · ling-3.0-flash",
-    "@aiModelBadge": {
-        "description": "model badge"
-    },
-    "seeAll": "Tout voir",
-    "@seeAll": {
-        "description": "see all link"
-    },
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "tipTopicHerbs": "herbes",
     "@tipTopicHerbs": {
         "description": "predefined tip topic"
@@ -1816,19 +1202,11 @@
     "@tipTopicsEmpty": {
         "description": "warning when no topics selected"
     },
-<<<<<<< HEAD
     "insightsChampionKicker": "VOTRE PRODUIT N°1",
     "@insightsChampionKicker": {
         "description": "champion card kicker"
     },
     "insightsChampionSubtitle": "{count, plural, =1{acheté une fois} other{acheté {count} fois}}",
-=======
-    "insightsChampionKicker": "CHAMPION DU MOIS",
-    "@insightsChampionKicker": {
-        "description": "champion card kicker"
-    },
-    "insightsChampionSubtitle": "acheté {count} fois ce mois-ci",
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@insightsChampionSubtitle": {
         "description": "champion card subtitle",
         "placeholders": {
@@ -1837,11 +1215,7 @@
             }
         }
     },
-<<<<<<< HEAD
     "insightsStreakDays": "{days, plural, =1{{days} jour d’affilée} other{{days} jours d’affilée}}",
-=======
-    "insightsStreakDays": "{days} jours d’affilée",
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@insightsStreakDays": {
         "description": "streak headline",
         "placeholders": {
@@ -1850,11 +1224,7 @@
             }
         }
     },
-<<<<<<< HEAD
     "insightsStreakSubtitle": "vous êtes lancé — continuez",
-=======
-    "insightsStreakSubtitle": "vous êtes lancé — continuez comme ça",
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "@insightsStreakSubtitle": {
         "description": "streak card subtitle"
     },
@@ -1875,13 +1245,6 @@
     "@insightsStatsProducts": {
         "description": "kpi label"
     },
-<<<<<<< HEAD
-=======
-    "insightsStatsLoginsWeek": "connexions cette semaine",
-    "@insightsStatsLoginsWeek": {
-        "description": "kpi label"
-    },
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "insightsEmpty": "Pas encore de données — commencez à ajouter des produits",
     "@insightsEmpty": {
         "description": "empty state on insights"
@@ -1934,22 +1297,6 @@
     "@recipeCreateListCta": {
         "description": "recipe cta"
     },
-<<<<<<< HEAD
-=======
-    "recipeDupForceMark": "sera quand même ajouté",
-    "@recipeDupForceMark": {
-        "description": "dup pill when user unchecks flag"
-    },
-    "recipeDedupBannerMany": "{n} doublons seront ignorés — décochez pour les ajouter quand même",
-    "@recipeDedupBannerMany": {
-        "description": "dedup banner",
-        "placeholders": {
-            "n": {
-                "type": "int"
-            }
-        }
-    },
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "offlineWriteBlocked": "Pas d’Internet — la modification ne sera pas enregistrée",
     "@offlineWriteBlocked": {
         "description": "snackbar when write attempted offline"

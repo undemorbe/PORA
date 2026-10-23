@@ -30,11 +30,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get authSubtitle2 =>
-<<<<<<< HEAD
       'Commencez à taper — nous détecterons s’il s’agit d’un numéro de téléphone ou d’un e-mail.';
-=======
-      'Commencez à saisir — nous détecterons s’il s’agit d’un numéro de téléphone ou d’un e-mail.';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get authJoinButton => 'Rejoindre';
@@ -96,33 +92,21 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get onboardingSlide1Body =>
-<<<<<<< HEAD
       'Déposez le lien d’une recette — Pora rassemble les ingrédients et retire ce que vous avez déjà.';
-=======
-      'Collez le lien d’une recette — Pora rassemble les ingrédients et retire ce que vous avez déjà.';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get onboardingSlide2Title => 'Une liste\npour deux';
 
   @override
   String get onboardingSlide2Body =>
-<<<<<<< HEAD
       'Ajoutez des articles ensemble — vous voyez qui a ajouté quoi. Votre partenaire peut acheter ce qu’il vous faut en rentrant.';
-=======
-      'Ajoutez des articles ensemble — vous voyez qui a ajouté quoi. Votre partenaire peut prendre ce qu’il vous faut en rentrant.';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get onboardingSlide3Title => 'Pora sait\nquand c’est le moment';
 
   @override
   String get onboardingSlide3Body =>
-<<<<<<< HEAD
       'D’après vos achats, Pora prévoit ce qui va bientôt manquer et vous rappelle de l’ajouter à votre liste.';
-=======
-      'D’après vos achats, Pora prévoit ce qui va bientôt manquer et vous permet de le commander en un clic.';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get onboardingSkip => 'Ignorer';
@@ -167,112 +151,22 @@ class AppLocalizationsFr extends AppLocalizations {
   String get briefNext => 'Suivant';
 
   @override
-<<<<<<< HEAD
-=======
-  String get briefItemMilk => 'Lait';
-
-  @override
-  String get briefItemBread => 'Pain';
-
-  @override
-  String get briefItemEggs => 'Œufs';
-
-  @override
-  String get briefItemCoffee => 'Café';
-
-  @override
-  String get briefItemCheese => 'Fromage';
-
-  @override
-  String get briefItemBananas => 'Bananes';
-
-  @override
-  String get briefItemButter => 'Beurre';
-
-  @override
-  String get briefItemWater => 'Eau';
-
-  @override
-  String get briefItemVegetables => 'Légumes';
-
-  @override
-  String get briefItemTomatoes => 'Tomates';
-
-  @override
-  String get briefItemPasta => 'Pâtes';
-
-  @override
-  String get briefItemChicken => 'Poulet';
-
-  @override
-  String get listTitle => 'Notre liste';
-
-  @override
-  String get listMembersCount => '2 personnes · 8 produits';
-
-  @override
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
   String get listUrgent => 'Urgent';
 
   @override
   String get listAdd => 'Ajouter';
 
   @override
-<<<<<<< HEAD
-  String get predictionsAddToList => 'Ajouter à la liste';
-
-  @override
-  String get predictionsDismiss => 'Non merci';
-=======
-  String get predictionsTitle => 'Pora peut vous aider !';
-
-  @override
-  String get predictionsSubtitle => 'Bientôt épuisé — d’après vos achats';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
-
-  @override
-  String get itemDetailAddedBy => 'Ajouté par';
-
-  @override
-<<<<<<< HEAD
-  String get itemDetailQuantity => 'Quantité';
-=======
-  String get predictionsOrderTitle => 'Tout commander en un clic';
-
-  @override
-  String get predictionsOrderSubtitle => 'Samokat · livraison en 15 minutes';
-
-  @override
-  String get predictionsOrderDiscount =>
-      '15 % de réduction sur votre première commande';
-
-  @override
   String get predictionsAddToList => 'Ajouter à la liste';
 
   @override
   String get predictionsDismiss => 'Non merci';
 
   @override
-  String get itemDetailName => 'Lait';
-
-  @override
-  String get itemDetailSubtitle => '2 L · Produits laitiers';
-
-  @override
   String get itemDetailAddedBy => 'Ajouté par';
 
   @override
-  String get itemDetailSection => 'Section';
-
-  @override
-  String get itemDetailSectionValue => 'Produits laitiers';
-
-  @override
   String get itemDetailQuantity => 'Quantité';
-
-  @override
-  String get itemDetailQuantityValue => '2 L';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get itemDetailUrgent => 'Urgent';
@@ -281,54 +175,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get itemDetailRemind => 'Me rappeler';
 
   @override
-<<<<<<< HEAD
-=======
-  String get itemDetailRemindEvery => 'Tous les 7 jours';
-
-  @override
-  String get itemDetailInsight =>
-      'Vous l’achetez environ tous les 7 jours · dernier achat il y a 6 jours. Je vous proposerai bientôt d’en racheter.';
-
-  @override
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
   String get itemDetailMarkBought => 'Marquer comme acheté';
 
   @override
   String get itemDetailDelete => 'Retirer de la liste';
 
   @override
-<<<<<<< HEAD
   String get addItemQuantity => 'Quantité';
-=======
-  String get addItemTitle => 'Ajouter un produit';
-
-  @override
-  String get addItemExampleValue => 'Avocat';
-
-  @override
-  String get addItemNameHint => 'Nom du produit';
-
-  @override
-  String get addItemQuantity => 'Quantité';
-
-  @override
-  String get addItemSection => 'Section';
-
-  @override
-  String get addItemUrgent => 'Urgent';
-
-  @override
-  String get addItemUrgentSubtitle => 'À acheter aujourd’hui';
-
-  @override
-  String get addItemRemind => 'Rappeler régulièrement';
-
-  @override
-  String get addItemRemindEvery => 'Tous les 7 jours';
-
-  @override
-  String get addItemSubmit => 'Ajouter à la liste';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get settingsTitle => 'Paramètres';
@@ -340,18 +193,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settingsNotifications => 'Notifications';
 
   @override
-<<<<<<< HEAD
-=======
-  String get settingsDelivery => 'Livraison';
-
-  @override
-  String get settingsProAd => 'Pora+ · sans publicité';
-
-  @override
-  String get settingsTryPill => 'Essayer';
-
-  @override
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
   String get settingsPrivacy => 'Confidentialité et données';
 
   @override
@@ -388,14 +229,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get householdGotInvited =>
-<<<<<<< HEAD
       'Vous avez été invité à rejoindre une famille';
-=======
-      'Vous avez été invité(e) à rejoindre une famille';
-
-  @override
-  String get householdWriteCode => 'Saisissez le code d’invitation';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get householdDoLater => 'Je le ferai plus tard';
@@ -416,58 +250,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get notificationsReadAll => 'Tout lire';
 
   @override
-<<<<<<< HEAD
   String get notificationsAddToListPill => '＋ Ajouter à la liste';
 
   @override
-=======
-  String get notificationsMilkTitle => 'Prends du lait en rentrant';
-
-  @override
-  String get notificationsMilkBody =>
-      'C’est épuisé — Anna l’a indiqué il y a 10 minutes.';
-
-  @override
-  String get notificationsMilkTime => 'Il y a 5 minutes';
-
-  @override
-  String get notificationsCoffeeTitle => 'Le café va bientôt manquer';
-
-  @override
-  String get notificationsCoffeeBody =>
-      'Vous en achetez environ tous les 14 jours, 12 se sont déjà écoulés.';
-
-  @override
-  String get notificationsPartnerAddedTitle => 'Anna a ajouté 2 produits';
-
-  @override
-  String get notificationsPartnerAddedBody =>
-      'Les bananes et le pain sont dans la liste partagée.';
-
-  @override
-  String get notificationsPartnerAddedTime => 'Aujourd’hui, 9:12';
-
-  @override
-  String get notificationsPromoTitle =>
-      '15 % de réduction sur votre première commande Samokat';
-
-  @override
-  String get notificationsPromoBody => 'La promo est encore valable 6 jours.';
-
-  @override
-  String get notificationsPromoTime => 'Hier';
-
-  @override
-  String get notificationsOrderDeliveredTitle => 'Commande livrée';
-
-  @override
-  String get notificationsOrderDeliveredBody => '8 produits · Samokat · ₽1,054';
-
-  @override
-  String get notificationsAddToListPill => '＋ Ajouter à la liste';
-
-  @override
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
   String get userCreateProfileTitle => 'Comment vous appelez-vous ?';
 
   @override
@@ -484,32 +269,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get userCreateProfileNext => 'Suivant';
 
   @override
-<<<<<<< HEAD
   String get searchHint => 'Produit ou recette…';
-=======
-  String get searchTitle => 'Rechercher';
-
-  @override
-  String get searchHint => 'Produit ou recette…';
-
-  @override
-  String get searchFilterAll => 'Tous';
-
-  @override
-  String get searchFilterVegetables => 'Légumes';
-
-  @override
-  String get searchFilterDairy => 'Produits laitiers';
-
-  @override
-  String get searchFilterGrocery => 'Courses';
-
-  @override
-  String get searchFilterRecipes => 'Recettes';
-
-  @override
-  String get searchResults => 'Résultats';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get searchNothingFound => 'Aucun résultat';
@@ -518,84 +278,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get insightsTitle => 'Analyses';
 
   @override
-<<<<<<< HEAD
   String get recipeImportTitle => 'Recette depuis un lien';
-=======
-  String get insightsTipKicker => '✨ ASTUCE PORA';
-
-  @override
-  String get insightsTipTitle => 'Vous adorez la carbonara !';
-
-  @override
-  String get insightsTipBody =>
-      'Profil de saveurs similaire — essayez le mac and cheese. Vous avez déjà régulièrement 4 des 6 ingrédients.';
-
-  @override
-  String get insightsTipAction => 'Ouvrir la recette →';
-
-  @override
-  String get insightsRunsOutMost => 'Épuisé le plus souvent';
-
-  @override
-  String get insightsFavoriteCuisines => 'Cuisines préférées';
-
-  @override
-  String get insightsCuisineItalian => 'Italienne';
-
-  @override
-  String get insightsCuisinePasta => 'Pâtes';
-
-  @override
-  String get insightsCuisineBreakfasts => 'Petits-déjeuners';
-
-  @override
-  String get insightsCuisineLight => 'Légère';
-
-  @override
-  String get orderTitle => 'Commande';
-
-  @override
-  String get orderCart => 'Panier';
-
-  @override
-  String get orderWhenToDeliver => 'Quand livrer';
-
-  @override
-  String orderCheckoutCta(String total) {
-    return 'Commander chez Samokat · $total';
-  }
-
-  @override
-  String get orderSummaryGoods => 'Articles';
-
-  @override
-  String get orderSummaryDiscount => '15 % de réduction';
-
-  @override
-  String get orderSummaryDelivery => 'Livraison';
-
-  @override
-  String get orderSummaryFree => 'Gratuit';
-
-  @override
-  String get orderSummaryTotal => 'Total';
-
-  @override
-  String get recipeImportTitle => 'Recette depuis un lien';
-
-  @override
-  String get recipePreviewTitle => 'Pâtes à la carbonara';
-
-  @override
-  String get recipePreviewMeta => 'eda.ru · 25 min · 2 portions';
-
-  @override
-  String get recipePreviewFound => '6 ingrédients trouvés';
-
-  @override
-  String get recipeDedupBanner =>
-      '2 doublons retirés pour ne pas répéter les articles déjà dans votre liste';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get recipeIngredients => 'Ingrédients';
@@ -629,17 +312,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get familiesSubtitle => 'Choisissez une famille pour ouvrir sa liste';
 
   @override
-<<<<<<< HEAD
   String get familiesCreateDialog => 'Comment appeler la famille ?';
-=======
-  String get familiesCurrent => 'Actuelle';
-
-  @override
-  String get familiesCreateOrJoin => '＋ Créer ou rejoindre';
-
-  @override
-  String get familiesCreateDialog => 'Quel nom donner à la famille ?';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get tryToUpdate => 'Réessayer';
@@ -693,11 +366,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get welcomeBackTitle => 'Bon retour !';
 
   @override
-<<<<<<< HEAD
   String get welcomeBackSubtitle => 'Un instant, ouverture de votre liste…';
-=======
-  String get welcomeBackSubtitle => 'Une seconde, nous ouvrons votre liste…';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get errorDuringLoading => 'Erreur lors du chargement';
@@ -816,11 +485,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get delete => 'Supprimer';
 
   @override
-<<<<<<< HEAD
   String get returnToList => 'Retour à la liste';
-=======
-  String get returnToList => 'Remettre dans la liste';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get nooneToNotify => 'Personne à notifier';
@@ -831,12 +496,6 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get recipeEmptyHint =>
       'Collez l’URL d’une recette et appuyez sur « Analyser »';
-<<<<<<< HEAD
-=======
-
-  @override
-  String get recipeDupMark => 'déjà dans la liste';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get done => 'Terminé';
@@ -930,11 +589,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get noInternetButLoadYouLocally =>
-<<<<<<< HEAD
       'Pas de connexion Internet, nous chargeons vos données locales';
-=======
-      'Pas de connexion Internet, mais nous chargerons vos données locales';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get groupDeletionTitle => 'Voulez-vous vraiment supprimer le groupe ?';
@@ -965,16 +620,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get groupShared => 'Partagé';
 
   @override
-<<<<<<< HEAD
-=======
-  String get noGroups => 'Aucun groupe pour le moment';
-
-  @override
-  String get settingsChangeThemeIOSEasterEgg =>
-      '* Pour changer de thème, allez dans Réglages > PORA > Thème\n* Sélectionnez un nouveau thème dans le menu des réglages\n* Appuyez sur « Thème » dans les paramètres de l’app pour basculer entre les modes clair et sombre';
-
-  @override
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
   String get tutorialTitle => 'Comment ça marche';
 
   @override
@@ -994,7 +639,6 @@ class AppLocalizationsFr extends AppLocalizations {
       'Faites glisser un groupe vers la droite → Inviter. Votre partenaire voit la même liste.';
 
   @override
-<<<<<<< HEAD
   String get tutorialAddTitle => 'Ajoutez un produit';
 
   @override
@@ -1003,16 +647,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get tutorialEditTitle => 'Modifiez et cochez';
-=======
-  String get tutorialAddTitle => 'Ajouter un produit';
-
-  @override
-  String get tutorialAddBody =>
-      'Appuyez sur + en bas de la liste. Nom, quantité, section, priorité — c’est fait.';
-
-  @override
-  String get tutorialEditTitle => 'Modifier et cocher';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get tutorialEditBody =>
@@ -1026,11 +660,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Faites glisser un produit vers la gauche → Supprimer. La confirmation peut être désactivée.';
 
   @override
-<<<<<<< HEAD
   String get tutorialAiTitle => 'Importez une recette';
-=======
-  String get tutorialAiTitle => 'Importer une recette';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get tutorialAiBody =>
@@ -1059,11 +689,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get tutorialSampleAvocado => 'Avocat';
 
   @override
-<<<<<<< HEAD
   String get tutorialSampleMilkQty => 'Lait 2×1 L';
-=======
-  String get tutorialSampleMilkQty => 'Lait 2×1L';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get tutorialSampleCoffee => 'Café';
@@ -1100,7 +726,6 @@ class AppLocalizationsFr extends AppLocalizations {
       'Votre partenaire envoie un lien ou un code. Collez-le — vous voilà dans la liste partagée.';
 
   @override
-<<<<<<< HEAD
   String get tutorialNotifyTitle => 'Alerte « il le faut maintenant »';
 
   @override
@@ -1109,16 +734,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get tutorialOutroTitle => 'Vous découvrirez le reste';
-=======
-  String get tutorialNotifyTitle => 'Ping « besoin urgent »';
-
-  @override
-  String get tutorialNotifyBody =>
-      'Appuyez sur « ! » sur un produit — votre partenaire reçoit une notification « achète-le maintenant ». Pas besoin d’appeler.';
-
-  @override
-  String get tutorialOutroTitle => 'Le reste, vous le découvrirez vous-même';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get tutorialOutroBody =>
@@ -1131,40 +746,24 @@ class AppLocalizationsFr extends AppLocalizations {
   String get tutorialSamplePushSender => 'Anna';
 
   @override
-<<<<<<< HEAD
   String get tutorialSamplePushBody => 'Il faut du lait, urgent';
-=======
-  String get tutorialSamplePushBody => 'Besoin de lait, urgent';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get tutorialSampleInviteMessage => 'Rejoins la liste';
 
   @override
-<<<<<<< HEAD
   String get supportMessage => 'Contacter l’assistance';
 
   @override
   String get supportMessageBottomSheetTopDescription =>
       'Votre message sera envoyé à l’équipe d’assistance. Merci de donner le plus de détails possible.';
-=======
-  String get supportMessage => 'Écrire au support';
-
-  @override
-  String get supportMessageBottomSheetTopDescription =>
-      'Votre message sera envoyé à l’équipe d’assistance. Merci de fournir autant de détails que possible.';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get supportMessageBottomSheetSendButton => 'Envoyer';
 
   @override
   String get supportMessageBottomSheetUnderButtonText =>
-<<<<<<< HEAD
       'Nous vous répondrons dès que possible, par e-mail ou dans l’application !';
-=======
-      'Nous répondrons dès que possible, par e-mail sur votre Gmail ou dans l’app !';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get allergen => 'Allergène';
@@ -1174,58 +773,25 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get predictionsGreetingSub =>
-<<<<<<< HEAD
       'Des suggestions intelligentes d’après vos achats';
 
   @override
   String get predictionsSectionSoon => 'Bientôt épuisé';
-=======
-      'Des suggestions intelligentes basées sur vos achats';
-
-  @override
-  String get predictionsSectionSoon => 'Bientôt épuisé';
-
-  @override
-  String get predictionsSectionOften => 'Vous achetez souvent';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get predictionsSectionAiSuggests => 'L’IA suggère';
 
   @override
-<<<<<<< HEAD
   String get refresh => 'Actualiser';
 
   @override
   String get kpiWeek => 'produits';
-=======
-  String get predictionsAiSuggestionsTitle => 'Produits et recettes pour vous';
-
-  @override
-  String get predictionsAiSuggestionsTopic => 'vos préférences et vos achats';
-
-  @override
-  String get refresh => 'Actualiser';
-
-  @override
-  String get predictionsOftenEmpty => 'Pas encore assez de données';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get kpiRecipes => 'achats fréquents';
 
   @override
-<<<<<<< HEAD
   String get kpiDaysToRun => 'bientôt épuisés';
-=======
-  String get kpiWeek => 'articles par semaine';
-
-  @override
-  String get kpiRecipes => 'recettes ce mois-ci';
-
-  @override
-  String get kpiDaysToRun => 'jours avant le réapprovisionnement';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get fallbackTip1 =>
@@ -1233,7 +799,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get fallbackTip2 =>
-<<<<<<< HEAD
       'Ajoutez le sel à la pâte en dernier — il ralentit la levure.';
 
   @override
@@ -1247,21 +812,6 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get fallbackTip5 =>
       'Testez la fraîcheur d’un œuf dans l’eau : il coule — frais, il flotte — à jeter.';
-=======
-      'Ajoutez le sel à la pâte à la fin — il ralentit la levure.';
-
-  @override
-  String get fallbackTip3 =>
-      'Pour que les oignons ne piquent pas les yeux, mettez-les 15 minutes au congélateur avant de les couper.';
-
-  @override
-  String get fallbackTip4 =>
-      'Soupe trop salée ? Une pomme de terre crue pendant 10 minutes absorbe l’excès de sel.';
-
-  @override
-  String get fallbackTip5 =>
-      'Testez la fraîcheur d’un œuf dans l’eau : il coule — il est frais, il flotte — à jeter.';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get fallbackTip6 =>
@@ -1269,19 +819,11 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get fallbackTip7 =>
-<<<<<<< HEAD
       'La viande congelée se tranche plus finement — 20 minutes au congélateur avant de la couper.';
 
   @override
   String get fallbackTip8 =>
       'Roulez le citron sur le plan de travail avant de le couper — vous obtiendrez plus de jus.';
-=======
-      'La viande congelée se coupe plus finement — 20 minutes au congélateur avant de la découper.';
-
-  @override
-  String get fallbackTip8 =>
-      'Roulez un citron sur le plan de travail avant de le couper — vous obtiendrez plus de jus.';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get fallbackTip9 =>
@@ -1289,11 +831,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get fallbackTip10 =>
-<<<<<<< HEAD
       'Le pain se garde un mois au congélateur ; on peut le griller directement sans le décongeler.';
-=======
-      'Le pain se conserve un mois au congélateur ; on peut le griller directement congelé.';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get aiTipOfDayLabel => 'ASTUCE DU JOUR';
@@ -1324,23 +862,15 @@ class AppLocalizationsFr extends AppLocalizations {
   String get chatSample1 => 'Que puis-je cuisiner avec du poulet et du riz ?';
 
   @override
-<<<<<<< HEAD
   String get chatSample2 =>
       'Par quoi remplacer la crème fraîche dans une pâte ?';
-=======
-  String get chatSample2 => 'Par quoi remplacer la crème aigre dans une pâte ?';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get chatSample3 =>
       'Comment conserver les herbes pour qu’elles ne fanent pas ?';
 
   @override
-<<<<<<< HEAD
   String get chatSample4 => 'Recette de dîner rapide en 20 minutes';
-=======
-  String get chatSample4 => 'Une recette de dîner rapide en 20 minutes';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get chatSample5 =>
@@ -1348,22 +878,14 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get chatSample6 =>
-<<<<<<< HEAD
       'Faites une liste de courses pour 3 petits-déjeuners simples';
-=======
-      'Créez une liste de courses pour 3 petits-déjeuners faciles';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get chatSample7 => 'Que cuisiner pour deux avec un petit budget ?';
 
   @override
   String get chatSample8 =>
-<<<<<<< HEAD
       'Combien de temps garder du riz cuit au réfrigérateur ?';
-=======
-      'Combien de temps puis-je garder du riz cuit au réfrigérateur ?';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get chatSample9 =>
@@ -1374,18 +896,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Par quoi remplacer le beurre dans cette recette ?';
 
   @override
-<<<<<<< HEAD
   String get chatSample11 => 'Prévoyez trois dîners avec ce que j’ai déjà';
 
   @override
   String get chatSample12 => 'Que cuisiner avec des restes en 15 minutes ?';
-=======
-  String get chatSample11 => 'Planifiez trois dîners avec ce que j’ai déjà';
-
-  @override
-  String get chatSample12 =>
-      'Que puis-je cuisiner avec des restes en 15 minutes ?';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String get chatSample13 =>
@@ -1401,15 +915,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get chatInputHint => 'Demandez n’importe quoi…';
 
   @override
-<<<<<<< HEAD
-=======
-  String get aiModelBadge => 'Propulsé par OpenRouter · ling-3.0-flash';
-
-  @override
-  String get seeAll => 'Tout voir';
-
-  @override
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
   String get tipTopicHerbs => 'herbes';
 
   @override
@@ -1466,7 +971,6 @@ class AppLocalizationsFr extends AppLocalizations {
       'Aucun thème sélectionné — l’astuce sera générale';
 
   @override
-<<<<<<< HEAD
   String get insightsChampionKicker => 'VOTRE PRODUIT N°1';
 
   @override
@@ -1478,18 +982,10 @@ class AppLocalizationsFr extends AppLocalizations {
       one: 'acheté une fois',
     );
     return '$_temp0';
-=======
-  String get insightsChampionKicker => 'CHAMPION DU MOIS';
-
-  @override
-  String insightsChampionSubtitle(int count) {
-    return 'acheté $count fois ce mois-ci';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
   }
 
   @override
   String insightsStreakDays(int days) {
-<<<<<<< HEAD
     String _temp0 = intl.Intl.pluralLogic(
       days,
       locale: localeName,
@@ -1501,13 +997,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get insightsStreakSubtitle => 'vous êtes lancé — continuez';
-=======
-    return '$days jours d’affilée';
-  }
-
-  @override
-  String get insightsStreakSubtitle => 'vous êtes lancé — continuez comme ça';
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
 
   @override
   String insightsFreqEvery(int days) {
@@ -1521,12 +1010,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get insightsStatsProducts => 'produits';
 
   @override
-<<<<<<< HEAD
-=======
-  String get insightsStatsLoginsWeek => 'connexions cette semaine';
-
-  @override
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
   String get insightsEmpty =>
       'Pas encore de données — commencez à ajouter des produits';
 
@@ -1572,7 +1055,6 @@ class AppLocalizationsFr extends AppLocalizations {
       'Pas d’Internet — la modification ne sera pas enregistrée';
 
   @override
-<<<<<<< HEAD
   String get offlineSavedQueued => 'Enregistré. Envoi dès le retour du réseau';
 
   @override
@@ -1581,17 +1063,6 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-=======
-  String recipeDedupBannerMany(int n) {
-    return '$n doublons seront ignorés — décochez pour les ajouter quand même';
-  }
-
-  @override
-  String get offlineWriteBlocked =>
-      'Pas d’Internet — la modification ne sera pas enregistrée';
-
-  @override
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
   String get offlineReadBanner => 'Hors ligne — affichage des données en cache';
 
   @override

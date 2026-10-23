@@ -11,25 +11,6 @@
     "@sendAgainAfter": {
         "description": "The sign in with other methods title"
     },
-<<<<<<< HEAD
-=======
-    "authSignInWithEmail": "Sign in with email",
-    "@authSignInWithEmail": {
-        "description": "The sign in with email button text"
-    },
-    "authSignInWithGoogle": "Sign in with Google",
-    "@authSignInWithGoogle": {
-        "description": "The sign in with Google button text"
-    },
-    "authSignInWithApple": "Sign in with Apple",
-    "@authSignInWithApple": {
-        "description": "The sign in with Apple button text"
-    },
-    "authSignInWithPhone": "Sign in with phone",
-    "@authSignInWithPhone": {
-        "description": "The sign in with Phone button text"
-    },
->>>>>>> 47d9a4e (fix(l10n): retranslate garbled French/Chinese strings and fix literal \n)
     "authPrivatePolicy": "By continuing, you agree to the\nTerms and Privacy Policy",
     "@authPrivatePolicy": {
         "description": "The private policy link text"
@@ -204,7 +185,13 @@
         "description": "listAdd"
     },
     "predictionsAddToList": "Add to list",
+    "@predictionsAddToList": {
+        "description": "predictionsAddToList"
+    },
     "predictionsDismiss": "No thanks",
+    "@predictionsDismiss": {
+        "description": "predictionsDismiss"
+    },
     "itemDetailAddedBy": "Added by",
     "@itemDetailAddedBy": {
         "description": "itemDetailAddedBy"
@@ -974,9 +961,21 @@
         "description": "Allergen toggle label"
     },
     "predictionsGreeting": "Your day with PORA",
+    "@predictionsGreeting": {
+        "description": "predictions main greeting"
+    },
     "predictionsGreetingSub": "Smart hints from your purchases",
+    "@predictionsGreetingSub": {
+        "description": "predictions greeting subtitle"
+    },
     "predictionsSectionSoon": "Running out soon",
+    "@predictionsSectionSoon": {
+        "description": "section title"
+    },
     "predictionsSectionAiSuggests": "AI suggests",
+    "@predictionsSectionAiSuggests": {
+        "description": "section title"
+    },
     "refresh": "Refresh",
     "@refresh": {
         "description": "refresh action"
@@ -1467,6 +1466,9 @@
         "description": "listPickerEmpty"
     },
     "predictionsAdded": "Added to list",
+    "@predictionsAdded": {
+        "description": "predictionsAdded"
+    },
     "shortcutOpenLists": "Open lists",
     "@shortcutOpenLists": {
         "description": "shortcutOpenLists"

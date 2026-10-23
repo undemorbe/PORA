@@ -189,7 +189,13 @@
         "description": "Написать письмо в поддержку"
     },
     "predictionsAddToList": "В список",
+    "@predictionsAddToList": {
+        "description": "predictionsAddToList"
+    },
     "predictionsDismiss": "Не надо",
+    "@predictionsDismiss": {
+        "description": "predictionsDismiss"
+    },
     "itemDetailAddedBy": "Добавил(а)",
     "@itemDetailAddedBy": {
         "description": "itemDetailAddedBy"
@@ -952,9 +958,21 @@
         "description": "Allergen toggle label"
     },
     "predictionsGreeting": "Ваш день с PORA",
+    "@predictionsGreeting": {
+        "description": "predictions main greeting"
+    },
     "predictionsGreetingSub": "Умные подсказки на основе покупок",
+    "@predictionsGreetingSub": {
+        "description": "predictions greeting subtitle"
+    },
     "predictionsSectionSoon": "Скоро закончится",
+    "@predictionsSectionSoon": {
+        "description": "section title"
+    },
     "predictionsSectionAiSuggests": "ИИ предлагает",
+    "@predictionsSectionAiSuggests": {
+        "description": "section title"
+    },
     "refresh": "Обновить",
     "@refresh": {
         "description": "refresh action"

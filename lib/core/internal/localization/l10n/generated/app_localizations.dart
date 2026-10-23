@@ -362,13 +362,13 @@ abstract class AppLocalizations {
   /// **'Add'**
   String get listAdd;
 
-  /// No description provided for @predictionsAddToList.
+  /// predictionsAddToList
   ///
   /// In en, this message translates to:
   /// **'Add to list'**
   String get predictionsAddToList;
 
-  /// No description provided for @predictionsDismiss.
+  /// predictionsDismiss
   ///
   /// In en, this message translates to:
   /// **'No thanks'**
@@ -1472,25 +1472,25 @@ abstract class AppLocalizations {
   /// **'Allergen'**
   String get allergen;
 
-  /// No description provided for @predictionsGreeting.
+  /// predictions main greeting
   ///
   /// In en, this message translates to:
   /// **'Your day with PORA'**
   String get predictionsGreeting;
 
-  /// No description provided for @predictionsGreetingSub.
+  /// predictions greeting subtitle
   ///
   /// In en, this message translates to:
   /// **'Smart hints from your purchases'**
   String get predictionsGreetingSub;
 
-  /// No description provided for @predictionsSectionSoon.
+  /// section title
   ///
   /// In en, this message translates to:
   /// **'Running out soon'**
   String get predictionsSectionSoon;
 
-  /// No description provided for @predictionsSectionAiSuggests.
+  /// section title
   ///
   /// In en, this message translates to:
   /// **'AI suggests'**
@@ -2186,7 +2186,7 @@ abstract class AppLocalizations {
   /// **'No lists yet — create one first'**
   String get listPickerEmpty;
 
-  /// No description provided for @predictionsAdded.
+  /// predictionsAdded
   ///
   /// In en, this message translates to:
   /// **'Added to list'**
