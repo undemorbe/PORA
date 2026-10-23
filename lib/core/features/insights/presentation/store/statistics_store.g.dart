@@ -60,6 +60,13 @@ mixin _$StatisticsStore on _StatisticsStoreBase, Store {
     () => super.urgentCount,
     name: '_StatisticsStoreBase.urgentCount',
   )).value;
+  Computed<CountEntry?>? _$championComputed;
+
+  @override
+  CountEntry? get champion => (_$championComputed ??= Computed<CountEntry?>(
+    () => super.champion,
+    name: '_StatisticsStoreBase.champion',
+  )).value;
 
   late final _$periodAtom = Atom(
     name: '_StatisticsStoreBase.period',
@@ -319,7 +326,8 @@ dueSoon: ${dueSoon},
 categories: ${categories},
 uniqueProducts: ${uniqueProducts},
 remindersCount: ${remindersCount},
-urgentCount: ${urgentCount}
+urgentCount: ${urgentCount},
+champion: ${champion}
     ''';
   }
 }

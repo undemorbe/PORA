@@ -17,6 +17,19 @@ class StatisticsStore = _StatisticsStoreBase with _$StatisticsStore;
 /// Доступные периоды экрана Insights, дней.
 const insightsPeriods = [7, 30, 90];
 
+/// «Чемпион» покупок: сервер видит покупки со всех устройств, локальный
+/// топ — запасной вариант. `null` — показывать нечего.
+CountEntry? pickChampion(
+  List<PopularProductEntity> server,
+  List<CountEntry> local,
+) {
+  if (server.isNotEmpty && server.first.quantity > 0) {
+    return CountEntry(server.first.name, server.first.quantity);
+  }
+  if (local.isNotEmpty) return local.first;
+  return null;
+}
+
 /// Данные экрана Insights. Два источника:
 /// - backend statistics API (логины, все продукты, популярные) — с
 ///   offline-кэшем в [HiveJsonCache];
@@ -135,6 +148,11 @@ abstract class _StatisticsStoreBase with Store {
 
   @computed
   int get urgentCount => allProducts.where((p) => p.urgent).length;
+
+  /// Самый покупаемый товар для `ChampionSection`, см. [pickChampion].
+  @computed
+  CountEntry? get champion =>
+      pickChampion(popularProducts.toList(), usage.topBought);
 
   @action
   void setPeriod(int days) {
