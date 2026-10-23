@@ -133,6 +133,7 @@ tbody tr.clickable:hover { background: var(--surface-2); }
 .heat { text-align: center; border-radius: 4px; }
 .muted { color: var(--text-muted); }
 .mono { font-family: var(--mono); font-size: 12px; }
+.props-cell { max-width: 360px; overflow: hidden; text-overflow: ellipsis; }
 .badge { display: inline-block; font-size: 11px; padding: 1px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent-strong); }
 .pager { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: flex-end; margin-top: 12px; }
 
