@@ -20,6 +20,10 @@ class DioClient {
     return _instance!;
   }
 
+  /// Запросы авторизации несут токены в query или в теле ответа
+  static bool _carriesTokens(RequestOptions options) =>
+      options.path.contains('/authorize/');
+
   static Dio _createDio() {
     final dio = Dio(
       BaseOptions(
@@ -53,10 +57,18 @@ class DioClient {
 
       // Логирование
       TalkerDioLogger(
-        settings: const TalkerDioLoggerSettings(
+        // Токены не пишем в лог: Authorization маскируется, а запросы
+        // /authorize/* (refresh-токен в query, токены в ответе verify-otp)
+        // не логируются вовсе
+        settings: TalkerDioLoggerSettings(
           printRequestHeaders: true,
           printResponseHeaders: true,
           printResponseMessage: true,
+          hiddenHeaders: const {'Authorization'},
+          requestFilter: (options) => !_carriesTokens(options),
+          responseFilter: (response) =>
+              !_carriesTokens(response.requestOptions),
+          errorFilter: (error) => !_carriesTokens(error.requestOptions),
         ),
         talker: Logger.talker,
       ),
