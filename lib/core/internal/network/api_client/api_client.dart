@@ -161,4 +161,12 @@ abstract class ApiClient {
 
   @POST('/help/message')
   Future<void> sendSupportMessage({@Body() required Map<String, dynamic> body});
+
+  //! Analytics
+  /// Батч клиентских событий. Ответ `202 {"accepted": n, "rejected": m}`
+  /// не нужен клиенту — отбрасываем.
+  @POST('/analytics/events')
+  Future<void> sendAnalyticsEvents({
+    @Body() required Map<String, dynamic> body,
+  });
 }
