@@ -1,7 +1,7 @@
 name: pora
 description: "Pora — shared shopping lists for families."
 publish_to: 'none'
-version: 1.0.0
+version: 1.1.0+5
 
 environment:
   sdk: ^3.12.2

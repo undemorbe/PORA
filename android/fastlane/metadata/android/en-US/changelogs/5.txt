@@ -1,0 +1,6 @@
+• Redesigned Insights: streaks, weekly activity and your top product
+• Lists refresh right after you add a product; clearer empty states
+• Units, sections and priorities now follow your app language
+• More reliable live updates between family members
+• Safer sign-in: limited code attempts and resend throttling
+• Bug fixes and performance improvements
