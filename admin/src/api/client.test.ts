@@ -42,7 +42,11 @@ describe('apiFetch', () => {
 
     await apiFetch('/api/admin/me');
 
-    expect(String(fetchMock.mock.calls[1][0])).toBe('/api/authorize/refresh?refresh-token=r1');
+    // Токен уходит в теле POST, не в URL (query попадает в логи)
+    const [refreshUrl, refreshInit] = fetchMock.mock.calls[1];
+    expect(String(refreshUrl)).toBe('/api/authorize/refresh');
+    expect(refreshInit?.method).toBe('POST');
+    expect(JSON.parse(String(refreshInit?.body))).toEqual({ 'refresh-token': 'r1' });
     expect(headerOf(fetchMock.mock.calls[2], 'Authorization')).toBe('Bearer new');
     expect(getRefresh()).toBe('r2');
   });

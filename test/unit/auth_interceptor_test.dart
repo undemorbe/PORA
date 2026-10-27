@@ -176,6 +176,24 @@ void main() {
     expect(adapter.calls, 1);
   });
 
+  test('refresh sends the token in a POST body, not the URL', () async {
+    final capture = _Capture();
+    final client = ApiClient(
+      Dio(BaseOptions(baseUrl: 'http://localhost'))
+        ..httpClientAdapter = capture,
+    );
+    try {
+      await client.refreshTokens(body: {'refresh-token': 'r1'});
+    } catch (_) {
+      // _Capture отвечает 202 без тела — парсинг ответа не важен
+    }
+    final sent = capture.last!;
+    expect(sent.method, 'POST');
+    expect(sent.path, '/authorize/refresh');
+    expect(sent.uri.query, isEmpty);
+    expect(sent.data, {'refresh-token': 'r1'});
+  });
+
   test('ApiClient marks analytics requests with skip-auth-refresh', () async {
     final capture = _Capture();
     final client = ApiClient(

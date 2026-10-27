@@ -28,9 +28,10 @@ abstract class ApiClient {
   factory ApiClient(Dio dio) = _ApiClient;
 
   //! Authorization
-  @GET('/authorize/refresh')
+  /// Токен в теле, а не в query: query-строка попадает в логи прокси
+  @POST('/authorize/refresh')
   Future<TokensModel> refreshTokens({
-    @Query('refresh-token') required String refreshToken,
+    @Body() required Map<String, dynamic> body,
   });
 
   @GET('/authorize/check-user')

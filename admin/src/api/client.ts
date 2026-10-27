@@ -60,8 +60,12 @@ async function doRefresh(): Promise<RefreshOutcome> {
   if (!refresh) return { result: 'refused' };
   let res: Response;
   try {
-    // Контракт бэкенда: refresh-токен в query. nginx не логирует /api/authorize/.
-    res = await fetch(`/api/authorize/refresh?${new URLSearchParams({ 'refresh-token': refresh })}`);
+    // Токен в теле POST: query-строка попадает в логи прокси и историю.
+    res = await fetch('/api/authorize/refresh', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 'refresh-token': refresh }),
+    });
   } catch {
     // Сеть моргнула — не разлогиниваем, refresh-токен остаётся.
     return { result: 'network' };
