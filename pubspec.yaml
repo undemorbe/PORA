@@ -48,7 +48,7 @@ dependencies:
   flutter_markdown_plus: ^1.0.12
   quick_actions: ^1.1.0
   receive_sharing_intent: ^1.8.1
-  dynamic_color: ^1.7.0
+  dynamic_color: ^2.1.0
   home_widget: ^0.7.0
   device_preview: ^3.0.0
   flutter_localizations:
