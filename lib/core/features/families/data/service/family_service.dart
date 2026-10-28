@@ -25,4 +25,8 @@ class FamilyService implements FamilyRepository {
   }) async {
     return await familyRemoteDataSource.deleteFamily(familyId: familyId);
   }
+
+  @override
+  Future<Either<Failure, Success>> leaveFamily({required String familyId}) =>
+      familyRemoteDataSource.leaveFamily(familyId: familyId);
 }

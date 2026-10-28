@@ -17,7 +17,17 @@ class _ResendOtpState extends State<ResendOtp> {
   int _secondsRemain = 30;
   Timer? _timer;
 
+  // Код уже отправлен при входе на экран — повтор раньше 30 с сервер
+  // отклонит (лимит отправки OTP), поэтому отсчёт идёт сразу.
+  @override
+  void initState() {
+    super.initState();
+    _isTapped = true;
+    _startTimer();
+  }
+
   void _startTimer() {
+    _timer?.cancel();
     _timer = Timer.periodic(const Duration(seconds: 1), (_) {
       _decrementSecond();
     });
@@ -54,13 +64,10 @@ class _ResendOtpState extends State<ResendOtp> {
     return InkWell(
       hoverColor: PoraColors.primary,
       onTap: () {
+        // Сразу блокируем повтор: двойной тап не шлёт второй запрос
+        setState(() => _isTapped = true);
+        _startTimer();
         widget.onTap();
-        Future.delayed(const Duration(milliseconds: 200)).whenComplete(() {
-          _startTimer();
-          setState(() {
-            _isTapped = true;
-          });
-        });
       },
       child: Text(
         context.l10n.otpResend,

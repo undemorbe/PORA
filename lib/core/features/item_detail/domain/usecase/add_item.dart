@@ -1,4 +1,5 @@
 import 'package:pora/core/features/item_detail/domain/repository/items_repository.dart';
+import 'package:pora/core/internal/analytics/analytics_service.dart';
 import 'package:pora/core/internal/errors/failure.dart';
 import 'package:pora/core/internal/extensions/either.dart';
 
@@ -17,7 +18,7 @@ class AddItemUseCase {
     required bool urgent,
     required int? remindEveryDays,
   }) async {
-    return await repository.addItem(
+    final res = await repository.addItem(
       listId: listId,
       name: name,
       section: section,
@@ -27,5 +28,9 @@ class AddItemUseCase {
       urgent: urgent,
       remindEveryDays: remindEveryDays,
     );
+    if (res.isRight) {
+      AnalyticsService.instance.logItemAdded(listId: listId, section: section);
+    }
+    return res;
   }
 }

@@ -9,6 +9,8 @@ plugins {
     // Google-services должен apply'иться, чтобы google-services.json превратился
     // в firebase_options на нативной стороне.
     id("com.google.gms.google-services")
+    // Crashlytics gradle-плагин — загрузка mapping/symbol файлов для деобфускации.
+    id("com.google.firebase.crashlytics")
 }
 
 dependencies {

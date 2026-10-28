@@ -1,7 +1,7 @@
 name: pora
-description: "PORA"
+description: "Pora — shared shopping lists for families."
 publish_to: 'none'
-version: 1.0.0
+version: 1.1.0+5
 
 environment:
   sdk: ^3.12.2
@@ -9,7 +9,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_localization: ^0.4.1
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   mobx: ^2.6.0
@@ -27,7 +26,6 @@ dependencies:
   dio: ^5.10.0
   json_annotation: ^4.12.0
   flutter_secure_storage: ^10.3.1
-  flutter_gen: ^5.14.1
   url_launcher: ^6.3.2
   image_picker: ^1.2.3
   pretty_qr_code: ^3.6.0
@@ -37,6 +35,8 @@ dependencies:
   flutter_image_compress: ^2.4.0
   firebase_core: ^4.12.1
   firebase_messaging: ^16.4.3
+  firebase_crashlytics: ^5.0.3
+  firebase_analytics: ^12.1.1
   flutter_local_notifications: ^22.0.1
   http: ^1.2.0
   html: ^0.15.4
@@ -46,14 +46,25 @@ dependencies:
   path_provider: any
   collection: any
   flutter_markdown_plus: ^1.0.12
+  quick_actions: ^1.1.0
+  receive_sharing_intent: ^1.8.1
+  dynamic_color: ^1.7.0
+  home_widget: ^0.7.0
+  device_preview: ^3.0.0
+  flutter_localizations:
+    sdk: flutter
+  recipe_scraper: 1.0.1 # пин: ревью исходников 1.0.1 (только html+http, без I/O). Новые версии — после аудита.
+  package_info_plus: ^10.2.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  fake_async: ^1.3.3 # детерминированные таймеры (debounce UsageTracker)
+  golden_toolkit: ^0.15.0 # loadAppFonts для golden/widget-тестов
+  flutter_launcher_icons: ^0.14.4 # генерация иконок (adaptive + iOS dark/tinted)
   flutter_lints: ^6.0.0
   build_runner: ^2.15.0
   auto_route_generator: ^10.5.0
   mobx_codegen: ^2.7.7
-  change_app_package_name: ^1.5.0
   json_serializable: ^6.14.0
   retrofit_generator: ^10.2.7
 
@@ -77,3 +88,15 @@ flutter:
                 weight: 700
               - asset: assets/fonts/Inter_18pt-ExtraBold.ttf
                 weight: 800
+
+flutter_launcher_icons:
+  image_path: "assets/icon/icon_full.png"
+  android: "ic_launcher"
+  min_sdk_android: 21
+  adaptive_icon_background: "#E07A5F"
+  adaptive_icon_foreground: "assets/icon/icon_fg.png"
+  adaptive_icon_monochrome: "assets/icon/icon_mono.png"
+  ios: true
+  remove_alpha_ios: true
+  image_path_ios_dark_transparent: "assets/icon/icon_dark.png"
+  image_path_ios_tinted_grayscale: "assets/icon/icon_tinted.png"

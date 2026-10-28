@@ -24,7 +24,7 @@ class FailureMapper {
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.sendTimeout:
       case DioExceptionType.receiveTimeout:
-        return NetworkFailure(e.message ?? 'Request timed out');
+        return TimeoutFailure(e.message ?? 'Request timed out');
       case DioExceptionType.connectionError:
         return const NetworkFailure();
       case DioExceptionType.cancel:
@@ -55,10 +55,28 @@ class FailureMapper {
       }
     }
 
-    return ApiFailure(
-      code: ApiErrorCode.fromWire(codeRaw),
-      message: message,
-      statusCode: status,
-    );
+    final code = ApiErrorCode.fromWire(codeRaw);
+
+    // Специализированные подтипы для well-known статусов — сохраняют
+    // `is ApiFailure` + `code`, но позволяют точечное ветвление в UI.
+    switch (status) {
+      case 404:
+        return NotFoundFailure(code: code, message: message);
+      case 409:
+        return ConflictFailure(code: code, message: message);
+      case 429:
+        return RateLimitFailure(
+          message: message,
+          retryAfterSeconds: _retryAfter(e),
+        );
+    }
+
+    return ApiFailure(code: code, message: message, statusCode: status);
+  }
+
+  static int? _retryAfter(DioException e) {
+    final raw = e.response?.headers.value('retry-after');
+    if (raw == null) return null;
+    return int.tryParse(raw.trim());
   }
 }

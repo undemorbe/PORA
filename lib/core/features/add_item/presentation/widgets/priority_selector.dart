@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pora/core/features/add_item/domain/add_item_defaults.dart';
+import 'package:pora/core/features/add_item/presentation/item_labels.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
 import 'package:pora/core/internal/theme/constant/additional_constants.dart';
 import 'package:pora/core/internal/widgets/pora_chip.dart';
@@ -17,9 +19,7 @@ class PrioritySelector extends StatelessWidget {
   Widget build(BuildContext context) {
     final l = context.l10n;
     final entries = <(int, String)>[
-      (1, l.priorityLow),
-      (2, l.priorityMed),
-      (3, l.priorityHigh),
+      for (final p in AddItemDefaults.priorities) (p, l.priorityName(p)),
     ];
     return Wrap(
       spacing: PoraSpacing.sm,

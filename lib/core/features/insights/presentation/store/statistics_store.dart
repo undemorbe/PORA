@@ -1,32 +1,89 @@
 import 'package:mobx/mobx.dart';
 import 'package:pora/core/features/insights/domain/entity/popular_product.dart';
-import 'package:pora/core/internal/cache/hive_json_cache.dart';
 import 'package:pora/core/features/insights/domain/usecase/get_all_user_products.dart';
 import 'package:pora/core/features/insights/domain/usecase/get_login_times.dart';
 import 'package:pora/core/features/insights/domain/usecase/get_popular_products.dart';
 import 'package:pora/core/features/lists/data/models/products/product_model.dart';
 import 'package:pora/core/features/lists/domain/entity/products/product.dart';
+import 'package:pora/core/internal/analytics/usage/usage_summary.dart';
+import 'package:pora/core/internal/analytics/usage/usage_tracker.dart';
+import 'package:pora/core/internal/cache/hive_json_cache.dart';
 import 'package:pora/core/internal/errors/failure.dart';
 
 part 'statistics_store.g.dart';
 
 class StatisticsStore = _StatisticsStoreBase with _$StatisticsStore;
 
+/// Доступные периоды экрана Insights, дней.
+const insightsPeriods = [7, 30, 90];
+
+/// «Чемпион» покупок: сервер видит покупки со всех устройств, локальный
+/// топ — запасной вариант. `null` — показывать нечего.
+CountEntry? pickChampion(
+  List<PopularProductEntity> server,
+  List<CountEntry> local,
+) {
+  if (server.isNotEmpty && server.first.quantity > 0) {
+    return CountEntry(server.first.name, server.first.quantity);
+  }
+  if (local.isNotEmpty) return local.first;
+  return null;
+}
+
+/// Данные экрана Insights. Два источника:
+/// - backend statistics API (логины, все продукты, популярные) — с
+///   offline-кэшем в [HiveJsonCache];
+/// - локальный [UsageTracker] (сессии, добавлено/куплено, часы, категории)
+///   — реактивно, без сети.
 abstract class _StatisticsStoreBase with Store {
   static const _loginsCacheKey = 'stats-logins-v1';
   static const _productsCacheKey = 'stats-products-v1';
   static const _popularCacheKey = 'stats-popular-v1';
 
+  /// Повторный заход на экран чаще этого — без сетевого запроса.
+  static const _refreshThrottle = Duration(minutes: 2);
+
   _StatisticsStoreBase({
     required this.loginTimesUseCase,
     required this.allProductsUseCase,
     required this.popularProductsUseCase,
-  });
+    UsageTracker? usage,
+    DateTime Function()? clock,
+  }) : _usage = usage ?? UsageTracker.instance,
+       _clock = clock ?? DateTime.now {
+    // Свои изменения товаров (добавил/купил/удалил) делают серверный снапшот
+    // устаревшим: следующий loadAll() идёт в сеть, минуя throttle. Иначе
+    // вкладка Pora до 2 минут (или до перезапуска) показывает старые KPI.
+    _disposeStaleReaction = reaction<int>(
+      (_) => _usage.days.values.fold<int>(
+        0,
+        (sum, d) => sum + d.added + d.bought + d.deleted,
+      ),
+      (_) {
+        _mutations++;
+        _lastLoadedAt = null;
+      },
+    );
+  }
 
   final GetLoginTimesUseCase loginTimesUseCase;
   final GetAllUserProductsUseCase allProductsUseCase;
   final GetPopularProductsUseCase popularProductsUseCase;
+  final UsageTracker _usage;
+  final DateTime Function() _clock;
+
   bool _popularEndpointGone = false;
+  bool _hydrated = false;
+  DateTime? _lastLoadedAt;
+  Future<void>? _inFlight;
+  late final ReactionDisposer _disposeStaleReaction;
+  // Счётчик локальных изменений: загрузка, во время которой товар
+  // изменился, не считается свежей.
+  int _mutations = 0;
+
+  // --- период ---
+  @observable
+  int period = 30;
 
   // --- login times ---
   @observable
@@ -59,51 +116,132 @@ abstract class _StatisticsStoreBase with Store {
   @observable
   String? popularError;
 
-  /// Streak дней подряд — computed из логинов.
-  /// Считаем уникальные дни по локальной таймзоне; streak прерывается как
-  /// только между двумя соседними днями появляется gap.
   @computed
-  int get streakDays {
-    if (logins.isEmpty) return 0;
-    final uniqueDays = <DateTime>{};
-    for (final t in logins) {
-      final local = t.toLocal();
-      uniqueDays.add(DateTime(local.year, local.month, local.day));
-    }
-    final sorted = uniqueDays.toList()..sort((a, b) => b.compareTo(a));
-    var streak = 1;
-    for (var i = 0; i < sorted.length - 1; i++) {
-      final gap = sorted[i].difference(sorted[i + 1]).inDays;
-      if (gap == 1) {
-        streak++;
-      } else {
-        break;
-      }
-    }
-    return streak;
+  bool get isLoading =>
+      isLoginsLoading || isProductsLoading || isPopularLoading;
+
+  /// Сводка пользования за выбранный [period]. Серверные логины
+  /// подмешиваются как активные дни (покрывают другие устройства).
+  @computed
+  UsageSummary get usage => UsageSummary.compute(
+    days: _usage.days.values,
+    periodDays: period,
+    now: _clock(),
+    extraActiveDays: logins,
+  );
+
+  /// Продукты, которые по ритму покупок пора докупать (≥ 75% цикла).
+  @computed
+  List<PopularProductEntity> get dueSoon {
+    final res = [
+      for (final p in popularProducts)
+        if (p.howOftenEnds > 0 && p.currentDay >= 0.75) p,
+    ]..sort((a, b) => b.currentDay.compareTo(a.currentDay));
+    return res.take(5).toList();
   }
 
-  /// Всё сразу — вызывается на входе в insights экран.
+  /// Категории (секции) всех продуктов за всё время; если сервер не отдал
+  /// секции — локальные добавления за период.
+  @computed
+  List<CountEntry> get categories {
+    final counts = <String, int>{};
+    for (final p in allProducts) {
+      final s = p.section.trim();
+      if (s.isEmpty) continue;
+      counts[s] = (counts[s] ?? 0) + 1;
+    }
+    if (counts.isEmpty) return usage.topSections;
+    final res = [for (final e in counts.entries) CountEntry(e.key, e.value)]
+      ..sort((a, b) => b.count.compareTo(a.count));
+    return res.take(6).toList();
+  }
+
+  @computed
+  int get uniqueProducts =>
+      allProducts.map((p) => p.name.trim().toLowerCase()).toSet().length;
+
+  @computed
+  int get remindersCount =>
+      allProducts.where((p) => (p.remindEveryDay ?? 0) > 0).length;
+
+  @computed
+  int get urgentCount => allProducts.where((p) => p.urgent).length;
+
+  /// Самый покупаемый товар для `ChampionSection`, см. [pickChampion].
+  @computed
+  CountEntry? get champion =>
+      pickChampion(popularProducts.toList(), usage.topBought);
+
   @action
-  Future<void> loadAll() async {
+  void setPeriod(int days) {
+    if (!insightsPeriods.contains(days)) return;
+    period = days;
+  }
+
+  /// Вход на экран: кэш → сеть. Повторные заходы в пределах
+  /// [_refreshThrottle] сеть не дёргают; pull-to-refresh передаёт [force].
+  /// Параллельные вызовы схлопываются в один.
+  Future<void> loadAll({bool force = false}) {
+    final last = _lastLoadedAt;
+    if (!force &&
+        last != null &&
+        _clock().difference(last) < _refreshThrottle) {
+      return Future.value();
+    }
+    return _inFlight ??= _loadAll().whenComplete(() => _inFlight = null);
+  }
+
+  Future<void> _loadAll() async {
+    final mutationsAtStart = _mutations;
+    if (!_hydrated) {
+      _hydrated = true;
+      await _hydrateFromCache();
+    }
     await Future.wait([loadLoginTimes(), loadAllProducts()]);
     await loadPopularProducts();
+    if (_mutations == mutationsAtStart) _lastLoadedAt = _clock();
+  }
+
+  /// Снимает reaction на локальные изменения. В приложении store — singleton
+  /// и живёт весь lifecycle; нужно тестам.
+  void dispose() => _disposeStaleReaction();
+
+  /// Один раз за жизнь store поднимаем снапшоты из кэша — дальше данные
+  /// в памяти актуальнее.
+  @action
+  Future<void> _hydrateFromCache() async {
+    final results = await Future.wait([
+      HiveJsonCache.read(_loginsCacheKey),
+      HiveJsonCache.read(_productsCacheKey),
+      HiveJsonCache.read(_popularCacheKey),
+    ]);
+    final cachedLogins = results[0];
+    if (cachedLogins is List && logins.isEmpty) {
+      logins = ObservableList.of(
+        cachedLogins
+            .whereType<String>()
+            .map(DateTime.tryParse)
+            .whereType<DateTime>(),
+      );
+    }
+    final cachedProducts = results[1];
+    if (cachedProducts is List && allProducts.isEmpty) {
+      allProducts = ObservableList.of(
+        cachedProducts.whereType<Map>().map(_productFromJson).nonNulls,
+      );
+    }
+    final cachedPopular = results[2];
+    if (cachedPopular is List && popularProducts.isEmpty) {
+      popularProducts = ObservableList.of(
+        cachedPopular.whereType<Map>().map(_popularFromJson),
+      );
+    }
   }
 
   @action
   Future<void> loadLoginTimes() async {
     isLoginsLoading = true;
     loginsError = null;
-    final cached = await HiveJsonCache.read(_loginsCacheKey);
-    if (cached is List) {
-      logins = ObservableList.of(
-        cached
-            .whereType<String>()
-            .map(DateTime.tryParse)
-            .whereType<DateTime>()
-            .toList(),
-      );
-    }
     final res = await loginTimesUseCase();
     if (res.isRight) {
       logins = ObservableList.of(res.right);
@@ -111,10 +249,8 @@ abstract class _StatisticsStoreBase with Store {
         _loginsCacheKey,
         res.right.map((d) => d.toIso8601String()).toList(),
       );
-    } else {
-      if (logins.isEmpty) {
-        loginsError = res.left.message;
-      }
+    } else if (logins.isEmpty) {
+      loginsError = res.left.message;
     }
     isLoginsLoading = false;
   }
@@ -123,12 +259,6 @@ abstract class _StatisticsStoreBase with Store {
   Future<void> loadAllProducts() async {
     isProductsLoading = true;
     productsError = null;
-    final cached = await HiveJsonCache.read(_productsCacheKey);
-    if (cached is List) {
-      allProducts = ObservableList.of(
-        cached.whereType<Map>().map(_productFromJson).whereType<ProductModel>(),
-      );
-    }
     final res = await allProductsUseCase();
     if (res.isRight) {
       allProducts = ObservableList.of(res.right);
@@ -136,8 +266,8 @@ abstract class _StatisticsStoreBase with Store {
         _productsCacheKey,
         res.right.map(_productToJson).toList(),
       );
-    } else {
-      if (allProducts.isEmpty) productsError = res.left.message;
+    } else if (allProducts.isEmpty) {
+      productsError = res.left.message;
     }
     isProductsLoading = false;
   }
@@ -146,12 +276,6 @@ abstract class _StatisticsStoreBase with Store {
   Future<void> loadPopularProducts() async {
     isPopularLoading = true;
     popularError = null;
-    final cached = await HiveJsonCache.read(_popularCacheKey);
-    if (cached is List) {
-      popularProducts = ObservableList.of(
-        cached.whereType<Map>().map(_popularFromJson).toList(),
-      );
-    }
     if (_popularEndpointGone) {
       popularProducts = ObservableList.of(_popularFromProducts(allProducts));
       isPopularLoading = false;
@@ -159,11 +283,12 @@ abstract class _StatisticsStoreBase with Store {
     }
     final res = await popularProductsUseCase();
     if (res.isRight) {
-      popularProducts = ObservableList.of(res.right);
-      // Cache snapshot.
+      final sorted = [...res.right]
+        ..sort((a, b) => b.quantity.compareTo(a.quantity));
+      popularProducts = ObservableList.of(sorted);
       await HiveJsonCache.put(
         _popularCacheKey,
-        res.right
+        sorted
             .map(
               (p) => {
                 'name': p.name,
@@ -178,11 +303,10 @@ abstract class _StatisticsStoreBase with Store {
       if (popularProducts.isEmpty && allProducts.isNotEmpty) {
         popularProducts = ObservableList.of(_popularFromProducts(allProducts));
       }
-      final isEndpointGone =
-          res.left is ApiFailure && (res.left as ApiFailure).statusCode == 410;
-      _popularEndpointGone = isEndpointGone;
-      if (popularProducts.isEmpty && !isEndpointGone) {
-        popularError = res.left.message;
+      final failure = res.left;
+      _popularEndpointGone = failure is ApiFailure && failure.statusCode == 410;
+      if (popularProducts.isEmpty && !_popularEndpointGone) {
+        popularError = failure.message;
       }
     }
     isPopularLoading = false;

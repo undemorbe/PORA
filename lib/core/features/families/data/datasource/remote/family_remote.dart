@@ -2,6 +2,7 @@ import 'package:pora/core/features/families/data/models/families_models.dart';
 import 'package:pora/core/features/families/domain/entity/family.dart';
 import 'package:pora/core/internal/di/export.dart';
 import 'package:pora/core/internal/errors/failure.dart';
+import 'package:pora/core/internal/errors/failure_mapper.dart';
 import 'package:pora/core/internal/errors/success.dart';
 import 'package:pora/core/internal/extensions/either.dart';
 import 'package:pora/core/internal/network/api_client/api_client.dart';
@@ -10,6 +11,7 @@ abstract class FamilyRemoteDataSource {
   Future<Either<Failure, List<FamilyEntity>>> getFamilies();
   Future<Either<Failure, String>> createFamily({required String name});
   Future<Either<Failure, Success>> deleteFamily({required String familyId});
+  Future<Either<Failure, Success>> leaveFamily({required String familyId});
 }
 
 class FamilyRemoteDataSourceImpl implements FamilyRemoteDataSource {
@@ -44,8 +46,21 @@ class FamilyRemoteDataSourceImpl implements FamilyRemoteDataSource {
     try {
       await apiClient.deleteFamily(familyId: familyId);
       return Right(const ServerSuccess());
-    } on Exception catch (e) {
-      return Left(NetworkFailure(e.toString()));
+    } catch (e, s) {
+      // FailureMapper сохраняет statusCode — UI отличает 403 (не владелец).
+      return Left(FailureMapper.map(e, s));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Success>> leaveFamily({
+    required String familyId,
+  }) async {
+    try {
+      await apiClient.leaveFamily(familyId: familyId);
+      return Right(const ServerSuccess());
+    } catch (e, s) {
+      return Left(FailureMapper.map(e, s));
     }
   }
 }

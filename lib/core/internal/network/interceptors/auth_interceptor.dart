@@ -4,7 +4,13 @@ import 'package:dio/dio.dart';
 
 /// Подставляет заголовок Authorization ко всем запросам и при 401 пытается
 /// один раз обновить токен и повторить запрос.
-class AuthInterceptor extends QueuedInterceptorsWrapper {
+///
+/// Обычный [Interceptor], не `QueuedInterceptorsWrapper`: очередь onError
+/// зависала, когда повтор или сам /refresh снова падали — их onError ждал
+/// текущий onError, а тот ждал их. Параллельные 401 не плодят refresh'и:
+/// `RefreshTokenUseCase` — single-flight, а запросы, ушедшие со старым
+/// токеном, повторяются с уже обновлённым.
+class AuthInterceptor extends Interceptor {
   AuthInterceptor({
     required this.tokenProvider,
     required this.onRefresh,
@@ -26,6 +32,11 @@ class AuthInterceptor extends QueuedInterceptorsWrapper {
 
   static const _retriedKey = '__auth_retried';
 
+  /// `extra`-флаг запроса: 401 не обновляет токен и не повторяет запрос.
+  /// Нужен фоновым отправкам (аналитика), которые сами ретраят позже, —
+  /// иначе запрос, начатый под старым юзером, повторится с токеном нового.
+  static const skipAuthRefreshKey = 'skip-auth-refresh';
+
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     final token = tokenProvider();
@@ -40,60 +51,55 @@ class AuthInterceptor extends QueuedInterceptorsWrapper {
     DioException err,
     ErrorInterceptorHandler handler,
   ) async {
+    final options = err.requestOptions;
     final is401 = err.response?.statusCode == 401;
-    final alreadyRetried = err.requestOptions.extra[_retriedKey] == true;
+    final isRefreshRequest = options.path.contains('/refresh');
+    final isLogoutRequest = options.path.contains('/logout');
 
-    // Не пытаемся обновить токен для запросов к /refresh или /logout
-    final isRefreshRequest = err.requestOptions.path.contains('/refresh');
-    final isLogoutRequest = err.requestOptions.path.contains('/logout');
-
-    if (is401 && !alreadyRetried && !isRefreshRequest && !isLogoutRequest) {
-      try {
-        final freshToken = await onRefresh();
-
-        if (freshToken != null) {
-          // Создаем новый запрос с обновленным токеном
-          final newRequest = err.requestOptions.copyWith(
-            extra: {...err.requestOptions.extra, _retriedKey: true},
-            headers: {
-              ...err.requestOptions.headers,
-              'Authorization': 'Bearer $freshToken',
-            },
-          );
-
-          // Используем переданный Dio или создаем новый
-          final dio = dioProvider?.call() ?? Dio();
-
-          try {
-            final response = await dio.fetch(newRequest);
-            return handler.resolve(response);
-          } catch (e) {
-            // Если повторный запрос тоже упал с 401, пробуем еще раз обновить токен
-            if (e is DioException && e.response?.statusCode == 401) {
-              // Можно добавить логику повторного обновления
-              // Но для безопасности лучше выйти из системы
-              onRefreshFailed?.call();
-              return handler.reject(err);
-            }
-            rethrow;
-          }
-        } else {
-          // Не удалось получить новый токен
-          onRefreshFailed?.call();
-          return handler.reject(err);
-        }
-      } catch (_) {
-        // Ошибка при обновлении токена
-        onRefreshFailed?.call();
-        return handler.reject(err);
-      }
+    if (!is401 ||
+        options.extra[skipAuthRefreshKey] == true ||
+        options.extra[_retriedKey] == true ||
+        isLogoutRequest) {
+      return handler.next(err);
     }
 
-    // Если это был запрос на /refresh и он упал - выходим из системы
-    if (isRefreshRequest && is401) {
+    // Сам /refresh ответил 401 — сессия мертва
+    if (isRefreshRequest) {
       onRefreshFailed?.call();
+      return handler.next(err);
     }
 
-    handler.next(err);
+    final String? freshToken;
+    try {
+      // Токен уже обновлён параллельным запросом — повторяем с ним
+      final current = tokenProvider();
+      final sentAuth = options.headers['Authorization'];
+      freshToken = current != null && sentAuth != 'Bearer $current'
+          ? current
+          : await onRefresh();
+    } catch (_) {
+      onRefreshFailed?.call();
+      return handler.next(err);
+    }
+
+    if (freshToken == null) {
+      onRefreshFailed?.call();
+      return handler.next(err);
+    }
+
+    final retry = options.copyWith(
+      extra: {...options.extra, _retriedKey: true},
+      headers: {...options.headers, 'Authorization': 'Bearer $freshToken'},
+    );
+    try {
+      final dio = dioProvider?.call() ?? Dio();
+      return handler.resolve(await dio.fetch<dynamic>(retry));
+    } on DioException catch (e) {
+      // 401 и со свежим токеном — выходим; сеть/5xx — просто отдаём ошибку,
+      // сессию не трогаем
+      if (e.response?.statusCode == 401) onRefreshFailed?.call();
+      // Ошибка повтора уже прошла всю цепочку интерсепторов
+      return handler.reject(e);
+    }
   }
 }

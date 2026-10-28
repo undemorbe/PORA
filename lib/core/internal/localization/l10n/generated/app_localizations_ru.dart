@@ -9,40 +9,13 @@ class AppLocalizationsRu extends AppLocalizations {
   AppLocalizationsRu([String locale = 'ru']) : super(locale);
 
   @override
-  String get appName => 'ПОРА';
-
-  @override
   String get language => 'Язык';
-
-  @override
-  String get authUnderAppName1 => 'Общий список для пар и семей';
-
-  @override
-  String get authUnderAppName2 => 'Рецепты, дом и доставка — в одном месте';
 
   @override
   String get onlyYou => 'Только Вы';
 
   @override
-  String get authSignInExpansibleExpand => 'Войти иным способом';
-
-  @override
-  String get authSignInExpansibleCollapse => 'Свернуть';
-
-  @override
   String get sendAgainAfter => 'Отправить еще раз через...';
-
-  @override
-  String get authSignInWithEmail => 'Войти по электронной почте';
-
-  @override
-  String get authSignInWithGoogle => 'Войти через Google';
-
-  @override
-  String get authSignInWithApple => 'Войти через Apple';
-
-  @override
-  String get authSignInWithPhone => 'Войти через телефон';
 
   @override
   String get authPrivatePolicy =>
@@ -132,7 +105,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get onboardingSlide3Body =>
-      'По вашим покупкам подскажет, что скоро закончится, и закажет в один тап.';
+      'По вашим покупкам Pora подскажет, что скоро закончится, и напомнит добавить это в список.';
 
   @override
   String get onboardingSkip => 'Пропустить';
@@ -175,70 +148,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get briefNext => 'Далее';
 
   @override
-  String get briefItemMilk => 'Молоко';
-
-  @override
-  String get briefItemBread => 'Хлеб';
-
-  @override
-  String get briefItemEggs => 'Яйца';
-
-  @override
-  String get briefItemCoffee => 'Кофе';
-
-  @override
-  String get briefItemCheese => 'Сыр';
-
-  @override
-  String get briefItemBananas => 'Бананы';
-
-  @override
-  String get briefItemButter => 'Масло';
-
-  @override
-  String get briefItemWater => 'Вода';
-
-  @override
-  String get briefItemVegetables => 'Овощи';
-
-  @override
-  String get briefItemTomatoes => 'Помидоры';
-
-  @override
-  String get briefItemPasta => 'Паста';
-
-  @override
-  String get briefItemChicken => 'Курица';
-
-  @override
-  String get listTitle => 'Наш список';
-
-  @override
-  String get listMembersCount => '2 человека · 8 продуктов';
-
-  @override
   String get listUrgent => 'Срочно';
 
   @override
   String get listAdd => 'Добавить';
-
-  @override
-  String get predictionsTitle => 'Пора поможет!';
-
-  @override
-  String get predictionsSubtitle => 'Скоро закончится — по вашим покупкам';
-
-  @override
-  String get predictionTip => 'Малюсенький советик';
-
-  @override
-  String get predictionsOrderTitle => 'Заказать всё в один тап';
-
-  @override
-  String get predictionsOrderSubtitle => 'Самокат · доставка за 15 минут';
-
-  @override
-  String get predictionsOrderDiscount => '−15% на первый заказ';
 
   @override
   String get predictionsAddToList => 'В список';
@@ -247,25 +160,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get predictionsDismiss => 'Не надо';
 
   @override
-  String get itemDetailName => 'Молоко';
-
-  @override
-  String get itemDetailSubtitle => '2 л · Молочное';
-
-  @override
   String get itemDetailAddedBy => 'Добавил(а)';
 
   @override
-  String get itemDetailSection => 'Раздел';
-
-  @override
-  String get itemDetailSectionValue => 'Молочное';
-
-  @override
   String get itemDetailQuantity => 'Количество';
-
-  @override
-  String get itemDetailQuantityValue => '2 л';
 
   @override
   String get itemDetailUrgent => 'Срочно';
@@ -274,68 +172,22 @@ class AppLocalizationsRu extends AppLocalizations {
   String get itemDetailRemind => 'Напоминать';
 
   @override
-  String get itemDetailRemindEvery => 'Каждые 7 дней';
-
-  @override
-  String get itemDetailInsight =>
-      'Покупаете ~раз в 7 дней · последний раз 6 дней назад. Скоро предложу докупить.';
-
-  @override
   String get itemDetailMarkBought => 'Отметить купленным';
 
   @override
   String get itemDetailDelete => 'Удалить из списка';
 
   @override
-  String get addItemTitle => 'Добавить продукт';
-
-  @override
-  String get addItemExampleValue => 'Авокадо';
-
-  @override
-  String get addItemNameHint => 'Название продукта';
-
-  @override
   String get addItemQuantity => 'Количество';
 
   @override
-  String get addItemSection => 'Раздел';
-
-  @override
-  String get addItemUrgent => 'Срочно';
-
-  @override
-  String get addItemUrgentSubtitle => 'Нужно купить сегодня';
-
-  @override
-  String get addItemRemind => 'Напоминать регулярно';
-
-  @override
-  String get addItemRemindEvery => 'Каждые 7 дней';
-
-  @override
-  String get addItemSubmit => 'Добавить в список';
-
-  @override
   String get settingsTitle => 'Настройки';
-
-  @override
-  String get settingsHouseholdSection => 'Хозяйство';
 
   @override
   String get settingsAppSection => 'Приложение';
 
   @override
   String get settingsNotifications => 'Уведомления';
-
-  @override
-  String get settingsDelivery => 'Доставка';
-
-  @override
-  String get settingsProAd => 'Pora+ · без рекламы';
-
-  @override
-  String get settingsTryPill => 'Попробовать';
 
   @override
   String get settingsPrivacy => 'Приватность и данные';
@@ -345,9 +197,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get settingsLogout => 'Выйти';
-
-  @override
-  String get settingsMembersNames => 'Борис и Анна';
 
   @override
   String get settingsInvitePill => 'Пригласить';
@@ -379,9 +228,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get householdGotInvited => 'Вас пригласили в семью';
 
   @override
-  String get householdWriteCode => 'Введите код приглашения';
-
-  @override
   String get householdDoLater => 'Сделаю позже';
 
   @override
@@ -398,47 +244,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get notificationsReadAll => 'Прочитать все';
-
-  @override
-  String get notificationsMilkTitle => 'По дороге домой захвати молоко';
-
-  @override
-  String get notificationsMilkBody =>
-      'Оно кончилось — Анна отметила 10 минут назад.';
-
-  @override
-  String get notificationsMilkTime => '5 минут назад';
-
-  @override
-  String get notificationsCoffeeTitle => 'Скоро закончится кофе';
-
-  @override
-  String get notificationsCoffeeBody => 'Покупаете ~раз в 14 дней, прошло 12.';
-
-  @override
-  String get notificationsPartnerAddedTitle => 'Анна добавила 2 продукта';
-
-  @override
-  String get notificationsPartnerAddedBody => 'Бананы и Хлеб — в общем списке.';
-
-  @override
-  String get notificationsPartnerAddedTime => 'Сегодня, 9:12';
-
-  @override
-  String get notificationsPromoTitle => '−15% на первый заказ в Самокате';
-
-  @override
-  String get notificationsPromoBody => 'Промо активно ещё 6 дней.';
-
-  @override
-  String get notificationsPromoTime => 'Вчера';
-
-  @override
-  String get notificationsOrderDeliveredTitle => 'Заказ доставлен';
-
-  @override
-  String get notificationsOrderDeliveredBody =>
-      '8 продуктов · Самокат · ₽1 054.';
 
   @override
   String get notificationsAddToListPill => '＋ В список';
@@ -460,28 +265,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get userCreateProfileNext => 'Далее';
 
   @override
-  String get searchTitle => 'Поиск';
-
-  @override
   String get searchHint => 'Название продукта…';
-
-  @override
-  String get searchFilterAll => 'Всё';
-
-  @override
-  String get searchFilterVegetables => 'Овощи';
-
-  @override
-  String get searchFilterDairy => 'Молочное';
-
-  @override
-  String get searchFilterGrocery => 'Бакалея';
-
-  @override
-  String get searchFilterRecipes => 'Рецепты';
-
-  @override
-  String get searchResults => 'Результаты';
 
   @override
   String get searchNothingFound => 'Ничего не найдено';
@@ -490,80 +274,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get insightsTitle => 'Инсайты';
 
   @override
-  String get insightsTipKicker => '✨ СОВЕТ PORA';
-
-  @override
-  String get insightsTipTitle => 'Вы любите карбонару!';
-
-  @override
-  String get insightsTipBody =>
-      'Похожий профиль вкуса — попробуйте мак-н-чиз. 4 из 6 ингредиентов у вас уже бывают регулярно.';
-
-  @override
-  String get insightsTipAction => 'Открыть рецепт →';
-
-  @override
-  String get insightsRunsOutMost => 'Чаще всего заканчивается';
-
-  @override
-  String get insightsFavoriteCuisines => 'Любимые кухни';
-
-  @override
-  String get insightsCuisineItalian => 'Итальянская';
-
-  @override
-  String get insightsCuisinePasta => 'Паста';
-
-  @override
-  String get insightsCuisineBreakfasts => 'Завтраки';
-
-  @override
-  String get insightsCuisineLight => 'Лёгкое';
-
-  @override
-  String get orderTitle => 'Заказ';
-
-  @override
-  String get orderCart => 'Корзина';
-
-  @override
-  String get orderWhenToDeliver => 'Когда доставить';
-
-  @override
-  String orderCheckoutCta(String total) {
-    return 'Заказать в Самокате · $total';
-  }
-
-  @override
-  String get orderSummaryGoods => 'Товары';
-
-  @override
-  String get orderSummaryDiscount => 'Скидка −15%';
-
-  @override
-  String get orderSummaryDelivery => 'Доставка';
-
-  @override
-  String get orderSummaryFree => 'Бесплатно';
-
-  @override
-  String get orderSummaryTotal => 'Итого';
-
-  @override
   String get recipeImportTitle => 'Рецепт по ссылке';
-
-  @override
-  String get recipePreviewTitle => 'Паста Карбонара';
-
-  @override
-  String get recipePreviewMeta => 'eda.ru · 25 мин · 2 порции';
-
-  @override
-  String get recipePreviewFound => '6 ингредиентов найдено';
-
-  @override
-  String get recipeDedupBanner =>
-      '2 совпадения убрали, чтобы не дублировать с вашим списком';
 
   @override
   String get recipeIngredients => 'Ингредиенты';
@@ -588,9 +299,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get navPora => 'Пора';
 
   @override
-  String get navOrder => 'Заказ';
-
-  @override
   String get navProfile => 'Профиль';
 
   @override
@@ -600,34 +308,52 @@ class AppLocalizationsRu extends AppLocalizations {
   String get familiesSubtitle => 'Выберите семью, чтобы открыть её список';
 
   @override
-  String get familiesCurrent => 'Текущая';
-
-  @override
-  String get familiesCreateOrJoin => '＋ Создать или присоединиться';
-
-  @override
   String get familiesCreateDialog => 'Как назовем семью?';
 
   @override
   String get tryToUpdate => 'Попробуйте обновить';
 
   @override
-  String get checkOut => 'Проверить';
-
-  @override
-  String get settingsMore => 'Углубленные';
-
-  @override
   String get listsYour => 'Ваш личный список';
 
   @override
-  String get human => 'человека';
+  String peopleCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count человека',
+      many: '$count человек',
+      few: '$count человека',
+      one: '$count человек',
+    );
+    return '$_temp0';
+  }
 
   @override
-  String get products => 'продуктов';
+  String productsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count продукта',
+      many: '$count продуктов',
+      few: '$count продукта',
+      one: '$count продукт',
+    );
+    return '$_temp0';
+  }
 
   @override
-  String get lists => 'списков';
+  String listsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count списка',
+      many: '$count списков',
+      few: '$count списка',
+      one: '$count список',
+    );
+    return '$_temp0';
+  }
 
   @override
   String get update => 'Обновить';
@@ -713,9 +439,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get appearance => 'Внешний вид';
 
   @override
-  String get themeSection => 'Тема';
-
-  @override
   String get themeLight => 'Светлая';
 
   @override
@@ -775,9 +498,6 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get recipeEmptyHint =>
       'Вставьте ссылку на рецепт и нажмите «Разобрать»';
-
-  @override
-  String get recipeDupMark => 'уже в списке';
 
   @override
   String get done => 'Готово';
@@ -898,13 +618,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get groupShared => 'Общая';
-
-  @override
-  String get noGroups => 'Пока нет ни одной группы';
-
-  @override
-  String get settingsChangeThemeIOSEasterEgg =>
-      '* Чтобы изменить тему, откройте Настройки > PORA > Тема\n* Выберите новую тему в меню настроек\n* Нажмите «Тема» в настройках приложения, чтобы переключаться между светлой и тёмной темой';
 
   @override
   String get tutorialTitle => 'Как это работает';
@@ -1065,34 +778,19 @@ class AppLocalizationsRu extends AppLocalizations {
   String get predictionsSectionSoon => 'Скоро закончится';
 
   @override
-  String get predictionsSectionOften => 'Часто покупаете';
-
-  @override
   String get predictionsSectionAiSuggests => 'ИИ предлагает';
-
-  @override
-  String get predictionsAiSuggestionsTitle => 'Продукты и рецепты для вас';
-
-  @override
-  String get predictionsAiSuggestionsTopic => 'ваши предпочтения и покупки';
 
   @override
   String get refresh => 'Обновить';
 
   @override
-  String get predictionsOftenEmpty => 'Пока недостаточно данных';
+  String get kpiWeek => 'продуктов';
 
   @override
-  String get predictionsAskPora => 'Спросить PORA';
+  String get kpiRecipes => 'часто берёте';
 
   @override
-  String get kpiWeek => 'продукта в неделю';
-
-  @override
-  String get kpiRecipes => 'рецептов за месяц';
-
-  @override
-  String get kpiDaysToRun => 'дней до закупки';
+  String get kpiDaysToRun => 'скоро закончатся';
 
   @override
   String get fallbackTip1 =>
@@ -1207,12 +905,6 @@ class AppLocalizationsRu extends AppLocalizations {
   String get chatInputHint => 'Спросите что-нибудь…';
 
   @override
-  String get aiModelBadge => 'Работает на OpenRouter · ling-3.0-flash';
-
-  @override
-  String get seeAll => 'Все';
-
-  @override
   String get tipTopicHerbs => 'зелень';
 
   @override
@@ -1268,16 +960,32 @@ class AppLocalizationsRu extends AppLocalizations {
   String get tipTopicsEmpty => 'Ни одной темы не выбрано — совет будет общий';
 
   @override
-  String get insightsChampionKicker => 'ЧЕМПИОН МЕСЯЦА';
+  String get insightsChampionKicker => 'ВАШ ЧЕМПИОН';
 
   @override
   String insightsChampionSubtitle(int count) {
-    return 'куплено $count раз за месяц';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count раза',
+      many: '$count раз',
+      few: '$count раза',
+      one: '$count раз',
+    );
+    return 'куплено $_temp0';
   }
 
   @override
   String insightsStreakDays(int days) {
-    return '$days дней подряд';
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days дня подряд',
+      many: '$days дней подряд',
+      few: '$days дня подряд',
+      one: '$days день подряд',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1293,9 +1001,6 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get insightsStatsProducts => 'продуктов';
-
-  @override
-  String get insightsStatsLoginsWeek => 'входов за неделю';
 
   @override
   String get insightsEmpty => 'Пока нет данных — начните добавлять продукты';
@@ -1337,15 +1042,15 @@ class AppLocalizationsRu extends AppLocalizations {
   String get recipeCreateListCta => 'Куда добавить рецепт?';
 
   @override
-  String get recipeDupForceMark => 'добавим ещё';
-
-  @override
-  String recipeDedupBannerMany(int n) {
-    return '$n дубликатов будут пропущены — снимите галочки чтобы добавить принудительно';
-  }
-
-  @override
   String get offlineWriteBlocked => 'Нет интернета — изменение не сохранится';
+
+  @override
+  String get offlineSavedQueued => 'Сохранено. Отправим, когда появится сеть';
+
+  @override
+  String offlineSyncDropped(int count) {
+    return 'Не синхронизировано изменений: $count';
+  }
 
   @override
   String get offlineReadBanner => 'Работаете офлайн — данные из кэша';
@@ -1358,4 +1063,382 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get listsEmptySubtitle => 'Может стоит создать новый?';
+
+  @override
+  String get aiModelSettingsSection => 'Модель Pora-AI';
+
+  @override
+  String get aiConfigRow => 'Своя модель Pora-AI';
+
+  @override
+  String get aiConfigRowSubtitle => 'Свой ключ OpenRouter и модели';
+
+  @override
+  String get aiConfigTitle => 'Модель Pora-AI';
+
+  @override
+  String get aiConfigIntro =>
+      'Подключите свой ключ OpenRouter и выберите модели для Pora-AI. Оставьте поле пустым, чтобы использовать значение по умолчанию.';
+
+  @override
+  String get aiConfigApiKeyLabel => 'API-ключ OpenRouter';
+
+  @override
+  String get aiConfigApiKeyHint => 'sk-or-...';
+
+  @override
+  String get aiConfigModelsSection => 'Модели';
+
+  @override
+  String get aiConfigPoraModelLabel => 'Модель PORA-AI';
+
+  @override
+  String get aiConfigPoraModelHint => 'например, openai/gpt-4o-mini';
+
+  @override
+  String get aiConfigTipsModelLabel => 'Модель подсказок (Tips)';
+
+  @override
+  String get aiConfigTipsModelHint => 'Пусто — как в приложении';
+
+  @override
+  String get aiConfigNeedKeyNote =>
+      'Введите API-ключ, чтобы задать свои модели';
+
+  @override
+  String get aiConfigReset => 'Сбросить к значениям по умолчанию';
+
+  @override
+  String get aiConfigSaved => 'Настройки Pora-AI сохранены';
+
+  @override
+  String get aiConfigResetDone =>
+      'Восстановлены настройки Pora-AI по умолчанию';
+
+  @override
+  String get aiConfigInfoTitle => 'Как подключить свою модель';
+
+  @override
+  String get aiConfigInfoBody =>
+      '1. Создайте бесплатный аккаунт на openrouter.ai.\n2. Откройте раздел Keys, создайте новый API-ключ и вставьте его сюда.\n3. На странице openrouter.ai/models скопируйте идентификатор модели (например, openai/gpt-4o-mini или anthropic/claude-3.5-sonnet).\n4. Вставьте идентификатор в поле PORA-AI. Поле Tips необязательно — оставьте пустым, чтобы использовать модель приложения по умолчанию с вашим ключом.\n\nКлюч хранится только на этом устройстве и используется только для ваших запросов к Pora-AI.';
+
+  @override
+  String get aiConfigInfoClose => 'Понятно';
+
+  @override
+  String get supportEmptyError => 'Сначала напишите сообщение';
+
+  @override
+  String get supportSent => 'Сообщение отправлено — скоро ответим';
+
+  @override
+  String get supportFailed =>
+      'Не удалось отправить. Проверьте подключение и повторите';
+
+  @override
+  String get supportSheetHint => 'Опишите проблему или пожелание...';
+
+  @override
+  String get shortcutAddItem => 'Добавить товар';
+
+  @override
+  String importantReminderTitle(String product) {
+    return 'Купи $product';
+  }
+
+  @override
+  String importantReminderFrom(String user) {
+    return 'от $user';
+  }
+
+  @override
+  String get importantReminderBody => 'Отметьте «Куплено», когда купите';
+
+  @override
+  String get importantReminderMarkBought => 'Куплено';
+
+  @override
+  String get liveActivityTestRow => 'Тест Live Activity';
+
+  @override
+  String get liveActivityTestSample => 'Молоко';
+
+  @override
+  String get listPickerTitle => 'В какой список добавить?';
+
+  @override
+  String get listPickerEmpty => 'Списков пока нет — сначала создайте';
+
+  @override
+  String get predictionsAdded => 'Добавлено в список';
+
+  @override
+  String get shortcutOpenLists => 'Открыть списки';
+
+  @override
+  String get shortcutOpenPora => 'Спросить Pora-AI';
+
+  @override
+  String insightsPeriodDays(int days) {
+    return '$days дн.';
+  }
+
+  @override
+  String insightsStreakBest(int days) {
+    return 'Рекорд: $days';
+  }
+
+  @override
+  String get insightsStreakStart => 'Заходите каждый день, чтобы начать серию';
+
+  @override
+  String get insightsKpiAdded => 'добавлено';
+
+  @override
+  String get insightsKpiBought => 'куплено';
+
+  @override
+  String get insightsKpiCompletion => 'добавленного куплено';
+
+  @override
+  String get insightsKpiActiveDays => 'активных дней';
+
+  @override
+  String get insightsKpiMinutes => 'минут в приложении';
+
+  @override
+  String get insightsKpiSessions => 'сессий';
+
+  @override
+  String insightsAvgSession(String minutes) {
+    return '≈$minutes мин за сессию';
+  }
+
+  @override
+  String get insightsActivityTitle => 'Добавлено и куплено';
+
+  @override
+  String get insightsActivityEmpty => 'За этот период активности пока нет';
+
+  @override
+  String get insightsHeatmapTitle => 'Активность за 4 недели';
+
+  @override
+  String get insightsLess => 'меньше';
+
+  @override
+  String get insightsMore => 'больше';
+
+  @override
+  String get insightsRhythmTitle => 'Ваш ритм';
+
+  @override
+  String get insightsPartMorning => 'Утро';
+
+  @override
+  String get insightsPartAfternoon => 'День';
+
+  @override
+  String get insightsPartEvening => 'Вечер';
+
+  @override
+  String get insightsPartNight => 'Ночь';
+
+  @override
+  String get insightsPeakMorning => 'Чаще всего вы активны утром';
+
+  @override
+  String get insightsPeakAfternoon => 'Чаще всего вы активны днём';
+
+  @override
+  String get insightsPeakEvening => 'Чаще всего вы активны вечером';
+
+  @override
+  String get insightsPeakNight => 'Чаще всего вы активны ночью';
+
+  @override
+  String insightsPeakWeekday(String day) {
+    return 'Самый активный день — $day';
+  }
+
+  @override
+  String get insightsCategoriesTitle => 'Что вы добавляете';
+
+  @override
+  String get insightsDueSoonTitle => 'Пора докупить';
+
+  @override
+  String get insightsDueNow => 'уже пора';
+
+  @override
+  String insightsDueInDays(int days) {
+    return 'через ~$days дн.';
+  }
+
+  @override
+  String get insightsTopBoughtTitle => 'Чаще всего покупали за период';
+
+  @override
+  String get insightsEngagementTitle => 'Как вы пользуетесь Pora';
+
+  @override
+  String get insightsKpiListsOpened => 'открытий списков';
+
+  @override
+  String get insightsKpiListsCreated => 'списков создано';
+
+  @override
+  String get insightsKpiRecipes => 'рецептов импортировано';
+
+  @override
+  String get insightsKpiAi => 'сообщений Pora';
+
+  @override
+  String get insightsKpiDeleted => 'удалено позиций';
+
+  @override
+  String get insightsAllTimeTitle => 'За всё время';
+
+  @override
+  String get insightsKpiReminders => 'с напоминанием';
+
+  @override
+  String get insightsKpiUrgent => 'срочных';
+
+  @override
+  String get insightsLocalNote =>
+      'Статистика пользования считается на этом устройстве';
+
+  @override
+  String get insightsNoUsageYet => 'Статистика появится по мере использования';
+
+  @override
+  String get settingsDeleteAccount => 'Удалить аккаунт';
+
+  @override
+  String get deleteAccountTitle => 'Удалить аккаунт?';
+
+  @override
+  String get deleteAccountBody =>
+      'Профиль, личные списки и статистика будут удалены безвозвратно. Общие семейные списки останутся у семьи; если вы владелец семьи, права перейдут самому давнему участнику. Действие нельзя отменить.';
+
+  @override
+  String get deleteAccountFailed =>
+      'Не удалось удалить аккаунт. Проверьте подключение и попробуйте ещё раз.';
+
+  @override
+  String get chatReportAi => 'Пожаловаться';
+
+  @override
+  String get chatReportSent => 'Спасибо, мы проверим этот ответ.';
+
+  @override
+  String get chatReportFailed =>
+      'Не удалось отправить жалобу. Попробуйте позже.';
+
+  @override
+  String get aiDisclaimer =>
+      'Pora AI может ошибаться. Проверяйте важную информацию.';
+
+  @override
+  String get groupLeave => 'Выйти';
+
+  @override
+  String get groupLeaveTitle =>
+      'Выйти из группы? Список останется у остальных участников.';
+
+  @override
+  String get groupDeleteOwnerOnly => 'Удалить группу может только её владелец';
+
+  @override
+  String get groupDeleteFailed =>
+      'Не удалось удалить группу. Попробуйте ещё раз.';
+
+  @override
+  String get groupLeaveFailed =>
+      'Не удалось выйти из группы. Попробуйте ещё раз.';
+
+  @override
+  String get listNoProductsTitle => 'Пока нет продуктов';
+
+  @override
+  String get listNoProductsSubtitle =>
+      'Нажмите «Добавить», чтобы внести первый продукт в список';
+
+  @override
+  String get unitPcs => 'шт';
+
+  @override
+  String get unitG => 'г';
+
+  @override
+  String get unitKg => 'кг';
+
+  @override
+  String get unitMl => 'мл';
+
+  @override
+  String get unitL => 'л';
+
+  @override
+  String get unitPack => 'уп';
+
+  @override
+  String get sectionProduce => 'Овощи и фрукты';
+
+  @override
+  String get sectionDairy => 'Молочное';
+
+  @override
+  String get sectionPantry => 'Бакалея';
+
+  @override
+  String get sectionDrinks => 'Напитки';
+
+  @override
+  String get sectionBread => 'Хлеб';
+
+  @override
+  String get sectionMisc => 'Разное';
+
+  @override
+  String get sectionOther => 'Прочее';
+
+  @override
+  String get predictionEveryDay => '~каждый день';
+
+  @override
+  String predictionEvery(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '~раз в $days дня',
+      many: '~раз в $days дней',
+      few: '~раз в $days дня',
+      one: '~раз в $days день',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get predictionBoughtRegularly => 'Покупаете регулярно';
+
+  @override
+  String get predictionBoughtToday => 'куплено сегодня';
+
+  @override
+  String get predictionBoughtYesterday => 'куплено вчера';
+
+  @override
+  String predictionBoughtDaysAgo(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'куплено $days дня назад',
+      many: 'куплено $days дней назад',
+      few: 'куплено $days дня назад',
+      one: 'куплено $days день назад',
+    );
+    return '$_temp0';
+  }
 }

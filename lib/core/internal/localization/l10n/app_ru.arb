@@ -1,19 +1,7 @@
 {
-    "appName": "ПОРА",
-    "@appName": {
-        "description": "The name of the application"
-    },
     "language": "Язык",
     "@language": {
         "description": "language"
-    },
-    "authUnderAppName1": "Общий список для пар и семей",
-    "@authUnderAppName1": {
-        "description": "The first line under the app name"
-    },
-    "authUnderAppName2": "Рецепты, дом и доставка — в одном месте",
-    "@authUnderAppName2": {
-        "description": "The second line under the app name"
     },
     "authSubtitle2": "Начните вводить, сами определим, телефон это или почта.",
     "@authSubtitle2": {
@@ -23,10 +11,6 @@
     "@onlyYou": {
         "description": "onlyYou"
     },
-    "authSignInExpansibleExpand": "Войти иным способом",
-    "@authSignInExpansibleExpand": {
-        "description": "The sign in with other methods title"
-    },
     "sendAgainAfter": "Отправить еще раз через...",
     "@sendAgainAfter": {
         "description": "The sign in with other methods title"
@@ -34,26 +18,6 @@
     "userCreateProfileNameRequired": "Может все-же скажете имя?",
     "@userCreateProfileNameRequired": {
         "description": "userCreateProfileNameRequired"
-    },
-    "authSignInExpansibleCollapse": "Свернуть",
-    "@authSignInExpansibleCollapse": {
-        "description": "The sign in with other methods title"
-    },
-    "authSignInWithEmail": "Войти по электронной почте",
-    "@authSignInWithEmail": {
-        "description": "The sign in with email button text"
-    },
-    "authSignInWithGoogle": "Войти через Google",
-    "@authSignInWithGoogle": {
-        "description": "The sign in with Google button text"
-    },
-    "authSignInWithApple": "Войти через Apple",
-    "@authSignInWithApple": {
-        "description": "The sign in with Apple button text"
-    },
-    "authSignInWithPhone": "Войти через телефон",
-    "@authSignInWithPhone": {
-        "description": "The sign in with Phone button text"
     },
     "authPrivatePolicy": "Продолжая, вы соглашаетесь с\nУсловиями и Политикой конфиденциальности",
     "@authPrivatePolicy": {
@@ -156,7 +120,7 @@
     "@onboardingSlide3Title": {
         "description": "onboardingSlide3Title"
     },
-    "onboardingSlide3Body": "По вашим покупкам подскажет, что скоро закончится, и закажет в один тап.",
+    "onboardingSlide3Body": "По вашим покупкам Pora подскажет, что скоро закончится, и напомнит добавить это в список.",
     "@onboardingSlide3Body": {
         "description": "onboardingSlide3Body"
     },
@@ -212,62 +176,6 @@
     "@briefNext": {
         "description": "briefNext"
     },
-    "briefItemMilk": "Молоко",
-    "@briefItemMilk": {
-        "description": "briefItemMilk"
-    },
-    "briefItemBread": "Хлеб",
-    "@briefItemBread": {
-        "description": "briefItemBread"
-    },
-    "briefItemEggs": "Яйца",
-    "@briefItemEggs": {
-        "description": "briefItemEggs"
-    },
-    "briefItemCoffee": "Кофе",
-    "@briefItemCoffee": {
-        "description": "briefItemCoffee"
-    },
-    "briefItemCheese": "Сыр",
-    "@briefItemCheese": {
-        "description": "briefItemCheese"
-    },
-    "briefItemBananas": "Бананы",
-    "@briefItemBananas": {
-        "description": "briefItemBananas"
-    },
-    "briefItemButter": "Масло",
-    "@briefItemButter": {
-        "description": "briefItemButter"
-    },
-    "briefItemWater": "Вода",
-    "@briefItemWater": {
-        "description": "briefItemWater"
-    },
-    "briefItemVegetables": "Овощи",
-    "@briefItemVegetables": {
-        "description": "briefItemVegetables"
-    },
-    "briefItemTomatoes": "Помидоры",
-    "@briefItemTomatoes": {
-        "description": "briefItemTomatoes"
-    },
-    "briefItemPasta": "Паста",
-    "@briefItemPasta": {
-        "description": "briefItemPasta"
-    },
-    "briefItemChicken": "Курица",
-    "@briefItemChicken": {
-        "description": "briefItemChicken"
-    },
-    "listTitle": "Наш список",
-    "@listTitle": {
-        "description": "listTitle"
-    },
-    "listMembersCount": "2 человека · 8 продуктов",
-    "@listMembersCount": {
-        "description": "listMembersCount"
-    },
     "listUrgent": "Срочно",
     "@listUrgent": {
         "description": "listUrgent"
@@ -276,33 +184,9 @@
     "@listAdd": {
         "description": "listAdd"
     },
-    "predictionsTitle": "Пора поможет!",
-    "@predictionsTitle": {
-        "description": "predictionsTitle"
-    },
-    "predictionTip": "Малюсенький советик",
-    "@predictionTip": {
-        "description": "predictionTip"
-    },
     "supportMessage": "Написать письмо в поддержку",
     "@supportMessage": {
         "description": "Написать письмо в поддержку"
-    },
-    "predictionsSubtitle": "Скоро закончится — по вашим покупкам",
-    "@predictionsSubtitle": {
-        "description": "predictionsSubtitle"
-    },
-    "predictionsOrderTitle": "Заказать всё в один тап",
-    "@predictionsOrderTitle": {
-        "description": "predictionsOrderTitle"
-    },
-    "predictionsOrderSubtitle": "Самокат · доставка за 15 минут",
-    "@predictionsOrderSubtitle": {
-        "description": "predictionsOrderSubtitle"
-    },
-    "predictionsOrderDiscount": "−15% на первый заказ",
-    "@predictionsOrderDiscount": {
-        "description": "predictionsOrderDiscount"
     },
     "predictionsAddToList": "В список",
     "@predictionsAddToList": {
@@ -312,33 +196,13 @@
     "@predictionsDismiss": {
         "description": "predictionsDismiss"
     },
-    "itemDetailName": "Молоко",
-    "@itemDetailName": {
-        "description": "itemDetailName"
-    },
-    "itemDetailSubtitle": "2 л · Молочное",
-    "@itemDetailSubtitle": {
-        "description": "itemDetailSubtitle"
-    },
     "itemDetailAddedBy": "Добавил(а)",
     "@itemDetailAddedBy": {
         "description": "itemDetailAddedBy"
     },
-    "itemDetailSection": "Раздел",
-    "@itemDetailSection": {
-        "description": "itemDetailSection"
-    },
-    "itemDetailSectionValue": "Молочное",
-    "@itemDetailSectionValue": {
-        "description": "itemDetailSectionValue"
-    },
     "itemDetailQuantity": "Количество",
     "@itemDetailQuantity": {
         "description": "itemDetailQuantity"
-    },
-    "itemDetailQuantityValue": "2 л",
-    "@itemDetailQuantityValue": {
-        "description": "itemDetailQuantityValue"
     },
     "itemDetailUrgent": "Срочно",
     "@itemDetailUrgent": {
@@ -348,14 +212,6 @@
     "@itemDetailRemind": {
         "description": "itemDetailRemind"
     },
-    "itemDetailRemindEvery": "Каждые 7 дней",
-    "@itemDetailRemindEvery": {
-        "description": "itemDetailRemindEvery"
-    },
-    "itemDetailInsight": "Покупаете ~раз в 7 дней · последний раз 6 дней назад. Скоро предложу докупить.",
-    "@itemDetailInsight": {
-        "description": "itemDetailInsight"
-    },
     "itemDetailMarkBought": "Отметить купленным",
     "@itemDetailMarkBought": {
         "description": "itemDetailMarkBought"
@@ -364,53 +220,13 @@
     "@itemDetailDelete": {
         "description": "itemDetailDelete"
     },
-    "addItemTitle": "Добавить продукт",
-    "@addItemTitle": {
-        "description": "addItemTitle"
-    },
-    "addItemExampleValue": "Авокадо",
-    "@addItemExampleValue": {
-        "description": "addItemExampleValue"
-    },
-    "addItemNameHint": "Название продукта",
-    "@addItemNameHint": {
-        "description": "addItemNameHint"
-    },
     "addItemQuantity": "Количество",
     "@addItemQuantity": {
         "description": "addItemQuantity"
     },
-    "addItemSection": "Раздел",
-    "@addItemSection": {
-        "description": "addItemSection"
-    },
-    "addItemUrgent": "Срочно",
-    "@addItemUrgent": {
-        "description": "addItemUrgent"
-    },
-    "addItemUrgentSubtitle": "Нужно купить сегодня",
-    "@addItemUrgentSubtitle": {
-        "description": "addItemUrgentSubtitle"
-    },
-    "addItemRemind": "Напоминать регулярно",
-    "@addItemRemind": {
-        "description": "addItemRemind"
-    },
-    "addItemRemindEvery": "Каждые 7 дней",
-    "@addItemRemindEvery": {
-        "description": "addItemRemindEvery"
-    },
-    "addItemSubmit": "Добавить в список",
-    "@addItemSubmit": {
-        "description": "addItemSubmit"
-    },
     "settingsTitle": "Настройки",
     "@settingsTitle": {
         "description": "settingsTitle"
-    },
-    "settingsHouseholdSection": "Хозяйство",
-    "@settingsHouseholdSection": {
-        "description": "settingsHouseholdSection"
     },
     "settingsAppSection": "Приложение",
     "@settingsAppSection": {
@@ -419,18 +235,6 @@
     "settingsNotifications": "Уведомления",
     "@settingsNotifications": {
         "description": "settingsNotifications"
-    },
-    "settingsDelivery": "Доставка",
-    "@settingsDelivery": {
-        "description": "settingsDelivery"
-    },
-    "settingsProAd": "Pora+ · без рекламы",
-    "@settingsProAd": {
-        "description": "settingsProAd"
-    },
-    "settingsTryPill": "Попробовать",
-    "@settingsTryPill": {
-        "description": "settingsTryPill"
     },
     "settingsPrivacy": "Приватность и данные",
     "@settingsPrivacy": {
@@ -443,10 +247,6 @@
     "settingsLogout": "Выйти",
     "@settingsLogout": {
         "description": "settingsLogout"
-    },
-    "settingsMembersNames": "Борис и Анна",
-    "@settingsMembersNames": {
-        "description": "settingsMembersNames"
     },
     "settingsInvitePill": "Пригласить",
     "@settingsInvitePill": {
@@ -488,10 +288,6 @@
     "@householdConnectToFamily": {
         "description": "householdConnectToFamily"
     },
-    "householdWriteCode": "Введите код приглашения",
-    "@householdWriteCode": {
-        "description": "householdWriteCode"
-    },
     "householdInviteDescriptionWhenConnecting": "Определили код приглашения, но вы и сами можете его ввести, если мы ошиблись",
     "@householdInviteDescriptionWhenConnecting": {
         "description": "householdInviteDescriptionWhenConnecting"
@@ -511,58 +307,6 @@
     "notificationsReadAll": "Прочитать все",
     "@notificationsReadAll": {
         "description": "notificationsReadAll"
-    },
-    "notificationsMilkTitle": "По дороге домой захвати молоко",
-    "@notificationsMilkTitle": {
-        "description": "notificationsMilkTitle"
-    },
-    "notificationsMilkBody": "Оно кончилось — Анна отметила 10 минут назад.",
-    "@notificationsMilkBody": {
-        "description": "notificationsMilkBody"
-    },
-    "notificationsMilkTime": "5 минут назад",
-    "@notificationsMilkTime": {
-        "description": "notificationsMilkTime"
-    },
-    "notificationsCoffeeTitle": "Скоро закончится кофе",
-    "@notificationsCoffeeTitle": {
-        "description": "notificationsCoffeeTitle"
-    },
-    "notificationsCoffeeBody": "Покупаете ~раз в 14 дней, прошло 12.",
-    "@notificationsCoffeeBody": {
-        "description": "notificationsCoffeeBody"
-    },
-    "notificationsPartnerAddedTitle": "Анна добавила 2 продукта",
-    "@notificationsPartnerAddedTitle": {
-        "description": "notificationsPartnerAddedTitle"
-    },
-    "notificationsPartnerAddedBody": "Бананы и Хлеб — в общем списке.",
-    "@notificationsPartnerAddedBody": {
-        "description": "notificationsPartnerAddedBody"
-    },
-    "notificationsPartnerAddedTime": "Сегодня, 9:12",
-    "@notificationsPartnerAddedTime": {
-        "description": "notificationsPartnerAddedTime"
-    },
-    "notificationsPromoTitle": "−15% на первый заказ в Самокате",
-    "@notificationsPromoTitle": {
-        "description": "notificationsPromoTitle"
-    },
-    "notificationsPromoBody": "Промо активно ещё 6 дней.",
-    "@notificationsPromoBody": {
-        "description": "notificationsPromoBody"
-    },
-    "notificationsPromoTime": "Вчера",
-    "@notificationsPromoTime": {
-        "description": "notificationsPromoTime"
-    },
-    "notificationsOrderDeliveredTitle": "Заказ доставлен",
-    "@notificationsOrderDeliveredTitle": {
-        "description": "notificationsOrderDeliveredTitle"
-    },
-    "notificationsOrderDeliveredBody": "8 продуктов · Самокат · ₽1 054.",
-    "@notificationsOrderDeliveredBody": {
-        "description": "notificationsOrderDeliveredBody"
     },
     "notificationsAddToListPill": "＋ В список",
     "@notificationsAddToListPill": {
@@ -588,41 +332,13 @@
     "@userCreateProfileNext": {
         "description": "userCreateProfileNext"
     },
-    "searchTitle": "Поиск",
-    "@searchTitle": {
-        "description": "searchTitle"
-    },
     "searchHint": "Название продукта…",
     "@searchHint": {
         "description": "searchHint"
     },
-    "searchFilterAll": "Всё",
-    "@searchFilterAll": {
-        "description": "searchFilterAll"
-    },
-    "searchFilterVegetables": "Овощи",
-    "@searchFilterVegetables": {
-        "description": "searchFilterVegetables"
-    },
     "update": "Обновить",
     "@update": {
         "description": "update"
-    },
-    "searchFilterDairy": "Молочное",
-    "@searchFilterDairy": {
-        "description": "searchFilterDairy"
-    },
-    "searchFilterGrocery": "Бакалея",
-    "@searchFilterGrocery": {
-        "description": "searchFilterGrocery"
-    },
-    "searchFilterRecipes": "Рецепты",
-    "@searchFilterRecipes": {
-        "description": "searchFilterRecipes"
-    },
-    "searchResults": "Результаты",
-    "@searchResults": {
-        "description": "searchResults"
     },
     "searchNothingFound": "Ничего не найдено",
     "@searchNothingFound": {
@@ -632,105 +348,9 @@
     "@insightsTitle": {
         "description": "insightsTitle"
     },
-    "insightsTipKicker": "✨ СОВЕТ PORA",
-    "@insightsTipKicker": {
-        "description": "insightsTipKicker"
-    },
-    "insightsTipTitle": "Вы любите карбонару!",
-    "@insightsTipTitle": {
-        "description": "insightsTipTitle"
-    },
-    "insightsTipBody": "Похожий профиль вкуса — попробуйте мак-н-чиз. 4 из 6 ингредиентов у вас уже бывают регулярно.",
-    "@insightsTipBody": {
-        "description": "insightsTipBody"
-    },
-    "insightsTipAction": "Открыть рецепт →",
-    "@insightsTipAction": {
-        "description": "insightsTipAction"
-    },
-    "insightsRunsOutMost": "Чаще всего заканчивается",
-    "@insightsRunsOutMost": {
-        "description": "insightsRunsOutMost"
-    },
-    "insightsFavoriteCuisines": "Любимые кухни",
-    "@insightsFavoriteCuisines": {
-        "description": "insightsFavoriteCuisines"
-    },
-    "insightsCuisineItalian": "Итальянская",
-    "@insightsCuisineItalian": {
-        "description": "insightsCuisineItalian"
-    },
-    "insightsCuisinePasta": "Паста",
-    "@insightsCuisinePasta": {
-        "description": "insightsCuisinePasta"
-    },
-    "insightsCuisineBreakfasts": "Завтраки",
-    "@insightsCuisineBreakfasts": {
-        "description": "insightsCuisineBreakfasts"
-    },
-    "insightsCuisineLight": "Лёгкое",
-    "@insightsCuisineLight": {
-        "description": "insightsCuisineLight"
-    },
-    "orderTitle": "Заказ",
-    "@orderTitle": {
-        "description": "orderTitle"
-    },
-    "orderCart": "Корзина",
-    "@orderCart": {
-        "description": "orderCart"
-    },
-    "orderWhenToDeliver": "Когда доставить",
-    "@orderWhenToDeliver": {
-        "description": "orderWhenToDeliver"
-    },
-    "orderCheckoutCta": "Заказать в Самокате · {total}",
-    "@orderCheckoutCta": {
-        "placeholders": {
-            "total": {
-                "type": "String"
-            }
-        }
-    },
-    "orderSummaryGoods": "Товары",
-    "@orderSummaryGoods": {
-        "description": "orderSummaryGoods"
-    },
-    "orderSummaryDiscount": "Скидка −15%",
-    "@orderSummaryDiscount": {
-        "description": "orderSummaryDiscount"
-    },
-    "orderSummaryDelivery": "Доставка",
-    "@orderSummaryDelivery": {
-        "description": "orderSummaryDelivery"
-    },
-    "orderSummaryFree": "Бесплатно",
-    "@orderSummaryFree": {
-        "description": "orderSummaryFree"
-    },
-    "orderSummaryTotal": "Итого",
-    "@orderSummaryTotal": {
-        "description": "orderSummaryTotal"
-    },
     "recipeImportTitle": "Рецепт по ссылке",
     "@recipeImportTitle": {
         "description": "recipeImportTitle"
-    },
-    "recipePreviewTitle": "Паста Карбонара",
-    "@recipePreviewTitle": {
-        "description": "recipePreviewTitle"
-    },
-    "recipePreviewMeta": "eda.ru · 25 мин · 2 порции",
-    "@recipePreviewMeta": {
-        "description": "recipePreviewMeta"
-    },
-    "recipePreviewFound": "6 ингредиентов найдено",
-    "@recipePreviewFound": {
-        "description": "recipePreviewFound"
-    },
-    "recipeDedupBanner": "2 совпадения убрали, чтобы не дублировать с вашим списком",
-    "@recipeDedupBanner": {
-        "description": "recipeDedupBanner"
     },
     "recipeIngredients": "Ингредиенты",
     "@recipeIngredients": {
@@ -740,7 +360,10 @@
     "@recipeAddToListCta": {
         "description": "Add the selected recipe products to the list",
         "placeholders": {
-            "count": {"type": "int", "format":"compact"}
+            "count": {
+                "type": "int",
+                "format": "compact"
+            }
         }
     },
     "recipeParseButton": "Разобрать",
@@ -755,10 +378,6 @@
     "@navPora": {
         "description": "navPora"
     },
-    "navOrder": "Заказ",
-    "@navOrder": {
-        "description": "navOrder"
-    },
     "navProfile": "Профиль",
     "@navProfile": {
         "description": "navProfile"
@@ -771,10 +390,6 @@
     "@familiesSubtitle": {
         "description": "familiesSubtitle"
     },
-    "familiesCurrent": "Текущая",
-    "@familiesCurrent": {
-        "description": "familiesCurrent"
-    },
     "familiesCreateDialog": "Как назовем семью?",
     "@familiesCreateDialog": {
         "description": "familiesCreateDialog"
@@ -783,37 +398,40 @@
     "@tryToUpdate": {
         "description": "tryToUpdate"
     },
-    "checkOut": "Проверить",
-    "@checkOut": {
-        "description": "checkOut"
-    },
-    "settingsMore": "Углубленные",
-    "@settingsMore": {
-        "description": "settingsMore"
-    },
     "listsYour": "Ваш личный список",
     "@listsYour": {
         "description": "listsYour"
     },
-    "human": "человека",
-    "@human": {
-        "description": "human"
+    "peopleCount": "{count, plural, one{{count} человек} few{{count} человека} many{{count} человек} other{{count} человека}}",
+    "@peopleCount": {
+        "description": "Members count in the list header",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
     },
     "connectionSuccess": "Присоединились",
     "@connectionSuccess": {
         "description": "connectionSuccess"
     },
-    "products": "продуктов",
-    "@products": {
-        "description": "products"
+    "productsCount": "{count, plural, one{{count} продукт} few{{count} продукта} many{{count} продуктов} other{{count} продукта}}",
+    "@productsCount": {
+        "description": "Products count in the list header",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
     },
-    "lists": "списков",
-    "@lists": {
-        "description": "lists"
-    },
-    "familiesCreateOrJoin": "＋ Создать или присоединиться",
-    "@familiesCreateOrJoin": {
-        "description": "familiesCreateOrJoin"
+    "listsCount": "{count, plural, one{{count} список} few{{count} списка} many{{count} списков} other{{count} списка}}",
+    "@listsCount": {
+        "description": "Lists count in the lists header",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
     },
     "familiesNoUrgent": "Нет срочного",
     "@familiesNoUrgent": {
@@ -920,10 +538,6 @@
     "@appearance": {
         "description": "appearance"
     },
-    "themeSection": "Тема",
-    "@themeSection": {
-        "description": "themeSection"
-    },
     "themeLight": "Светлая",
     "@themeLight": {
         "description": "themeLight"
@@ -1019,10 +633,6 @@
     "recipeEmptyHint": "Вставьте ссылку на рецепт и нажмите «Разобрать»",
     "@recipeEmptyHint": {
         "description": "recipeEmptyHint"
-    },
-    "recipeDupMark": "уже в списке",
-    "@recipeDupMark": {
-        "description": "recipeDupMark"
     },
     "done": "Готово",
     "@done": {
@@ -1166,14 +776,6 @@
     "groupShared": "Общая",
     "@groupShared": {
         "description": "groupShared"
-    },
-    "noGroups": "Пока нет ни одной группы",
-    "@noGroups": {
-        "description": "noGroups"
-    },
-    "settingsChangeThemeIOSEasterEgg": "* Чтобы изменить тему, откройте Настройки > PORA > Тема\n* Выберите новую тему в меню настроек\n* Нажмите «Тема» в настройках приложения, чтобы переключаться между светлой и тёмной темой",
-    "@settingsChangeThemeIOSEasterEgg": {
-        "description": "ios easter egg on advanced settings when tapped few times"
     },
     "tutorialTitle": "Как это работает",
     "@tutorialTitle": {
@@ -1367,43 +969,23 @@
     "@predictionsSectionSoon": {
         "description": "section title"
     },
-    "predictionsSectionOften": "Часто покупаете",
-    "@predictionsSectionOften": {
-        "description": "section title"
-    },
     "predictionsSectionAiSuggests": "ИИ предлагает",
     "@predictionsSectionAiSuggests": {
         "description": "section title"
-    },
-    "predictionsAiSuggestionsTitle": "Продукты и рецепты для вас",
-    "@predictionsAiSuggestionsTitle": {
-        "description": "AI suggestions card title"
-    },
-    "predictionsAiSuggestionsTopic": "ваши предпочтения и покупки",
-    "@predictionsAiSuggestionsTopic": {
-        "description": "AI suggestions topic"
     },
     "refresh": "Обновить",
     "@refresh": {
         "description": "refresh action"
     },
-    "predictionsOftenEmpty": "Пока недостаточно данных",
-    "@predictionsOftenEmpty": {
-        "description": "empty frequent products"
-    },
-    "predictionsAskPora": "Спросить PORA",
-    "@predictionsAskPora": {
-        "description": "FAB label"
-    },
-    "kpiWeek": "продукта в неделю",
+    "kpiWeek": "продуктов",
     "@kpiWeek": {
         "description": "kpi label"
     },
-    "kpiRecipes": "рецептов за месяц",
+    "kpiRecipes": "часто берёте",
     "@kpiRecipes": {
         "description": "kpi label"
     },
-    "kpiDaysToRun": "дней до закупки",
+    "kpiDaysToRun": "скоро закончатся",
     "@kpiDaysToRun": {
         "description": "kpi label"
     },
@@ -1543,14 +1125,6 @@
     "@chatInputHint": {
         "description": "chat input placeholder"
     },
-    "aiModelBadge": "Работает на OpenRouter · ling-3.0-flash",
-    "@aiModelBadge": {
-        "description": "model badge"
-    },
-    "seeAll": "Все",
-    "@seeAll": {
-        "description": "see all link"
-    },
     "tipTopicHerbs": "зелень",
     "@tipTopicHerbs": {
         "description": "predefined tip topic"
@@ -1623,11 +1197,11 @@
     "@tipTopicsEmpty": {
         "description": "warning when no topics selected"
     },
-    "insightsChampionKicker": "ЧЕМПИОН МЕСЯЦА",
+    "insightsChampionKicker": "ВАШ ЧЕМПИОН",
     "@insightsChampionKicker": {
         "description": "champion card kicker"
     },
-    "insightsChampionSubtitle": "куплено {count} раз за месяц",
+    "insightsChampionSubtitle": "куплено {count, plural, one{{count} раз} few{{count} раза} many{{count} раз} other{{count} раза}}",
     "@insightsChampionSubtitle": {
         "description": "champion card subtitle",
         "placeholders": {
@@ -1636,7 +1210,7 @@
             }
         }
     },
-    "insightsStreakDays": "{days} дней подряд",
+    "insightsStreakDays": "{days, plural, one{{days} день подряд} few{{days} дня подряд} many{{days} дней подряд} other{{days} дня подряд}}",
     "@insightsStreakDays": {
         "description": "streak headline",
         "placeholders": {
@@ -1664,10 +1238,6 @@
     },
     "insightsStatsProducts": "продуктов",
     "@insightsStatsProducts": {
-        "description": "kpi label"
-    },
-    "insightsStatsLoginsWeek": "входов за неделю",
-    "@insightsStatsLoginsWeek": {
         "description": "kpi label"
     },
     "insightsEmpty": "Пока нет данных — начните добавлять продукты",
@@ -1722,22 +1292,17 @@
     "@recipeCreateListCta": {
         "description": "recipe cta"
     },
-    "recipeDupForceMark": "добавим ещё",
-    "@recipeDupForceMark": {
-        "description": "dup pill when user unchecks flag"
-    },
-    "recipeDedupBannerMany": "{n} дубликатов будут пропущены — снимите галочки чтобы добавить принудительно",
-    "@recipeDedupBannerMany": {
-        "description": "dedup banner",
-        "placeholders": {
-            "n": {
-                "type": "int"
-            }
-        }
-    },
     "offlineWriteBlocked": "Нет интернета — изменение не сохранится",
     "@offlineWriteBlocked": {
         "description": "snackbar when write attempted offline"
+    },
+    "offlineSavedQueued": "Сохранено. Отправим, когда появится сеть",
+    "@offlineSavedQueued": {
+        "description": "snackbar when an offline change was queued for sync"
+    },
+    "offlineSyncDropped": "Не синхронизировано изменений: {count}",
+    "@offlineSyncDropped": {
+        "description": "snackbar when queued offline changes were rejected by the server"
     },
     "offlineReadBanner": "Работаете офлайн — данные из кэша",
     "@offlineReadBanner": {
@@ -1748,5 +1313,184 @@
         "description": "chat bubble cta"
     },
     "listsEmptyTitle": "Списков у вас пока нет",
-    "listsEmptySubtitle": "Может стоит создать новый?"
+    "listsEmptySubtitle": "Может стоит создать новый?",
+    "aiModelSettingsSection": "Модель Pora-AI",
+    "aiConfigRow": "Своя модель Pora-AI",
+    "aiConfigRowSubtitle": "Свой ключ OpenRouter и модели",
+    "aiConfigTitle": "Модель Pora-AI",
+    "aiConfigIntro": "Подключите свой ключ OpenRouter и выберите модели для Pora-AI. Оставьте поле пустым, чтобы использовать значение по умолчанию.",
+    "aiConfigApiKeyLabel": "API-ключ OpenRouter",
+    "aiConfigApiKeyHint": "sk-or-...",
+    "aiConfigModelsSection": "Модели",
+    "aiConfigPoraModelLabel": "Модель PORA-AI",
+    "aiConfigPoraModelHint": "например, openai/gpt-4o-mini",
+    "aiConfigTipsModelLabel": "Модель подсказок (Tips)",
+    "aiConfigTipsModelHint": "Пусто — как в приложении",
+    "aiConfigNeedKeyNote": "Введите API-ключ, чтобы задать свои модели",
+    "aiConfigReset": "Сбросить к значениям по умолчанию",
+    "aiConfigSaved": "Настройки Pora-AI сохранены",
+    "aiConfigResetDone": "Восстановлены настройки Pora-AI по умолчанию",
+    "aiConfigInfoTitle": "Как подключить свою модель",
+    "aiConfigInfoBody": "1. Создайте бесплатный аккаунт на openrouter.ai.\n2. Откройте раздел Keys, создайте новый API-ключ и вставьте его сюда.\n3. На странице openrouter.ai/models скопируйте идентификатор модели (например, openai/gpt-4o-mini или anthropic/claude-3.5-sonnet).\n4. Вставьте идентификатор в поле PORA-AI. Поле Tips необязательно — оставьте пустым, чтобы использовать модель приложения по умолчанию с вашим ключом.\n\nКлюч хранится только на этом устройстве и используется только для ваших запросов к Pora-AI.",
+    "aiConfigInfoClose": "Понятно",
+    "supportEmptyError": "Сначала напишите сообщение",
+    "supportSent": "Сообщение отправлено — скоро ответим",
+    "supportFailed": "Не удалось отправить. Проверьте подключение и повторите",
+    "supportSheetHint": "Опишите проблему или пожелание...",
+    "shortcutAddItem": "Добавить товар",
+    "importantReminderTitle": "Купи {product}",
+    "importantReminderFrom": "от {user}",
+    "importantReminderBody": "Отметьте «Куплено», когда купите",
+    "importantReminderMarkBought": "Куплено",
+    "liveActivityTestRow": "Тест Live Activity",
+    "liveActivityTestSample": "Молоко",
+    "listPickerTitle": "В какой список добавить?",
+    "listPickerEmpty": "Списков пока нет — сначала создайте",
+    "predictionsAdded": "Добавлено в список",
+    "shortcutOpenLists": "Открыть списки",
+    "shortcutOpenPora": "Спросить Pora-AI",
+    "insightsPeriodDays": "{days} дн.",
+    "insightsStreakBest": "Рекорд: {days}",
+    "insightsStreakStart": "Заходите каждый день, чтобы начать серию",
+    "insightsKpiAdded": "добавлено",
+    "insightsKpiBought": "куплено",
+    "insightsKpiCompletion": "добавленного куплено",
+    "insightsKpiActiveDays": "активных дней",
+    "insightsKpiMinutes": "минут в приложении",
+    "insightsKpiSessions": "сессий",
+    "insightsAvgSession": "≈{minutes} мин за сессию",
+    "insightsActivityTitle": "Добавлено и куплено",
+    "insightsActivityEmpty": "За этот период активности пока нет",
+    "insightsHeatmapTitle": "Активность за 4 недели",
+    "insightsLess": "меньше",
+    "insightsMore": "больше",
+    "insightsRhythmTitle": "Ваш ритм",
+    "insightsPartMorning": "Утро",
+    "insightsPartAfternoon": "День",
+    "insightsPartEvening": "Вечер",
+    "insightsPartNight": "Ночь",
+    "insightsPeakMorning": "Чаще всего вы активны утром",
+    "insightsPeakAfternoon": "Чаще всего вы активны днём",
+    "insightsPeakEvening": "Чаще всего вы активны вечером",
+    "insightsPeakNight": "Чаще всего вы активны ночью",
+    "insightsPeakWeekday": "Самый активный день — {day}",
+    "insightsCategoriesTitle": "Что вы добавляете",
+    "insightsDueSoonTitle": "Пора докупить",
+    "insightsDueNow": "уже пора",
+    "insightsDueInDays": "через ~{days} дн.",
+    "insightsTopBoughtTitle": "Чаще всего покупали за период",
+    "insightsEngagementTitle": "Как вы пользуетесь Pora",
+    "insightsKpiListsOpened": "открытий списков",
+    "insightsKpiListsCreated": "списков создано",
+    "insightsKpiRecipes": "рецептов импортировано",
+    "insightsKpiAi": "сообщений Pora",
+    "insightsKpiDeleted": "удалено позиций",
+    "insightsAllTimeTitle": "За всё время",
+    "insightsKpiReminders": "с напоминанием",
+    "insightsKpiUrgent": "срочных",
+    "insightsLocalNote": "Статистика пользования считается на этом устройстве",
+    "insightsNoUsageYet": "Статистика появится по мере использования",
+    "settingsDeleteAccount": "Удалить аккаунт",
+    "@settingsDeleteAccount": {
+        "description": "settingsDeleteAccount"
+    },
+    "deleteAccountTitle": "Удалить аккаунт?",
+    "@deleteAccountTitle": {
+        "description": "deleteAccountTitle"
+    },
+    "deleteAccountBody": "Профиль, личные списки и статистика будут удалены безвозвратно. Общие семейные списки останутся у семьи; если вы владелец семьи, права перейдут самому давнему участнику. Действие нельзя отменить.",
+    "@deleteAccountBody": {
+        "description": "deleteAccountBody"
+    },
+    "deleteAccountFailed": "Не удалось удалить аккаунт. Проверьте подключение и попробуйте ещё раз.",
+    "@deleteAccountFailed": {
+        "description": "deleteAccountFailed"
+    },
+    "chatReportAi": "Пожаловаться",
+    "@chatReportAi": {
+        "description": "chatReportAi"
+    },
+    "chatReportSent": "Спасибо, мы проверим этот ответ.",
+    "@chatReportSent": {
+        "description": "chatReportSent"
+    },
+    "chatReportFailed": "Не удалось отправить жалобу. Попробуйте позже.",
+    "@chatReportFailed": {
+        "description": "chatReportFailed"
+    },
+    "aiDisclaimer": "Pora AI может ошибаться. Проверяйте важную информацию.",
+    "@aiDisclaimer": {
+        "description": "aiDisclaimer"
+    },
+    "groupLeave": "Выйти",
+    "groupLeaveTitle": "Выйти из группы? Список останется у остальных участников.",
+    "groupDeleteOwnerOnly": "Удалить группу может только её владелец",
+    "groupDeleteFailed": "Не удалось удалить группу. Попробуйте ещё раз.",
+    "groupLeaveFailed": "Не удалось выйти из группы. Попробуйте ещё раз.",
+    "listNoProductsTitle": "Пока нет продуктов",
+    "@listNoProductsTitle": {
+        "description": "Empty state title of a list without products"
+    },
+    "listNoProductsSubtitle": "Нажмите «Добавить», чтобы внести первый продукт в список",
+    "@listNoProductsSubtitle": {
+        "description": "Empty state subtitle of a list without products"
+    },
+    "unitPcs": "шт",
+    "@unitPcs": {
+        "description": "Display label of stored unit 'шт'"
+    },
+    "unitG": "г",
+    "@unitG": {
+        "description": "Display label of stored unit 'г'"
+    },
+    "unitKg": "кг",
+    "@unitKg": {
+        "description": "Display label of stored unit 'кг'"
+    },
+    "unitMl": "мл",
+    "@unitMl": {
+        "description": "Display label of stored unit 'мл'"
+    },
+    "unitL": "л",
+    "@unitL": {
+        "description": "Display label of stored unit 'л'"
+    },
+    "unitPack": "уп",
+    "@unitPack": {
+        "description": "Display label of stored unit 'уп'"
+    },
+    "sectionProduce": "Овощи и фрукты",
+    "@sectionProduce": {
+        "description": "Display label of stored section 'Овощи и фрукты'"
+    },
+    "sectionDairy": "Молочное",
+    "@sectionDairy": {
+        "description": "Display label of stored section 'Молочное'"
+    },
+    "sectionPantry": "Бакалея",
+    "@sectionPantry": {
+        "description": "Display label of stored section 'Бакалея'"
+    },
+    "sectionDrinks": "Напитки",
+    "@sectionDrinks": {
+        "description": "Display label of stored section 'Напитки'"
+    },
+    "sectionBread": "Хлеб",
+    "@sectionBread": {
+        "description": "Display label of stored section 'Хлеб'"
+    },
+    "sectionMisc": "Разное",
+    "@sectionMisc": {
+        "description": "Display label of stored section 'Разное'"
+    },
+    "sectionOther": "Прочее",
+    "@sectionOther": {
+        "description": "Display label of server section 'Прочее' (items without a section)"
+    },
+    "predictionEveryDay": "~каждый день",
+    "predictionEvery": "{days, plural, one{~раз в {days} день} few{~раз в {days} дня} many{~раз в {days} дней} other{~раз в {days} дня}}",
+    "predictionBoughtRegularly": "Покупаете регулярно",
+    "predictionBoughtToday": "куплено сегодня",
+    "predictionBoughtYesterday": "куплено вчера",
+    "predictionBoughtDaysAgo": "{days, plural, one{куплено {days} день назад} few{куплено {days} дня назад} many{куплено {days} дней назад} other{куплено {days} дня назад}}"
 }

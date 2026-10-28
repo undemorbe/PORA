@@ -1,5 +1,6 @@
 import 'package:pora/core/features/recipe/data/datasource/recipe_scraper.dart';
 import 'package:pora/core/features/recipe/domain/entity/recipe.dart';
+import 'package:pora/core/features/recipe/domain/recipe_import_failure.dart';
 import 'package:pora/core/features/recipe/domain/repository/recipe_repository.dart';
 import 'package:pora/core/internal/errors/failure.dart';
 import 'package:pora/core/internal/errors/failure_mapper.dart';
@@ -22,7 +23,7 @@ class RecipeService implements RecipeRepository {
       final recipe = await scraper.scrape(url, languageCode: languageCode);
       return Right(recipe);
     } on RecipeScrapeException catch (e) {
-      return Left(ServerFailure(e.message));
+      return Left(RecipeImportFailure(e.message, kind: e.kind));
     } catch (e, s) {
       return Left(FailureMapper.map(e, s));
     }

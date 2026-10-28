@@ -5,6 +5,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 import 'package:pora/core/features/notifications/domain/entity/notification_entity.dart';
+import 'package:pora/core/internal/notifications/deep_link_handler.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pora/core/features/notifications/presentation/store/notifications_store.dart';
 import 'package:pora/core/features/notifications/presentation/widgets/notification_tile.dart';
@@ -290,6 +291,14 @@ class _GroupedList extends StatelessWidget {
   const _GroupedList({required this.store});
   final NotificationsStore store;
 
+  /// Тап: помечаем прочитанным и роутим по payload (screen/list-id/item-id).
+  Future<void> _open(NotificationEntity n) async {
+    if (n.unread) await store.markRead(n.id);
+    if (n.data.isNotEmpty) {
+      await DeepLinkHandler.instance.handle(Map<String, dynamic>.from(n.data));
+    }
+  }
+
   String _label(BuildContext ctx, DateTime day) {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
@@ -336,7 +345,7 @@ class _GroupedList extends StatelessWidget {
                       _SlidableRow(
                         key: ValueKey('notif-${n.id}'),
                         notif: n,
-                        onTap: n.unread ? () => store.markRead(n.id) : null,
+                        onTap: () => _open(n),
                         onDelete: () => store.delete(n.id),
                       ),
                   ],

@@ -9,45 +9,17 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appName => 'Pora';
-
-  @override
   String get language => 'Language';
-
-  @override
-  String get authUnderAppName1 => 'Shared list for couples and families';
-
-  @override
-  String get authUnderAppName2 =>
-      'Recipes, home, and delivery — all in one place';
 
   @override
   String get onlyYou => 'Only you';
 
   @override
-  String get authSignInExpansibleExpand => 'Sign in another way';
-
-  @override
-  String get authSignInExpansibleCollapse => 'Collapse';
-
-  @override
   String get sendAgainAfter => 'Send again in...';
 
   @override
-  String get authSignInWithEmail => 'Sign in with email';
-
-  @override
-  String get authSignInWithGoogle => 'Sign in with Google';
-
-  @override
-  String get authSignInWithApple => 'Sign in with Apple';
-
-  @override
-  String get authSignInWithPhone => 'Sign in with phone';
-
-  @override
   String get authPrivatePolicy =>
-      'By continuing, you agree to the\\nTerms and Privacy Policy';
+      'By continuing, you agree to the\nTerms and Privacy Policy';
 
   @override
   String get authTitle => 'Almost there';
@@ -115,25 +87,25 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get onboardingSlide1Title => 'Recipe → list\\nin seconds';
+  String get onboardingSlide1Title => 'Recipe → list\nin seconds';
 
   @override
   String get onboardingSlide1Body =>
       'Drop a recipe link — Pora collects the ingredients and removes what you already have.';
 
   @override
-  String get onboardingSlide2Title => 'One list\\nfor two';
+  String get onboardingSlide2Title => 'One list\nfor two';
 
   @override
   String get onboardingSlide2Body =>
       'Add things together — you can see who added what. Your partner can pick up what you need on the way home.';
 
   @override
-  String get onboardingSlide3Title => 'Pora knows\\nwhen it\'s time';
+  String get onboardingSlide3Title => 'Pora knows\nwhen it\'s time';
 
   @override
   String get onboardingSlide3Body =>
-      'Based on your purchases, Pora predicts what will run out soon and lets you order it with one tap.';
+      'Based on your purchases, Pora predicts what will run out soon and reminds you to add it to your list.';
 
   @override
   String get onboardingSkip => 'Skip';
@@ -177,71 +149,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get briefNext => 'Next';
 
   @override
-  String get briefItemMilk => 'Milk';
-
-  @override
-  String get briefItemBread => 'Bread';
-
-  @override
-  String get briefItemEggs => 'Eggs';
-
-  @override
-  String get briefItemCoffee => 'Coffee';
-
-  @override
-  String get briefItemCheese => 'Cheese';
-
-  @override
-  String get briefItemBananas => 'Bananas';
-
-  @override
-  String get briefItemButter => 'Butter';
-
-  @override
-  String get briefItemWater => 'Water';
-
-  @override
-  String get briefItemVegetables => 'Vegetables';
-
-  @override
-  String get briefItemTomatoes => 'Tomatoes';
-
-  @override
-  String get briefItemPasta => 'Pasta';
-
-  @override
-  String get briefItemChicken => 'Chicken';
-
-  @override
-  String get listTitle => 'Our list';
-
-  @override
-  String get listMembersCount => '2 people · 8 products';
-
-  @override
   String get listUrgent => 'Urgent';
 
   @override
   String get listAdd => 'Add';
-
-  @override
-  String get predictionsTitle => 'Pora can help!';
-
-  @override
-  String get predictionsSubtitle =>
-      'Running out soon — based on your purchases';
-
-  @override
-  String get predictionTip => 'A tiny tip';
-
-  @override
-  String get predictionsOrderTitle => 'Order everything with one tap';
-
-  @override
-  String get predictionsOrderSubtitle => 'Samokat · delivery in 15 minutes';
-
-  @override
-  String get predictionsOrderDiscount => '15% off your first order';
 
   @override
   String get predictionsAddToList => 'Add to list';
@@ -250,25 +161,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get predictionsDismiss => 'No thanks';
 
   @override
-  String get itemDetailName => 'Milk';
-
-  @override
-  String get itemDetailSubtitle => '2 L · Dairy';
-
-  @override
   String get itemDetailAddedBy => 'Added by';
 
   @override
-  String get itemDetailSection => 'Section';
-
-  @override
-  String get itemDetailSectionValue => 'Dairy';
-
-  @override
   String get itemDetailQuantity => 'Quantity';
-
-  @override
-  String get itemDetailQuantityValue => '2 L';
 
   @override
   String get itemDetailUrgent => 'Urgent';
@@ -277,68 +173,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get itemDetailRemind => 'Remind me';
 
   @override
-  String get itemDetailRemindEvery => 'Every 7 days';
-
-  @override
-  String get itemDetailInsight =>
-      'You buy it about every 7 days · last bought 6 days ago. I\'ll suggest restocking soon.';
-
-  @override
   String get itemDetailMarkBought => 'Mark as bought';
 
   @override
   String get itemDetailDelete => 'Remove from list';
 
   @override
-  String get addItemTitle => 'Add product';
-
-  @override
-  String get addItemExampleValue => 'Avocado';
-
-  @override
-  String get addItemNameHint => 'Product name';
-
-  @override
   String get addItemQuantity => 'Quantity';
 
   @override
-  String get addItemSection => 'Section';
-
-  @override
-  String get addItemUrgent => 'Urgent';
-
-  @override
-  String get addItemUrgentSubtitle => 'Need to buy today';
-
-  @override
-  String get addItemRemind => 'Remind regularly';
-
-  @override
-  String get addItemRemindEvery => 'Every 7 days';
-
-  @override
-  String get addItemSubmit => 'Add to list';
-
-  @override
   String get settingsTitle => 'Settings';
-
-  @override
-  String get settingsHouseholdSection => 'Household';
 
   @override
   String get settingsAppSection => 'App';
 
   @override
   String get settingsNotifications => 'Notifications';
-
-  @override
-  String get settingsDelivery => 'Delivery';
-
-  @override
-  String get settingsProAd => 'Pora+ · ad-free';
-
-  @override
-  String get settingsTryPill => 'Try it';
 
   @override
   String get settingsPrivacy => 'Privacy and data';
@@ -348,9 +198,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsLogout => 'Sign out';
-
-  @override
-  String get settingsMembersNames => 'Boris and Anna';
 
   @override
   String get settingsInvitePill => 'Invite';
@@ -382,9 +229,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get householdGotInvited => 'You\'ve been invited to a family';
 
   @override
-  String get householdWriteCode => 'Enter invite code';
-
-  @override
   String get householdDoLater => 'I\'ll do it later';
 
   @override
@@ -401,48 +245,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get notificationsReadAll => 'Read all';
-
-  @override
-  String get notificationsMilkTitle => 'Grab milk on your way home';
-
-  @override
-  String get notificationsMilkBody =>
-      'It\'s run out — Anna marked it 10 minutes ago.';
-
-  @override
-  String get notificationsMilkTime => '5 minutes ago';
-
-  @override
-  String get notificationsCoffeeTitle => 'Coffee is running out soon';
-
-  @override
-  String get notificationsCoffeeBody =>
-      'You buy it about every 14 days, 12 have passed.';
-
-  @override
-  String get notificationsPartnerAddedTitle => 'Anna added 2 products';
-
-  @override
-  String get notificationsPartnerAddedBody =>
-      'Bananas and bread are in the shared list.';
-
-  @override
-  String get notificationsPartnerAddedTime => 'Today, 9:12';
-
-  @override
-  String get notificationsPromoTitle => '15% off your first Samokat order';
-
-  @override
-  String get notificationsPromoBody => 'The promo is active for 6 more days.';
-
-  @override
-  String get notificationsPromoTime => 'Yesterday';
-
-  @override
-  String get notificationsOrderDeliveredTitle => 'Order delivered';
-
-  @override
-  String get notificationsOrderDeliveredBody => '8 products · Samokat · ₽1,054';
 
   @override
   String get notificationsAddToListPill => '＋ Add to list';
@@ -464,28 +266,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get userCreateProfileNext => 'Next';
 
   @override
-  String get searchTitle => 'Search';
-
-  @override
   String get searchHint => 'Product or recipe…';
-
-  @override
-  String get searchFilterAll => 'All';
-
-  @override
-  String get searchFilterVegetables => 'Vegetables';
-
-  @override
-  String get searchFilterDairy => 'Dairy';
-
-  @override
-  String get searchFilterGrocery => 'Groceries';
-
-  @override
-  String get searchFilterRecipes => 'Recipes';
-
-  @override
-  String get searchResults => 'Results';
 
   @override
   String get searchNothingFound => 'Nothing found';
@@ -494,80 +275,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get insightsTitle => 'Insights';
 
   @override
-  String get insightsTipKicker => '✨ PORA TIP';
-
-  @override
-  String get insightsTipTitle => 'You love carbonara!';
-
-  @override
-  String get insightsTipBody =>
-      'Similar flavor profile — try mac and cheese. You already regularly have 4 of 6 ingredients.';
-
-  @override
-  String get insightsTipAction => 'Open recipe →';
-
-  @override
-  String get insightsRunsOutMost => 'Runs out most often';
-
-  @override
-  String get insightsFavoriteCuisines => 'Favorite cuisines';
-
-  @override
-  String get insightsCuisineItalian => 'Italian';
-
-  @override
-  String get insightsCuisinePasta => 'Pasta';
-
-  @override
-  String get insightsCuisineBreakfasts => 'Breakfasts';
-
-  @override
-  String get insightsCuisineLight => 'Light';
-
-  @override
-  String get orderTitle => 'Order';
-
-  @override
-  String get orderCart => 'Cart';
-
-  @override
-  String get orderWhenToDeliver => 'When to deliver';
-
-  @override
-  String orderCheckoutCta(String total) {
-    return 'Order from Samokat · $total';
-  }
-
-  @override
-  String get orderSummaryGoods => 'Items';
-
-  @override
-  String get orderSummaryDiscount => '15% off';
-
-  @override
-  String get orderSummaryDelivery => 'Delivery';
-
-  @override
-  String get orderSummaryFree => 'Free';
-
-  @override
-  String get orderSummaryTotal => 'Total';
-
-  @override
   String get recipeImportTitle => 'Recipe from a link';
-
-  @override
-  String get recipePreviewTitle => 'Pasta Carbonara';
-
-  @override
-  String get recipePreviewMeta => 'eda.ru · 25 min · 2 servings';
-
-  @override
-  String get recipePreviewFound => '6 ingredients found';
-
-  @override
-  String get recipeDedupBanner =>
-      'Removed 2 duplicates to avoid duplicating items already on your list';
 
   @override
   String get recipeIngredients => 'Ingredients';
@@ -592,9 +300,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navPora => 'Pora';
 
   @override
-  String get navOrder => 'Order';
-
-  @override
   String get navProfile => 'Profile';
 
   @override
@@ -604,34 +309,46 @@ class AppLocalizationsEn extends AppLocalizations {
   String get familiesSubtitle => 'Choose a family to open its list';
 
   @override
-  String get familiesCurrent => 'Current';
-
-  @override
-  String get familiesCreateOrJoin => '＋ Create or join';
-
-  @override
   String get familiesCreateDialog => 'What should we call the family?';
 
   @override
   String get tryToUpdate => 'Try refreshing';
 
   @override
-  String get checkOut => 'Check';
-
-  @override
-  String get settingsMore => 'Advanced';
-
-  @override
   String get listsYour => 'Your personal list';
 
   @override
-  String get human => 'people';
+  String peopleCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count people',
+      one: '$count person',
+    );
+    return '$_temp0';
+  }
 
   @override
-  String get products => 'products';
+  String productsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count products',
+      one: '$count product',
+    );
+    return '$_temp0';
+  }
 
   @override
-  String get lists => 'lists';
+  String listsCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count lists',
+      one: '$count list',
+    );
+    return '$_temp0';
+  }
 
   @override
   String get update => 'Refresh';
@@ -717,9 +434,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appearance => 'Appearance';
 
   @override
-  String get themeSection => 'Theme';
-
-  @override
   String get themeLight => 'Light';
 
   @override
@@ -778,9 +492,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get recipeEmptyHint => 'Paste a recipe URL and tap “Parse”';
-
-  @override
-  String get recipeDupMark => 'already in list';
 
   @override
   String get done => 'Done';
@@ -901,13 +612,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get groupShared => 'Shared';
-
-  @override
-  String get noGroups => 'No groups yet';
-
-  @override
-  String get settingsChangeThemeIOSEasterEgg =>
-      '* To change your theme, go to Settings > PORA > Theme\n* Select a new theme from the settings menu\n* Tap on \'Theme\' in the app\'s settings to switch between light and dark modes';
 
   @override
   String get tutorialTitle => 'How it works';
@@ -1068,34 +772,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get predictionsSectionSoon => 'Running out soon';
 
   @override
-  String get predictionsSectionOften => 'You buy often';
-
-  @override
   String get predictionsSectionAiSuggests => 'AI suggests';
-
-  @override
-  String get predictionsAiSuggestionsTitle => 'Products and recipes for you';
-
-  @override
-  String get predictionsAiSuggestionsTopic => 'your preferences and purchases';
 
   @override
   String get refresh => 'Refresh';
 
   @override
-  String get predictionsOftenEmpty => 'Not enough data yet';
+  String get kpiWeek => 'products';
 
   @override
-  String get predictionsAskPora => 'Ask PORA';
+  String get kpiRecipes => 'bought often';
 
   @override
-  String get kpiWeek => 'items per week';
-
-  @override
-  String get kpiRecipes => 'recipes this month';
-
-  @override
-  String get kpiDaysToRun => 'days until restock';
+  String get kpiDaysToRun => 'running out';
 
   @override
   String get fallbackTip1 =>
@@ -1210,12 +899,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chatInputHint => 'Ask anything…';
 
   @override
-  String get aiModelBadge => 'Powered by OpenRouter · ling-3.0-flash';
-
-  @override
-  String get seeAll => 'See all';
-
-  @override
   String get tipTopicHerbs => 'herbs';
 
   @override
@@ -1271,16 +954,28 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tipTopicsEmpty => 'No topics selected — tip will be generic';
 
   @override
-  String get insightsChampionKicker => 'CHAMPION OF THE MONTH';
+  String get insightsChampionKicker => 'YOUR TOP PRODUCT';
 
   @override
   String insightsChampionSubtitle(int count) {
-    return 'bought $count times this month';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'bought $count times',
+      one: 'bought once',
+    );
+    return '$_temp0';
   }
 
   @override
   String insightsStreakDays(int days) {
-    return '$days days in a row';
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days days in a row',
+      one: '$days day in a row',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1296,9 +991,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get insightsStatsProducts => 'products';
-
-  @override
-  String get insightsStatsLoginsWeek => 'logins this week';
 
   @override
   String get insightsEmpty => 'No data yet — start adding products';
@@ -1340,15 +1032,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recipeCreateListCta => 'Where to add this recipe?';
 
   @override
-  String get recipeDupForceMark => 'will add anyway';
-
-  @override
-  String recipeDedupBannerMany(int n) {
-    return '$n duplicates will be skipped — uncheck to force-add';
-  }
-
-  @override
   String get offlineWriteBlocked => 'No internet — change won\'t be saved';
+
+  @override
+  String get offlineSavedQueued =>
+      'Saved. We\'ll send it when you\'re back online';
+
+  @override
+  String offlineSyncDropped(int count) {
+    return 'Couldn\'t sync changes: $count';
+  }
 
   @override
   String get offlineReadBanner => 'Offline — showing cached data';
@@ -1361,4 +1054,373 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get listsEmptySubtitle => 'Maybe you should create a new one?';
+
+  @override
+  String get aiModelSettingsSection => 'Pora-AI model';
+
+  @override
+  String get aiConfigRow => 'Custom Pora-AI model';
+
+  @override
+  String get aiConfigRowSubtitle => 'Use your own OpenRouter key and models';
+
+  @override
+  String get aiConfigTitle => 'Pora-AI model';
+
+  @override
+  String get aiConfigIntro =>
+      'Connect your own OpenRouter API key and pick the models that power Pora-AI. Leave a field empty to use the app default.';
+
+  @override
+  String get aiConfigApiKeyLabel => 'OpenRouter API key';
+
+  @override
+  String get aiConfigApiKeyHint => 'sk-or-...';
+
+  @override
+  String get aiConfigModelsSection => 'Models';
+
+  @override
+  String get aiConfigPoraModelLabel => 'PORA-AI model';
+
+  @override
+  String get aiConfigPoraModelHint => 'e.g. openai/gpt-4o-mini';
+
+  @override
+  String get aiConfigTipsModelLabel => 'Tips model';
+
+  @override
+  String get aiConfigTipsModelHint => 'Empty — same as app default';
+
+  @override
+  String get aiConfigNeedKeyNote =>
+      'Enter your API key to choose custom models';
+
+  @override
+  String get aiConfigReset => 'Reset to default';
+
+  @override
+  String get aiConfigSaved => 'Pora-AI settings saved';
+
+  @override
+  String get aiConfigResetDone => 'Restored default Pora-AI settings';
+
+  @override
+  String get aiConfigInfoTitle => 'How to connect your model';
+
+  @override
+  String get aiConfigInfoBody =>
+      '1. Create a free account at openrouter.ai.\n2. Open Keys and create a new API key, then paste it here.\n3. Browse openrouter.ai/models and copy a model id (for example openai/gpt-4o-mini or anthropic/claude-3.5-sonnet).\n4. Paste the id into the PORA-AI field. The Tips field is optional — leave it empty to reuse the app default model with your key.\n\nYour key is stored only on this device and is used solely for your Pora-AI requests.';
+
+  @override
+  String get aiConfigInfoClose => 'Got it';
+
+  @override
+  String get supportEmptyError => 'Please write a message first';
+
+  @override
+  String get supportSent => 'Message sent — we\'ll get back to you soon';
+
+  @override
+  String get supportFailed =>
+      'Couldn\'t send. Check your connection and try again';
+
+  @override
+  String get supportSheetHint => 'Describe your issue or feedback...';
+
+  @override
+  String get shortcutAddItem => 'Add item';
+
+  @override
+  String importantReminderTitle(String product) {
+    return 'Buy $product';
+  }
+
+  @override
+  String importantReminderFrom(String user) {
+    return 'from $user';
+  }
+
+  @override
+  String get importantReminderBody => 'Mark as bought when done';
+
+  @override
+  String get importantReminderMarkBought => 'Bought';
+
+  @override
+  String get liveActivityTestRow => 'Test Live Activity';
+
+  @override
+  String get liveActivityTestSample => 'Milk';
+
+  @override
+  String get listPickerTitle => 'Add to which list?';
+
+  @override
+  String get listPickerEmpty => 'No lists yet — create one first';
+
+  @override
+  String get predictionsAdded => 'Added to list';
+
+  @override
+  String get shortcutOpenLists => 'Open lists';
+
+  @override
+  String get shortcutOpenPora => 'Ask Pora-AI';
+
+  @override
+  String insightsPeriodDays(int days) {
+    return '${days}d';
+  }
+
+  @override
+  String insightsStreakBest(int days) {
+    return 'Best streak: $days';
+  }
+
+  @override
+  String get insightsStreakStart => 'Open Pora every day to build a streak';
+
+  @override
+  String get insightsKpiAdded => 'added';
+
+  @override
+  String get insightsKpiBought => 'bought';
+
+  @override
+  String get insightsKpiCompletion => 'of added got bought';
+
+  @override
+  String get insightsKpiActiveDays => 'active days';
+
+  @override
+  String get insightsKpiMinutes => 'minutes in app';
+
+  @override
+  String get insightsKpiSessions => 'sessions';
+
+  @override
+  String insightsAvgSession(String minutes) {
+    return '≈$minutes min per session';
+  }
+
+  @override
+  String get insightsActivityTitle => 'Added and bought';
+
+  @override
+  String get insightsActivityEmpty => 'No activity in this period yet';
+
+  @override
+  String get insightsHeatmapTitle => 'Activity · last 4 weeks';
+
+  @override
+  String get insightsLess => 'less';
+
+  @override
+  String get insightsMore => 'more';
+
+  @override
+  String get insightsRhythmTitle => 'Your rhythm';
+
+  @override
+  String get insightsPartMorning => 'Morning';
+
+  @override
+  String get insightsPartAfternoon => 'Afternoon';
+
+  @override
+  String get insightsPartEvening => 'Evening';
+
+  @override
+  String get insightsPartNight => 'Night';
+
+  @override
+  String get insightsPeakMorning => 'You\'re most active in the morning';
+
+  @override
+  String get insightsPeakAfternoon => 'You\'re most active in the afternoon';
+
+  @override
+  String get insightsPeakEvening => 'You\'re most active in the evening';
+
+  @override
+  String get insightsPeakNight => 'You\'re most active at night';
+
+  @override
+  String insightsPeakWeekday(String day) {
+    return 'Busiest day — $day';
+  }
+
+  @override
+  String get insightsCategoriesTitle => 'What you add';
+
+  @override
+  String get insightsDueSoonTitle => 'Time to restock';
+
+  @override
+  String get insightsDueNow => 'now';
+
+  @override
+  String insightsDueInDays(int days) {
+    return 'in ~${days}d';
+  }
+
+  @override
+  String get insightsTopBoughtTitle => 'Bought most this period';
+
+  @override
+  String get insightsEngagementTitle => 'How you use Pora';
+
+  @override
+  String get insightsKpiListsOpened => 'lists opened';
+
+  @override
+  String get insightsKpiListsCreated => 'lists created';
+
+  @override
+  String get insightsKpiRecipes => 'recipes imported';
+
+  @override
+  String get insightsKpiAi => 'messages to Pora';
+
+  @override
+  String get insightsKpiDeleted => 'items deleted';
+
+  @override
+  String get insightsAllTimeTitle => 'All time';
+
+  @override
+  String get insightsKpiReminders => 'with reminders';
+
+  @override
+  String get insightsKpiUrgent => 'urgent';
+
+  @override
+  String get insightsLocalNote =>
+      'Usage stats on this screen are calculated on your device';
+
+  @override
+  String get insightsNoUsageYet => 'Stats will appear as you use Pora';
+
+  @override
+  String get settingsDeleteAccount => 'Delete account';
+
+  @override
+  String get deleteAccountTitle => 'Delete account?';
+
+  @override
+  String get deleteAccountBody =>
+      'Your profile, personal lists and usage data will be permanently deleted. Shared family lists stay with the family; if you own a family, it passes to its longest-standing member. This cannot be undone.';
+
+  @override
+  String get deleteAccountFailed =>
+      'Couldn\'t delete the account. Check your connection and try again.';
+
+  @override
+  String get chatReportAi => 'Report';
+
+  @override
+  String get chatReportSent => 'Thanks — we\'ll review this answer.';
+
+  @override
+  String get chatReportFailed => 'Couldn\'t send the report. Try again later.';
+
+  @override
+  String get aiDisclaimer =>
+      'Pora AI can make mistakes. Check important information.';
+
+  @override
+  String get groupLeave => 'Leave';
+
+  @override
+  String get groupLeaveTitle =>
+      'Leave this group? Its list stays with the other members.';
+
+  @override
+  String get groupDeleteOwnerOnly => 'Only the group owner can delete it';
+
+  @override
+  String get groupDeleteFailed => 'Couldn\'t delete the group. Try again.';
+
+  @override
+  String get groupLeaveFailed => 'Couldn\'t leave the group. Try again.';
+
+  @override
+  String get listNoProductsTitle => 'No products yet';
+
+  @override
+  String get listNoProductsSubtitle =>
+      'Tap “Add” to put the first one on the list';
+
+  @override
+  String get unitPcs => 'pcs';
+
+  @override
+  String get unitG => 'g';
+
+  @override
+  String get unitKg => 'kg';
+
+  @override
+  String get unitMl => 'ml';
+
+  @override
+  String get unitL => 'l';
+
+  @override
+  String get unitPack => 'pack';
+
+  @override
+  String get sectionProduce => 'Fruit & vegetables';
+
+  @override
+  String get sectionDairy => 'Dairy';
+
+  @override
+  String get sectionPantry => 'Pantry';
+
+  @override
+  String get sectionDrinks => 'Drinks';
+
+  @override
+  String get sectionBread => 'Bread';
+
+  @override
+  String get sectionMisc => 'Miscellaneous';
+
+  @override
+  String get sectionOther => 'Other';
+
+  @override
+  String get predictionEveryDay => '~every day';
+
+  @override
+  String predictionEvery(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '~every $days days',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get predictionBoughtRegularly => 'Bought regularly';
+
+  @override
+  String get predictionBoughtToday => 'bought today';
+
+  @override
+  String get predictionBoughtYesterday => 'bought yesterday';
+
+  @override
+  String predictionBoughtDaysAgo(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: 'bought $days days ago',
+      one: 'bought $days day ago',
+    );
+    return '$_temp0';
+  }
 }

@@ -4,17 +4,18 @@ import 'package:dio/dio.dart';
 import 'package:pora/core/features/auth_and_validation/data/models/jwt_models/tokens_model.dart';
 import 'package:pora/core/features/brief/data/models/brief_product_model_list.dart';
 import 'package:pora/core/features/families/data/models/families_models.dart';
+import 'package:pora/core/features/groups/data/models/user_groups_model.dart';
 import 'package:pora/core/features/item_detail/data/models/add_item_response.dart';
 import 'package:pora/core/features/invitation/data/models/link_code_model.dart';
 import 'package:pora/core/features/lists/data/models/lists/list_model.dart';
 import 'package:pora/core/features/lists/data/models/lists/lists_array_model.dart';
 import 'package:pora/core/features/lists/data/models/products/product_model.dart';
-import 'package:pora/core/features/settings/data/models/message_model.dart';
 import 'package:pora/core/features/insights/data/models/login_times_model.dart';
 import 'package:pora/core/features/insights/data/models/popular_product_model.dart';
 import 'package:pora/core/features/insights/data/models/user_products_model.dart';
 import 'package:pora/core/features/user/data/models/user/user_model.dart';
 import 'package:pora/core/features/user/data/models/user/user_update_model.dart';
+import 'package:retrofit/dio.dart' show Extra;
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 
@@ -27,9 +28,10 @@ abstract class ApiClient {
   factory ApiClient(Dio dio) = _ApiClient;
 
   //! Authorization
-  @GET('/authorize/refresh')
+  /// Токен в теле, а не в query: query-строка попадает в логи прокси
+  @POST('/authorize/refresh')
   Future<TokensModel> refreshTokens({
-    @Query('refresh-token') required String refreshToken,
+    @Body() required Map<String, dynamic> body,
   });
 
   @GET('/authorize/check-user')
@@ -51,12 +53,20 @@ abstract class ApiClient {
   @GET('/user/me')
   Future<UserModel> getUser();
 
+  /// Семьи (участники + превью списков) и личные списки одним запросом.
+  @GET('/user/groups')
+  Future<UserGroupsModel> getUserGroups();
+
   @POST('/user/save-image')
   @MultiPart()
   Future<String> saveUserImage({@Part(name: 'image') required File file});
 
   @PUT('/user/device')
   Future<void> updateUserDevice({@Body() required Map<String, dynamic> body});
+
+  /// Безвозвратное удаление аккаунта (требование Google Play).
+  @DELETE('/user/me')
+  Future<void> deleteAccount();
 
   //! Brief
   @POST('/user/statistics/brief')
@@ -102,9 +112,15 @@ abstract class ApiClient {
   @DELETE('/families/{fid}')
   Future<void> deleteFamily({@Path('fid') required String familyId});
 
+  /// Выйти из семьи (только не-владелец; владельцу backend отвечает 403).
+  @POST('/families/{fid}/leave')
+  Future<void> leaveFamily({@Path('fid') required String familyId});
+
   //! Lists
+  /// Ответ: `{"id": "<list-id>"}`. `dynamic`, а не `Map<String, dynamic>`:
+  /// retrofit_generator генерирует для Map невалидный `dynamic.fromJson`.
   @POST('/lists/create-list')
-  Future<void> createList({@Body() required Map<String, dynamic> body});
+  Future<dynamic> createList({@Body() required Map<String, dynamic> body});
 
   @GET('/lists/{lid}')
   Future<ListModel> getList({@Path('lid') required String listId});
@@ -147,4 +163,16 @@ abstract class ApiClient {
 
   @POST('/help/message')
   Future<void> sendSupportMessage({@Body() required Map<String, dynamic> body});
+
+  //! Analytics
+  /// Батч клиентских событий. Ответ `202 {"accepted": n, "rejected": m}`
+  /// не нужен клиенту — отбрасываем.
+  /// `skip-auth-refresh`: 401 не обновляет токен и не повторяет запрос —
+  /// батч старого юзера не должен уйти с токеном нового; sink ретраит сам.
+  @POST('/analytics/events')
+  // Аналитика никогда не запускает refresh токена — так задумано.
+  @Extra({'skip-auth-refresh': true})
+  Future<void> sendAnalyticsEvents({
+    @Body() required Map<String, dynamic> body,
+  });
 }

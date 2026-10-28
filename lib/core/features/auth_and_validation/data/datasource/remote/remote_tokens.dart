@@ -11,5 +11,5 @@ class TokensRemoteDataSourceImpl implements TokensRemoteDataSource {
 
   @override
   Future<TokensEntity> refreshTokens({required String? refreshToken}) =>
-      apiClient.refreshTokens(refreshToken: refreshToken ?? '');
+      apiClient.refreshTokens(body: {'refresh-token': refreshToken ?? ''});
 }

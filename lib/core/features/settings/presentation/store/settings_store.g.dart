@@ -72,6 +72,42 @@ mixin _$SettingsStore on _SettingsStoreBase, Store {
     });
   }
 
+  late final _$isDeletingAccountAtom = Atom(
+    name: '_SettingsStoreBase.isDeletingAccount',
+    context: context,
+  );
+
+  @override
+  bool get isDeletingAccount {
+    _$isDeletingAccountAtom.reportRead();
+    return super.isDeletingAccount;
+  }
+
+  @override
+  set isDeletingAccount(bool value) {
+    _$isDeletingAccountAtom.reportWrite(value, super.isDeletingAccount, () {
+      super.isDeletingAccount = value;
+    });
+  }
+
+  late final _$isSendingSupportAtom = Atom(
+    name: '_SettingsStoreBase.isSendingSupport',
+    context: context,
+  );
+
+  @override
+  bool get isSendingSupport {
+    _$isSendingSupportAtom.reportRead();
+    return super.isSendingSupport;
+  }
+
+  @override
+  set isSendingSupport(bool value) {
+    _$isSendingSupportAtom.reportWrite(value, super.isSendingSupport, () {
+      super.isSendingSupport = value;
+    });
+  }
+
   late final _$setProfileImageAsyncAction = AsyncAction(
     '_SettingsStoreBase.setProfileImage',
     context: context,
@@ -102,13 +138,23 @@ mixin _$SettingsStore on _SettingsStoreBase, Store {
     return _$logoutAsyncAction.run(() => super.logout());
   }
 
+  late final _$deleteAccountAsyncAction = AsyncAction(
+    '_SettingsStoreBase.deleteAccount',
+    context: context,
+  );
+
+  @override
+  Future<bool> deleteAccount() {
+    return _$deleteAccountAsyncAction.run(() => super.deleteAccount());
+  }
+
   late final _$sendSupportMessageAsyncAction = AsyncAction(
     '_SettingsStoreBase.sendSupportMessage',
     context: context,
   );
 
   @override
-  Future<void> sendSupportMessage({required String text}) {
+  Future<bool> sendSupportMessage({required String text}) {
     return _$sendSupportMessageAsyncAction.run(
       () => super.sendSupportMessage(text: text),
     );
@@ -120,6 +166,8 @@ mixin _$SettingsStore on _SettingsStoreBase, Store {
 user: ${user},
 profileImageFile: ${profileImageFile},
 isLoadingImage: ${isLoadingImage},
+isDeletingAccount: ${isDeletingAccount},
+isSendingSupport: ${isSendingSupport},
 profileImageUrl: ${profileImageUrl}
     ''';
   }

@@ -7,7 +7,6 @@ import 'package:pora/core/internal/formatters/email_input_formatter.dart';
 import 'package:pora/core/internal/formatters/phone_input_formatter.dart';
 import 'package:pora/core/internal/theme/text/app_text_styles.dart';
 import 'package:pora/core/internal/theme/context_colors.dart';
-import 'package:pora/core/internal/theme/themes_colors/light_colors/additional_constants.dart';
 import 'package:pora/core/internal/theme/themes_colors/light_colors/app_colors.dart';
 
 /// Режим ввода: телефон или почта.

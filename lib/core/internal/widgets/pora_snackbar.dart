@@ -95,32 +95,35 @@ class _PoraSnackContent extends StatelessWidget {
             children: [
               // Акцентная полоса слева.
               Container(width: 6, color: accent),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(14, 14, 16, 14),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      width: 38,
-                      height: 38,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: accent.withValues(alpha: 0.14),
-                        shape: BoxShape.circle,
+              // Expanded даёт тексту ограниченную ширину — иначе Flexible
+              // ниже получает бесконечную и длинное сообщение не переносится.
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(14, 14, 16, 14),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 38,
+                        height: 38,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: accent.withValues(alpha: 0.14),
+                          shape: BoxShape.circle,
+                        ),
+                        child: PhosphorIcon(icon, size: 22, color: accent),
                       ),
-                      child: PhosphorIcon(icon, size: 22, color: accent),
-                    ),
-                    const SizedBox(width: 12),
-                    Flexible(
-                      child: Text(
-                        message,
-                        style: PoraText.body.copyWith(
-                          color: c.ink,
-                          fontWeight: FontWeight.w600,
+                      const SizedBox(width: 12),
+                      Flexible(
+                        child: Text(
+                          message,
+                          style: PoraText.body.copyWith(
+                            color: c.ink,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],

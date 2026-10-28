@@ -1,10 +1,15 @@
 import 'package:get_it/get_it.dart';
 import 'package:pora/core/features/user/domain/usecase/user/update_device_token.dart';
 import 'package:pora/core/internal/logging/logger.dart';
+import 'package:pora/core/internal/network/single_flight.dart';
 import 'package:pora/core/internal/notifications/notification_service.dart';
 import 'package:pora/core/internal/router/guard/auth_state.dart';
 
 bool _boundToAuth = false;
+
+/// Токен, уже доставленный на backend в текущей auth-сессии.
+String? _lastSyncedToken;
+final _syncFlight = SingleFlight<void>();
 
 /// Однократно подписаться на AuthState.stream — при каждом переходе
 /// в `authenticated` (свежий логин или refresh с ролью) шлём токен.
@@ -14,7 +19,12 @@ void bindDeviceTokenSyncToAuth() {
   if (auth == null) return;
   _boundToAuth = true;
   auth.stream.listen((status) {
-    if (status == AuthStatus.authenticated) syncDeviceToken();
+    if (status == AuthStatus.authenticated) {
+      syncDeviceToken();
+    } else {
+      // Новый логин (возможно, другим юзером) обязан перерегистрировать токен.
+      _lastSyncedToken = null;
+    }
   });
 }
 
@@ -26,9 +36,19 @@ void bindDeviceTokenSyncToAuth() {
 ///   1. AuthState.stream → authenticated (после verifyOtp или refresh).
 ///   2. AppBootstrap — на всякий случай если pipeline пропустил.
 ///   3. `FirebaseMessaging.onTokenRefresh` (внутри NotificationService).
-Future<void> syncDeviceToken() async {
+///   4. welcome_back / create_profile экраны.
+///
+/// Тот же токен в рамках auth-сессии повторно не шлётся; параллельные вызовы
+/// склеиваются. [force] — ручной resync из advanced settings.
+Future<void> syncDeviceToken({bool force = false}) =>
+    _syncFlight.run(() => _sync(force: force));
+
+Future<void> _sync({required bool force}) async {
   final auth = _tryGet<AuthState>();
-  if (auth == null || !auth.isAuthenticated) return;
+  if (auth == null || !auth.isAuthenticated) {
+    _lastSyncedToken = null;
+    return;
+  }
 
   final ns = NotificationService.instance;
   final token = ns.fcmToken;
@@ -36,6 +56,7 @@ Future<void> syncDeviceToken() async {
     Logger.talker.warning('syncDeviceToken skipped: fcmToken is null');
     return;
   }
+  if (!force && token == _lastSyncedToken) return;
 
   final useCase = _tryGet<UpdateDeviceTokenUseCase>();
   if (useCase == null) return;
@@ -43,6 +64,8 @@ Future<void> syncDeviceToken() async {
   final res = await useCase.call(deviceToken: token, deviceType: ns.deviceType);
   if (res.isLeft) {
     Logger.talker.warning('syncDeviceToken failed: ${res.left.message}');
+  } else {
+    _lastSyncedToken = token;
   }
 }
 

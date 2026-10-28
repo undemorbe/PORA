@@ -90,7 +90,6 @@ abstract class PoraTheme {
     );
 
     // Типографику берём общую, но перекрашиваем под тёмный фон.
-    Color ink(Color _) => PoraColorsDark.ink;
     final tt = TextTheme(
       displaySmall: PoraText.display.copyWith(color: PoraColorsDark.ink),
       headlineMedium: PoraText.title.copyWith(color: PoraColorsDark.ink),

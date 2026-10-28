@@ -104,29 +104,11 @@ abstract class AppLocalizations {
     Locale('zh'),
   ];
 
-  /// The name of the application
-  ///
-  /// In en, this message translates to:
-  /// **'Pora'**
-  String get appName;
-
   /// language
   ///
   /// In en, this message translates to:
   /// **'Language'**
   String get language;
-
-  /// The first line under the app name
-  ///
-  /// In en, this message translates to:
-  /// **'Shared list for couples and families'**
-  String get authUnderAppName1;
-
-  /// The second line under the app name
-  ///
-  /// In en, this message translates to:
-  /// **'Recipes, home, and delivery — all in one place'**
-  String get authUnderAppName2;
 
   /// onlyYou
   ///
@@ -137,49 +119,13 @@ abstract class AppLocalizations {
   /// The sign in with other methods title
   ///
   /// In en, this message translates to:
-  /// **'Sign in another way'**
-  String get authSignInExpansibleExpand;
-
-  /// The sign in with other methods title
-  ///
-  /// In en, this message translates to:
-  /// **'Collapse'**
-  String get authSignInExpansibleCollapse;
-
-  /// The sign in with other methods title
-  ///
-  /// In en, this message translates to:
   /// **'Send again in...'**
   String get sendAgainAfter;
-
-  /// The sign in with email button text
-  ///
-  /// In en, this message translates to:
-  /// **'Sign in with email'**
-  String get authSignInWithEmail;
-
-  /// The sign in with Google button text
-  ///
-  /// In en, this message translates to:
-  /// **'Sign in with Google'**
-  String get authSignInWithGoogle;
-
-  /// The sign in with Apple button text
-  ///
-  /// In en, this message translates to:
-  /// **'Sign in with Apple'**
-  String get authSignInWithApple;
-
-  /// The sign in with Phone button text
-  ///
-  /// In en, this message translates to:
-  /// **'Sign in with phone'**
-  String get authSignInWithPhone;
 
   /// The private policy link text
   ///
   /// In en, this message translates to:
-  /// **'By continuing, you agree to the\\nTerms and Privacy Policy'**
+  /// **'By continuing, you agree to the\nTerms and Privacy Policy'**
   String get authPrivatePolicy;
 
   /// authTitle
@@ -293,7 +239,7 @@ abstract class AppLocalizations {
   /// onboardingSlide1Title
   ///
   /// In en, this message translates to:
-  /// **'Recipe → list\\nin seconds'**
+  /// **'Recipe → list\nin seconds'**
   String get onboardingSlide1Title;
 
   /// onboardingSlide1Body
@@ -305,7 +251,7 @@ abstract class AppLocalizations {
   /// onboardingSlide2Title
   ///
   /// In en, this message translates to:
-  /// **'One list\\nfor two'**
+  /// **'One list\nfor two'**
   String get onboardingSlide2Title;
 
   /// onboardingSlide2Body
@@ -317,13 +263,13 @@ abstract class AppLocalizations {
   /// onboardingSlide3Title
   ///
   /// In en, this message translates to:
-  /// **'Pora knows\\nwhen it\'s time'**
+  /// **'Pora knows\nwhen it\'s time'**
   String get onboardingSlide3Title;
 
   /// onboardingSlide3Body
   ///
   /// In en, this message translates to:
-  /// **'Based on your purchases, Pora predicts what will run out soon and lets you order it with one tap.'**
+  /// **'Based on your purchases, Pora predicts what will run out soon and reminds you to add it to your list.'**
   String get onboardingSlide3Body;
 
   /// onboardingSkip
@@ -404,90 +350,6 @@ abstract class AppLocalizations {
   /// **'Next'**
   String get briefNext;
 
-  /// briefItemMilk
-  ///
-  /// In en, this message translates to:
-  /// **'Milk'**
-  String get briefItemMilk;
-
-  /// briefItemBread
-  ///
-  /// In en, this message translates to:
-  /// **'Bread'**
-  String get briefItemBread;
-
-  /// briefItemEggs
-  ///
-  /// In en, this message translates to:
-  /// **'Eggs'**
-  String get briefItemEggs;
-
-  /// briefItemCoffee
-  ///
-  /// In en, this message translates to:
-  /// **'Coffee'**
-  String get briefItemCoffee;
-
-  /// briefItemCheese
-  ///
-  /// In en, this message translates to:
-  /// **'Cheese'**
-  String get briefItemCheese;
-
-  /// briefItemBananas
-  ///
-  /// In en, this message translates to:
-  /// **'Bananas'**
-  String get briefItemBananas;
-
-  /// briefItemButter
-  ///
-  /// In en, this message translates to:
-  /// **'Butter'**
-  String get briefItemButter;
-
-  /// briefItemWater
-  ///
-  /// In en, this message translates to:
-  /// **'Water'**
-  String get briefItemWater;
-
-  /// briefItemVegetables
-  ///
-  /// In en, this message translates to:
-  /// **'Vegetables'**
-  String get briefItemVegetables;
-
-  /// briefItemTomatoes
-  ///
-  /// In en, this message translates to:
-  /// **'Tomatoes'**
-  String get briefItemTomatoes;
-
-  /// briefItemPasta
-  ///
-  /// In en, this message translates to:
-  /// **'Pasta'**
-  String get briefItemPasta;
-
-  /// briefItemChicken
-  ///
-  /// In en, this message translates to:
-  /// **'Chicken'**
-  String get briefItemChicken;
-
-  /// listTitle
-  ///
-  /// In en, this message translates to:
-  /// **'Our list'**
-  String get listTitle;
-
-  /// listMembersCount
-  ///
-  /// In en, this message translates to:
-  /// **'2 people · 8 products'**
-  String get listMembersCount;
-
   /// listUrgent
   ///
   /// In en, this message translates to:
@@ -499,42 +361,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add'**
   String get listAdd;
-
-  /// predictionsTitle
-  ///
-  /// In en, this message translates to:
-  /// **'Pora can help!'**
-  String get predictionsTitle;
-
-  /// predictionsSubtitle
-  ///
-  /// In en, this message translates to:
-  /// **'Running out soon — based on your purchases'**
-  String get predictionsSubtitle;
-
-  /// predictionTip
-  ///
-  /// In en, this message translates to:
-  /// **'A tiny tip'**
-  String get predictionTip;
-
-  /// predictionsOrderTitle
-  ///
-  /// In en, this message translates to:
-  /// **'Order everything with one tap'**
-  String get predictionsOrderTitle;
-
-  /// predictionsOrderSubtitle
-  ///
-  /// In en, this message translates to:
-  /// **'Samokat · delivery in 15 minutes'**
-  String get predictionsOrderSubtitle;
-
-  /// predictionsOrderDiscount
-  ///
-  /// In en, this message translates to:
-  /// **'15% off your first order'**
-  String get predictionsOrderDiscount;
 
   /// predictionsAddToList
   ///
@@ -548,47 +374,17 @@ abstract class AppLocalizations {
   /// **'No thanks'**
   String get predictionsDismiss;
 
-  /// itemDetailName
-  ///
-  /// In en, this message translates to:
-  /// **'Milk'**
-  String get itemDetailName;
-
-  /// itemDetailSubtitle
-  ///
-  /// In en, this message translates to:
-  /// **'2 L · Dairy'**
-  String get itemDetailSubtitle;
-
   /// itemDetailAddedBy
   ///
   /// In en, this message translates to:
   /// **'Added by'**
   String get itemDetailAddedBy;
 
-  /// itemDetailSection
-  ///
-  /// In en, this message translates to:
-  /// **'Section'**
-  String get itemDetailSection;
-
-  /// itemDetailSectionValue
-  ///
-  /// In en, this message translates to:
-  /// **'Dairy'**
-  String get itemDetailSectionValue;
-
   /// itemDetailQuantity
   ///
   /// In en, this message translates to:
   /// **'Quantity'**
   String get itemDetailQuantity;
-
-  /// itemDetailQuantityValue
-  ///
-  /// In en, this message translates to:
-  /// **'2 L'**
-  String get itemDetailQuantityValue;
 
   /// itemDetailUrgent
   ///
@@ -602,18 +398,6 @@ abstract class AppLocalizations {
   /// **'Remind me'**
   String get itemDetailRemind;
 
-  /// itemDetailRemindEvery
-  ///
-  /// In en, this message translates to:
-  /// **'Every 7 days'**
-  String get itemDetailRemindEvery;
-
-  /// itemDetailInsight
-  ///
-  /// In en, this message translates to:
-  /// **'You buy it about every 7 days · last bought 6 days ago. I\'ll suggest restocking soon.'**
-  String get itemDetailInsight;
-
   /// itemDetailMarkBought
   ///
   /// In en, this message translates to:
@@ -626,77 +410,17 @@ abstract class AppLocalizations {
   /// **'Remove from list'**
   String get itemDetailDelete;
 
-  /// addItemTitle
-  ///
-  /// In en, this message translates to:
-  /// **'Add product'**
-  String get addItemTitle;
-
-  /// addItemExampleValue
-  ///
-  /// In en, this message translates to:
-  /// **'Avocado'**
-  String get addItemExampleValue;
-
-  /// addItemNameHint
-  ///
-  /// In en, this message translates to:
-  /// **'Product name'**
-  String get addItemNameHint;
-
   /// addItemQuantity
   ///
   /// In en, this message translates to:
   /// **'Quantity'**
   String get addItemQuantity;
 
-  /// addItemSection
-  ///
-  /// In en, this message translates to:
-  /// **'Section'**
-  String get addItemSection;
-
-  /// addItemUrgent
-  ///
-  /// In en, this message translates to:
-  /// **'Urgent'**
-  String get addItemUrgent;
-
-  /// addItemUrgentSubtitle
-  ///
-  /// In en, this message translates to:
-  /// **'Need to buy today'**
-  String get addItemUrgentSubtitle;
-
-  /// addItemRemind
-  ///
-  /// In en, this message translates to:
-  /// **'Remind regularly'**
-  String get addItemRemind;
-
-  /// addItemRemindEvery
-  ///
-  /// In en, this message translates to:
-  /// **'Every 7 days'**
-  String get addItemRemindEvery;
-
-  /// addItemSubmit
-  ///
-  /// In en, this message translates to:
-  /// **'Add to list'**
-  String get addItemSubmit;
-
   /// settingsTitle
   ///
   /// In en, this message translates to:
   /// **'Settings'**
   String get settingsTitle;
-
-  /// settingsHouseholdSection
-  ///
-  /// In en, this message translates to:
-  /// **'Household'**
-  String get settingsHouseholdSection;
 
   /// settingsAppSection
   ///
@@ -709,24 +433,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Notifications'**
   String get settingsNotifications;
-
-  /// settingsDelivery
-  ///
-  /// In en, this message translates to:
-  /// **'Delivery'**
-  String get settingsDelivery;
-
-  /// settingsProAd
-  ///
-  /// In en, this message translates to:
-  /// **'Pora+ · ad-free'**
-  String get settingsProAd;
-
-  /// settingsTryPill
-  ///
-  /// In en, this message translates to:
-  /// **'Try it'**
-  String get settingsTryPill;
 
   /// settingsPrivacy
   ///
@@ -745,12 +451,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sign out'**
   String get settingsLogout;
-
-  /// settingsMembersNames
-  ///
-  /// In en, this message translates to:
-  /// **'Boris and Anna'**
-  String get settingsMembersNames;
 
   /// settingsInvitePill
   ///
@@ -806,12 +506,6 @@ abstract class AppLocalizations {
   /// **'You\'ve been invited to a family'**
   String get householdGotInvited;
 
-  /// householdWriteCode
-  ///
-  /// In en, this message translates to:
-  /// **'Enter invite code'**
-  String get householdWriteCode;
-
   /// householdDoLater
   ///
   /// In en, this message translates to:
@@ -847,84 +541,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Read all'**
   String get notificationsReadAll;
-
-  /// notificationsMilkTitle
-  ///
-  /// In en, this message translates to:
-  /// **'Grab milk on your way home'**
-  String get notificationsMilkTitle;
-
-  /// notificationsMilkBody
-  ///
-  /// In en, this message translates to:
-  /// **'It\'s run out — Anna marked it 10 minutes ago.'**
-  String get notificationsMilkBody;
-
-  /// notificationsMilkTime
-  ///
-  /// In en, this message translates to:
-  /// **'5 minutes ago'**
-  String get notificationsMilkTime;
-
-  /// notificationsCoffeeTitle
-  ///
-  /// In en, this message translates to:
-  /// **'Coffee is running out soon'**
-  String get notificationsCoffeeTitle;
-
-  /// notificationsCoffeeBody
-  ///
-  /// In en, this message translates to:
-  /// **'You buy it about every 14 days, 12 have passed.'**
-  String get notificationsCoffeeBody;
-
-  /// notificationsPartnerAddedTitle
-  ///
-  /// In en, this message translates to:
-  /// **'Anna added 2 products'**
-  String get notificationsPartnerAddedTitle;
-
-  /// notificationsPartnerAddedBody
-  ///
-  /// In en, this message translates to:
-  /// **'Bananas and bread are in the shared list.'**
-  String get notificationsPartnerAddedBody;
-
-  /// notificationsPartnerAddedTime
-  ///
-  /// In en, this message translates to:
-  /// **'Today, 9:12'**
-  String get notificationsPartnerAddedTime;
-
-  /// notificationsPromoTitle
-  ///
-  /// In en, this message translates to:
-  /// **'15% off your first Samokat order'**
-  String get notificationsPromoTitle;
-
-  /// notificationsPromoBody
-  ///
-  /// In en, this message translates to:
-  /// **'The promo is active for 6 more days.'**
-  String get notificationsPromoBody;
-
-  /// notificationsPromoTime
-  ///
-  /// In en, this message translates to:
-  /// **'Yesterday'**
-  String get notificationsPromoTime;
-
-  /// notificationsOrderDeliveredTitle
-  ///
-  /// In en, this message translates to:
-  /// **'Order delivered'**
-  String get notificationsOrderDeliveredTitle;
-
-  /// notificationsOrderDeliveredBody
-  ///
-  /// In en, this message translates to:
-  /// **'8 products · Samokat · ₽1,054'**
-  String get notificationsOrderDeliveredBody;
 
   /// notificationsAddToListPill
   ///
@@ -962,53 +578,11 @@ abstract class AppLocalizations {
   /// **'Next'**
   String get userCreateProfileNext;
 
-  /// searchTitle
-  ///
-  /// In en, this message translates to:
-  /// **'Search'**
-  String get searchTitle;
-
   /// searchHint
   ///
   /// In en, this message translates to:
   /// **'Product or recipe…'**
   String get searchHint;
-
-  /// searchFilterAll
-  ///
-  /// In en, this message translates to:
-  /// **'All'**
-  String get searchFilterAll;
-
-  /// searchFilterVegetables
-  ///
-  /// In en, this message translates to:
-  /// **'Vegetables'**
-  String get searchFilterVegetables;
-
-  /// searchFilterDairy
-  ///
-  /// In en, this message translates to:
-  /// **'Dairy'**
-  String get searchFilterDairy;
-
-  /// searchFilterGrocery
-  ///
-  /// In en, this message translates to:
-  /// **'Groceries'**
-  String get searchFilterGrocery;
-
-  /// searchFilterRecipes
-  ///
-  /// In en, this message translates to:
-  /// **'Recipes'**
-  String get searchFilterRecipes;
-
-  /// searchResults
-  ///
-  /// In en, this message translates to:
-  /// **'Results'**
-  String get searchResults;
 
   /// searchNothingFound
   ///
@@ -1022,149 +596,11 @@ abstract class AppLocalizations {
   /// **'Insights'**
   String get insightsTitle;
 
-  /// insightsTipKicker
-  ///
-  /// In en, this message translates to:
-  /// **'✨ PORA TIP'**
-  String get insightsTipKicker;
-
-  /// insightsTipTitle
-  ///
-  /// In en, this message translates to:
-  /// **'You love carbonara!'**
-  String get insightsTipTitle;
-
-  /// insightsTipBody
-  ///
-  /// In en, this message translates to:
-  /// **'Similar flavor profile — try mac and cheese. You already regularly have 4 of 6 ingredients.'**
-  String get insightsTipBody;
-
-  /// insightsTipAction
-  ///
-  /// In en, this message translates to:
-  /// **'Open recipe →'**
-  String get insightsTipAction;
-
-  /// insightsRunsOutMost
-  ///
-  /// In en, this message translates to:
-  /// **'Runs out most often'**
-  String get insightsRunsOutMost;
-
-  /// insightsFavoriteCuisines
-  ///
-  /// In en, this message translates to:
-  /// **'Favorite cuisines'**
-  String get insightsFavoriteCuisines;
-
-  /// insightsCuisineItalian
-  ///
-  /// In en, this message translates to:
-  /// **'Italian'**
-  String get insightsCuisineItalian;
-
-  /// insightsCuisinePasta
-  ///
-  /// In en, this message translates to:
-  /// **'Pasta'**
-  String get insightsCuisinePasta;
-
-  /// insightsCuisineBreakfasts
-  ///
-  /// In en, this message translates to:
-  /// **'Breakfasts'**
-  String get insightsCuisineBreakfasts;
-
-  /// insightsCuisineLight
-  ///
-  /// In en, this message translates to:
-  /// **'Light'**
-  String get insightsCuisineLight;
-
-  /// orderTitle
-  ///
-  /// In en, this message translates to:
-  /// **'Order'**
-  String get orderTitle;
-
-  /// orderCart
-  ///
-  /// In en, this message translates to:
-  /// **'Cart'**
-  String get orderCart;
-
-  /// orderWhenToDeliver
-  ///
-  /// In en, this message translates to:
-  /// **'When to deliver'**
-  String get orderWhenToDeliver;
-
-  /// No description provided for @orderCheckoutCta.
-  ///
-  /// In en, this message translates to:
-  /// **'Order from Samokat · {total}'**
-  String orderCheckoutCta(String total);
-
-  /// orderSummaryGoods
-  ///
-  /// In en, this message translates to:
-  /// **'Items'**
-  String get orderSummaryGoods;
-
-  /// orderSummaryDiscount
-  ///
-  /// In en, this message translates to:
-  /// **'15% off'**
-  String get orderSummaryDiscount;
-
-  /// orderSummaryDelivery
-  ///
-  /// In en, this message translates to:
-  /// **'Delivery'**
-  String get orderSummaryDelivery;
-
-  /// orderSummaryFree
-  ///
-  /// In en, this message translates to:
-  /// **'Free'**
-  String get orderSummaryFree;
-
-  /// orderSummaryTotal
-  ///
-  /// In en, this message translates to:
-  /// **'Total'**
-  String get orderSummaryTotal;
-
   /// recipeImportTitle
   ///
   /// In en, this message translates to:
   /// **'Recipe from a link'**
   String get recipeImportTitle;
-
-  /// recipePreviewTitle
-  ///
-  /// In en, this message translates to:
-  /// **'Pasta Carbonara'**
-  String get recipePreviewTitle;
-
-  /// recipePreviewMeta
-  ///
-  /// In en, this message translates to:
-  /// **'eda.ru · 25 min · 2 servings'**
-  String get recipePreviewMeta;
-
-  /// recipePreviewFound
-  ///
-  /// In en, this message translates to:
-  /// **'6 ingredients found'**
-  String get recipePreviewFound;
-
-  /// recipeDedupBanner
-  ///
-  /// In en, this message translates to:
-  /// **'Removed 2 duplicates to avoid duplicating items already on your list'**
-  String get recipeDedupBanner;
 
   /// recipeIngredients
   ///
@@ -1196,12 +632,6 @@ abstract class AppLocalizations {
   /// **'Pora'**
   String get navPora;
 
-  /// navOrder
-  ///
-  /// In en, this message translates to:
-  /// **'Order'**
-  String get navOrder;
-
   /// navProfile
   ///
   /// In en, this message translates to:
@@ -1220,18 +650,6 @@ abstract class AppLocalizations {
   /// **'Choose a family to open its list'**
   String get familiesSubtitle;
 
-  /// familiesCurrent
-  ///
-  /// In en, this message translates to:
-  /// **'Current'**
-  String get familiesCurrent;
-
-  /// familiesCreateOrJoin
-  ///
-  /// In en, this message translates to:
-  /// **'＋ Create or join'**
-  String get familiesCreateOrJoin;
-
   /// familiesCreateDialog
   ///
   /// In en, this message translates to:
@@ -1244,41 +662,29 @@ abstract class AppLocalizations {
   /// **'Try refreshing'**
   String get tryToUpdate;
 
-  /// checkOut
-  ///
-  /// In en, this message translates to:
-  /// **'Check'**
-  String get checkOut;
-
-  /// settingsMore
-  ///
-  /// In en, this message translates to:
-  /// **'Advanced'**
-  String get settingsMore;
-
   /// listsYour
   ///
   /// In en, this message translates to:
   /// **'Your personal list'**
   String get listsYour;
 
-  /// human
+  /// Members count in the list header
   ///
   /// In en, this message translates to:
-  /// **'people'**
-  String get human;
+  /// **'{count, plural, one{{count} person} other{{count} people}}'**
+  String peopleCount(int count);
 
-  /// products
+  /// Products count in the list header
   ///
   /// In en, this message translates to:
-  /// **'products'**
-  String get products;
+  /// **'{count, plural, one{{count} product} other{{count} products}}'**
+  String productsCount(int count);
 
-  /// lists
+  /// Lists count in the lists header
   ///
   /// In en, this message translates to:
-  /// **'lists'**
-  String get lists;
+  /// **'{count, plural, one{{count} list} other{{count} lists}}'**
+  String listsCount(int count);
 
   /// update
   ///
@@ -1442,12 +848,6 @@ abstract class AppLocalizations {
   /// **'Appearance'**
   String get appearance;
 
-  /// themeSection
-  ///
-  /// In en, this message translates to:
-  /// **'Theme'**
-  String get themeSection;
-
   /// themeLight
   ///
   /// In en, this message translates to:
@@ -1567,12 +967,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Paste a recipe URL and tap “Parse”'**
   String get recipeEmptyHint;
-
-  /// recipeDupMark
-  ///
-  /// In en, this message translates to:
-  /// **'already in list'**
-  String get recipeDupMark;
 
   /// done
   ///
@@ -1801,18 +1195,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Shared'**
   String get groupShared;
-
-  /// noGroups
-  ///
-  /// In en, this message translates to:
-  /// **'No groups yet'**
-  String get noGroups;
-
-  /// ios easter egg on advanced settings when tapped few times
-  ///
-  /// In en, this message translates to:
-  /// **'* To change your theme, go to Settings > PORA > Theme\n* Select a new theme from the settings menu\n* Tap on \'Theme\' in the app\'s settings to switch between light and dark modes'**
-  String get settingsChangeThemeIOSEasterEgg;
 
   /// tutorialTitle
   ///
@@ -2111,26 +1493,8 @@ abstract class AppLocalizations {
   /// section title
   ///
   /// In en, this message translates to:
-  /// **'You buy often'**
-  String get predictionsSectionOften;
-
-  /// section title
-  ///
-  /// In en, this message translates to:
   /// **'AI suggests'**
   String get predictionsSectionAiSuggests;
-
-  /// AI suggestions card title
-  ///
-  /// In en, this message translates to:
-  /// **'Products and recipes for you'**
-  String get predictionsAiSuggestionsTitle;
-
-  /// AI suggestions topic
-  ///
-  /// In en, this message translates to:
-  /// **'your preferences and purchases'**
-  String get predictionsAiSuggestionsTopic;
 
   /// refresh action
   ///
@@ -2138,34 +1502,22 @@ abstract class AppLocalizations {
   /// **'Refresh'**
   String get refresh;
 
-  /// empty frequent products
-  ///
-  /// In en, this message translates to:
-  /// **'Not enough data yet'**
-  String get predictionsOftenEmpty;
-
-  /// FAB label
-  ///
-  /// In en, this message translates to:
-  /// **'Ask PORA'**
-  String get predictionsAskPora;
-
   /// kpi label
   ///
   /// In en, this message translates to:
-  /// **'items per week'**
+  /// **'products'**
   String get kpiWeek;
 
   /// kpi label
   ///
   /// In en, this message translates to:
-  /// **'recipes this month'**
+  /// **'bought often'**
   String get kpiRecipes;
 
   /// kpi label
   ///
   /// In en, this message translates to:
-  /// **'days until restock'**
+  /// **'running out'**
   String get kpiDaysToRun;
 
   /// fallback tip
@@ -2372,18 +1724,6 @@ abstract class AppLocalizations {
   /// **'Ask anything…'**
   String get chatInputHint;
 
-  /// model badge
-  ///
-  /// In en, this message translates to:
-  /// **'Powered by OpenRouter · ling-3.0-flash'**
-  String get aiModelBadge;
-
-  /// see all link
-  ///
-  /// In en, this message translates to:
-  /// **'See all'**
-  String get seeAll;
-
   /// predefined tip topic
   ///
   /// In en, this message translates to:
@@ -2492,22 +1832,22 @@ abstract class AppLocalizations {
   /// **'No topics selected — tip will be generic'**
   String get tipTopicsEmpty;
 
-  /// champion card kicker
+  /// insightsChampionKicker
   ///
   /// In en, this message translates to:
-  /// **'CHAMPION OF THE MONTH'**
+  /// **'YOUR TOP PRODUCT'**
   String get insightsChampionKicker;
 
-  /// champion card subtitle
+  /// insightsChampionSubtitle
   ///
   /// In en, this message translates to:
-  /// **'bought {count} times this month'**
+  /// **'{count, plural, =1{bought once} other{bought {count} times}}'**
   String insightsChampionSubtitle(int count);
 
-  /// streak headline
+  /// insightsStreakDays
   ///
   /// In en, this message translates to:
-  /// **'{days} days in a row'**
+  /// **'{days, plural, =1{{days} day in a row} other{{days} days in a row}}'**
   String insightsStreakDays(int days);
 
   /// streak card subtitle
@@ -2533,12 +1873,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'products'**
   String get insightsStatsProducts;
-
-  /// kpi label
-  ///
-  /// In en, this message translates to:
-  /// **'logins this week'**
-  String get insightsStatsLoginsWeek;
 
   /// empty state on insights
   ///
@@ -2618,23 +1952,23 @@ abstract class AppLocalizations {
   /// **'Where to add this recipe?'**
   String get recipeCreateListCta;
 
-  /// dup pill when user unchecks flag
-  ///
-  /// In en, this message translates to:
-  /// **'will add anyway'**
-  String get recipeDupForceMark;
-
-  /// dedup banner
-  ///
-  /// In en, this message translates to:
-  /// **'{n} duplicates will be skipped — uncheck to force-add'**
-  String recipeDedupBannerMany(int n);
-
   /// snackbar when write attempted offline
   ///
   /// In en, this message translates to:
   /// **'No internet — change won\'t be saved'**
   String get offlineWriteBlocked;
+
+  /// snackbar when an offline change was queued for sync
+  ///
+  /// In en, this message translates to:
+  /// **'Saved. We\'ll send it when you\'re back online'**
+  String get offlineSavedQueued;
+
+  /// snackbar when queued offline changes were rejected by the server
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t sync changes: {count}'**
+  String offlineSyncDropped(int count);
 
   /// top banner when cached data shown
   ///
@@ -2659,6 +1993,666 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Maybe you should create a new one?'**
   String get listsEmptySubtitle;
+
+  /// aiModelSettingsSection
+  ///
+  /// In en, this message translates to:
+  /// **'Pora-AI model'**
+  String get aiModelSettingsSection;
+
+  /// aiConfigRow
+  ///
+  /// In en, this message translates to:
+  /// **'Custom Pora-AI model'**
+  String get aiConfigRow;
+
+  /// aiConfigRowSubtitle
+  ///
+  /// In en, this message translates to:
+  /// **'Use your own OpenRouter key and models'**
+  String get aiConfigRowSubtitle;
+
+  /// aiConfigTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Pora-AI model'**
+  String get aiConfigTitle;
+
+  /// aiConfigIntro
+  ///
+  /// In en, this message translates to:
+  /// **'Connect your own OpenRouter API key and pick the models that power Pora-AI. Leave a field empty to use the app default.'**
+  String get aiConfigIntro;
+
+  /// aiConfigApiKeyLabel
+  ///
+  /// In en, this message translates to:
+  /// **'OpenRouter API key'**
+  String get aiConfigApiKeyLabel;
+
+  /// aiConfigApiKeyHint
+  ///
+  /// In en, this message translates to:
+  /// **'sk-or-...'**
+  String get aiConfigApiKeyHint;
+
+  /// aiConfigModelsSection
+  ///
+  /// In en, this message translates to:
+  /// **'Models'**
+  String get aiConfigModelsSection;
+
+  /// aiConfigPoraModelLabel
+  ///
+  /// In en, this message translates to:
+  /// **'PORA-AI model'**
+  String get aiConfigPoraModelLabel;
+
+  /// aiConfigPoraModelHint
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. openai/gpt-4o-mini'**
+  String get aiConfigPoraModelHint;
+
+  /// aiConfigTipsModelLabel
+  ///
+  /// In en, this message translates to:
+  /// **'Tips model'**
+  String get aiConfigTipsModelLabel;
+
+  /// aiConfigTipsModelHint
+  ///
+  /// In en, this message translates to:
+  /// **'Empty — same as app default'**
+  String get aiConfigTipsModelHint;
+
+  /// aiConfigNeedKeyNote
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your API key to choose custom models'**
+  String get aiConfigNeedKeyNote;
+
+  /// aiConfigReset
+  ///
+  /// In en, this message translates to:
+  /// **'Reset to default'**
+  String get aiConfigReset;
+
+  /// aiConfigSaved
+  ///
+  /// In en, this message translates to:
+  /// **'Pora-AI settings saved'**
+  String get aiConfigSaved;
+
+  /// aiConfigResetDone
+  ///
+  /// In en, this message translates to:
+  /// **'Restored default Pora-AI settings'**
+  String get aiConfigResetDone;
+
+  /// aiConfigInfoTitle
+  ///
+  /// In en, this message translates to:
+  /// **'How to connect your model'**
+  String get aiConfigInfoTitle;
+
+  /// aiConfigInfoBody
+  ///
+  /// In en, this message translates to:
+  /// **'1. Create a free account at openrouter.ai.\n2. Open Keys and create a new API key, then paste it here.\n3. Browse openrouter.ai/models and copy a model id (for example openai/gpt-4o-mini or anthropic/claude-3.5-sonnet).\n4. Paste the id into the PORA-AI field. The Tips field is optional — leave it empty to reuse the app default model with your key.\n\nYour key is stored only on this device and is used solely for your Pora-AI requests.'**
+  String get aiConfigInfoBody;
+
+  /// aiConfigInfoClose
+  ///
+  /// In en, this message translates to:
+  /// **'Got it'**
+  String get aiConfigInfoClose;
+
+  /// supportEmptyError
+  ///
+  /// In en, this message translates to:
+  /// **'Please write a message first'**
+  String get supportEmptyError;
+
+  /// supportSent
+  ///
+  /// In en, this message translates to:
+  /// **'Message sent — we\'ll get back to you soon'**
+  String get supportSent;
+
+  /// supportFailed
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t send. Check your connection and try again'**
+  String get supportFailed;
+
+  /// supportSheetHint
+  ///
+  /// In en, this message translates to:
+  /// **'Describe your issue or feedback...'**
+  String get supportSheetHint;
+
+  /// App shortcut: add item
+  ///
+  /// In en, this message translates to:
+  /// **'Add item'**
+  String get shortcutAddItem;
+
+  /// No description provided for @importantReminderTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Buy {product}'**
+  String importantReminderTitle(String product);
+
+  /// No description provided for @importantReminderFrom.
+  ///
+  /// In en, this message translates to:
+  /// **'from {user}'**
+  String importantReminderFrom(String user);
+
+  /// importantReminderBody
+  ///
+  /// In en, this message translates to:
+  /// **'Mark as bought when done'**
+  String get importantReminderBody;
+
+  /// importantReminderMarkBought
+  ///
+  /// In en, this message translates to:
+  /// **'Bought'**
+  String get importantReminderMarkBought;
+
+  /// liveActivityTestRow
+  ///
+  /// In en, this message translates to:
+  /// **'Test Live Activity'**
+  String get liveActivityTestRow;
+
+  /// liveActivityTestSample
+  ///
+  /// In en, this message translates to:
+  /// **'Milk'**
+  String get liveActivityTestSample;
+
+  /// listPickerTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Add to which list?'**
+  String get listPickerTitle;
+
+  /// listPickerEmpty
+  ///
+  /// In en, this message translates to:
+  /// **'No lists yet — create one first'**
+  String get listPickerEmpty;
+
+  /// predictionsAdded
+  ///
+  /// In en, this message translates to:
+  /// **'Added to list'**
+  String get predictionsAdded;
+
+  /// shortcutOpenLists
+  ///
+  /// In en, this message translates to:
+  /// **'Open lists'**
+  String get shortcutOpenLists;
+
+  /// shortcutOpenPora
+  ///
+  /// In en, this message translates to:
+  /// **'Ask Pora-AI'**
+  String get shortcutOpenPora;
+
+  /// insightsPeriodDays
+  ///
+  /// In en, this message translates to:
+  /// **'{days}d'**
+  String insightsPeriodDays(int days);
+
+  /// insightsStreakBest
+  ///
+  /// In en, this message translates to:
+  /// **'Best streak: {days}'**
+  String insightsStreakBest(int days);
+
+  /// insightsStreakStart
+  ///
+  /// In en, this message translates to:
+  /// **'Open Pora every day to build a streak'**
+  String get insightsStreakStart;
+
+  /// insightsKpiAdded
+  ///
+  /// In en, this message translates to:
+  /// **'added'**
+  String get insightsKpiAdded;
+
+  /// insightsKpiBought
+  ///
+  /// In en, this message translates to:
+  /// **'bought'**
+  String get insightsKpiBought;
+
+  /// insightsKpiCompletion
+  ///
+  /// In en, this message translates to:
+  /// **'of added got bought'**
+  String get insightsKpiCompletion;
+
+  /// insightsKpiActiveDays
+  ///
+  /// In en, this message translates to:
+  /// **'active days'**
+  String get insightsKpiActiveDays;
+
+  /// insightsKpiMinutes
+  ///
+  /// In en, this message translates to:
+  /// **'minutes in app'**
+  String get insightsKpiMinutes;
+
+  /// insightsKpiSessions
+  ///
+  /// In en, this message translates to:
+  /// **'sessions'**
+  String get insightsKpiSessions;
+
+  /// insightsAvgSession
+  ///
+  /// In en, this message translates to:
+  /// **'≈{minutes} min per session'**
+  String insightsAvgSession(String minutes);
+
+  /// insightsActivityTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Added and bought'**
+  String get insightsActivityTitle;
+
+  /// insightsActivityEmpty
+  ///
+  /// In en, this message translates to:
+  /// **'No activity in this period yet'**
+  String get insightsActivityEmpty;
+
+  /// insightsHeatmapTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Activity · last 4 weeks'**
+  String get insightsHeatmapTitle;
+
+  /// insightsLess
+  ///
+  /// In en, this message translates to:
+  /// **'less'**
+  String get insightsLess;
+
+  /// insightsMore
+  ///
+  /// In en, this message translates to:
+  /// **'more'**
+  String get insightsMore;
+
+  /// insightsRhythmTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Your rhythm'**
+  String get insightsRhythmTitle;
+
+  /// insightsPartMorning
+  ///
+  /// In en, this message translates to:
+  /// **'Morning'**
+  String get insightsPartMorning;
+
+  /// insightsPartAfternoon
+  ///
+  /// In en, this message translates to:
+  /// **'Afternoon'**
+  String get insightsPartAfternoon;
+
+  /// insightsPartEvening
+  ///
+  /// In en, this message translates to:
+  /// **'Evening'**
+  String get insightsPartEvening;
+
+  /// insightsPartNight
+  ///
+  /// In en, this message translates to:
+  /// **'Night'**
+  String get insightsPartNight;
+
+  /// insightsPeakMorning
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re most active in the morning'**
+  String get insightsPeakMorning;
+
+  /// insightsPeakAfternoon
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re most active in the afternoon'**
+  String get insightsPeakAfternoon;
+
+  /// insightsPeakEvening
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re most active in the evening'**
+  String get insightsPeakEvening;
+
+  /// insightsPeakNight
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re most active at night'**
+  String get insightsPeakNight;
+
+  /// insightsPeakWeekday
+  ///
+  /// In en, this message translates to:
+  /// **'Busiest day — {day}'**
+  String insightsPeakWeekday(String day);
+
+  /// insightsCategoriesTitle
+  ///
+  /// In en, this message translates to:
+  /// **'What you add'**
+  String get insightsCategoriesTitle;
+
+  /// insightsDueSoonTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Time to restock'**
+  String get insightsDueSoonTitle;
+
+  /// insightsDueNow
+  ///
+  /// In en, this message translates to:
+  /// **'now'**
+  String get insightsDueNow;
+
+  /// insightsDueInDays
+  ///
+  /// In en, this message translates to:
+  /// **'in ~{days}d'**
+  String insightsDueInDays(int days);
+
+  /// insightsTopBoughtTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Bought most this period'**
+  String get insightsTopBoughtTitle;
+
+  /// insightsEngagementTitle
+  ///
+  /// In en, this message translates to:
+  /// **'How you use Pora'**
+  String get insightsEngagementTitle;
+
+  /// insightsKpiListsOpened
+  ///
+  /// In en, this message translates to:
+  /// **'lists opened'**
+  String get insightsKpiListsOpened;
+
+  /// insightsKpiListsCreated
+  ///
+  /// In en, this message translates to:
+  /// **'lists created'**
+  String get insightsKpiListsCreated;
+
+  /// insightsKpiRecipes
+  ///
+  /// In en, this message translates to:
+  /// **'recipes imported'**
+  String get insightsKpiRecipes;
+
+  /// insightsKpiAi
+  ///
+  /// In en, this message translates to:
+  /// **'messages to Pora'**
+  String get insightsKpiAi;
+
+  /// insightsKpiDeleted
+  ///
+  /// In en, this message translates to:
+  /// **'items deleted'**
+  String get insightsKpiDeleted;
+
+  /// insightsAllTimeTitle
+  ///
+  /// In en, this message translates to:
+  /// **'All time'**
+  String get insightsAllTimeTitle;
+
+  /// insightsKpiReminders
+  ///
+  /// In en, this message translates to:
+  /// **'with reminders'**
+  String get insightsKpiReminders;
+
+  /// insightsKpiUrgent
+  ///
+  /// In en, this message translates to:
+  /// **'urgent'**
+  String get insightsKpiUrgent;
+
+  /// insightsLocalNote
+  ///
+  /// In en, this message translates to:
+  /// **'Usage stats on this screen are calculated on your device'**
+  String get insightsLocalNote;
+
+  /// insightsNoUsageYet
+  ///
+  /// In en, this message translates to:
+  /// **'Stats will appear as you use Pora'**
+  String get insightsNoUsageYet;
+
+  /// settingsDeleteAccount
+  ///
+  /// In en, this message translates to:
+  /// **'Delete account'**
+  String get settingsDeleteAccount;
+
+  /// deleteAccountTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Delete account?'**
+  String get deleteAccountTitle;
+
+  /// deleteAccountBody
+  ///
+  /// In en, this message translates to:
+  /// **'Your profile, personal lists and usage data will be permanently deleted. Shared family lists stay with the family; if you own a family, it passes to its longest-standing member. This cannot be undone.'**
+  String get deleteAccountBody;
+
+  /// deleteAccountFailed
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t delete the account. Check your connection and try again.'**
+  String get deleteAccountFailed;
+
+  /// chatReportAi
+  ///
+  /// In en, this message translates to:
+  /// **'Report'**
+  String get chatReportAi;
+
+  /// chatReportSent
+  ///
+  /// In en, this message translates to:
+  /// **'Thanks — we\'ll review this answer.'**
+  String get chatReportSent;
+
+  /// chatReportFailed
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t send the report. Try again later.'**
+  String get chatReportFailed;
+
+  /// aiDisclaimer
+  ///
+  /// In en, this message translates to:
+  /// **'Pora AI can make mistakes. Check important information.'**
+  String get aiDisclaimer;
+
+  /// groupLeave
+  ///
+  /// In en, this message translates to:
+  /// **'Leave'**
+  String get groupLeave;
+
+  /// groupLeaveTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Leave this group? Its list stays with the other members.'**
+  String get groupLeaveTitle;
+
+  /// groupDeleteOwnerOnly
+  ///
+  /// In en, this message translates to:
+  /// **'Only the group owner can delete it'**
+  String get groupDeleteOwnerOnly;
+
+  /// groupDeleteFailed
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t delete the group. Try again.'**
+  String get groupDeleteFailed;
+
+  /// groupLeaveFailed
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t leave the group. Try again.'**
+  String get groupLeaveFailed;
+
+  /// Empty state title of a list without products
+  ///
+  /// In en, this message translates to:
+  /// **'No products yet'**
+  String get listNoProductsTitle;
+
+  /// Empty state subtitle of a list without products
+  ///
+  /// In en, this message translates to:
+  /// **'Tap “Add” to put the first one on the list'**
+  String get listNoProductsSubtitle;
+
+  /// Display label of stored unit 'шт'
+  ///
+  /// In en, this message translates to:
+  /// **'pcs'**
+  String get unitPcs;
+
+  /// Display label of stored unit 'г'
+  ///
+  /// In en, this message translates to:
+  /// **'g'**
+  String get unitG;
+
+  /// Display label of stored unit 'кг'
+  ///
+  /// In en, this message translates to:
+  /// **'kg'**
+  String get unitKg;
+
+  /// Display label of stored unit 'мл'
+  ///
+  /// In en, this message translates to:
+  /// **'ml'**
+  String get unitMl;
+
+  /// Display label of stored unit 'л'
+  ///
+  /// In en, this message translates to:
+  /// **'l'**
+  String get unitL;
+
+  /// Display label of stored unit 'уп'
+  ///
+  /// In en, this message translates to:
+  /// **'pack'**
+  String get unitPack;
+
+  /// Display label of stored section 'Овощи и фрукты'
+  ///
+  /// In en, this message translates to:
+  /// **'Fruit & vegetables'**
+  String get sectionProduce;
+
+  /// Display label of stored section 'Молочное'
+  ///
+  /// In en, this message translates to:
+  /// **'Dairy'**
+  String get sectionDairy;
+
+  /// Display label of stored section 'Бакалея'
+  ///
+  /// In en, this message translates to:
+  /// **'Pantry'**
+  String get sectionPantry;
+
+  /// Display label of stored section 'Напитки'
+  ///
+  /// In en, this message translates to:
+  /// **'Drinks'**
+  String get sectionDrinks;
+
+  /// Display label of stored section 'Хлеб'
+  ///
+  /// In en, this message translates to:
+  /// **'Bread'**
+  String get sectionBread;
+
+  /// Display label of stored section 'Разное'
+  ///
+  /// In en, this message translates to:
+  /// **'Miscellaneous'**
+  String get sectionMisc;
+
+  /// Display label of server section 'Прочее' (items without a section)
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get sectionOther;
+
+  /// Product runs out daily (prediction card)
+  ///
+  /// In en, this message translates to:
+  /// **'~every day'**
+  String get predictionEveryDay;
+
+  /// How often a product runs out, in days (prediction card); 1 day uses predictionEveryDay
+  ///
+  /// In en, this message translates to:
+  /// **'{days, plural, other{~every {days} days}}'**
+  String predictionEvery(int days);
+
+  /// Prediction card meta when the cycle length is unknown
+  ///
+  /// In en, this message translates to:
+  /// **'Bought regularly'**
+  String get predictionBoughtRegularly;
+
+  /// Product was bought today (prediction card)
+  ///
+  /// In en, this message translates to:
+  /// **'bought today'**
+  String get predictionBoughtToday;
+
+  /// Product was bought yesterday (prediction card)
+  ///
+  /// In en, this message translates to:
+  /// **'bought yesterday'**
+  String get predictionBoughtYesterday;
+
+  /// Days since the product was last bought, 2+ (prediction card)
+  ///
+  /// In en, this message translates to:
+  /// **'{days, plural, one{bought {days} day ago} other{bought {days} days ago}}'**
+  String predictionBoughtDaysAgo(int days);
 }
 
 class _AppLocalizationsDelegate

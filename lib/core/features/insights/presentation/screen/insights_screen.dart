@@ -2,24 +2,34 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
-import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
-import 'package:pora/core/features/insights/domain/entity/popular_product.dart';
 import 'package:pora/core/features/insights/presentation/store/statistics_store.dart';
-import 'package:pora/core/features/insights/presentation/widgets/champion_card.dart';
-import 'package:pora/core/features/insights/presentation/widgets/frequency_row.dart';
-import 'package:pora/core/features/insights/presentation/widgets/stat_card.dart';
+import 'package:pora/core/features/insights/presentation/widgets/activity_chart.dart';
+import 'package:pora/core/features/insights/presentation/widgets/period_switch.dart';
+import 'package:pora/core/features/insights/presentation/widgets/rhythm_card.dart';
+import 'package:pora/core/features/insights/presentation/widgets/sections/categories_section.dart';
+import 'package:pora/core/features/insights/presentation/widgets/sections/champion_section.dart';
+import 'package:pora/core/features/insights/presentation/widgets/sections/due_soon_section.dart';
+import 'package:pora/core/features/insights/presentation/widgets/sections/engagement_section.dart';
+import 'package:pora/core/features/insights/presentation/widgets/sections/insights_header.dart';
+import 'package:pora/core/features/insights/presentation/widgets/sections/kpi_grid.dart';
+import 'package:pora/core/features/insights/presentation/widgets/sections/popular_section.dart';
+import 'package:pora/core/features/insights/presentation/widgets/sections/top_bought_section.dart';
 import 'package:pora/core/features/insights/presentation/widgets/streak_card.dart';
 import 'package:pora/core/features/insights/presentation/widgets/weekly_heatmap.dart';
+import 'package:pora/core/internal/analytics/analytics_service.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
 import 'package:pora/core/internal/theme/constant/additional_constants.dart';
-import 'package:pora/core/internal/theme/text/app_text_styles.dart';
 import 'package:pora/core/internal/theme/context_colors.dart';
+import 'package:pora/core/internal/theme/text/app_text_styles.dart';
 import 'package:pora/core/internal/widgets/fade_slide_in.dart';
-import 'package:pora/core/internal/widgets/pora_rows_card.dart';
+import 'package:pora/core/internal/widgets/responsive.dart';
 import 'package:pora/core/internal/widgets/section_label.dart';
 
-/// Инсайты: реальные данные из `StatisticsStore` (backend statistics API).
-/// Streak, champion, heatmap, popular — всё живое.
+/// Инсайты: локальная статистика пользования (`UsageTracker`) за выбранный
+/// период + серверная статистика продуктов (`StatisticsStore`).
+///
+/// Каждый блок — свой `Observer` вокруг data-виджета из `widgets/sections/`:
+/// смена периода/новое событие перерисовывает только зависящие секции.
 @RoutePage()
 class InsightsPage extends StatefulWidget {
   const InsightsPage({super.key});
@@ -37,15 +47,30 @@ class _InsightsPageState extends State<InsightsPage> {
     _store.loadAll();
   }
 
+  void _setPeriod(int days) {
+    if (days == _store.period) return;
+    _store.setPeriod(days);
+    AnalyticsService.instance.logInsightsPeriodChanged(days);
+  }
+
   @override
   Widget build(BuildContext context) {
     final l = context.l10n;
+    var step = 0;
+    // Каскад появления: каждая следующая секция чуть позже.
+    Widget fade(Widget child) => FadeSlideIn(
+      delay: Duration(milliseconds: 40 + 40 * step++),
+      child: child,
+    );
+    const gap = SizedBox(height: PoraSpacing.lg);
+    const sectionGap = SizedBox(height: PoraSpacing.xl);
+
     return Scaffold(
       body: SafeArea(
-        child: RefreshIndicator.adaptive(
-          onRefresh: _store.loadAll,
-          child: Observer(
-            builder: (_) => ListView(
+        child: AdaptiveContainer(
+          child: RefreshIndicator.adaptive(
+            onRefresh: () => _store.loadAll(force: true),
+            child: ListView(
               padding: const EdgeInsets.fromLTRB(
                 PoraSpacing.screen,
                 6,
@@ -53,51 +78,107 @@ class _InsightsPageState extends State<InsightsPage> {
                 PoraSpacing.xxl,
               ),
               children: [
-                FadeSlideIn(
-                  delay: const Duration(milliseconds: 40),
-                  child: _Header(
+                fade(
+                  InsightsHeader(
                     title: l.insightsTitle,
                     onBack: () => context.router.maybePop(),
                   ),
                 ),
-                const SizedBox(height: PoraSpacing.lg),
-                FadeSlideIn(
-                  delay: const Duration(milliseconds: 120),
-                  child: StreakCard(days: _store.streakDays),
-                ),
-                const SizedBox(height: PoraSpacing.md),
-                FadeSlideIn(
-                  delay: const Duration(milliseconds: 160),
-                  child: _StatsRow(
-                    products: _store.allProducts.length,
-                    loginsThisWeek: _loginsThisWeek(_store.logins),
-                  ),
-                ),
-                const SizedBox(height: PoraSpacing.lg),
-                if (_store.popularProducts.isNotEmpty)
-                  FadeSlideIn(
-                    delay: const Duration(milliseconds: 200),
-                    child: ChampionCard(
-                      name: _store.popularProducts.first.name,
-                      count: _store.popularProducts.first.quantity,
+                gap,
+                fade(
+                  Observer(
+                    builder: (_) => PeriodSwitch(
+                      periods: insightsPeriods,
+                      value: _store.period,
+                      onChanged: _setPeriod,
                     ),
                   ),
-                const SizedBox(height: PoraSpacing.lg),
-                FadeSlideIn(
-                  delay: const Duration(milliseconds: 280),
-                  child: WeeklyHeatmap(logins: _store.logins.toList()),
                 ),
-                const SizedBox(height: PoraSpacing.xl),
-                FadeSlideIn(
-                  delay: const Duration(milliseconds: 360),
-                  child: SectionLabel(l.insightsPopular),
+                gap,
+                fade(
+                  Observer(
+                    builder: (_) => StreakCard(
+                      days: _store.usage.currentStreak,
+                      best: _store.usage.bestStreak,
+                    ),
+                  ),
                 ),
-                FadeSlideIn(
-                  delay: const Duration(milliseconds: 400),
-                  child: _PopularList(
-                    products: _store.popularProducts.toList(),
-                    isLoading: _store.isPopularLoading,
-                    errorMessage: _store.popularError,
+                const SizedBox(height: PoraSpacing.md),
+                fade(
+                  Observer(
+                    builder: (_) => InsightsKpiGrid(summary: _store.usage),
+                  ),
+                ),
+                gap,
+                fade(
+                  Observer(
+                    builder: (_) => ActivityChart(points: _store.usage.series),
+                  ),
+                ),
+                gap,
+                fade(
+                  Observer(builder: (_) => RhythmCard(summary: _store.usage)),
+                ),
+                gap,
+                fade(
+                  Observer(
+                    builder: (_) =>
+                        WeeklyHeatmap(activity: _store.usage.activityByDay),
+                  ),
+                ),
+                fade(
+                  Observer(
+                    builder: (_) => DueSoonSection(items: _store.dueSoon),
+                  ),
+                ),
+                fade(
+                  Observer(
+                    builder: (_) => ChampionSection(champion: _store.champion),
+                  ),
+                ),
+                fade(
+                  Observer(
+                    builder: (_) =>
+                        TopBoughtSection(top: _store.usage.topBought),
+                  ),
+                ),
+                fade(
+                  Observer(
+                    builder: (_) =>
+                        CategoriesSection(categories: _store.categories),
+                  ),
+                ),
+                sectionGap,
+                fade(SectionLabel(l.insightsEngagementTitle)),
+                fade(
+                  Observer(
+                    builder: (_) => EngagementSection(
+                      summary: _store.usage,
+                      uniqueProducts: _store.uniqueProducts,
+                      remindersCount: _store.remindersCount,
+                      urgentCount: _store.urgentCount,
+                    ),
+                  ),
+                ),
+                sectionGap,
+                fade(SectionLabel(l.insightsPopular)),
+                fade(
+                  Observer(
+                    builder: (_) => PopularSection(
+                      products: _store.popularProducts.toList(),
+                      isLoading: _store.isPopularLoading,
+                      errorMessage: _store.popularError,
+                    ),
+                  ),
+                ),
+                sectionGap,
+                fade(
+                  Text(
+                    l.insightsLocalNote,
+                    textAlign: TextAlign.center,
+                    style: PoraText.micro.copyWith(
+                      color: context.colors.textSubtle,
+                    ),
                   ),
                 ),
               ],
@@ -105,112 +186,6 @@ class _InsightsPageState extends State<InsightsPage> {
           ),
         ),
       ),
-    );
-  }
-
-  int _loginsThisWeek(Iterable<DateTime> logins) {
-    final today = DateTime.now();
-    final start = DateTime(
-      today.year,
-      today.month,
-      today.day,
-    ).subtract(Duration(days: today.weekday - 1));
-    return logins.where((login) => !login.toLocal().isBefore(start)).length;
-  }
-}
-
-class _StatsRow extends StatelessWidget {
-  const _StatsRow({required this.products, required this.loginsThisWeek});
-
-  final int products;
-  final int loginsThisWeek;
-
-  @override
-  Widget build(BuildContext context) {
-    final l = context.l10n;
-    return Row(
-      children: [
-        Expanded(
-          child: StatCard(number: '$products', label: l.insightsStatsProducts),
-        ),
-        const SizedBox(width: PoraSpacing.md),
-        Expanded(
-          child: StatCard(
-            number: '$loginsThisWeek',
-            label: l.insightsStatsLoginsWeek,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _PopularList extends StatelessWidget {
-  const _PopularList({
-    required this.products,
-    required this.isLoading,
-    required this.errorMessage,
-  });
-
-  final List<PopularProductEntity> products;
-  final bool isLoading;
-  final String? errorMessage;
-
-  @override
-  Widget build(BuildContext context) {
-    if (isLoading && products.isEmpty) {
-      return const Padding(
-        padding: EdgeInsets.symmetric(vertical: PoraSpacing.lg),
-        child: Center(child: CircularProgressIndicator.adaptive()),
-      );
-    }
-    if (products.isEmpty) {
-      return Padding(
-        padding: const EdgeInsets.symmetric(vertical: PoraSpacing.md),
-        child: Text(
-          errorMessage ?? context.l10n.insightsEmpty,
-          style: PoraText.small.copyWith(color: context.colors.textSubtle),
-          textAlign: TextAlign.center,
-        ),
-      );
-    }
-    final l = context.l10n;
-    final top = products.first.quantity;
-    return PoraRowsCard(
-      children: [
-        for (final p in products.take(6))
-          FrequencyRow(
-            name: p.name,
-            sub: p.howOftenEnds > 0
-                ? l.insightsFreqEvery(p.howOftenEnds)
-                : '×${p.quantity}',
-            pct: top == 0 ? 0 : p.quantity / top,
-          ),
-      ],
-    );
-  }
-}
-
-class _Header extends StatelessWidget {
-  const _Header({required this.title, required this.onBack});
-  final String title;
-  final VoidCallback onBack;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: onBack,
-          child: const Padding(
-            padding: EdgeInsets.symmetric(vertical: 6, horizontal: 4),
-            child: Icon(PhosphorIconsRegular.caretLeft, size: 26),
-          ),
-        ),
-        const SizedBox(width: PoraSpacing.md),
-        Text(title, style: PoraText.title),
-      ],
     );
   }
 }

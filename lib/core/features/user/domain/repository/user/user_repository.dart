@@ -8,6 +8,9 @@ import 'package:pora/core/internal/extensions/either.dart';
 abstract class UserRepository {
   Future<Either<Failure, UserEntity>> getUser();
   Future<Either<Failure, Success>> logout();
+
+  /// Безвозвратно удаляет аккаунт на сервере.
+  Future<Either<Failure, Success>> deleteAccount();
   Future<Either<Failure, Success>> updateUser({UserEntity? user, File? image});
 
   /// Регистрация FCM/APNS токена. Оба поля обязательны.

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 import 'package:pora/core/features/families/domain/entity/member.dart';
@@ -14,7 +16,11 @@ import 'package:pora/core/features/lists/domain/usecase/get_list_data.dart';
 import 'package:pora/core/features/item_detail/domain/usecase/delete_item.dart';
 import 'package:pora/core/features/item_detail/domain/usecase/mark_item_bought.dart';
 import 'package:pora/core/features/user/domain/usecase/user/get_user.dart';
+import 'package:pora/core/internal/cache/cache_keys.dart';
 import 'package:pora/core/internal/cache/hive_json_cache.dart';
+import 'package:pora/core/internal/cache/list_cache_patcher.dart';
+import 'package:pora/core/internal/cache/offline_policy.dart';
+import 'package:pora/core/internal/errors/success.dart';
 part 'lists_store.g.dart';
 
 class ListStore = _ListStoreBase with _$ListStore;
@@ -37,9 +43,17 @@ abstract class _ListStoreBase with Store {
   @observable
   bool? isSelfUpdated;
 
+  Timer? _selfUpdateTimer;
+
   /// True когда contract показывает данные из cache (offline read).
   @observable
   bool usingCache = false;
+
+  /// Последняя write-операция ушла в offline-очередь. Остаётся true, пока
+  /// следующая не дойдёт до сервера — так серия офлайн-тапов даёт один
+  /// snackbar (reaction срабатывает только на переходе false→true).
+  @observable
+  bool lastWriteQueued = false;
 
   @observable
   ListsArrayEntity? listsWithPreview;
@@ -97,6 +111,11 @@ abstract class _ListStoreBase with Store {
     return byId.values.toList();
   }
 
+  /// Очередь доехала до сервера — сбрасываем флаг, чтобы следующая
+  /// офлайн-запись снова дала snackbar (reaction ловит только false→true).
+  @action
+  void clearQueuedFlag() => lastWriteQueued = false;
+
   @action
   void setQuery(String value) => query = value;
 
@@ -118,26 +137,29 @@ abstract class _ListStoreBase with Store {
       // Write-through cache — открытый список доступен offline.
       final asModel = _asListModel(response.right);
       if (asModel != null) {
-        await HiveJsonCache.put(_listCacheKey(lid), asModel.toJson());
+        // Через очередь патчера — не гоняемся с офлайн-патчами товаров.
+        await getIt<ListCachePatcher>().writeSnapshot(
+          CacheKeys.listContent(lid),
+          asModel.toJson(),
+        );
       }
     } else {
-      // Пробуем восстановить из кэша.
-      final cached = await HiveJsonCache.read(_listCacheKey(lid));
-      if (cached is Map<String, dynamic>) {
-        try {
-          list = ListModel.fromJson(cached);
-          isSuccess = true;
-          usingCache = true;
-          return;
-        } catch (_) {}
+      // Кэш отдаём только при проблемах с доступностью, не при 4xx.
+      if (canServeCache(response.left)) {
+        final cached = await HiveJsonCache.read(CacheKeys.listContent(lid));
+        if (cached is Map<String, dynamic>) {
+          try {
+            list = ListModel.fromJson(cached);
+            isSuccess = true;
+            usingCache = true;
+            return;
+          } catch (_) {}
+        }
       }
       isSuccess = false;
       errorMessage = response.left.message;
     }
   }
-
-  String _listCacheKey(String lid) => 'list-content-v1-$lid';
-  String _famListsCacheKey(String fid) => 'fam-lists-v1-$fid';
 
   ListModel? _asListModel(ListEntity e) {
     if (e is ListModel) return e;
@@ -158,19 +180,21 @@ abstract class _ListStoreBase with Store {
       usingCache = false;
       if (response.right is ListsArrayModel) {
         await HiveJsonCache.put(
-          _famListsCacheKey(fid),
+          CacheKeys.familyLists(fid),
           (response.right as ListsArrayModel).toJson(),
         );
       }
     } else {
-      final cached = await HiveJsonCache.read(_famListsCacheKey(fid));
-      if (cached is Map<String, dynamic>) {
-        try {
-          listsWithPreview = ListsArrayModel.fromJson(cached);
-          isSuccess = true;
-          usingCache = true;
-          return;
-        } catch (_) {}
+      if (canServeCache(response.left)) {
+        final cached = await HiveJsonCache.read(CacheKeys.familyLists(fid));
+        if (cached is Map<String, dynamic>) {
+          try {
+            listsWithPreview = ListsArrayModel.fromJson(cached);
+            isSuccess = true;
+            usingCache = true;
+            return;
+          } catch (_) {}
+        }
       }
       isSuccess = false;
       errorMessage = response.left.message;
@@ -179,8 +203,11 @@ abstract class _ListStoreBase with Store {
 
   @action
   Future<bool> toggleItemBought({required String itemId}) async {
+    // Окно, в котором WS-эхо собственного изменения не перезагружает список.
+    // Повторный тап продлевает окно, а не плодит параллельные таймеры.
     isSelfUpdated = true;
-    Future.delayed(Duration(seconds: 2)).whenComplete(() {
+    _selfUpdateTimer?.cancel();
+    _selfUpdateTimer = Timer(const Duration(seconds: 2), () {
       isSelfUpdated = false;
     });
     final cur = list;
@@ -201,8 +228,12 @@ abstract class _ListStoreBase with Store {
     final res = await getIt<MarkItemBoughtUseCase>().call(
       itemId: itemId,
       checked: target,
+      name: found.name,
     );
-    if (res.isRight) return true;
+    if (res.isRight) {
+      lastWriteQueued = res.right is QueuedSuccess;
+      return true;
+    }
     _patchItem(itemId, checked: !target);
     errorMessage = res.left.message;
     return false;
@@ -225,6 +256,7 @@ abstract class _ListStoreBase with Store {
   Future<void> deleteItem({required String itemId}) async {
     final res = await getIt<DeleteItemUseCase>().call(itemId: itemId);
     if (res.isRight) {
+      lastWriteQueued = res.right is QueuedSuccess;
       // Оптимистично убираем item из loaded list.
       final cur = list;
       if (cur != null) {

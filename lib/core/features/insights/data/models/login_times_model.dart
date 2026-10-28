@@ -1,6 +1,6 @@
 /// DTO ответа `GET /user/statistics/login_times`.
 /// Body: `{ "login-times": [unixSeconds, ...] }` — порядок убывающий,
-/// только последняя неделя. Формат времени — unix seconds (int).
+/// окно — последние 90 дней. Формат времени — unix seconds или ISO-8601.
 class LoginTimesModel {
   const LoginTimesModel({required this.unixSeconds});
 

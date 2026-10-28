@@ -81,14 +81,42 @@ mixin _$GroupsStore on _GroupsStoreBase, Store {
     });
   }
 
-  late final _$loadAsyncAction = AsyncAction(
-    '_GroupsStoreBase.load',
+  late final _$currentUserIdAtom = Atom(
+    name: '_GroupsStoreBase.currentUserId',
     context: context,
   );
 
   @override
-  Future<void> load() {
-    return _$loadAsyncAction.run(() => super.load());
+  String? get currentUserId {
+    _$currentUserIdAtom.reportRead();
+    return super.currentUserId;
+  }
+
+  @override
+  set currentUserId(String? value) {
+    _$currentUserIdAtom.reportWrite(value, super.currentUserId, () {
+      super.currentUserId = value;
+    });
+  }
+
+  late final _$_loadAsyncAction = AsyncAction(
+    '_GroupsStoreBase._load',
+    context: context,
+  );
+
+  @override
+  Future<void> _load() {
+    return _$_loadAsyncAction.run(() => super._load());
+  }
+
+  late final _$refreshFamilyAsyncAction = AsyncAction(
+    '_GroupsStoreBase.refreshFamily',
+    context: context,
+  );
+
+  @override
+  Future<void> refreshFamily(String fid) {
+    return _$refreshFamilyAsyncAction.run(() => super.refreshFamily(fid));
   }
 
   late final _$createGroupAsyncAction = AsyncAction(
@@ -109,8 +137,18 @@ mixin _$GroupsStore on _GroupsStoreBase, Store {
   );
 
   @override
-  Future<void> deleteGroup(GroupEntity g) {
+  Future<Failure?> deleteGroup(GroupEntity g) {
     return _$deleteGroupAsyncAction.run(() => super.deleteGroup(g));
+  }
+
+  late final _$leaveGroupAsyncAction = AsyncAction(
+    '_GroupsStoreBase.leaveGroup',
+    context: context,
+  );
+
+  @override
+  Future<Failure?> leaveGroup(GroupEntity g) {
+    return _$leaveGroupAsyncAction.run(() => super.leaveGroup(g));
   }
 
   @override
@@ -119,7 +157,8 @@ mixin _$GroupsStore on _GroupsStoreBase, Store {
 groups: ${groups},
 isLoading: ${isLoading},
 errorMessage: ${errorMessage},
-usingCache: ${usingCache}
+usingCache: ${usingCache},
+currentUserId: ${currentUserId}
     ''';
   }
 }

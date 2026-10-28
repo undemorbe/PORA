@@ -3,7 +3,10 @@ import 'dart:convert';
 import 'package:pora/core/features/predictions_ai/domain/entity/ai_message.dart';
 import 'package:pora/core/features/predictions_ai/domain/repository/ai_repository.dart';
 import 'package:pora/core/features/recipe/domain/entity/recipe.dart';
+import 'package:pora/core/features/recipe/data/datasource/ingredient_line_parser.dart';
 import 'package:pora/core/features/recipe/domain/entity/recipe_ingredient.dart';
+import 'package:pora/core/features/recipe/domain/recipe_units.dart';
+import 'package:pora/core/internal/analytics/analytics_service.dart';
 
 /// Normalizes raw page evidence into the recipe contract.
 class AiRecipeParser {
@@ -26,10 +29,13 @@ class AiRecipeParser {
   The user message contains a web page and candidate ingredients extracted from its markup.
   Return NO_RECIPE if the page is not a single cooking recipe.
   Otherwise return ONLY valid JSON, with no markdown or commentary:
-  {"title":"string","servings":"string or null","foodEmoji":"one food emoji","ingredients":[{"name":"string","quantity":"string or null","unit":"string or null"}]}
+  {"title":"string","servings":"string or null","foodEmoji":"one food emoji","ingredients":[{"name":"string","quantity":"string or null","unit":"string or null","note":"string or null"}]}
   Rules:
   - Use only ingredients explicitly supported by the page. Never invent or infer missing ingredients.
-  - Remove navigation, ads, nutrition facts, preparation actions, headings, duplicate items and section labels.
+  - Remove navigation, ads, nutrition facts, preparation actions, headings, duplicate items and section labels
+    ("For the sauce", "Для теста" are labels, not ingredients).
+  - Put preparation details ("finely chopped", "room temperature", "to taste") into "note", not into "name".
+  - If the same ingredient appears in several sections, keep each occurrence only when quantities differ.
   - Reconcile candidate markup with the page text; fix broken names, quantities and units.
   - Keep alternatives and notes in the ingredient name only when they are part of the ingredient.
   - Translate ingredient names AND units to the user's language ($languageCode).
@@ -42,6 +48,7 @@ class AiRecipeParser {
   - Choose exactly one relevant food emoji for the dish (for example 🍝, 🍲, 🥗, 🍰, 🍞, 🍎). Never return a generic face or symbol.
   ''';
 
+    final watch = Stopwatch()..start();
     final res = await ai.chat(
       messages: [
         AiMessage.system(systemPrompt),
@@ -49,6 +56,12 @@ class AiRecipeParser {
       ],
       maxTokens: 1200,
       temperature: 0.1,
+    );
+    AnalyticsService.instance.logAiResponse(
+      kind: 'recipe',
+      success: res.isRight,
+      latencyMs: watch.elapsedMilliseconds,
+      error: res.isLeft ? res.left.runtimeType.toString() : null,
     );
     if (res.isLeft) return null;
 
@@ -73,42 +86,16 @@ class AiRecipeParser {
       final decoded = jsonDecode(s);
       if (decoded is! Map) return null;
       final json = Map<String, dynamic>.from(decoded);
-      final title = _stringValue(json['title']);
-      if (title == null || title.isEmpty) return null;
+      // Без заголовка рецепт всё ещё полезен — скрейпер подставит title
+      // со страницы.
+      final title = _stringValue(json['title']) ?? '';
       final foodEmoji = _foodEmoji(_stringValue(json['foodEmoji']));
-      final raws = (json['ingredients'] as List?) ?? const [];
+      final rawList = json['ingredients'];
+      final raws = rawList is List ? rawList : const [];
       final ings = <RecipeIngredient>[];
       for (final r in raws) {
-        if (r is! Map) continue;
-        final item = Map<String, dynamic>.from(r);
-        final embedded = _extractEmbeddedAmount(
-          _stringValue(item['name']) ?? '',
-          languageCode,
-        );
-        final cleanedName = _cleanIngredientName(embedded.name);
-        if (_isNonIngredientName(_stringValue(item['name']) ?? cleanedName)) {
-          continue;
-        }
-        final name = _capitalizeFirst(cleanedName);
-        if (name.isEmpty) continue;
-        final qty = _stringValue(item['quantity']) ?? embedded.quantity;
-        final unit = _normalizeUnit(
-          _stringValue(item['unit']) ?? embedded.unit,
-          languageCode,
-        );
-        final joined = [
-          qty,
-          unit,
-          name,
-        ].where((e) => e != null && e.isNotEmpty).join(' ');
-        ings.add(
-          RecipeIngredient(
-            name: name,
-            quantity: qty == null || qty.isEmpty ? null : qty,
-            unit: unit == null || unit.isEmpty ? null : unit,
-            raw: joined,
-          ),
-        );
+        final ingredient = _ingredient(r, languageCode);
+        if (ingredient != null) ings.add(ingredient);
       }
       if (ings.isEmpty) return null;
       final servings = _stringValue(json['servings']);
@@ -151,110 +138,67 @@ class AiRecipeParser {
     ).hasMatch(value);
   }
 
-  ({String name, String? quantity, String? unit}) _extractEmbeddedAmount(
-    String value,
-    String languageCode,
-  ) {
-    const unitPattern =
-        r'(?:грамм(?:а|ов)?|г|кг|мг|мл|л|шт\.?|штук|'
-        r'ст\.?\s*л\.?|столов(?:ая|ой)\s+ложк(?:а|и)|'
-        r'ч\.?\s*л\.?|чайная\s+ложк(?:а|и)|'
-        r'g|grams?|kg|mg|ml|l|pcs?|tsp|tbsp|tablespoons?|cup|cups|oz|lb)';
-    final prefix = RegExp(
-      r'^\s*(?<quantity>\d+(?:[.,]\d+)?)\s*'
-      '(?<unit>$unitPattern)\\s+'
-      r'(?<name>.+?)\s*$',
-      caseSensitive: false,
-      unicode: true,
-    ).firstMatch(value);
-    if (prefix != null) {
-      return (
-        name: prefix.namedGroup('name')!.trim(),
-        quantity: prefix.namedGroup('quantity'),
-        unit: _normalizeUnit(prefix.namedGroup('unit'), languageCode),
+  /// Элемент `ingredients`: объект `{name, quantity, unit, note}` или
+  /// строка «200 г муки». Количество, «утёкшее» в name, вынимается
+  /// общим [IngredientLineParser].
+  RecipeIngredient? _ingredient(dynamic value, String languageCode) {
+    if (value is String) {
+      if (_isNonIngredientName(value)) return null;
+      final parsed = IngredientLineParser.parse(value);
+      return _build(
+        name: parsed.name,
+        quantity: parsed.quantity,
+        unit: parsed.unit,
+        note: parsed.note,
+        languageCode: languageCode,
       );
     }
-
-    final suffix = RegExp(
-      [
-        r'^\s*(?<name>.+?)\s*(?:[-–—,:]|[(])\s*',
-        r'(?<quantity>\d+(?:[.,]\d+)?)\s*',
-        '(?<unit>$unitPattern)',
-        r'\)?\s*$',
-      ].join(),
-      caseSensitive: false,
-      unicode: true,
-    ).firstMatch(value);
-    final looseSuffix =
-        suffix ??
-        RegExp(
-          [
-            r'^\s*(?<name>.+?)\s+',
-            r'(?<quantity>\d+(?:[.,]\d+)?)\s*',
-            '(?<unit>$unitPattern)',
-            r'\s*$',
-          ].join(),
-          caseSensitive: false,
-          unicode: true,
-        ).firstMatch(value);
-    if (looseSuffix == null) {
-      return (name: value.trim(), quantity: null, unit: null);
+    if (value is! Map) return null;
+    final rawName = _stringValue(value['name']) ?? '';
+    if (rawName.isEmpty || _isNonIngredientName(rawName)) return null;
+    var name = _cleanIngredientName(rawName);
+    var quantity = _stringValue(value['quantity']);
+    var unit = _stringValue(value['unit']);
+    var note = _stringValue(value['note']);
+    if (quantity == null && RegExp(r'\d').hasMatch(name)) {
+      final embedded = IngredientLineParser.parse(name);
+      if (embedded.quantity != null) {
+        name = embedded.name;
+        quantity = embedded.quantity;
+        unit ??= embedded.unit;
+        note ??= embedded.note;
+      }
     }
-    return (
-      name: looseSuffix.namedGroup('name')!.trim(),
-      quantity: looseSuffix.namedGroup('quantity'),
-      unit: _normalizeUnit(looseSuffix.namedGroup('unit'), languageCode),
+    return _build(
+      name: name,
+      quantity: quantity,
+      unit: unit,
+      note: note,
+      languageCode: languageCode,
     );
   }
 
-  String? _normalizeUnit(String? value, String languageCode) {
-    if (value == null) return null;
-    final normalized = value.toLowerCase().replaceAll('.', '').trim();
-    const aliases = {
-      'г': 'g',
-      'гр': 'g',
-      'грамм': 'g',
-      'грамма': 'g',
-      'граммов': 'g',
-      'кг': 'kg',
-      'мг': 'mg',
-      'мл': 'ml',
-      'л': 'l',
-      'шт': 'pcs',
-      'штук': 'pcs',
-      'grams': 'g',
-      'gram': 'g',
-      'pcs': 'pcs',
-      'tablespoon': 'tbsp',
-      'tablespoons': 'tbsp',
-      'teaspoon': 'tsp',
-      'teaspoons': 'tsp',
-      'ст л': 'tbsp',
-      'столовая ложка': 'tbsp',
-      'ч л': 'tsp',
-      'чайная ложка': 'tsp',
-      'стакан': 'cup',
-      'зубчик': 'clove',
-      'банка': 'can',
-      'пучок': 'bunch',
-    };
-    final canonical = aliases[normalized] ?? normalized;
-    if (!languageCode.toLowerCase().startsWith('ru')) return canonical;
-    const russian = {
-      'g': 'г',
-      'kg': 'кг',
-      'mg': 'мг',
-      'ml': 'мл',
-      'l': 'л',
-      'pcs': 'шт',
-      'tbsp': 'ст. л.',
-      'tsp': 'ч. л.',
-      'cup': 'стакан',
-      'clove': 'зубчик',
-      'can': 'банка',
-      'bunch': 'пучок',
-    };
-    return russian[canonical] ?? canonical;
+  RecipeIngredient? _build({
+    required String name,
+    required String? quantity,
+    required String? unit,
+    required String? note,
+    required String languageCode,
+  }) {
+    final cleanName = _capitalizeFirst(name);
+    if (cleanName.isEmpty) return null;
+    final localizedUnit = RecipeUnits.localize(unit, languageCode);
+    return RecipeIngredient(
+      name: cleanName,
+      quantity: quantity,
+      unit: localizedUnit,
+      note: note,
+      raw: [
+        quantity,
+        localizedUnit,
+        cleanName,
+      ].where((e) => e != null && e.isNotEmpty).join(' '),
+    );
   }
 
   String? _foodEmoji(String? value) {

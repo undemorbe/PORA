@@ -7,21 +7,35 @@ import 'package:pora/core/features/item_detail/domain/usecase/mark_item_bought.d
 import 'package:pora/core/features/item_detail/domain/usecase/notify_about_item.dart';
 import 'package:pora/core/features/item_detail/domain/usecase/update_item.dart';
 import 'package:pora/core/features/lists/domain/entity/products/product.dart';
+import 'package:pora/core/internal/errors/success.dart';
 part 'item_details_store.g.dart';
 
+/// Локальная копия товара с подменёнными полями (оптимистичный toggle,
+/// офлайн-правка). `id` и `addedBy` всегда берутся из `src`; `null` в
+/// параметре значит «оставить как в `src`».
 class _PatchedProduct extends ProductEntity {
-  _PatchedProduct(ProductEntity src, {required super.checked})
-    : super(
-        name: src.name,
-        id: src.id,
-        section: src.section,
-        quantity: src.quantity,
-        unit: src.unit,
-        priority: src.priority,
-        urgent: src.urgent,
-        remindEveryDay: src.remindEveryDay,
-        addedBy: src.addedBy,
-      );
+  _PatchedProduct(
+    ProductEntity src, {
+    bool? checked,
+    String? name,
+    String? section,
+    int? quantity,
+    String? unit,
+    int? priority,
+    bool? urgent,
+    int? remindEveryDay,
+  }) : super(
+         name: name ?? src.name,
+         id: src.id,
+         section: section ?? src.section,
+         quantity: quantity ?? src.quantity,
+         unit: unit ?? src.unit,
+         priority: priority ?? src.priority,
+         urgent: urgent ?? src.urgent,
+         checked: checked ?? src.checked,
+         remindEveryDay: remindEveryDay ?? src.remindEveryDay,
+         addedBy: src.addedBy,
+       );
 }
 
 class ItemDetailsStore = _ItemDetailsStoreBase with _$ItemDetailsStore;
@@ -43,6 +57,16 @@ abstract class _ItemDetailsStoreBase with Store {
   @observable
   bool isDeleted = false;
 
+  /// Последняя успешная write-операция ушла в offline-очередь, а не на
+  /// сервер — экран показывает «отправим, когда появится сеть».
+  @observable
+  bool lastWriteQueued = false;
+
+  /// Последняя загрузка упала из-за сети (и в кэше товара не нашлось) —
+  /// экран показывает локализованное «нет интернета» и кнопку повтора.
+  @observable
+  bool loadFailedOffline = false;
+
   @action
   Future<void> load() async {
     isLoading = true;
@@ -51,11 +75,16 @@ abstract class _ItemDetailsStoreBase with Store {
     isLoading = false;
     if (res.isRight) {
       item = res.right;
+      loadFailedOffline = false;
     } else {
       errorMessage = res.left.message;
+      loadFailedOffline = res.left.isConnectivity;
     }
   }
 
+  /// PUT /items/{iid}. `null` в любом параметре — оставить текущее
+  /// значение (в том числе напоминание); `checked` всегда уходит текущий,
+  /// чтобы правка не сняла отметку «куплено».
   @action
   Future<bool> save({
     String? name,
@@ -68,20 +97,39 @@ abstract class _ItemDetailsStoreBase with Store {
   }) async {
     final current = item;
     if (current == null) return false;
+    final next = _PatchedProduct(
+      current,
+      name: name,
+      section: section,
+      quantity: quantity,
+      unit: unit,
+      priority: priority,
+      urgent: urgent,
+      remindEveryDay: remindEveryDays,
+    );
     isLoading = true;
     final res = await GetIt.I<UpdateItemUseCase>().call(
       itemId: itemId,
-      name: name ?? current.name,
-      section: section ?? current.section,
-      quantity: quantity ?? current.quantity,
-      unit: unit ?? current.unit,
-      priority: priority ?? current.priority,
-      urgent: urgent ?? current.urgent,
-      remindEveryDays: remindEveryDays,
+      name: next.name,
+      section: next.section,
+      quantity: next.quantity,
+      unit: next.unit,
+      priority: next.priority,
+      urgent: next.urgent,
+      checked: next.checked,
+      remindEveryDays: next.remindEveryDay,
     );
     isLoading = false;
     if (res.isRight) {
-      await load();
+      final queued = res.right is QueuedSuccess;
+      lastWriteQueued = queued;
+      // Офлайн GET отдаст лишь кэш — применяем правку локально; с сервера
+      // перечитываем только после реального успеха.
+      if (queued) {
+        item = next;
+      } else {
+        await load();
+      }
       return true;
     }
     errorMessage = res.left.message;
@@ -94,6 +142,7 @@ abstract class _ItemDetailsStoreBase with Store {
     final res = await GetIt.I<DeleteItemUseCase>().call(itemId: itemId);
     isLoading = false;
     if (res.isRight) {
+      lastWriteQueued = res.right is QueuedSuccess;
       isDeleted = true;
       return true;
     }
@@ -118,8 +167,12 @@ abstract class _ItemDetailsStoreBase with Store {
     final res = await GetIt.I<MarkItemBoughtUseCase>().call(
       itemId: itemId,
       checked: target,
+      name: cur.name,
     );
-    if (res.isRight) return true;
+    if (res.isRight) {
+      lastWriteQueued = res.right is QueuedSuccess;
+      return true;
+    }
     item = _PatchedProduct(cur, checked: !target);
     errorMessage = res.left.message;
     return false;
@@ -136,7 +189,10 @@ abstract class _ItemDetailsStoreBase with Store {
       to: to,
       message: message,
     );
-    if (res.isRight) return true;
+    if (res.isRight) {
+      lastWriteQueued = res.right is QueuedSuccess;
+      return true;
+    }
     errorMessage = res.left.message;
     return false;
   }

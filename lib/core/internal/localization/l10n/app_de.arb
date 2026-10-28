@@ -1,19 +1,7 @@
 {
-    "appName": "Zeit",
-    "@appName": {
-        "description": "The name of the application"
-    },
     "language": "Sprache",
     "@language": {
         "description": "language"
-    },
-    "authUnderAppName1": "Gemeinsame Liste für Paare und Familien",
-    "@authUnderAppName1": {
-        "description": "The first line under the app name"
-    },
-    "authUnderAppName2": "Rezepte, Haushalt und Lieferung — alles an einem Ort",
-    "@authUnderAppName2": {
-        "description": "The second line under the app name"
     },
     "onlyYou": "Nur du",
     "@onlyYou": {
@@ -21,35 +9,11 @@
     },
     "listsEmptyTitle": "Sie haben noch keine Listen",
     "listsEmptySubtitle": "Vielleicht sollten Sie eine neue erstellen?",
-    "authSignInExpansibleExpand": "Auf andere Weise anmelden",
-    "@authSignInExpansibleExpand": {
-        "description": "The sign in with other methods title"
-    },
-    "authSignInExpansibleCollapse": "Einklappen",
-    "@authSignInExpansibleCollapse": {
-        "description": "The sign in with other methods title"
-    },
     "sendAgainAfter": "Erneut senden in ...",
     "@sendAgainAfter": {
         "description": "The sign in with other methods title"
     },
-    "authSignInWithEmail": "Mit E-Mail anmelden",
-    "@authSignInWithEmail": {
-        "description": "The sign in with email button text"
-    },
-    "authSignInWithGoogle": "Mit Google anmelden",
-    "@authSignInWithGoogle": {
-        "description": "The sign in with Google button text"
-    },
-    "authSignInWithApple": "Mit Apple anmelden",
-    "@authSignInWithApple": {
-        "description": "The sign in with Apple button text"
-    },
-    "authSignInWithPhone": "Mit Telefonnummer anmelden",
-    "@authSignInWithPhone": {
-        "description": "The sign in with Phone button text"
-    },
-    "authPrivatePolicy": "Wenn du fortfährst, stimmst du den\\nNutzungsbedingungen und der Datenschutzerklärung zu",
+    "authPrivatePolicy": "Wenn du fortfährst, stimmst du den\nNutzungsbedingungen und der Datenschutzerklärung zu",
     "@authPrivatePolicy": {
         "description": "The private policy link text"
     },
@@ -138,7 +102,7 @@
             }
         }
     },
-    "onboardingSlide1Title": "Rezept → Liste\\nin Sekunden",
+    "onboardingSlide1Title": "Rezept → Liste\nin Sekunden",
     "@onboardingSlide1Title": {
         "description": "onboardingSlide1Title"
     },
@@ -146,7 +110,7 @@
     "@onboardingSlide1Body": {
         "description": "onboardingSlide1Body"
     },
-    "onboardingSlide2Title": "Eine Liste\\nfür zwei",
+    "onboardingSlide2Title": "Eine Liste\nfür zwei",
     "@onboardingSlide2Title": {
         "description": "onboardingSlide2Title"
     },
@@ -154,11 +118,11 @@
     "@onboardingSlide2Body": {
         "description": "onboardingSlide2Body"
     },
-    "onboardingSlide3Title": "Pora weiß,\\nwann es Zeit ist",
+    "onboardingSlide3Title": "Pora weiß,\nwann es Zeit ist",
     "@onboardingSlide3Title": {
         "description": "onboardingSlide3Title"
     },
-    "onboardingSlide3Body": "Auf Basis deiner Einkäufe sagt Pora voraus, was bald ausgeht, und du kannst es mit einem Tippen nachbestellen.",
+    "onboardingSlide3Body": "Auf Basis deiner Einkäufe sagt Pora voraus, was bald ausgeht, und erinnert dich, es auf die Liste zu setzen.",
     "@onboardingSlide3Body": {
         "description": "onboardingSlide3Body"
     },
@@ -214,62 +178,6 @@
     "@briefNext": {
         "description": "briefNext"
     },
-    "briefItemMilk": "Milch",
-    "@briefItemMilk": {
-        "description": "briefItemMilk"
-    },
-    "briefItemBread": "Brot",
-    "@briefItemBread": {
-        "description": "briefItemBread"
-    },
-    "briefItemEggs": "Eier",
-    "@briefItemEggs": {
-        "description": "briefItemEggs"
-    },
-    "briefItemCoffee": "Kaffee",
-    "@briefItemCoffee": {
-        "description": "briefItemCoffee"
-    },
-    "briefItemCheese": "Käse",
-    "@briefItemCheese": {
-        "description": "briefItemCheese"
-    },
-    "briefItemBananas": "Bananen",
-    "@briefItemBananas": {
-        "description": "briefItemBananas"
-    },
-    "briefItemButter": "Butter",
-    "@briefItemButter": {
-        "description": "briefItemButter"
-    },
-    "briefItemWater": "Wasser",
-    "@briefItemWater": {
-        "description": "briefItemWater"
-    },
-    "briefItemVegetables": "Gemüse",
-    "@briefItemVegetables": {
-        "description": "briefItemVegetables"
-    },
-    "briefItemTomatoes": "Tomaten",
-    "@briefItemTomatoes": {
-        "description": "briefItemTomatoes"
-    },
-    "briefItemPasta": "Pasta",
-    "@briefItemPasta": {
-        "description": "briefItemPasta"
-    },
-    "briefItemChicken": "Hähnchen",
-    "@briefItemChicken": {
-        "description": "briefItemChicken"
-    },
-    "listTitle": "Unsere Liste",
-    "@listTitle": {
-        "description": "listTitle"
-    },
-    "listMembersCount": "2 Personen · 8 Produkte",
-    "@listMembersCount": {
-        "description": "listMembersCount"
-    },
     "listUrgent": "Dringend",
     "@listUrgent": {
         "description": "listUrgent"
@@ -277,30 +185,6 @@
     "listAdd": "Hinzufügen",
     "@listAdd": {
         "description": "listAdd"
-    },
-    "predictionsTitle": "Pora kann helfen!",
-    "@predictionsTitle": {
-        "description": "predictionsTitle"
-    },
-    "predictionsSubtitle": "Geht bald aus — basierend auf deinen Einkäufen",
-    "@predictionsSubtitle": {
-        "description": "predictionsSubtitle"
-    },
-    "predictionTip": "Ein kleiner Tipp",
-    "@predictionTip": {
-        "description": "predictionTip"
-    },
-    "predictionsOrderTitle": "Alles mit einem Tippen bestellen",
-    "@predictionsOrderTitle": {
-        "description": "predictionsOrderTitle"
-    },
-    "predictionsOrderSubtitle": "Samokat · Lieferung in 15 Minuten",
-    "@predictionsOrderSubtitle": {
-        "description": "predictionsOrderSubtitle"
-    },
-    "predictionsOrderDiscount": "15 % Rabatt auf deine erste Bestellung",
-    "@predictionsOrderDiscount": {
-        "description": "predictionsOrderDiscount"
     },
     "predictionsAddToList": "Füge hinzu zu Liste",
     "@predictionsAddToList": {
@@ -310,33 +194,13 @@
     "@predictionsDismiss": {
         "description": "predictionsDismiss"
     },
-    "itemDetailName": "Milch",
-    "@itemDetailName": {
-        "description": "itemDetailName"
-    },
-    "itemDetailSubtitle": "2 l · Milchprodukte",
-    "@itemDetailSubtitle": {
-        "description": "itemDetailSubtitle"
-    },
     "itemDetailAddedBy": "Hinzugefügt von",
     "@itemDetailAddedBy": {
         "description": "itemDetailAddedBy"
     },
-    "itemDetailSection": "Bereich",
-    "@itemDetailSection": {
-        "description": "itemDetailSection"
-    },
-    "itemDetailSectionValue": "Milchprodukte",
-    "@itemDetailSectionValue": {
-        "description": "itemDetailSectionValue"
-    },
     "itemDetailQuantity": "Menge",
     "@itemDetailQuantity": {
         "description": "itemDetailQuantity"
-    },
-    "itemDetailQuantityValue": "2 L",
-    "@itemDetailQuantityValue": {
-        "description": "itemDetailQuantityValue"
     },
     "itemDetailUrgent": "Dringend",
     "@itemDetailUrgent": {
@@ -346,14 +210,6 @@
     "@itemDetailRemind": {
         "description": "itemDetailRemind"
     },
-    "itemDetailRemindEvery": "Alle 7 Tage",
-    "@itemDetailRemindEvery": {
-        "description": "itemDetailRemindEvery"
-    },
-    "itemDetailInsight": "Du kaufst es etwa alle 7 Tage · zuletzt vor 6 Tagen gekauft. Ich schlage bald einen Nachkauf vor.",
-    "@itemDetailInsight": {
-        "description": "itemDetailInsight"
-    },
     "itemDetailMarkBought": "Als gekauft markieren",
     "@itemDetailMarkBought": {
         "description": "itemDetailMarkBought"
@@ -362,53 +218,13 @@
     "@itemDetailDelete": {
         "description": "itemDetailDelete"
     },
-    "addItemTitle": "Produkt hinzufügen",
-    "@addItemTitle": {
-        "description": "addItemTitle"
-    },
-    "addItemExampleValue": "Avocado",
-    "@addItemExampleValue": {
-        "description": "addItemExampleValue"
-    },
-    "addItemNameHint": "Produktname",
-    "@addItemNameHint": {
-        "description": "addItemNameHint"
-    },
     "addItemQuantity": "Menge",
     "@addItemQuantity": {
         "description": "addItemQuantity"
     },
-    "addItemSection": "Bereich",
-    "@addItemSection": {
-        "description": "addItemSection"
-    },
-    "addItemUrgent": "Dringend",
-    "@addItemUrgent": {
-        "description": "addItemUrgent"
-    },
-    "addItemUrgentSubtitle": "Heute kaufen",
-    "@addItemUrgentSubtitle": {
-        "description": "addItemUrgentSubtitle"
-    },
-    "addItemRemind": "Regelmäßig erinnern",
-    "@addItemRemind": {
-        "description": "addItemRemind"
-    },
-    "addItemRemindEvery": "Alle 7 Tage",
-    "@addItemRemindEvery": {
-        "description": "addItemRemindEvery"
-    },
-    "addItemSubmit": "Füge hinzu zu Liste",
-    "@addItemSubmit": {
-        "description": "addItemSubmit"
-    },
     "settingsTitle": "Einstellungen",
     "@settingsTitle": {
         "description": "settingsTitle"
-    },
-    "settingsHouseholdSection": "Haushalt",
-    "@settingsHouseholdSection": {
-        "description": "settingsHouseholdSection"
     },
     "settingsAppSection": "App",
     "@settingsAppSection": {
@@ -417,18 +233,6 @@
     "settingsNotifications": "Benachrichtigungen",
     "@settingsNotifications": {
         "description": "settingsNotifications"
-    },
-    "settingsDelivery": "Lieferung",
-    "@settingsDelivery": {
-        "description": "settingsDelivery"
-    },
-    "settingsProAd": "Pora+ · ad-kostenlos",
-    "@settingsProAd": {
-        "description": "settingsProAd"
-    },
-    "settingsTryPill": "Ausprobieren",
-    "@settingsTryPill": {
-        "description": "settingsTryPill"
     },
     "settingsPrivacy": "Datenschutz und Daten",
     "@settingsPrivacy": {
@@ -441,10 +245,6 @@
     "settingsLogout": "Abmelden",
     "@settingsLogout": {
         "description": "settingsLogout"
-    },
-    "settingsMembersNames": "Boris und Anna",
-    "@settingsMembersNames": {
-        "description": "settingsMembersNames"
     },
     "settingsInvitePill": "Einladen",
     "@settingsInvitePill": {
@@ -482,10 +282,6 @@
     "@householdGotInvited": {
         "description": "householdGotInvited"
     },
-    "householdWriteCode": "Gib ein invite Code",
-    "@householdWriteCode": {
-        "description": "householdWriteCode"
-    },
     "householdDoLater": "Ich mache es später",
     "@householdDoLater": {
         "description": "householdDoLater"
@@ -509,58 +305,6 @@
     "notificationsReadAll": "Alle lesen",
     "@notificationsReadAll": {
         "description": "notificationsReadAll"
-    },
-    "notificationsMilkTitle": "Bring auf dem Heimweg Milch mit",
-    "@notificationsMilkTitle": {
-        "description": "notificationsMilkTitle"
-    },
-    "notificationsMilkBody": "Sie ist ausgegangen — Anna hat es vor 10 Minuten markiert.",
-    "@notificationsMilkBody": {
-        "description": "notificationsMilkBody"
-    },
-    "notificationsMilkTime": "5 Minuten ago",
-    "@notificationsMilkTime": {
-        "description": "notificationsMilkTime"
-    },
-    "notificationsCoffeeTitle": "Der Kaffee geht bald aus",
-    "@notificationsCoffeeTitle": {
-        "description": "notificationsCoffeeTitle"
-    },
-    "notificationsCoffeeBody": "Du kaufst ihn etwa alle 14 Tage, 12 sind bereits vergangen.",
-    "@notificationsCoffeeBody": {
-        "description": "notificationsCoffeeBody"
-    },
-    "notificationsPartnerAddedTitle": "Anna hat 2 Produkte hinzugefügt",
-    "@notificationsPartnerAddedTitle": {
-        "description": "notificationsPartnerAddedTitle"
-    },
-    "notificationsPartnerAddedBody": "Bananen und Brot stehen auf der gemeinsamen Liste.",
-    "@notificationsPartnerAddedBody": {
-        "description": "notificationsPartnerAddedBody"
-    },
-    "notificationsPartnerAddedTime": "heute, 9:12",
-    "@notificationsPartnerAddedTime": {
-        "description": "notificationsPartnerAddedTime"
-    },
-    "notificationsPromoTitle": "15 % Rabatt auf deine erste Samokat-Bestellung",
-    "@notificationsPromoTitle": {
-        "description": "notificationsPromoTitle"
-    },
-    "notificationsPromoBody": "Die Aktion ist noch 6 Tage aktiv.",
-    "@notificationsPromoBody": {
-        "description": "notificationsPromoBody"
-    },
-    "notificationsPromoTime": "Gestern",
-    "@notificationsPromoTime": {
-        "description": "notificationsPromoTime"
-    },
-    "notificationsOrderDeliveredTitle": "Bestellung geliefert",
-    "@notificationsOrderDeliveredTitle": {
-        "description": "notificationsOrderDeliveredTitle"
-    },
-    "notificationsOrderDeliveredBody": "8 Produkte · Samokat · ₽1.054",
-    "@notificationsOrderDeliveredBody": {
-        "description": "notificationsOrderDeliveredBody"
     },
     "notificationsAddToListPill": "＋ Füge hinzu zu Liste",
     "@notificationsAddToListPill": {
@@ -586,37 +330,9 @@
     "@userCreateProfileNext": {
         "description": "userCreateProfileNext"
     },
-    "searchTitle": "Suchen",
-    "@searchTitle": {
-        "description": "searchTitle"
-    },
     "searchHint": "Produkt oder Rezept …",
     "@searchHint": {
         "description": "searchHint"
-    },
-    "searchFilterAll": "Alle",
-    "@searchFilterAll": {
-        "description": "searchFilterAll"
-    },
-    "searchFilterVegetables": "Gemüse",
-    "@searchFilterVegetables": {
-        "description": "searchFilterVegetables"
-    },
-    "searchFilterDairy": "Milchprodukte",
-    "@searchFilterDairy": {
-        "description": "searchFilterDairy"
-    },
-    "searchFilterGrocery": "Lebensmittel",
-    "@searchFilterGrocery": {
-        "description": "searchFilterGrocery"
-    },
-    "searchFilterRecipes": "Rezepte",
-    "@searchFilterRecipes": {
-        "description": "searchFilterRecipes"
-    },
-    "searchResults": "Ergebnisse",
-    "@searchResults": {
-        "description": "searchResults"
     },
     "searchNothingFound": "Nichts gefunden",
     "@searchNothingFound": {
@@ -626,105 +342,9 @@
     "@insightsTitle": {
         "description": "insightsTitle"
     },
-    "insightsTipKicker": "✨ PORA-TIPP",
-    "@insightsTipKicker": {
-        "description": "insightsTipKicker"
-    },
-    "insightsTipTitle": "Du liebst Carbonara!",
-    "@insightsTipTitle": {
-        "description": "insightsTipTitle"
-    },
-    "insightsTipBody": "Ähnliches Geschmacksprofil — probiere Mac and Cheese. 4 von 6 Zutaten hast du bereits regelmäßig zu Hause.",
-    "@insightsTipBody": {
-        "description": "insightsTipBody"
-    },
-    "insightsTipAction": "Rezept öffnen →",
-    "@insightsTipAction": {
-        "description": "insightsTipAction"
-    },
-    "insightsRunsOutMost": "Geht am häufigsten aus",
-    "@insightsRunsOutMost": {
-        "description": "insightsRunsOutMost"
-    },
-    "insightsFavoriteCuisines": "Lieblingsküchen",
-    "@insightsFavoriteCuisines": {
-        "description": "insightsFavoriteCuisines"
-    },
-    "insightsCuisineItalian": "Italienisch",
-    "@insightsCuisineItalian": {
-        "description": "insightsCuisineItalian"
-    },
-    "insightsCuisinePasta": "Pasta",
-    "@insightsCuisinePasta": {
-        "description": "insightsCuisinePasta"
-    },
-    "insightsCuisineBreakfasts": "Frühstücke",
-    "@insightsCuisineBreakfasts": {
-        "description": "insightsCuisineBreakfasts"
-    },
-    "insightsCuisineLight": "Hell",
-    "@insightsCuisineLight": {
-        "description": "insightsCuisineLight"
-    },
-    "orderTitle": "Bestellung",
-    "@orderTitle": {
-        "description": "orderTitle"
-    },
-    "orderCart": "Warenkorb",
-    "@orderCart": {
-        "description": "orderCart"
-    },
-    "orderWhenToDeliver": "Wann liefern?",
-    "@orderWhenToDeliver": {
-        "description": "orderWhenToDeliver"
-    },
-    "orderCheckoutCta": "Bei Samokat bestellen · {total}",
-    "@orderCheckoutCta": {
-        "placeholders": {
-            "total": {
-                "type": "String"
-            }
-        }
-    },
-    "orderSummaryGoods": "Artikel",
-    "@orderSummaryGoods": {
-        "description": "orderSummaryGoods"
-    },
-    "orderSummaryDiscount": "15 % Rabatt",
-    "@orderSummaryDiscount": {
-        "description": "orderSummaryDiscount"
-    },
-    "orderSummaryDelivery": "Lieferung",
-    "@orderSummaryDelivery": {
-        "description": "orderSummaryDelivery"
-    },
-    "orderSummaryFree": "Kostenlos",
-    "@orderSummaryFree": {
-        "description": "orderSummaryFree"
-    },
-    "orderSummaryTotal": "Gesamt",
-    "@orderSummaryTotal": {
-        "description": "orderSummaryTotal"
-    },
     "recipeImportTitle": "Rezept von a link",
     "@recipeImportTitle": {
         "description": "recipeImportTitle"
-    },
-    "recipePreviewTitle": "Pasta Carbonara",
-    "@recipePreviewTitle": {
-        "description": "recipePreviewTitle"
-    },
-    "recipePreviewMeta": "eda.ru · 25 Min. · 2 Portionen",
-    "@recipePreviewMeta": {
-        "description": "recipePreviewMeta"
-    },
-    "recipePreviewFound": "6 Zutaten gefunden",
-    "@recipePreviewFound": {
-        "description": "recipePreviewFound"
-    },
-    "recipeDedupBanner": "2 Duplikate entfernt, damit bereits gelistete Artikel nicht doppelt hinzugefügt werden",
-    "@recipeDedupBanner": {
-        "description": "recipeDedupBanner"
     },
     "recipeIngredients": "Zutaten",
     "@recipeIngredients": {
@@ -734,7 +354,10 @@
     "@recipeAddToListCta": {
         "description": "Add the selected recipe products to the list",
         "placeholders": {
-            "count": {"type": "int", "format":"compact"}
+            "count": {
+                "type": "int",
+                "format": "compact"
+            }
         }
     },
     "recipeParseButton": "Analysieren",
@@ -749,10 +372,6 @@
     "@navPora": {
         "description": "navPora"
     },
-    "navOrder": "Bestellung",
-    "@navOrder": {
-        "description": "navOrder"
-    },
     "navProfile": "Profil",
     "@navProfile": {
         "description": "navProfile"
@@ -765,14 +384,6 @@
     "@familiesSubtitle": {
         "description": "familiesSubtitle"
     },
-    "familiesCurrent": "Aktuell",
-    "@familiesCurrent": {
-        "description": "familiesCurrent"
-    },
-    "familiesCreateOrJoin": "＋ Create oder join",
-    "@familiesCreateOrJoin": {
-        "description": "familiesCreateOrJoin"
-    },
     "familiesCreateDialog": "What should we call der Familie?",
     "@familiesCreateDialog": {
         "description": "familiesCreateDialog"
@@ -781,29 +392,36 @@
     "@tryToUpdate": {
         "description": "tryToUpdate"
     },
-    "checkOut": "Prüfen",
-    "@checkOut": {
-        "description": "checkOut"
-    },
-    "settingsMore": "Erweitert",
-    "@settingsMore": {
-        "description": "settingsMore"
-    },
     "listsYour": "Deine persönliche Liste",
     "@listsYour": {
         "description": "listsYour"
     },
-    "human": "Personen",
-    "@human": {
-        "description": "human"
+    "peopleCount": "{count, plural, one{{count} Person} other{{count} Personen}}",
+    "@peopleCount": {
+        "description": "Members count in the list header",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
     },
-    "products": "Produkte",
-    "@products": {
-        "description": "products"
+    "productsCount": "{count, plural, one{{count} Produkt} other{{count} Produkte}}",
+    "@productsCount": {
+        "description": "Products count in the list header",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
     },
-    "lists": "Listen",
-    "@lists": {
-        "description": "lists"
+    "listsCount": "{count, plural, one{{count} Liste} other{{count} Listen}}",
+    "@listsCount": {
+        "description": "Lists count in the lists header",
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
     },
     "update": "Aktualisieren",
     "@update": {
@@ -918,10 +536,6 @@
     "@appearance": {
         "description": "appearance"
     },
-    "themeSection": "Theme",
-    "@themeSection": {
-        "description": "themeSection"
-    },
     "themeLight": "Hell",
     "@themeLight": {
         "description": "themeLight"
@@ -1001,10 +615,6 @@
     "recipeEmptyHint": "Füge eine Rezept-URL ein und tippe auf „Analysieren“",
     "@recipeEmptyHint": {
         "description": "recipeEmptyHint"
-    },
-    "recipeDupMark": "bereits in der Liste",
-    "@recipeDupMark": {
-        "description": "recipeDupMark"
     },
     "done": "Fertig",
     "@done": {
@@ -1167,14 +777,6 @@
     "groupShared": "Geteilt",
     "@groupShared": {
         "description": "groupShared"
-    },
-    "noGroups": "Noch keine Gruppen",
-    "@noGroups": {
-        "description": "noGroups"
-    },
-    "settingsChangeThemeIOSEasterEgg": "* Um das Theme zu ändern, gehe zu Einstellungen > PORA > Theme\n* Wähle ein neues Theme im Einstellungsmenü\n* Tippe in den App-Einstellungen auf „Theme“, um zwischen hellem und dunklem Modus zu wechseln",
-    "@settingsChangeThemeIOSEasterEgg": {
-        "description": "ios easter egg on advanced settings when tapped few times"
     },
     "tutorialTitle": "So funktioniert es",
     "@tutorialTitle": {
@@ -1372,43 +974,23 @@
     "@predictionsSectionSoon": {
         "description": "section title"
     },
-    "predictionsSectionOften": "Du kaufst häufig",
-    "@predictionsSectionOften": {
-        "description": "section title"
-    },
     "predictionsSectionAiSuggests": "KI schlägt vor",
     "@predictionsSectionAiSuggests": {
         "description": "section title"
-    },
-    "predictionsAiSuggestionsTitle": "Produkte und Rezepte für dich",
-    "@predictionsAiSuggestionsTitle": {
-        "description": "AI suggestions card title"
-    },
-    "predictionsAiSuggestionsTopic": "deine Vorlieben und Einkäufe",
-    "@predictionsAiSuggestionsTopic": {
-        "description": "AI suggestions topic"
     },
     "refresh": "Aktualisieren",
     "@refresh": {
         "description": "refresh action"
     },
-    "predictionsOftenEmpty": "Noch nicht genug Daten",
-    "@predictionsOftenEmpty": {
-        "description": "empty frequent products"
-    },
-    "predictionsAskPora": "PORA fragen",
-    "@predictionsAskPora": {
-        "description": "FAB label"
-    },
-    "kpiWeek": "Artikel pro Woche",
+    "kpiWeek": "Produkte",
     "@kpiWeek": {
         "description": "kpi label"
     },
-    "kpiRecipes": "Rezepte diesen Monat",
+    "kpiRecipes": "oft gekauft",
     "@kpiRecipes": {
         "description": "kpi label"
     },
-    "kpiDaysToRun": "Tage bis zum Nachkauf",
+    "kpiDaysToRun": "gehen zur Neige",
     "@kpiDaysToRun": {
         "description": "kpi label"
     },
@@ -1548,14 +1130,6 @@
     "@chatInputHint": {
         "description": "chat input placeholder"
     },
-    "aiModelBadge": "Powered by OpenRouter · ling-3.0-flash",
-    "@aiModelBadge": {
-        "description": "model badge"
-    },
-    "seeAll": "Alle anzeigen",
-    "@seeAll": {
-        "description": "see all link"
-    },
     "tipTopicHerbs": "Kräuter",
     "@tipTopicHerbs": {
         "description": "predefined tip topic"
@@ -1628,11 +1202,11 @@
     "@tipTopicsEmpty": {
         "description": "warning when no topics selected"
     },
-    "insightsChampionKicker": "CHAMPION DES MONATS",
+    "insightsChampionKicker": "DEIN TOP-PRODUKT",
     "@insightsChampionKicker": {
         "description": "champion card kicker"
     },
-    "insightsChampionSubtitle": "diesen Monat {count}-mal gekauft",
+    "insightsChampionSubtitle": "{count, plural, =1{einmal gekauft} other{{count}-mal gekauft}}",
     "@insightsChampionSubtitle": {
         "description": "champion card subtitle",
         "placeholders": {
@@ -1641,7 +1215,7 @@
             }
         }
     },
-    "insightsStreakDays": "{days} Tage in Folge",
+    "insightsStreakDays": "{days, plural, =1{{days} Tag in Folge} other{{days} Tage in Folge}}",
     "@insightsStreakDays": {
         "description": "streak headline",
         "placeholders": {
@@ -1669,10 +1243,6 @@
     },
     "insightsStatsProducts": "Produkte",
     "@insightsStatsProducts": {
-        "description": "kpi label"
-    },
-    "insightsStatsLoginsWeek": "Anmeldungen diese Woche",
-    "@insightsStatsLoginsWeek": {
         "description": "kpi label"
     },
     "insightsEmpty": "Noch keine Daten — füge Produkte hinzu",
@@ -1727,22 +1297,17 @@
     "@recipeCreateListCta": {
         "description": "recipe cta"
     },
-    "recipeDupForceMark": "wird trotzdem hinzugefügt",
-    "@recipeDupForceMark": {
-        "description": "dup pill when user unchecks flag"
-    },
-    "recipeDedupBannerMany": "{n} Duplikate werden übersprungen — deaktiviere die Auswahl, um sie trotzdem hinzuzufügen",
-    "@recipeDedupBannerMany": {
-        "description": "dedup banner",
-        "placeholders": {
-            "n": {
-                "type": "int"
-            }
-        }
-    },
     "offlineWriteBlocked": "Kein Internet — die Änderung wird nicht gespeichert",
     "@offlineWriteBlocked": {
         "description": "snackbar when write attempted offline"
+    },
+    "offlineSavedQueued": "Gespeichert. Wird gesendet, sobald du wieder online bist",
+    "@offlineSavedQueued": {
+        "description": "snackbar when an offline change was queued for sync"
+    },
+    "offlineSyncDropped": "Änderungen nicht synchronisiert: {count}",
+    "@offlineSyncDropped": {
+        "description": "snackbar when queued offline changes were rejected by the server"
     },
     "offlineReadBanner": "Offline — zwischengespeicherte Daten werden angezeigt",
     "@offlineReadBanner": {
@@ -1751,5 +1316,184 @@
     "chatImportRecipeCta": "Rezept importieren",
     "@chatImportRecipeCta": {
         "description": "chat bubble cta"
-    }
+    },
+    "aiModelSettingsSection": "Pora-AI-Modell",
+    "aiConfigRow": "Eigenes Pora-AI-Modell",
+    "aiConfigRowSubtitle": "Eigener OpenRouter-Schlüssel und Modelle",
+    "aiConfigTitle": "Pora-AI-Modell",
+    "aiConfigIntro": "Verbinden Sie Ihren eigenen OpenRouter-API-Schlüssel und wählen Sie die Modelle für Pora-AI. Lassen Sie ein Feld leer, um den Standard der App zu verwenden.",
+    "aiConfigApiKeyLabel": "OpenRouter-API-Schlüssel",
+    "aiConfigApiKeyHint": "sk-or-...",
+    "aiConfigModelsSection": "Modelle",
+    "aiConfigPoraModelLabel": "PORA-AI-Modell",
+    "aiConfigPoraModelHint": "z. B. openai/gpt-4o-mini",
+    "aiConfigTipsModelLabel": "Tipps-Modell",
+    "aiConfigTipsModelHint": "Leer — wie App-Standard",
+    "aiConfigNeedKeyNote": "Geben Sie Ihren API-Schlüssel ein, um eigene Modelle zu wählen",
+    "aiConfigReset": "Auf Standard zurücksetzen",
+    "aiConfigSaved": "Pora-AI-Einstellungen gespeichert",
+    "aiConfigResetDone": "Pora-AI-Standard wiederhergestellt",
+    "aiConfigInfoTitle": "So verbinden Sie Ihr Modell",
+    "aiConfigInfoBody": "1. Erstellen Sie ein kostenloses Konto auf openrouter.ai.\n2. Öffnen Sie Keys, erstellen Sie einen neuen API-Schlüssel und fügen Sie ihn hier ein.\n3. Kopieren Sie unter openrouter.ai/models eine Modell-ID (zum Beispiel openai/gpt-4o-mini oder anthropic/claude-3.5-sonnet).\n4. Fügen Sie die ID in das Feld PORA-AI ein. Das Feld Tipps ist optional — leer lassen, um das Standardmodell der App mit Ihrem Schlüssel zu nutzen.\n\nIhr Schlüssel wird nur auf diesem Gerät gespeichert und nur für Ihre Pora-AI-Anfragen verwendet.",
+    "aiConfigInfoClose": "Verstanden",
+    "supportEmptyError": "Bitte zuerst eine Nachricht schreiben",
+    "supportSent": "Nachricht gesendet — wir melden uns bald",
+    "supportFailed": "Senden fehlgeschlagen. Verbindung prüfen und erneut versuchen",
+    "supportSheetHint": "Beschreiben Sie Ihr Anliegen oder Feedback...",
+    "shortcutAddItem": "Artikel hinzufügen",
+    "importantReminderTitle": "{product} kaufen",
+    "importantReminderFrom": "von {user}",
+    "importantReminderBody": "Als gekauft markieren, wenn erledigt",
+    "importantReminderMarkBought": "Gekauft",
+    "liveActivityTestRow": "Live Activity testen",
+    "liveActivityTestSample": "Milch",
+    "listPickerTitle": "Zu welcher Liste hinzufügen?",
+    "listPickerEmpty": "Noch keine Listen — zuerst eine erstellen",
+    "predictionsAdded": "Zur Liste hinzugefügt",
+    "shortcutOpenLists": "Listen öffnen",
+    "shortcutOpenPora": "Pora-AI fragen",
+    "insightsPeriodDays": "{days} T.",
+    "insightsStreakBest": "Rekord: {days}",
+    "insightsStreakStart": "Öffne Pora täglich, um eine Serie aufzubauen",
+    "insightsKpiAdded": "hinzugefügt",
+    "insightsKpiBought": "gekauft",
+    "insightsKpiCompletion": "des Hinzugefügten gekauft",
+    "insightsKpiActiveDays": "aktive Tage",
+    "insightsKpiMinutes": "Minuten in der App",
+    "insightsKpiSessions": "Sitzungen",
+    "insightsAvgSession": "≈{minutes} Min. pro Sitzung",
+    "insightsActivityTitle": "Hinzugefügt und gekauft",
+    "insightsActivityEmpty": "In diesem Zeitraum noch keine Aktivität",
+    "insightsHeatmapTitle": "Aktivität · letzte 4 Wochen",
+    "insightsLess": "weniger",
+    "insightsMore": "mehr",
+    "insightsRhythmTitle": "Dein Rhythmus",
+    "insightsPartMorning": "Morgen",
+    "insightsPartAfternoon": "Mittag",
+    "insightsPartEvening": "Abend",
+    "insightsPartNight": "Nacht",
+    "insightsPeakMorning": "Am aktivsten bist du morgens",
+    "insightsPeakAfternoon": "Am aktivsten bist du mittags",
+    "insightsPeakEvening": "Am aktivsten bist du abends",
+    "insightsPeakNight": "Am aktivsten bist du nachts",
+    "insightsPeakWeekday": "Aktivster Tag — {day}",
+    "insightsCategoriesTitle": "Was du hinzufügst",
+    "insightsDueSoonTitle": "Zeit nachzukaufen",
+    "insightsDueNow": "jetzt",
+    "insightsDueInDays": "in ~{days} T.",
+    "insightsTopBoughtTitle": "Im Zeitraum am häufigsten gekauft",
+    "insightsEngagementTitle": "So nutzt du Pora",
+    "insightsKpiListsOpened": "Listen geöffnet",
+    "insightsKpiListsCreated": "Listen erstellt",
+    "insightsKpiRecipes": "Rezepte importiert",
+    "insightsKpiAi": "Nachrichten an Pora",
+    "insightsKpiDeleted": "Artikel gelöscht",
+    "insightsAllTimeTitle": "Insgesamt",
+    "insightsKpiReminders": "mit Erinnerung",
+    "insightsKpiUrgent": "dringend",
+    "insightsLocalNote": "Nutzungsstatistiken werden auf deinem Gerät berechnet",
+    "insightsNoUsageYet": "Statistiken erscheinen, sobald du Pora nutzt",
+    "settingsDeleteAccount": "Konto löschen",
+    "@settingsDeleteAccount": {
+        "description": "settingsDeleteAccount"
+    },
+    "deleteAccountTitle": "Konto löschen?",
+    "@deleteAccountTitle": {
+        "description": "deleteAccountTitle"
+    },
+    "deleteAccountBody": "Dein Profil, deine persönlichen Listen und Nutzungsdaten werden dauerhaft gelöscht. Gemeinsame Familienlisten bleiben bei der Familie; gehört dir eine Familie, geht sie an das am längsten dabei befindliche Mitglied über. Dies kann nicht rückgängig gemacht werden.",
+    "@deleteAccountBody": {
+        "description": "deleteAccountBody"
+    },
+    "deleteAccountFailed": "Konto konnte nicht gelöscht werden. Prüfe deine Verbindung und versuche es erneut.",
+    "@deleteAccountFailed": {
+        "description": "deleteAccountFailed"
+    },
+    "chatReportAi": "Melden",
+    "@chatReportAi": {
+        "description": "chatReportAi"
+    },
+    "chatReportSent": "Danke – wir prüfen diese Antwort.",
+    "@chatReportSent": {
+        "description": "chatReportSent"
+    },
+    "chatReportFailed": "Meldung konnte nicht gesendet werden. Versuche es später erneut.",
+    "@chatReportFailed": {
+        "description": "chatReportFailed"
+    },
+    "aiDisclaimer": "Pora AI kann Fehler machen. Prüfe wichtige Informationen.",
+    "@aiDisclaimer": {
+        "description": "aiDisclaimer"
+    },
+    "groupLeave": "Verlassen",
+    "groupLeaveTitle": "Gruppe verlassen? Die Liste bleibt bei den anderen Mitgliedern.",
+    "groupDeleteOwnerOnly": "Nur der Gruppeninhaber kann sie löschen",
+    "groupDeleteFailed": "Gruppe konnte nicht gelöscht werden. Bitte erneut versuchen.",
+    "groupLeaveFailed": "Gruppe konnte nicht verlassen werden. Bitte erneut versuchen.",
+    "listNoProductsTitle": "Noch keine Produkte",
+    "@listNoProductsTitle": {
+        "description": "Empty state title of a list without products"
+    },
+    "listNoProductsSubtitle": "Tippe auf „Hinzufügen“, um das erste Produkt auf die Liste zu setzen",
+    "@listNoProductsSubtitle": {
+        "description": "Empty state subtitle of a list without products"
+    },
+    "unitPcs": "Stk.",
+    "@unitPcs": {
+        "description": "Display label of stored unit 'шт'"
+    },
+    "unitG": "g",
+    "@unitG": {
+        "description": "Display label of stored unit 'г'"
+    },
+    "unitKg": "kg",
+    "@unitKg": {
+        "description": "Display label of stored unit 'кг'"
+    },
+    "unitMl": "ml",
+    "@unitMl": {
+        "description": "Display label of stored unit 'мл'"
+    },
+    "unitL": "l",
+    "@unitL": {
+        "description": "Display label of stored unit 'л'"
+    },
+    "unitPack": "Pkg.",
+    "@unitPack": {
+        "description": "Display label of stored unit 'уп'"
+    },
+    "sectionProduce": "Obst & Gemüse",
+    "@sectionProduce": {
+        "description": "Display label of stored section 'Овощи и фрукты'"
+    },
+    "sectionDairy": "Milchprodukte",
+    "@sectionDairy": {
+        "description": "Display label of stored section 'Молочное'"
+    },
+    "sectionPantry": "Vorräte",
+    "@sectionPantry": {
+        "description": "Display label of stored section 'Бакалея'"
+    },
+    "sectionDrinks": "Getränke",
+    "@sectionDrinks": {
+        "description": "Display label of stored section 'Напитки'"
+    },
+    "sectionBread": "Brot",
+    "@sectionBread": {
+        "description": "Display label of stored section 'Хлеб'"
+    },
+    "sectionMisc": "Verschiedenes",
+    "@sectionMisc": {
+        "description": "Display label of stored section 'Разное'"
+    },
+    "sectionOther": "Sonstiges",
+    "@sectionOther": {
+        "description": "Display label of server section 'Прочее' (items without a section)"
+    },
+    "predictionEveryDay": "~täglich",
+    "predictionEvery": "{days, plural, other{~alle {days} Tage}}",
+    "predictionBoughtRegularly": "Regelmäßig gekauft",
+    "predictionBoughtToday": "heute gekauft",
+    "predictionBoughtYesterday": "gestern gekauft",
+    "predictionBoughtDaysAgo": "{days, plural, one{vor {days} Tag gekauft} other{vor {days} Tagen gekauft}}"
 }

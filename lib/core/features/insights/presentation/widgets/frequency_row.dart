@@ -64,7 +64,7 @@ class FrequencyRow extends StatelessWidget {
                 builder: (_, v, _) => LinearProgressIndicator(
                   value: v,
                   minHeight: 6,
-                  backgroundColor: const Color(0xFFEFE4D4),
+                  backgroundColor: c.surfaceAlt,
                   color: PoraColors.primary,
                 ),
               ),

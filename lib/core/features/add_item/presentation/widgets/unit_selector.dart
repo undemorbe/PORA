@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pora/core/features/add_item/domain/add_item_defaults.dart';
+import 'package:pora/core/features/add_item/presentation/item_labels.dart';
 import 'package:pora/core/features/add_item/presentation/widgets/custom_value_dialog.dart';
 import 'package:pora/core/internal/extensions/l10n_extension.dart';
 import 'package:pora/core/internal/theme/constant/additional_constants.dart';
@@ -26,7 +27,8 @@ class UnitSelector extends StatelessWidget {
       children: [
         for (final u in AddItemDefaults.units)
           PoraChip(
-            label: u,
+            // На backend уходит каноническое u, на чипе — перевод.
+            label: context.l10n.unitName(u),
             dense: true,
             selected: u == value,
             onTap: () => onChanged(u),

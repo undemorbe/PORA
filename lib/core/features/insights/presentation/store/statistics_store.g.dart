@@ -9,13 +9,82 @@ part of 'statistics_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$StatisticsStore on _StatisticsStoreBase, Store {
-  Computed<int>? _$streakDaysComputed;
+  Computed<bool>? _$isLoadingComputed;
 
   @override
-  int get streakDays => (_$streakDaysComputed ??= Computed<int>(
-    () => super.streakDays,
-    name: '_StatisticsStoreBase.streakDays',
+  bool get isLoading => (_$isLoadingComputed ??= Computed<bool>(
+    () => super.isLoading,
+    name: '_StatisticsStoreBase.isLoading',
   )).value;
+  Computed<UsageSummary>? _$usageComputed;
+
+  @override
+  UsageSummary get usage => (_$usageComputed ??= Computed<UsageSummary>(
+    () => super.usage,
+    name: '_StatisticsStoreBase.usage',
+  )).value;
+  Computed<List<PopularProductEntity>>? _$dueSoonComputed;
+
+  @override
+  List<PopularProductEntity> get dueSoon =>
+      (_$dueSoonComputed ??= Computed<List<PopularProductEntity>>(
+        () => super.dueSoon,
+        name: '_StatisticsStoreBase.dueSoon',
+      )).value;
+  Computed<List<CountEntry>>? _$categoriesComputed;
+
+  @override
+  List<CountEntry> get categories =>
+      (_$categoriesComputed ??= Computed<List<CountEntry>>(
+        () => super.categories,
+        name: '_StatisticsStoreBase.categories',
+      )).value;
+  Computed<int>? _$uniqueProductsComputed;
+
+  @override
+  int get uniqueProducts => (_$uniqueProductsComputed ??= Computed<int>(
+    () => super.uniqueProducts,
+    name: '_StatisticsStoreBase.uniqueProducts',
+  )).value;
+  Computed<int>? _$remindersCountComputed;
+
+  @override
+  int get remindersCount => (_$remindersCountComputed ??= Computed<int>(
+    () => super.remindersCount,
+    name: '_StatisticsStoreBase.remindersCount',
+  )).value;
+  Computed<int>? _$urgentCountComputed;
+
+  @override
+  int get urgentCount => (_$urgentCountComputed ??= Computed<int>(
+    () => super.urgentCount,
+    name: '_StatisticsStoreBase.urgentCount',
+  )).value;
+  Computed<CountEntry?>? _$championComputed;
+
+  @override
+  CountEntry? get champion => (_$championComputed ??= Computed<CountEntry?>(
+    () => super.champion,
+    name: '_StatisticsStoreBase.champion',
+  )).value;
+
+  late final _$periodAtom = Atom(
+    name: '_StatisticsStoreBase.period',
+    context: context,
+  );
+
+  @override
+  int get period {
+    _$periodAtom.reportRead();
+    return super.period;
+  }
+
+  @override
+  set period(int value) {
+    _$periodAtom.reportWrite(value, super.period, () {
+      super.period = value;
+    });
+  }
 
   late final _$loginsAtom = Atom(
     name: '_StatisticsStoreBase.logins',
@@ -179,14 +248,14 @@ mixin _$StatisticsStore on _StatisticsStoreBase, Store {
     });
   }
 
-  late final _$loadAllAsyncAction = AsyncAction(
-    '_StatisticsStoreBase.loadAll',
+  late final _$_hydrateFromCacheAsyncAction = AsyncAction(
+    '_StatisticsStoreBase._hydrateFromCache',
     context: context,
   );
 
   @override
-  Future<void> loadAll() {
-    return _$loadAllAsyncAction.run(() => super.loadAll());
+  Future<void> _hydrateFromCache() {
+    return _$_hydrateFromCacheAsyncAction.run(() => super._hydrateFromCache());
   }
 
   late final _$loadLoginTimesAsyncAction = AsyncAction(
@@ -221,9 +290,27 @@ mixin _$StatisticsStore on _StatisticsStoreBase, Store {
     );
   }
 
+  late final _$_StatisticsStoreBaseActionController = ActionController(
+    name: '_StatisticsStoreBase',
+    context: context,
+  );
+
+  @override
+  void setPeriod(int days) {
+    final _$actionInfo = _$_StatisticsStoreBaseActionController.startAction(
+      name: '_StatisticsStoreBase.setPeriod',
+    );
+    try {
+      return super.setPeriod(days);
+    } finally {
+      _$_StatisticsStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
+period: ${period},
 logins: ${logins},
 isLoginsLoading: ${isLoginsLoading},
 loginsError: ${loginsError},
@@ -233,7 +320,14 @@ productsError: ${productsError},
 popularProducts: ${popularProducts},
 isPopularLoading: ${isPopularLoading},
 popularError: ${popularError},
-streakDays: ${streakDays}
+isLoading: ${isLoading},
+usage: ${usage},
+dueSoon: ${dueSoon},
+categories: ${categories},
+uniqueProducts: ${uniqueProducts},
+remindersCount: ${remindersCount},
+urgentCount: ${urgentCount},
+champion: ${champion}
     ''';
   }
 }

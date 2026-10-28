@@ -11,7 +11,7 @@ class ProfileCard extends StatelessWidget {
   const ProfileCard({
     super.key,
     this.name = 'Борис',
-    this.email = 'stankovb08@gmail.com',
+    this.email = '',
     this.onTap,
     required this.settingsStore,
     this.ringColor,

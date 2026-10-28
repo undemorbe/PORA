@@ -4,6 +4,7 @@ import 'package:mobx/mobx.dart';
 import 'package:pora/core/features/predictions_ai/domain/usecase/generate_tip.dart';
 import 'package:pora/core/features/predictions_ai/domain/prompt/ai_context.dart';
 import 'package:pora/core/features/predictions_ai/domain/prompt/ai_prompt_kind.dart';
+import 'package:pora/core/internal/analytics/analytics_service.dart';
 
 part 'ai_tip_store.g.dart';
 
@@ -34,6 +35,7 @@ abstract class _AiTipStoreBase with Store {
     AiPromptKind promptKind = AiPromptKind.tip,
   }) async {
     isLoading = true;
+    final watch = Stopwatch()..start();
     final res = await useCase(
       topic: topic,
       languageCode: languageCode,
@@ -46,6 +48,13 @@ abstract class _AiTipStoreBase with Store {
     } else {
       _applyFallback(fallbackList);
     }
+    AnalyticsService.instance.logAiResponse(
+      kind: 'tip',
+      success: !fromFallback,
+      latencyMs: watch.elapsedMilliseconds,
+      error: res.isLeft ? res.left.runtimeType.toString() : null,
+    );
+    AnalyticsService.instance.logTipGenerated(fromFallback: fromFallback);
     isLoading = false;
   }
 

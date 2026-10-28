@@ -9,6 +9,7 @@ import 'package:pora/core/features/lists/domain/entity/products/product.dart';
 import 'package:pora/core/features/item_detail/presentation/store/item_details_store.dart';
 import 'package:pora/core/features/item_detail/presentation/widgets/notify_sheet.dart';
 import 'package:pora/core/features/lists/presentation/store/lists_store.dart';
+import 'package:pora/core/features/lists/presentation/widgets/list_empty_state.dart';
 import 'package:pora/core/features/lists/presentation/widgets/list_item_tile.dart';
 import 'package:pora/core/features/lists/presentation/widgets/delete_list_dialog.dart';
 import 'package:pora/core/features/lists/presentation/widgets/section_group.dart';
@@ -28,12 +29,17 @@ class SectionBuilder extends StatelessWidget {
     required this.isPreview,
     this.members,
     this.lid,
+    this.onListClosed,
   });
 
   final ListStore listStore;
   final bool isPreview;
   final String? lid;
   final List<MemberEntity>? members;
+
+  /// Превью: вызывается после возврата из открытого списка — товары в нём
+  /// могли поменяться, а WS превью слушает только события уровня списка.
+  final Future<void> Function()? onListClosed;
 
   @override
   Widget build(BuildContext context) {
@@ -64,9 +70,19 @@ class SectionBuilder extends StatelessWidget {
   }
 
   Widget _buildPreview(BuildContext context) {
-    final lists = listStore.listsWithPreview?.lists ?? const <ListEntity>[];
+    final preview = listStore.listsWithPreview;
+    if (preview == null) {
+      // Первая загрузка ещё идёт — не пугаем «Попробуйте обновить».
+      return listStore.isLoading
+          ? const _Loading()
+          : Center(child: Text(context.l10n.tryToUpdate));
+    }
+    final lists = preview.lists;
     if (lists.isEmpty) {
-      return Center(child: Text(context.l10n.tryToUpdate));
+      return ListEmptyState(
+        title: context.l10n.listsEmptyTitle,
+        subtitle: context.l10n.listsEmptySubtitle,
+      );
     }
 
     return Column(
@@ -78,7 +94,7 @@ class SectionBuilder extends StatelessWidget {
             child: _PreviewListCard(
               list: list,
               members: members ?? const [],
-
+              onClosed: onListClosed,
               onDelete: () async {
                 final ok = await confirmDeleteList(
                   context,
@@ -95,27 +111,48 @@ class SectionBuilder extends StatelessWidget {
   Widget _buildConcrete(BuildContext context) {
     final hasList = listStore.list != null;
     if (!hasList) {
-      return Center(child: Text(context.l10n.tryToUpdate));
+      // Без списка после загрузки — реальный сбой (ни сервера, ни кэша).
+      return listStore.isLoading
+          ? const _Loading()
+          : Center(child: Text(context.l10n.tryToUpdate));
     }
     final sections = listStore.filteredSections;
     if (sections.isEmpty) {
-      final emptyLabel = listStore.query.trim().isEmpty
-          ? context.l10n.tryToUpdate
-          : context.l10n.searchNothingFound;
+      if (listStore.query.trim().isEmpty) {
+        // Список загружен, просто в нём ещё ничего нет.
+        return ListEmptyState(
+          title: context.l10n.listNoProductsTitle,
+          subtitle: context.l10n.listNoProductsSubtitle,
+        );
+      }
       return Padding(
         padding: const EdgeInsets.symmetric(vertical: PoraSpacing.xl),
-        child: Center(child: Text(emptyLabel, style: PoraText.subtitle)),
+        child: Center(
+          child: Text(
+            context.l10n.searchNothingFound,
+            style: PoraText.subtitle,
+          ),
+        ),
       );
     }
 
-    void onProductTap(ProductEntity p) {
-      context.router.push(
+    Future<void> onProductTap(ProductEntity p) async {
+      var deleted = false;
+      await context.router.push(
         ItemDetailRoute(
           itemId: p.id,
-          additionalEffectOnDeletion: () =>
-              listStore.getConcreteList(lid: lid ?? ''),
+          additionalEffectOnDeletion: () {
+            deleted = true;
+            listStore.getConcreteList(lid: lid ?? '');
+          },
         ),
       );
+      // Правки в карточке офлайн не приходят WS-эхом — после возврата
+      // перечитываем список (офлайн отдаст пропатченный кэш, онлайн —
+      // свежие данные). Удаление уже перегрузило список само.
+      final listId = lid;
+      if (deleted || listId == null || !context.mounted) return;
+      await listStore.getConcreteList(lid: listId);
     }
 
     Future<void> onNotify(ProductEntity p) async {
@@ -145,16 +182,30 @@ class SectionBuilder extends StatelessWidget {
   }
 }
 
+class _Loading extends StatelessWidget {
+  const _Loading();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Padding(
+      padding: EdgeInsets.symmetric(vertical: PoraSpacing.xl),
+      child: Center(child: CircularProgressIndicator.adaptive()),
+    );
+  }
+}
+
 class _PreviewListCard extends StatelessWidget {
   const _PreviewListCard({
     required this.list,
     required this.members,
     required this.onDelete,
+    this.onClosed,
   });
 
   final ListEntity list;
   final List<MemberEntity> members;
   final Future<void> Function() onDelete;
+  final Future<void> Function()? onClosed;
 
   @override
   Widget build(BuildContext context) {
@@ -162,9 +213,13 @@ class _PreviewListCard extends StatelessWidget {
     final visible = allItems.take(_kPreviewProductsLimit).toList();
     final hidden = allItems.length - visible.length;
 
-    void openList() => context.router.push(
-      ListRoute(listId: list.id, listName: list.name, members: members),
-    );
+    Future<void> openList() async {
+      await context.router.push(
+        ListRoute(listId: list.id, listName: list.name, members: members),
+      );
+      // В списке могли добавить/купить товары — освежаем превью.
+      await onClosed?.call();
+    }
 
     final card = GestureDetector(
       behavior: HitTestBehavior.opaque,

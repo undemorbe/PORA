@@ -8,7 +8,9 @@ abstract class ListsRepository {
   Future<Either<Failure, ListsArrayEntity>> getFamilyLists({
     required String fid,
   });
-  Future<Either<Failure, Success>> createList({
+
+  /// Возвращает id созданного списка.
+  Future<Either<Failure, String>> createList({
     required String name,
     String? fid,
   });

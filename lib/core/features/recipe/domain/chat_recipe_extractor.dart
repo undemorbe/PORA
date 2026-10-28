@@ -45,19 +45,19 @@ class ChatRecipeExtractor {
         return ChatRecipeExtraction(cleanText: cleanText);
       }
       final json = Map<String, dynamic>.from(decoded);
-      final title = (json['title'] as String?)?.trim();
+      final title = _str(json['title']);
       if (title == null || title.isEmpty) {
         return ChatRecipeExtraction(cleanText: cleanText);
       }
-      final servings = (json['servings'] as String?)?.trim();
+      final servings = _str(json['servings']);
       final rawIngs = (json['ingredients'] as List?) ?? const [];
       final ings = <RecipeIngredient>[];
       for (final r in rawIngs) {
-        if (r is! Map<String, dynamic>) continue;
-        final name = (r['name'] as String?)?.trim() ?? '';
+        if (r is! Map) continue;
+        final name = _str(r['name']) ?? '';
         if (name.isEmpty) continue;
-        final qty = (r['quantity'] as String?)?.trim();
-        final unit = (r['unit'] as String?)?.trim();
+        final qty = _str(r['quantity']);
+        final unit = _str(r['unit']);
         final joined = [
           qty,
           unit,
@@ -85,6 +85,14 @@ class ChatRecipeExtractor {
     } catch (_) {
       return ChatRecipeExtraction(cleanText: cleanText);
     }
+  }
+
+  /// AI иногда отдаёт числа (`"quantity": 2`) вместо строк — `as String?`
+  /// ронял весь разбор.
+  static String? _str(dynamic value) {
+    if (value == null) return null;
+    final s = value.toString().trim();
+    return s.isEmpty || s == 'null' ? null : s;
   }
 
   static String _stripCodeFence(String value) {

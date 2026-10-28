@@ -10,6 +10,10 @@ class RecipeEntity extends Equatable {
   final String sourceUrl;
   final List<RecipeIngredient> ingredients;
 
+  /// Каким способом получен рецепт (`json_ld`, `wprm`, `heuristic+ai`,
+  /// `youtube+ai`, …) — для аналитики качества импорта.
+  final String? extractor;
+
   const RecipeEntity({
     required this.title,
     required this.sourceUrl,
@@ -17,7 +21,28 @@ class RecipeEntity extends Equatable {
     this.imageUrl,
     this.servings,
     this.foodEmoji,
+    this.extractor,
   });
+
+  RecipeEntity copyWith({
+    String? title,
+    String? imageUrl,
+    String? servings,
+    String? foodEmoji,
+    String? sourceUrl,
+    List<RecipeIngredient>? ingredients,
+    String? extractor,
+  }) {
+    return RecipeEntity(
+      title: title ?? this.title,
+      imageUrl: imageUrl ?? this.imageUrl,
+      servings: servings ?? this.servings,
+      foodEmoji: foodEmoji ?? this.foodEmoji,
+      sourceUrl: sourceUrl ?? this.sourceUrl,
+      ingredients: ingredients ?? this.ingredients,
+      extractor: extractor ?? this.extractor,
+    );
+  }
 
   @override
   List<Object?> get props => [
@@ -27,5 +52,6 @@ class RecipeEntity extends Equatable {
     foodEmoji,
     sourceUrl,
     ingredients,
+    extractor,
   ];
 }

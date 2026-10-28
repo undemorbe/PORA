@@ -4,6 +4,17 @@ import 'package:pora/core/features/brief/domain/repository/brief_repository.dart
 import 'package:pora/core/features/brief/domain/usecases/get_brief.dart';
 import 'package:pora/core/features/brief/domain/usecases/post_brief.dart';
 import 'package:pora/core/features/brief/presentation/controller/brief_store.dart';
+import 'package:pora/core/features/groups/data/home_view_prefs.dart';
+import 'package:pora/core/features/predictions_ai/data/config/ai_config.dart';
+import 'package:pora/core/features/predictions_ai/data/prefs/ai_config_prefs.dart';
+import 'package:pora/core/internal/cache/list_cache_patcher.dart';
+import 'package:pora/core/internal/errors/failure.dart';
+import 'package:pora/core/internal/errors/failure_mapper.dart';
+import 'package:pora/core/internal/errors/success.dart';
+import 'package:pora/core/internal/extensions/either.dart';
+import 'package:pora/core/internal/offline/outbox.dart';
+import 'package:pora/core/internal/offline/outbox_kinds.dart';
+import 'package:pora/core/internal/offline/outbox_replayer.dart';
 import 'package:pora/core/features/settings/data/datasource/support_remote.dart';
 import 'package:pora/core/features/settings/data/service/support_service.dart';
 import 'package:pora/core/features/settings/domain/repository/support_repository.dart';
@@ -21,6 +32,7 @@ class InjectionContainer {
     _registerRepositories();
     _registerUsecases();
     await _getIt.allReady();
+    await _getIt<AiConfig>().reload();
     try {
       Logger.talker.info('Dependencies initialized successfully');
     } catch (e, stackTrace) {
@@ -43,20 +55,35 @@ class InjectionContainer {
     _getIt.registerLazySingleton<ApiClient>(() => ApiClient(_getIt<Dio>()));
     _getIt.registerLazySingleton<IUriLauncher>(() => UriLauncherImpl());
 
-    //! AI (OpenRouter — отдельный Dio с Bearer из dotenv)
+    //! AI (OpenRouter — ключ и модели через AiConfig: prefs переопределяют .env)
+    _getIt.registerLazySingleton<AiConfigPrefs>(
+      () => AiConfigPrefs(db: _getIt<ILocalDB<dynamic>>()),
+    );
+    _getIt.registerLazySingleton<AiConfig>(
+      () => AiConfig(_getIt<AiConfigPrefs>()),
+    );
     _getIt.registerLazySingleton<OpenRouterApiClient>(() {
+      final config = _getIt<AiConfig>();
       final baseUrl = dotenv.maybeGet('AI_API_URL') ?? '';
-      final key = dotenv.maybeGet('AI_API_KEY') ?? '';
       final dio = Dio(
         BaseOptions(
           baseUrl: baseUrl,
           connectTimeout: const Duration(seconds: 20),
           receiveTimeout: const Duration(seconds: 30),
           headers: {
-            'Authorization': 'Bearer $key',
             'Content-Type': 'application/json',
             'HTTP-Referer': 'https://pora.app',
             'X-Title': 'PORA',
+          },
+        ),
+      );
+      // Bearer проставляется динамически на каждый запрос — смена ключа в
+      // настройках вступает в силу без рестарта и пересоздания Dio.
+      dio.interceptors.add(
+        InterceptorsWrapper(
+          onRequest: (options, handler) {
+            options.headers['Authorization'] = 'Bearer ${config.apiKey}';
+            handler.next(options);
           },
         ),
       );
@@ -65,19 +92,13 @@ class InjectionContainer {
     _getIt.registerLazySingleton<AiRemote>(
       () => AiRemoteImpl(
         client: _getIt<OpenRouterApiClient>(),
-        model:
-            dotenv.maybeGet('AI_CHAT_MODEL') ??
-            dotenv.maybeGet('AI_MODEL') ??
-            '',
+        modelResolver: () => _getIt<AiConfig>().poraModel,
       ),
     );
     _getIt.registerLazySingleton<AiRemote>(
       () => AiRemoteImpl(
         client: _getIt<OpenRouterApiClient>(),
-        model:
-            dotenv.maybeGet('AI_TIP_MODEL') ??
-            dotenv.maybeGet('AI_MODEL') ??
-            '',
+        modelResolver: () => _getIt<AiConfig>().tipsModel,
       ),
       instanceName: 'tips',
     );
@@ -166,6 +187,9 @@ class InjectionContainer {
     _getIt.registerFactory<LogoutUseCase>(
       () => LogoutUseCase(repository: _getIt<UserRepository>()),
     );
+    _getIt.registerFactory<DeleteAccountUseCase>(
+      () => DeleteAccountUseCase(repository: _getIt<UserRepository>()),
+    );
     _getIt.registerFactory<UpdateDeviceTokenUseCase>(
       () => UpdateDeviceTokenUseCase(repository: _getIt<UserRepository>()),
     );
@@ -207,6 +231,14 @@ class InjectionContainer {
     );
     _getIt.registerFactory<DeleteFamilyUseCase>(
       () => DeleteFamilyUseCase(familyRepository: _getIt<FamilyRepository>()),
+    );
+    _getIt.registerFactory<LeaveFamilyUseCase>(
+      () => LeaveFamilyUseCase(familyRepository: _getIt<FamilyRepository>()),
+    );
+
+    //! Groups
+    _getIt.registerFactory<GetUserGroupsUseCase>(
+      () => GetUserGroupsUseCase(groupsRepository: _getIt<GroupsRepository>()),
     );
 
     //! Invitations (linkCodes for families)
@@ -323,6 +355,14 @@ class InjectionContainer {
       ),
     );
 
+    //! Groups
+    _getIt.registerLazySingleton<GroupsRemote>(
+      () => GroupsRemoteImpl(apiClient: _getIt<ApiClient>()),
+    );
+    _getIt.registerLazySingleton<GroupsRepository>(
+      () => GroupsService(groupsRemote: _getIt<GroupsRemote>()),
+    );
+
     //! Invitations (linkCodes to families)
     _getIt.registerLazySingleton<RemoteInvitations>(
       () => RemoteInvitationsImpl(apiClient: _getIt<ApiClient>()),
@@ -349,10 +389,29 @@ class InjectionContainer {
       () => AiRecipeParser(ai: _getIt<AiRepository>()),
     );
     _getIt.registerLazySingleton<RecipeScraper>(
-      () => HttpRecipeScraper(aiParser: _getIt<AiRecipeParser>()),
+      () => HttpRecipeScraper(
+        aiParser: _getIt<AiRecipeParser>(),
+        recipeStripper: RecipeStripperClient(
+          host:
+              dotenv.maybeGet('AI_RECIPE_SCRAPPER_URL') ??
+              RecipeStripperClient.defaultHost,
+        ),
+      ),
     );
     _getIt.registerLazySingleton<RecipeRepository>(
       () => RecipeService(scraper: _getIt<RecipeScraper>()),
+    );
+
+    //! Offline outbox
+    _getIt.registerLazySingleton<Outbox>(Outbox.new);
+    _getIt.registerLazySingleton<ListCachePatcher>(
+      () => const ListCachePatcher(),
+    );
+    _getIt.registerLazySingleton<OutboxReplayer>(
+      () => OutboxReplayer(
+        outbox: _getIt<Outbox>(),
+        isOnline: () => _getIt<ConnectivityStore>().online,
+      ),
     );
 
     //! Items
@@ -360,8 +419,13 @@ class InjectionContainer {
       () => ItemsRemoteImpl(apiClient: _getIt<ApiClient>()),
     );
     _getIt.registerLazySingleton<ItemsRepository>(
-      () => ItemsService(remote: _getIt<ItemsRemote>()),
+      () => ItemsService(
+        remote: _getIt<ItemsRemote>(),
+        outbox: _getIt<Outbox>(),
+        listCache: _getIt<ListCachePatcher>(),
+      ),
     );
+    _registerOutboxHandlers();
     _getIt.registerLazySingleton<ItemDetailsPrefs>(
       () => ItemDetailsPrefs(db: _getIt<ILocalDB<dynamic>>()),
     );
@@ -378,6 +442,9 @@ class InjectionContainer {
     //! Groups store — singleton чтобы recipe-import и другие фичи могли
     //! читать список групп/личных списков без пересоздания store'а.
     _getIt.registerLazySingleton<GroupsStore>(() => GroupsStore()..load());
+    _getIt.registerLazySingleton<HomeViewPrefs>(
+      () => HomeViewPrefs(_getIt<ILocalDB<dynamic>>()),
+    );
 
     //! Support messaging
     _getIt.registerLazySingleton<SupportRemote>(
@@ -385,6 +452,66 @@ class InjectionContainer {
     );
     _getIt.registerLazySingleton<SupportRepository>(
       () => SupportService(remoteDataSource: _getIt<SupportRemote>()),
+    );
+  }
+
+  /// Обработчики offline-очереди: бьют по `ItemsRemote` НАПРЯМУЮ (минуя
+  /// `ItemsService`), чтобы повторный офлайн не ставил операцию в очередь
+  /// снова. Маппинг ошибок — через [FailureMapper] (connectivity → пауза,
+  /// 4xx → дроп).
+  void _registerOutboxHandlers() {
+    final replayer = _getIt<OutboxReplayer>();
+    final remote = _getIt<ItemsRemote>();
+
+    Future<Either<Failure, Object?>> guard(Future<void> Function() op) async {
+      try {
+        await op();
+        return Right(const ServerSuccess());
+      } catch (e, s) {
+        return Left(FailureMapper.map(e, s));
+      }
+    }
+
+    replayer.register(
+      OutboxKinds.itemMarkBought,
+      (a) => guard(
+        () => remote.markBought(
+          itemId: a['item-id'] as String,
+          checked: a['checked'] as bool,
+        ),
+      ),
+    );
+    replayer.register(OutboxKinds.itemDelete, (a) async {
+      final res = await guard(
+        () => remote.deleteItem(itemId: a['item-id'] as String),
+      );
+      // 404 — товар уже удалён (например, другим участником семьи): цель
+      // операции достигнута, это не ошибка синхронизации.
+      if (res.isLeft && res.left is NotFoundFailure) {
+        return Right(const ServerSuccess());
+      }
+      return res;
+    });
+    replayer.register(
+      OutboxKinds.itemUpdate,
+      (a) => guard(
+        () => remote.updateItem(
+          itemId: a['item-id'] as String,
+          body: Map<String, dynamic>.from(a['body'] as Map),
+        ),
+      ),
+    );
+    replayer.register(
+      OutboxKinds.itemNotify,
+      (a) => guard(
+        () => remote.notify(
+          itemId: a['item-id'] as String,
+          body: {
+            'to': (a['to'] as List?)?.cast<String>(),
+            'message': a['message'] as String,
+          },
+        ),
+      ),
     );
   }
 }

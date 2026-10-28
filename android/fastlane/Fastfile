@@ -1,0 +1,280 @@
+# Release-пайплайн Android: сборка подписанных APK/AAB через Flutter,
+# публикация в GitHub Releases и Google Play (supply).
+#
+# Локально (из android/):
+#   bundle exec fastlane android build version:1.2.0 build_number:42
+#   bundle exec fastlane android release tag:v1.2.0
+#   bundle exec fastlane android deploy track:internal metadata:true
+#   bundle exec fastlane android promote from:internal to:production rollout:0.2
+#   bundle exec fastlane android play_metadata
+#   bundle exec fastlane android play_validate
+# В CI вызывается из .github/workflows/release.yml.
+# Описание стора — fastlane/metadata/android/<locale>/, заметки к релизу —
+# changelogs/<versionCode>.txt (или default.txt).
+
+require "digest"
+require "fileutils"
+require "yaml"
+
+opt_out_usage
+default_platform(:android)
+
+ROOT = File.expand_path("../..", __dir__)
+ARTIFACTS_DIR = File.join(ROOT, "build", "release-artifacts")
+GITHUB_REPO = ENV.fetch("GITHUB_REPOSITORY", "undemorbe/PORA")
+PLAY_METADATA_DIR = File.join(__dir__, "metadata", "android")
+PLAY_TRACKS = %w[internal alpha beta production].freeze
+
+# `1.2.0` из тега `v1.2.0` / `v1.2.0-beta.1` → build-name без префикса.
+def version_from_tag(tag)
+  tag.to_s.sub(/\Av/, "")
+end
+
+def pubspec_version
+  YAML.load_file(File.join(ROOT, "pubspec.yaml"))["version"].to_s.split("+").first
+end
+
+def resolve_version(options)
+  v = options[:version] || version_from_tag(options[:tag] || ENV["RELEASE_TAG"])
+  v = pubspec_version if v.to_s.empty?
+  UI.user_error!("Invalid version '#{v}' (expected semver like 1.2.0)") unless v =~ /\A\d+\.\d+\.\d+(-[0-9A-Za-z.]+)?\z/
+  v
+end
+
+def require_play_key!
+  return unless ENV["PLAY_STORE_JSON_KEY"].to_s.empty?
+
+  UI.user_error!("PLAY_STORE_JSON_KEY is not set (service account JSON, see docs/RELEASE.md)")
+end
+
+def resolve_track(value, default = "internal")
+  track = (value || default).to_s
+  UI.user_error!("Unknown track '#{track}' (#{PLAY_TRACKS.join('/')})") unless PLAY_TRACKS.include?(track)
+  track
+end
+
+# Доля пользователей для staged rollout: 0 < r < 1 → inProgress, иначе nil.
+def resolve_rollout(value)
+  return nil if value.to_s.empty?
+
+  r = value.to_f
+  UI.user_error!("rollout must be in (0, 1], got #{value}") unless r.positive? && r <= 1
+  r < 1 ? r.to_s : nil
+end
+
+# Статус релиза: черновик (default — пока приложение не опубликовано, Play
+# принимает только draft), completed или inProgress (если задан rollout).
+def resolve_release_status(options, rollout)
+  return "inProgress" if rollout
+
+  status = (options[:status] || ENV["PLAY_RELEASE_STATUS"] || "draft").to_s
+  UI.user_error!("Unknown status '#{status}' (draft/completed/halted)") unless %w[draft completed halted].include?(status)
+  status
+end
+
+def resolve_build_number(options)
+  n = (options[:build_number] || ENV["BUILD_NUMBER"]).to_s
+  n = Time.now.utc.strftime("%y%m%d%H") if n.empty? # монотонно для локальных сборок
+  UI.user_error!("Invalid build number '#{n}'") unless n =~ /\A\d+\z/
+  n
+end
+
+platform :android do
+  desc "Проверяет, что есть всё для подписанной release-сборки"
+  private_lane :verify_release_inputs do
+    missing = []
+    missing << ".env" unless File.exist?(File.join(ROOT, ".env"))
+    missing << "android/app/google-services.json" unless File.exist?(File.join(ROOT, "android/app/google-services.json"))
+    props = File.join(ROOT, "android/key.properties")
+    if File.exist?(props)
+      store = File.read(props)[/^storeFile=(.+)$/, 1].to_s.strip
+      store_path = File.expand_path(store, File.join(ROOT, "android/app"))
+      missing << "keystore (#{store})" unless File.exist?(store_path)
+    else
+      missing << "android/key.properties"
+    end
+    UI.user_error!("Release inputs missing: #{missing.join(', ')} (see .github/ci/prepare_android.sh)") unless missing.empty?
+
+    # .env пакуется в APK/AAB как asset: ключ из него достаётся распаковкой.
+    # CI вырезает его в prepare_android.sh; локально — не даём собрать.
+    env_file = File.read(File.join(ROOT, ".env"))
+    if env_file =~ /^AI_API_KEY=\S/ && ENV["EMBED_AI_KEY"] != "true"
+      UI.user_error!(".env contains AI_API_KEY — it would ship inside the release build. " \
+                     "Remove it or set EMBED_AI_KEY=true (only for a key with a hard spend limit)")
+    end
+  end
+
+  desc "Собирает подписанные release APK и AAB. Опции: version, build_number"
+  lane :build do |options|
+    verify_release_inputs
+    version = resolve_version(options)
+    build_number = resolve_build_number(options)
+    # build-name для Android — только X.Y.Z; суффикс пре-релиза идёт в имя файла.
+    build_name = version.split("-").first
+    flags = ["--release", "--build-name=#{build_name}", "--build-number=#{build_number}"]
+
+    Dir.chdir(ROOT) do
+      sh("flutter", "build", "apk", *flags)
+      sh("flutter", "build", "appbundle", *flags)
+    end
+
+    FileUtils.rm_rf(ARTIFACTS_DIR)
+    FileUtils.mkdir_p(ARTIFACTS_DIR)
+    base = "pora-#{version}+#{build_number}"
+    apk = File.join(ARTIFACTS_DIR, "#{base}.apk")
+    aab = File.join(ARTIFACTS_DIR, "#{base}.aab")
+    FileUtils.cp(File.join(ROOT, "build/app/outputs/flutter-apk/app-release.apk"), apk)
+    FileUtils.cp(File.join(ROOT, "build/app/outputs/bundle/release/app-release.aab"), aab)
+
+    sums = [apk, aab].map { |f| "#{Digest::SHA256.file(f).hexdigest}  #{File.basename(f)}" }
+    File.write(File.join(ARTIFACTS_DIR, "SHA256SUMS.txt"), sums.join("\n") + "\n")
+
+    UI.success("Artifacts in #{ARTIFACTS_DIR}:")
+    Dir[File.join(ARTIFACTS_DIR, "*")].sort.each { |f| UI.message("  #{File.basename(f)} (#{(File.size(f) / 1024.0 / 1024).round(1)} MB)") }
+
+    lane_context[:PORA_VERSION] = version
+    lane_context[:PORA_BUILD_NUMBER] = build_number
+    lane_context[:PORA_AAB] = aab
+  end
+
+  desc "Создаёт GitHub Release для тега и прикладывает артефакты. Опции: tag"
+  lane :github_release do |options|
+    tag = options[:tag] || ENV["RELEASE_TAG"]
+    UI.user_error!("tag is required (e.g. tag:v1.2.0)") if tag.to_s.empty?
+    token = ENV["GITHUB_TOKEN"]
+    UI.user_error!("GITHUB_TOKEN is required") if token.to_s.empty?
+    assets = Dir[File.join(ARTIFACTS_DIR, "*")].sort
+    UI.user_error!("No artifacts in #{ARTIFACTS_DIR} — run `build` first") if assets.empty?
+
+    version = lane_context[:PORA_VERSION] || version_from_tag(tag)
+    previous = begin
+      sh("git", "describe", "--tags", "--abbrev=0", "--match", "v*", "#{tag}^", log: false).strip
+    rescue StandardError
+      nil
+    end
+    changelog = changelog_from_git_commits(
+      between: previous ? [previous, tag] : nil,
+      commits_count: previous ? nil : 30,
+      pretty: "- %s (%h)",
+      merge_commit_filtering: "exclude_merges",
+      quiet: true
+    ).to_s.strip
+    changelog = "- Initial release" if changelog.empty?
+
+    compare = previous ? "\n\n**Full diff:** https://github.com/#{GITHUB_REPO}/compare/#{previous}...#{tag}" : ""
+    description = <<~MD
+      ## Pora #{version}
+
+      | File | Use |
+      |---|---|
+      | `*.apk` | install directly on an Android device |
+      | `*.aab` | upload to Google Play |
+      | `SHA256SUMS.txt` | checksums |
+
+      ### Changes
+      #{changelog}#{compare}
+    MD
+
+    set_github_release(
+      repository_name: GITHUB_REPO,
+      # GITHUB_TOKEN воркфлоу принимается только как Bearer; `api_token`
+      # шлёт Basic-auth (годится для PAT) → GitHub отвечает 404.
+      api_bearer: token,
+      name: "Pora #{version}",
+      tag_name: tag,
+      commitish: ENV["GITHUB_SHA"],
+      description: description,
+      is_prerelease: tag.include?("-"),
+      upload_assets: assets
+    )
+  end
+
+  desc "Загружает AAB в Google Play. Опции: track (internal|alpha|beta|production), " \
+       "status (draft|completed), rollout (0..1), metadata (true — обновить описание), aab"
+  lane :deploy do |options|
+    require_play_key!
+    aab = options[:aab] || lane_context[:PORA_AAB] || Dir[File.join(ARTIFACTS_DIR, "*.aab")].first
+    UI.user_error!("AAB not found — run `build` first") unless aab && File.exist?(aab)
+    track = resolve_track(options[:track] || ENV["PLAY_TRACK"])
+    rollout = resolve_rollout(options[:rollout] || ENV["PLAY_ROLLOUT"])
+    with_metadata = options[:metadata].to_s == "true"
+
+    upload_to_play_store(
+      track: track,
+      aab: aab,
+      release_status: resolve_release_status(options, rollout),
+      rollout: rollout,
+      metadata_path: PLAY_METADATA_DIR,
+      skip_upload_metadata: !with_metadata,
+      skip_upload_changelogs: false,
+      skip_upload_images: true,
+      skip_upload_screenshots: true
+    )
+  end
+
+  desc "Совместимость: AAB → internal track (черновик)"
+  lane :play_internal do |options|
+    deploy(aab: options[:aab], track: "internal")
+  end
+
+  desc "Переносит последнюю сборку между треками. Опции: from, to, rollout, status"
+  lane :promote do |options|
+    require_play_key!
+    from = resolve_track(options[:from])
+    to = resolve_track(options[:to], "production")
+    UI.user_error!("from and to must differ") if from == to
+    rollout = resolve_rollout(options[:rollout])
+
+    upload_to_play_store(
+      track: from,
+      track_promote_to: to,
+      release_status: resolve_release_status(options, rollout),
+      rollout: rollout,
+      skip_upload_aab: true,
+      skip_upload_apk: true,
+      skip_upload_metadata: true,
+      skip_upload_changelogs: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true
+    )
+  end
+
+  desc "Обновляет описание стора (текст; images:true — ещё иконку/графику/скриншоты)"
+  lane :play_metadata do |options|
+    require_play_key!
+    with_images = options[:images].to_s == "true"
+    upload_to_play_store(
+      metadata_path: PLAY_METADATA_DIR,
+      skip_upload_aab: true,
+      skip_upload_apk: true,
+      skip_upload_changelogs: true,
+      skip_upload_images: !with_images,
+      skip_upload_screenshots: !with_images
+    )
+  end
+
+  desc "Скачивает текущее описание из Play Console в fastlane/metadata"
+  lane :play_pull_metadata do
+    require_play_key!
+    download_from_play_store(metadata_path: PLAY_METADATA_DIR)
+  end
+
+  desc "Проверяет доступ сервисного аккаунта к Play Console"
+  lane :play_validate do
+    require_play_key!
+    validate_play_store_json_key(json_key_data: ENV["PLAY_STORE_JSON_KEY"])
+  end
+
+  desc "Полный релиз: build → GitHub Release (→ Google Play, если задан ключ)"
+  lane :release do |options|
+    tag = options[:tag] || ENV["RELEASE_TAG"]
+    build(version: options[:version], tag: tag, build_number: options[:build_number])
+    github_release(tag: tag)
+    if ENV["PLAY_STORE_JSON_KEY"].to_s.empty?
+      UI.important("PLAY_STORE_JSON_KEY not set — skipping Google Play upload")
+    else
+      # Трек/статус — из PLAY_TRACK / PLAY_RELEASE_STATUS (по умолчанию internal, draft).
+      deploy
+    end
+  end
+end

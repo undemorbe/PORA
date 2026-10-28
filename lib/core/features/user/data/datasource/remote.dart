@@ -7,6 +7,7 @@ abstract class UserRemoteDataSource {
   Future<UserModel> getUser();
   Future<void> updateUser(UserModel? model, File? image);
   Future<void> logout();
+  Future<void> deleteAccount();
   Future<void> updateDevice({
     required String deviceToken,
     required String deviceType,
@@ -35,6 +36,11 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   @override
   Future<void> logout() async {
     await apiClient.logout();
+  }
+
+  @override
+  Future<void> deleteAccount() async {
+    await apiClient.deleteAccount();
   }
 
   @override

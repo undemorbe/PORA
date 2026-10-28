@@ -138,6 +138,24 @@ mixin _$ListStore on _ListStoreBase, Store {
     });
   }
 
+  late final _$lastWriteQueuedAtom = Atom(
+    name: '_ListStoreBase.lastWriteQueued',
+    context: context,
+  );
+
+  @override
+  bool get lastWriteQueued {
+    _$lastWriteQueuedAtom.reportRead();
+    return super.lastWriteQueued;
+  }
+
+  @override
+  set lastWriteQueued(bool value) {
+    _$lastWriteQueuedAtom.reportWrite(value, super.lastWriteQueued, () {
+      super.lastWriteQueued = value;
+    });
+  }
+
   late final _$listsWithPreviewAtom = Atom(
     name: '_ListStoreBase.listsWithPreview',
     context: context,
@@ -255,6 +273,18 @@ mixin _$ListStore on _ListStoreBase, Store {
   );
 
   @override
+  void clearQueuedFlag() {
+    final _$actionInfo = _$_ListStoreBaseActionController.startAction(
+      name: '_ListStoreBase.clearQueuedFlag',
+    );
+    try {
+      return super.clearQueuedFlag();
+    } finally {
+      _$_ListStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setQuery(String value) {
     final _$actionInfo = _$_ListStoreBaseActionController.startAction(
       name: '_ListStoreBase.setQuery',
@@ -287,6 +317,7 @@ isSuccess: ${isSuccess},
 errorMessage: ${errorMessage},
 isSelfUpdated: ${isSelfUpdated},
 usingCache: ${usingCache},
+lastWriteQueued: ${lastWriteQueued},
 listsWithPreview: ${listsWithPreview},
 query: ${query},
 productsAmount: ${productsAmount},
