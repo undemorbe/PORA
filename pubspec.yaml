@@ -41,7 +41,7 @@ dependencies:
   http: ^1.2.0
   html: ^0.15.4
   web_socket_channel: ^3.0.3
-  connectivity_plus: ^6.1.0
+  connectivity_plus: ^7.3.2
   liquid_glass_easy: ^3.3.1
   path_provider: any
   collection: any
